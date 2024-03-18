@@ -393,6 +393,16 @@ export default function DeckBuilder() {
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const value = params.get("deck");
 
+  const shareHandler = async () => {
+    const message = "クリップボードに保存するメッセージ";
+    try {
+      await navigator.clipboard.writeText(message);
+      alert("クリップボードに保存しました。");
+    } catch (error) {
+      alert("失敗しました。");
+    }
+  };
+
   useEffect(() => {
     if (value) {
       const { deck, legendaryDeck } = decodeDeck(value);
@@ -406,7 +416,10 @@ export default function DeckBuilder() {
       <Grid container direction={"row"} alignItems={"right"}>
         <Grid item xs={12}>
           {/* share button */}
-          <Link href={`/deck-builder?deck=${encodeDeck(deck, legendaryDeck)}`}>
+          <Link
+            href={`/deck-builder?deck=${encodeDeck(deck, legendaryDeck)}`}
+            onClick={shareHandler}
+          >
             <IconButton aria-label="share">
               <ShareOutlined />
             </IconButton>
