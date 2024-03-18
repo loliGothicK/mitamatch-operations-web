@@ -18,9 +18,26 @@ export const memoriaAtom = atom<Memoria[]>(() => data);
 export const legendaryDeckAtom = atom<MemoriaWithConcentration[]>([]);
 export const deckAtom = atom<MemoriaWithConcentration[]>([]);
 export const swAtom = atom<"sword" | "shield">("shield");
-export const roleFilterAtom = atom<RoleFilterType[]>([...roleFilter]);
+export const roleFilterAtom = atom<RoleFilterType[]>([
+  "support",
+  "interference",
+  "recovery",
+]);
 export const elementFilterAtom = atom<ElementFilterType[]>([...elementFilter]);
 export const labelFilterAtom = atom<LabelSearch[]>([]);
+
+export const currentRoleFilterAtom = atom((get) => {
+  const sw = get(swAtom);
+  return match<"sword" | "shield", RoleFilterType[]>(sw)
+    .with("shield", () => ["support", "interference", "recovery"])
+    .with("sword", () => [
+      "normal_single",
+      "normal_range",
+      "special_single",
+      "special_range",
+    ])
+    .exhaustive();
+});
 
 export const filteredMemoriaAtom = atom((get) => {
   return get(memoriaAtom).filter((memoria) => {

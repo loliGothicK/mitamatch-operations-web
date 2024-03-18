@@ -4,13 +4,24 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import { useAtom } from "jotai";
-import { memoriaAtom, roleFilterAtom, elementFilterAtom } from "@/jotai/atom";
-import { elementFilter, FilterType, roleFilter } from "@/type/FilterType";
+import {
+  roleFilterAtom,
+  elementFilterAtom,
+  swAtom,
+  currentRoleFilterAtom,
+} from "@/jotai/atom";
+import {
+  elementFilter,
+  elementFilterMap,
+  FilterType,
+  roleFilter,
+  roleFilterMap,
+} from "@/type/FilterType";
 import { CheckBoxItem } from "@/component/CheckBoxItem";
 
 function RoleCheckbox() {
   const [filter, setFilter] = useAtom(roleFilterAtom);
-  const [_, setMemoria] = useAtom(memoriaAtom);
+  const [currentRoleFilter] = useAtom(currentRoleFilterAtom);
 
   return (
     <div>
@@ -18,24 +29,30 @@ function RoleCheckbox() {
         label={"役割"}
         control={
           <Checkbox
-            checked={filter.length === roleFilter.length}
+            checked={filter.length === currentRoleFilter.length}
             indeterminate={
-              filter.length > 0 && filter.length < roleFilter.length
+              filter.length > 0 && filter.length < currentRoleFilter.length
             }
             onChange={() => {
               setFilter((prev) => {
-                if (filter.length === roleFilter.length) {
+                if (filter.length === currentRoleFilter.length) {
                   return [
                     ...prev.filter(
-                      (v) => !(roleFilter as readonly FilterType[]).includes(v),
+                      (v) =>
+                        !(currentRoleFilter as readonly FilterType[]).includes(
+                          v,
+                        ),
                     ),
                   ];
                 } else {
                   return [
                     ...prev.filter(
-                      (v) => !(roleFilter as readonly FilterType[]).includes(v),
+                      (v) =>
+                        !(currentRoleFilter as readonly FilterType[]).includes(
+                          v,
+                        ),
                     ),
-                    ...roleFilter,
+                    ...currentRoleFilter,
                   ];
                 }
               });
@@ -44,11 +61,11 @@ function RoleCheckbox() {
         }
       />
       <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
-        {roleFilter.map((flag) => {
+        {currentRoleFilter.map((flag) => {
           return (
             <CheckBoxItem
               key={flag}
-              name={flag}
+              name={roleFilterMap[flag]}
               checked={filter.includes(flag)}
               handleChange={() => {
                 setFilter((prev) => {
@@ -104,7 +121,7 @@ function ElementCheckbox() {
           return (
             <CheckBoxItem
               key={flag}
-              name={flag}
+              name={elementFilterMap[flag]}
               checked={filter.includes(flag)}
               handleChange={() => {
                 setFilter((prev) => {

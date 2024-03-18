@@ -29,10 +29,12 @@ import Box from "@mui/material/Box";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import { useAtom } from "jotai";
 import {
+  currentRoleFilterAtom,
   deckAtom,
   filteredMemoriaAtom,
   legendaryDeckAtom,
   Memoria,
+  roleFilterAtom,
   swAtom,
 } from "@/jotai/atom";
 import Filter from "@/component/Filter";
@@ -263,7 +265,7 @@ function renderRow(props: ListChildComponentProps) {
 }
 
 function VirtualizedList() {
-  const [memoria, _] = useAtom(filteredMemoriaAtom);
+  const [memoria] = useAtom(filteredMemoriaAtom);
   return (
     <FixedSizeList
       height={700}
@@ -296,6 +298,7 @@ function ToggleButtons() {
   const [_, setDeck] = useAtom(deckAtom);
   const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
+  const [___, setRoleFilter] = useAtom(roleFilterAtom);
 
   return (
     <FormControlLabel
@@ -304,8 +307,15 @@ function ToggleButtons() {
       onChange={() => {
         if (sw === "shield") {
           setSw("sword");
+          setRoleFilter([
+            "normal_single",
+            "normal_range",
+            "special_single",
+            "special_range",
+          ]);
         } else {
           setSw("shield");
+          setRoleFilter(["support", "interference", "recovery"]);
         }
         setDeck([]);
         setLegendaryDeck([]);

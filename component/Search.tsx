@@ -66,6 +66,8 @@ function LabelCheckbox() {
   );
 }
 
+function SkillCheckbox() {}
+
 export default function Search() {
   return (
     <Grid container columns={3}>
