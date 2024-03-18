@@ -162,7 +162,7 @@ function DeckList({ legendaryDeck, deck }: DeckProps) {
         sx={{
           bgcolor: "grey",
           minHeight: 530,
-          width: 630,
+          width: 620,
           paddingTop: 2,
           paddingBottom: 2,
         }}
