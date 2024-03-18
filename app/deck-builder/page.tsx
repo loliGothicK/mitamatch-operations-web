@@ -12,6 +12,7 @@ import {
   ImageListItem,
   ImageListItemBar,
   ListItem,
+  Stack,
   Switch,
 } from "@mui/material";
 import Image from "next/image";
@@ -45,11 +46,6 @@ import Details from "@/component/Details";
 import { decodeDeck, encodeDeck } from "@/actions/encodeDeck";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-
-interface DeckProps {
-  legendaryDeck: Memoria[];
-  deck: Memoria[];
-}
 
 function MemoriaItem({ name, id }: { name: string; id: string }) {
   const [_, setDeck] = useAtom(deckAtom);
@@ -154,12 +150,25 @@ function MemoriaItem({ name, id }: { name: string; id: string }) {
   );
 }
 
-function DeckList({ legendaryDeck, deck }: DeckProps) {
+function DeckList() {
+  const [deck, setDeck] = useAtom(deckAtom);
+  const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+
   return (
     <Grid container direction={"column"} alignItems={"center"}>
-      <Typography variant="h4" gutterBottom>
-        Deck List
-      </Typography>
+      <Stack direction={"row"} spacing={2}>
+        <Typography variant="h4" gutterBottom>
+          Deck List
+        </Typography>
+        <Button
+          onClick={() => {
+            setDeck([]);
+            setLegendaryDeck([]);
+          }}
+        >
+          Clear
+        </Button>
+      </Stack>
       <Container
         maxWidth="md"
         sx={{
@@ -441,7 +450,7 @@ export default function DeckBuilder() {
             </Grid>
           </Grid>
           <Grid item xs={12} md={8} lg={5}>
-            <DeckList deck={deck} legendaryDeck={legendaryDeck} />
+            <DeckList />
           </Grid>
           <Grid item xs={12} lg={3}>
             {/* Source */}
