@@ -5,6 +5,9 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
   ImageList,
   ImageListItem,
   ImageListItemBar,
@@ -327,17 +330,6 @@ function ToggleButtons() {
 }
 
 function FilterModal() {
-  const style = {
-    position: "absolute" as "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "midnightblue",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -351,30 +343,22 @@ function FilterModal() {
       <Button onClick={handleOpen}>
         <FilterAlt />
       </Button>
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style} color={"white"}>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Filters
+            Filter
           </Typography>
           <Filter />
-        </Box>
-      </Modal>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
 
 function SearchModal() {
-  const style = {
-    position: "absolute" as "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "midnightblue",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -388,14 +372,17 @@ function SearchModal() {
       <Button onClick={handleOpen}>
         <SearchOutlined />
       </Button>
-      <Modal open={open} onClose={handleClose}>
-        <Box sx={style} color={"white"}>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Search
           </Typography>
           <Search />
-        </Box>
-      </Modal>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
