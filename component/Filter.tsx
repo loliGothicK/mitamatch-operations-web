@@ -7,14 +7,12 @@ import { useAtom } from "jotai";
 import {
   roleFilterAtom,
   elementFilterAtom,
-  swAtom,
   currentRoleFilterAtom,
 } from "@/jotai/atom";
 import {
   elementFilter,
   elementFilterMap,
   FilterType,
-  roleFilter,
   roleFilterMap,
 } from "@/type/FilterType";
 import { CheckBoxItem } from "@/component/CheckBoxItem";

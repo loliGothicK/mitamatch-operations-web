@@ -9,7 +9,8 @@ import {
   RoleFilterType,
 } from "@/type/FilterType";
 import { match } from "ts-pattern";
-import { LabelSearch } from "@/type/SearchType";
+import { BasicStatusSearch, LabelSearch } from "@/type/SearchType";
+import { parse_skill, SkillKind } from "@/utils/parser/skill";
 
 export type Memoria = (typeof data)[0];
 export type MemoriaWithConcentration = Memoria & { concentration?: number };
@@ -39,6 +40,8 @@ export const currentRoleFilterAtom = atom((get) => {
     .exhaustive();
 });
 
+export const basicStatusFilterAtom = atom<BasicStatusSearch[]>([]);
+
 export const filteredMemoriaAtom = atom((get) => {
   return get(memoriaAtom).filter((memoria) => {
     const sw = match(get(swAtom))
@@ -60,11 +63,34 @@ export const filteredMemoriaAtom = atom((get) => {
       return memoria.labels.includes(filter);
     });
 
+    const skill = parse_skill(memoria.skill.name, memoria.skill.description);
+
+    const basicStatus = get(basicStatusFilterAtom).every((filter) => {
+      return match(filter)
+        .with({ status: "ATK", upDown: skill.upDown }, () =>
+          skill.status.includes("ATK"),
+        )
+        .with({ status: "DEF", upDown: skill.upDown }, () =>
+          skill.status.includes("DEF"),
+        )
+        .with({ status: "Sp.ATK", upDown: skill.upDown }, () =>
+          skill.status.includes("Sp.ATK"),
+        )
+        .with({ status: "Sp.DEF", upDown: skill.upDown }, () =>
+          skill.status.includes("Sp.DEF"),
+        )
+        .with({ status: "Life", upDown: skill.upDown }, () =>
+          skill.status.includes("Life"),
+        )
+        .otherwise(() => false);
+    });
+
     return (
       sw &&
       role &&
       element &&
       label &&
+      basicStatus &&
       !get(deckAtom).some(({ name }) => memoria.name === name) &&
       !get(legendaryDeckAtom).some(({ name }) => memoria.name === name)
     );

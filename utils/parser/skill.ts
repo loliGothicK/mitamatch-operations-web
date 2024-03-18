@@ -22,13 +22,7 @@ export const statusKind = [
 ] as const;
 export type StatusKind = (typeof statusKind)[number];
 
-export function statusToJapanese({
-  status,
-  upDown,
-}: {
-  status: StatusKind;
-  upDown: "up" | "down";
-}): string {
+export function statusToJapanese({ status, upDown }: Status): string {
   return match({ status, upDown })
     .with({ status: "ATK", upDown: "up" }, () => "攻UP")
     .with({ status: "ATK", upDown: "down" }, () => "攻DOWN")
@@ -76,12 +70,11 @@ export type Amount =
   | "large"
   | "extra-large"
   | "super-large";
-type Status = {
+export type Status = {
   upDown: "up" | "down";
-  status: StatusKind[];
-  amount: Amount;
+  status: StatusKind;
 };
-type SkillKind = Elemental | Status | "charge" | "counter" | "heal";
+export type SkillKind = Elemental | Status | "charge" | "counter" | "heal";
 type BuffKind = "Power" | "Guard" | "Might" | "Defer" | "Life";
 
 export type Skill = {
