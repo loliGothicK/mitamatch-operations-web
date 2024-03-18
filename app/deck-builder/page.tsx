@@ -332,27 +332,21 @@ function renderRow(props: ListChildComponentProps) {
   const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
 
   return (
-    <ListItem
-      key={index}
-      style={style}
-      secondaryAction={
-        <IconButton
-          edge="end"
-          aria-label="comments"
-          onClick={() => {
-            if (memoria[index].labels.includes("legendary")) {
-              setLegendaryDeck((prev) => [...prev, memoria[index]]);
-            } else {
-              setDeck((prev) => [...prev, memoria[index]]);
-            }
-          }}
-        >
-          <Add />
-        </IconButton>
-      }
-      disablePadding
-      sx={{ bgcolor: "grey" }}
-    >
+    <ListItem key={index} style={style} disablePadding sx={{ bgcolor: "grey" }}>
+      <IconButton
+        edge="start"
+        aria-label="comments"
+        sx={{ marginLeft: 2 }}
+        onClick={() => {
+          if (memoria[index].labels.includes("legendary")) {
+            setLegendaryDeck((prev) => [...prev, memoria[index]]);
+          } else {
+            setDeck((prev) => [...prev, memoria[index]]);
+          }
+        }}
+      >
+        <Add />
+      </IconButton>
       <ListItemButton role={undefined} dense>
         <ListItemIcon>
           <Icon

@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import { Button } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
+import { elementFilter, elementFilterMap } from "@/type/FilterType";
 
 export default function Details() {
   const [deck] = useAtom(deckAtom);
@@ -111,15 +112,18 @@ export default function Details() {
         {elementAggregate.size == 0 ? (
           <></>
         ) : (
-          [...elementAggregate.entries()].map(([kind, count]) => {
-            return (
-              <Grid item xs={4} key={kind}>
-                <Button disabled>
-                  {kind} : {count}
-                </Button>
-              </Grid>
-            );
-          })
+          elementFilter
+            .map((kind) => elementFilterMap[kind])
+            .filter((kind) => elementAggregate.get(kind) != undefined)
+            .map((kind) => {
+              return (
+                <Grid item xs={4} key={kind}>
+                  <Button disabled>
+                    {kind} : {elementAggregate.get(kind)}
+                  </Button>
+                </Grid>
+              );
+            })
         )}
       </Grid>
       <Typography variant="body1" marginTop={5}>
