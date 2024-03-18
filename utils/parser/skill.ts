@@ -263,6 +263,10 @@ export function parse_skill(name: string, description: string): Skill {
       () => option.of(["Water ATK", "Fire DEF"]),
     )
     .when(
+      () => name.includes("[風攻火防]"),
+      () => option.of(["Wind ATK", "Fire DEF"]),
+    )
+    .when(
       () => name.includes("ファイアパワー"),
       () => option.of(["Fire ATK"]),
     )
@@ -336,13 +340,33 @@ export function parse_skill(name: string, description: string): Skill {
           )
           .with("Might", () =>
             match<"W" | "Sp" | "N", StatusKind[]>(buffType)
-              .with("Sp", () => ["Sp.ATK", "Sp.DEF"])
-              .otherwise(() => ["ATK", "DEF"]),
+              .with("Sp", (): StatusKind[] => {
+                if (name.includes("攻") && name.includes("防")) {
+                  return [];
+                } else if (name.includes("攻")) {
+                  return ["Sp.DEF"];
+                } else if (name.includes("防")) {
+                  return ["Sp.ATK"];
+                } else {
+                  return ["Sp.ATK", "Sp.DEF"];
+                }
+              })
+              .otherwise((): StatusKind[] => {
+                if (name.includes("攻") && name.includes("防")) {
+                  return [];
+                } else if (name.includes("攻")) {
+                  return ["DEF"];
+                } else if (name.includes("防")) {
+                  return ["ATK"];
+                } else {
+                  return ["ATK", "DEF"];
+                }
+              }),
           )
           .with("Defer", () =>
             match<"W" | "Sp" | "N", StatusKind[]>(buffType)
-              .with("Sp", () => ["Sp.ATK", "DEF"])
-              .otherwise(() => ["ATK", "Sp.DEF"]),
+              .with("Sp", () => ["ATK", "Sp.DEF"])
+              .otherwise(() => ["Sp.ATK", "DEF"]),
           )
           .with("Life", () => ["Life"])
           .exhaustive();
