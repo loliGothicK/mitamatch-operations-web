@@ -95,7 +95,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
               marginRight: 1,
             }}
           >
-            {concentration == 4 ? (
+            {concentrationValue == 4 ? (
               <Typography
                 variant="body2"
                 color="white"
@@ -315,7 +315,7 @@ function ToggleButtons() {
 
   return (
     <FormControlLabel
-      control={<Switch defaultChecked />}
+      control={<Switch defaultChecked={sw === "sword"} />}
       label="前衛 <=> 後衛"
       onChange={() => {
         if (sw === "shield") {
@@ -399,13 +399,14 @@ export default function DeckBuilder() {
   const params = useSearchParams();
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [sw, setSw] = useAtom(swAtom);
   const value = params.get("deck");
   const pathname = usePathname();
 
   const shareHandler = async () => {
     try {
       await navigator.clipboard.writeText(
-        `https://mitama.io/${pathname}?deck=${encodeDeck(deck, legendaryDeck)}`,
+        `https://mitama.io/${pathname}?deck=${encodeDeck(sw, deck, legendaryDeck)}`,
       );
       alert("クリップボードに保存しました。");
     } catch (error) {
@@ -415,11 +416,12 @@ export default function DeckBuilder() {
 
   useEffect(() => {
     if (value) {
-      const { deck, legendaryDeck } = decodeDeck(value);
+      const { sw, deck, legendaryDeck } = decodeDeck(value);
       setDeck(deck);
       setLegendaryDeck(legendaryDeck);
+      setSw(sw);
     }
-  }, [setDeck, setLegendaryDeck, value]);
+  }, [setDeck, setLegendaryDeck, setSw, value]);
 
   return (
     <Layout>
@@ -427,7 +429,7 @@ export default function DeckBuilder() {
         <Grid item xs={12}>
           {/* share button */}
           <Link
-            href={`/deck-builder?deck=${encodeDeck(deck, legendaryDeck)}`}
+            href={`/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`}
             onClick={shareHandler}
           >
             <IconButton aria-label="share">
