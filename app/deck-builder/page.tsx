@@ -47,7 +47,7 @@ import Search from "@/component/Search";
 import Details from "@/component/Details";
 import { decodeDeck, encodeDeck } from "@/actions/encodeDeck";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Theme, useMediaQuery } from "@mui/system";
 
 interface DeckProps {
@@ -392,11 +392,13 @@ export default function DeckBuilder() {
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const value = params.get("deck");
+  const pathname = usePathname();
 
   const shareHandler = async () => {
-    const message = "クリップボードに保存するメッセージ";
     try {
-      await navigator.clipboard.writeText(message);
+      await navigator.clipboard.writeText(
+        `https://mitama.io/${pathname}?deck=${encodeDeck(deck, legendaryDeck)}`,
+      );
       alert("クリップボードに保存しました。");
     } catch (error) {
       alert("失敗しました。");
