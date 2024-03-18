@@ -22,6 +22,7 @@ import {
 } from "@/component/dashboard/listItems";
 import Footer from "@/component/Footer";
 import Image from "next/image";
+import { Avatar } from "@mui/material";
 
 const drawerWidth: number = 240;
 
@@ -166,11 +167,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             >
               Mitamatch Operations for Web
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
