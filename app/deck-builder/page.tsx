@@ -4,6 +4,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {
+  Avatar,
   Button,
   Dialog,
   DialogActions,
@@ -46,6 +47,8 @@ import Details from "@/component/Details";
 import { decodeDeck, encodeDeck } from "@/actions/encodeDeck";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
+import { match } from "ts-pattern";
+import { blue, green, pink, purple, red, yellow } from "@mui/material/colors";
 
 function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   const { name, id, concentration } = memoria;
@@ -79,8 +82,113 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     });
   };
 
+  const kindImage = match(memoria.kind)
+    .with("通常単体", () => {
+      return (
+        <Image src={"/NormalSingle.png"} alt={"kind"} width={25} height={25} />
+      );
+    })
+    .with("通常範囲", () => {
+      return (
+        <Image src={"/NormalRange.png"} alt={"kind"} width={25} height={25} />
+      );
+    })
+    .with("特殊単体", () => {
+      return (
+        <Image src={"/SpecialSingle.png"} alt={"kind"} width={25} height={25} />
+      );
+    })
+    .with("特殊範囲", () => {
+      return (
+        <Image src={"/SpecialRange.png"} alt={"kind"} width={25} height={25} />
+      );
+    })
+    .with("支援", () => {
+      return <Image src={"/Assist.png"} alt={"kind"} width={25} height={25} />;
+    })
+    .with("妨害", () => {
+      return (
+        <Image src={"/Interference.png"} alt={"kind"} width={25} height={25} />
+      );
+    })
+    .with("回復", () => {
+      return (
+        <Image src={"/Recovery.png"} alt={"kind"} width={25} height={25} />
+      );
+    })
+    .run();
+
   return (
     <ImageListItem key={id}>
+      <Container sx={{}}>
+        {match(memoria.element)
+          .with("火", () => (
+            <Avatar
+              sx={{
+                width: 30,
+                height: 30,
+                left: 70,
+                position: "absolute",
+                bgcolor: red[500],
+              }}
+            >
+              {kindImage}
+            </Avatar>
+          ))
+          .with("水", () => (
+            <Avatar
+              sx={{
+                width: 30,
+                height: 30,
+                left: 70,
+                position: "absolute",
+                bgcolor: blue[500],
+              }}
+            >
+              {kindImage}
+            </Avatar>
+          ))
+          .with("風", () => (
+            <Avatar
+              sx={{
+                width: 30,
+                height: 30,
+                left: 70,
+                position: "absolute",
+                bgcolor: green[500],
+              }}
+            >
+              {kindImage}
+            </Avatar>
+          ))
+          .with("光", () => (
+            <Avatar
+              sx={{
+                width: 30,
+                height: 30,
+                left: 70,
+                position: "absolute",
+                bgcolor: yellow[500],
+              }}
+            >
+              {kindImage}
+            </Avatar>
+          ))
+          .with("闇", () => (
+            <Avatar
+              sx={{
+                width: 30,
+                height: 30,
+                left: 70,
+                position: "absolute",
+                bgcolor: purple[500],
+              }}
+            >
+              {kindImage}
+            </Avatar>
+          ))
+          .run()}
+      </Container>
       <Image src={`/memoria/${name}.png`} alt={name} width={100} height={100} />
       <ImageListItemBar
         sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
