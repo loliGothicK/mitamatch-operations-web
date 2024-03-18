@@ -34,7 +34,7 @@ import {
   deckAtom,
   filteredMemoriaAtom,
   legendaryDeckAtom,
-  Memoria,
+  MemoriaWithConcentration,
   roleFilterAtom,
   swAtom,
 } from "@/jotai/atom";
@@ -47,21 +47,24 @@ import { decodeDeck, encodeDeck } from "@/actions/encodeDeck";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 
-function MemoriaItem({ name, id }: { name: string; id: string }) {
+function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
+  const { name, id, concentration } = memoria;
   const [_, setDeck] = useAtom(deckAtom);
   const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
-  const [concentration, setConcentration] = useState(4);
+  const [concentrationValue, setConcentration] = useState(
+    concentration ? concentration : 4,
+  );
 
   const handleConcentration = () => {
-    if (concentration > 0) {
-      setConcentration(concentration - 1);
+    if (concentrationValue > 0) {
+      setConcentration(concentrationValue - 1);
     } else {
       setConcentration(4);
     }
     setDeck((prev) => {
       return prev.map((memoria) => {
         if (memoria.name === name) {
-          return { ...memoria, concentration: concentration };
+          return { ...memoria, concentration: concentrationValue };
         }
         return memoria;
       });
@@ -69,7 +72,7 @@ function MemoriaItem({ name, id }: { name: string; id: string }) {
     setLegendaryDeck((prev) => {
       return prev.map((memoria) => {
         if (memoria.name === name) {
-          return { ...memoria, concentration: concentration };
+          return { ...memoria, concentration: concentrationValue };
         }
         return memoria;
       });
@@ -185,15 +188,15 @@ function DeckList() {
           cols={5}
           rowHeight={100}
         >
-          {legendaryDeck.map(({ name, id }) => {
-            return <MemoriaItem name={name} id={id.toString()} key={id} />;
+          {legendaryDeck.map((memoria) => {
+            return <MemoriaItem memoria={memoria} key={memoria.id} />;
           })}
         </ImageList>
         <Divider sx={{ margin: 2 }} />
         {/* Deck Images */}
         <ImageList sx={{ width: 600 }} cols={5} rowHeight={100}>
-          {deck.map(({ name, id }) => {
-            return <MemoriaItem name={name} id={id.toString()} key={id} />;
+          {deck.map((memoria) => {
+            return <MemoriaItem memoria={memoria} key={memoria.id} />;
           })}
         </ImageList>
       </Container>

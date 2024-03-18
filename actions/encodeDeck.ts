@@ -27,11 +27,11 @@ export function decodeDeck(encoded: string): {
   return {
     legendaryDeck: legendaryDeck.map(
       ([id, concentration]: [number, number]) => {
-        return { ...deckMap.get(id), concentration };
+        return { ...deckMap.get(id), concentration: concentration ?? 4 };
       },
     ),
     deck: deck.map(([id, concentration]: [number, number]) => {
-      return { ...deckMap.get(id), concentration };
+      return { ...deckMap.get(id), concentration: concentration ?? 4 };
     }),
   };
 }

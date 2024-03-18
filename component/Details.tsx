@@ -2,11 +2,7 @@
 import { useAtom } from "jotai";
 import { deckAtom, legendaryDeckAtom, Memoria } from "@/jotai/atom";
 import { Lens } from "monocle-ts";
-import {
-  parse_skill,
-  statusKind,
-  statusToJapanese,
-} from "@/utils/parser/skill";
+import { parse_skill, statusToJapanese } from "@/utils/parser/skill";
 import { parse_support, toJapanese } from "@/utils/parser/support";
 import Grid from "@mui/material/Grid";
 import { Button } from "@mui/material";
@@ -73,7 +69,7 @@ export default function Details() {
           [...skillAggregate.entries()].map(([kind, count]) => {
             return (
               <Grid item xs={4} key={kind}>
-                <Button color={"secondary"}>
+                <Button disabled>
                   {kind} : {count}
                 </Button>
               </Grid>
@@ -92,7 +88,7 @@ export default function Details() {
           [...supportAggregate.entries()].map(([kind, count]) => {
             return (
               <Grid item xs={4} key={kind}>
-                <Button color={"secondary"}>
+                <Button disabled>
                   {kind} : {count}
                 </Button>
               </Grid>
@@ -111,7 +107,7 @@ export default function Details() {
           [...elementAggregate.entries()].map(([kind, count]) => {
             return (
               <Grid item xs={4} key={kind}>
-                <Button color={"secondary"}>
+                <Button disabled>
                   {kind} : {count}
                 </Button>
               </Grid>
