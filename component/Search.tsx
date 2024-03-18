@@ -1,8 +1,16 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import { useAtom } from "jotai";
-import { basicStatusFilterAtom, labelFilterAtom } from "@/jotai/atom";
-import { allBasicStatusSearch, labelSearch } from "@/type/SearchType";
+import {
+  basicStatusFilterAtom,
+  elementStatusFilterAtom,
+  labelFilterAtom,
+} from "@/jotai/atom";
+import {
+  allBasicStatusSearch,
+  allElementStatusSearch,
+  labelSearch,
+} from "@/type/SearchType";
 import { CheckBoxItem } from "@/component/CheckBoxItem";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -72,6 +80,41 @@ function BasicStatusCheckbox() {
   );
 }
 
+function ElementStatusCheckbox() {
+  const [filter, setFilter] = useAtom(elementStatusFilterAtom);
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+      {allElementStatusSearch().map((flag) => {
+        return (
+          <CheckBoxItem
+            key={statusToJapanese(flag)}
+            name={statusToJapanese(flag)}
+            checked={filter.some(
+              (v) => v.status === flag.status && v.upDown === flag.upDown,
+            )}
+            handleChange={() => {
+              setFilter((prev) => {
+                if (
+                  filter.some(
+                    (v) => v.status === flag.status && v.upDown === flag.upDown,
+                  )
+                ) {
+                  return prev.filter(
+                    (v) => v.status !== flag.status || v.upDown !== flag.upDown,
+                  );
+                } else {
+                  return [...prev, flag];
+                }
+              });
+            }}
+          />
+        );
+      })}
+    </Box>
+  );
+}
+
 export default function Search() {
   const [value, setValue] = React.useState("1");
 
@@ -96,7 +139,9 @@ export default function Search() {
         <TabPanel value="2">
           <BasicStatusCheckbox />
         </TabPanel>
-        <TabPanel value="3">Coming soon...</TabPanel>
+        <TabPanel value="3">
+          <ElementStatusCheckbox />
+        </TabPanel>
         <TabPanel value="4">Coming soon...</TabPanel>
       </TabContext>
     </Box>

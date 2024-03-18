@@ -17,7 +17,7 @@ export const elementStatus = [
 export type ElementStatus = (typeof elementStatus)[number];
 export type BasicStatusSearch = { status: BasicStatus; upDown: "up" | "down" };
 export type ElementStatusSearch = {
-  stat: ElementStatus;
+  status: ElementStatus;
   upDown: "up" | "down";
 };
 
@@ -28,5 +28,13 @@ export function allBasicStatusSearch(): BasicStatusSearch[] {
         return { status, upDown: upDown as "up" | "down" };
       })
       .filter((v) => v.status !== "Life" || v.upDown === "up");
+  });
+}
+
+export function allElementStatusSearch(): ElementStatusSearch[] {
+  return elementStatus.flatMap((status) => {
+    return ["up", "down"].map((upDown) => {
+      return { status, upDown: upDown as "up" | "down" };
+    });
   });
 }

@@ -9,7 +9,11 @@ import {
   RoleFilterType,
 } from "@/type/FilterType";
 import { match } from "ts-pattern";
-import { BasicStatusSearch, LabelSearch } from "@/type/SearchType";
+import {
+  BasicStatusSearch,
+  ElementStatusSearch,
+  LabelSearch,
+} from "@/type/SearchType";
 import { parse_skill, SkillKind } from "@/utils/parser/skill";
 
 export type Memoria = (typeof data)[0];
@@ -41,6 +45,7 @@ export const currentRoleFilterAtom = atom((get) => {
 });
 
 export const basicStatusFilterAtom = atom<BasicStatusSearch[]>([]);
+export const elementStatusFilterAtom = atom<ElementStatusSearch[]>([]);
 
 export const filteredMemoriaAtom = atom((get) => {
   return get(memoriaAtom).filter((memoria) => {
@@ -85,12 +90,48 @@ export const filteredMemoriaAtom = atom((get) => {
         .otherwise(() => false);
     });
 
+    const elementStatus = get(elementStatusFilterAtom).every((filter) => {
+      return match(filter)
+        .with({ status: "Fire ATK", upDown: skill.upDown }, () =>
+          skill.status.includes("Fire ATK"),
+        )
+        .with({ status: "Fire DEF", upDown: skill.upDown }, () =>
+          skill.status.includes("Fire DEF"),
+        )
+        .with({ status: "Water ATK", upDown: skill.upDown }, () =>
+          skill.status.includes("Water ATK"),
+        )
+        .with({ status: "Water DEF", upDown: skill.upDown }, () =>
+          skill.status.includes("Water DEF"),
+        )
+        .with({ status: "Wind ATK", upDown: skill.upDown }, () =>
+          skill.status.includes("Wind ATK"),
+        )
+        .with({ status: "Wind DEF", upDown: skill.upDown }, () =>
+          skill.status.includes("Wind DEF"),
+        )
+        .with({ status: "Light ATK", upDown: skill.upDown }, () =>
+          skill.status.includes("Light ATK"),
+        )
+        .with({ status: "Light DEF", upDown: skill.upDown }, () =>
+          skill.status.includes("Light DEF"),
+        )
+        .with({ status: "Dark ATK", upDown: skill.upDown }, () =>
+          skill.status.includes("Dark ATK"),
+        )
+        .with({ status: "Dark DEF", upDown: skill.upDown }, () =>
+          skill.status.includes("Dark DEF"),
+        )
+        .otherwise(() => false);
+    });
+
     return (
       sw &&
       role &&
       element &&
       label &&
       basicStatus &&
+      elementStatus &&
       !get(deckAtom).some(({ name }) => memoria.name === name) &&
       !get(legendaryDeckAtom).some(({ name }) => memoria.name === name)
     );
