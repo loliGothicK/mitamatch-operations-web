@@ -18,12 +18,10 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import {
   mainListItems,
-  secondaryListItems,
+  UpdateListItems,
 } from "@/component/dashboard/listItems";
-import Chart from "@/component/dashboard/Chart";
-import Deposits from "@/component/dashboard/Deposits";
-import Orders from "@/component/dashboard/Orders";
 import Footer from "@/component/Footer";
+import Image from "next/image";
 
 const drawerWidth: number = 240;
 
@@ -82,35 +80,48 @@ function DashboardFragments() {
     <>
       <Grid container spacing={3}>
         {/* Chart */}
-        <Grid item xs={12} md={8} lg={9}>
+        <Grid item xs={12} md={12} lg={12}>
           <Paper
             sx={{
               p: 2,
               display: "flex",
+              alignItems: "center",
               flexDirection: "column",
-              height: 240,
+              height: 320,
+              backgroundColor: "midnightblue",
             }}
           >
-            <Chart />
+            <Container
+              maxWidth={"xs"}
+              sx={{ display: { xs: "block", sm: "none" } }}
+            >
+              <Image
+                src={"/MitamaLabLogo.png"}
+                alt={"logo"}
+                width={300}
+                height={300}
+              />
+            </Container>
+            <Container
+              maxWidth={"sm"}
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              <Image
+                src={"/MO_DARK.png"}
+                alt={"logo"}
+                width={900}
+                height={300}
+              />
+            </Container>
           </Paper>
         </Grid>
-        {/* Recent Deposits */}
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper
-            sx={{
-              p: 2,
-              display: "flex",
-              flexDirection: "column",
-              height: 240,
-            }}
-          >
-            <Deposits />
-          </Paper>
-        </Grid>
-        {/* Recent Orders */}
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            <Orders />
+            <Typography variant="h6" gutterBottom component="div">
+              Recent Updates
+            </Typography>
+            <Divider />
+            <List>{UpdateListItems}</List>
           </Paper>
         </Grid>
       </Grid>
@@ -176,11 +187,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
-          </List>
+          <List component="nav">{mainListItems}</List>
         </Drawer>
         <Box
           component="main"

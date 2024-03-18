@@ -14,7 +14,13 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Divider from "@mui/material/Divider";
-import { Add, FilterAlt, Remove, SearchOutlined } from "@mui/icons-material";
+import {
+  Add,
+  FilterAlt,
+  Remove,
+  SearchOutlined,
+  ShareOutlined,
+} from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -23,10 +29,10 @@ import Box from "@mui/material/Box";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import { useAtom } from "jotai";
 import {
-  Memoria,
   deckAtom,
-  legendaryDeckAtom,
   filteredMemoriaAtom,
+  legendaryDeckAtom,
+  Memoria,
   swAtom,
 } from "@/jotai/atom";
 import Filter from "@/component/Filter";
@@ -34,6 +40,8 @@ import { useState } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Search from "@/component/Search";
 import Details from "@/component/Details";
+import { encodeDeck } from "@/actions/encodeDeck";
+import Link from "next/link";
 
 interface DeckProps {
   legendaryDeck: Memoria[];
@@ -43,10 +51,78 @@ interface DeckProps {
 function MemoriaItem({ name, id }: { name: string; id: string }) {
   const [_, setDeck] = useAtom(deckAtom);
   const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [concentration, setConcentration] = useState(4);
+
+  const handleConcentration = () => {
+    if (concentration > 0) {
+      setConcentration(concentration - 1);
+    } else {
+      setConcentration(4);
+    }
+    setDeck((prev) => {
+      return prev.map((memoria) => {
+        if (memoria.name === name) {
+          return { ...memoria, concentration: concentration };
+        }
+        return memoria;
+      });
+    });
+    setLegendaryDeck((prev) => {
+      return prev.map((memoria) => {
+        if (memoria.name === name) {
+          return { ...memoria, concentration: concentration };
+        }
+        return memoria;
+      });
+    });
+  };
 
   return (
     <ImageListItem key={id}>
       <Image src={`/memoria/${name}.png`} alt={name} width={100} height={100} />
+      <ImageListItemBar
+        sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
+        position={"top"}
+        actionPosition={"right"}
+        actionIcon={
+          <IconButton
+            aria-label={`remove ${name}`}
+            onClick={handleConcentration}
+            sx={{
+              marginTop: 2,
+              marginRight: 1,
+            }}
+          >
+            {concentration == 4 ? (
+              <Typography
+                variant="body2"
+                color="white"
+                sx={{
+                  position: "absolute",
+                }}
+              >
+                MAX
+              </Typography>
+            ) : (
+              <Typography
+                variant="body2"
+                color="white"
+                sx={{
+                  position: "absolute",
+                }}
+              >
+                {concentration}
+              </Typography>
+            )}
+            <Image
+              src={"/Concentration.png"}
+              alt={"concentration"}
+              width={30}
+              height={30}
+            />
+          </IconButton>
+        }
+      />
       <ImageListItemBar
         sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
         position={"top"}
@@ -77,34 +153,39 @@ function MemoriaItem({ name, id }: { name: string; id: string }) {
 
 function DeckList({ legendaryDeck, deck }: DeckProps) {
   return (
-    <>
-      <Typography variant="h6" gutterBottom>
+    <Grid container direction={"column"} alignItems={"center"}>
+      <Typography variant="h4" gutterBottom>
         Deck List
       </Typography>
       <Container
-        maxWidth="lg"
+        maxWidth="md"
         sx={{
           bgcolor: "grey",
-          minHeight: "60vh",
+          minHeight: 530,
+          width: 630,
           paddingTop: 2,
           paddingBottom: 2,
         }}
       >
         {/* Legendary Deck Images */}
-        <ImageList sx={{ width: 600, height: 100 }} cols={5} rowHeight={100}>
+        <ImageList
+          sx={{ width: 600, height: 100, flexDirection: "column" }}
+          cols={5}
+          rowHeight={100}
+        >
           {legendaryDeck.map(({ name, id }) => {
             return <MemoriaItem name={name} id={id.toString()} key={id} />;
           })}
         </ImageList>
         <Divider sx={{ margin: 2 }} />
         {/* Deck Images */}
-        <ImageList sx={{ width: 600, height: 520 }} cols={5} rowHeight={100}>
+        <ImageList sx={{ width: 600 }} cols={5} rowHeight={100}>
           {deck.map(({ name, id }) => {
             return <MemoriaItem name={name} id={id.toString()} key={id} />;
           })}
         </ImageList>
       </Container>
-    </>
+    </Grid>
   );
 }
 
@@ -186,7 +267,7 @@ function VirtualizedList() {
   return (
     <FixedSizeList
       height={700}
-      width={500}
+      width={450}
       itemSize={100}
       itemCount={memoria.length}
       overscanCount={5}
@@ -197,8 +278,8 @@ function VirtualizedList() {
 }
 function Source() {
   return (
-    <Box sx={{ width: "100%", height: "70vh", maxWidth: 400 }}>
-      <Typography variant="h6" gutterBottom>
+    <Grid container direction={"column"} alignItems={"center"}>
+      <Typography variant="h4" gutterBottom>
         Memoria List
       </Typography>
       <Grid direction="row" spacing={2} width={400}>
@@ -207,7 +288,7 @@ function Source() {
         <SearchModal />
       </Grid>
       <VirtualizedList />
-    </Box>
+    </Grid>
   );
 }
 
@@ -260,7 +341,7 @@ function FilterModal() {
         <FilterAlt />
       </Button>
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
+        <Box sx={style} color={"white"}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Filters
           </Typography>
@@ -298,7 +379,7 @@ function SearchModal() {
         <SearchOutlined />
       </Button>
       <Modal open={open} onClose={handleClose}>
-        <Box sx={style}>
+        <Box sx={style} color={"white"}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Search
           </Typography>
@@ -310,25 +391,44 @@ function SearchModal() {
 }
 
 export default function DeckBuilder() {
-  const [deck, _] = useAtom(deckAtom);
-  const [legendaryDeck, __] = useAtom(legendaryDeckAtom);
+  const [deck] = useAtom(deckAtom);
+  const [legendaryDeck] = useAtom(legendaryDeckAtom);
 
   return (
     <Layout>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={4} lg={4}>
-          {/* DeckDetail */}
-          <Typography variant="h6" gutterBottom>
-            Deck Details
-          </Typography>
-          <Details />
+      <Grid container direction={"row"} alignItems={"right"}>
+        <Grid item xs={12}>
+          {/* share button */}
+          <Link href={`/deck-builder?deck=${encodeDeck(deck, legendaryDeck)}`}>
+            <IconButton aria-label="share">
+              <ShareOutlined />
+            </IconButton>
+          </Link>
         </Grid>
-        <Grid item xs={12} md={8} lg={5}>
-          <DeckList deck={deck} legendaryDeck={legendaryDeck} />
-        </Grid>
-        <Grid item xs={12} lg={3}>
-          {/* Source */}
-          <Source />
+        <Grid
+          container
+          item
+          spacing={2}
+          xs={12}
+          direction={"row"}
+          alignItems={"left"}
+        >
+          <Grid item xs={12} md={4} lg={4}>
+            <Grid container direction={"column"} alignItems={"center"}>
+              {/* DeckDetail */}
+              <Typography variant="h4" gutterBottom>
+                Deck Details
+              </Typography>
+              <Details />
+            </Grid>
+          </Grid>
+          <Grid item xs={12} md={8} lg={5}>
+            <DeckList deck={deck} legendaryDeck={legendaryDeck} />
+          </Grid>
+          <Grid item xs={12} lg={3}>
+            {/* Source */}
+            <Source />
+          </Grid>
         </Grid>
       </Grid>
     </Layout>

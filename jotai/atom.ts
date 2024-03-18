@@ -12,10 +12,11 @@ import { match } from "ts-pattern";
 import { LabelSearch } from "@/type/SearchType";
 
 export type Memoria = (typeof data)[0];
+export type MemoriaWithConcentration = Memoria & { concentration?: number };
 
 export const memoriaAtom = atom<Memoria[]>(() => data);
-export const legendaryDeckAtom = atom<Memoria[]>([]);
-export const deckAtom = atom<Memoria[]>([]);
+export const legendaryDeckAtom = atom<MemoriaWithConcentration[]>([]);
+export const deckAtom = atom<MemoriaWithConcentration[]>([]);
 export const swAtom = atom<"sword" | "shield">("shield");
 export const roleFilterAtom = atom<RoleFilterType[]>([...roleFilter]);
 export const elementFilterAtom = atom<ElementFilterType[]>([...elementFilter]);

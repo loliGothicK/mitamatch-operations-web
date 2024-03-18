@@ -55,7 +55,7 @@ export default function Details() {
   }
 
   return (
-    <>
+    <Grid container spacing={2} alignItems={"left"} direction={"column"}>
       <Typography variant="body1">スキル</Typography>
       <Divider sx={{ margin: 2 }} />
       <Grid container spacing={1}>
@@ -65,7 +65,7 @@ export default function Details() {
           [...skillAggregate.entries()].map(([kind, count]) => {
             return (
               <Grid item xs={4} key={kind}>
-                <Button color={"info"}>
+                <Button color={"secondary"}>
                   {kind} : {count}
                 </Button>
               </Grid>
@@ -73,7 +73,9 @@ export default function Details() {
           })
         )}
       </Grid>
-      <Typography variant="body1">補助スキル</Typography>
+      <Typography variant="body1" marginTop={5}>
+        補助スキル
+      </Typography>
       <Divider sx={{ margin: 2 }} />
       <Grid container spacing={1}>
         {supportAggregate.size == 0 ? (
@@ -82,7 +84,7 @@ export default function Details() {
           [...supportAggregate.entries()].map(([kind, count]) => {
             return (
               <Grid item xs={4} key={kind}>
-                <Button color={"info"}>
+                <Button color={"secondary"}>
                   {kind} : {count}
                 </Button>
               </Grid>
@@ -90,6 +92,6 @@ export default function Details() {
           })
         )}
       </Grid>
-    </>
+    </Grid>
   );
 }

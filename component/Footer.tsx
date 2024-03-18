@@ -75,6 +75,15 @@ export default function Footer({ ...props }) {
           >
             {content["copy"]}
           </Typography>
+          <Typography
+            color={theme.palette.text.secondary}
+            component="p"
+            variant="body2"
+            gutterBottom={false}
+          >
+            All copyrights (images, text, data, etc.) on this website are owned
+            by ©AZONE INTERNATIONAL and acus/アサルトリリィプロジェクト.
+          </Typography>
         </Box>
       </footer>
     </Container>
