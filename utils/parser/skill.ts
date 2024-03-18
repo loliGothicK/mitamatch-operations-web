@@ -21,24 +21,47 @@ export const statusKind = [
   "Dark DEF",
 ] as const;
 export type StatusKind = (typeof statusKind)[number];
-// map to japanese
-export const statusKindMap = {
-  ATK: "攻撃",
-  DEF: "防御",
-  "Sp.ATK": "特攻",
-  "Sp.DEF": "特防",
-  Life: "HP",
-  "Fire ATK": "火攻",
-  "Fire DEF": "火防",
-  "Water ATK": "水攻",
-  "Water DEF": "水防",
-  "Wind ATK": "風攻",
-  "Wind DEF": "風防",
-  "Light ATK": "光攻",
-  "Light DEF": "光防",
-  "Dark ATK": "闇攻",
-  "Dark DEF": "闇防",
-} as const;
+
+export function statusToJapanese({
+  status,
+  upDown,
+}: {
+  status: StatusKind;
+  upDown: "up" | "down";
+}): string {
+  return match({ status, upDown })
+    .with({ status: "ATK", upDown: "up" }, () => "攻UP")
+    .with({ status: "ATK", upDown: "down" }, () => "攻DOWN")
+    .with({ status: "DEF", upDown: "up" }, () => "防UP")
+    .with({ status: "DEF", upDown: "down" }, () => "防DOWN")
+    .with({ status: "Sp.ATK", upDown: "up" }, () => "特攻UP")
+    .with({ status: "Sp.ATK", upDown: "down" }, () => "特攻DOWN")
+    .with({ status: "Sp.DEF", upDown: "up" }, () => "特防UP")
+    .with({ status: "Sp.DEF", upDown: "down" }, () => "特防DOWN")
+    .with({ status: "Life", upDown: "up" }, () => "ライフUP")
+    .with({ status: "Life", upDown: "down" }, () => "ライフDOWN")
+    .with({ status: "Fire ATK", upDown: "up" }, () => "火攻UP")
+    .with({ status: "Fire ATK", upDown: "down" }, () => "火攻DOWN")
+    .with({ status: "Fire DEF", upDown: "up" }, () => "火防UP")
+    .with({ status: "Fire DEF", upDown: "down" }, () => "火防DOWN")
+    .with({ status: "Water ATK", upDown: "up" }, () => "水攻UP")
+    .with({ status: "Water ATK", upDown: "down" }, () => "水攻DOWN")
+    .with({ status: "Water DEF", upDown: "up" }, () => "水防UP")
+    .with({ status: "Water DEF", upDown: "down" }, () => "水防DOWN")
+    .with({ status: "Wind ATK", upDown: "up" }, () => "風攻UP")
+    .with({ status: "Wind ATK", upDown: "down" }, () => "風攻DOWN")
+    .with({ status: "Wind DEF", upDown: "up" }, () => "風防UP")
+    .with({ status: "Wind DEF", upDown: "down" }, () => "風防DOWN")
+    .with({ status: "Light ATK", upDown: "up" }, () => "光攻UP")
+    .with({ status: "Light ATK", upDown: "down" }, () => "光攻DOWN")
+    .with({ status: "Light DEF", upDown: "up" }, () => "光防UP")
+    .with({ status: "Light DEF", upDown: "down" }, () => "光防DOWN")
+    .with({ status: "Dark ATK", upDown: "up" }, () => "闇攻UP")
+    .with({ status: "Dark ATK", upDown: "down" }, () => "闇攻DOWN")
+    .with({ status: "Dark DEF", upDown: "up" }, () => "闇防UP")
+    .with({ status: "Dark DEF", upDown: "down" }, () => "闇防DOWN")
+    .exhaustive();
+}
 
 type Element = "Fire" | "Water" | "Wind" | "Light" | "Dark";
 type ElementalKind = "Stimulation" | "Spread" | "Strengthen" | "Weaken";
