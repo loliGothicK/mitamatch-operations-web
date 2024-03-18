@@ -113,7 +113,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
                   position: "absolute",
                 }}
               >
-                {concentration}
+                {concentrationValue}
               </Typography>
             )}
             <Image
