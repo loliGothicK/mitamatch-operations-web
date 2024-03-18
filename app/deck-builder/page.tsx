@@ -48,41 +48,18 @@ import { decodeDeck, encodeDeck } from "@/actions/encodeDeck";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { match } from "ts-pattern";
-import { blue, green, pink, purple, red, yellow } from "@mui/material/colors";
+import { blue, green, purple, red, yellow } from "@mui/material/colors";
 
-function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
-  const { name, id, concentration } = memoria;
-  const [_, setDeck] = useAtom(deckAtom);
-  const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
-  const [concentrationValue, setConcentration] = useState(
-    concentration ? concentration : 4,
-  );
-
-  const handleConcentration = () => {
-    if (concentrationValue > 0) {
-      setConcentration(concentrationValue - 1);
-    } else {
-      setConcentration(4);
-    }
-    setDeck((prev) => {
-      return prev.map((memoria) => {
-        if (memoria.name === name) {
-          return { ...memoria, concentration: concentrationValue };
-        }
-        return memoria;
-      });
-    });
-    setLegendaryDeck((prev) => {
-      return prev.map((memoria) => {
-        if (memoria.name === name) {
-          return { ...memoria, concentration: concentrationValue };
-        }
-        return memoria;
-      });
-    });
-  };
-
-  const kindImage = match(memoria.kind)
+function Icon({
+  kind,
+  element,
+  position,
+}: {
+  kind: string;
+  element: string;
+  position?: number;
+}) {
+  const kindImage = match(kind)
     .with("通常単体", () => {
       return (
         <Image src={"/NormalSingle.png"} alt={"kind"} width={25} height={25} />
@@ -118,77 +95,110 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     })
     .run();
 
+  return match(element)
+    .with("火", () => (
+      <Avatar
+        sx={{
+          width: 30,
+          height: 30,
+          left: position,
+          position: "absolute",
+          bgcolor: red[500],
+        }}
+      >
+        {kindImage}
+      </Avatar>
+    ))
+    .with("水", () => (
+      <Avatar
+        sx={{
+          width: 30,
+          height: 30,
+          left: position,
+          position: "absolute",
+          bgcolor: blue[500],
+        }}
+      >
+        {kindImage}
+      </Avatar>
+    ))
+    .with("風", () => (
+      <Avatar
+        sx={{
+          width: 30,
+          height: 30,
+          left: position,
+          position: "absolute",
+          bgcolor: green[500],
+        }}
+      >
+        {kindImage}
+      </Avatar>
+    ))
+    .with("光", () => (
+      <Avatar
+        sx={{
+          width: 30,
+          height: 30,
+          left: position,
+          position: "absolute",
+          bgcolor: yellow[500],
+        }}
+      >
+        {kindImage}
+      </Avatar>
+    ))
+    .with("闇", () => (
+      <Avatar
+        sx={{
+          width: 30,
+          height: 30,
+          left: position,
+          position: "absolute",
+          bgcolor: purple[500],
+        }}
+      >
+        {kindImage}
+      </Avatar>
+    ))
+    .run();
+}
+
+function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
+  const { name, id, concentration } = memoria;
+  const [_, setDeck] = useAtom(deckAtom);
+  const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [concentrationValue, setConcentration] = useState(
+    concentration ? concentration : 4,
+  );
+
+  const handleConcentration = () => {
+    if (concentrationValue > 0) {
+      setConcentration(concentrationValue - 1);
+    } else {
+      setConcentration(4);
+    }
+    setDeck((prev) => {
+      return prev.map((memoria) => {
+        if (memoria.name === name) {
+          return { ...memoria, concentration: concentrationValue };
+        }
+        return memoria;
+      });
+    });
+    setLegendaryDeck((prev) => {
+      return prev.map((memoria) => {
+        if (memoria.name === name) {
+          return { ...memoria, concentration: concentrationValue };
+        }
+        return memoria;
+      });
+    });
+  };
+
   return (
     <ImageListItem key={id}>
-      <Container sx={{}}>
-        {match(memoria.element)
-          .with("火", () => (
-            <Avatar
-              sx={{
-                width: 30,
-                height: 30,
-                left: 70,
-                position: "absolute",
-                bgcolor: red[500],
-              }}
-            >
-              {kindImage}
-            </Avatar>
-          ))
-          .with("水", () => (
-            <Avatar
-              sx={{
-                width: 30,
-                height: 30,
-                left: 70,
-                position: "absolute",
-                bgcolor: blue[500],
-              }}
-            >
-              {kindImage}
-            </Avatar>
-          ))
-          .with("風", () => (
-            <Avatar
-              sx={{
-                width: 30,
-                height: 30,
-                left: 70,
-                position: "absolute",
-                bgcolor: green[500],
-              }}
-            >
-              {kindImage}
-            </Avatar>
-          ))
-          .with("光", () => (
-            <Avatar
-              sx={{
-                width: 30,
-                height: 30,
-                left: 70,
-                position: "absolute",
-                bgcolor: yellow[500],
-              }}
-            >
-              {kindImage}
-            </Avatar>
-          ))
-          .with("闇", () => (
-            <Avatar
-              sx={{
-                width: 30,
-                height: 30,
-                left: 70,
-                position: "absolute",
-                bgcolor: purple[500],
-              }}
-            >
-              {kindImage}
-            </Avatar>
-          ))
-          .run()}
-      </Container>
+      <Icon kind={memoria.kind} element={memoria.element} position={70} />
       <Image src={`/memoria/${name}.png`} alt={name} width={100} height={100} />
       <ImageListItemBar
         sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
@@ -345,6 +355,11 @@ function renderRow(props: ListChildComponentProps) {
     >
       <ListItemButton role={undefined} dense>
         <ListItemIcon>
+          <Icon
+            kind={memoria[index].kind}
+            element={memoria[index].element}
+            position={85}
+          />
           <Image
             src={`/memoria/${memoria[index].name}.png`}
             alt={memoria[index].name}
