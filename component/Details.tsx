@@ -48,6 +48,7 @@ export default function Details() {
   const supportAggregate = new Map<string, number>();
   for (const kind of supports.flatMap((support) => {
     return support.kind.map((kind) => {
+      console.log(kind);
       return toJapanese(kind);
     });
   })) {

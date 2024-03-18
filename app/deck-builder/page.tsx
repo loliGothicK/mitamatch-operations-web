@@ -45,6 +45,7 @@ import Details from "@/component/Details";
 import { decodeDeck, encodeDeck } from "@/actions/encodeDeck";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Theme, useMediaQuery } from "@mui/system";
 
 interface DeckProps {
   legendaryDeck: Memoria[];
