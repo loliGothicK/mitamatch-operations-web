@@ -432,7 +432,7 @@ export default function DeckBuilder() {
       setDeck(deck);
       setLegendaryDeck(legendaryDeck);
     }
-  }, [setDeck, setLegendaryDeck, setSw, value]);
+  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, value]);
 
   return (
     <Layout>
