@@ -315,7 +315,7 @@ function ToggleButtons() {
 
   return (
     <FormControlLabel
-      control={<Switch defaultChecked={sw === "sword"} />}
+      control={<Switch checked={sw === "shield"} />}
       label="前衛 <=> 後衛"
       onChange={() => {
         if (sw === "shield") {
@@ -400,6 +400,7 @@ export default function DeckBuilder() {
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
+  const [_, setRoleFilter] = useAtom(roleFilterAtom);
   const value = params.get("deck");
   const pathname = usePathname();
 
@@ -417,9 +418,19 @@ export default function DeckBuilder() {
   useEffect(() => {
     if (value) {
       const { sw, deck, legendaryDeck } = decodeDeck(value);
+      setSw(sw);
+      setRoleFilter(
+        sw === "shield"
+          ? ["support", "interference", "recovery"]
+          : [
+              "normal_single",
+              "normal_range",
+              "special_single",
+              "special_range",
+            ],
+      );
       setDeck(deck);
       setLegendaryDeck(legendaryDeck);
-      setSw(sw);
     }
   }, [setDeck, setLegendaryDeck, setSw, value]);
 
