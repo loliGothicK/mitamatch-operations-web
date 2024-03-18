@@ -8,9 +8,35 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Mitamatch Operations for Web",
-  description: "Mitamatch Operations for Web",
+const siteName = "Mitamatch Operations for Web";
+const description = "Mitamatch Operations の機能の一部がブラウザで使えます";
+const url = "https://mitama.io";
+
+export const metadata = {
+  title: {
+    default: siteName,
+    /** `next-seo`の`titleTemplate`に相当する機能 */
+    template: `%s - ${siteName}`,
+  },
+  description,
+  openGraph: {
+    title: siteName,
+    description,
+    url,
+    siteName,
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description,
+    site: "@mitama_rs",
+    creator: "@mitama_rs",
+  },
+  alternates: {
+    canonical: url,
+  },
 };
 
 export default function RootLayout({
