@@ -12,7 +12,6 @@ import {
   ImageListItem,
   ImageListItemBar,
   ListItem,
-  Modal,
   Switch,
 } from "@mui/material";
 import Image from "next/image";
@@ -28,11 +27,9 @@ import IconButton from "@mui/material/IconButton";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Box from "@mui/material/Box";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import { useAtom } from "jotai";
 import {
-  currentRoleFilterAtom,
   deckAtom,
   filteredMemoriaAtom,
   legendaryDeckAtom,
@@ -48,7 +45,6 @@ import Details from "@/component/Details";
 import { decodeDeck, encodeDeck } from "@/actions/encodeDeck";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Theme, useMediaQuery } from "@mui/system";
 
 interface DeckProps {
   legendaryDeck: Memoria[];
