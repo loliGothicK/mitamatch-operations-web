@@ -202,28 +202,28 @@ export function parse_skill(name: string, description: string): Skill {
   const upDown = description.includes("ダウン") ? "down" : "up";
 
   const buffType = name.includes("W") ? "W" : name.includes("Sp") ? "Sp" : "N";
-  const buffKind = match<string, Option<BuffKind>>(name)
+  const buffKind = match<string, BuffKind[]>(name)
+    .when(
+      (name) => name.includes("ライフ"),
+      () => (name.includes("ガード") ? ["Guard", "Life"] : ["Life"]),
+    )
     .when(
       (name) => name.includes("パワー"),
-      () => option.of("Power"),
+      () => ["Power"],
     )
     .when(
       (name) => name.includes("ガード"),
-      () => option.of("Guard"),
+      () => ["Guard"],
     )
     .when(
       (name) => name.includes("マイト"),
-      () => option.of("Might"),
+      () => ["Might"],
     )
     .when(
       (name) => name.includes("ディファー"),
-      () => option.of("Defer"),
+      () => ["Defer"],
     )
-    .when(
-      (name) => name.includes("ライフ"),
-      () => option.of("Life"),
-    )
-    .otherwise(() => option.none);
+    .otherwise(() => []);
 
   const element = match<string, Option<StatusKind[]>>(name)
     .when(
@@ -321,57 +321,55 @@ export function parse_skill(name: string, description: string): Skill {
     .map((o) => o.value);
 
   const status = [
-    ...getOrElse<StatusKind[]>(() => [])(
-      map((kind: BuffKind) => {
-        return match<BuffKind, StatusKind[]>(kind)
-          .with("Power", () =>
-            match<"W" | "Sp" | "N", StatusKind[]>(buffType)
-              .with("N", () => ["ATK"])
-              .with("Sp", () => ["Sp.ATK"])
-              .with("W", () => ["ATK", "Sp.ATK"])
-              .exhaustive(),
-          )
-          .with("Guard", () =>
-            match<"W" | "Sp" | "N", StatusKind[]>(buffType)
-              .with("N", () => ["DEF"])
-              .with("Sp", () => ["Sp.DEF"])
-              .with("W", () => ["DEF", "Sp.DEF"])
-              .exhaustive(),
-          )
-          .with("Might", () =>
-            match<"W" | "Sp" | "N", StatusKind[]>(buffType)
-              .with("Sp", (): StatusKind[] => {
-                if (name.includes("攻") && name.includes("防")) {
-                  return [];
-                } else if (name.includes("攻")) {
-                  return ["Sp.DEF"];
-                } else if (name.includes("防")) {
-                  return ["Sp.ATK"];
-                } else {
-                  return ["Sp.ATK", "Sp.DEF"];
-                }
-              })
-              .otherwise((): StatusKind[] => {
-                if (name.includes("攻") && name.includes("防")) {
-                  return [];
-                } else if (name.includes("攻")) {
-                  return ["DEF"];
-                } else if (name.includes("防")) {
-                  return ["ATK"];
-                } else {
-                  return ["ATK", "DEF"];
-                }
-              }),
-          )
-          .with("Defer", () =>
-            match<"W" | "Sp" | "N", StatusKind[]>(buffType)
-              .with("Sp", () => ["ATK", "Sp.DEF"])
-              .otherwise(() => ["Sp.ATK", "DEF"]),
-          )
-          .with("Life", () => ["Life"])
-          .exhaustive();
-      })(buffKind),
-    ),
+    ...buffKind.flatMap((kind) => {
+      return match<BuffKind, StatusKind[]>(kind)
+        .with("Power", () =>
+          match<"W" | "Sp" | "N", StatusKind[]>(buffType)
+            .with("N", () => ["ATK"])
+            .with("Sp", () => ["Sp.ATK"])
+            .with("W", () => ["ATK", "Sp.ATK"])
+            .exhaustive(),
+        )
+        .with("Guard", () =>
+          match<"W" | "Sp" | "N", StatusKind[]>(buffType)
+            .with("N", () => ["DEF"])
+            .with("Sp", () => ["Sp.DEF"])
+            .with("W", () => ["DEF", "Sp.DEF"])
+            .exhaustive(),
+        )
+        .with("Might", () =>
+          match<"W" | "Sp" | "N", StatusKind[]>(buffType)
+            .with("Sp", (): StatusKind[] => {
+              if (name.includes("攻") && name.includes("防")) {
+                return [];
+              } else if (name.includes("攻")) {
+                return ["Sp.DEF"];
+              } else if (name.includes("防")) {
+                return ["Sp.ATK"];
+              } else {
+                return ["Sp.ATK", "Sp.DEF"];
+              }
+            })
+            .otherwise((): StatusKind[] => {
+              if (name.includes("攻") && name.includes("防")) {
+                return [];
+              } else if (name.includes("攻")) {
+                return ["DEF"];
+              } else if (name.includes("防")) {
+                return ["ATK"];
+              } else {
+                return ["ATK", "DEF"];
+              }
+            }),
+        )
+        .with("Defer", () =>
+          match<"W" | "Sp" | "N", StatusKind[]>(buffType)
+            .with("Sp", () => ["ATK", "Sp.DEF"])
+            .otherwise(() => ["Sp.ATK", "DEF"]),
+        )
+        .with("Life", () => ["Life"])
+        .exhaustive();
+    }),
     ...getOrElse<StatusKind[]>(() => [])(
       map((kind: StatusKind[]) => kind)(element),
     ),
