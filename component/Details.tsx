@@ -58,6 +58,13 @@ export default function Details() {
     elementAggregate.set(element, (elementAggregate.get(element) || 0) + 1);
   }
 
+  const kindAggregate = new Map<string, number>();
+  for (const kind of [...deck, ...legendaryDeck].map((memoria) => {
+    return memoria.kind;
+  })) {
+    kindAggregate.set(kind, (kindAggregate.get(kind) || 0) + 1);
+  }
+
   return (
     <Grid container spacing={2} alignItems={"left"} direction={"column"}>
       <Typography variant="body1">スキル</Typography>
@@ -105,6 +112,25 @@ export default function Details() {
           <></>
         ) : (
           [...elementAggregate.entries()].map(([kind, count]) => {
+            return (
+              <Grid item xs={4} key={kind}>
+                <Button disabled>
+                  {kind} : {count}
+                </Button>
+              </Grid>
+            );
+          })
+        )}
+      </Grid>
+      <Typography variant="body1" marginTop={5}>
+        内訳
+      </Typography>
+      <Divider sx={{ margin: 2 }} />
+      <Grid container spacing={1}>
+        {kindAggregate.size == 0 ? (
+          <></>
+        ) : (
+          [...kindAggregate.entries()].map(([kind, count]) => {
             return (
               <Grid item xs={4} key={kind}>
                 <Button disabled>
