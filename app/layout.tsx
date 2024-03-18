@@ -21,8 +21,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider>{children}</Provider>
       </body>
-      <GoogleTagManager gtmId="..." />
-      <GoogleAnalytics gaId="..." />
+      <GoogleTagManager gtmId={`${process.env.GTAG}`} />
+      <GoogleAnalytics gaId={`${process.env.GTAG}`} />
     </html>
   );
 }
