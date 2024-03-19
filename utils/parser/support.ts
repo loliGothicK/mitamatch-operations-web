@@ -148,6 +148,10 @@ export function parse_support(name: string, _: string): Support {
       () => ["DamageUp", statusDown("Water DEF")],
     )
     .when(
+      (name) => name === "攻:ダメージUP/副攻:風ガードDOWN",
+      () => ["DamageUp", statusDown("Wind DEF")],
+    )
+    .when(
       (name) => name === "攻:ガードUP",
       () => [statusUp("DEF")],
     )
