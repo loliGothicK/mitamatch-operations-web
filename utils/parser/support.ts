@@ -4,14 +4,14 @@ import { match } from "ts-pattern";
 type Trigger = "Attack" | "Assist" | "Recovery" | "Command";
 
 type Status = {
-  upDown: "up" | "down";
+  upDown: "UP" | "DOWN";
   status: Exclude<
     StatusKind,
     "Life" | "Light ATK" | "Light DEF" | "Dark ATK" | "Dark DEF"
   >;
 };
 
-type SupportKind =
+export type SupportKind =
   | "DamageUp"
   | "SupportUp"
   | "RecoveryUp"
@@ -20,38 +20,6 @@ type SupportKind =
   | "MpCostDown"
   | "RangeUp"
   | Status;
-
-export function toJapanese(kind: SupportKind) {
-  return match(kind)
-    .with("DamageUp", () => "ダメージUP")
-    .with("SupportUp", () => "支援UP")
-    .with("RecoveryUp", () => "回復UP")
-    .with("NormalMatchPtUp", () => "PtUP/通")
-    .with("SpecialMatchPtUp", () => "PtUP/特")
-    .with("MpCostDown", () => "MP")
-    .with("RangeUp", () => "範囲+1")
-    .with({ upDown: "up", status: "ATK" }, () => "攻UP")
-    .with({ upDown: "up", status: "DEF" }, () => "防UP")
-    .with({ upDown: "up", status: "Sp.ATK" }, () => "特攻UP")
-    .with({ upDown: "up", status: "Sp.DEF" }, () => "特防UP")
-    .with({ upDown: "up", status: "Fire ATK" }, () => "火攻UP")
-    .with({ upDown: "up", status: "Water ATK" }, () => "水攻UP")
-    .with({ upDown: "up", status: "Wind ATK" }, () => "風攻UP")
-    .with({ upDown: "up", status: "Fire DEF" }, () => "火防UP")
-    .with({ upDown: "up", status: "Water DEF" }, () => "水防UP")
-    .with({ upDown: "up", status: "Wind DEF" }, () => "風防UP")
-    .with({ upDown: "down", status: "ATK" }, () => "攻DOWN")
-    .with({ upDown: "down", status: "DEF" }, () => "防DOWN")
-    .with({ upDown: "down", status: "Sp.ATK" }, () => "特攻DOWN")
-    .with({ upDown: "down", status: "Sp.DEF" }, () => "特防DOWN")
-    .with({ upDown: "down", status: "Fire ATK" }, () => "火攻DOWN")
-    .with({ upDown: "down", status: "Water ATK" }, () => "水攻DOWN")
-    .with({ upDown: "down", status: "Wind ATK" }, () => "風攻DOWN")
-    .with({ upDown: "down", status: "Fire DEF" }, () => "火防DOWN")
-    .with({ upDown: "down", status: "Water DEF" }, () => "水防DOWN")
-    .with({ upDown: "down", status: "Wind DEF" }, () => "風防DOWN")
-    .exhaustive();
-}
 
 type Support = {
   trigger: Trigger;
@@ -65,7 +33,7 @@ function statusUp(
   >,
 ): Status {
   return {
-    upDown: "up",
+    upDown: "UP",
     status,
   };
 }
@@ -77,7 +45,7 @@ function statusDown(
   >,
 ): Status {
   return {
-    upDown: "down",
+    upDown: "DOWN",
     status,
   };
 }

@@ -29,7 +29,6 @@
     "react": "^18",
     "react-dom": "^18",
     "react-virtualized": "^9.22.5",
-    "react-window": "^1.8.10",
     "recharts": "^2.12.3",
     "ts-node": "^10.9.2",
     "ts-pattern": "^5.0.8"

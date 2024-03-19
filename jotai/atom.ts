@@ -4,7 +4,6 @@ import {
   elementFilter,
   elementFilterMap,
   ElementFilterType,
-  roleFilter,
   roleFilterMap,
   RoleFilterType,
 } from "@/type/FilterType";
@@ -14,7 +13,7 @@ import {
   ElementStatusSearch,
   LabelSearch,
 } from "@/type/SearchType";
-import { parse_skill, SkillKind } from "@/utils/parser/skill";
+import { parse_skill } from "@/utils/parser/skill";
 
 export type Memoria = (typeof data)[0];
 export type MemoriaWithConcentration = Memoria & { concentration?: number };

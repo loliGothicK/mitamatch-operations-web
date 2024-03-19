@@ -22,42 +22,8 @@ export const statusKind = [
 ] as const;
 export type StatusKind = (typeof statusKind)[number];
 
-export function statusToJapanese({ status, upDown }: Status): string {
-  return match({ status, upDown })
-    .with({ status: "ATK", upDown: "up" }, () => "攻UP")
-    .with({ status: "ATK", upDown: "down" }, () => "攻DOWN")
-    .with({ status: "DEF", upDown: "up" }, () => "防UP")
-    .with({ status: "DEF", upDown: "down" }, () => "防DOWN")
-    .with({ status: "Sp.ATK", upDown: "up" }, () => "特攻UP")
-    .with({ status: "Sp.ATK", upDown: "down" }, () => "特攻DOWN")
-    .with({ status: "Sp.DEF", upDown: "up" }, () => "特防UP")
-    .with({ status: "Sp.DEF", upDown: "down" }, () => "特防DOWN")
-    .with({ status: "Life", upDown: "up" }, () => "ライフUP")
-    .with({ status: "Life", upDown: "down" }, () => "ライフDOWN")
-    .with({ status: "Fire ATK", upDown: "up" }, () => "火攻UP")
-    .with({ status: "Fire ATK", upDown: "down" }, () => "火攻DOWN")
-    .with({ status: "Fire DEF", upDown: "up" }, () => "火防UP")
-    .with({ status: "Fire DEF", upDown: "down" }, () => "火防DOWN")
-    .with({ status: "Water ATK", upDown: "up" }, () => "水攻UP")
-    .with({ status: "Water ATK", upDown: "down" }, () => "水攻DOWN")
-    .with({ status: "Water DEF", upDown: "up" }, () => "水防UP")
-    .with({ status: "Water DEF", upDown: "down" }, () => "水防DOWN")
-    .with({ status: "Wind ATK", upDown: "up" }, () => "風攻UP")
-    .with({ status: "Wind ATK", upDown: "down" }, () => "風攻DOWN")
-    .with({ status: "Wind DEF", upDown: "up" }, () => "風防UP")
-    .with({ status: "Wind DEF", upDown: "down" }, () => "風防DOWN")
-    .with({ status: "Light ATK", upDown: "up" }, () => "光攻UP")
-    .with({ status: "Light ATK", upDown: "down" }, () => "光攻DOWN")
-    .with({ status: "Light DEF", upDown: "up" }, () => "光防UP")
-    .with({ status: "Light DEF", upDown: "down" }, () => "光防DOWN")
-    .with({ status: "Dark ATK", upDown: "up" }, () => "闇攻UP")
-    .with({ status: "Dark ATK", upDown: "down" }, () => "闇攻DOWN")
-    .with({ status: "Dark DEF", upDown: "up" }, () => "闇防UP")
-    .with({ status: "Dark DEF", upDown: "down" }, () => "闇防DOWN")
-    .exhaustive();
-}
-
-type Element = "Fire" | "Water" | "Wind" | "Light" | "Dark";
+export const elements = ["Fire", "Water", "Wind", "Light", "Dark"];
+type Element = (typeof elements)[number];
 type ElementalKind = "Stimulation" | "Spread" | "Strengthen" | "Weaken";
 
 type Elemental = {
@@ -71,16 +37,16 @@ export type Amount =
   | "extra-large"
   | "super-large";
 export type Status = {
-  upDown: "up" | "down";
+  upDown: "UP" | "DOWN";
   status: StatusKind;
 };
-export type SkillKind = Elemental | Status | "charge" | "counter" | "heal";
+export type SkillKind = Status | Elemental | "charge" | "counter" | "heal";
 type BuffKind = "Power" | "Guard" | "Might" | "Defer" | "Life";
 
 export type Skill = {
   name: string;
   description: string;
-  upDown: "up" | "down";
+  upDown: "UP" | "DOWN";
   status: StatusKind[];
   amount: Amount;
   effects: SkillKind[];
@@ -199,7 +165,7 @@ export function parse_skill(name: string, description: string): Skill {
     )
     .otherwise(() => "medium");
 
-  const upDown = description.includes("ダウン") ? "down" : "up";
+  const upDown = description.includes("ダウン") ? "DOWN" : "UP";
 
   const buffType = name.includes("W") ? "W" : name.includes("Sp") ? "Sp" : "N";
   const buffKind = match<string, BuffKind[]>(name)

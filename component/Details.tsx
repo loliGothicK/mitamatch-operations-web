@@ -2,13 +2,135 @@
 import { useAtom } from "jotai";
 import { deckAtom, legendaryDeckAtom, Memoria } from "@/jotai/atom";
 import { Lens } from "monocle-ts";
-import { parse_skill, statusToJapanese } from "@/utils/parser/skill";
-import { parse_support, toJapanese } from "@/utils/parser/support";
+import {
+  parse_skill,
+  Status,
+  StatusKind,
+  statusKind,
+} from "@/utils/parser/skill";
+import { parse_support, SupportKind } from "@/utils/parser/support";
 import Grid from "@mui/material/Grid";
-import { Button } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { elementFilter, elementFilterMap } from "@/type/FilterType";
+import { match } from "ts-pattern";
+
+type UpDown = "UP" | "DOWN";
+type StatusPattern = `${StatusKind}/${UpDown}`;
+const statusPattern: StatusPattern[] = statusKind.flatMap((s) => {
+  return [`${s}/UP`, `${s}/DOWN`] as StatusPattern[];
+});
+
+function intoStatusPattern({
+  status,
+  upDown,
+}: {
+  status: StatusKind;
+  upDown: UpDown;
+}): StatusPattern {
+  return `${status}/${upDown}` as StatusPattern;
+}
+
+function statusPatternToJapanese(pattern: StatusPattern): string {
+  const [status, upDown] = pattern.split("/") as [StatusKind, UpDown];
+  return match(status)
+    .with("ATK", () => `攻${upDown}`)
+    .with("DEF", () => `防${upDown}`)
+    .with("Sp.ATK", () => `特攻${upDown}`)
+    .with("Sp.DEF", () => `特防${upDown}`)
+    .with("Life", () => `HP${upDown}`)
+    .with("Fire ATK", () => `火攻${upDown}`)
+    .with("Fire DEF", () => `火防${upDown}`)
+    .with("Water ATK", () => `水攻${upDown}`)
+    .with("Water DEF", () => `水防${upDown}`)
+    .with("Wind ATK", () => `風攻${upDown}`)
+    .with("Wind DEF", () => `風防${upDown}`)
+    .with("Light ATK", () => `光攻${upDown}`)
+    .with("Light DEF", () => `光防${upDown}`)
+    .with("Dark ATK", () => `闇攻${upDown}`)
+    .with("Dark DEF", () => `闇防${upDown}`)
+    .exhaustive();
+}
+
+type SupportPattern =
+  | `${Exclude<
+      StatusKind,
+      "Life" | "Light ATK" | "Light DEF" | "Dark ATK" | "Dark DEF"
+    >}/${UpDown}`
+  | "DamageUp"
+  | "SupportUp"
+  | "RecoveryUp"
+  | "NormalMatchPtUp"
+  | "SpecialMatchPtUp"
+  | "MpCostDown"
+  | "RangeUp";
+const supportPattern: SupportPattern[] = [
+  "DamageUp",
+  "SupportUp",
+  "RecoveryUp",
+  "NormalMatchPtUp",
+  "SpecialMatchPtUp",
+  "MpCostDown",
+  "RangeUp",
+  ...[
+    "ATK",
+    "DEF",
+    "Sp.ATK",
+    "Sp.DEF",
+    "Fire ATK",
+    "Fire DEF",
+    "Water ATK",
+    "Water DEF",
+    "Wind ATK",
+    "Wind DEF",
+  ].flatMap((s) => {
+    return [`${s}/UP`, `${s}/DOWN`] as SupportPattern[];
+  }),
+] as const;
+
+function supportPatternToJapanese(pattern: SupportPattern): string {
+  return match(pattern)
+    .with("ATK/UP", () => `攻UP`)
+    .with("DEF/UP", () => `防UP`)
+    .with("Sp.ATK/UP", () => `特攻UP`)
+    .with("Sp.DEF/UP", () => `特防UP`)
+    .with("ATK/DOWN", () => `攻DOWN`)
+    .with("DEF/DOWN", () => `防DOWN`)
+    .with("Sp.ATK/DOWN", () => `特攻DOWN`)
+    .with("Sp.DEF/DOWN", () => `特防DOWN`)
+    .with("Fire ATK/UP", () => `火攻UP`)
+    .with("Fire DEF/UP", () => `火防UP`)
+    .with("Water ATK/UP", () => `水攻UP`)
+    .with("Water DEF/UP", () => `水防UP`)
+    .with("Wind ATK/UP", () => `風攻UP`)
+    .with("Wind DEF/UP", () => `風防UP`)
+    .with("Fire ATK/DOWN", () => `火攻DOWN`)
+    .with("Fire DEF/DOWN", () => `火防DOWN`)
+    .with("Water ATK/DOWN", () => `水攻DOWN`)
+    .with("Water DEF/DOWN", () => `水防DOWN`)
+    .with("Wind ATK/DOWN", () => `風攻DOWN`)
+    .with("Wind DEF/DOWN", () => `風防DOWN`)
+    .with("DamageUp", () => "ダメージUP")
+    .with("SupportUp", () => "支援UP")
+    .with("RecoveryUp", () => "回復UP")
+    .with("NormalMatchPtUp", () => "PtUP/通")
+    .with("SpecialMatchPtUp", () => "PtUP/特")
+    .with("MpCostDown", () => "MP")
+    .with("RangeUp", () => "範囲+1")
+    .exhaustive();
+}
+
+export function intoSupportPattern(kind: SupportKind): SupportPattern {
+  return match(kind)
+    .with("DamageUp", () => "DamageUp")
+    .with("SupportUp", () => "SupportUp")
+    .with("RecoveryUp", () => "RecoveryUp")
+    .with("NormalMatchPtUp", () => "NormalMatchPtUp")
+    .with("SpecialMatchPtUp", () => "SpecialMatchPtUp")
+    .with("MpCostDown", () => "MpCostDown")
+    .with("RangeUp", () => "RangeUp")
+    .otherwise(() => intoStatusPattern(kind as Status)) as SupportPattern;
+}
 
 export default function Details() {
   const [deck] = useAtom(deckAtom);
@@ -26,13 +148,13 @@ export default function Details() {
     return parse_skill(skillName.get(memoria), skillDescription.get(memoria));
   });
 
-  const skillAggregate = new Map<string, number>();
-  for (const kind of skills.flatMap((skill) => {
+  const skillAggregate = new Map<StatusPattern, number>();
+  for (const pattern of skills.flatMap((skill) => {
     return skill.status.map((stat) => {
-      return statusToJapanese({ status: stat, upDown: skill.upDown });
+      return intoStatusPattern({ status: stat, upDown: skill.upDown });
     });
   })) {
-    skillAggregate.set(kind, (skillAggregate.get(kind) || 0) + 1);
+    skillAggregate.set(pattern, (skillAggregate.get(pattern) || 0) + 1);
   }
 
   const supports = [...deck, ...legendaryDeck].map((memoria) => {
@@ -42,14 +164,13 @@ export default function Details() {
     );
   });
 
-  const supportAggregate = new Map<string, number>();
-  for (const kind of supports.flatMap((support) => {
+  const supportAggregate = new Map<SupportPattern, number>();
+  for (const pattern of supports.flatMap((support) => {
     return support.kind.map((kind) => {
-      console.log(kind);
-      return toJapanese(kind);
+      return intoSupportPattern(kind);
     });
   })) {
-    supportAggregate.set(kind, (supportAggregate.get(kind) || 0) + 1);
+    supportAggregate.set(pattern, (supportAggregate.get(pattern) || 0) + 1);
   }
 
   const elementAggregate = new Map<string, number>();
@@ -74,15 +195,18 @@ export default function Details() {
         {skillAggregate.size == 0 ? (
           <></>
         ) : (
-          [...skillAggregate.entries()].map(([kind, count]) => {
-            return (
-              <Grid item xs={4} key={kind}>
-                <Typography fontSize={10}>
-                  {kind} : {count}
-                </Typography>
-              </Grid>
-            );
-          })
+          statusPattern
+            .filter((pattern) => skillAggregate.get(pattern) != undefined)
+            .map((pattern, index) => {
+              return (
+                <Grid item xs={4} key={index}>
+                  <Typography fontSize={10}>
+                    {statusPatternToJapanese(pattern)} :{" "}
+                    {skillAggregate.get(pattern)}
+                  </Typography>
+                </Grid>
+              );
+            })
         )}
       </Grid>
       <Typography variant="body1" marginTop={5}>
@@ -93,15 +217,18 @@ export default function Details() {
         {supportAggregate.size == 0 ? (
           <></>
         ) : (
-          [...supportAggregate.entries()].map(([kind, count]) => {
-            return (
-              <Grid item xs={4} key={kind}>
-                <Typography fontSize={10}>
-                  {kind} : {count}
-                </Typography>
-              </Grid>
-            );
-          })
+          supportPattern
+            .filter((pattern) => supportAggregate.get(pattern) != undefined)
+            .map((pattern, index) => {
+              return (
+                <Grid item xs={4} key={index}>
+                  <Typography fontSize={10}>
+                    {supportPatternToJapanese(pattern)} :{" "}
+                    {supportAggregate.get(pattern)}
+                  </Typography>
+                </Grid>
+              );
+            })
         )}
       </Grid>
       <Typography variant="body1" marginTop={5}>
@@ -134,15 +261,25 @@ export default function Details() {
         {kindAggregate.size == 0 ? (
           <></>
         ) : (
-          [...kindAggregate.entries()].map(([kind, count]) => {
-            return (
-              <Grid item xs={4} key={kind}>
-                <Typography fontSize={10}>
-                  {kind} : {count}
-                </Typography>
-              </Grid>
-            );
-          })
+          [
+            "通常単体",
+            "通常範囲",
+            "特殊単体",
+            "特殊範囲",
+            "支援",
+            "妨害",
+            "回復",
+          ]
+            .filter((kind) => kindAggregate.get(kind) != undefined)
+            .map((kind) => {
+              return (
+                <Grid item xs={4} key={kind}>
+                  <Typography fontSize={10}>
+                    {kind} : {kindAggregate.get(kind)}
+                  </Typography>
+                </Grid>
+              );
+            })
         )}
       </Grid>
     </Grid>
