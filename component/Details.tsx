@@ -21,7 +21,7 @@ const statusPattern: StatusPattern[] = statusKind.flatMap((s) => {
   return [`${s}/UP`, `${s}/DOWN`] as StatusPattern[];
 });
 
-function intoStatusPattern({
+export function intoStatusPattern({
   status,
   upDown,
 }: {
@@ -31,7 +31,7 @@ function intoStatusPattern({
   return `${status}/${upDown}` as StatusPattern;
 }
 
-function statusPatternToJapanese(pattern: StatusPattern): string {
+export function statusPatternToJapanese(pattern: StatusPattern): string {
   const [status, upDown] = pattern.split("/") as [StatusKind, UpDown];
   return match(status)
     .with("ATK", () => `攻${upDown}`)

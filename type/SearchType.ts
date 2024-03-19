@@ -15,26 +15,26 @@ export const elementStatus = [
   "Dark DEF",
 ] as const;
 export type ElementStatus = (typeof elementStatus)[number];
-export type BasicStatusSearch = { status: BasicStatus; upDown: "up" | "down" };
+export type BasicStatusSearch = { status: BasicStatus; upDown: "UP" | "DOWN" };
 export type ElementStatusSearch = {
   status: ElementStatus;
-  upDown: "up" | "down";
+  upDown: "UP" | "DOWN";
 };
 
 export function allBasicStatusSearch(): BasicStatusSearch[] {
   return basicStatus.flatMap((status) => {
-    return ["up", "down"]
+    return ["UP", "DOWN"]
       .map((upDown) => {
-        return { status, upDown: upDown as "up" | "down" };
+        return { status, upDown: upDown as "UP" | "DOWN" };
       })
-      .filter((v) => v.status !== "Life" || v.upDown === "up");
+      .filter((v) => v.status !== "Life" || v.upDown === "UP");
   });
 }
 
 export function allElementStatusSearch(): ElementStatusSearch[] {
   return elementStatus.flatMap((status) => {
-    return ["up", "down"].map((upDown) => {
-      return { status, upDown: upDown as "up" | "down" };
+    return ["UP", "DOWN"].map((upDown) => {
+      return { status, upDown: upDown as "UP" | "DOWN" };
     });
   });
 }

@@ -16,7 +16,10 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { statusToJapanese } from "@/utils/parser/skill";
+import {
+  intoStatusPattern,
+  statusPatternToJapanese,
+} from "@/component/Details";
 
 function LabelCheckbox() {
   const [filter, setFilter] = useAtom(labelFilterAtom);
@@ -53,8 +56,8 @@ function BasicStatusCheckbox() {
       {allBasicStatusSearch().map((flag) => {
         return (
           <CheckBoxItem
-            key={statusToJapanese(flag)}
-            name={statusToJapanese(flag)}
+            key={intoStatusPattern(flag)}
+            name={statusPatternToJapanese(intoStatusPattern(flag))}
             checked={filter.some(
               (v) => v.status === flag.status && v.upDown === flag.upDown,
             )}
@@ -88,8 +91,8 @@ function ElementStatusCheckbox() {
       {allElementStatusSearch().map((flag) => {
         return (
           <CheckBoxItem
-            key={statusToJapanese(flag)}
-            name={statusToJapanese(flag)}
+            key={intoStatusPattern(flag)}
+            name={statusPatternToJapanese(intoStatusPattern(flag))}
             checked={filter.some(
               (v) => v.status === flag.status && v.upDown === flag.upDown,
             )}
