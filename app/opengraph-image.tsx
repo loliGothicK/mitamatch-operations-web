@@ -30,7 +30,7 @@ export default async function Image() {
         }}
       >
         <NextImage
-          src={"./opengraph-image.png"}
+          src={"/opengraph-image.png"}
           alt={"og"}
           width={1200}
           height={630}
