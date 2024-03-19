@@ -77,9 +77,9 @@ export default function Details() {
           [...skillAggregate.entries()].map(([kind, count]) => {
             return (
               <Grid item xs={4} key={kind}>
-                <Button disabled>
+                <Typography fontSize={10}>
                   {kind} : {count}
-                </Button>
+                </Typography>
               </Grid>
             );
           })
@@ -96,9 +96,9 @@ export default function Details() {
           [...supportAggregate.entries()].map(([kind, count]) => {
             return (
               <Grid item xs={4} key={kind}>
-                <Button disabled>
+                <Typography fontSize={10}>
                   {kind} : {count}
-                </Button>
+                </Typography>
               </Grid>
             );
           })
@@ -118,9 +118,9 @@ export default function Details() {
             .map((kind) => {
               return (
                 <Grid item xs={4} key={kind}>
-                  <Button disabled>
+                  <Typography fontSize={10}>
                     {kind} : {elementAggregate.get(kind)}
-                  </Button>
+                  </Typography>
                 </Grid>
               );
             })
@@ -137,9 +137,9 @@ export default function Details() {
           [...kindAggregate.entries()].map(([kind, count]) => {
             return (
               <Grid item xs={4} key={kind}>
-                <Button disabled>
+                <Typography fontSize={10}>
                   {kind} : {count}
-                </Button>
+                </Typography>
               </Grid>
             );
           })

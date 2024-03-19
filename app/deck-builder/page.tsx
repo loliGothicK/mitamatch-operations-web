@@ -49,6 +49,8 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { match } from "ts-pattern";
 import { blue, green, purple, red, yellow } from "@mui/material/colors";
+import { AutoSizer, List, ListRowProps } from "react-virtualized";
+import "react-virtualized/styles.css";
 
 function Icon({
   kind,
@@ -322,90 +324,89 @@ function DeckList() {
   );
 }
 
-function renderRow(props: ListChildComponentProps) {
-  const { index, style } = props;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+function VirtualizedList() {
   const [memoria] = useAtom(filteredMemoriaAtom);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [_, setDeck] = useAtom(deckAtom);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
 
   return (
-    <ListItem key={index} style={style} disablePadding sx={{ bgcolor: "grey" }}>
-      <IconButton
-        edge="start"
-        aria-label="comments"
-        sx={{ marginLeft: 2 }}
-        onClick={() => {
-          if (memoria[index].labels.includes("legendary")) {
-            setLegendaryDeck((prev) => [...prev, memoria[index]]);
-          } else {
-            setDeck((prev) => [...prev, memoria[index]]);
-          }
-        }}
-      >
-        <Add />
-      </IconButton>
-      <ListItemButton role={undefined} dense>
-        <ListItemIcon>
-          <Icon
-            kind={memoria[index].kind}
-            element={memoria[index].element}
-            position={85}
-          />
-          <Image
-            src={`/memoria/${memoria[index].name}.png`}
-            alt={memoria[index].name}
-            width={100}
-            height={100}
-          />
-        </ListItemIcon>
-        <ListItemText
-          secondary={
-            <>
-              <Typography
-                component="span"
-                variant="body1"
-                fontWeight="bold"
-                sx={{ display: "block" }}
-                color="text.primary"
+    <AutoSizer>
+      {({ height, width }) => (
+        <List
+          height={height}
+          rowCount={memoria.length}
+          rowHeight={100}
+          rowRenderer={({ key, index, style }) => {
+            return (
+              <ListItem
+                key={key}
+                style={style}
+                disablePadding
+                sx={{ bgcolor: "grey" }}
               >
-                {memoria[index].skill.name}
-              </Typography>
-              <Divider sx={{ margin: 1 }} />
-              <Typography
-                component="span"
-                fontWeight="bold"
-                variant="body1"
-                sx={{ display: "block" }}
-                color="text.primary"
-              >
-                {memoria[index].support.name}
-              </Typography>
-            </>
-          }
-          sx={{
-            marginLeft: 2,
+                <IconButton
+                  edge="start"
+                  aria-label="comments"
+                  onClick={() => {
+                    if (memoria[index].labels.includes("legendary")) {
+                      setLegendaryDeck((prev) => [...prev, memoria[index]]);
+                    } else {
+                      setDeck((prev) => [...prev, memoria[index]]);
+                    }
+                  }}
+                >
+                  <Add />
+                </IconButton>
+                <ListItemButton role={undefined} dense>
+                  <ListItemIcon>
+                    <Icon
+                      kind={memoria[index].kind}
+                      element={memoria[index].element}
+                      position={85}
+                    />
+                    <Image
+                      src={`/memoria/${memoria[index].name}.png`}
+                      alt={memoria[index].name}
+                      width={100}
+                      height={100}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    secondary={
+                      <>
+                        <Typography
+                          component="span"
+                          fontWeight="bold"
+                          fontSize={12}
+                          sx={{ display: "block" }}
+                          color="text.primary"
+                        >
+                          {memoria[index].skill.name}
+                        </Typography>
+                        <Divider sx={{ margin: 1 }} />
+                        <Typography
+                          component="span"
+                          fontWeight="bold"
+                          fontSize={12}
+                          sx={{ display: "block" }}
+                          color="text.primary"
+                        >
+                          {memoria[index].support.name}
+                        </Typography>
+                      </>
+                    }
+                    sx={{
+                      marginLeft: 2,
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
           }}
+          width={width}
         />
-      </ListItemButton>
-    </ListItem>
-  );
-}
-
-function VirtualizedList() {
-  const [memoria] = useAtom(filteredMemoriaAtom);
-  return (
-    <FixedSizeList
-      height={700}
-      width={450}
-      itemSize={100}
-      itemCount={memoria.length}
-      overscanCount={5}
-    >
-      {renderRow}
-    </FixedSizeList>
+      )}
+    </AutoSizer>
   );
 }
 function Source() {
@@ -414,12 +415,12 @@ function Source() {
       <Typography variant="h4" gutterBottom>
         Memoria List
       </Typography>
-      <Grid direction="row" spacing={2} width={400}>
+      <Grid direction="row" spacing={2} minHeight={"60vh"}>
         <ToggleButtons />
         <FilterModal />
         <SearchModal />
+        <VirtualizedList />
       </Grid>
-      <VirtualizedList />
     </Grid>
   );
 }
@@ -573,19 +574,18 @@ export default function DeckBuilder() {
           direction={"row"}
           alignItems={"left"}
         >
-          <Grid item xs={12} md={4} lg={4}>
+          <Grid item xs={12} md={4} lg={2}>
             <Grid container direction={"column"} alignItems={"center"}>
-              {/* DeckDetail */}
               <Typography variant="h4" gutterBottom>
                 Deck Details
               </Typography>
               <Details />
             </Grid>
           </Grid>
-          <Grid item xs={12} md={8} lg={5}>
+          <Grid item xs={12} md={8} lg={6}>
             <DeckList />
           </Grid>
-          <Grid item xs={12} lg={3}>
+          <Grid item xs={12} md={12} lg={4}>
             {/* Source */}
             <Source />
           </Grid>
