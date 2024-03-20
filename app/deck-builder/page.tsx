@@ -9,7 +9,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  ImageList,
   ImageListItem,
   ImageListItemBar,
   ListItem,
@@ -404,6 +403,7 @@ function VirtualizedList() {
                 <IconButton
                   edge="start"
                   aria-label="comments"
+                  sx={{ paddingLeft: 3, paddingRight: 0 }}
                   onClick={() => {
                     if (memoria[index].labels.includes("legendary")) {
                       setLegendaryDeck((prev) => [...prev, memoria[index]]);
