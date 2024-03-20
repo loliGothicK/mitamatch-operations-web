@@ -9,11 +9,19 @@ import {
 } from "@/type/FilterType";
 import { match } from "ts-pattern";
 import {
+  AssistSupportSearch,
   BasicStatusSearch,
   ElementStatusSearch,
   LabelSearch,
+  RecoverySupportSearch,
+  VanguardSupportSearch,
 } from "@/type/SearchType";
 import { parse_skill } from "@/utils/parser/skill";
+import { parse_support } from "@/utils/parser/support";
+import {
+  AssistSupportCheckbox,
+  RecoverySupportCheckbox,
+} from "@/component/Search";
 
 export type Memoria = (typeof data)[0];
 export type MemoriaWithConcentration = Memoria & { concentration?: number };
@@ -45,6 +53,9 @@ export const currentRoleFilterAtom = atom((get) => {
 
 export const basicStatusFilterAtom = atom<BasicStatusSearch[]>([]);
 export const elementStatusFilterAtom = atom<ElementStatusSearch[]>([]);
+export const vanguardSupportFilterAtom = atom<VanguardSupportSearch[]>([]);
+export const assistSupportFilterAtom = atom<AssistSupportSearch[]>([]);
+export const recoverySupportFilterAtom = atom<RecoverySupportSearch[]>([]);
 
 export const filteredMemoriaAtom = atom((get) => {
   return get(memoriaAtom).filter((memoria) => {
@@ -124,6 +135,53 @@ export const filteredMemoriaAtom = atom((get) => {
         .otherwise(() => false);
     });
 
+    const support = parse_support(
+      memoria.support.name,
+      memoria.support.description,
+    );
+
+    const vanguardSupport = get(vanguardSupportFilterAtom).every((filter) => {
+      if (typeof filter === "string") {
+        return support.kind.some((x) => typeof x === "string" && x === filter);
+      } else {
+        return support.kind.some((x) => {
+          return (
+            typeof x !== "string" &&
+            x.status === filter.status &&
+            x.upDown === filter.upDown
+          );
+        });
+      }
+    });
+
+    const assistSupport = get(assistSupportFilterAtom).every((filter) => {
+      if (typeof filter === "string") {
+        return support.kind.some((x) => typeof x === "string" && x === filter);
+      } else {
+        return support.kind.some((x) => {
+          return (
+            typeof x !== "string" &&
+            x.status === filter.status &&
+            x.upDown === filter.upDown
+          );
+        });
+      }
+    });
+
+    const recoverySupport = get(recoverySupportFilterAtom).every((filter) => {
+      if (typeof filter === "string") {
+        return support.kind.some((x) => typeof x === "string" && x === filter);
+      } else {
+        return support.kind.some((x) => {
+          return (
+            typeof x !== "string" &&
+            x.status === filter.status &&
+            x.upDown === filter.upDown
+          );
+        });
+      }
+    });
+
     return (
       sw &&
       role &&
@@ -131,6 +189,9 @@ export const filteredMemoriaAtom = atom((get) => {
       label &&
       basicStatus &&
       elementStatus &&
+      vanguardSupport &&
+      assistSupport &&
+      recoverySupport &&
       !get(deckAtom).some(({ name }) => memoria.name === name) &&
       !get(legendaryDeckAtom).some(({ name }) => memoria.name === name)
     );

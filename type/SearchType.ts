@@ -38,3 +38,38 @@ export function allElementStatusSearch(): ElementStatusSearch[] {
     });
   });
 }
+
+export type VanguardSupportSearch =
+  | "NormalMatchPtUp"
+  | "SpecialMatchPtUp"
+  | "DamageUp"
+  | BasicStatusSearch
+  | ElementStatusSearch;
+
+export function allVanguardSupportSearch(): VanguardSupportSearch[] {
+  return [
+    "NormalMatchPtUp",
+    "SpecialMatchPtUp",
+    "DamageUp",
+    ...allBasicStatusSearch(),
+    ...allElementStatusSearch(),
+  ];
+}
+
+export type AssistSupportSearch =
+  | "SupportUp"
+  | BasicStatusSearch
+  | ElementStatusSearch;
+
+export function allAssistSupportSearch(): AssistSupportSearch[] {
+  return ["SupportUp", ...allBasicStatusSearch(), ...allElementStatusSearch()];
+}
+
+export type RecoverySupportSearch =
+  | "RecoveryUp"
+  | BasicStatusSearch
+  | ElementStatusSearch;
+
+export function allRecoverySupportSearch(): RecoverySupportSearch[] {
+  return ["RecoveryUp", ...allBasicStatusSearch(), ...allElementStatusSearch()];
+}
