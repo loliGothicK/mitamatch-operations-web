@@ -12,6 +12,7 @@ import {
   ImageListItem,
   ImageListItemBar,
   ListItem,
+  Skeleton,
   Switch,
 } from "@mui/material";
 import Image from "next/image";
@@ -54,30 +55,6 @@ import { arrayMove, SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { DndContext } from "@dnd-kit/core";
 import Box from "@mui/material/Box";
-
-function skeleton(w: number, h: number) {
-  return `
-    <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <defs>
-        <linearGradient id="g">
-          <stop stop-color="#d1d5db" offset="20%" />
-          <stop stop-color="#f3f4f6" offset="50%" />
-          <stop stop-color="#d1d5db" offset="70%" />
-        </linearGradient>
-      </defs>
-      <rect width="${w}" height="${h}" fill="#d1d5db" />
-      <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
-      <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite" />
-    </svg>`;
-}
-
-function toBase64(str: string) {
-  if (typeof window === "undefined") {
-    return Buffer.from(str).toString("base64");
-  } else {
-    return window.btoa(str);
-  }
-}
 
 function Icon({
   kind,
@@ -248,6 +225,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   const [concentrationValue, setConcentration] = useState(
     concentration ? concentration : 4,
   );
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const {
     setNodeRef,
@@ -304,6 +282,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
 
   return (
     <Grid item key={id}>
+      {!isLoaded && <Skeleton variant="rectangular" width={100} height={100} />}
       <ImageListItem>
         <Box display={isSorting ? "none" : "inline"}>
           <Icon kind={memoria.kind} element={memoria.element} position={70} />
@@ -326,7 +305,9 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
             alt={name}
             width={100}
             height={100}
-            placeholder={`data:image/svg+xml;base64,${toBase64(skeleton(128, 128))}`}
+            onLoad={() => {
+              setIsLoaded(true);
+            }}
           />
         </div>
         <ImageListItemBar
@@ -451,6 +432,7 @@ function VirtualizedList() {
   const [sw] = useAtom(swAtom);
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <AutoSizer>
@@ -504,12 +486,21 @@ function VirtualizedList() {
                       element={memoria[index].element}
                       position={85}
                     />
+                    {!isLoaded && (
+                      <Skeleton
+                        variant="rectangular"
+                        width={100}
+                        height={100}
+                      />
+                    )}
                     <Image
                       src={`/memoria/${memoria[index].name}.png`}
                       alt={memoria[index].name}
                       width={100}
                       height={100}
-                      placeholder={`data:image/svg+xml;base64,${toBase64(skeleton(128, 128))}`}
+                      onLoad={() => {
+                        setIsLoaded(true);
+                      }}
                     />
                   </ListItemIcon>
                   <ListItemText
