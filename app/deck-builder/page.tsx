@@ -12,6 +12,8 @@ import {
   ImageListItem,
   ImageListItemBar,
   ListItem,
+  Menu,
+  MenuItem,
   Skeleton,
   Switch,
 } from "@mui/material";
@@ -36,6 +38,8 @@ import {
   legendaryDeckAtom,
   MemoriaWithConcentration,
   roleFilterAtom,
+  sortKind,
+  sortKindAtom,
   swAtom,
 } from "@/jotai/atom";
 import Filter from "@/component/Filter";
@@ -55,6 +59,7 @@ import { arrayMove, SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { DndContext } from "@dnd-kit/core";
 import Box from "@mui/material/Box";
+import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 
 function Icon({
   kind,
@@ -540,6 +545,39 @@ function VirtualizedList() {
     </AutoSizer>
   );
 }
+
+function SortMenu() {
+  const [sort, setSort] = useAtom(sortKindAtom);
+  return (
+    <PopupState
+      variant="popover"
+      popupId="demo-popup-menu"
+      disableAutoFocus={false}
+      parentPopupState={null}
+    >
+      {(popupState) => (
+        <>
+          <Button {...bindTrigger(popupState)}>sorted by {sort}</Button>
+          <Menu {...bindMenu(popupState)}>
+            {sortKind.map((kind) => {
+              return (
+                <MenuItem
+                  key={kind}
+                  onClick={() => {
+                    popupState.close();
+                    setSort(kind);
+                  }}
+                >
+                  {kind}
+                </MenuItem>
+              );
+            })}
+          </Menu>
+        </>
+      )}
+    </PopupState>
+  );
+}
 function Source() {
   return (
     <Grid
@@ -552,6 +590,7 @@ function Source() {
         <ToggleButtons />
         <FilterModal />
         <SearchModal />
+        <SortMenu />
         <VirtualizedList />
       </Grid>
     </Grid>
