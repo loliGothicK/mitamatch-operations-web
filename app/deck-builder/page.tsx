@@ -166,6 +166,53 @@ function Icon({
     .run();
 }
 
+function Concentration({
+  concentration,
+  handleConcentration,
+}: {
+  concentration: number;
+  handleConcentration: () => void;
+}) {
+  return (
+    <IconButton
+      onClick={handleConcentration}
+      sx={{
+        top: 25,
+        left: 60,
+        position: "absolute",
+      }}
+    >
+      {concentration == 4 ? (
+        <Typography
+          variant="body2"
+          color="white"
+          sx={{
+            position: "absolute",
+          }}
+        >
+          MAX
+        </Typography>
+      ) : (
+        <Typography
+          variant="body2"
+          color="white"
+          sx={{
+            position: "absolute",
+          }}
+        >
+          {concentration}
+        </Typography>
+      )}
+      <Image
+        src={"/Concentration.png"}
+        alt={"concentration"}
+        width={30}
+        height={30}
+      />
+    </IconButton>
+  );
+}
+
 function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   const { name, id, concentration } = memoria;
   const [sw] = useAtom(swAtom);
@@ -218,85 +265,58 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   };
 
   return (
-    <ImageListItem key={id}>
-      <Icon kind={memoria.kind} element={memoria.element} position={70} />
-      <Image src={`/memoria/${name}.png`} alt={name} width={100} height={100} />
-      <ImageListItemBar
-        sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
-        position={"top"}
-        actionPosition={"right"}
-        actionIcon={
-          <IconButton
-            aria-label={`remove ${name}`}
-            onClick={handleConcentration}
-            sx={{
-              marginTop: 2,
-              marginRight: 1,
-            }}
-          >
-            {concentrationValue == 4 ? (
-              <Typography
-                variant="body2"
-                color="white"
-                sx={{
-                  position: "absolute",
-                }}
-              >
-                MAX
-              </Typography>
-            ) : (
-              <Typography
-                variant="body2"
-                color="white"
-                sx={{
-                  position: "absolute",
-                }}
-              >
-                {concentrationValue}
-              </Typography>
-            )}
-            <Image
-              src={"/Concentration.png"}
-              alt={"concentration"}
-              width={30}
-              height={30}
-            />
-          </IconButton>
-        }
-      />
-      <ImageListItemBar
-        sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
-        position={"top"}
-        actionPosition={"left"}
-        actionIcon={
-          <IconButton
-            sx={{
-              color: "rgba(255, 50, 50, 0.9)",
-              bgcolor: "rgba(0, 0, 0, 0.2)",
-            }}
-            aria-label={`remove ${name}`}
-            onClick={() => {
-              setDeck((prev) =>
-                prev.filter((memoria) => memoria.name !== name),
-              );
-              setLegendaryDeck((prev) =>
-                prev.filter((memoria) => memoria.name !== name),
-              );
-              Cookies.set(
-                "deck",
-                encodeDeck(
-                  sw,
-                  deck.filter((memoria) => memoria.name !== name),
-                  legendaryDeck.filter((memoria) => memoria.name !== name),
-                ),
-              );
-            }}
-          >
-            <Remove />
-          </IconButton>
-        }
-      />
-    </ImageListItem>
+    <Grid item key={id}>
+      <ImageListItem>
+        <Icon kind={memoria.kind} element={memoria.element} position={70} />
+        <Concentration
+          concentration={concentrationValue}
+          handleConcentration={handleConcentration}
+        />
+        <Image
+          src={`/memoria/${name}.png`}
+          alt={name}
+          width={100}
+          height={100}
+        />
+        <ImageListItemBar
+          sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
+          position={"top"}
+          actionPosition={"right"}
+        />
+        <ImageListItemBar
+          sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
+          position={"top"}
+          actionPosition={"left"}
+          actionIcon={
+            <IconButton
+              sx={{
+                color: "rgba(255, 50, 50, 0.9)",
+                bgcolor: "rgba(0, 0, 0, 0.2)",
+              }}
+              aria-label={`remove ${name}`}
+              onClick={() => {
+                setDeck((prev) =>
+                  prev.filter((memoria) => memoria.name !== name),
+                );
+                setLegendaryDeck((prev) =>
+                  prev.filter((memoria) => memoria.name !== name),
+                );
+                Cookies.set(
+                  "deck",
+                  encodeDeck(
+                    sw,
+                    deck.filter((memoria) => memoria.name !== name),
+                    legendaryDeck.filter((memoria) => memoria.name !== name),
+                  ),
+                );
+              }}
+            >
+              <Remove />
+            </IconButton>
+          }
+        />
+      </ImageListItem>
+    </Grid>
   );
 }
 
@@ -330,22 +350,30 @@ function DeckList() {
         }}
       >
         {/* Legendary Deck Images */}
-        <ImageList
-          sx={{ maxWidth: 600, height: 100, flexDirection: "column" }}
-          cols={5}
-          rowHeight={100}
+        <Grid
+          container
+          direction={"row"}
+          spacing={2}
+          alignItems={"left"}
+          sx={{ maxWidth: 600, minHeight: 100 }}
         >
           {legendaryDeck.map((memoria) => {
             return <MemoriaItem memoria={memoria} key={memoria.id} />;
           })}
-        </ImageList>
+        </Grid>
         <Divider sx={{ margin: 2 }} />
         {/* Deck Images */}
-        <ImageList sx={{ maxWidth: 600 }} cols={5} rowHeight={100}>
+        <Grid
+          container
+          direction={"row"}
+          alignItems={"left"}
+          spacing={2}
+          sx={{ maxWidth: 600, minHeight: 100 }}
+        >
           {deck.map((memoria) => {
             return <MemoriaItem memoria={memoria} key={memoria.id} />;
           })}
-        </ImageList>
+        </Grid>
       </Container>
     </Grid>
   );
