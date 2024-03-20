@@ -362,6 +362,7 @@ function VirtualizedList() {
       {({ height, width }) => (
         <List
           height={height}
+          width={width}
           rowCount={memoria.length}
           rowHeight={100}
           rowRenderer={({ key, index, style }) => {
@@ -446,7 +447,6 @@ function VirtualizedList() {
               </ListItem>
             );
           }}
-          width={width}
         />
       )}
     </AutoSizer>
@@ -458,7 +458,7 @@ function Source() {
       <Typography variant="h4" gutterBottom>
         Memoria List
       </Typography>
-      <Grid direction="row" spacing={2} minHeight={"60vh"}>
+      <Grid direction="row" spacing={2} minHeight={"60vh"} minWidth={"100%"}>
         <ToggleButtons />
         <FilterModal />
         <SearchModal />
@@ -634,6 +634,7 @@ export default function DeckBuilder() {
           xs={12}
           direction={"row"}
           alignItems={"left"}
+          flexShrink={2}
         >
           <Grid item xs={12} md={4} lg={2}>
             <Grid container direction={"column"} alignItems={"center"}>
