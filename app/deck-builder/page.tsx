@@ -43,13 +43,14 @@ import { useEffect, useState } from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Search from "@/component/Search";
 import Details from "@/component/Details";
-import { decodeDeck, encodeDeck } from "@/actions/encodeDeck";
+import { decodeDeck, encodeDeck } from "@/actions/serde";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { match } from "ts-pattern";
 import { blue, green, purple, red, yellow } from "@mui/material/colors";
-import { AutoSizer, List, ListRowProps } from "react-virtualized";
+import { AutoSizer, List } from "react-virtualized";
 import "react-virtualized/styles.css";
+import Cookies from "js-cookie";
 
 function Icon({
   kind,
@@ -167,8 +168,9 @@ function Icon({
 
 function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   const { name, id, concentration } = memoria;
-  const [_, setDeck] = useAtom(deckAtom);
-  const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [sw] = useAtom(swAtom);
+  const [deck, setDeck] = useAtom(deckAtom);
+  const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [concentrationValue, setConcentration] = useState(
     concentration ? concentration : 4,
   );
@@ -195,6 +197,24 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
         return memoria;
       });
     });
+    Cookies.set(
+      "deck",
+      encodeDeck(
+        sw,
+        deck.map((memoria) => {
+          if (memoria.name === name) {
+            return { ...memoria, concentration: concentrationValue };
+          }
+          return memoria;
+        }),
+        legendaryDeck.map((memoria) => {
+          if (memoria.name === name) {
+            return { ...memoria, concentration: concentrationValue };
+          }
+          return memoria;
+        }),
+      ),
+    );
   };
 
   return (
@@ -262,6 +282,14 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
               setLegendaryDeck((prev) =>
                 prev.filter((memoria) => memoria.name !== name),
               );
+              Cookies.set(
+                "deck",
+                encodeDeck(
+                  sw,
+                  deck.filter((memoria) => memoria.name !== name),
+                  legendaryDeck.filter((memoria) => memoria.name !== name),
+                ),
+              );
             }}
           >
             <Remove />
@@ -325,8 +353,9 @@ function DeckList() {
 
 function VirtualizedList() {
   const [memoria] = useAtom(filteredMemoriaAtom);
-  const [_, setDeck] = useAtom(deckAtom);
-  const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [sw] = useAtom(swAtom);
+  const [deck, setDeck] = useAtom(deckAtom);
+  const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
 
   return (
     <AutoSizer>
@@ -349,8 +378,23 @@ function VirtualizedList() {
                   onClick={() => {
                     if (memoria[index].labels.includes("legendary")) {
                       setLegendaryDeck((prev) => [...prev, memoria[index]]);
+                      Cookies.set(
+                        "deck",
+                        encodeDeck(sw, deck, [
+                          ...legendaryDeck,
+                          memoria[index],
+                        ]),
+                      );
                     } else {
                       setDeck((prev) => [...prev, memoria[index]]);
+                      Cookies.set(
+                        "deck",
+                        encodeDeck(
+                          sw,
+                          [...deck, memoria[index]],
+                          legendaryDeck,
+                        ),
+                      );
                     }
                   }}
                 >
@@ -548,6 +592,24 @@ export default function DeckBuilder() {
       );
       setDeck(deck);
       setLegendaryDeck(legendaryDeck);
+    } else {
+      const cookie = Cookies.get("deck");
+      if (cookie) {
+        const { sw, deck, legendaryDeck } = decodeDeck(cookie);
+        setSw(sw);
+        setRoleFilter(
+          sw === "shield"
+            ? ["support", "interference", "recovery"]
+            : [
+                "normal_single",
+                "normal_range",
+                "special_single",
+                "special_range",
+              ],
+        );
+        setDeck(deck);
+        setLegendaryDeck(legendaryDeck);
+      }
     }
   }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, value]);
 
