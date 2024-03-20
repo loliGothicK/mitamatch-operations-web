@@ -81,58 +81,15 @@ export const filteredMemoriaAtom = atom((get) => {
     const skill = parse_skill(memoria.skill.name, memoria.skill.description);
 
     const basicStatus = get(basicStatusFilterAtom).every((filter) => {
-      return match(filter)
-        .with({ status: "ATK", upDown: skill.upDown }, () =>
-          skill.status.includes("ATK"),
-        )
-        .with({ status: "DEF", upDown: skill.upDown }, () =>
-          skill.status.includes("DEF"),
-        )
-        .with({ status: "Sp.ATK", upDown: skill.upDown }, () =>
-          skill.status.includes("Sp.ATK"),
-        )
-        .with({ status: "Sp.DEF", upDown: skill.upDown }, () =>
-          skill.status.includes("Sp.DEF"),
-        )
-        .with({ status: "Life", upDown: skill.upDown }, () =>
-          skill.status.includes("Life"),
-        )
-        .otherwise(() => false);
+      return skill.status.some((x) => {
+        return x === filter.status && skill.upDown === filter.upDown;
+      });
     });
 
     const elementStatus = get(elementStatusFilterAtom).every((filter) => {
-      return match(filter)
-        .with({ status: "Fire ATK", upDown: skill.upDown }, () =>
-          skill.status.includes("Fire ATK"),
-        )
-        .with({ status: "Fire DEF", upDown: skill.upDown }, () =>
-          skill.status.includes("Fire DEF"),
-        )
-        .with({ status: "Water ATK", upDown: skill.upDown }, () =>
-          skill.status.includes("Water ATK"),
-        )
-        .with({ status: "Water DEF", upDown: skill.upDown }, () =>
-          skill.status.includes("Water DEF"),
-        )
-        .with({ status: "Wind ATK", upDown: skill.upDown }, () =>
-          skill.status.includes("Wind ATK"),
-        )
-        .with({ status: "Wind DEF", upDown: skill.upDown }, () =>
-          skill.status.includes("Wind DEF"),
-        )
-        .with({ status: "Light ATK", upDown: skill.upDown }, () =>
-          skill.status.includes("Light ATK"),
-        )
-        .with({ status: "Light DEF", upDown: skill.upDown }, () =>
-          skill.status.includes("Light DEF"),
-        )
-        .with({ status: "Dark ATK", upDown: skill.upDown }, () =>
-          skill.status.includes("Dark ATK"),
-        )
-        .with({ status: "Dark DEF", upDown: skill.upDown }, () =>
-          skill.status.includes("Dark DEF"),
-        )
-        .otherwise(() => false);
+      return skill.status.some((x) => {
+        return x === filter.status && skill.upDown === filter.upDown;
+      });
     });
 
     const support = parse_support(
