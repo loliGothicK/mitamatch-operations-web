@@ -70,439 +70,155 @@ export function parse_support(name: string, _: string): Support {
     )
     .run();
 
-  const effects = match<string, SupportKind[]>(name.split(" ")[0])
-    .when(
-      (name) => name === "攻:獲得マッチPtUP/通常単体",
-      () => ["NormalMatchPtUp"],
-    )
-    .when(
-      (name) => name === "攻:獲得マッチPtUP/特殊単体",
-      () => ["SpecialMatchPtUp"],
-    )
-    .when(
-      (name) => name === "攻:マイトUP",
-      () => [statusUp("ATK"), statusUp("DEF")],
-    )
-    .when(
-      (name) => name === "攻:マイトDOWN",
-      () => [statusDown("ATK"), statusDown("DEF")],
-    )
-    .when(
-      (name) => name === "攻:パワーUP",
-      () => [statusUp("ATK")],
-    )
-    .when(
-      (name) => name === "攻:パワーUP/副攻:風パワーUP",
-      () => [statusUp("ATK"), statusUp("Wind ATK")],
-    )
-    .when(
-      (name) => name === "攻:パワーUP/副攻:水パワーUP",
-      () => [statusUp("ATK"), statusUp("Water ATK")],
-    )
-    .when(
-      (name) => name === "攻:パワーUP/副攻:火パワーUP",
-      () => [statusUp("ATK"), statusUp("Fire ATK")],
-    )
-    .when(
-      (name) => name === "攻:パワーDOWN",
-      () => [statusDown("ATK")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/パワーUP",
-      () => ["DamageUp", statusUp("ATK")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/ガードDOWN",
-      () => ["DamageUp", statusDown("DEF")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/Sp.パワーUP",
-      () => ["DamageUp", statusUp("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/Sp.ガードDOWN",
-      () => ["DamageUp", statusDown("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP",
-      () => ["DamageUp"],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/副攻:水パワーUP",
-      () => ["DamageUp", statusUp("Water ATK")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/副攻:火パワーUP",
-      () => ["DamageUp", statusUp("Fire ATK")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/副攻:風パワーUP",
-      () => ["DamageUp", statusUp("Wind ATK")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/副攻:火ガードDOWN",
-      () => ["DamageUp", statusDown("Fire DEF")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/副攻:水ガードDOWN",
-      () => ["DamageUp", statusDown("Water DEF")],
-    )
-    .when(
-      (name) => name === "攻:ダメージUP/副攻:風ガードDOWN",
-      () => ["DamageUp", statusDown("Wind DEF")],
-    )
-    .when(
-      (name) => name === "攻:ガードUP",
-      () => [statusUp("DEF")],
-    )
-    .when(
-      (name) => name === "攻:ガードDOWN",
-      () => [statusDown("DEF")],
-    )
-    .when(
-      (name) => name === "攻:ガードDOWN/副攻:火ガードDOWN",
-      () => [statusDown("DEF"), statusDown("Fire DEF")],
-    )
-    .when(
-      (name) => name === "攻:ガードDOWN/副攻:水ガードDOWN",
-      () => [statusDown("DEF"), statusDown("Water DEF")],
-    )
-    .when(
-      (name) => name === "攻:WパワーDOWN",
-      () => [statusDown("ATK"), statusDown("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "攻:WガードUP",
-      () => [statusUp("DEF"), statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "攻:Sp.マイトUP",
-      () => [statusUp("Sp.ATK"), statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "攻:Sp.マイトDOWN",
-      () => [statusDown("Sp.ATK"), statusDown("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "攻:Sp.パワーUP",
-      () => [statusUp("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "攻:Sp.パワーUP/副攻:風パワーUP",
-      () => [statusUp("Sp.ATK"), statusUp("Wind ATK")],
-    )
-    .when(
-      (name) => name === "攻:Sp.パワーUP/副攻:水パワーUP",
-      () => [statusUp("Sp.ATK"), statusUp("Water ATK")],
-    )
-    .when(
-      (name) => name === "攻:Sp.パワーUP/副攻:火パワーUP",
-      () => [statusUp("Sp.ATK"), statusUp("Fire ATK")],
-    )
-    .when(
-      (name) => name === "攻:Sp.パワーDOWN",
-      () => [statusDown("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "攻:Sp.ディファーDOWN",
-      () => [statusDown("Sp.ATK"), statusDown("DEF")],
-    )
-    .when(
-      (name) => name === "攻:Sp.ガードUP",
-      () => [statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "攻:Sp.ガードDOWN",
-      () => [statusDown("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "攻:Sp.ガードDOWN/副攻:火ガードDOWN",
-      () => [statusDown("Sp.DEF"), statusDown("Fire DEF")],
-    )
-    .when(
-      (name) => name === "攻:Sp.ガードDOWN/副攻:水ガードDOWN",
-      () => [statusDown("Sp.DEF"), statusDown("Water DEF")],
-    )
-    .when(
-      (name) => name === "援:支援UP",
-      () => ["SupportUp"],
-    )
-    .when(
-      (name) => name === "援:支援UP/パワーUP",
-      () => ["SupportUp", statusUp("ATK")],
-    )
-    .when(
-      (name) => name === "援:支援UP/パワーDOWN",
-      () => ["SupportUp", statusDown("ATK")],
-    )
-    .when(
-      (name) => name === "援:支援UP/ガードDOWN",
-      () => ["SupportUp", statusDown("DEF")],
-    )
-    .when(
-      (name) => name === "援:支援UP/Sp.パワーUP",
-      () => ["SupportUp", statusUp("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "援:支援UP/Sp.パワーDOWN",
-      () => ["SupportUp", statusDown("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "援:支援UP/Sp.ガードUP",
-      () => ["SupportUp", statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "援:支援UP/副援:水パワーUP",
-      () => ["SupportUp", statusUp("Water ATK")],
-    )
-    .when(
-      (name) => name === "援:支援UP/副援:火パワーDOWN",
-      () => ["SupportUp", statusDown("Fire ATK")],
-    )
-    .when(
-      (name) => name === "援:支援UP/副援:水パワーDOWN",
-      () => ["SupportUp", statusDown("Water ATK")],
-    )
-    .when(
-      (name) => name === "援:支援UP/副援:火パワーUP",
-      () => ["SupportUp", statusUp("Fire ATK")],
-    )
-    .when(
-      (name) => name === "援:支援UP/副援:風パワーUP",
-      () => ["SupportUp", statusUp("Wind ATK")],
-    )
-    .when(
-      (name) => name === "援:支援UP/副援:風パワーDOWN",
-      () => ["SupportUp", statusDown("Wind ATK")],
-    )
-    .when(
-      (name) => name === "援:マイトUP",
-      () => [statusUp("ATK"), statusUp("DEF")],
-    )
-    .when(
-      (name) => name === "援:マイトDOWN",
-      () => [statusDown("ATK"), statusDown("DEF")],
-    )
-    .when(
-      (name) => name === "援:パワーUP",
-      () => [statusUp("ATK")],
-    )
-    .when(
-      (name) => name === "援:パワーUP/副援:風パワーUP",
-      () => [statusUp("ATK"), statusUp("Wind ATK")],
-    )
-    .when(
-      (name) => name === "援:パワーUP/副援:水パワーUP",
-      () => [statusUp("ATK"), statusUp("Water ATK")],
-    )
-    .when(
-      (name) => name === "援:パワーUP/副援:火パワーUP",
-      () => [statusUp("ATK"), statusUp("Fire ATK")],
-    )
-    .when(
-      (name) => name === "援:パワーDOWN/副援:風パワーDOWN",
-      () => [statusDown("ATK"), statusDown("Wind ATK")],
-    )
-    .when(
-      (name) => name === "援:パワーDOWN/副援:水パワーDOWN",
-      () => [statusDown("ATK"), statusDown("Water ATK")],
-    )
-    .when(
-      (name) => name === "援:パワーDOWN/副援:火パワーDOWN",
-      () => [statusDown("ATK"), statusDown("Fire ATK")],
-    )
-    .when(
-      (name) => name === "援:パワーDOWN",
-      () => [statusDown("ATK")],
-    )
-    .when(
-      (name) => name === "援:ディファーDOWN",
-      () => [statusDown("ATK"), statusDown("DEF")],
-    )
-    .when(
-      (name) => name === "援:ガードUP",
-      () => [statusUp("DEF")],
-    )
-    .when(
-      (name) => name === "援:ガードDOWN",
-      () => [statusDown("DEF")],
-    )
-    .when(
-      (name) => name === "援:ガードDOWN/副援:風ガードDOWN",
-      () => [statusDown("DEF"), statusDown("Wind DEF")],
-    )
-    .when(
-      (name) => name === "援:ガードDOWN/副援:水ガードDOWN",
-      () => [statusDown("DEF"), statusDown("Water DEF")],
-    )
-    .when(
-      (name) => name === "援:ガードDOWN/副援:火ガードDOWN",
-      () => [statusDown("DEF"), statusDown("Fire DEF")],
-    )
-    .when(
-      (name) => name === "援:火パワーUP",
-      () => [statusUp("Fire ATK")],
-    )
-    .when(
-      (name) => name === "援:風パワーUP",
-      () => [statusUp("Wind ATK")],
-    )
-    .when(
-      (name) => name === "援:WパワーUP",
-      () => [statusUp("ATK"), statusUp("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "援:WパワーDOWN",
-      () => [statusDown("ATK"), statusDown("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "援:WガードUP",
-      () => [statusUp("DEF"), statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "援:WガードDOWN",
-      () => [statusDown("DEF"), statusDown("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "援:Sp.マイトUP",
-      () => [statusUp("Sp.ATK"), statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "援:Sp.マイトDOWN",
-      () => [statusDown("Sp.ATK"), statusDown("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "援:Sp.パワーUP",
-      () => [statusUp("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "援:Sp.パワーUP/副援:風パワーUP",
-      () => [statusUp("Sp.ATK"), statusUp("Wind ATK")],
-    )
-    .when(
-      (name) => name === "援:Sp.パワーUP/副援:水パワーUP",
-      () => [statusUp("Sp.ATK"), statusUp("Water ATK")],
-    )
-    .when(
-      (name) => name === "援:Sp.パワーUP/副援:火パワーUP",
-      () => [statusUp("Sp.ATK"), statusUp("Fire ATK")],
-    )
-    .when(
-      (name) => name === "援:Sp.パワーDOWN/副援:風パワーDOWN",
-      () => [statusDown("Sp.ATK"), statusDown("Wind ATK")],
-    )
-    .when(
-      (name) => name === "援:Sp.パワーDOWN/副援:水パワーDOWN",
-      () => [statusDown("Sp.ATK"), statusDown("Water ATK")],
-    )
-    .when(
-      (name) => name === "援:Sp.パワーDOWN/副援:火パワーDOWN",
-      () => [statusDown("Sp.ATK"), statusDown("Fire ATK")],
-    )
-    .when(
-      (name) => name === "援:Sp.パワーDOWN",
-      () => [statusDown("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "援:Sp.ガードUP",
-      () => [statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "援:Sp.ガードDOWN",
-      () => [statusDown("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "援:Sp.ガードDOWN/副援:風ガードDOWN",
-      () => [statusDown("Sp.DEF"), statusDown("Wind DEF")],
-    )
-    .when(
-      (name) => name === "援:Sp.ガードDOWN/副援:水ガードDOWN",
-      () => [statusDown("Sp.DEF"), statusDown("Water DEF")],
-    )
-    .when(
-      (name) => name === "援:Sp.ガードDOWN/副援:火ガードDOWN",
-      () => [statusDown("Sp.DEF"), statusDown("Fire DEF")],
-    )
-    .when(
-      (name) => name === "回:回復UP/副援:風ガードUP",
-      () => ["RecoveryUp", statusUp("Wind DEF")],
-    )
-    .when(
-      (name) => name === "回:回復UP/副援:水ガードUP",
-      () => ["RecoveryUp", statusUp("Water DEF")],
-    )
-    .when(
-      (name) => name === "回:回復UP/副援:火ガードUP",
-      () => ["RecoveryUp", statusUp("Fire DEF")],
-    )
-    .when(
-      (name) => name === "回:回復UP/副援:支援UP",
-      () => ["RecoveryUp", "SupportUp"],
-    )
-    .when(
-      (name) => name === "回:回復UP/ガードUP",
-      () => ["RecoveryUp", statusUp("DEF")],
-    )
-    .when(
-      (name) => name === "回:回復UP/Sp.ガードUP",
-      () => ["RecoveryUp", statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "回:回復UP",
-      () => ["RecoveryUp"],
-    )
-    .when(
-      (name) => name === "回:パワーUP",
-      () => [statusUp("ATK")],
-    )
-    .when(
-      (name) => name === "回:ガードUP",
-      () => [statusUp("DEF")],
-    )
-    .when(
-      (name) => name === "回:ガードUP/副援:火ガードUP",
-      () => [statusUp("DEF"), statusUp("Fire DEF")],
-    )
-    .when(
-      (name) => name === "回:ガードUP/副援:水ガードUP",
-      () => [statusUp("DEF"), statusUp("Water DEF")],
-    )
-    .when(
-      (name) => name === "回:ガードUP/副援:風ガードUP",
-      () => [statusUp("DEF"), statusUp("Wind DEF")],
-    )
-    .when(
-      (name) => name === "回:WガードUP",
-      () => [statusUp("DEF"), statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "回:Sp.パワーUP",
-      () => [statusUp("Sp.ATK")],
-    )
-    .when(
-      (name) => name === "回:Sp.ガードUP",
-      () => [statusUp("Sp.DEF")],
-    )
-    .when(
-      (name) => name === "回:Sp.ガードUP/副援:水ガードUP",
-      () => [statusUp("Sp.DEF"), statusUp("Water DEF")],
-    )
-    .when(
-      (name) => name === "回:Sp.ガードUP/副援:火ガードUP",
-      () => [statusUp("Sp.DEF"), statusUp("Fire DEF")],
-    )
-    .when(
-      (name) => name === "コ:MP消費DOWN",
-      () => ["MpCostDown"],
-    )
-    .when(
-      (name) => name === "コ:効果範囲+1",
-      () => ["RangeUp"],
-    )
-    .run();
+  return match(trigger)
+    .with("Command", () => {
+      const effects = match<string, SupportKind[]>(name)
+        .when(
+          (name) => name.includes("MP消費DOWN"),
+          () => ["MpCostDown"],
+        )
+        .when(
+          (name) => name.includes("効果範囲"),
+          () => ["RangeUp"],
+        )
+        .run();
+      return { trigger, kind: effects };
+    })
+    .otherwise(() => {
+      const regExp = /^(.+) (.+)$/;
+      const [_, effects, _level] = name.match(regExp)!;
+      const kind = effects.split("/").flatMap((effect) => {
+        return (
+          match<string, SupportKind[]>(effect)
+            // # サポート効果一覧
+            // ## 第一効果
+            // ### 前衛
+            .with("攻:獲得マッチPtUP", () => []) // これだけスラッシュの使い方が異なる、F*CK
+            .with("通常単体", () => ["NormalMatchPtUp"])
+            .with("特殊単体", () => ["SpecialMatchPtUp"])
+            .with("攻:ダメージUP", () => ["DamageUp"])
+            .with("攻:パワーUP", () => [statusUp("ATK")])
+            .with("攻:パワーDOWN", () => [statusDown("ATK")])
+            .with("攻:Sp.パワーUP", () => [statusUp("Sp.ATK")])
+            .with("攻:Sp.パワーDOWN", () => [statusDown("Sp.ATK")])
+            .with("攻:WパワーDOWN", () => [
+              statusDown("ATK"),
+              statusDown("Sp.ATK"),
+            ])
+            .with("攻:ガードUP", () => [statusUp("DEF")])
+            .with("攻:ガードDOWN", () => [statusDown("DEF")])
+            .with("攻:Sp.ガードUP", () => [statusUp("Sp.DEF")])
+            .with("攻:Sp.ガードDOWN", () => [statusDown("Sp.DEF")])
+            .with("攻:WガードUP", () => [statusUp("DEF"), statusUp("Sp.DEF")])
+            .with("攻:WガードDOWN", () => [
+              statusDown("DEF"),
+              statusDown("Sp.DEF"),
+            ])
+            .with("攻:マイトUP", () => [statusUp("ATK"), statusUp("DEF")])
+            .with("攻:マイトDOWN", () => [statusDown("ATK"), statusDown("DEF")])
+            .with("攻:Sp.マイトUP", () => [
+              statusUp("Sp.ATK"),
+              statusUp("Sp.DEF"),
+            ])
+            .with("攻:Sp.マイトDOWN", () => [
+              statusDown("Sp.ATK"),
+              statusDown("Sp.DEF"),
+            ])
+            .with("攻:Sp.ディファーDOWN", () => [
+              statusDown("ATK"),
+              statusDown("Sp.DEF"),
+            ])
+            // ### 支援/妨害
+            .with("援:支援UP", () => ["SupportUp"])
+            .with("援:パワーUP", () => [statusUp("ATK")])
+            .with("援:パワーDOWN", () => [statusDown("ATK")])
+            .with("援:Sp.パワーUP", () => [statusUp("Sp.ATK")])
+            .with("援:Sp.パワーDOWN", () => [statusDown("Sp.ATK")])
+            .with("援:WパワーUP", () => [statusUp("ATK"), statusUp("Sp.ATK")])
+            .with("援:WパワーDOWN", () => [
+              statusDown("ATK"),
+              statusDown("Sp.ATK"),
+            ])
+            .with("援:ガードUP", () => [statusUp("DEF")])
+            .with("援:ガードDOWN", () => [statusDown("DEF")])
+            .with("援:Sp.ガードUP", () => [statusUp("Sp.DEF")])
+            .with("援:Sp.ガードDOWN", () => [statusDown("Sp.DEF")])
+            .with("援:WガードUP", () => [statusUp("DEF"), statusUp("Sp.DEF")])
+            .with("援:WガードDOWN", () => [
+              statusDown("DEF"),
+              statusDown("Sp.DEF"),
+            ])
+            .with("援:マイトUP", () => [statusUp("ATK"), statusUp("DEF")])
+            .with("援:マイトDOWN", () => [statusDown("ATK"), statusDown("DEF")])
+            .with("援:Sp.マイトUP", () => [
+              statusUp("Sp.ATK"),
+              statusUp("Sp.DEF"),
+            ])
+            .with("援:Sp.マイトDOWN", () => [
+              statusDown("Sp.ATK"),
+              statusDown("Sp.DEF"),
+            ])
+            .with("援:Sp.ディファーDOWN", () => [
+              statusDown("ATK"),
+              statusDown("Sp.DEF"),
+            ])
+            .with("援:ディファーDOWN", () => [
+              statusDown("Sp.ATK"),
+              statusDown("DEF"),
+            ])
+            .with("援:火パワーUP", () => [statusUp("Fire ATK")])
+            .with("援:水パワーUP", () => [statusUp("Water ATK")]) // 現状存在しない
+            .with("援:風パワーUP", () => [statusUp("Wind ATK")])
+            // ### 回復
+            .with("回:回復UP", () => ["RecoveryUp"])
+            .with("回:ガードUP", () => [statusUp("DEF")])
+            .with("回:Sp.ガードUP", () => [statusUp("Sp.DEF")])
+            .with("回:WガードUP", () => [statusUp("DEF"), statusUp("Sp.DEF")])
+            .with("回:パワーUP", () => [statusUp("ATK")])
+            .with("回:Sp.パワーUP", () => [statusUp("Sp.ATK")])
 
-  return {
-    trigger,
-    kind: effects.flat(),
-  };
+            // ## 第二効果
+            // ### 複合系
+            .with("パワーUP", () => [statusUp("ATK")])
+            .with("パワーDOWN", () => [statusDown("ATK")])
+            .with("Sp.パワーUP", () => [statusUp("Sp.ATK")])
+            .with("Sp.パワーDOWN", () => [statusDown("Sp.ATK")])
+            .with("ガードUP", () => [statusUp("DEF")])
+            .with("ガードDOWN", () => [statusDown("DEF")])
+            .with("Sp.ガードUP", () => [statusUp("Sp.DEF")])
+            .with("Sp.ガードDOWN", () => [statusDown("Sp.DEF")])
+            // ### 副攻
+            .with("副攻:火パワーUP", () => [statusUp("Fire ATK")])
+            .with("副攻:水パワーUP", () => [statusUp("Water ATK")])
+            .with("副攻:風パワーUP", () => [statusUp("Wind ATK")])
+            .with("副攻:火ガードDOWN", () => [statusDown("Fire DEF")])
+            .with("副攻:水ガードDOWN", () => [statusDown("Water DEF")])
+            .with("副攻:風ガードDOWN", () => [statusDown("Wind DEF")])
+            // ### 副援
+            .with("副援:支援UP", () => ["SupportUp"])
+            .with("副援:火パワーUP", () => [statusUp("Fire ATK")])
+            .with("副援:水パワーUP", () => [statusUp("Water ATK")])
+            .with("副援:風パワーUP", () => [statusUp("Wind ATK")])
+            .with("副援:火パワーDOWN", () => [statusDown("Fire ATK")])
+            .with("副援:水パワーDOWN", () => [statusDown("Water ATK")])
+            .with("副援:風パワーDOWN", () => [statusDown("Water ATK")])
+            .with("副援:火ガードUP", () => [statusUp("Fire DEF")])
+            .with("副援:水ガードUP", () => [statusUp("Water DEF")])
+            .with("副援:風ガードUP", () => [statusUp("Wind DEF")])
+            .with("副援:火ガードDOWN", () => [statusDown("Fire DEF")])
+            .with("副援:水ガードDOWN", () => [statusDown("Water DEF")]) // 現状存在しない
+            .with("副援:風ガードDOWN", () => [statusDown("Wind DEF")]) // 現状存在しない
+            .with("副援:トライガードUP", () => [
+              statusUp("Fire DEF"),
+              statusUp("Water DEF"),
+              statusUp("Wind DEF"),
+            ])
+            .run()
+        );
+      });
+      return {
+        trigger,
+        kind,
+      };
+    });
 }
