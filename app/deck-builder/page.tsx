@@ -320,18 +320,18 @@ function DeckList() {
         </Button>
       </Stack>
       <Container
-        maxWidth="md"
+        maxWidth={false}
         sx={{
           bgcolor: "grey",
-          minHeight: 530,
-          width: 620,
+          minHeight: "60vh",
+          maxWidth: 620,
           paddingTop: 2,
           paddingBottom: 2,
         }}
       >
         {/* Legendary Deck Images */}
         <ImageList
-          sx={{ width: 600, height: 100, flexDirection: "column" }}
+          sx={{ maxWidth: 600, height: 100, flexDirection: "column" }}
           cols={5}
           rowHeight={100}
         >
@@ -341,7 +341,7 @@ function DeckList() {
         </ImageList>
         <Divider sx={{ margin: 2 }} />
         {/* Deck Images */}
-        <ImageList sx={{ width: 600 }} cols={5} rowHeight={100}>
+        <ImageList sx={{ maxWidth: 600 }} cols={5} rowHeight={100}>
           {deck.map((memoria) => {
             return <MemoriaItem memoria={memoria} key={memoria.id} />;
           })}
@@ -454,7 +454,12 @@ function VirtualizedList() {
 }
 function Source() {
   return (
-    <Grid container direction={"column"} alignItems={"center"}>
+    <Grid
+      container
+      direction={"column"}
+      alignItems={"center"}
+      minHeight={"70vh"}
+    >
       <Typography variant="h4" gutterBottom>
         Memoria List
       </Typography>
