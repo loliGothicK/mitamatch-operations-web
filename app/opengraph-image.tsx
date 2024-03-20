@@ -5,7 +5,7 @@ import { default as NextImage } from "next/image";
 export const runtime = "edge";
 
 // Image metadata
-export const alt = "About Acme";
+export const alt = "opengraph image";
 export const size = {
   width: 1200,
   height: 630,
@@ -20,21 +20,17 @@ export default async function Image() {
       // ImageResponse JSX element
       <div
         style={{
-          fontSize: 128,
-          background: "white",
+          fontSize: 100,
+          background: "lightskyblue",
           width: "100%",
           height: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          padding: 50,
         }}
       >
-        <NextImage
-          src={"/opengraph-image.png"}
-          alt={"og"}
-          width={1200}
-          height={630}
-        />
+        Mitamatch Operations for Web
       </div>
     ),
     // ImageResponse options
