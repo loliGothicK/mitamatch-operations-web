@@ -1,9 +1,9 @@
 import { test } from "@jest/globals";
 import { data } from "../../public/memoria.json";
-import { parse_support } from "./support";
+import { parse_skill } from "./skill";
 
 test("support parser regex coverall", () => {
-  for (const { support } of data) {
-    parse_support(support.name, support.description);
+  for (const { skill } of data) {
+    parse_skill(skill.name, skill.description);
   }
 });
