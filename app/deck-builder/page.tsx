@@ -12,13 +12,13 @@ import {
   ImageListItem,
   ImageListItemBar,
   ListItem,
-  Stack,
   Switch,
 } from "@mui/material";
 import Image from "next/image";
 import Divider from "@mui/material/Divider";
 import {
   Add,
+  ClearAll,
   FilterAlt,
   Remove,
   SearchOutlined,
@@ -50,6 +50,10 @@ import { blue, green, purple, red, yellow } from "@mui/material/colors";
 import { AutoSizer, List } from "react-virtualized";
 import "react-virtualized/styles.css";
 import Cookies from "js-cookie";
+import { arrayMove, SortableContext, useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { DndContext } from "@dnd-kit/core";
+import Box from "@mui/material/Box";
 
 function Icon({
   kind,
@@ -221,6 +225,17 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     concentration ? concentration : 4,
   );
 
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isSorting,
+  } = useSortable({
+    id,
+  });
+
   const handleConcentration = () => {
     if (concentrationValue > 0) {
       setConcentration(concentrationValue - 1);
@@ -266,102 +281,94 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   return (
     <Grid item key={id}>
       <ImageListItem>
-        <Icon kind={memoria.kind} element={memoria.element} position={70} />
-        <Concentration
-          concentration={concentrationValue}
-          handleConcentration={handleConcentration}
-        />
-        <Image
-          src={`/memoria/${name}.png`}
-          alt={name}
-          width={100}
-          height={100}
-        />
+        <Box display={isSorting ? "none" : "inline"}>
+          <Icon kind={memoria.kind} element={memoria.element} position={70} />
+          <Concentration
+            concentration={concentrationValue}
+            handleConcentration={handleConcentration}
+          />
+        </Box>
+        <div
+          ref={setNodeRef}
+          {...attributes}
+          {...listeners}
+          style={{
+            transform: CSS.Transform.toString(transform),
+            transition,
+          }}
+        >
+          <Image
+            src={`/memoria/${name}.png`}
+            alt={name}
+            width={100}
+            height={100}
+          />
+        </div>
         <ImageListItemBar
           sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
           position={"top"}
           actionPosition={"right"}
         />
-        <ImageListItemBar
-          sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
-          position={"top"}
-          actionPosition={"left"}
-          actionIcon={
-            <IconButton
-              sx={{
-                color: "rgba(255, 50, 50, 0.9)",
-                bgcolor: "rgba(0, 0, 0, 0.2)",
-              }}
-              aria-label={`remove ${name}`}
-              onClick={() => {
-                setDeck((prev) =>
-                  prev.filter((memoria) => memoria.name !== name),
-                );
-                setLegendaryDeck((prev) =>
-                  prev.filter((memoria) => memoria.name !== name),
-                );
-                Cookies.set(
-                  "deck",
-                  encodeDeck(
-                    sw,
-                    deck.filter((memoria) => memoria.name !== name),
-                    legendaryDeck.filter((memoria) => memoria.name !== name),
-                  ),
-                );
-              }}
-            >
-              <Remove />
-            </IconButton>
-          }
-        />
+        <Box display={isSorting ? "none" : "inline"}>
+          <ImageListItemBar
+            sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
+            position={"top"}
+            actionPosition={"left"}
+            actionIcon={
+              <IconButton
+                sx={{
+                  color: "rgba(255, 50, 50, 0.9)",
+                  bgcolor: "rgba(0, 0, 0, 0.2)",
+                  zIndex: Number.POSITIVE_INFINITY,
+                }}
+                aria-label={`remove ${name}`}
+                onClick={() => {
+                  setDeck((prev) =>
+                    prev.filter((memoria) => memoria.name !== name),
+                  );
+                  setLegendaryDeck((prev) =>
+                    prev.filter((memoria) => memoria.name !== name),
+                  );
+                  Cookies.set(
+                    "deck",
+                    encodeDeck(
+                      sw,
+                      deck.filter((memoria) => memoria.name !== name),
+                      legendaryDeck.filter((memoria) => memoria.name !== name),
+                    ),
+                  );
+                }}
+              >
+                <Remove />
+              </IconButton>
+            }
+          />
+        </Box>
       </ImageListItem>
     </Grid>
   );
 }
 
-function DeckList() {
+function Deck() {
   const [deck, setDeck] = useAtom(deckAtom);
-  const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
 
   return (
-    <Grid container direction={"column"} alignItems={"center"}>
-      <Stack direction={"row"} spacing={2}>
-        <Typography variant="h4" gutterBottom>
-          Deck List
-        </Typography>
-        <Button
-          onClick={() => {
-            setDeck([]);
-            setLegendaryDeck([]);
-          }}
-        >
-          Clear
-        </Button>
-      </Stack>
-      <Container
-        maxWidth={false}
-        sx={{
-          bgcolor: "grey",
-          minHeight: "60vh",
-          maxWidth: 620,
-          paddingTop: 2,
-          paddingBottom: 2,
-        }}
-      >
-        {/* Legendary Deck Images */}
-        <Grid
-          container
-          direction={"row"}
-          spacing={2}
-          alignItems={"left"}
-          sx={{ maxWidth: 600, minHeight: 100 }}
-        >
-          {legendaryDeck.map((memoria) => {
-            return <MemoriaItem memoria={memoria} key={memoria.id} />;
-          })}
-        </Grid>
-        <Divider sx={{ margin: 2 }} />
-        {/* Deck Images */}
+    <DndContext
+      onDragEnd={(event) => {
+        const { active, over } = event;
+        if (over == null) {
+          return;
+        }
+        if (active.id !== over.id) {
+          setDeck((items) => {
+            const oldIndex = items.findIndex((item) => item.id === active.id);
+            const newIndex = items.findIndex((item) => item.id === over.id);
+            return arrayMove(items, oldIndex, newIndex);
+          });
+        }
+      }}
+    >
+      <SortableContext items={deck}>
         <Grid
           container
           direction={"row"}
@@ -373,8 +380,44 @@ function DeckList() {
             return <MemoriaItem memoria={memoria} key={memoria.id} />;
           })}
         </Grid>
-      </Container>
-    </Grid>
+      </SortableContext>
+    </DndContext>
+  );
+}
+
+function LegendaryDeck() {
+  const [deck, setDeck] = useAtom(legendaryDeckAtom);
+
+  return (
+    <DndContext
+      onDragEnd={(event) => {
+        const { active, over } = event;
+        if (over == null) {
+          return;
+        }
+        if (active.id !== over.id) {
+          setDeck((items) => {
+            const oldIndex = items.findIndex((item) => item.id === active.id);
+            const newIndex = items.findIndex((item) => item.id === over.id);
+            return arrayMove(items, oldIndex, newIndex);
+          });
+        }
+      }}
+    >
+      <SortableContext items={deck}>
+        <Grid
+          container
+          direction={"row"}
+          alignItems={"left"}
+          spacing={2}
+          sx={{ maxWidth: 600, minHeight: 100 }}
+        >
+          {deck.map((memoria) => {
+            return <MemoriaItem memoria={memoria} key={memoria.id} />;
+          })}
+        </Grid>
+      </SortableContext>
+    </DndContext>
   );
 }
 
@@ -488,9 +531,6 @@ function Source() {
       alignItems={"center"}
       minHeight={"70vh"}
     >
-      <Typography variant="h4" gutterBottom>
-        Memoria List
-      </Typography>
       <Grid direction="row" spacing={2} minHeight={"60vh"} minWidth={"100%"}>
         <ToggleButtons />
         <FilterModal />
@@ -649,17 +689,6 @@ export default function DeckBuilder() {
   return (
     <Layout>
       <Grid container direction={"row"} alignItems={"right"}>
-        <Grid item xs={12}>
-          {/* share button */}
-          <Link
-            href={`/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`}
-            onClick={shareHandler}
-          >
-            <IconButton aria-label="share">
-              <ShareOutlined />
-            </IconButton>
-          </Link>
-        </Grid>
         <Grid
           container
           item
@@ -671,14 +700,40 @@ export default function DeckBuilder() {
         >
           <Grid item xs={12} md={4} lg={2}>
             <Grid container direction={"column"} alignItems={"center"}>
-              <Typography variant="h4" gutterBottom>
-                Deck Details
-              </Typography>
               <Details />
             </Grid>
           </Grid>
-          <Grid item xs={12} md={8} lg={6}>
-            <DeckList />
+          <Grid item xs={12} md={8} lg={6} alignItems={"center"}>
+            <Button
+              onClick={() => {
+                setDeck([]);
+                setLegendaryDeck([]);
+              }}
+            >
+              <ClearAll />
+            </Button>
+            <Link
+              href={`/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`}
+              onClick={shareHandler}
+            >
+              <IconButton aria-label="share">
+                <ShareOutlined />
+              </IconButton>
+            </Link>
+            <Container
+              maxWidth={false}
+              sx={{
+                bgcolor: "grey",
+                minHeight: "60vh",
+                maxWidth: 620,
+                paddingTop: 2,
+                paddingBottom: 2,
+              }}
+            >
+              <LegendaryDeck />
+              <Divider sx={{ margin: 2 }} />
+              <Deck />
+            </Container>
           </Grid>
           <Grid item xs={12} md={12} lg={4}>
             {/* Source */}
