@@ -18,10 +18,6 @@ import {
 } from "@/type/SearchType";
 import { parse_skill } from "@/utils/parser/skill";
 import { parse_support } from "@/utils/parser/support";
-import {
-  AssistSupportCheckbox,
-  RecoverySupportCheckbox,
-} from "@/component/Search";
 
 export type Memoria = (typeof data)[0];
 export type MemoriaWithConcentration = Memoria & { concentration?: number };
@@ -176,7 +172,7 @@ export const filteredMemoriaAtom = atom((get) => {
       );
     })
     .sort((a, b) => {
-      const kind = match(get(sortKindAtom))
+      return match(get(sortKindAtom))
         .with("ID", () => b.id - a.id)
         .with("NAME", () => a.name.localeCompare(b.name))
         .with("ATK", () => b.status[4][0] - a.status[4][0])
@@ -194,6 +190,5 @@ export const filteredMemoriaAtom = atom((get) => {
             b.status[4][2] + b.status[4][3] - (a.status[4][2] + a.status[4][3]),
         )
         .exhaustive();
-      return kind;
     });
 });
