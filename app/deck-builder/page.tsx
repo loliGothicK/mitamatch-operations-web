@@ -230,7 +230,7 @@ function Concentration({
 }
 
 function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
-  const { name, id, concentration } = memoria;
+  const { name, id, skill, support, concentration } = memoria;
   const [sw] = useAtom(swAtom);
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
@@ -312,15 +312,27 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
             transition,
           }}
         >
-          <Image
-            src={`/memoria/${name}.png`}
-            alt={name}
-            width={100}
-            height={100}
-            onLoad={() => {
-              setIsLoaded(true);
-            }}
-          />
+          <Tooltip
+            title={
+              <Stack>
+                <Typography variant="h6">{name}</Typography>
+                <Typography variant="body2">{skill.name}</Typography>
+                <Typography variant="body2">{support.name}</Typography>
+              </Stack>
+            }
+            placement={'top'}
+            arrow
+          >
+            <Image
+              src={`/memoria/${name}.png`}
+              alt={name}
+              width={100}
+              height={100}
+              onLoad={() => {
+                setIsLoaded(true);
+              }}
+            />
+          </Tooltip>
         </div>
         <ImageListItemBar
           sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
@@ -510,15 +522,17 @@ function VirtualizedList() {
                     >
                       <Add color={'warning'} />
                     </IconButton>
-                    <Image
-                      src={`/memoria/${memoria[index].name}.png`}
-                      alt={memoria[index].name}
-                      width={100}
-                      height={100}
-                      onLoad={() => {
-                        setIsLoaded(true);
-                      }}
-                    />
+                    <Tooltip title={memoria[index].name} placement={'top'}>
+                      <Image
+                        src={`/memoria/${memoria[index].name}.png`}
+                        alt={memoria[index].name}
+                        width={100}
+                        height={100}
+                        onLoad={() => {
+                          setIsLoaded(true);
+                        }}
+                      />
+                    </Tooltip>
                   </ListItemIcon>
                   <ListItemText
                     secondary={
