@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import memoriaData from './memoria.json';
 
 export const memoriaSchema = z.object({

@@ -1,5 +1,6 @@
 import { atom } from 'jotai';
 
+import { Memoria, memoriaList } from '@/domain/memoria';
 import { parse_skill } from '@/parser/skill';
 import { parse_support } from '@/parser/support';
 import {
@@ -21,7 +22,6 @@ import {
 } from '@/types/SearchType';
 
 import { match } from 'ts-pattern';
-import { Memoria, memoriaList } from '@/domain/memoria';
 
 export type MemoriaWithConcentration = Memoria & { concentration?: number };
 

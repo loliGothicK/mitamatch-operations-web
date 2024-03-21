@@ -1,3 +1,4 @@
+import { intoStatusPattern } from '@/component/Details';
 import {
   Elemental,
   ElementalKind,
@@ -7,7 +8,6 @@ import {
 } from '@/parser/skill';
 
 import { match } from 'ts-pattern';
-import { intoStatusPattern } from '@/component/Details';
 
 export const labelSearch = ['legendary', 'ultimate'] as const;
 export type LabelSearch = (typeof labelSearch)[number];
