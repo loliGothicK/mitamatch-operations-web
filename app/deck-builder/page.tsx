@@ -834,7 +834,6 @@ export default function DeckBuilder() {
             </Container>
           </Grid>
           <Grid item xs={12} md={12} lg={4}>
-            {/* Source */}
             <Source />
           </Grid>
         </Grid>

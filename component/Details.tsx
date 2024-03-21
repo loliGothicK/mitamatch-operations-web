@@ -6,13 +6,14 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { deckAtom, legendaryDeckAtom, Memoria } from '@/jotai/atoms';
+import { deckAtom, legendaryDeckAtom } from '@/jotai/atoms';
 import { parse_skill, Status, StatusKind, statusKind } from '@/parser/skill';
 import { parse_support, SupportKind } from '@/parser/support';
 import { elementFilter, elementFilterMap } from '@/types/FilterType';
 
 import { Lens } from 'monocle-ts';
 import { match } from 'ts-pattern';
+import { Memoria } from '@/domain/memoria';
 
 type UpDown = 'UP' | 'DOWN';
 type StatusPattern = `${StatusKind}/${UpDown}`;
@@ -87,7 +88,7 @@ const supportPattern: SupportPattern[] = [
   }),
 ] as const;
 
-function supportPatternToJapanese(pattern: SupportPattern): string {
+export function supportPatternToJapanese(pattern: SupportPattern): string {
   return match(pattern)
     .with('ATK/UP', () => `攻UP`)
     .with('DEF/UP', () => `防UP`)

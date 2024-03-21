@@ -13,6 +13,7 @@ import { CheckBoxItem } from '@/component/CheckBoxItem';
 import {
   intoStatusPattern,
   statusPatternToJapanese,
+  supportPatternToJapanese,
 } from '@/component/Details';
 import {
   assistSupportFilterAtom,
@@ -211,63 +212,62 @@ export function VanguardSupportCheckbox() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {allVanguardSupportSearch().map((flag) => {
-        if (typeof flag === 'string') {
-          return (
-            <CheckBoxItem
-              key={flag}
-              name={
-                flag === 'NormalMatchPtUp'
-                  ? '獲得マッチPtUP/通常単体'
-                  : flag === 'SpecialMatchPtUp'
-                    ? '獲得マッチPtUP/特殊単体'
-                    : 'DamageUp'
+        return (
+          <CheckBoxItem
+            key={typeof flag !== 'string' ? intoStatusPattern(flag) : flag}
+            name={
+              typeof flag === 'string'
+                ? supportPatternToJapanese(flag)
+                : statusPatternToJapanese(intoStatusPattern(flag))
+            }
+            checked={filter.some((v) => {
+              if (typeof v === 'string' && typeof flag === 'string') {
+                return v === flag;
+              } else if (typeof v !== 'string' && typeof flag !== 'string') {
+                return v.status === flag.status && v.upDown === flag.upDown;
+              } else {
+                return false;
               }
-              checked={filter.includes(flag)}
-              handleChange={() => {
-                setFilter((prev) => {
-                  if (filter.includes(flag)) {
-                    return prev.filter((v) => v !== flag);
-                  } else {
-                    return [...prev, flag];
-                  }
-                });
-              }}
-            />
-          );
-        } else {
-          return (
-            <CheckBoxItem
-              key={intoStatusPattern(flag)}
-              name={statusPatternToJapanese(intoStatusPattern(flag))}
-              checked={filter.some(
-                (v) =>
-                  typeof v !== 'string' &&
-                  v.status === flag.status &&
-                  v.upDown === flag.upDown,
-              )}
-              handleChange={() => {
-                setFilter((prev) => {
-                  if (
-                    filter.some(
-                      (v) =>
-                        typeof v !== 'string' &&
-                        v.status === flag.status &&
-                        v.upDown === flag.upDown,
-                    )
-                  ) {
-                    return prev.filter(
-                      (v) =>
-                        typeof v !== 'string' &&
-                        (v.status !== flag.status || v.upDown !== flag.upDown),
-                    );
-                  } else {
-                    return [...prev, flag];
-                  }
-                });
-              }}
-            />
-          );
-        }
+            })}
+            handleChange={() => {
+              setFilter((prev) => {
+                if (
+                  filter.some((v) => {
+                    if (typeof v === 'string' && typeof flag === 'string') {
+                      return v === flag;
+                    } else if (
+                      typeof v !== 'string' &&
+                      typeof flag !== 'string'
+                    ) {
+                      return (
+                        v.status === flag.status && v.upDown === flag.upDown
+                      );
+                    } else {
+                      return false;
+                    }
+                  })
+                ) {
+                  return prev.filter((v) => {
+                    if (typeof v === 'string' && typeof flag === 'string') {
+                      return v !== flag;
+                    } else if (
+                      typeof v !== 'string' &&
+                      typeof flag !== 'string'
+                    ) {
+                      return !(
+                        v.status === flag.status && v.upDown === flag.upDown
+                      );
+                    } else {
+                      return true;
+                    }
+                  });
+                } else {
+                  return [...prev, flag];
+                }
+              });
+            }}
+          />
+        );
       })}
     </Box>
   );
@@ -279,57 +279,62 @@ export function AssistSupportCheckbox() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {allAssistSupportSearch().map((flag) => {
-        if (typeof flag === 'string') {
-          return (
-            <CheckBoxItem
-              key={flag}
-              name={'支援UP'}
-              checked={filter.includes(flag)}
-              handleChange={() => {
-                setFilter((prev) => {
-                  if (filter.includes(flag)) {
-                    return prev.filter((v) => v !== flag);
-                  } else {
-                    return [...prev, flag];
-                  }
-                });
-              }}
-            />
-          );
-        } else {
-          return (
-            <CheckBoxItem
-              key={intoStatusPattern(flag)}
-              name={statusPatternToJapanese(intoStatusPattern(flag))}
-              checked={filter.some(
-                (v) =>
-                  typeof v !== 'string' &&
-                  v.status === flag.status &&
-                  v.upDown === flag.upDown,
-              )}
-              handleChange={() => {
-                setFilter((prev) => {
-                  if (
-                    filter.some(
-                      (v) =>
-                        typeof v !== 'string' &&
-                        v.status === flag.status &&
-                        v.upDown === flag.upDown,
-                    )
-                  ) {
-                    return prev.filter(
-                      (v) =>
-                        typeof v !== 'string' &&
-                        (v.status !== flag.status || v.upDown !== flag.upDown),
-                    );
-                  } else {
-                    return [...prev, flag];
-                  }
-                });
-              }}
-            />
-          );
-        }
+        return (
+          <CheckBoxItem
+            key={typeof flag !== 'string' ? intoStatusPattern(flag) : flag}
+            name={
+              typeof flag === 'string'
+                ? supportPatternToJapanese(flag)
+                : statusPatternToJapanese(intoStatusPattern(flag))
+            }
+            checked={filter.some((v) => {
+              if (typeof v === 'string' && typeof flag === 'string') {
+                return v === flag;
+              } else if (typeof v !== 'string' && typeof flag !== 'string') {
+                return v.status === flag.status && v.upDown === flag.upDown;
+              } else {
+                return false;
+              }
+            })}
+            handleChange={() => {
+              setFilter((prev) => {
+                if (
+                  filter.some((v) => {
+                    if (typeof v === 'string' && typeof flag === 'string') {
+                      return v === flag;
+                    } else if (
+                      typeof v !== 'string' &&
+                      typeof flag !== 'string'
+                    ) {
+                      return (
+                        v.status === flag.status && v.upDown === flag.upDown
+                      );
+                    } else {
+                      return false;
+                    }
+                  })
+                ) {
+                  return prev.filter((v) => {
+                    if (typeof v === 'string' && typeof flag === 'string') {
+                      return v !== flag;
+                    } else if (
+                      typeof v !== 'string' &&
+                      typeof flag !== 'string'
+                    ) {
+                      return !(
+                        v.status === flag.status && v.upDown === flag.upDown
+                      );
+                    } else {
+                      return true;
+                    }
+                  });
+                } else {
+                  return [...prev, flag];
+                }
+              });
+            }}
+          />
+        );
       })}
     </Box>
   );
@@ -341,57 +346,62 @@ export function RecoverySupportCheckbox() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {allRecoverySupportSearch().map((flag) => {
-        if (typeof flag === 'string') {
-          return (
-            <CheckBoxItem
-              key={flag}
-              name={'回復UP'}
-              checked={filter.includes(flag)}
-              handleChange={() => {
-                setFilter((prev) => {
-                  if (filter.includes(flag)) {
-                    return prev.filter((v) => v !== flag);
-                  } else {
-                    return [...prev, flag];
-                  }
-                });
-              }}
-            />
-          );
-        } else {
-          return (
-            <CheckBoxItem
-              key={intoStatusPattern(flag)}
-              name={statusPatternToJapanese(intoStatusPattern(flag))}
-              checked={filter.some(
-                (v) =>
-                  typeof v !== 'string' &&
-                  v.status === flag.status &&
-                  v.upDown === flag.upDown,
-              )}
-              handleChange={() => {
-                setFilter((prev) => {
-                  if (
-                    filter.some(
-                      (v) =>
-                        typeof v !== 'string' &&
-                        v.status === flag.status &&
-                        v.upDown === flag.upDown,
-                    )
-                  ) {
-                    return prev.filter(
-                      (v) =>
-                        typeof v !== 'string' &&
-                        (v.status !== flag.status || v.upDown !== flag.upDown),
-                    );
-                  } else {
-                    return [...prev, flag];
-                  }
-                });
-              }}
-            />
-          );
-        }
+        return (
+          <CheckBoxItem
+            key={typeof flag !== 'string' ? intoStatusPattern(flag) : flag}
+            name={
+              typeof flag === 'string'
+                ? supportPatternToJapanese(flag)
+                : statusPatternToJapanese(intoStatusPattern(flag))
+            }
+            checked={filter.some((v) => {
+              if (typeof v === 'string' && typeof flag === 'string') {
+                return v === flag;
+              } else if (typeof v !== 'string' && typeof flag !== 'string') {
+                return v.status === flag.status && v.upDown === flag.upDown;
+              } else {
+                return false;
+              }
+            })}
+            handleChange={() => {
+              setFilter((prev) => {
+                if (
+                  filter.some((v) => {
+                    if (typeof v === 'string' && typeof flag === 'string') {
+                      return v === flag;
+                    } else if (
+                      typeof v !== 'string' &&
+                      typeof flag !== 'string'
+                    ) {
+                      return (
+                        v.status === flag.status && v.upDown === flag.upDown
+                      );
+                    } else {
+                      return false;
+                    }
+                  })
+                ) {
+                  return prev.filter((v) => {
+                    if (typeof v === 'string' && typeof flag === 'string') {
+                      return v !== flag;
+                    } else if (
+                      typeof v !== 'string' &&
+                      typeof flag !== 'string'
+                    ) {
+                      return !(
+                        v.status === flag.status && v.upDown === flag.upDown
+                      );
+                    } else {
+                      return true;
+                    }
+                  });
+                } else {
+                  return [...prev, flag];
+                }
+              });
+            }}
+          />
+        );
       })}
     </Box>
   );

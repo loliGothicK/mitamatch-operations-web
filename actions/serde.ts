@@ -1,5 +1,5 @@
 import { MemoriaWithConcentration } from '@/jotai/atoms';
-import { data } from '@/public/memoria.json';
+import { memoriaList } from '@/domain/memoria';
 
 export function encodeDeck(
   sw: 'sword' | 'shield',
@@ -26,7 +26,7 @@ export function decodeDeck(encoded: string): {
   legendaryDeck: MemoriaWithConcentration[];
 } {
   const { sw, deck, legendaryDeck } = JSON.parse(atob(encoded));
-  const deckMap = new Map(data.map((memoria) => [memoria.id, memoria]));
+  const deckMap = new Map(memoriaList.map((memoria) => [memoria.id, memoria]));
   return {
     sw,
     legendaryDeck: legendaryDeck.map(
