@@ -12,10 +12,10 @@ import {
   Add,
   ClearAll,
   FilterAlt,
-  Remove,
-  SearchOutlined,
   Launch,
   LinkSharp,
+  Remove,
+  SearchOutlined,
 } from '@mui/icons-material';
 import {
   Avatar,
