@@ -40,6 +40,10 @@ export const mainListItems = (
 
 const updates = [
   {
+    name: 'Deck Builder for Web is fully functional',
+    description: ['Deck Builder all features are now available.'],
+  },
+  {
     name: 'Mitamatch Operations for Web',
     description: ['Deck Builder is now available (preview).'],
   },
