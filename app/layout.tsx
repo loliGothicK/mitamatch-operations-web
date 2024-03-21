@@ -2,10 +2,11 @@ import React from 'react';
 
 import { Inter } from 'next/font/google';
 
+import { Provider } from 'jotai';
+
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Provider } from 'jotai';
 
 const inter = Inter({ subsets: ['latin'] });
 

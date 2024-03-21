@@ -1,5 +1,7 @@
 'use client';
 
+import { useAtom } from 'jotai';
+
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -14,7 +16,6 @@ import {
 } from '@/utils/parser/skill';
 import { parse_support, SupportKind } from '@/utils/parser/support';
 
-import { useAtom } from 'jotai';
 import { Lens } from 'monocle-ts';
 import { match } from 'ts-pattern';
 

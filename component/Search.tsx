@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { useAtom } from 'jotai';
+
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
@@ -35,8 +37,6 @@ import {
   labelSearch,
   otherSupportSearch,
 } from '@/type/SearchType';
-
-import { useAtom } from 'jotai';
 
 function LabelCheckbox() {
   const [filter, setFilter] = useAtom(labelFilterAtom);

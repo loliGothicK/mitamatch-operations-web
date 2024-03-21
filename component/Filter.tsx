@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { useAtom } from 'jotai';
+
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -17,8 +19,6 @@ import {
   FilterType,
   roleFilterMap,
 } from '@/type/FilterType';
-
-import { useAtom } from 'jotai';
 
 function RoleCheckbox() {
   const [filter, setFilter] = useAtom(roleFilterAtom);

@@ -1,3 +1,5 @@
+import { atom } from 'jotai';
+
 import { data } from '@/public/memoria.json';
 import {
   elementFilter,
@@ -20,7 +22,6 @@ import {
 import { parse_skill } from '@/utils/parser/skill';
 import { parse_support } from '@/utils/parser/support';
 
-import { atom } from 'jotai';
 import { match } from 'ts-pattern';
 
 export type Memoria = (typeof data)[0];

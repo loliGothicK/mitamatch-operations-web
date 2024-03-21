@@ -7,6 +7,7 @@ module.exports = {
   importOrder: [
     '^(react/(.*)$)|^(react$)',
     '^(next/(.*)$)|^(next$)',
+    '^jotai/(.*)$|^jotai$',
     '^@mui/(.*)$',
     '<THIRD_PARTY_MODULES>',
     '^@?\\w',
