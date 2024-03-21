@@ -13,6 +13,9 @@ import {
   BasicStatusSearch,
   ElementStatusSearch,
   LabelSearch,
+  OtherSkillPattern,
+  OtherSkillSearch,
+  OtherSupportSearch,
   RecoverySupportSearch,
   VanguardSupportSearch,
 } from "@/type/SearchType";
@@ -61,9 +64,23 @@ export const currentRoleFilterAtom = atom((get) => {
 
 export const basicStatusFilterAtom = atom<BasicStatusSearch[]>([]);
 export const elementStatusFilterAtom = atom<ElementStatusSearch[]>([]);
+export const otherSkillFilterAtom = atom<OtherSkillSearch[]>([]);
 export const vanguardSupportFilterAtom = atom<VanguardSupportSearch[]>([]);
 export const assistSupportFilterAtom = atom<AssistSupportSearch[]>([]);
 export const recoverySupportFilterAtom = atom<RecoverySupportSearch[]>([]);
+export const otherSupportFilterAtom = atom<OtherSupportSearch[]>([]);
+
+export const resetFilterAtom = atom(null, (_, set) => {
+  set(labelFilterAtom, []);
+  set(basicStatusFilterAtom, []);
+  set(elementStatusFilterAtom, []);
+  set(otherSkillFilterAtom, []);
+  set(vanguardSupportFilterAtom, []);
+  set(assistSupportFilterAtom, []);
+  set(recoverySupportFilterAtom, []);
+  set(otherSupportFilterAtom, []);
+});
+
 export const sortKindAtom = atom<SortKind>("ID");
 
 export const filteredMemoriaAtom = atom((get) => {
@@ -101,6 +118,12 @@ export const filteredMemoriaAtom = atom((get) => {
       const elementStatus = get(elementStatusFilterAtom).every((filter) => {
         return skill.status.some((x) => {
           return x === filter.status && skill.upDown === filter.upDown;
+        });
+      });
+
+      const otherSkill = get(otherSkillFilterAtom).every((filter) => {
+        return skill.effects.some((x) => {
+          return x === filter;
         });
       });
 
@@ -164,6 +187,7 @@ export const filteredMemoriaAtom = atom((get) => {
         label &&
         basicStatus &&
         elementStatus &&
+        otherSkill &&
         vanguardSupport &&
         assistSupport &&
         recoverySupport &&

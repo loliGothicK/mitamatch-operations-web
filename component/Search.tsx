@@ -6,16 +6,23 @@ import {
   basicStatusFilterAtom,
   elementStatusFilterAtom,
   labelFilterAtom,
+  otherSkillFilterAtom,
+  otherSupportFilterAtom,
   recoverySupportFilterAtom,
+  resetFilterAtom,
   vanguardSupportFilterAtom,
 } from "@/jotai/atom";
 import {
   allAssistSupportSearch,
   allBasicStatusSearch,
   allElementStatusSearch,
+  allOtherSkillSearch,
   allRecoverySupportSearch,
   allVanguardSupportSearch,
+  elementalSkillPatternToJapanese,
+  intoElementalSkillPattern,
   labelSearch,
+  otherSupportSearch,
 } from "@/type/SearchType";
 import { CheckBoxItem } from "@/component/CheckBoxItem";
 import Tab from "@mui/material/Tab";
@@ -26,6 +33,7 @@ import {
   intoStatusPattern,
   statusPatternToJapanese,
 } from "@/component/Details";
+import { Button } from "@mui/material";
 
 function LabelCheckbox() {
   const [filter, setFilter] = useAtom(labelFilterAtom);
@@ -119,6 +127,76 @@ function ElementStatusCheckbox() {
             }}
           />
         );
+      })}
+    </Box>
+  );
+}
+
+function OtherSkillCheckbox() {
+  const [filter, setFilter] = useAtom(otherSkillFilterAtom);
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+      {allOtherSkillSearch().map((flag) => {
+        if (typeof flag === "string") {
+          return (
+            <CheckBoxItem
+              key={flag}
+              name={
+                flag === "charge"
+                  ? "チャージ"
+                  : flag === "counter"
+                    ? "カウンター"
+                    : "ヒール"
+              }
+              checked={filter.includes(flag)}
+              handleChange={() => {
+                setFilter((prev) => {
+                  if (filter.includes(flag)) {
+                    return prev.filter((v) => v !== flag);
+                  } else {
+                    return [...prev, flag];
+                  }
+                });
+              }}
+            />
+          );
+        } else {
+          return (
+            <CheckBoxItem
+              key={intoElementalSkillPattern(flag)}
+              name={elementalSkillPatternToJapanese(
+                intoElementalSkillPattern(flag),
+              )}
+              checked={filter.some(
+                (v) =>
+                  typeof v !== "string" &&
+                  v.element === flag.element &&
+                  v.kind === flag.kind,
+              )}
+              handleChange={() => {
+                setFilter((prev) => {
+                  if (
+                    filter.some(
+                      (v) =>
+                        typeof v !== "string" &&
+                        v.element === flag.element &&
+                        v.kind === flag.kind,
+                    )
+                  ) {
+                    return prev.filter(
+                      (v) =>
+                        typeof v !== "string" &&
+                        (v.element !== flag.element || v.kind !== flag.kind),
+                    );
+                  } else {
+                    return [...prev, flag];
+                  }
+                });
+              }}
+            />
+          );
+        }
       })}
     </Box>
   );
@@ -316,15 +394,43 @@ export function RecoverySupportCheckbox() {
   );
 }
 
+export function OtherSupportCheckbox() {
+  const [filter, setFilter] = useAtom(otherSupportFilterAtom);
+
+  return (
+    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+      {otherSupportSearch.map((flag) => {
+        return (
+          <CheckBoxItem
+            key={flag}
+            name={flag === "MpCostDown" ? "MP消費DOWN" : "効果範囲+1"}
+            checked={filter.includes(flag)}
+            handleChange={() => {
+              setFilter((prev) => {
+                if (filter.includes(flag)) {
+                  return prev.filter((v) => v !== flag);
+                } else {
+                  return [...prev, flag];
+                }
+              });
+            }}
+          />
+        );
+      })}
+    </Box>
+  );
+}
+
 export default function Search() {
   const [value, setValue] = React.useState("1");
-
+  const [_, resetFilters] = useAtom(resetFilterAtom);
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
   return (
     <Box sx={{ width: "100%", typography: "body1" }}>
+      <Button onClick={resetFilters}>リセット</Button>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList
@@ -351,7 +457,9 @@ export default function Search() {
         <TabPanel value="3">
           <ElementStatusCheckbox />
         </TabPanel>
-        <TabPanel value="4">Coming soon...</TabPanel>
+        <TabPanel value="4">
+          <OtherSkillCheckbox />
+        </TabPanel>
         <TabPanel value="5">
           <VanguardSupportCheckbox />
         </TabPanel>
@@ -361,7 +469,9 @@ export default function Search() {
         <TabPanel value="7">
           <RecoverySupportCheckbox />
         </TabPanel>
-        <TabPanel value="8">Coming soon...</TabPanel>
+        <TabPanel value="8">
+          <OtherSupportCheckbox />
+        </TabPanel>
       </TabContext>
     </Box>
   );

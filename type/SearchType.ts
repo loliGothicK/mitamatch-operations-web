@@ -1,3 +1,12 @@
+import {
+  Elemental,
+  ElementalKind,
+  elementalKind,
+  Elements,
+  elements,
+} from "@/utils/parser/skill";
+import { match } from "ts-pattern";
+
 export const labelSearch = ["legendary", "ultimate"] as const;
 export type LabelSearch = (typeof labelSearch)[number];
 export const basicStatus = ["ATK", "DEF", "Sp.ATK", "Sp.DEF", "Life"] as const;
@@ -39,6 +48,51 @@ export function allElementStatusSearch(): ElementStatusSearch[] {
   });
 }
 
+export type OtherSkillSearch = "charge" | "counter" | "heal" | Elemental;
+export type ElementalSkillPattern =
+  `${Elemental["element"]}/${Elemental["kind"]}`;
+export type OtherSkillPattern =
+  | "charge"
+  | "counter"
+  | "heal"
+  | ElementalSkillPattern;
+export function intoElementalSkillPattern({
+  element,
+  kind,
+}: Elemental): ElementalSkillPattern {
+  return `${element}/${kind}`;
+}
+export function elementalSkillPatternToJapanese(
+  pattern: ElementalSkillPattern,
+) {
+  const [element, kind] = pattern.split("/");
+  const first = match(element as unknown as Elements)
+    .with("Fire", () => "火")
+    .with("Water", () => "水")
+    .with("Wind", () => "風")
+    .with("Light", () => "光")
+    .with("Dark", () => "闇")
+    .exhaustive();
+  const second = match(kind as unknown as ElementalKind)
+    .with("Stimulation", () => ":")
+    .with("Spread", () => "拡:")
+    .with("Strengthen", () => "強:")
+    .with("Weaken", () => "弱:")
+    .exhaustive();
+  return `${first}${second}`;
+}
+
+export function allOtherSkillSearch(): OtherSkillSearch[] {
+  return [
+    "charge",
+    "counter",
+    "heal",
+    ...elementalKind.flatMap((kind) =>
+      elements.map((element) => ({ kind, element })),
+    ),
+  ];
+}
+
 export type VanguardSupportSearch =
   | "NormalMatchPtUp"
   | "SpecialMatchPtUp"
@@ -73,3 +127,6 @@ export type RecoverySupportSearch =
 export function allRecoverySupportSearch(): RecoverySupportSearch[] {
   return ["RecoveryUp", ...allBasicStatusSearch(), ...allElementStatusSearch()];
 }
+
+export const otherSupportSearch = ["MpCostDown", "RangeUp"] as const;
+export type OtherSupportSearch = (typeof otherSupportSearch)[number];

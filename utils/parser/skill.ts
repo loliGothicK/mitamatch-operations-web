@@ -22,12 +22,19 @@ export const statusKind = [
 ] as const;
 export type StatusKind = (typeof statusKind)[number];
 
-export const elements = ["Fire", "Water", "Wind", "Light", "Dark"];
-type Element = (typeof elements)[number];
-type ElementalKind = "Stimulation" | "Spread" | "Strengthen" | "Weaken";
+export const elements = ["Fire", "Water", "Wind", "Light", "Dark"] as const;
+export type Elements = (typeof elements)[number];
 
-type Elemental = {
-  element: Element;
+export const elementalKind = [
+  "Stimulation",
+  "Spread",
+  "Strengthen",
+  "Weaken",
+] as const;
+export type ElementalKind = (typeof elementalKind)[number];
+
+export type Elemental = {
+  element: Elements;
   kind: ElementalKind;
 };
 export type Amount =
