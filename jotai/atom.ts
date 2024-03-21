@@ -13,7 +13,6 @@ import {
   BasicStatusSearch,
   ElementStatusSearch,
   LabelSearch,
-  OtherSkillPattern,
   OtherSkillSearch,
   OtherSupportSearch,
   RecoverySupportSearch,
