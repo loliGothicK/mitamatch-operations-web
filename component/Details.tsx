@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { deckAtom, legendaryDeckAtom, Memoria } from '@/jotai/atom';
+import { deckAtom, legendaryDeckAtom, Memoria } from '@/jotai/atoms';
 import { elementFilter, elementFilterMap } from '@/type/FilterType';
 import {
   parse_skill,

@@ -12,7 +12,7 @@ import {
   currentRoleFilterAtom,
   elementFilterAtom,
   roleFilterAtom,
-} from '@/jotai/atom';
+} from '@/jotai/atoms';
 import {
   elementFilter,
   elementFilterMap,

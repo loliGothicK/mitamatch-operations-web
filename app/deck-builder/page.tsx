@@ -57,7 +57,7 @@ import {
   sortKind,
   sortKindAtom,
   swAtom,
-} from '@/jotai/atom';
+} from '@/jotai/atoms';
 
 import { DndContext } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';

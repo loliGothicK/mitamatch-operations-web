@@ -24,7 +24,7 @@ import {
   recoverySupportFilterAtom,
   resetFilterAtom,
   vanguardSupportFilterAtom,
-} from '@/jotai/atom';
+} from '@/jotai/atoms';
 import {
   allAssistSupportSearch,
   allBasicStatusSearch,

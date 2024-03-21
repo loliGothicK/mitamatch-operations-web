@@ -181,6 +181,12 @@ export const filteredMemoriaAtom = atom((get) => {
         }
       });
 
+      const otherSupport = get(otherSupportFilterAtom).every((filter) => {
+        return support.kind.some((x) => {
+          return x === filter;
+        });
+      });
+
       return (
         sw &&
         role &&
@@ -192,6 +198,7 @@ export const filteredMemoriaAtom = atom((get) => {
         vanguardSupport &&
         assistSupport &&
         recoverySupport &&
+        otherSupport &&
         !get(deckAtom).some(({ name }) => memoria.name === name) &&
         !get(legendaryDeckAtom).some(({ name }) => memoria.name === name)
       );

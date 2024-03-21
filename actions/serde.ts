@@ -1,4 +1,4 @@
-import { MemoriaWithConcentration } from '@/jotai/atom';
+import { MemoriaWithConcentration } from '@/jotai/atoms';
 import { data } from '@/public/memoria.json';
 
 export function encodeDeck(
