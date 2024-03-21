@@ -620,7 +620,7 @@ function Source() {
       alignItems={'center'}
       minHeight={'70vh'}
     >
-      <Grid direction="row" spacing={2} minHeight={'60vh'} minWidth={'100%'}>
+      <Grid minHeight={'60vh'} minWidth={'100%'}>
         <ToggleButtons />
         <FilterModal />
         <SearchModal />

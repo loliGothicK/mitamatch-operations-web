@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 
 import { parse_skill } from '@/parser/skill';
 import { parse_support } from '@/parser/support';
-import { data } from '@/public/memoria.json';
+import memoriaData from '@/public/memoria.json';
 import {
   elementFilter,
   elementFilterMap,
@@ -23,7 +23,7 @@ import {
 
 import { match } from 'ts-pattern';
 
-export type Memoria = (typeof data)[0];
+export type Memoria = (typeof memoriaData.data)[0];
 export type MemoriaWithConcentration = Memoria & { concentration?: number };
 
 export const sortKind = [
@@ -38,7 +38,6 @@ export const sortKind = [
 ] as const;
 export type SortKind = (typeof sortKind)[number];
 
-export const memoriaAtom = atom<Memoria[]>(() => data);
 export const legendaryDeckAtom = atom<MemoriaWithConcentration[]>([]);
 export const deckAtom = atom<MemoriaWithConcentration[]>([]);
 export const swAtom = atom<'sword' | 'shield'>('shield');
@@ -85,7 +84,7 @@ export const resetFilterAtom = atom(null, (_, set) => {
 export const sortKindAtom = atom<SortKind>('ID');
 
 export const filteredMemoriaAtom = atom((get) => {
-  return get(memoriaAtom)
+  return memoriaData.data
     .filter((memoria) => {
       const sw = match(get(swAtom))
         .with('shield', () => ['支援', '妨害', '回復'].includes(memoria.kind))
