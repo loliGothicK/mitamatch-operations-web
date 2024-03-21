@@ -1,6 +1,7 @@
+import { memoriaList } from '@/domain/memoria';
+
 import { test } from '@jest/globals';
 
-import { memoriaList } from '@/domain/memoria';
 import { parse_skill } from './skill';
 
 test('support parser regex coverall', () => {
