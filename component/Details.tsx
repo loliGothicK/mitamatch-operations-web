@@ -192,7 +192,13 @@ export default function Details() {
   }
 
   return (
-    <Grid container spacing={2} alignItems={'left'} direction={'column'}>
+    <Grid
+      container
+      spacing={2}
+      alignItems={'left'}
+      direction={'column'}
+      sx={{ marginTop: 5 }}
+    >
       <Typography variant="body1">スキル</Typography>
       <Divider sx={{ margin: 2 }} />
       <Grid container spacing={1}>

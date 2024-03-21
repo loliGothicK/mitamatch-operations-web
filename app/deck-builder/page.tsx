@@ -14,8 +14,8 @@ import {
   FilterAlt,
   Remove,
   SearchOutlined,
-  ShareOutlined,
   Launch,
+  LinkSharp,
 } from '@mui/icons-material';
 import {
   Avatar,
@@ -30,6 +30,7 @@ import {
   Skeleton,
   Stack,
   Switch,
+  Tooltip,
 } from '@mui/material';
 import Box from '@mui/material/Box';
 import { blue, green, purple, red, yellow } from '@mui/material/colors';
@@ -657,9 +658,11 @@ function FilterModal() {
 
   return (
     <>
-      <Button onClick={handleOpen}>
-        <FilterAlt />
-      </Button>
+      <Tooltip title={'filter'} placement={'top'}>
+        <Button onClick={handleOpen}>
+          <FilterAlt />
+        </Button>
+      </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -686,9 +689,11 @@ function SearchModal() {
 
   return (
     <>
-      <Button onClick={handleOpen}>
-        <SearchOutlined />
-      </Button>
+      <Tooltip title={'search'} placement={'top'}>
+        <Button onClick={handleOpen}>
+          <SearchOutlined />
+        </Button>
+      </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -779,22 +784,26 @@ export default function DeckBuilder() {
             </Grid>
           </Grid>
           <Grid item xs={12} md={8} lg={6} alignItems={'center'}>
-            <Button
-              onClick={() => {
-                setDeck([]);
-                setLegendaryDeck([]);
-              }}
-            >
-              <ClearAll />
-            </Button>
-            <Link
-              href={`/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`}
-              onClick={shareHandler}
-            >
-              <IconButton aria-label="share">
-                <ShareOutlined />
-              </IconButton>
-            </Link>
+            <Tooltip title="clear all" placement={'top'}>
+              <Button
+                onClick={() => {
+                  setDeck([]);
+                  setLegendaryDeck([]);
+                }}
+              >
+                <ClearAll />
+              </Button>
+            </Tooltip>
+            <Tooltip title={'generate share link'} placement={'top'}>
+              <Link
+                href={`/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`}
+                onClick={shareHandler}
+              >
+                <IconButton aria-label="share">
+                  <LinkSharp />
+                </IconButton>
+              </Link>
+            </Tooltip>
             <Container
               maxWidth={false}
               sx={{
