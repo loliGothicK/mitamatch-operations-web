@@ -1,6 +1,17 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import { useAtom } from "jotai";
+import * as React from 'react';
+
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import { Button } from '@mui/material';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+
+import { CheckBoxItem } from '@/component/CheckBoxItem';
+import {
+  intoStatusPattern,
+  statusPatternToJapanese,
+} from '@/component/Details';
 import {
   assistSupportFilterAtom,
   basicStatusFilterAtom,
@@ -11,7 +22,7 @@ import {
   recoverySupportFilterAtom,
   resetFilterAtom,
   vanguardSupportFilterAtom,
-} from "@/jotai/atom";
+} from '@/jotai/atom';
 import {
   allAssistSupportSearch,
   allBasicStatusSearch,
@@ -23,23 +34,15 @@ import {
   intoElementalSkillPattern,
   labelSearch,
   otherSupportSearch,
-} from "@/type/SearchType";
-import { CheckBoxItem } from "@/component/CheckBoxItem";
-import Tab from "@mui/material/Tab";
-import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import {
-  intoStatusPattern,
-  statusPatternToJapanese,
-} from "@/component/Details";
-import { Button } from "@mui/material";
+} from '@/type/SearchType';
+
+import { useAtom } from 'jotai';
 
 function LabelCheckbox() {
   const [filter, setFilter] = useAtom(labelFilterAtom);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {labelSearch.map((flag) => {
         return (
           <CheckBoxItem
@@ -66,7 +69,7 @@ function BasicStatusCheckbox() {
   const [filter, setFilter] = useAtom(basicStatusFilterAtom);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {allBasicStatusSearch().map((flag) => {
         return (
           <CheckBoxItem
@@ -101,7 +104,7 @@ function ElementStatusCheckbox() {
   const [filter, setFilter] = useAtom(elementStatusFilterAtom);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {allElementStatusSearch().map((flag) => {
         return (
           <CheckBoxItem
@@ -136,18 +139,18 @@ function OtherSkillCheckbox() {
   const [filter, setFilter] = useAtom(otherSkillFilterAtom);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {allOtherSkillSearch().map((flag) => {
-        if (typeof flag === "string") {
+        if (typeof flag === 'string') {
           return (
             <CheckBoxItem
               key={flag}
               name={
-                flag === "charge"
-                  ? "チャージ"
-                  : flag === "counter"
-                    ? "カウンター"
-                    : "ヒール"
+                flag === 'charge'
+                  ? 'チャージ'
+                  : flag === 'counter'
+                    ? 'カウンター'
+                    : 'ヒール'
               }
               checked={filter.includes(flag)}
               handleChange={() => {
@@ -170,7 +173,7 @@ function OtherSkillCheckbox() {
               )}
               checked={filter.some(
                 (v) =>
-                  typeof v !== "string" &&
+                  typeof v !== 'string' &&
                   v.element === flag.element &&
                   v.kind === flag.kind,
               )}
@@ -179,14 +182,14 @@ function OtherSkillCheckbox() {
                   if (
                     filter.some(
                       (v) =>
-                        typeof v !== "string" &&
+                        typeof v !== 'string' &&
                         v.element === flag.element &&
                         v.kind === flag.kind,
                     )
                   ) {
                     return prev.filter(
                       (v) =>
-                        typeof v !== "string" &&
+                        typeof v !== 'string' &&
                         (v.element !== flag.element || v.kind !== flag.kind),
                     );
                   } else {
@@ -206,18 +209,18 @@ export function VanguardSupportCheckbox() {
   const [filter, setFilter] = useAtom(vanguardSupportFilterAtom);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {allVanguardSupportSearch().map((flag) => {
-        if (typeof flag === "string") {
+        if (typeof flag === 'string') {
           return (
             <CheckBoxItem
               key={flag}
               name={
-                flag === "NormalMatchPtUp"
-                  ? "獲得マッチPtUP/通常単体"
-                  : flag === "SpecialMatchPtUp"
-                    ? "獲得マッチPtUP/特殊単体"
-                    : "DamageUp"
+                flag === 'NormalMatchPtUp'
+                  ? '獲得マッチPtUP/通常単体'
+                  : flag === 'SpecialMatchPtUp'
+                    ? '獲得マッチPtUP/特殊単体'
+                    : 'DamageUp'
               }
               checked={filter.includes(flag)}
               handleChange={() => {
@@ -238,7 +241,7 @@ export function VanguardSupportCheckbox() {
               name={statusPatternToJapanese(intoStatusPattern(flag))}
               checked={filter.some(
                 (v) =>
-                  typeof v !== "string" &&
+                  typeof v !== 'string' &&
                   v.status === flag.status &&
                   v.upDown === flag.upDown,
               )}
@@ -247,14 +250,14 @@ export function VanguardSupportCheckbox() {
                   if (
                     filter.some(
                       (v) =>
-                        typeof v !== "string" &&
+                        typeof v !== 'string' &&
                         v.status === flag.status &&
                         v.upDown === flag.upDown,
                     )
                   ) {
                     return prev.filter(
                       (v) =>
-                        typeof v !== "string" &&
+                        typeof v !== 'string' &&
                         (v.status !== flag.status || v.upDown !== flag.upDown),
                     );
                   } else {
@@ -274,13 +277,13 @@ export function AssistSupportCheckbox() {
   const [filter, setFilter] = useAtom(assistSupportFilterAtom);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {allAssistSupportSearch().map((flag) => {
-        if (typeof flag === "string") {
+        if (typeof flag === 'string') {
           return (
             <CheckBoxItem
               key={flag}
-              name={"支援UP"}
+              name={'支援UP'}
               checked={filter.includes(flag)}
               handleChange={() => {
                 setFilter((prev) => {
@@ -300,7 +303,7 @@ export function AssistSupportCheckbox() {
               name={statusPatternToJapanese(intoStatusPattern(flag))}
               checked={filter.some(
                 (v) =>
-                  typeof v !== "string" &&
+                  typeof v !== 'string' &&
                   v.status === flag.status &&
                   v.upDown === flag.upDown,
               )}
@@ -309,14 +312,14 @@ export function AssistSupportCheckbox() {
                   if (
                     filter.some(
                       (v) =>
-                        typeof v !== "string" &&
+                        typeof v !== 'string' &&
                         v.status === flag.status &&
                         v.upDown === flag.upDown,
                     )
                   ) {
                     return prev.filter(
                       (v) =>
-                        typeof v !== "string" &&
+                        typeof v !== 'string' &&
                         (v.status !== flag.status || v.upDown !== flag.upDown),
                     );
                   } else {
@@ -336,13 +339,13 @@ export function RecoverySupportCheckbox() {
   const [filter, setFilter] = useAtom(recoverySupportFilterAtom);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {allRecoverySupportSearch().map((flag) => {
-        if (typeof flag === "string") {
+        if (typeof flag === 'string') {
           return (
             <CheckBoxItem
               key={flag}
-              name={"回復UP"}
+              name={'回復UP'}
               checked={filter.includes(flag)}
               handleChange={() => {
                 setFilter((prev) => {
@@ -362,7 +365,7 @@ export function RecoverySupportCheckbox() {
               name={statusPatternToJapanese(intoStatusPattern(flag))}
               checked={filter.some(
                 (v) =>
-                  typeof v !== "string" &&
+                  typeof v !== 'string' &&
                   v.status === flag.status &&
                   v.upDown === flag.upDown,
               )}
@@ -371,14 +374,14 @@ export function RecoverySupportCheckbox() {
                   if (
                     filter.some(
                       (v) =>
-                        typeof v !== "string" &&
+                        typeof v !== 'string' &&
                         v.status === flag.status &&
                         v.upDown === flag.upDown,
                     )
                   ) {
                     return prev.filter(
                       (v) =>
-                        typeof v !== "string" &&
+                        typeof v !== 'string' &&
                         (v.status !== flag.status || v.upDown !== flag.upDown),
                     );
                   } else {
@@ -398,12 +401,12 @@ export function OtherSupportCheckbox() {
   const [filter, setFilter] = useAtom(otherSupportFilterAtom);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       {otherSupportSearch.map((flag) => {
         return (
           <CheckBoxItem
             key={flag}
-            name={flag === "MpCostDown" ? "MP消費DOWN" : "効果範囲+1"}
+            name={flag === 'MpCostDown' ? 'MP消費DOWN' : '効果範囲+1'}
             checked={filter.includes(flag)}
             handleChange={() => {
               setFilter((prev) => {
@@ -422,20 +425,20 @@ export function OtherSupportCheckbox() {
 }
 
 export default function Search() {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState('1');
   const [_, resetFilters] = useAtom(resetFilterAtom);
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
   return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
+    <Box sx={{ width: '100%', typography: 'body1' }}>
       <Button onClick={resetFilters}>リセット</Button>
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList
             onChange={handleChange}
-            variant={"scrollable"}
+            variant={'scrollable'}
             scrollButtons="auto"
           >
             <Tab label="ラベル" value="1" />

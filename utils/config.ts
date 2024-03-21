@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 const envSchema = z.object({
   CLIENT_ID: z.string().regex(/^\d+$/),

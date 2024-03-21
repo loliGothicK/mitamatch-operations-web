@@ -1,21 +1,24 @@
-"use client";
-import { useAtom } from "jotai";
-import { deckAtom, legendaryDeckAtom, Memoria } from "@/jotai/atom";
-import { Lens } from "monocle-ts";
+'use client';
+
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+
+import { deckAtom, legendaryDeckAtom, Memoria } from '@/jotai/atom';
+import { elementFilter, elementFilterMap } from '@/type/FilterType';
 import {
   parse_skill,
   Status,
   StatusKind,
   statusKind,
-} from "@/utils/parser/skill";
-import { parse_support, SupportKind } from "@/utils/parser/support";
-import Grid from "@mui/material/Grid";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import { elementFilter, elementFilterMap } from "@/type/FilterType";
-import { match } from "ts-pattern";
+} from '@/utils/parser/skill';
+import { parse_support, SupportKind } from '@/utils/parser/support';
 
-type UpDown = "UP" | "DOWN";
+import { useAtom } from 'jotai';
+import { Lens } from 'monocle-ts';
+import { match } from 'ts-pattern';
+
+type UpDown = 'UP' | 'DOWN';
 type StatusPattern = `${StatusKind}/${UpDown}`;
 const statusPattern: StatusPattern[] = statusKind.flatMap((s) => {
   return [`${s}/UP`, `${s}/DOWN`] as StatusPattern[];
@@ -32,57 +35,57 @@ export function intoStatusPattern({
 }
 
 export function statusPatternToJapanese(pattern: StatusPattern): string {
-  const [status, upDown] = pattern.split("/") as [StatusKind, UpDown];
+  const [status, upDown] = pattern.split('/') as [StatusKind, UpDown];
   return match(status)
-    .with("ATK", () => `攻${upDown}`)
-    .with("DEF", () => `防${upDown}`)
-    .with("Sp.ATK", () => `特攻${upDown}`)
-    .with("Sp.DEF", () => `特防${upDown}`)
-    .with("Life", () => `HP${upDown}`)
-    .with("Fire ATK", () => `火攻${upDown}`)
-    .with("Fire DEF", () => `火防${upDown}`)
-    .with("Water ATK", () => `水攻${upDown}`)
-    .with("Water DEF", () => `水防${upDown}`)
-    .with("Wind ATK", () => `風攻${upDown}`)
-    .with("Wind DEF", () => `風防${upDown}`)
-    .with("Light ATK", () => `光攻${upDown}`)
-    .with("Light DEF", () => `光防${upDown}`)
-    .with("Dark ATK", () => `闇攻${upDown}`)
-    .with("Dark DEF", () => `闇防${upDown}`)
+    .with('ATK', () => `攻${upDown}`)
+    .with('DEF', () => `防${upDown}`)
+    .with('Sp.ATK', () => `特攻${upDown}`)
+    .with('Sp.DEF', () => `特防${upDown}`)
+    .with('Life', () => `HP${upDown}`)
+    .with('Fire ATK', () => `火攻${upDown}`)
+    .with('Fire DEF', () => `火防${upDown}`)
+    .with('Water ATK', () => `水攻${upDown}`)
+    .with('Water DEF', () => `水防${upDown}`)
+    .with('Wind ATK', () => `風攻${upDown}`)
+    .with('Wind DEF', () => `風防${upDown}`)
+    .with('Light ATK', () => `光攻${upDown}`)
+    .with('Light DEF', () => `光防${upDown}`)
+    .with('Dark ATK', () => `闇攻${upDown}`)
+    .with('Dark DEF', () => `闇防${upDown}`)
     .exhaustive();
 }
 
 type SupportPattern =
   | `${Exclude<
       StatusKind,
-      "Life" | "Light ATK" | "Light DEF" | "Dark ATK" | "Dark DEF"
+      'Life' | 'Light ATK' | 'Light DEF' | 'Dark ATK' | 'Dark DEF'
     >}/${UpDown}`
-  | "DamageUp"
-  | "SupportUp"
-  | "RecoveryUp"
-  | "NormalMatchPtUp"
-  | "SpecialMatchPtUp"
-  | "MpCostDown"
-  | "RangeUp";
+  | 'DamageUp'
+  | 'SupportUp'
+  | 'RecoveryUp'
+  | 'NormalMatchPtUp'
+  | 'SpecialMatchPtUp'
+  | 'MpCostDown'
+  | 'RangeUp';
 const supportPattern: SupportPattern[] = [
-  "DamageUp",
-  "SupportUp",
-  "RecoveryUp",
-  "NormalMatchPtUp",
-  "SpecialMatchPtUp",
-  "MpCostDown",
-  "RangeUp",
+  'DamageUp',
+  'SupportUp',
+  'RecoveryUp',
+  'NormalMatchPtUp',
+  'SpecialMatchPtUp',
+  'MpCostDown',
+  'RangeUp',
   ...[
-    "ATK",
-    "DEF",
-    "Sp.ATK",
-    "Sp.DEF",
-    "Fire ATK",
-    "Fire DEF",
-    "Water ATK",
-    "Water DEF",
-    "Wind ATK",
-    "Wind DEF",
+    'ATK',
+    'DEF',
+    'Sp.ATK',
+    'Sp.DEF',
+    'Fire ATK',
+    'Fire DEF',
+    'Water ATK',
+    'Water DEF',
+    'Wind ATK',
+    'Wind DEF',
   ].flatMap((s) => {
     return [`${s}/UP`, `${s}/DOWN`] as SupportPattern[];
   }),
@@ -90,45 +93,45 @@ const supportPattern: SupportPattern[] = [
 
 function supportPatternToJapanese(pattern: SupportPattern): string {
   return match(pattern)
-    .with("ATK/UP", () => `攻UP`)
-    .with("DEF/UP", () => `防UP`)
-    .with("Sp.ATK/UP", () => `特攻UP`)
-    .with("Sp.DEF/UP", () => `特防UP`)
-    .with("ATK/DOWN", () => `攻DOWN`)
-    .with("DEF/DOWN", () => `防DOWN`)
-    .with("Sp.ATK/DOWN", () => `特攻DOWN`)
-    .with("Sp.DEF/DOWN", () => `特防DOWN`)
-    .with("Fire ATK/UP", () => `火攻UP`)
-    .with("Fire DEF/UP", () => `火防UP`)
-    .with("Water ATK/UP", () => `水攻UP`)
-    .with("Water DEF/UP", () => `水防UP`)
-    .with("Wind ATK/UP", () => `風攻UP`)
-    .with("Wind DEF/UP", () => `風防UP`)
-    .with("Fire ATK/DOWN", () => `火攻DOWN`)
-    .with("Fire DEF/DOWN", () => `火防DOWN`)
-    .with("Water ATK/DOWN", () => `水攻DOWN`)
-    .with("Water DEF/DOWN", () => `水防DOWN`)
-    .with("Wind ATK/DOWN", () => `風攻DOWN`)
-    .with("Wind DEF/DOWN", () => `風防DOWN`)
-    .with("DamageUp", () => "ダメージUP")
-    .with("SupportUp", () => "支援UP")
-    .with("RecoveryUp", () => "回復UP")
-    .with("NormalMatchPtUp", () => "PtUP/通")
-    .with("SpecialMatchPtUp", () => "PtUP/特")
-    .with("MpCostDown", () => "MP")
-    .with("RangeUp", () => "範囲+1")
+    .with('ATK/UP', () => `攻UP`)
+    .with('DEF/UP', () => `防UP`)
+    .with('Sp.ATK/UP', () => `特攻UP`)
+    .with('Sp.DEF/UP', () => `特防UP`)
+    .with('ATK/DOWN', () => `攻DOWN`)
+    .with('DEF/DOWN', () => `防DOWN`)
+    .with('Sp.ATK/DOWN', () => `特攻DOWN`)
+    .with('Sp.DEF/DOWN', () => `特防DOWN`)
+    .with('Fire ATK/UP', () => `火攻UP`)
+    .with('Fire DEF/UP', () => `火防UP`)
+    .with('Water ATK/UP', () => `水攻UP`)
+    .with('Water DEF/UP', () => `水防UP`)
+    .with('Wind ATK/UP', () => `風攻UP`)
+    .with('Wind DEF/UP', () => `風防UP`)
+    .with('Fire ATK/DOWN', () => `火攻DOWN`)
+    .with('Fire DEF/DOWN', () => `火防DOWN`)
+    .with('Water ATK/DOWN', () => `水攻DOWN`)
+    .with('Water DEF/DOWN', () => `水防DOWN`)
+    .with('Wind ATK/DOWN', () => `風攻DOWN`)
+    .with('Wind DEF/DOWN', () => `風防DOWN`)
+    .with('DamageUp', () => 'ダメージUP')
+    .with('SupportUp', () => '支援UP')
+    .with('RecoveryUp', () => '回復UP')
+    .with('NormalMatchPtUp', () => 'PtUP/通')
+    .with('SpecialMatchPtUp', () => 'PtUP/特')
+    .with('MpCostDown', () => 'MP')
+    .with('RangeUp', () => '範囲+1')
     .exhaustive();
 }
 
 export function intoSupportPattern(kind: SupportKind): SupportPattern {
   return match(kind)
-    .with("DamageUp", () => "DamageUp")
-    .with("SupportUp", () => "SupportUp")
-    .with("RecoveryUp", () => "RecoveryUp")
-    .with("NormalMatchPtUp", () => "NormalMatchPtUp")
-    .with("SpecialMatchPtUp", () => "SpecialMatchPtUp")
-    .with("MpCostDown", () => "MpCostDown")
-    .with("RangeUp", () => "RangeUp")
+    .with('DamageUp', () => 'DamageUp')
+    .with('SupportUp', () => 'SupportUp')
+    .with('RecoveryUp', () => 'RecoveryUp')
+    .with('NormalMatchPtUp', () => 'NormalMatchPtUp')
+    .with('SpecialMatchPtUp', () => 'SpecialMatchPtUp')
+    .with('MpCostDown', () => 'MpCostDown')
+    .with('RangeUp', () => 'RangeUp')
     .otherwise(() => intoStatusPattern(kind as Status)) as SupportPattern;
 }
 
@@ -136,12 +139,12 @@ export default function Details() {
   const [deck] = useAtom(deckAtom);
   const [legendaryDeck] = useAtom(legendaryDeckAtom);
 
-  const skillName = Lens.fromPath<Memoria>()(["skill", "name"]);
-  const skillDescription = Lens.fromPath<Memoria>()(["skill", "description"]);
-  const supportName = Lens.fromPath<Memoria>()(["support", "name"]);
+  const skillName = Lens.fromPath<Memoria>()(['skill', 'name']);
+  const skillDescription = Lens.fromPath<Memoria>()(['skill', 'description']);
+  const supportName = Lens.fromPath<Memoria>()(['support', 'name']);
   const supportDescription = Lens.fromPath<Memoria>()([
-    "support",
-    "description",
+    'support',
+    'description',
   ]);
 
   const skills = [...deck, ...legendaryDeck].map((memoria) => {
@@ -188,7 +191,7 @@ export default function Details() {
   }
 
   return (
-    <Grid container spacing={2} alignItems={"left"} direction={"column"}>
+    <Grid container spacing={2} alignItems={'left'} direction={'column'}>
       <Typography variant="body1">スキル</Typography>
       <Divider sx={{ margin: 2 }} />
       <Grid container spacing={1}>
@@ -201,7 +204,7 @@ export default function Details() {
               return (
                 <Grid item xs={4} key={index}>
                   <Typography fontSize={10}>
-                    {statusPatternToJapanese(pattern)} :{" "}
+                    {statusPatternToJapanese(pattern)} :{' '}
                     {skillAggregate.get(pattern)}
                   </Typography>
                 </Grid>
@@ -223,7 +226,7 @@ export default function Details() {
               return (
                 <Grid item xs={4} key={index}>
                   <Typography fontSize={10}>
-                    {supportPatternToJapanese(pattern)} :{" "}
+                    {supportPatternToJapanese(pattern)} :{' '}
                     {supportAggregate.get(pattern)}
                   </Typography>
                 </Grid>
@@ -262,13 +265,13 @@ export default function Details() {
           <></>
         ) : (
           [
-            "通常単体",
-            "通常範囲",
-            "特殊単体",
-            "特殊範囲",
-            "支援",
-            "妨害",
-            "回復",
+            '通常単体',
+            '通常範囲',
+            '特殊単体',
+            '特殊範囲',
+            '支援',
+            '妨害',
+            '回復',
           ]
             .filter((kind) => kindAggregate.get(kind) != undefined)
             .map((kind) => {

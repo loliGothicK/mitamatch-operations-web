@@ -1,8 +1,19 @@
-"use client";
-import { Layout } from "@/component/Dashboard";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+'use client';
+
+import { useEffect, useState } from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
+
+import {
+  Add,
+  ClearAll,
+  FilterAlt,
+  Remove,
+  SearchOutlined,
+  ShareOutlined,
+} from '@mui/icons-material';
 import {
   Avatar,
   Button,
@@ -16,22 +27,24 @@ import {
   MenuItem,
   Skeleton,
   Switch,
-} from "@mui/material";
-import Image from "next/image";
-import Divider from "@mui/material/Divider";
-import {
-  Add,
-  ClearAll,
-  FilterAlt,
-  Remove,
-  SearchOutlined,
-  ShareOutlined,
-} from "@mui/icons-material";
-import IconButton from "@mui/material/IconButton";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { useAtom } from "jotai";
+} from '@mui/material';
+import Box from '@mui/material/Box';
+import { blue, green, purple, red, yellow } from '@mui/material/colors';
+import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
+
+import { decodeDeck, encodeDeck } from '@/actions/serde';
+import { Layout } from '@/component/Dashboard';
+import Details from '@/component/Details';
+import Filter from '@/component/Filter';
+import Search from '@/component/Search';
 import {
   deckAtom,
   filteredMemoriaAtom,
@@ -41,25 +54,17 @@ import {
   sortKind,
   sortKindAtom,
   swAtom,
-} from "@/jotai/atom";
-import Filter from "@/component/Filter";
-import { useEffect, useState } from "react";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Search from "@/component/Search";
-import Details from "@/component/Details";
-import { decodeDeck, encodeDeck } from "@/actions/serde";
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
-import { match } from "ts-pattern";
-import { blue, green, purple, red, yellow } from "@mui/material/colors";
-import { AutoSizer, List } from "react-virtualized";
-import "react-virtualized/styles.css";
-import Cookies from "js-cookie";
-import { arrayMove, SortableContext, useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { DndContext } from "@dnd-kit/core";
-import Box from "@mui/material/Box";
-import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
+} from '@/jotai/atom';
+
+import { DndContext } from '@dnd-kit/core';
+import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import { useAtom } from 'jotai';
+import Cookies from 'js-cookie';
+import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
+import { AutoSizer, List } from 'react-virtualized';
+import 'react-virtualized/styles.css';
+import { match } from 'ts-pattern';
 
 function Icon({
   kind,
@@ -71,101 +76,101 @@ function Icon({
   position?: number;
 }) {
   const kindImage = match(kind)
-    .with("通常単体", () => {
+    .with('通常単体', () => {
       return (
-        <Image src={"/NormalSingle.png"} alt={"kind"} width={25} height={25} />
+        <Image src={'/NormalSingle.png'} alt={'kind'} width={25} height={25} />
       );
     })
-    .with("通常範囲", () => {
+    .with('通常範囲', () => {
       return (
-        <Image src={"/NormalRange.png"} alt={"kind"} width={25} height={25} />
+        <Image src={'/NormalRange.png'} alt={'kind'} width={25} height={25} />
       );
     })
-    .with("特殊単体", () => {
+    .with('特殊単体', () => {
       return (
-        <Image src={"/SpecialSingle.png"} alt={"kind"} width={25} height={25} />
+        <Image src={'/SpecialSingle.png'} alt={'kind'} width={25} height={25} />
       );
     })
-    .with("特殊範囲", () => {
+    .with('特殊範囲', () => {
       return (
-        <Image src={"/SpecialRange.png"} alt={"kind"} width={25} height={25} />
+        <Image src={'/SpecialRange.png'} alt={'kind'} width={25} height={25} />
       );
     })
-    .with("支援", () => {
-      return <Image src={"/Assist.png"} alt={"kind"} width={25} height={25} />;
+    .with('支援', () => {
+      return <Image src={'/Assist.png'} alt={'kind'} width={25} height={25} />;
     })
-    .with("妨害", () => {
+    .with('妨害', () => {
       return (
-        <Image src={"/Interference.png"} alt={"kind"} width={25} height={25} />
+        <Image src={'/Interference.png'} alt={'kind'} width={25} height={25} />
       );
     })
-    .with("回復", () => {
+    .with('回復', () => {
       return (
-        <Image src={"/Recovery.png"} alt={"kind"} width={25} height={25} />
+        <Image src={'/Recovery.png'} alt={'kind'} width={25} height={25} />
       );
     })
     .run();
 
   return match(element)
-    .with("火", () => (
+    .with('火', () => (
       <Avatar
         sx={{
           width: 30,
           height: 30,
           left: position,
-          position: "absolute",
+          position: 'absolute',
           bgcolor: red[500],
         }}
       >
         {kindImage}
       </Avatar>
     ))
-    .with("水", () => (
+    .with('水', () => (
       <Avatar
         sx={{
           width: 30,
           height: 30,
           left: position,
-          position: "absolute",
+          position: 'absolute',
           bgcolor: blue[500],
         }}
       >
         {kindImage}
       </Avatar>
     ))
-    .with("風", () => (
+    .with('風', () => (
       <Avatar
         sx={{
           width: 30,
           height: 30,
           left: position,
-          position: "absolute",
+          position: 'absolute',
           bgcolor: green[500],
         }}
       >
         {kindImage}
       </Avatar>
     ))
-    .with("光", () => (
+    .with('光', () => (
       <Avatar
         sx={{
           width: 30,
           height: 30,
           left: position,
-          position: "absolute",
+          position: 'absolute',
           bgcolor: yellow[500],
         }}
       >
         {kindImage}
       </Avatar>
     ))
-    .with("闇", () => (
+    .with('闇', () => (
       <Avatar
         sx={{
           width: 30,
           height: 30,
           left: position,
-          position: "absolute",
+          position: 'absolute',
           bgcolor: purple[500],
         }}
       >
@@ -188,7 +193,7 @@ function Concentration({
       sx={{
         top: 25,
         left: 60,
-        position: "absolute",
+        position: 'absolute',
       }}
     >
       {concentration == 4 ? (
@@ -196,7 +201,7 @@ function Concentration({
           variant="body2"
           color="white"
           sx={{
-            position: "absolute",
+            position: 'absolute',
           }}
         >
           MAX
@@ -206,15 +211,15 @@ function Concentration({
           variant="body2"
           color="white"
           sx={{
-            position: "absolute",
+            position: 'absolute',
           }}
         >
           {concentration}
         </Typography>
       )}
       <Image
-        src={"/Concentration.png"}
-        alt={"concentration"}
+        src={'/Concentration.png'}
+        alt={'concentration'}
         width={30}
         height={30}
       />
@@ -266,7 +271,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
       });
     });
     Cookies.set(
-      "deck",
+      'deck',
       encodeDeck(
         sw,
         deck.map((memoria) => {
@@ -289,7 +294,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     <Grid item key={id}>
       {!isLoaded && <Skeleton variant="rectangular" width={100} height={100} />}
       <ImageListItem>
-        <Box display={isSorting ? "none" : "inline"}>
+        <Box display={isSorting ? 'none' : 'inline'}>
           <Icon kind={memoria.kind} element={memoria.element} position={70} />
           <Concentration
             concentration={concentrationValue}
@@ -316,20 +321,20 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
           />
         </div>
         <ImageListItemBar
-          sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
-          position={"top"}
-          actionPosition={"right"}
+          sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
+          position={'top'}
+          actionPosition={'right'}
         />
-        <Box display={isSorting ? "none" : "inline"}>
+        <Box display={isSorting ? 'none' : 'inline'}>
           <ImageListItemBar
-            sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
-            position={"top"}
-            actionPosition={"left"}
+            sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
+            position={'top'}
+            actionPosition={'left'}
             actionIcon={
               <IconButton
                 sx={{
-                  color: "rgba(255, 50, 50, 0.9)",
-                  bgcolor: "rgba(0, 0, 0, 0.2)",
+                  color: 'rgba(255, 50, 50, 0.9)',
+                  bgcolor: 'rgba(0, 0, 0, 0.2)',
                   zIndex: Number.POSITIVE_INFINITY,
                 }}
                 aria-label={`remove ${name}`}
@@ -341,7 +346,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
                     prev.filter((memoria) => memoria.name !== name),
                   );
                   Cookies.set(
-                    "deck",
+                    'deck',
                     encodeDeck(
                       sw,
                       deck.filter((memoria) => memoria.name !== name),
@@ -382,8 +387,8 @@ function Deck() {
       <SortableContext items={deck}>
         <Grid
           container
-          direction={"row"}
-          alignItems={"left"}
+          direction={'row'}
+          alignItems={'left'}
           spacing={2}
           sx={{ maxWidth: 600, minHeight: 100 }}
         >
@@ -418,8 +423,8 @@ function LegendaryDeck() {
       <SortableContext items={deck}>
         <Grid
           container
-          direction={"row"}
-          alignItems={"left"}
+          direction={'row'}
+          alignItems={'left'}
           spacing={2}
           sx={{ maxWidth: 600, minHeight: 100 }}
         >
@@ -453,17 +458,17 @@ function VirtualizedList() {
                 key={key}
                 style={style}
                 disablePadding
-                sx={{ bgcolor: "grey" }}
+                sx={{ bgcolor: 'grey' }}
               >
                 <IconButton
                   edge="start"
                   aria-label="comments"
                   sx={{ paddingLeft: 3, paddingRight: 0 }}
                   onClick={() => {
-                    if (memoria[index].labels.includes("legendary")) {
+                    if (memoria[index].labels.includes('legendary')) {
                       setLegendaryDeck((prev) => [...prev, memoria[index]]);
                       Cookies.set(
-                        "deck",
+                        'deck',
                         encodeDeck(sw, deck, [
                           ...legendaryDeck,
                           memoria[index],
@@ -472,7 +477,7 @@ function VirtualizedList() {
                     } else {
                       setDeck((prev) => [...prev, memoria[index]]);
                       Cookies.set(
-                        "deck",
+                        'deck',
                         encodeDeck(
                           sw,
                           [...deck, memoria[index]],
@@ -515,7 +520,7 @@ function VirtualizedList() {
                           component="span"
                           fontWeight="bold"
                           fontSize={12}
-                          sx={{ display: "block" }}
+                          sx={{ display: 'block' }}
                           color="text.primary"
                         >
                           {memoria[index].skill.name}
@@ -525,7 +530,7 @@ function VirtualizedList() {
                           component="span"
                           fontWeight="bold"
                           fontSize={12}
-                          sx={{ display: "block" }}
+                          sx={{ display: 'block' }}
                           color="text.primary"
                         >
                           {memoria[index].support.name}
@@ -582,11 +587,11 @@ function Source() {
   return (
     <Grid
       container
-      direction={"column"}
-      alignItems={"center"}
-      minHeight={"70vh"}
+      direction={'column'}
+      alignItems={'center'}
+      minHeight={'70vh'}
     >
-      <Grid direction="row" spacing={2} minHeight={"60vh"} minWidth={"100%"}>
+      <Grid direction="row" spacing={2} minHeight={'60vh'} minWidth={'100%'}>
         <ToggleButtons />
         <FilterModal />
         <SearchModal />
@@ -605,20 +610,20 @@ function ToggleButtons() {
 
   return (
     <FormControlLabel
-      control={<Switch checked={sw === "shield"} />}
+      control={<Switch checked={sw === 'shield'} />}
       label="前衛 <=> 後衛"
       onChange={() => {
-        if (sw === "shield") {
-          setSw("sword");
+        if (sw === 'shield') {
+          setSw('sword');
           setRoleFilter([
-            "normal_single",
-            "normal_range",
-            "special_single",
-            "special_range",
+            'normal_single',
+            'normal_range',
+            'special_single',
+            'special_range',
           ]);
         } else {
-          setSw("shield");
-          setRoleFilter(["support", "interference", "recovery"]);
+          setSw('shield');
+          setRoleFilter(['support', 'interference', 'recovery']);
         }
         setDeck([]);
         setLegendaryDeck([]);
@@ -691,7 +696,7 @@ export default function DeckBuilder() {
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
   const [_, setRoleFilter] = useAtom(roleFilterAtom);
-  const value = params.get("deck");
+  const value = params.get('deck');
   const pathname = usePathname();
 
   const shareHandler = async () => {
@@ -699,9 +704,9 @@ export default function DeckBuilder() {
       await navigator.clipboard.writeText(
         `https://mitama.io/${pathname}?deck=${encodeDeck(sw, deck, legendaryDeck)}`,
       );
-      alert("クリップボードに保存しました。");
+      alert('クリップボードに保存しました。');
     } catch (error) {
-      alert("失敗しました。");
+      alert('失敗しました。');
     }
   };
 
@@ -710,30 +715,30 @@ export default function DeckBuilder() {
       const { sw, deck, legendaryDeck } = decodeDeck(value);
       setSw(sw);
       setRoleFilter(
-        sw === "shield"
-          ? ["support", "interference", "recovery"]
+        sw === 'shield'
+          ? ['support', 'interference', 'recovery']
           : [
-              "normal_single",
-              "normal_range",
-              "special_single",
-              "special_range",
+              'normal_single',
+              'normal_range',
+              'special_single',
+              'special_range',
             ],
       );
       setDeck(deck);
       setLegendaryDeck(legendaryDeck);
     } else {
-      const cookie = Cookies.get("deck");
+      const cookie = Cookies.get('deck');
       if (cookie) {
         const { sw, deck, legendaryDeck } = decodeDeck(cookie);
         setSw(sw);
         setRoleFilter(
-          sw === "shield"
-            ? ["support", "interference", "recovery"]
+          sw === 'shield'
+            ? ['support', 'interference', 'recovery']
             : [
-                "normal_single",
-                "normal_range",
-                "special_single",
-                "special_range",
+                'normal_single',
+                'normal_range',
+                'special_single',
+                'special_range',
               ],
         );
         setDeck(deck);
@@ -744,22 +749,22 @@ export default function DeckBuilder() {
 
   return (
     <Layout>
-      <Grid container direction={"row"} alignItems={"right"}>
+      <Grid container direction={'row'} alignItems={'right'}>
         <Grid
           container
           item
           spacing={2}
           xs={12}
-          direction={"row"}
-          alignItems={"left"}
+          direction={'row'}
+          alignItems={'left'}
           flexShrink={2}
         >
           <Grid item xs={12} md={4} lg={2}>
-            <Grid container direction={"column"} alignItems={"center"}>
+            <Grid container direction={'column'} alignItems={'center'}>
               <Details />
             </Grid>
           </Grid>
-          <Grid item xs={12} md={8} lg={6} alignItems={"center"}>
+          <Grid item xs={12} md={8} lg={6} alignItems={'center'}>
             <Button
               onClick={() => {
                 setDeck([]);
@@ -779,8 +784,8 @@ export default function DeckBuilder() {
             <Container
               maxWidth={false}
               sx={{
-                bgcolor: "grey",
-                minHeight: "60vh",
+                bgcolor: 'grey',
+                minHeight: '60vh',
                 maxWidth: 620,
                 paddingTop: 2,
                 paddingBottom: 2,

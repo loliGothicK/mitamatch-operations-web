@@ -1,3 +1,3 @@
-import { Provider } from 'jotai'
-import {ReactNode} from "react";
+import { ReactNode } from 'react';
 
+import { Provider } from 'jotai';

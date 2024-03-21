@@ -1,21 +1,24 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Grid from "@mui/material/Grid";
-import { useAtom } from "jotai";
+import * as React from 'react';
+
+import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Grid from '@mui/material/Grid';
+
+import { CheckBoxItem } from '@/component/CheckBoxItem';
 import {
-  roleFilterAtom,
-  elementFilterAtom,
   currentRoleFilterAtom,
-} from "@/jotai/atom";
+  elementFilterAtom,
+  roleFilterAtom,
+} from '@/jotai/atom';
 import {
   elementFilter,
   elementFilterMap,
   FilterType,
   roleFilterMap,
-} from "@/type/FilterType";
-import { CheckBoxItem } from "@/component/CheckBoxItem";
+} from '@/type/FilterType';
+
+import { useAtom } from 'jotai';
 
 function RoleCheckbox() {
   const [filter, setFilter] = useAtom(roleFilterAtom);
@@ -24,7 +27,7 @@ function RoleCheckbox() {
   return (
     <div>
       <FormControlLabel
-        label={"役割"}
+        label={'役割'}
         control={
           <Checkbox
             checked={filter.length === currentRoleFilter.length}
@@ -58,7 +61,7 @@ function RoleCheckbox() {
           />
         }
       />
-      <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
         {currentRoleFilter.map((flag) => {
           return (
             <CheckBoxItem
@@ -88,7 +91,7 @@ function ElementCheckbox() {
   return (
     <div>
       <FormControlLabel
-        label={"属性"}
+        label={'属性'}
         control={
           <Checkbox
             checked={filter.length === elementFilter.length}
@@ -114,7 +117,7 @@ function ElementCheckbox() {
           />
         }
       />
-      <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
         {elementFilter.map((flag) => {
           return (
             <CheckBoxItem

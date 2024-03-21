@@ -1,8 +1,8 @@
-import { MemoriaWithConcentration } from "@/jotai/atom";
-import { data } from "@/public/memoria.json";
+import { MemoriaWithConcentration } from '@/jotai/atom';
+import { data } from '@/public/memoria.json';
 
 export function encodeDeck(
-  sw: "sword" | "shield",
+  sw: 'sword' | 'shield',
   deck: MemoriaWithConcentration[],
   legendaryDeck: MemoriaWithConcentration[],
 ) {
@@ -21,7 +21,7 @@ export function encodeDeck(
 }
 
 export function decodeDeck(encoded: string): {
-  sw: "sword" | "shield";
+  sw: 'sword' | 'shield';
   deck: MemoriaWithConcentration[];
   legendaryDeck: MemoriaWithConcentration[];
 } {

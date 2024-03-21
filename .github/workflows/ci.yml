@@ -1,4 +1,4 @@
-name: Jest
+name: CI
 
 on:
   push:
@@ -26,5 +26,9 @@ jobs:
           cache-dependency-path: '**/package-lock.json'
       - name: Install packages
         run: npm ci
-      - name: Show coverage
+      - name: Format check
+        run: npm run fmt:check
+      - name: Lint check
+        run: npm run lint
+      - name: Test and Show coverage
         run: npm test -- --bail --maxWorkers=100% --watchAll=false --coverage

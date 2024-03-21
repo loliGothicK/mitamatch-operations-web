@@ -1,15 +1,17 @@
-import { Inter } from "next/font/google";
-import React from "react";
-import { Provider } from "jotai";
-import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import React from 'react';
 
-const inter = Inter({ subsets: ["latin"] });
+import { Inter } from 'next/font/google';
 
-const siteName = "Mitamatch Operations for Web";
-const description = "Mitamatch Operations の機能の一部がブラウザで使えます";
-const url = "https://mitama.io";
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Provider } from 'jotai';
+
+const inter = Inter({ subsets: ['latin'] });
+
+const siteName = 'Mitamatch Operations for Web';
+const description = 'Mitamatch Operations の機能の一部がブラウザで使えます';
+const url = 'https://mitama.io';
 
 export const metadata = {
   title: {
@@ -23,15 +25,15 @@ export const metadata = {
     description,
     url,
     siteName,
-    locale: "ja_JP",
-    type: "website",
+    locale: 'ja_JP',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: siteName,
     description,
-    site: "@mitama_rs",
-    creator: "@mitama_rs",
+    site: '@mitama_rs',
+    creator: '@mitama_rs',
   },
   alternates: {
     canonical: url,

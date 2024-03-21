@@ -1,23 +1,25 @@
-import * as React from "react";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import LayersIcon from "@mui/icons-material/Layers";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import Link from "next/link";
-import Typography from "@mui/material/Typography";
+import * as React from 'react';
+
+import Link from 'next/link';
+
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import LayersIcon from '@mui/icons-material/Layers';
+import PeopleIcon from '@mui/icons-material/People';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import Typography from '@mui/material/Typography';
 
 export const mainListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
       Menu
     </ListSubheader>
-    <Link href={"/"}>
+    <Link href={'/'}>
       <ListItemButton>
         <ListItemIcon>
           <DashboardIcon />
@@ -25,7 +27,7 @@ export const mainListItems = (
         <ListItemText primary="Dashboard" />
       </ListItemButton>
     </Link>
-    <Link href={"/deck-builder"}>
+    <Link href={'/deck-builder'}>
       <ListItemButton>
         <ListItemIcon>
           <ShoppingCartIcon />
@@ -38,8 +40,8 @@ export const mainListItems = (
 
 const updates = [
   {
-    name: "Mitamatch Operations for Web",
-    description: ["Deck Builder is now available (preview)."],
+    name: 'Mitamatch Operations for Web',
+    description: ['Deck Builder is now available (preview).'],
   },
 ];
 

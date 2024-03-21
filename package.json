@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "fmt": "prettier --write --ignore-path .gitignore ./**/*.{ts,tsx,css}",
+    "fmt:check": "prettier --check --ignore-path .gitignore ./**/*.{ts,tsx,css}",
     "test": "jest"
   },
   "dependencies": {
@@ -37,6 +39,7 @@
     "ts-pattern": "^5.0.8"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/jest": "^29.5.12",
     "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.6",
@@ -48,9 +51,10 @@
     "@types/react-window": "^1.8.8",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
+    "eslint-config-prettier": "^9.1.0",
     "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.2",
-    "prettier": "3.2.5",
+    "prettier": "^3.2.5",
     "ts-jest": "^29.1.2",
     "typescript": "^5",
     "zod": "^3.22.4"
