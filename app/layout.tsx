@@ -25,6 +25,9 @@ export const metadata = {
     title: siteName,
     description,
     url,
+    images: [
+      'https://raw.githubusercontent.com/loliGothicK/mitamatch-operations-web/master/public/opengraph-image.png',
+    ],
     siteName,
     locale: 'ja_JP',
     type: 'website',
@@ -33,6 +36,9 @@ export const metadata = {
     card: 'summary_large_image',
     title: siteName,
     description,
+    images: [
+      'https://raw.githubusercontent.com/loliGothicK/mitamatch-operations-web/master/public/opengraph-image.png',
+    ],
     site: '@mitama_rs',
     creator: '@mitama_rs',
   },
