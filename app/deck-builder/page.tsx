@@ -44,9 +44,9 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 
 import { decodeDeck, encodeDeck } from '@/actions/serde';
-import { Layout } from '@/component/Dashboard';
 import Details from '@/component/Details';
 import Filter from '@/component/Filter';
+import { Layout } from '@/component/Layout';
 import Search from '@/component/Search';
 import {
   deckAtom,

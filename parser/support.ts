@@ -1,4 +1,4 @@
-import { StatusKind } from '@/utils/parser/skill';
+import { StatusKind } from '@/parser/skill';
 
 import { match } from 'ts-pattern';
 

@@ -18,7 +18,7 @@ import {
   elementFilterMap,
   FilterType,
   roleFilterMap,
-} from '@/type/FilterType';
+} from '@/types/FilterType';
 
 function RoleCheckbox() {
   const [filter, setFilter] = useAtom(roleFilterAtom);

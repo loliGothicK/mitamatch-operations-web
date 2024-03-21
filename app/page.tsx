@@ -1,7 +1,12 @@
 'use client';
 
-import Dashboard from '@/component/Dashboard';
+import Home from '@/component/home';
+import { Layout } from '@/component/Layout';
 
 export default function Index() {
-  return <Dashboard />;
+  return (
+    <Layout>
+      <Home />
+    </Layout>
+  );
 }

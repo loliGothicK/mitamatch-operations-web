@@ -1,5 +1,7 @@
 import { atom } from 'jotai';
 
+import { parse_skill } from '@/parser/skill';
+import { parse_support } from '@/parser/support';
 import { data } from '@/public/memoria.json';
 import {
   elementFilter,
@@ -7,7 +9,7 @@ import {
   ElementFilterType,
   roleFilterMap,
   RoleFilterType,
-} from '@/type/FilterType';
+} from '@/types/FilterType';
 import {
   AssistSupportSearch,
   BasicStatusSearch,
@@ -17,9 +19,7 @@ import {
   OtherSupportSearch,
   RecoverySupportSearch,
   VanguardSupportSearch,
-} from '@/type/SearchType';
-import { parse_skill } from '@/utils/parser/skill';
-import { parse_support } from '@/utils/parser/support';
+} from '@/types/SearchType';
 
 import { match } from 'ts-pattern';
 

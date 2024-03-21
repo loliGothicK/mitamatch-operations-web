@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import Image from 'next/image';
-
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -10,19 +8,14 @@ import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import MuiDrawer from '@mui/material/Drawer';
-import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import Paper from '@mui/material/Paper';
 import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-import {
-  mainListItems,
-  UpdateListItems,
-} from '@/component/dashboard/listItems';
 import Footer from '@/component/Footer';
+import { mainListItems } from '@/component/home/listItems';
 
 const drawerWidth: number = 240;
 
@@ -75,60 +68,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const mdTheme = createTheme();
-
-function DashboardFragments() {
-  return (
-    <>
-      <Grid container spacing={3}>
-        {/* Chart */}
-        <Grid item xs={12} md={12} lg={12}>
-          <Paper
-            sx={{
-              p: 2,
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'column',
-              height: 320,
-              backgroundColor: 'midnightblue',
-            }}
-          >
-            <Container
-              maxWidth={'xs'}
-              sx={{ display: { xs: 'block', sm: 'none' } }}
-            >
-              <Image
-                src={'/MitamaLabLogo.png'}
-                alt={'logo'}
-                width={300}
-                height={300}
-              />
-            </Container>
-            <Container
-              maxWidth={'sm'}
-              sx={{ display: { xs: 'none', sm: 'block' } }}
-            >
-              <Image
-                src={'/MO_DARK.png'}
-                alt={'logo'}
-                width={900}
-                height={300}
-              />
-            </Container>
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-            <Typography variant="h6" gutterBottom component="div">
-              Recent Updates
-            </Typography>
-            <Divider />
-            <List>{UpdateListItems}</List>
-          </Paper>
-        </Grid>
-      </Grid>
-    </>
-  );
-}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = React.useState(true);
@@ -208,13 +147,5 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </Box>
       </Box>
     </ThemeProvider>
-  );
-}
-
-export default function Dashboard() {
-  return (
-    <Layout>
-      <DashboardFragments />
-    </Layout>
   );
 }

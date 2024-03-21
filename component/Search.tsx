@@ -36,7 +36,7 @@ import {
   intoElementalSkillPattern,
   labelSearch,
   otherSupportSearch,
-} from '@/type/SearchType';
+} from '@/types/SearchType';
 
 function LabelCheckbox() {
   const [filter, setFilter] = useAtom(labelFilterAtom);

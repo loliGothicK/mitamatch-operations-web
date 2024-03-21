@@ -4,7 +4,7 @@ import {
   elementalKind,
   Elements,
   elements,
-} from '@/utils/parser/skill';
+} from '@/parser/skill';
 
 import { match } from 'ts-pattern';
 
@@ -52,11 +52,6 @@ export function allElementStatusSearch(): ElementStatusSearch[] {
 export type OtherSkillSearch = 'charge' | 'counter' | 'heal' | Elemental;
 export type ElementalSkillPattern =
   `${Elemental['element']}/${Elemental['kind']}`;
-export type OtherSkillPattern =
-  | 'charge'
-  | 'counter'
-  | 'heal'
-  | ElementalSkillPattern;
 export function intoElementalSkillPattern({
   element,
   kind,

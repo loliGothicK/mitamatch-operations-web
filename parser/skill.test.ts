@@ -1,6 +1,6 @@
 import { test } from '@jest/globals';
 
-import { data } from '../../public/memoria.json';
+import { data } from '../public/memoria.json';
 import { parse_skill } from './skill';
 
 test('support parser regex coverall', () => {

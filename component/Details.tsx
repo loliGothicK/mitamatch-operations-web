@@ -7,14 +7,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import { deckAtom, legendaryDeckAtom, Memoria } from '@/jotai/atoms';
-import { elementFilter, elementFilterMap } from '@/type/FilterType';
-import {
-  parse_skill,
-  Status,
-  StatusKind,
-  statusKind,
-} from '@/utils/parser/skill';
-import { parse_support, SupportKind } from '@/utils/parser/support';
+import { parse_skill, Status, StatusKind, statusKind } from '@/parser/skill';
+import { parse_support, SupportKind } from '@/parser/support';
+import { elementFilter, elementFilterMap } from '@/types/FilterType';
 
 import { Lens } from 'monocle-ts';
 import { match } from 'ts-pattern';
