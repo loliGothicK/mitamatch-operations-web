@@ -15,6 +15,7 @@ import {
   Remove,
   SearchOutlined,
   ShareOutlined,
+  Launch,
 } from '@mui/icons-material';
 import {
   Avatar,
@@ -24,10 +25,10 @@ import {
   DialogContent,
   ImageListItem,
   ImageListItemBar,
-  ListItem,
   Menu,
   MenuItem,
   Skeleton,
+  Stack,
   Switch,
 } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -37,7 +38,6 @@ import Divider from '@mui/material/Divider';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
@@ -455,47 +455,18 @@ function VirtualizedList() {
           rowHeight={100}
           rowRenderer={({ key, index, style }) => {
             return (
-              <ListItem
+              <Stack
+                direction={'row'}
                 key={key}
                 style={style}
-                disablePadding
                 sx={{ bgcolor: 'grey' }}
               >
-                <IconButton
-                  edge="start"
-                  aria-label="comments"
-                  sx={{ paddingLeft: 3, paddingRight: 0 }}
-                  onClick={() => {
-                    if (memoria[index].labels.includes('legendary')) {
-                      setLegendaryDeck((prev) => [...prev, memoria[index]]);
-                      Cookies.set(
-                        'deck',
-                        encodeDeck(sw, deck, [
-                          ...legendaryDeck,
-                          memoria[index],
-                        ]),
-                      );
-                    } else {
-                      setDeck((prev) => [...prev, memoria[index]]);
-                      Cookies.set(
-                        'deck',
-                        encodeDeck(
-                          sw,
-                          [...deck, memoria[index]],
-                          legendaryDeck,
-                        ),
-                      );
-                    }
-                  }}
-                >
-                  <Add />
-                </IconButton>
-                <ListItemButton role={undefined} dense>
+                <Stack direction={'row'} alignItems={'center'}>
                   <ListItemIcon>
                     <Icon
                       kind={memoria[index].kind}
                       element={memoria[index].element}
-                      position={85}
+                      position={70}
                     />
                     {!isLoaded && (
                       <Skeleton
@@ -504,6 +475,40 @@ function VirtualizedList() {
                         height={100}
                       />
                     )}
+                    <IconButton
+                      edge="start"
+                      aria-label="comments"
+                      sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 10,
+                        bgcolor: 'rgba(0, 0, 0, 0.2)',
+                      }}
+                      onClick={() => {
+                        if (memoria[index].labels.includes('legendary')) {
+                          setLegendaryDeck((prev) => [...prev, memoria[index]]);
+                          Cookies.set(
+                            'deck',
+                            encodeDeck(sw, deck, [
+                              ...legendaryDeck,
+                              memoria[index],
+                            ]),
+                          );
+                        } else {
+                          setDeck((prev) => [...prev, memoria[index]]);
+                          Cookies.set(
+                            'deck',
+                            encodeDeck(
+                              sw,
+                              [...deck, memoria[index]],
+                              legendaryDeck,
+                            ),
+                          );
+                        }
+                      }}
+                    >
+                      <Add color={'warning'} />
+                    </IconButton>
                     <Image
                       src={`/memoria/${memoria[index].name}.png`}
                       alt={memoria[index].name}
@@ -542,8 +547,16 @@ function VirtualizedList() {
                       marginLeft: 2,
                     }}
                   />
-                </ListItemButton>
-              </ListItem>
+                </Stack>
+                <IconButton sx={{ position: 'absolute', right: 0 }}>
+                  <Link
+                    href={`https://allb.game-db.tw/memoria/${memoria[index].link}`}
+                    target={'_blank'}
+                  >
+                    <Launch />
+                  </Link>
+                </IconButton>
+              </Stack>
             );
           }}
         />
