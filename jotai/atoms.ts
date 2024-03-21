@@ -2,7 +2,6 @@ import { atom } from 'jotai';
 
 import { parse_skill } from '@/parser/skill';
 import { parse_support } from '@/parser/support';
-import memoriaData from '@/public/memoria.json';
 import {
   elementFilter,
   elementFilterMap,
@@ -22,8 +21,8 @@ import {
 } from '@/types/SearchType';
 
 import { match } from 'ts-pattern';
+import { Memoria, memoriaList } from '@/domain/memoria';
 
-export type Memoria = (typeof memoriaData.data)[0];
 export type MemoriaWithConcentration = Memoria & { concentration?: number };
 
 export const sortKind = [
@@ -84,7 +83,7 @@ export const resetFilterAtom = atom(null, (_, set) => {
 export const sortKindAtom = atom<SortKind>('ID');
 
 export const filteredMemoriaAtom = atom((get) => {
-  return memoriaData.data
+  return memoriaList
     .filter((memoria) => {
       const sw = match(get(swAtom))
         .with('shield', () => ['支援', '妨害', '回復'].includes(memoria.kind))
