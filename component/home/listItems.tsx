@@ -47,6 +47,13 @@ export const mainListItems = (
 
 const updates = [
   {
+    name: 'Timeline Builder for Web is now available (preview)',
+    description: [
+      'Timeline Builder is now available for Web (preview).',
+      'You can create, edit, and share your order timeline.',
+    ],
+  },
+  {
     name: 'Deck Builder for Web is fully functional',
     description: ['Deck Builder all features are now available.'],
   },
@@ -69,7 +76,11 @@ export const UpdateListItems = (
             secondary={
               <>
                 {item.description.map((line, index) => {
-                  return <Typography key={index}>{line}</Typography>;
+                  return (
+                    <Typography fontSize={12} key={index}>
+                      {line}
+                    </Typography>
+                  );
                 })}
               </>
             }
