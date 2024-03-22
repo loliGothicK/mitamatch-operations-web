@@ -284,9 +284,11 @@ function Timeline() {
                       : timeline[index - 1].name.includes('戦術加速')
                         ? 5
                         : order.prepare_time;
-                  return (
-                    value - prepareTime - order.active_time - (order.delay || 0)
-                  );
+                  const delay =
+                    index > timeline.length - 2
+                      ? 0
+                      : timeline[index + 1].delay || 0;
+                  return value - prepareTime - order.active_time - delay;
                 },
                 900,
               )}
@@ -303,12 +305,11 @@ function Timeline() {
                         : timeline[index - 1].name.includes('戦術加速')
                           ? 5
                           : order.prepare_time;
-                    return (
-                      value -
-                      prepareTime -
-                      order.active_time -
-                      (order.delay || 0)
-                    );
+                    const delay =
+                      index > timeline.length - 2
+                        ? 0
+                        : timeline[index + 1].delay || 0;
+                    return value - prepareTime - order.active_time - delay;
                   },
                   900,
                 ) / 60,
@@ -323,12 +324,11 @@ function Timeline() {
                         : timeline[index - 1].name.includes('戦術加速')
                           ? 5
                           : order.prepare_time;
-                    return (
-                      value -
-                      prepareTime -
-                      order.active_time -
-                      (order.delay || 0)
-                    );
+                    const delay =
+                      index > timeline.length - 2
+                        ? 0
+                        : timeline[index + 1].delay || 0;
+                    return value - prepareTime - order.active_time - delay;
                   },
                   900,
                 ) % 60
@@ -373,7 +373,10 @@ function Source() {
                     bgcolor: 'rgba(0, 0, 0, 0.2)',
                   }}
                   onClick={() => {
-                    setSelectedOrder((prev) => [...prev, orders[index]]);
+                    setSelectedOrder((prev) => {
+                      const delay = prev.length == 0 ? undefined : 5;
+                      return [...prev, { ...orders[index], delay }];
+                    });
                   }}
                 >
                   <Add color={'warning'} />
