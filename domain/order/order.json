@@ -185,7 +185,7 @@
       "active_time": 80,
       "payed": false,
       "kind": "Other",
-      "usually": false
+      "usually": true
     },
     {
       "id": 147,
@@ -202,7 +202,7 @@
       "active_time": 80,
       "payed": false,
       "kind": "Other",
-      "usually": false
+      "usually": true
     },
     {
       "id": 146,
@@ -253,7 +253,7 @@
       "active_time": 90,
       "payed": false,
       "kind": "TriggerRateFluctuation",
-      "usually": false
+      "usually": true
     },
     {
       "id": 143,
@@ -270,7 +270,7 @@
       "active_time": 90,
       "payed": false,
       "kind": "TriggerRateFluctuation",
-      "usually": false
+      "usually": true
     },
     {
       "id": 142,
@@ -321,7 +321,7 @@
       "active_time": 80,
       "payed": false,
       "kind": "Other",
-      "usually": false
+      "usually": true
     },
     {
       "id": 139,
@@ -338,7 +338,7 @@
       "active_time": 80,
       "payed": false,
       "kind": "Other",
-      "usually": false
+      "usually": true
     },
     {
       "id": 138,
@@ -610,7 +610,7 @@
       "active_time": 0,
       "payed": false,
       "kind": "Other",
-      "usually": false
+      "usually": true
     },
     {
       "id": 122,
@@ -712,7 +712,7 @@
       "active_time": 0,
       "payed": false,
       "kind": "Other",
-      "usually": false
+      "usually": true
     },
     {
       "id": 116,
@@ -1273,7 +1273,7 @@
       "active_time": 0,
       "payed": false,
       "kind": "Formation",
-      "usually": false
+      "usually": true
     },
     {
       "id": 83,
@@ -1290,7 +1290,7 @@
       "active_time": 0,
       "payed": false,
       "kind": "Formation",
-      "usually": false
+      "usually": true
     },
     {
       "id": 82,
@@ -1324,7 +1324,7 @@
       "active_time": 60,
       "payed": false,
       "kind": "Elemental/Light",
-      "usually": false
+      "usually": true
     },
     {
       "id": 80,
@@ -1392,7 +1392,7 @@
       "active_time": 60,
       "payed": false,
       "kind": "Elemental/Light",
-      "usually": false
+      "usually": true
     },
     {
       "id": 76,
@@ -1409,7 +1409,7 @@
       "active_time": 60,
       "payed": false,
       "kind": "Elemental/Light",
-      "usually": false
+      "usually": true
     },
     {
       "id": 75,
@@ -1443,7 +1443,7 @@
       "active_time": 60,
       "payed": false,
       "kind": "Elemental/Dark",
-      "usually": false
+      "usually": true
     },
     {
       "id": 73,
@@ -1494,7 +1494,7 @@
       "active_time": 60,
       "payed": false,
       "kind": "Elemental/Dark",
-      "usually": false
+      "usually": true
     },
     {
       "id": 70,
@@ -1511,7 +1511,7 @@
       "active_time": 60,
       "payed": false,
       "kind": "Elemental/Dark",
-      "usually": false
+      "usually": true
     },
     {
       "id": 69,
@@ -1630,7 +1630,7 @@
       "active_time": 100,
       "payed": false,
       "kind": "Shield",
-      "usually": false
+      "usually": true
     },
     {
       "id": 62,
@@ -1647,7 +1647,7 @@
       "active_time": 100,
       "payed": false,
       "kind": "Shield",
-      "usually": false
+      "usually": true
     },
     {
       "id": 61,
@@ -1664,7 +1664,7 @@
       "active_time": 100,
       "payed": false,
       "kind": "Shield",
-      "usually": false
+      "usually": true
     },
     {
       "id": 60,
@@ -1698,7 +1698,7 @@
       "active_time": 0,
       "payed": false,
       "kind": "Formation",
-      "usually": false
+      "usually": true
     },
     {
       "id": 58,
@@ -1749,7 +1749,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Wind",
-      "usually": false
+      "usually": true
     },
     {
       "id": 55,
@@ -1766,7 +1766,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Fire",
-      "usually": false
+      "usually": true
     },
     {
       "id": 54,
@@ -1817,7 +1817,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Water",
-      "usually": false
+      "usually": true
     },
     {
       "id": 51,
@@ -1834,7 +1834,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Wind",
-      "usually": false
+      "usually": true
     },
     {
       "id": 50,
@@ -1868,7 +1868,7 @@
       "active_time": 0,
       "payed": false,
       "kind": "Other",
-      "usually": false
+      "usually": true
     },
     {
       "id": 48,
@@ -1953,7 +1953,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Fire",
-      "usually": false
+      "usually": true
     },
     {
       "id": 43,
@@ -2038,7 +2038,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Water",
-      "usually": false
+      "usually": true
     },
     {
       "id": 38,

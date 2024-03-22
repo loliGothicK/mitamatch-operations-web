@@ -23,8 +23,10 @@ import {
   MenuItem,
   Snackbar,
   Stack,
+  Switch,
   TextField,
 } from '@mui/material';
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
@@ -41,6 +43,7 @@ import {
   filterAtom,
   filteredOrderAtom,
   OrderWithPIC,
+  payedAtom,
   timelineAtom,
 } from '@/jotai/orderAtoms';
 
@@ -504,6 +507,7 @@ export default function TimelineBuilder() {
   const matches = useMediaQuery(theme.breakpoints.up('lg'));
   const pathname = usePathname();
   const [timeline, setTimeline] = useAtom(timelineAtom);
+  const [, setPayed] = useAtom(payedAtom);
   const params = useSearchParams();
   const value = params.get('deck');
 
@@ -562,7 +566,22 @@ export default function TimelineBuilder() {
             </Container>
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
-            <FilterMenu />
+            <Box
+              flexDirection="row"
+              justifyContent="flex-end"
+              display="flex"
+              alignItems={'center'}
+              paddingRight={20}
+            >
+              <FilterMenu />
+              <Divider orientation="vertical" flexItem sx={{ margin: 1 }} />
+              <Typography>無課金</Typography>
+              <Switch
+                defaultChecked={true}
+                onChange={() => setPayed((prev) => !prev)}
+              />
+              <Typography>課金</Typography>
+            </Box>
             <Container
               maxWidth={false}
               sx={{

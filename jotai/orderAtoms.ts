@@ -10,6 +10,7 @@ export type OrderWithPIC = Order & {
 
 export const timelineAtom = atom<OrderWithPIC[]>([]);
 
+export const payedAtom = atom(true);
 export const filterAtom = atom<
   | Exclude<
       OrderKind,
@@ -34,5 +35,6 @@ export const filteredOrderAtom = atom((get) => {
           ? order.kind.startsWith('Elemental')
           : order.kind === filter,
     )
-    .filter((order) => get(timelineAtom).every((o) => o.id != order.id));
+    .filter((order) => get(timelineAtom).every((o) => o.id != order.id))
+    .filter((order) => (get(payedAtom) ? order.payed : !order.payed));
 });
