@@ -284,6 +284,7 @@ function Timeline() {
         <List sx={{ width: '100%', maxWidth: '65vh', overflow: 'auto' }}>
           {timeline.map((order, index) => (
             <TimelineItem
+              key={order.id}
               order={order}
               left={takeLeft(index)(timeline).reduce(
                 (value: number, order: OrderWithPIC, index): number => {
@@ -493,7 +494,7 @@ export default function TimelineBuilder() {
         setTimeline(decodeTimeline(cookie));
       }
     }
-  }, [value]);
+  }, [setTimeline, value]);
 
   return (
     <Layout>
