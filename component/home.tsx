@@ -15,7 +15,6 @@ export default function Home() {
   return (
     <>
       <Grid container spacing={3}>
-        {/* Chart */}
         <Grid item xs={12} md={12} lg={12}>
           <Paper
             sx={{

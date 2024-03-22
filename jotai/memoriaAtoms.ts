@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-import { Memoria, memoriaList } from '@/domain/memoria';
+import { Memoria, memoriaList } from '@/domain/memoria/memoria';
 import { parse_skill } from '@/parser/skill';
 import { parse_support } from '@/parser/support';
 import {

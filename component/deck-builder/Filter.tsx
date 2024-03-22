@@ -7,12 +7,12 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 
-import { CheckBoxItem } from '@/component/CheckBoxItem';
+import { CheckBoxItem } from '@/component/deck-builder/CheckBoxItem';
 import {
   currentRoleFilterAtom,
   elementFilterAtom,
   roleFilterAtom,
-} from '@/jotai/atoms';
+} from '@/jotai/memoriaAtoms';
 import {
   elementFilter,
   elementFilterMap,

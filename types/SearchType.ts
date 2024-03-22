@@ -1,4 +1,3 @@
-import { intoStatusPattern } from '@/component/Details';
 import {
   Elemental,
   ElementalKind,

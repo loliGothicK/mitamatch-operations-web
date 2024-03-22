@@ -9,12 +9,12 @@ import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 
-import { CheckBoxItem } from '@/component/CheckBoxItem';
+import { CheckBoxItem } from '@/component/deck-builder/CheckBoxItem';
 import {
   intoStatusPattern,
   statusPatternToJapanese,
   supportPatternToJapanese,
-} from '@/component/Details';
+} from '@/component/deck-builder/Details';
 import {
   assistSupportFilterAtom,
   basicStatusFilterAtom,
@@ -25,7 +25,7 @@ import {
   recoverySupportFilterAtom,
   resetFilterAtom,
   vanguardSupportFilterAtom,
-} from '@/jotai/atoms';
+} from '@/jotai/memoriaAtoms';
 import {
   allAssistSupportSearch,
   allBasicStatusSearch,

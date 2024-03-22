@@ -1,5 +1,5 @@
-import { memoriaList } from '@/domain/memoria';
-import { MemoriaWithConcentration } from '@/jotai/atoms';
+import { memoriaList } from '@/domain/memoria/memoria';
+import { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
 
 export function encodeDeck(
   sw: 'sword' | 'shield',
