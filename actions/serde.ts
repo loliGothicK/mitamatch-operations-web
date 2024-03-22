@@ -44,7 +44,12 @@ export function decodeDeck(encoded: string): {
 
 export function encodeTimeline(timeline: OrderWithPIC[]) {
   const timelineInfo = timeline.map((order) => {
-    return { id: order.id, delay: order.delay, pic: order.pic, sub: order.sub };
+    return {
+      id: order.id,
+      delay: order.delay,
+      pic: order.pic ? encodeURIComponent(order.pic) : undefined,
+      sub: order.sub ? encodeURIComponent(order.sub) : undefined,
+    };
   });
   return btoa(JSON.stringify({ timeline: timelineInfo }));
 }
