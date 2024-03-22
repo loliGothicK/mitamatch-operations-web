@@ -1,9 +1,10 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import { useAtom } from 'jotai';
 
@@ -33,6 +34,7 @@ import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useMediaQuery } from '@mui/system';
 
+import { decodeTimeline, encodeTimeline } from '@/actions/serde';
 import { Layout } from '@/component/Layout';
 import {
   filterAtom,
@@ -45,6 +47,7 @@ import { DndContext } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { takeLeft } from 'fp-ts/Array';
+import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { AutoSizer, List as VirtulizedList } from 'react-virtualized';
 
@@ -162,7 +165,13 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
           aria-label={`remove ${order.name}`}
           onClick={() => {
             // remove order from timeline
-            setTimeline((prev) => prev.filter((o) => o.id !== order.id));
+            setTimeline((prev) => {
+              Cookies.set(
+                'timeline',
+                encodeTimeline(prev.filter((o) => o.id !== order.id)),
+              );
+              return prev.filter((o) => o.id !== order.id);
+            });
           }}
         >
           <Remove />
@@ -375,6 +384,10 @@ function Source() {
                   onClick={() => {
                     setSelectedOrder((prev) => {
                       const delay = prev.length == 0 ? undefined : 5;
+                      Cookies.set(
+                        'timeline',
+                        encodeTimeline([...prev, { ...orders[index], delay }]),
+                      );
                       return [...prev, { ...orders[index], delay }];
                     });
                   }}
@@ -455,6 +468,32 @@ function FilterMenu() {
 export default function TimelineBuilder() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('lg'));
+  const pathname = usePathname();
+  const [timeline, setTimeline] = useAtom(timelineAtom);
+  const params = useSearchParams();
+  const value = params.get('deck');
+
+  const shareHandler = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        `https://mitama.io/${pathname}?timeline=${encodeTimeline(timeline)}`,
+      );
+      alert('クリップボードに保存しました。');
+    } catch (error) {
+      alert('失敗しました。');
+    }
+  };
+
+  useEffect(() => {
+    if (value) {
+      setTimeline(decodeTimeline(value));
+    } else {
+      const cookie = Cookies.get('timeline');
+      if (cookie) {
+        setTimeline(decodeTimeline(cookie));
+      }
+    }
+  }, [value]);
 
   return (
     <Layout>
@@ -469,7 +508,10 @@ export default function TimelineBuilder() {
           flexShrink={1}
         >
           <Grid item xs={12} md={6} lg={6} alignItems={'center'}>
-            <Link href={`/timeline-builder`}>
+            <Link
+              href={`/timeline-builder?timeline=${encodeTimeline(timeline)}`}
+              onClick={shareHandler}
+            >
               <IconButton aria-label="share">
                 <LinkSharp />
               </IconButton>
