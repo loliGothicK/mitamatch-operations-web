@@ -141,7 +141,10 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
     <>
       <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
         <Typography fontSize={10}>
-          {Math.floor(left / 60)}:{(left % 60).toString().padStart(2, '0')}
+          {`${left < 0 ? '-' : ''}${Math.trunc(left / 60)}`}:
+          {Math.abs(left % 60)
+            .toString()
+            .padStart(2, '0')}
         </Typography>
       </Divider>
       <Stack direction={'row'} padding={0} alignItems={'center'}>
@@ -325,8 +328,8 @@ function Timeline() {
           ))}
           <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
             <Typography fontSize={10}>
-              {Math.floor(
-                takeLeft(timeline.length)(timeline).reduce(
+              {(() => {
+                const left = takeLeft(timeline.length)(timeline).reduce(
                   (value: number, order: OrderWithPIC, index): number => {
                     const prepareTime =
                       index == 0
@@ -341,29 +344,13 @@ function Timeline() {
                     return value - prepareTime - order.active_time - delay;
                   },
                   900,
-                ) / 60,
-              )}
-              :
-              {(
-                takeLeft(timeline.length)(timeline).reduce(
-                  (value: number, order: OrderWithPIC, index): number => {
-                    const prepareTime =
-                      index == 0
-                        ? order.prepare_time
-                        : timeline[index - 1].name.includes('戦術加速')
-                          ? 5
-                          : order.prepare_time;
-                    const delay =
-                      index > timeline.length - 2
-                        ? 0
-                        : timeline[index + 1].delay || 0;
-                    return value - prepareTime - order.active_time - delay;
-                  },
-                  900,
-                ) % 60
-              )
-                .toString()
-                .padStart(2, '0')}
+                );
+                return `${left < 0 ? '-' : ''}${Math.trunc(left / 60)}:${Math.abs(
+                  left % 60,
+                )
+                  .toString()
+                  .padStart(2, '0')}`;
+              })()}
             </Typography>
           </Divider>
         </List>
