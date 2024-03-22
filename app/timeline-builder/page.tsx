@@ -1,19 +1,27 @@
 'use client';
 
+import { FormEvent, useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { useAtom } from 'jotai';
 
-import { Add, LinkSharp, Remove } from '@mui/icons-material';
+import { Add, Edit, LinkSharp, Remove } from '@mui/icons-material';
 import {
   Avatar,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   ListItem,
   ListItemAvatar,
   Menu,
   MenuItem,
   Stack,
+  TextField,
 } from '@mui/material';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
@@ -26,10 +34,10 @@ import Typography from '@mui/material/Typography';
 import { useMediaQuery } from '@mui/system';
 
 import { Layout } from '@/component/Layout';
-import { Order } from '@/domain/order/order';
 import {
   filterAtom,
   filteredOrderAtom,
+  OrderWithPIC,
   timelineAtom,
 } from '@/jotai/orderAtoms';
 
@@ -40,16 +48,75 @@ import { takeLeft } from 'fp-ts/Array';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { AutoSizer, List as VirtulizedList } from 'react-virtualized';
 
-function TimelineItem({ order, left }: { order: Order; left: number }) {
+function Info({ order }: { order: OrderWithPIC }) {
+  if (order.pic && order.sub && order.delay) {
+    return (
+      <Stack direction={'row'} alignItems={'center'} spacing={1}>
+        <Typography variant="body1">{order.name}</Typography>
+        <Typography variant="body2" fontSize={10}>
+          [ {order.pic} / {order.sub} ] (+{order.delay} sec)
+        </Typography>
+      </Stack>
+    );
+  } else if (order.pic && order.sub) {
+    return (
+      <Stack direction={'row'} alignItems={'center'} spacing={1}>
+        <Typography variant="body1">{order.name}</Typography>
+        <Typography variant="body2" fontSize={10}>
+          [ {order.pic} / {order.sub} ]
+        </Typography>
+      </Stack>
+    );
+  } else if (order.pic && order.delay) {
+    return (
+      <Stack direction={'row'} alignItems={'center'} spacing={1}>
+        <Typography variant="body1">{order.name}</Typography>
+        <Typography variant="body2" fontSize={10}>
+          [ {order.pic} ] (+{order.delay} sec)
+        </Typography>
+      </Stack>
+    );
+  } else if (order.pic) {
+    return (
+      <Stack direction={'row'} alignItems={'center'} spacing={1}>
+        <Typography variant="body1">{order.name}</Typography>
+        <Typography variant="body2" fontSize={10}>
+          [ {order.pic} ]
+        </Typography>
+      </Stack>
+    );
+  } else if (order.delay) {
+    return (
+      <Stack direction={'row'} alignItems={'center'} spacing={1}>
+        <Typography variant="body1">{order.name}</Typography>
+        <Typography variant="body2" fontSize={10}>
+          (+{order.delay} sec)
+        </Typography>
+      </Stack>
+    );
+  } else {
+    return <Typography variant="body1">{order.name}</Typography>;
+  }
+}
+
+function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
   const [, setTimeline] = useAtom(timelineAtom);
   const { setNodeRef, attributes, listeners, transform, transition } =
     useSortable({
       id: order.id,
     });
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <>
-      {' '}
       <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
         <Typography fontSize={10}>
           {Math.floor(left / 60)}:{(left % 60).toString().padStart(2, '0')}
@@ -65,21 +132,27 @@ function TimelineItem({ order, left }: { order: Order; left: number }) {
             transition,
           }}
         >
-          <ListItem key={order.id} sx={{ padding: 0 }}>
-            <ListItemAvatar>
-              <Avatar>
-                <Image
-                  src={`/order/${order.name}.png`}
-                  alt={order.name}
-                  width={50}
-                  height={50}
-                />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={order.name} secondary={order.effect} />
-          </ListItem>
+          <Stack direction={'row'} padding={0} alignItems={'center'}>
+            <ListItem key={order.id} sx={{ padding: 0 }}>
+              <ListItemAvatar>
+                <Avatar>
+                  <Image
+                    src={`/order/${order.name}.png`}
+                    alt={order.name}
+                    width={50}
+                    height={50}
+                  />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={<Info order={order} />}
+                secondary={order.effect}
+              />
+            </ListItem>
+          </Stack>
         </div>
         <IconButton
+          size={'small'}
           sx={{
             position: 'absolute',
             right: 0,
@@ -94,7 +167,85 @@ function TimelineItem({ order, left }: { order: Order; left: number }) {
         >
           <Remove />
         </IconButton>
+        <IconButton
+          size={'small'}
+          sx={{
+            position: 'absolute',
+            right: 50,
+            color: 'secondary',
+            bgcolor: 'rgba(0, 0, 0, 0.05)',
+          }}
+          aria-label={`remove ${order.name}`}
+          onClick={handleClickOpen}
+        >
+          <Edit />
+        </IconButton>
       </Stack>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          component: 'form',
+          onSubmit: (event: FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const formJson = Object.fromEntries((formData as any).entries());
+            setTimeline((prev) =>
+              prev.map((o) =>
+                o.id === order.id
+                  ? {
+                      ...o,
+                      delay: formJson.delay,
+                      pic: formJson.pic,
+                      sub: formJson.sub,
+                    }
+                  : o,
+              ),
+            );
+            handleClose();
+          },
+        }}
+      >
+        <DialogTitle>Edit</DialogTitle>
+        <DialogContent>
+          <DialogContentText></DialogContentText>
+          <TextField
+            autoFocus
+            defaultValue={order.delay}
+            margin="dense"
+            id="delay"
+            name="delay"
+            label="delay"
+            type="number"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            defaultValue={order.pic}
+            margin="dense"
+            id="pic"
+            name="pic"
+            label="PIC"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            autoFocus
+            defaultValue={order.sub}
+            margin="dense"
+            id="sub"
+            name="sub"
+            label="Sub PIC"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button type="submit">Save</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
@@ -126,14 +277,16 @@ function Timeline() {
             <TimelineItem
               order={order}
               left={takeLeft(index)(timeline).reduce(
-                (value: number, order: Order, index): number => {
+                (value: number, order: OrderWithPIC, index): number => {
                   const prepareTime =
                     index == 0
                       ? order.prepare_time
                       : timeline[index - 1].name.includes('戦術加速')
                         ? 5
                         : order.prepare_time;
-                  return value - prepareTime - order.active_time;
+                  return (
+                    value - prepareTime - order.active_time - (order.delay || 0)
+                  );
                 },
                 900,
               )}
@@ -143,14 +296,19 @@ function Timeline() {
             <Typography fontSize={10}>
               {Math.floor(
                 takeLeft(timeline.length)(timeline).reduce(
-                  (value: number, order: Order, index): number => {
+                  (value: number, order: OrderWithPIC, index): number => {
                     const prepareTime =
                       index == 0
                         ? order.prepare_time
                         : timeline[index - 1].name.includes('戦術加速')
                           ? 5
                           : order.prepare_time;
-                    return value - prepareTime - order.active_time;
+                    return (
+                      value -
+                      prepareTime -
+                      order.active_time -
+                      (order.delay || 0)
+                    );
                   },
                   900,
                 ) / 60,
@@ -158,14 +316,19 @@ function Timeline() {
               :
               {(
                 takeLeft(timeline.length)(timeline).reduce(
-                  (value: number, order: Order, index): number => {
+                  (value: number, order: OrderWithPIC, index): number => {
                     const prepareTime =
                       index == 0
                         ? order.prepare_time
                         : timeline[index - 1].name.includes('戦術加速')
                           ? 5
                           : order.prepare_time;
-                    return value - prepareTime - order.active_time;
+                    return (
+                      value -
+                      prepareTime -
+                      order.active_time -
+                      (order.delay || 0)
+                    );
                   },
                   900,
                 ) % 60
@@ -227,7 +390,7 @@ function Source() {
                   <Typography variant="body2">
                     {orders[index].effect}
                   </Typography>
-                  <Typography variant="body2">
+                  <Typography variant="body2" fontSize={10}>
                     {orders[index].description}
                   </Typography>
                 </Stack>

@@ -2,7 +2,13 @@ import { atom } from 'jotai';
 
 import { Order, OrderKind, orderList } from '@/domain/order/order';
 
-export const timelineAtom = atom<Order[]>([]);
+export type OrderWithPIC = Order & {
+  delay?: number;
+  pic?: string;
+  sub?: string;
+};
+
+export const timelineAtom = atom<OrderWithPIC[]>([]);
 
 export const filterAtom = atom<
   | Exclude<
