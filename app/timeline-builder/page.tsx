@@ -71,6 +71,15 @@ function Info({ order }: { order: OrderWithPIC }) {
         </Typography>
       </Stack>
     );
+  } else if (order.sub && order.delay) {
+    return (
+      <Stack direction={'row'} alignItems={'center'} spacing={1}>
+        <Typography variant="body1">{order.name}</Typography>
+        <Typography variant="body2" fontSize={10}>
+          [ {order.sub} ] (+{order.delay} sec)
+        </Typography>
+      </Stack>
+    );
   } else if (order.pic && order.delay) {
     return (
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
@@ -86,6 +95,15 @@ function Info({ order }: { order: OrderWithPIC }) {
         <Typography variant="body1">{order.name}</Typography>
         <Typography variant="body2" fontSize={10}>
           [ {order.pic} ]
+        </Typography>
+      </Stack>
+    );
+  } else if (order.sub) {
+    return (
+      <Stack direction={'row'} alignItems={'center'} spacing={1}>
+        <Typography variant="body1">{order.name}</Typography>
+        <Typography variant="body2" fontSize={10}>
+          [ {order.sub} ]
         </Typography>
       </Stack>
     );
