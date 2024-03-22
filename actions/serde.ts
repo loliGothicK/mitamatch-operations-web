@@ -1,5 +1,7 @@
-import { memoriaList } from '@/domain/memoria';
-import { MemoriaWithConcentration } from '@/jotai/atoms';
+import { memoriaList } from '@/domain/memoria/memoria';
+import { orderList } from '@/domain/order/order';
+import { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
+import { OrderWithPIC } from '@/jotai/orderAtoms';
 
 export function encodeDeck(
   sw: 'sword' | 'shield',
@@ -38,4 +40,27 @@ export function decodeDeck(encoded: string): {
       return { ...deckMap.get(id), concentration: concentration ?? 4 };
     }),
   };
+}
+
+export function encodeTimeline(timeline: OrderWithPIC[]) {
+  const timelineInfo = timeline.map((order) => {
+    return { id: order.id, delay: order.delay, pic: order.pic, sub: order.sub };
+  });
+  return btoa(JSON.stringify({ timeline: timelineInfo }));
+}
+
+export function decodeTimeline(encoded: string): OrderWithPIC[] {
+  const orderMap = new Map(orderList.map((order) => [order.id, order]));
+  const { timeline } = JSON.parse(atob(encoded));
+
+  return timeline.map(
+    (item: { id: number; delay?: number; pic?: string; sub?: string }) => {
+      return {
+        ...orderMap.get(item.id)!,
+        delay: item.delay,
+        pic: item.pic,
+        sub: item.sub,
+      };
+    },
+  );
 }

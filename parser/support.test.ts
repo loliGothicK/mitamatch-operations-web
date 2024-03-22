@@ -1,4 +1,4 @@
-import { memoriaList } from '@/domain/memoria';
+import { memoriaList } from '@/domain/memoria/memoria';
 
 import { test } from '@jest/globals';
 

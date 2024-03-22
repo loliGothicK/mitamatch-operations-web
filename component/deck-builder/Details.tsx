@@ -6,8 +6,8 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { Memoria } from '@/domain/memoria';
-import { deckAtom, legendaryDeckAtom } from '@/jotai/atoms';
+import { Memoria } from '@/domain/memoria/memoria';
+import { deckAtom, legendaryDeckAtom } from '@/jotai/memoriaAtoms';
 import { parse_skill, Status, StatusKind, statusKind } from '@/parser/skill';
 import { parse_support, SupportKind } from '@/parser/support';
 import { elementFilter, elementFilterMap } from '@/types/FilterType';

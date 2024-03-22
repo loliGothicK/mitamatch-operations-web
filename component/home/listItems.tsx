@@ -4,34 +4,44 @@ import Link from 'next/link';
 
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import Typography from '@mui/material/Typography';
 
+const links = [
+  {
+    title: 'Home',
+    href: '/',
+  },
+  {
+    title: 'Deck Builder',
+    href: '/deck-builder',
+  },
+  {
+    title: 'Timeline Builder',
+    href: '/timeline-builder',
+  },
+];
+
 export const mainListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
       Menu
     </ListSubheader>
-    <Link href={'/'}>
-      <ListItemButton>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Dashboard" />
-      </ListItemButton>
-    </Link>
-    <Link href={'/deck-builder'}>
-      <ListItemButton>
-        <ListItemIcon>
-          <ShoppingCartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Deck Builder" />
-      </ListItemButton>
-    </Link>
+    {links.map(({ title, href }, index) => {
+      return (
+        <Link href={href} key={index}>
+          <ListItemButton>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary={title} />
+          </ListItemButton>
+        </Link>
+      );
+    })}
   </React.Fragment>
 );
 

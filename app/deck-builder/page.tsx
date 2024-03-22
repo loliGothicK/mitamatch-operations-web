@@ -44,10 +44,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 
 import { decodeDeck, encodeDeck } from '@/actions/serde';
-import Details from '@/component/Details';
-import Filter from '@/component/Filter';
+import Details from '@/component/deck-builder/Details';
+import Filter from '@/component/deck-builder/Filter';
+import Search from '@/component/deck-builder/Search';
 import { Layout } from '@/component/Layout';
-import Search from '@/component/Search';
 import {
   deckAtom,
   filteredMemoriaAtom,
@@ -57,7 +57,7 @@ import {
   sortKind,
   sortKindAtom,
   swAtom,
-} from '@/jotai/atoms';
+} from '@/jotai/memoriaAtoms';
 
 import { DndContext } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
@@ -612,6 +612,7 @@ function SortMenu() {
     </PopupState>
   );
 }
+
 function Source() {
   return (
     <Grid
@@ -632,10 +633,10 @@ function Source() {
 }
 
 function ToggleButtons() {
-  const [_, setDeck] = useAtom(deckAtom);
-  const [__, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [, setDeck] = useAtom(deckAtom);
+  const [, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
-  const [___, setRoleFilter] = useAtom(roleFilterAtom);
+  const [, setRoleFilter] = useAtom(roleFilterAtom);
 
   return (
     <FormControlLabel
@@ -728,7 +729,7 @@ export default function DeckBuilder() {
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
-  const [_, setRoleFilter] = useAtom(roleFilterAtom);
+  const [, setRoleFilter] = useAtom(roleFilterAtom);
   const value = params.get('deck');
   const pathname = usePathname();
 
