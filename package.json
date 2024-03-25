@@ -24,7 +24,7 @@
     "@next/third-parties": "14.1.4",
     "@vercel/analytics": "1.2.2",
     "@vercel/speed-insights": "1.0.10",
-    "fp-ts": "2.16.4",
+    "fp-ts": "2.16.5",
     "jotai": "2.7.1",
     "js-cookie": "3.0.5",
     "material-ui-popup-state": "5.1.0",
