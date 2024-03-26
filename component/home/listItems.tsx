@@ -2,8 +2,9 @@ import * as React from 'react';
 
 import Link from 'next/link';
 
+import { Home, Schema, ViewCompact, ViewTimeline } from '@mui/icons-material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import { Badge } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -14,14 +15,26 @@ const links = [
   {
     title: 'Home',
     href: '/',
+    icon: <Home />,
   },
   {
     title: 'Deck Builder',
     href: '/deck-builder',
+    icon: <ViewCompact />,
   },
   {
     title: 'Timeline Builder',
     href: '/timeline-builder',
+    icon: <ViewTimeline />,
+  },
+  {
+    title: 'Flow Chart',
+    href: '/flowchart',
+    icon: (
+      <Badge badgeContent={'preview'} color="primary">
+        <Schema />
+      </Badge>
+    ),
   },
 ];
 
@@ -30,13 +43,11 @@ export const mainListItems = (
     <ListSubheader component="div" inset>
       Menu
     </ListSubheader>
-    {links.map(({ title, href }, index) => {
+    {links.map(({ title, href, icon }, index) => {
       return (
         <Link href={href} key={index}>
           <ListItemButton>
-            <ListItemIcon>
-              <DashboardIcon />
-            </ListItemIcon>
+            <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primary={title} />
           </ListItemButton>
         </Link>
