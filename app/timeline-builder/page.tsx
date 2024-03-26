@@ -509,7 +509,7 @@ export default function TimelineBuilder() {
   const [timeline, setTimeline] = useAtom(timelineAtom);
   const [, setPayed] = useAtom(payedAtom);
   const params = useSearchParams();
-  const value = params.get('deck');
+  const value = params.get('timeline');
 
   const shareHandler = async () => {
     try {
