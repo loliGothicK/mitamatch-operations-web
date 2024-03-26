@@ -2101,7 +2101,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:18.2.69, @types/react@npm:^18.0.26":
+"@types/react@npm:*, @types/react@npm:^18.0.26":
   version: 18.2.69
   resolution: "@types/react@npm:18.2.69"
   dependencies:
@@ -2109,6 +2109,17 @@ __metadata:
     "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 10c0/239b947ed8576a271057a6f571d0967098074b101a2bece244e88093dc8fb2f020872c463b8e78b2049334ba99158f6eef5960e51f73a389f86eee39b835d846
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:18.2.70":
+  version: 18.2.70
+  resolution: "@types/react@npm:18.2.70"
+  dependencies:
+    "@types/prop-types": "npm:*"
+    "@types/scheduler": "npm:*"
+    csstype: "npm:^3.0.2"
+  checksum: 10c0/2107b1fa8963cabe33d981cf1c0e3b7534c9d12b98c1046cd9f7975851690a0780db011f6a1d637ae4e612ef00c94ebdbe76a9e2f9e0f3baa6aad3213932af41
   languageName: node
   linkType: hard
 
@@ -2906,7 +2917,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^1.0.4, clsx@npm:^1.2.1":
+"clsx@npm:^1.0.4":
   version: 1.2.1
   resolution: "clsx@npm:1.2.1"
   checksum: 10c0/34dead8bee24f5e96f6e7937d711978380647e936a22e76380290e35486afd8634966ce300fc4b74a32f3762c7d4c0303f442c3e259f4ce02374eb0c82834f27
@@ -4142,10 +4153,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fp-ts@npm:2.16.4":
-  version: 2.16.4
-  resolution: "fp-ts@npm:2.16.4"
-  checksum: 10c0/c81f463ddc32faf9a58c95d89951e16a1ea42e0412fb962b53ddfd213afc8f55695aceb2a81ad22a77e877a8904395df1d4351cd43c21c1e98e421fe86de5752
+"fp-ts@npm:2.16.5":
+  version: 2.16.5
+  resolution: "fp-ts@npm:2.16.5"
+  checksum: 10c0/7208a91dcfd3aadd356ee727df351ae86017cfe8c61a6375c6b8f642bb68028edcf928ec5075b3e9884d723cdac3103317c0398ccd6825448eaf01f6298cb61f
   languageName: node
   linkType: hard
 
@@ -5996,7 +6007,7 @@ __metadata:
     "@types/jsonwebtoken": "npm:9.0.6"
     "@types/node": "npm:20.11.30"
     "@types/node-fetch": "npm:2.6.11"
-    "@types/react": "npm:18.2.69"
+    "@types/react": "npm:18.2.70"
     "@types/react-dom": "npm:18.2.22"
     "@types/react-virtualized": "npm:9.21.29"
     "@types/react-window": "npm:1.8.8"
@@ -6005,7 +6016,7 @@ __metadata:
     eslint: "npm:8.57.0"
     eslint-config-next: "npm:14.1.4"
     eslint-config-prettier: "npm:9.1.0"
-    fp-ts: "npm:2.16.4"
+    fp-ts: "npm:2.16.5"
     jest: "npm:29.7.0"
     jotai: "npm:2.7.1"
     js-cookie: "npm:3.0.5"
@@ -6016,7 +6027,6 @@ __metadata:
     node-fetch: "npm:3.3.2"
     prettier: "npm:3.2.5"
     react: "npm:18.2.0"
-    react-contexify: "npm:^6.0.0"
     react-dom: "npm:18.2.0"
     react-virtualized: "npm:9.22.5"
     reactflow: "npm:11.10.4"
@@ -6588,18 +6598,6 @@ __metadata:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
   checksum: 10c0/900a93d3cdae3acd7d16f642c29a642aea32c2026446151f0778c62ac089d4b8e6c986811076e1ae180a694cedf077d453a11b58ff0a865629a4f82ab558e102
-  languageName: node
-  linkType: hard
-
-"react-contexify@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "react-contexify@npm:6.0.0"
-  dependencies:
-    clsx: "npm:^1.2.1"
-  peerDependencies:
-    react: ">=16"
-    react-dom: ">=16"
-  checksum: 10c0/f43ece394e0d398941bdc46930759582a447372b48fac06a382acfb447ca6f359d8c882f8bfd25d38d951966dcb19a566d9bd00d157e81a32a15f77a771ef45d
   languageName: node
   linkType: hard
 
