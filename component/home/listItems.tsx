@@ -58,19 +58,19 @@ export const mainListItems = (
 
 const updates = [
   {
-    name: 'Timeline Builder for Web is now available (preview)',
+    name: 'Flow Chart is now available for preview',
+    description: ['You can create, edit, and share your flow chart.'],
+  },
+  {
+    name: 'Timeline Builder for Web is now generally available (GA)',
     description: [
-      'Timeline Builder is now available for Web (preview).',
+      'Timeline Builder is now generally available for Web.',
       'You can create, edit, and share your order timeline.',
     ],
   },
   {
     name: 'Deck Builder for Web is fully functional',
     description: ['Deck Builder all features are now available.'],
-  },
-  {
-    name: 'Mitamatch Operations for Web',
-    description: ['Deck Builder is now available (preview).'],
   },
 ];
 
