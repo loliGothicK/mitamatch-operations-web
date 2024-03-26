@@ -63,8 +63,8 @@ export function decodeTimeline(encoded: string): OrderWithPIC[] {
       return {
         ...orderMap.get(item.id)!,
         delay: item.delay,
-        pic: item.pic,
-        sub: item.sub,
+        pic: item.pic ? decodeURIComponent(item.pic) : undefined,
+        sub: item.sub ? decodeURIComponent(item.sub) : undefined,
       };
     },
   );
