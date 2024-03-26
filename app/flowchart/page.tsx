@@ -6,10 +6,12 @@ import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
 import { Add } from '@mui/icons-material';
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, Button, Modal, Stack, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 
 import { LabeledEdge } from '@/component/flow/Edge';
 import OrderNode from '@/component/flow/node/OrderNode';
@@ -40,6 +42,7 @@ export default function FlowChart() {
   const [initEdges, setEdgeStorage] = useAtom(edgeStorageAtom);
   const [nodes, setNodes, onNodesChange] = useNodesState(initNodes as Node[]);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initEdges);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const getCounter = () => {
     setCounter((c) => c + 1);
@@ -68,38 +71,50 @@ export default function FlowChart() {
         alignItems={'center'}
         sx={{ height: '10vh' }}
       >
-        <Autocomplete
-          disablePortal
-          options={orderList
-            .filter((order) => order.payed)
-            .map((order) => order.name)}
-          sx={{ width: 250 }}
-          renderInput={(params) => (
-            <TextField {...params} label="Select Order" />
-          )}
-          onChange={(_, value) => {
-            if (value) {
-              setSelect(orderList.find((order) => order.name === value)!);
-            }
-          }}
-        />
-        <IconButton
-          onClick={() => {
-            const newNodes = [
-              ...nodes,
-              {
-                id: getCounter().toString(),
-                type: 'order',
-                position: { x: 100, y: 100 },
-                data: { order: select },
-              },
-            ];
-            setNodeStorage(newNodes);
-            setNodes(newNodes);
-          }}
-        >
-          <Add />
-        </IconButton>
+        <Stack direction={'row'} display={'flex'}>
+          <Stack direction={'row'}>
+            <Autocomplete
+              disablePortal
+              options={orderList
+                .filter((order) => order.payed)
+                .map((order) => order.name)}
+              sx={{ width: 250 }}
+              renderInput={(params) => (
+                <TextField {...params} label="Select Order" />
+              )}
+              onChange={(_, value) => {
+                if (value) {
+                  setSelect(orderList.find((order) => order.name === value)!);
+                }
+              }}
+            />
+            <IconButton
+              onClick={() => {
+                const newNodes = [
+                  ...nodes,
+                  {
+                    id: getCounter().toString(),
+                    type: 'order',
+                    position: { x: 100, y: 100 },
+                    data: { order: select },
+                  },
+                ];
+                setNodeStorage(newNodes);
+                setNodes(newNodes);
+              }}
+            >
+              <Add />
+            </IconButton>
+          </Stack>
+          <Stack
+            direction={'row'}
+            position={'absolute'}
+            right={100}
+            onClick={() => setModalOpen(true)}
+          >
+            <Button>{'how to use'}</Button>
+          </Stack>
+        </Stack>
       </Grid>
       <Divider />
       <div
@@ -128,6 +143,40 @@ export default function FlowChart() {
           <MiniMap nodeStrokeWidth={3} zoomable pannable />
         </ReactFlow>
       </div>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <Box
+          sx={{
+            position: 'absolute' as 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 500,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Flowchart の使い方
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            1. オーダーを選択して追加ボタンを押す
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            2. ノードをドラッグして移動
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            3. ノードのハンドルをドラッグしてエッジを作成
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            4. ノードまたはエッジをクリックして Backspace を押すと削除
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            5. ノードまたはエッジを右クリックすると編集メニューが表示
+          </Typography>
+        </Box>
+      </Modal>
     </Layout>
   );
 }
