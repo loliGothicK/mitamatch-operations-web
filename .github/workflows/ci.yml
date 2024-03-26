@@ -22,13 +22,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: package.json
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
+          cache: 'yarn'
+          cache-dependency-path: '**/yarn.lock'
       - name: Install packages
-        run: npm ci
+        run: yarn install
       - name: Format check
-        run: npm run fmt:check
+        run: yarn fmt:check
       - name: Lint check
-        run: npm run lint
+        run: yarn lint
       - name: Test and Show coverage
-        run: npm test -- --bail --maxWorkers=100% --watchAll=false --coverage
+        run: yarn test -- --bail --maxWorkers=100% --watchAll=false --coverage
