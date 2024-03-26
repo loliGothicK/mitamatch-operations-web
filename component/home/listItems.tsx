@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { Home, Schema, ViewCompact, ViewTimeline } from '@mui/icons-material';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import { Badge } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -29,7 +30,11 @@ const links = [
   {
     title: 'Flow Chart',
     href: '/flowchart',
-    icon: <Schema />,
+    icon: (
+      <Badge badgeContent={'preview'} color="primary">
+        <Schema />
+      </Badge>
+    ),
   },
 ];
 
