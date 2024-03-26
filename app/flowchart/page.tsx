@@ -150,7 +150,7 @@ export default function FlowChart() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            width: 500,
             bgcolor: 'background.paper',
             border: '2px solid #000',
             boxShadow: 24,
@@ -158,26 +158,22 @@ export default function FlowChart() {
           }}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            How to use Flowchart
+            Flowchart の使い方
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            1. Select Order from the dropdown menu.
+            1. オーダーを選択して追加ボタンを押す
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            2. Click the Add button to add the selected Order to the Flowchart.
+            2. ノードをドラッグして移動
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            3. Drag and drop the Order to the desired position.
+            3. ノードのハンドルをドラッグしてエッジを作成
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            4. Connect the Orders by dragging the edge from one Order to
-            another.
+            4. ノードまたはエッジをクリックして Backspace を押すと削除
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            5. Right Click the edge to add a label (context menu).
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            6. Click the edge and press Backspace to remove the Nodes or Edges.
+            5. ノードまたはエッジを右クリックすると編集メニューが表示
           </Typography>
         </Box>
       </Modal>
