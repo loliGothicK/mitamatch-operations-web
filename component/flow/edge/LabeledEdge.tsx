@@ -80,6 +80,7 @@ export default function LabeledEdge({
             backgroundColor: 'rgba(255, 255, 255, 0.4)',
             display: comment !== '' ? 'block' : 'none',
           }}
+          disabled={true}
           onClick={() => setDialogOpen(true)}
         >
           {comment}

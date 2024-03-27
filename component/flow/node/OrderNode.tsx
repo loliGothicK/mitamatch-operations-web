@@ -2,6 +2,7 @@ import { FormEvent, MouseEvent, useState } from 'react';
 
 import { Edit } from '@mui/icons-material';
 import {
+  Autocomplete,
   Button,
   Card,
   CardContent,
@@ -18,13 +19,14 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import { Order } from '@/domain/order/order';
+import { Order, orderList } from '@/domain/order/order';
 
 import { Handle, NodeProps, Position } from 'reactflow';
 
 function OrderNode({ data, isConnectable }: NodeProps<{ order: Order }>) {
   const [pic, setPic] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
+  const [order, setOrder] = useState<Order>(data.order);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -84,7 +86,7 @@ function OrderNode({ data, isConnectable }: NodeProps<{ order: Order }>) {
             <CardMedia
               component="img"
               sx={{ width: 50, height: 50, padding: 0 }}
-              image={`/order/${data.order.name}.png`}
+              image={`/order/${order.name}.png`}
             />
             <CardContent>
               <Typography
@@ -93,7 +95,7 @@ function OrderNode({ data, isConnectable }: NodeProps<{ order: Order }>) {
                 color="text.secondary"
                 component="div"
               >
-                {data.order.name}
+                {order.name}
               </Typography>
               <Typography
                 variant="body1"
@@ -148,11 +150,30 @@ function OrderNode({ data, isConnectable }: NodeProps<{ order: Order }>) {
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries((formData as any).entries());
             setPic(formJson.pic);
+            setOrder(orderList.find((o) => o.name === formJson.order)!);
             handleClose();
           },
         }}
       >
         <DialogTitle>Edit</DialogTitle>
+        <DialogContent>
+          <Autocomplete
+            options={orderList.filter((o) => o.payed).map((o) => o.name)}
+            defaultValue={order.name}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                autoFocus
+                margin="dense"
+                id="order"
+                name="order"
+                label="Order"
+                type="text"
+                variant="standard"
+              />
+            )}
+          />
+        </DialogContent>
         <DialogContent>
           <TextField
             autoFocus
