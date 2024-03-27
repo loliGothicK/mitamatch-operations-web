@@ -160,21 +160,17 @@ export default function FlowChart() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Flowchart の使い方
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            1. オーダーを選択して追加ボタンを押す
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            2. ノードをドラッグして移動
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            3. ノードのハンドルをドラッグしてエッジを作成
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            4. ノードまたはエッジをクリックして Backspace を押すと削除
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            5. ノードまたはエッジを右クリックすると編集メニューが表示
-          </Typography>
+          {[
+            '1. オーダーを選択して追加ボタンを押す',
+            '2. ノードをドラッグして移動',
+            '3. ノードのハンドルをドラッグしてエッジを作成',
+            '4. ノードまたはエッジをクリックして Backspace を押すと削除',
+            '5. ノードまたはエッジを右クリックすると編集メニューが表示',
+          ].map((text, index) => (
+            <Typography key={index} sx={{ mt: 2 }}>
+              {text}
+            </Typography>
+          ))}
         </Box>
       </Modal>
     </Layout>
