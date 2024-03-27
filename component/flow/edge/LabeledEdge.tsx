@@ -12,7 +12,7 @@ import {
 
 import { EdgeLabelRenderer, EdgeProps, getBezierPath } from 'reactflow';
 
-export function LabeledEdge({
+export default function LabeledEdge({
   id,
   sourceX,
   sourceY,

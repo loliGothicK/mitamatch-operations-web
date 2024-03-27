@@ -13,7 +13,7 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import { LabeledEdge } from '@/component/flow/Edge';
+import LabeledEdge from '@/component/flow/edge/LabeledEdge';
 import OrderNode from '@/component/flow/node/OrderNode';
 import { Layout } from '@/component/Layout';
 import { Order, orderList } from '@/domain/order/order';
