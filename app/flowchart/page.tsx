@@ -1,9 +1,8 @@
 'use client';
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 
 import { Add } from '@mui/icons-material';
 import { Autocomplete, Button, Modal, Stack, TextField } from '@mui/material';
@@ -13,40 +12,42 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import { LabeledEdge } from '@/component/flow/Edge';
+import LabeledEdge from '@/component/flow/edge/LabeledEdge';
 import OrderNode from '@/component/flow/node/OrderNode';
 import { Layout } from '@/component/Layout';
 import { Order, orderList } from '@/domain/order/order';
-import { Node } from '@/types/flow/node';
+import { edgeStorageAtom, idAtom, nodeStorageAtom } from '@/jotai/flowAtoms';
 
 import ReactFlow, {
   addEdge,
   Background,
   BackgroundVariant,
   Connection,
-  Edge,
   MiniMap,
-  Node as NodeType,
   useEdgesState,
   useNodesState,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-const nodeStorageAtom = atomWithStorage('flowchart-nodes', [] as NodeType[]);
-const edgeStorageAtom = atomWithStorage('flowchart-edges', [] as Edge[]);
-const counterAtom = atomWithStorage('counter', 0);
-
 export default function FlowChart() {
-  const [counter, setCounter] = useAtom(counterAtom);
-  const [initNodes, setNodeStorage] = useAtom(nodeStorageAtom);
-  const [initEdges, setEdgeStorage] = useAtom(edgeStorageAtom);
-  const [nodes, setNodes, onNodesChange] = useNodesState(initNodes as Node[]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initEdges);
+  const [count, setCount] = useAtom(idAtom);
+  const [cachedNodes, setNodeStorage] = useAtom(nodeStorageAtom);
+  const [cachedEdges, setEdgeStorage] = useAtom(edgeStorageAtom);
+  const [nodes, setNodes, onNodesChange] = useNodesState(cachedNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(cachedEdges);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const getCounter = () => {
-    setCounter((c) => c + 1);
-    return counter;
+  useEffect(() => {
+    setNodes(cachedNodes);
+    console.log(cachedNodes);
+  }, [cachedNodes]);
+  useEffect(() => {
+    setEdges(cachedEdges);
+  }, [cachedEdges]);
+
+  const getCount = () => {
+    setCount((prev) => prev + 1);
+    return count;
   };
 
   const onConnect = useCallback(
@@ -93,10 +94,12 @@ export default function FlowChart() {
                 const newNodes = [
                   ...nodes,
                   {
-                    id: getCounter().toString(),
+                    id: getCount().toString(),
                     type: 'order',
                     position: { x: 100, y: 100 },
-                    data: { order: select },
+                    data: {
+                      order: select,
+                    },
                   },
                 ];
                 setNodeStorage(newNodes);
@@ -126,8 +129,30 @@ export default function FlowChart() {
         <ReactFlow
           nodes={nodes}
           edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
+          onNodesChange={(changes) => {
+            onNodesChange(changes);
+            setNodeStorage((prev) => {
+              changes.forEach((change) => {
+                if (change.type === 'remove') {
+                  const idx = prev.findIndex((n) => n.id === change.id);
+                  prev.splice(idx, 1);
+                }
+              });
+              return prev;
+            });
+          }}
+          onEdgesChange={(changes) => {
+            onEdgesChange(changes);
+            setEdgeStorage((prev) => {
+              changes.forEach((change) => {
+                if (change.type === 'remove') {
+                  const idx = prev.findIndex((e) => e.id === change.id);
+                  prev.splice(idx, 1);
+                }
+              });
+              return prev;
+            });
+          }}
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
           onConnect={onConnect}
@@ -160,21 +185,17 @@ export default function FlowChart() {
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Flowchart の使い方
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            1. オーダーを選択して追加ボタンを押す
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            2. ノードをドラッグして移動
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            3. ノードのハンドルをドラッグしてエッジを作成
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            4. ノードまたはエッジをクリックして Backspace を押すと削除
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            5. ノードまたはエッジを右クリックすると編集メニューが表示
-          </Typography>
+          {[
+            '1. オーダーを選択して追加ボタンを押す',
+            '2. ノードをドラッグして移動',
+            '3. ノードのハンドルをドラッグしてエッジを作成',
+            '4. ノードまたはエッジをクリックして Backspace を押すと削除',
+            '5. ノードまたはエッジを右クリックすると編集メニューが表示',
+          ].map((text, index) => (
+            <Typography key={index} sx={{ mt: 2 }}>
+              {text}
+            </Typography>
+          ))}
         </Box>
       </Modal>
     </Layout>

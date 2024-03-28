@@ -12,7 +12,7 @@ import {
 
 import { EdgeLabelRenderer, EdgeProps, getBezierPath } from 'reactflow';
 
-export function LabeledEdge({
+export default function LabeledEdge({
   id,
   sourceX,
   sourceY,
@@ -80,6 +80,7 @@ export function LabeledEdge({
             backgroundColor: 'rgba(255, 255, 255, 0.4)',
             display: comment !== '' ? 'block' : 'none',
           }}
+          disabled={true}
           onClick={() => setDialogOpen(true)}
         >
           {comment}
