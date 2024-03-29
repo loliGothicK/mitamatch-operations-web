@@ -39,7 +39,6 @@ export default function FlowChart() {
 
   useEffect(() => {
     setNodes(cachedNodes);
-    console.log(cachedNodes);
   }, [cachedNodes]);
   useEffect(() => {
     setEdges(cachedEdges);
