@@ -109,20 +109,30 @@ export const filteredMemoriaAtom = atom((get) => {
       const skill = parse_skill(memoria.skill.name, memoria.skill.description);
 
       const basicStatus = get(basicStatusFilterAtom).every((filter) => {
-        return skill.status.some((x) => {
-          return x === filter.status && skill.upDown === filter.upDown;
+        return skill.effects.some((x) => {
+          return (
+            x.status === filter.status &&
+            (filter.upDown === 'UP' ? x.type === 'buff' : x.type === 'debuff')
+          );
         });
       });
 
       const elementStatus = get(elementStatusFilterAtom).every((filter) => {
-        return skill.status.some((x) => {
-          return x === filter.status && skill.upDown === filter.upDown;
+        return skill.effects.some((x) => {
+          return (
+            x.status === filter.status &&
+            (filter.upDown === 'UP' ? x.type === 'buff' : x.type === 'debuff')
+          );
         });
       });
 
       const otherSkill = get(otherSkillFilterAtom).every((filter) => {
-        return skill.effects.some((x) => {
-          return x === filter;
+        return skill.kinds?.some((x) => {
+          return typeof x === 'string' && typeof filter === 'string'
+            ? x === filter
+            : typeof x !== 'string' && typeof filter !== 'string'
+              ? x.element === filter.element && x.kind === filter.kind
+              : false;
         });
       });
 
@@ -133,55 +143,37 @@ export const filteredMemoriaAtom = atom((get) => {
 
       const vanguardSupport = get(vanguardSupportFilterAtom).every((filter) => {
         if (typeof filter === 'string') {
-          return support.kind.some(
-            (x) => typeof x === 'string' && x === filter,
-          );
+          return support.effects.some((x) => x.type === filter);
         } else {
-          return support.kind.some((x) => {
-            return (
-              typeof x !== 'string' &&
-              x.status === filter.status &&
-              x.upDown === filter.upDown
-            );
+          return support.effects.some((x) => {
+            return x.status === filter.status && x.type === filter.upDown;
           });
         }
       });
 
       const assistSupport = get(assistSupportFilterAtom).every((filter) => {
         if (typeof filter === 'string') {
-          return support.kind.some(
-            (x) => typeof x === 'string' && x === filter,
-          );
+          return support.effects.some((x) => x.type === filter);
         } else {
-          return support.kind.some((x) => {
-            return (
-              typeof x !== 'string' &&
-              x.status === filter.status &&
-              x.upDown === filter.upDown
-            );
+          return support.effects.some((x) => {
+            return x.status === filter.status && x.type === filter.upDown;
           });
         }
       });
 
       const recoverySupport = get(recoverySupportFilterAtom).every((filter) => {
         if (typeof filter === 'string') {
-          return support.kind.some(
-            (x) => typeof x === 'string' && x === filter,
-          );
+          return support.effects.some((x) => x.type === filter);
         } else {
-          return support.kind.some((x) => {
-            return (
-              typeof x !== 'string' &&
-              x.status === filter.status &&
-              x.upDown === filter.upDown
-            );
+          return support.effects.some((x) => {
+            return x.status === filter.status && x.type === filter.upDown;
           });
         }
       });
 
       const otherSupport = get(otherSupportFilterAtom).every((filter) => {
-        return support.kind.some((x) => {
-          return x === filter;
+        return support.effects.some((x) => {
+          return x.type === filter;
         });
       });
 

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 import { Memoria } from '@/domain/memoria/memoria';
 import { deckAtom, legendaryDeckAtom } from '@/jotai/memoriaAtoms';
-import { parse_skill, Status, StatusKind, statusKind } from '@/parser/skill';
+import { parse_skill, StatusKind, statusKind } from '@/parser/skill';
 import { parse_support, SupportKind } from '@/parser/support';
 import { elementFilter, elementFilterMap } from '@/types/FilterType';
 
@@ -60,16 +60,14 @@ type SupportPattern =
   | 'DamageUp'
   | 'SupportUp'
   | 'RecoveryUp'
-  | 'NormalMatchPtUp'
-  | 'SpecialMatchPtUp'
+  | 'MatchPtUp'
   | 'MpCostDown'
   | 'RangeUp';
 const supportPattern: SupportPattern[] = [
   'DamageUp',
   'SupportUp',
   'RecoveryUp',
-  'NormalMatchPtUp',
-  'SpecialMatchPtUp',
+  'MatchPtUp',
   'MpCostDown',
   'RangeUp',
   ...[
@@ -113,23 +111,25 @@ export function supportPatternToJapanese(pattern: SupportPattern): string {
     .with('DamageUp', () => 'ダメージUP')
     .with('SupportUp', () => '支援UP')
     .with('RecoveryUp', () => '回復UP')
-    .with('NormalMatchPtUp', () => 'PtUP/通')
-    .with('SpecialMatchPtUp', () => 'PtUP/特')
+    .with('MatchPtUp', () => 'PtUP')
     .with('MpCostDown', () => 'MP')
     .with('RangeUp', () => '範囲+1')
     .exhaustive();
 }
 
 export function intoSupportPattern(kind: SupportKind): SupportPattern {
-  return match(kind)
+  return match(kind.type)
     .with('DamageUp', () => 'DamageUp')
     .with('SupportUp', () => 'SupportUp')
     .with('RecoveryUp', () => 'RecoveryUp')
-    .with('NormalMatchPtUp', () => 'NormalMatchPtUp')
-    .with('SpecialMatchPtUp', () => 'SpecialMatchPtUp')
+    .with('MatchPtUp', () => 'MatchPtUp')
     .with('MpCostDown', () => 'MpCostDown')
     .with('RangeUp', () => 'RangeUp')
-    .otherwise(() => intoStatusPattern(kind as Status)) as SupportPattern;
+    .with('UP', () => intoStatusPattern({ status: kind.status!, upDown: 'UP' }))
+    .with('DOWN', () =>
+      intoStatusPattern({ status: kind.status!, upDown: 'DOWN' }),
+    )
+    .exhaustive() as SupportPattern;
 }
 
 export default function Details() {
@@ -150,9 +150,14 @@ export default function Details() {
 
   const skillAggregate = new Map<StatusPattern, number>();
   for (const pattern of skills.flatMap((skill) => {
-    return skill.status.map((stat) => {
-      return intoStatusPattern({ status: stat, upDown: skill.upDown });
-    });
+    return skill.effects
+      .filter((eff) => eff.status !== undefined)
+      .map((eff) => {
+        return intoStatusPattern({
+          status: eff.status!,
+          upDown: eff.type === 'buff' ? 'UP' : 'DOWN',
+        });
+      });
   })) {
     skillAggregate.set(pattern, (skillAggregate.get(pattern) || 0) + 1);
   }
@@ -166,8 +171,8 @@ export default function Details() {
 
   const supportAggregate = new Map<SupportPattern, number>();
   for (const pattern of supports.flatMap((support) => {
-    return support.kind.map((kind) => {
-      return intoSupportPattern(kind);
+    return support.effects.map((eff) => {
+      return intoSupportPattern(eff);
     });
   })) {
     supportAggregate.set(pattern, (supportAggregate.get(pattern) || 0) + 1);
