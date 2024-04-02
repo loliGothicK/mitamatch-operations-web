@@ -1,57 +1,175 @@
-import { StatusKind } from '@/parser/skill';
+import { Amount, StatusKind } from '@/parser/skill';
 
 import { match } from 'ts-pattern';
 
 type Trigger = 'Attack' | 'Assist' | 'Recovery' | 'Command';
 
-type Status = {
-  upDown: 'UP' | 'DOWN';
-  status: Exclude<
-    StatusKind,
-    'Life' | 'Light ATK' | 'Light DEF' | 'Dark ATK' | 'Dark DEF'
-  >;
-};
+type PossibleStatus = Exclude<
+  StatusKind,
+  'Life' | 'Light ATK' | 'Light DEF' | 'Dark ATK' | 'Dark DEF'
+>;
 
-export type SupportKind =
-  | 'DamageUp'
-  | 'SupportUp'
-  | 'RecoveryUp'
-  | 'NormalMatchPtUp'
-  | 'SpecialMatchPtUp'
-  | 'MpCostDown'
-  | 'RangeUp'
-  | Status;
+export type SupportKind = {
+  type:
+    | 'DamageUp'
+    | 'SupportUp'
+    | 'RecoveryUp'
+    | 'MatchPtUp'
+    | 'MpCostDown'
+    | 'RangeUp'
+    | 'UP'
+    | 'DOWN';
+  amount: Amount;
+  status?: PossibleStatus;
+};
 
 type Support = {
   trigger: Trigger;
-  kind: SupportKind[];
+  probability: Exclude<Amount, 'large' | 'extra-large' | 'super-large'>;
+  effects: SupportKind[];
 };
 
-function statusUp(
-  status: Exclude<
-    StatusKind,
-    'Life' | 'Light ATK' | 'Light DEF' | 'Dark ATK' | 'Dark DEF'
-  >,
-): Status {
-  return {
-    upDown: 'UP',
-    status,
-  };
+function parse_status(description: string): SupportKind[] {
+  const first =
+    /(敵|敵前衛1体|味方|味方前衛1体|自身)の(.+)を(.*アップ|.*ダウン)/;
+  const _match = description.match(first);
+
+  if (!_match) {
+    return [];
+  }
+
+  const statuses = _match[2].split('と').flatMap((status) => {
+    return match<string, PossibleStatus[]>(status)
+      .with('ATK', () => ['ATK'])
+      .with('DEF', () => ['DEF'])
+      .with('Sp.ATK', () => ['Sp.ATK'])
+      .with('Sp.DEF', () => ['Sp.DEF'])
+      .with('火属性攻撃力', () => ['Fire ATK'])
+      .with('水属性攻撃力', () => ['Water ATK'])
+      .with('風属性攻撃力', () => ['Wind ATK'])
+      .with('火属性防御力', () => ['Fire DEF'])
+      .with('水属性防御力', () => ['Water DEF'])
+      .with('風属性防御力', () => ['Wind DEF'])
+      .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
+        'Fire ATK',
+        'Water ATK',
+        'Wind ATK',
+      ])
+      .with('火属性防御力・水属性防御力・風属性防御力', () => [
+        'Fire DEF',
+        'Water DEF',
+        'Wind DEF',
+      ])
+      .run();
+  });
+
+  const [amount, type] = match<string, [Amount, 'UP' | 'DOWN']>(_match[3])
+    .with('小アップ', () => ['small', 'UP'])
+    .with('アップ', () => ['medium', 'UP'])
+    .with('大アップ', () => ['large', 'UP'])
+    .with('特大アップ', () => ['extra-large', 'UP'])
+    .with('超特大アップ', () => ['super-large', 'UP'])
+    .with('小ダウン', () => ['small', 'DOWN'])
+    .with('ダウン', () => ['medium', 'DOWN'])
+    .with('大ダウン', () => ['large', 'DOWN'])
+    .with('特大ダウン', () => ['extra-large', 'DOWN'])
+    .with('超特大ダウン', () => ['super-large', 'DOWN'])
+    .run();
+
+  return statuses.map((status) => {
+    return {
+      type,
+      status,
+      amount,
+    };
+  });
 }
 
-function statusDown(
-  status: Exclude<
-    StatusKind,
-    'Life' | 'Light ATK' | 'Light DEF' | 'Dark ATK' | 'Dark DEF'
-  >,
-): Status {
-  return {
-    upDown: 'DOWN',
-    status,
-  };
+function parse_amount(amount: string): Amount {
+  return match<string, Amount>(amount)
+    .with('小アップ', () => 'small')
+    .with('アップ', () => 'medium')
+    .with('大アップ', () => 'large')
+    .with('特大アップ', () => 'extra-large')
+    .with('超特大アップ', () => 'super-large')
+    .run();
 }
 
-export function parse_support(name: string, _: string): Support {
+function parse_damage(description: string): SupportKind[] {
+  const damage = /攻撃ダメージを(.*アップ)させる/;
+  const _match = description.match(damage);
+
+  if (!_match) {
+    return [];
+  }
+
+  return [{ type: 'DamageUp', amount: parse_amount(_match[1]) }];
+}
+
+function parse_assist(description: string): SupportKind[] {
+  const assist = /支援\/妨害効果を(.*アップ)/;
+  const _match = description.match(assist);
+
+  if (!_match) {
+    return [];
+  }
+
+  return [{ type: 'SupportUp', amount: parse_amount(_match[1]) }];
+}
+
+function parse_recovery(description: string): SupportKind[] {
+  const recovery = /HPの回復量を(.*アップ)/;
+  const _match = description.match(recovery);
+
+  if (!_match) {
+    return [];
+  }
+
+  return [{ type: 'RecoveryUp', amount: parse_amount(_match[1]) }];
+}
+
+function parse_match_pt(description: string): SupportKind[] {
+  const matchPt = /自身のマッチPtの獲得量が(.*アップ)する/;
+  const _match = description.match(matchPt);
+
+  if (!_match) {
+    return [];
+  }
+
+  const amount = match<string, Amount>(_match[1])
+    .with('小アップ', () => 'small')
+    .with('アップ', () => 'medium')
+    .with('大アップ', () => 'large')
+    .with('特大アップ', () => 'extra-large')
+    .with('超特大アップ', () => 'super-large')
+    .run();
+
+  return [{ type: 'MatchPtUp', amount }];
+}
+
+function parse_mp_cost(description: string): SupportKind[] {
+  const mpCost = /一定確率でMP消費を抑える/;
+  const _match = description.match(mpCost);
+
+  if (!_match) {
+    return [];
+  }
+
+  return [{ type: 'MpCostDown', amount: 'medium' }];
+}
+
+function parse_range(description: string): SupportKind[] {
+  const range = /効果対象範囲が(.+)される/;
+  const _match = description.match(range);
+
+  if (!_match) {
+    return [];
+  }
+
+  return [{ type: 'RangeUp', amount: 'medium' }];
+}
+
+export function parse_support(name: string, description: string): Support {
   const trigger = match<string, Trigger>(name)
     .when(
       (name) => name.startsWith('攻:'),
@@ -71,155 +189,31 @@ export function parse_support(name: string, _: string): Support {
     )
     .run();
 
-  return match(trigger)
-    .with('Command', () => {
-      const effects = match<string, SupportKind[]>(name)
-        .when(
-          (name) => name.includes('MP消費DOWN'),
-          () => ['MpCostDown'],
-        )
-        .when(
-          (name) => name.includes('効果範囲'),
-          () => ['RangeUp'],
-        )
-        .run();
-      return { trigger, kind: effects };
-    })
-    .otherwise(() => {
-      const regExp = /^(.+) (.+)$/;
-      const [_, effects, _level] = name.match(regExp)!;
-      const kind = effects.split('/').flatMap((effect) => {
-        return (
-          match<string, SupportKind[]>(effect)
-            // # サポート効果一覧
-            // ## 第一効果
-            // ### 前衛
-            .with('攻:獲得マッチPtUP', () => []) // これだけスラッシュの使い方が異なる、F*CK
-            .with('通常単体', () => ['NormalMatchPtUp'])
-            .with('特殊単体', () => ['SpecialMatchPtUp'])
-            .with('攻:ダメージUP', () => ['DamageUp'])
-            .with('攻:パワーUP', () => [statusUp('ATK')])
-            .with('攻:パワーDOWN', () => [statusDown('ATK')])
-            .with('攻:Sp.パワーUP', () => [statusUp('Sp.ATK')])
-            .with('攻:Sp.パワーDOWN', () => [statusDown('Sp.ATK')])
-            .with('攻:WパワーDOWN', () => [
-              statusDown('ATK'),
-              statusDown('Sp.ATK'),
-            ])
-            .with('攻:ガードUP', () => [statusUp('DEF')])
-            .with('攻:ガードDOWN', () => [statusDown('DEF')])
-            .with('攻:Sp.ガードUP', () => [statusUp('Sp.DEF')])
-            .with('攻:Sp.ガードDOWN', () => [statusDown('Sp.DEF')])
-            .with('攻:WガードUP', () => [statusUp('DEF'), statusUp('Sp.DEF')])
-            .with('攻:WガードDOWN', () => [
-              statusDown('DEF'),
-              statusDown('Sp.DEF'),
-            ])
-            .with('攻:マイトUP', () => [statusUp('ATK'), statusUp('DEF')])
-            .with('攻:マイトDOWN', () => [statusDown('ATK'), statusDown('DEF')])
-            .with('攻:Sp.マイトUP', () => [
-              statusUp('Sp.ATK'),
-              statusUp('Sp.DEF'),
-            ])
-            .with('攻:Sp.マイトDOWN', () => [
-              statusDown('Sp.ATK'),
-              statusDown('Sp.DEF'),
-            ])
-            .with('攻:Sp.ディファーDOWN', () => [
-              statusDown('ATK'),
-              statusDown('Sp.DEF'),
-            ])
-            // ### 支援/妨害
-            .with('援:支援UP', () => ['SupportUp'])
-            .with('援:パワーUP', () => [statusUp('ATK')])
-            .with('援:パワーDOWN', () => [statusDown('ATK')])
-            .with('援:Sp.パワーUP', () => [statusUp('Sp.ATK')])
-            .with('援:Sp.パワーDOWN', () => [statusDown('Sp.ATK')])
-            .with('援:WパワーUP', () => [statusUp('ATK'), statusUp('Sp.ATK')])
-            .with('援:WパワーDOWN', () => [
-              statusDown('ATK'),
-              statusDown('Sp.ATK'),
-            ])
-            .with('援:ガードUP', () => [statusUp('DEF')])
-            .with('援:ガードDOWN', () => [statusDown('DEF')])
-            .with('援:Sp.ガードUP', () => [statusUp('Sp.DEF')])
-            .with('援:Sp.ガードDOWN', () => [statusDown('Sp.DEF')])
-            .with('援:WガードUP', () => [statusUp('DEF'), statusUp('Sp.DEF')])
-            .with('援:WガードDOWN', () => [
-              statusDown('DEF'),
-              statusDown('Sp.DEF'),
-            ])
-            .with('援:マイトUP', () => [statusUp('ATK'), statusUp('DEF')])
-            .with('援:マイトDOWN', () => [statusDown('ATK'), statusDown('DEF')])
-            .with('援:Sp.マイトUP', () => [
-              statusUp('Sp.ATK'),
-              statusUp('Sp.DEF'),
-            ])
-            .with('援:Sp.マイトDOWN', () => [
-              statusDown('Sp.ATK'),
-              statusDown('Sp.DEF'),
-            ])
-            .with('援:Sp.ディファーDOWN', () => [
-              statusDown('ATK'),
-              statusDown('Sp.DEF'),
-            ])
-            .with('援:ディファーDOWN', () => [
-              statusDown('Sp.ATK'),
-              statusDown('DEF'),
-            ])
-            .with('援:火パワーUP', () => [statusUp('Fire ATK')])
-            .with('援:水パワーUP', () => [statusUp('Water ATK')]) // 現状存在しない
-            .with('援:風パワーUP', () => [statusUp('Wind ATK')])
-            // ### 回復
-            .with('回:回復UP', () => ['RecoveryUp'])
-            .with('回:ガードUP', () => [statusUp('DEF')])
-            .with('回:Sp.ガードUP', () => [statusUp('Sp.DEF')])
-            .with('回:WガードUP', () => [statusUp('DEF'), statusUp('Sp.DEF')])
-            .with('回:パワーUP', () => [statusUp('ATK')])
-            .with('回:Sp.パワーUP', () => [statusUp('Sp.ATK')])
-
-            // ## 第二効果
-            // ### 複合系
-            .with('パワーUP', () => [statusUp('ATK')])
-            .with('パワーDOWN', () => [statusDown('ATK')])
-            .with('Sp.パワーUP', () => [statusUp('Sp.ATK')])
-            .with('Sp.パワーDOWN', () => [statusDown('Sp.ATK')])
-            .with('ガードUP', () => [statusUp('DEF')])
-            .with('ガードDOWN', () => [statusDown('DEF')])
-            .with('Sp.ガードUP', () => [statusUp('Sp.DEF')])
-            .with('Sp.ガードDOWN', () => [statusDown('Sp.DEF')])
-            // ### 副攻
-            .with('副攻:火パワーUP', () => [statusUp('Fire ATK')])
-            .with('副攻:水パワーUP', () => [statusUp('Water ATK')])
-            .with('副攻:風パワーUP', () => [statusUp('Wind ATK')])
-            .with('副攻:火ガードDOWN', () => [statusDown('Fire DEF')])
-            .with('副攻:水ガードDOWN', () => [statusDown('Water DEF')])
-            .with('副攻:風ガードDOWN', () => [statusDown('Wind DEF')])
-            // ### 副援
-            .with('副援:支援UP', () => ['SupportUp'])
-            .with('副援:火パワーUP', () => [statusUp('Fire ATK')])
-            .with('副援:水パワーUP', () => [statusUp('Water ATK')])
-            .with('副援:風パワーUP', () => [statusUp('Wind ATK')])
-            .with('副援:火パワーDOWN', () => [statusDown('Fire ATK')])
-            .with('副援:水パワーDOWN', () => [statusDown('Water ATK')])
-            .with('副援:風パワーDOWN', () => [statusDown('Water ATK')])
-            .with('副援:火ガードUP', () => [statusUp('Fire DEF')])
-            .with('副援:水ガードUP', () => [statusUp('Water DEF')])
-            .with('副援:風ガードUP', () => [statusUp('Wind DEF')])
-            .with('副援:火ガードDOWN', () => [statusDown('Fire DEF')])
-            .with('副援:水ガードDOWN', () => [statusDown('Water DEF')]) // 現状存在しない
-            .with('副援:風ガードDOWN', () => [statusDown('Wind DEF')]) // 現状存在しない
-            .with('副援:トライガードUP', () => [
-              statusUp('Fire DEF'),
-              statusUp('Water DEF'),
-              statusUp('Wind DEF'),
-            ])
-            .run()
-        );
-      });
-      return {
-        trigger,
-        kind,
-      };
-    });
+  return {
+    trigger,
+    probability: match<
+      string,
+      Exclude<Amount, 'large' | 'extra-large' | 'super-large'>
+    >(description)
+      .when(
+        (sentence) => sentence.includes('一定確率'),
+        () => 'small',
+      )
+      .when(
+        (sentence) => sentence.includes('中確率'),
+        () => 'medium',
+      )
+      .run(),
+    effects: description.split('。').flatMap((sentence) => {
+      return [
+        ...parse_damage(sentence),
+        ...parse_assist(sentence),
+        ...parse_recovery(sentence),
+        ...parse_match_pt(sentence),
+        ...parse_mp_cost(sentence),
+        ...parse_range(sentence),
+        ...parse_status(sentence),
+      ];
+    }),
+  };
 }

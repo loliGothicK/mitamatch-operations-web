@@ -1,5 +1,4 @@
 import { option } from 'fp-ts';
-import { getOrElse, map } from 'fp-ts/lib/Option';
 import { Option } from 'fp-ts/Option';
 import { match } from 'ts-pattern';
 
@@ -43,21 +42,337 @@ export type Amount =
   | 'large'
   | 'extra-large'
   | 'super-large';
-export type Status = {
-  upDown: 'UP' | 'DOWN';
-  status: StatusKind;
+export type SkillKind = Elemental | 'charge' | 'counter' | 'heal';
+
+export type SkillEffect = {
+  type: 'damage' | 'heal' | 'buff' | 'debuff';
+  range: [number, number];
+  amount: Amount;
+  status?: StatusKind;
 };
-export type SkillKind = Status | Elemental | 'charge' | 'counter' | 'heal';
-type BuffKind = 'Power' | 'Guard' | 'Might' | 'Defer' | 'Life';
 
 export type Skill = {
-  name: string;
-  description: string;
-  upDown: 'UP' | 'DOWN';
-  status: StatusKind[];
-  amount: Amount;
-  effects: SkillKind[];
+  raw: { name: string; description: string };
+  effects: SkillEffect[];
+  kinds?: SkillKind[];
 };
+
+function parse_damage(description: string): SkillEffect[] {
+  let result: SkillEffect[] = [];
+  const damage = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
+  const _match = description.match(damage);
+
+  if (!_match) {
+    return result;
+  }
+
+  const range = ((r) => {
+    if (r.length === 1) {
+      return [r[0], r[0]] as [number, number];
+    } else {
+      return [r[0], r[1]] as [number, number];
+    }
+  })(_match[1].split('～').map((n) => parseInt(n)));
+
+  const amount = match<string, Amount>(_match[3])
+    .with('小ダメージ', () => 'small')
+    .with('ダメージ', () => 'medium')
+    .with('大ダメージ', () => 'large')
+    .with('特大ダメージ', () => 'extra-large')
+    .with('超特大ダメージ', () => 'super-large')
+    .run();
+
+  result.push({ type: 'damage', range, amount });
+
+  const buff = /自身の(.*?)を(.*?アップ)させる/;
+  const debuff = /敵の(.*?)を(.*?ダウン)させる/;
+
+  const buffMatch = description.match(buff);
+
+  if (buffMatch) {
+    const statuses = buffMatch[1].split('と').flatMap((s) => {
+      return match<string, StatusKind[]>(s)
+        .with('ATK', () => ['ATK'])
+        .with('Sp.ATK', () => ['Sp.ATK'])
+        .with('DEF', () => ['DEF'])
+        .with('Sp.DEF', () => ['Sp.DEF'])
+        .with('火属性攻撃力', () => ['Fire ATK'])
+        .with('水属性攻撃力', () => ['Water ATK'])
+        .with('風属性攻撃力', () => ['Wind ATK'])
+        .with('光属性攻撃力', () => ['Light ATK'])
+        .with('闇属性攻撃力', () => ['Dark ATK'])
+        .with('火属性防御力', () => ['Fire DEF'])
+        .with('水属性防御力', () => ['Water DEF'])
+        .with('風属性防御力', () => ['Wind DEF'])
+        .with('光属性防御力', () => ['Light DEF'])
+        .with('闇属性防御力', () => ['Dark DEF'])
+        .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
+          'Fire ATK',
+          'Water ATK',
+          'Wind ATK',
+        ])
+        .with('火属性防御力・水属性防御力・風属性防御力', () => [
+          'Fire DEF',
+          'Water DEF',
+          'Wind DEF',
+        ])
+        .run();
+    });
+
+    const debuffAmount = match<string, Amount>(buffMatch[2])
+      .with('小アップ', () => 'small')
+      .with('アップ', () => 'medium')
+      .with('大アップ', () => 'large')
+      .with('特大アップ', () => 'extra-large')
+      .run();
+
+    statuses.forEach((status) => {
+      result.push({
+        type: 'buff',
+        range,
+        amount: debuffAmount,
+        status,
+      });
+    });
+  }
+
+  const debuffMatch = description.match(debuff);
+
+  if (debuffMatch) {
+    const statuses = debuffMatch[1].split('と').flatMap((s) => {
+      return match<string, StatusKind[]>(s)
+        .with('ATK', () => ['ATK'])
+        .with('Sp.ATK', () => ['Sp.ATK'])
+        .with('DEF', () => ['DEF'])
+        .with('Sp.DEF', () => ['Sp.DEF'])
+        .with('火属性攻撃力', () => ['Fire ATK'])
+        .with('水属性攻撃力', () => ['Water ATK'])
+        .with('風属性攻撃力', () => ['Wind ATK'])
+        .with('光属性攻撃力', () => ['Light ATK'])
+        .with('闇属性攻撃力', () => ['Dark ATK'])
+        .with('火属性防御力', () => ['Fire DEF'])
+        .with('水属性防御力', () => ['Water DEF'])
+        .with('風属性防御力', () => ['Wind DEF'])
+        .with('光属性防御力', () => ['Light DEF'])
+        .with('闇属性防御力', () => ['Dark DEF'])
+        .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
+          'Fire ATK',
+          'Water ATK',
+          'Wind ATK',
+        ])
+        .with('火属性防御力・水属性防御力・風属性防御力', () => [
+          'Fire DEF',
+          'Water DEF',
+          'Wind DEF',
+        ])
+        .run();
+    });
+
+    const debuffAmount = match<string, Amount>(debuffMatch[2])
+      .with('小ダウン', () => 'small')
+      .with('ダウン', () => 'medium')
+      .with('大ダウン', () => 'large')
+      .with('特大ダウン', () => 'extra-large')
+      .run();
+
+    statuses.forEach((status) => {
+      result.push({
+        type: 'debuff',
+        range,
+        amount: debuffAmount,
+        status,
+      });
+    });
+  }
+
+  return result;
+}
+
+function parse_buff(description: string): SkillEffect[] {
+  const buff = /味方(.+)体の(.+)を(.*?アップ)させる/;
+  const _match = description.match(buff);
+
+  if (!_match) {
+    return [];
+  }
+
+  const range = ((r) => {
+    if (r.length === 1) {
+      return [r[0], r[0]] as [number, number];
+    } else {
+      return [r[0], r[1]] as [number, number];
+    }
+  })(_match[1].split('～').map((n) => parseInt(n)));
+
+  const status = _match[2].split('と').flatMap((s) => {
+    return match<string, StatusKind[]>(s)
+      .with('ATK', () => ['ATK'])
+      .with('DEF', () => ['DEF'])
+      .with('Sp.ATK', () => ['Sp.ATK'])
+      .with('Sp.DEF', () => ['Sp.DEF'])
+      .with('最大HP', () => ['Life'])
+      .with('火属性攻撃力', () => ['Fire ATK'])
+      .with('水属性攻撃力', () => ['Water ATK'])
+      .with('風属性攻撃力', () => ['Wind ATK'])
+      .with('光属性攻撃力', () => ['Light ATK'])
+      .with('闇属性攻撃力', () => ['Dark ATK'])
+      .with('火属性防御力', () => ['Fire DEF'])
+      .with('水属性防御力', () => ['Water DEF'])
+      .with('風属性防御力', () => ['Wind DEF'])
+      .with('光属性防御力', () => ['Light DEF'])
+      .with('闇属性防御力', () => ['Dark DEF'])
+      .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
+        'Fire ATK',
+        'Water ATK',
+        'Wind ATK',
+      ])
+      .run();
+  });
+
+  const amount = match<string, Amount>(_match[3])
+    .with('小アップ', () => 'small')
+    .with('アップ', () => 'medium')
+    .with('大アップ', () => 'large')
+    .with('特大アップ', () => 'extra-large')
+    .with('超特大アップ', () => 'super-large')
+    .run();
+
+  return status.map((s) => {
+    return { type: 'buff', range, amount, status: s };
+  });
+}
+
+function parse_debuff(description: string): SkillEffect[] {
+  const debuff = /敵(.+)体の(.+)を(.*?ダウン)させる/;
+  const _match = description.match(debuff);
+
+  if (!_match) {
+    return [];
+  }
+
+  const range = ((r) => {
+    if (r.length === 1) {
+      return [r[0], r[0]] as [number, number];
+    } else {
+      return [r[0], r[1]] as [number, number];
+    }
+  })(_match[1].split('～').map((n) => parseInt(n)));
+
+  const status = _match[2].split('と').flatMap((s) => {
+    return match<string, StatusKind[]>(s)
+      .with('ATK', () => ['ATK'])
+      .with('DEF', () => ['DEF'])
+      .with('Sp.ATK', () => ['Sp.ATK'])
+      .with('Sp.DEF', () => ['Sp.DEF'])
+      .with('最大HP', () => ['Life'])
+      .with('火属性攻撃力', () => ['Fire ATK'])
+      .with('水属性攻撃力', () => ['Water ATK'])
+      .with('風属性攻撃力', () => ['Wind ATK'])
+      .with('光属性攻撃力', () => ['Light ATK'])
+      .with('闇属性攻撃力', () => ['Dark ATK'])
+      .with('火属性防御力', () => ['Fire DEF'])
+      .with('水属性防御力', () => ['Water DEF'])
+      .with('風属性防御力', () => ['Wind DEF'])
+      .with('光属性防御力', () => ['Light DEF'])
+      .with('闇属性防御力', () => ['Dark DEF'])
+      .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
+        'Fire ATK',
+        'Water ATK',
+        'Wind ATK',
+      ])
+      .run();
+  });
+
+  const amount = match<string, Amount>(_match[3])
+    .with('小ダウン', () => 'small')
+    .with('ダウン', () => 'medium')
+    .with('大ダウン', () => 'large')
+    .with('特大ダウン', () => 'extra-large')
+    .with('超特大ダウン', () => 'super-large')
+    .run();
+
+  return status.map((s) => {
+    return { type: 'debuff', range, amount, status: s };
+  });
+}
+
+function parse_heal(description: string): SkillEffect[] {
+  let result: SkillEffect[] = [];
+  const heal = /味方(.+)体のHPを(.*?回復)/;
+  const _match = description.match(heal);
+
+  if (!_match) {
+    return [];
+  }
+
+  const range = ((r) => {
+    if (r.length === 1) {
+      return [r[0], r[0]] as [number, number];
+    } else {
+      return [r[0], r[1]] as [number, number];
+    }
+  })(_match[1].split('～').map((n) => parseInt(n)));
+
+  const healAmount = match<string, Amount>(_match[2])
+    .with('小回復', () => 'small')
+    .with('回復', () => 'medium')
+    .with('大回復', () => 'large')
+    .with('特大回復', () => 'extra-large')
+    .run();
+
+  result.push({ type: 'heal', range, amount: healAmount });
+
+  const buff = /(ATK.*?|Sp\.ATK.*?|DEF.*?|Sp\.DEF.*?)を(.*?アップ)/;
+
+  const __match = description.match(buff);
+
+  if (!__match) {
+    return result;
+  }
+
+  const status = __match[1].split('と').flatMap((s) => {
+    return match<string, StatusKind[]>(s)
+      .with('ATK', () => ['ATK'])
+      .with('DEF', () => ['DEF'])
+      .with('Sp.ATK', () => ['Sp.ATK'])
+      .with('Sp.DEF', () => ['Sp.DEF'])
+      .with('最大HP', () => ['Life'])
+      .with('火属性攻撃力', () => ['Fire ATK'])
+      .with('水属性攻撃力', () => ['Water ATK'])
+      .with('風属性攻撃力', () => ['Wind ATK'])
+      .with('光属性攻撃力', () => ['Light ATK'])
+      .with('闇属性攻撃力', () => ['Dark ATK'])
+      .with('火属性防御力', () => ['Fire DEF'])
+      .with('水属性防御力', () => ['Water DEF'])
+      .with('風属性防御力', () => ['Wind DEF'])
+      .with('光属性防御力', () => ['Light DEF'])
+      .with('闇属性防御力', () => ['Dark DEF'])
+      .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
+        'Fire ATK',
+        'Water ATK',
+        'Wind ATK',
+      ])
+      .with('火属性防御力・水属性防御力・風属性防御力', () => [
+        'Fire DEF',
+        'Water DEF',
+        'Wind DEF',
+      ])
+      .run();
+  });
+
+  const buffAmount = match<string, Amount>(__match[2])
+    .with('小アップ', () => 'small')
+    .with('アップ', () => 'medium')
+    .with('大アップ', () => 'large')
+    .with('特大アップ', () => 'extra-large')
+    .run();
+
+  return result.concat(
+    status.map((stat) => {
+      return { type: 'buff', range, amount: buffAmount, status: stat };
+    }),
+  );
+}
 
 export function parse_skill(name: string, description: string): Skill {
   const elemental = match<string, Option<SkillKind>>(name)
@@ -153,207 +468,16 @@ export function parse_skill(name: string, description: string): Skill {
     ? option.of('heal' as SkillKind)
     : option.none;
 
-  const amount = match<string, Amount>(description)
-    .when(
-      (description) => description.includes('小'),
-      () => 'small',
-    )
-    .when(
-      (description) => description.includes('大'),
-      () => 'large',
-    )
-    .when(
-      (description) => description.includes('特大'),
-      () => 'extra-large',
-    )
-    .when(
-      (description) => description.includes('超特大'),
-      () => 'super-large',
-    )
-    .otherwise(() => 'medium');
-
-  const upDown = description.includes('ダウン') ? 'DOWN' : 'UP';
-
-  const buffType = name.includes('W') ? 'W' : name.includes('Sp') ? 'Sp' : 'N';
-  const buffKind = match<string, BuffKind[]>(name)
-    .when(
-      (name) => name.includes('ライフ'),
-      () => (name.includes('ガード') ? ['Guard', 'Life'] : ['Life']),
-    )
-    .when(
-      (name) => name.includes('パワー'),
-      () => ['Power'],
-    )
-    .when(
-      (name) => name.includes('ガード'),
-      () => ['Guard'],
-    )
-    .when(
-      (name) => name.includes('マイト'),
-      () => ['Might'],
-    )
-    .when(
-      (name) => name.includes('ディファー'),
-      () => ['Defer'],
-    )
-    .otherwise(() => []);
-
-  const element = match<string, Option<StatusKind[]>>(name)
-    .when(
-      () => name.includes('[火防]'),
-      () => option.of(['Fire DEF']),
-    )
-    .when(
-      () => name.includes('[水防]'),
-      () => option.of(['Water DEF']),
-    )
-    .when(
-      () => name.includes('[風防]'),
-      () => option.of(['Wind DEF']),
-    )
-    .when(
-      () => name.includes('[火攻]'),
-      () => option.of(['Fire ATK']),
-    )
-    .when(
-      () => name.includes('[水攻]'),
-      () => option.of(['Water ATK']),
-    )
-    .when(
-      () => name.includes('[風攻]'),
-      () => option.of(['Wind ATK']),
-    )
-    .when(
-      () => name.includes('[風攻水防]'),
-      () => option.of(['Wind ATK', 'Water DEF']),
-    )
-    .when(
-      () => name.includes('[火攻風防]'),
-      () => option.of(['Fire ATK', 'Wind DEF']),
-    )
-    .when(
-      () => name.includes('[水攻火防]'),
-      () => option.of(['Water ATK', 'Fire DEF']),
-    )
-    .when(
-      () => name.includes('[風攻火防]'),
-      () => option.of(['Wind ATK', 'Fire DEF']),
-    )
-    .when(
-      () => name.includes('ファイアパワー'),
-      () => option.of(['Fire ATK']),
-    )
-    .when(
-      () => name.includes('ウォーターパワー'),
-      () => option.of(['Water ATK']),
-    )
-    .when(
-      () => name.includes('ウィンドパワー'),
-      () => option.of(['Wind ATK']),
-    )
-    .when(
-      () => name.includes('ライトパワー'),
-      () => option.of(['Light ATK']),
-    )
-    .when(
-      () => name.includes('ダークパワー'),
-      () => option.of(['Dark ATK']),
-    )
-    .when(
-      () => name.includes('ファイアガード'),
-      () => option.of(['Fire DEF']),
-    )
-    .when(
-      () => name.includes('ウォーターガード'),
-      () => option.of(['Water DEF']),
-    )
-    .when(
-      () => name.includes('ウィンドガード'),
-      () => option.of(['Wind DEF']),
-    )
-    .when(
-      () => name.includes('ライトガード'),
-      () => option.of(['Light DEF']),
-    )
-    .when(
-      () => name.includes('ダークガード'),
-      () => option.of(['Dark DEF']),
-    )
-    .when(
-      () => name.includes('トライパワー'),
-      () => option.of(['Fire ATK', 'Water ATK', 'Wind ATK']),
-    )
-    .when(
-      () => name.includes('トライガード'),
-      () => option.of(['Fire DEF', 'Water DEF', 'Wind DEF']),
-    )
-    .otherwise(() => option.none);
-
-  const effects = [elemental, counter, charge, heal]
-    .filter(option.isSome)
-    .map((o) => o.value);
-
-  const status = [
-    ...buffKind.flatMap((kind) => {
-      return match<BuffKind, StatusKind[]>(kind)
-        .with('Power', () =>
-          match<'W' | 'Sp' | 'N', StatusKind[]>(buffType)
-            .with('N', () => ['ATK'])
-            .with('Sp', () => ['Sp.ATK'])
-            .with('W', () => ['ATK', 'Sp.ATK'])
-            .exhaustive(),
-        )
-        .with('Guard', () =>
-          match<'W' | 'Sp' | 'N', StatusKind[]>(buffType)
-            .with('N', () => ['DEF'])
-            .with('Sp', () => ['Sp.DEF'])
-            .with('W', () => ['DEF', 'Sp.DEF'])
-            .exhaustive(),
-        )
-        .with('Might', () =>
-          match<'W' | 'Sp' | 'N', StatusKind[]>(buffType)
-            .with('Sp', (): StatusKind[] => {
-              if (name.includes('攻') && name.includes('防')) {
-                return [];
-              } else if (name.includes('攻')) {
-                return ['Sp.DEF'];
-              } else if (name.includes('防')) {
-                return ['Sp.ATK'];
-              } else {
-                return ['Sp.ATK', 'Sp.DEF'];
-              }
-            })
-            .otherwise((): StatusKind[] => {
-              if (name.includes('攻') && name.includes('防')) {
-                return [];
-              } else if (name.includes('攻')) {
-                return ['DEF'];
-              } else if (name.includes('防')) {
-                return ['ATK'];
-              } else {
-                return ['ATK', 'DEF'];
-              }
-            }),
-        )
-        .with('Defer', () =>
-          match<'W' | 'Sp' | 'N', StatusKind[]>(buffType)
-            .with('Sp', () => ['ATK', 'Sp.DEF'])
-            .otherwise(() => ['Sp.ATK', 'DEF']),
-        )
-        .with('Life', () => ['Life'])
-        .exhaustive();
-    }),
-    ...getOrElse<StatusKind[]>(() => [])(
-      map((kind: StatusKind[]) => kind)(element),
-    ),
-  ];
-
   return {
-    name,
-    description,
-    upDown,
-    status,
-    amount,
-    effects,
+    raw: { name, description },
+    effects: [
+      ...parse_damage(description),
+      ...parse_buff(description),
+      ...parse_debuff(description),
+      ...parse_heal(description),
+    ],
+    kinds: [elemental, counter, charge, heal]
+      .filter(option.isSome)
+      .map((o) => o.value),
   } satisfies Skill;
 }
