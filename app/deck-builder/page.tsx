@@ -15,15 +15,12 @@ import {
   FilterAlt,
   Launch,
   LinkSharp,
-  QuestionMark,
   Remove,
   SearchOutlined,
 } from '@mui/icons-material';
 import {
   Autocomplete,
   Avatar,
-  Badge,
-  BadgeProps,
   Button,
   Card,
   CardContent,
@@ -51,7 +48,6 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { styled } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 
@@ -856,14 +852,6 @@ function DeckBuilder() {
     </Grid>
   );
 }
-
-const StyledBadge = styled(Badge)<BadgeProps>(() => ({
-  '& .MuiBadge-badge': {
-    right: -3,
-    top: -3,
-    padding: '0 4px',
-  },
-}));
 
 const defAtom = atomWithStorage('def', 400_000);
 const spDefAtom = atomWithStorage('spDef', 400_000);
