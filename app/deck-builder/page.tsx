@@ -1053,30 +1053,21 @@ function Calculator() {
           </>
         )}
       </Grid>
-      <Divider sx={{ margin: 2 }}>
-        <StyledBadge
-          badgeContent={
-            <Tooltip
-              title={
-                'すべてのメモリアを無限回使ったときの1回あたりの効果量の合計'
-              }
-            >
-              <QuestionMark fontSize={'small'} />
-            </Tooltip>
-          }
-        >
-          {'期待値総量'}
-        </StyledBadge>
-      </Divider>
+      <Divider sx={{ margin: 2 }}>{'期待値'}</Divider>
       <Grid container spacing={2} direction={'row'}>
         {sw === 'sword' ? (
           <Grid item xs={12}>
             <Typography variant="body1">{`ダメージ量: ${expectedToalDamage}`}</Typography>
           </Grid>
         ) : (
-          <Grid item xs={12}>
-            <Typography variant="body1">{`回復量: ${expectedTotalRecovery}`}</Typography>
-          </Grid>
+          <>
+            <Grid item xs={6}>
+              <Typography variant="body1">{`総合回復量: ${expectedTotalRecovery}`}</Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body1">{`平均回復量: ${Math.floor(expectedTotalRecovery / [...deck, ...legendaryDeck].length)}`}</Typography>
+            </Grid>
+          </>
         )}
         <Grid container item xs={12} spacing={2}>
           <Grid item key={'buff'}>
