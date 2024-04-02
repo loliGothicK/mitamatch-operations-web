@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
 import {
   Add,
@@ -864,27 +865,21 @@ const StyledBadge = styled(Badge)<BadgeProps>(() => ({
   },
 }));
 
+const defAtom = atomWithStorage('def', 400_000);
+const spDefAtom = atomWithStorage('spDef', 400_000);
+const statusAtom = atomWithStorage('status', [
+  400_000, 400_000, 400_000, 400_000,
+] as [number, number, number, number]);
+
 function Calculator() {
   const [deck] = useAtom(deckAtom);
   const [legendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw] = useAtom(swAtom);
   const [charm, setCharm] = useState<Charm>(charmList.reverse()[0]);
   const [costume, setCostume] = useState<Costume>(costumeList.reverse()[0]);
-  const [def, setDef] = useState(400_000);
-  const [spDef, setSpDef] = useState(400_000);
-  const [selfStatus, setSelfStatus] = useState<
-    [number, number, number, number]
-  >(
-    [...deck, ...legendaryDeck].reduce(
-      ([atk, spAtk, def, spDef], cur) => [
-        atk + cur.status[cur.concentration || 4][0],
-        spAtk + cur.status[cur.concentration || 4][1],
-        def + cur.status[cur.concentration || 4][2],
-        spDef + cur.status[cur.concentration || 4][3],
-      ],
-      charm?.status || [0, 0, 0, 0],
-    ),
-  );
+  const [def, setDef] = useAtom(defAtom);
+  const [spDef, setSpDef] = useAtom(spDefAtom);
+  const [selfStatus, setSelfStatus] = useAtom(statusAtom);
 
   const expected = evaluate(
     [...deck, ...legendaryDeck],
