@@ -84,7 +84,7 @@ export function evaluate(
       .with(2, () => 1.4)
       .with(3, () => 1.425)
       .with(4, () => 1.5)
-      .run();
+      .otherwise(() => 1.5);
 
     const range = match(skill.effects[0].range)
       .with([1, 1], () => 1)
@@ -93,6 +93,30 @@ export function evaluate(
       .with([2, 2], () => 2)
       .with([2, 3], () => 2.5)
       .run();
+
+    const rangePlus =
+      1.0 -
+      deck
+        .map((memoria) =>
+          parse_support(memoria.support.name, memoria.support.description),
+        )
+        .filter((support) =>
+          support.effects.some((effect) => effect.type === 'RangeUp'),
+        )
+        .map((rangeUp) => {
+          const up = rangeUp.effects.find(
+            (effect) => effect.type === 'RangeUp',
+          );
+          if (!up) return 0;
+          return match(memoria.concentration)
+            .with(0, () => 0.12)
+            .with(1, () => 0.125)
+            .with(2, () => 0.13)
+            .with(3, () => 0.135)
+            .with(4, () => 0.15)
+            .otherwise(() => 0.15);
+        })
+        .reduce((acc: number, cur: number) => acc * (1.0 - cur), 1.0);
 
     const calibration =
       charmRate *
@@ -109,7 +133,7 @@ export function evaluate(
           [opDef, opSpDef],
           calibration,
           skillLevel,
-          range,
+          range + rangePlus,
           memoria,
           deck,
         ),
@@ -117,7 +141,7 @@ export function evaluate(
           [atk, spAtk, def, spDef],
           calibration,
           skillLevel,
-          range,
+          range + rangePlus,
           memoria,
           deck,
         ),
@@ -125,7 +149,7 @@ export function evaluate(
           [atk, spAtk, def, spDef],
           calibration,
           skillLevel,
-          range,
+          range + rangePlus,
           memoria,
           deck,
         ),
@@ -133,7 +157,7 @@ export function evaluate(
           def + spDef,
           calibration,
           skillLevel,
-          range,
+          range + rangePlus,
           memoria,
           deck,
         ),
