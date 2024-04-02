@@ -869,7 +869,7 @@ function Calculator() {
   const [spDef, setSpDef] = useAtom(spDefAtom);
   const [selfStatus, setSelfStatus] = useAtom(statusAtom);
 
-  const { skill } = evaluate(
+  const { skill, supportBuff, supportDebuff } = evaluate(
     [...deck, ...legendaryDeck],
     selfStatus,
     [def, spDef],
@@ -907,6 +907,23 @@ function Calculator() {
   const expectedTotalRecovery = skill
     .map(({ expected }) => expected.recovery)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
+
+  Object.entries(supportBuff)
+    .filter(([, amount]) => !!amount)
+    .forEach(([type, amount]) => {
+      expectedTotalBuff.set(
+        type as StatusKind,
+        (expectedTotalBuff.get(type as StatusKind) || 0) + amount,
+      );
+    });
+  Object.entries(supportDebuff)
+    .filter(([, amount]) => !!amount)
+    .forEach(([type, amount]) => {
+      expectedTotalDebuff.set(
+        type as StatusKind,
+        (expectedTotalDebuff.get(type as StatusKind) || 0) + amount,
+      );
+    });
 
   const displayBuff = ({
     type,

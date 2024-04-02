@@ -63,14 +63,20 @@ export function evaluate(
       recovery?: number;
     };
   }[];
-  supportBuff: {
-    type: StatusKind;
-    amount: number;
-  }[];
-  supportDebuff: {
-    type: StatusKind;
-    amount: number;
-  }[];
+  supportBuff: Record<
+    Exclude<
+      StatusKind,
+      'Light ATK' | 'Dark ATK' | 'Light DEF' | 'Dark DEF' | 'Life'
+    >,
+    number
+  >;
+  supportDebuff: Record<
+    Exclude<
+      StatusKind,
+      'Light ATK' | 'Dark ATK' | 'Light DEF' | 'Dark DEF' | 'Life'
+    >,
+    number
+  >;
 } {
   const themeRate = new Map<string, number>([
     ['火', 1.1],
@@ -175,10 +181,12 @@ export function evaluate(
     };
   });
 
+  const calibration = charmRate * costumeRate * graceRate;
+
   return {
     skill,
-    supportBuff: [],
-    supportDebuff: [],
+    supportBuff: support('UP', [atk, spAtk, def, spDef], calibration, deck),
+    supportDebuff: support('DOWN', [atk, spAtk, def, spDef], calibration, deck),
   };
 }
 
@@ -256,11 +264,11 @@ function damage(
       const up = support.effects.find((effect) => effect.type === 'DamageUp');
       if (!up) return 0;
       const level = match(up.amount)
-        .with('small', () => 1.01)
-        .with('medium', () => 1.15)
-        .with('large', () => 1.18)
-        .with('extra-large', () => 1.21)
-        .with('super-large', () => 1.24)
+        .with('small', () => 1 / 100)
+        .with('medium', () => 15 / 100)
+        .with('large', () => 18 / 100)
+        .with('extra-large', () => 21 / 100)
+        .with('super-large', () => 24 / 100)
         .exhaustive();
       const probability = match(support.probability)
         .with('small', () => {
@@ -282,7 +290,7 @@ function damage(
         .exhaustive();
       return level * probability;
     })
-    .reduce((acc, cur) => acc + cur, 0);
+    .reduce((acc, cur) => acc + cur, 1);
 
   const memoriaRate = skillRate * skillLevel;
   return Math.floor(
@@ -332,11 +340,11 @@ function buff(
             );
             if (!up) return 0;
             const level = match(up.amount)
-              .with('small', () => 1.01)
-              .with('medium', () => 1.15)
-              .with('large', () => 1.18)
-              .with('extra-large', () => 1.21)
-              .with('super-large', () => 1.24)
+              .with('small', () => 1 / 100)
+              .with('medium', () => 15 / 100)
+              .with('large', () => 18 / 100)
+              .with('extra-large', () => 21 / 100)
+              .with('super-large', () => 24 / 100)
               .exhaustive();
             const probability = match(support.probability)
               .with('small', () => {
@@ -358,7 +366,7 @@ function buff(
               .exhaustive();
             return level * probability;
           })
-          .reduce((acc, cur) => acc + cur, 0);
+          .reduce((acc, cur) => acc + cur, 1);
 
   return skill.effects
     .filter((effect) => effect.type === 'buff')
@@ -529,11 +537,11 @@ function debuff(
             );
             if (!up) return 0;
             const level = match(up.amount)
-              .with('small', () => 1.01)
-              .with('medium', () => 1.15)
-              .with('large', () => 1.18)
-              .with('extra-large', () => 1.21)
-              .with('super-large', () => 1.24)
+              .with('small', () => 1 / 100)
+              .with('medium', () => 15 / 100)
+              .with('large', () => 18 / 100)
+              .with('extra-large', () => 21 / 100)
+              .with('super-large', () => 24 / 100)
               .exhaustive();
             const probability = match(support.probability)
               .with('small', () => {
@@ -555,7 +563,7 @@ function debuff(
               .exhaustive();
             return level * probability;
           })
-          .reduce((acc, cur) => acc + cur, 0);
+          .reduce((acc, cur) => acc + cur, 1);
 
   return skill.effects
     .filter((effect) => effect.type === 'debuff')
@@ -715,11 +723,11 @@ function recovery(
       const up = support.effects.find((effect) => effect.type === 'RecoveryUp');
       if (!up) return 0;
       const level = match(up.amount)
-        .with('small', () => 1.01)
-        .with('medium', () => 1.15)
-        .with('large', () => 1.18)
-        .with('extra-large', () => 1.21)
-        .with('super-large', () => 1.24)
+        .with('small', () => 1 / 100)
+        .with('medium', () => 15 / 100)
+        .with('large', () => 18 / 100)
+        .with('extra-large', () => 21 / 100)
+        .with('super-large', () => 24 / 100)
         .exhaustive();
       const probability = match(support.probability)
         .with('small', () => {
@@ -741,8 +749,167 @@ function recovery(
         .exhaustive();
       return level * probability;
     })
-    .reduce((acc, cur) => acc + cur, 0);
+    .reduce((acc, cur) => acc + cur, 1);
 
   const memoriaRate = skillRate * skillLevel;
   return Math.floor(dsd * memoriaRate * calibration * support * range);
+}
+
+function support(
+  type: 'UP' | 'DOWN',
+  [atk, spAtk, def, spDef]: [number, number, number, number],
+  calibration: number,
+  deck: MemoriaWithConcentration[],
+): Record<
+  Exclude<
+    StatusKind,
+    'Light ATK' | 'Dark ATK' | 'Light DEF' | 'Dark DEF' | 'Life'
+  >,
+  number
+> {
+  let result: Record<
+    Exclude<
+      StatusKind,
+      'Light ATK' | 'Dark ATK' | 'Light DEF' | 'Dark DEF' | 'Life'
+    >,
+    number
+  > = {
+    ATK: 0,
+    'Sp.ATK': 0,
+    DEF: 0,
+    'Sp.DEF': 0,
+    'Fire ATK': 0,
+    'Water ATK': 0,
+    'Wind ATK': 0,
+    'Fire DEF': 0,
+    'Water DEF': 0,
+    'Wind DEF': 0,
+  };
+  deck
+    .flatMap((memoria) => {
+      const support = parse_support(
+        memoria.support.name,
+        memoria.support.description,
+      );
+      return support.effects.map(
+        (effect) => [memoria.concentration || 4, effect] as const,
+      );
+    })
+    .filter(([, effect]) => effect.type === type)
+    .map(([concentration, { amount, status }]) => {
+      const probability = match(concentration)
+        .with(0, () => 0.12)
+        .with(1, () => 0.125)
+        .with(2, () => 0.13)
+        .with(3, () => 0.135)
+        .with(4, () => 0.15)
+        .run();
+      const skillLevel = match(concentration)
+        .with(0, () => 1.35)
+        .with(1, () => 1.375)
+        .with(2, () => 1.4)
+        .with(3, () => 1.425)
+        .with(4, () => 1.5)
+        .otherwise(() => 1.5);
+      return match(status!)
+        .with('ATK', () => {
+          const skillRate = match(amount)
+            .with('small', () => 2.28 / 100)
+            .with('medium', () => 3.04 / 100)
+            .with('large', () => 3.8 / 100)
+            .with('extra-large', () => 4.27 / 100)
+            .with('super-large', () => 4.74 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(atk * memoriaRate * calibration * probability),
+          };
+        })
+        .with('Sp.ATK', () => {
+          const skillRate = match(amount)
+            .with('small', () => 2.28 / 100)
+            .with('medium', () => 3.04 / 100)
+            .with('large', () => 3.8 / 100)
+            .with('extra-large', () => 4.27 / 100)
+            .with('super-large', () => 4.74 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(spAtk * memoriaRate * calibration * probability),
+          };
+        })
+        .with('DEF', () => {
+          const skillRate = match(amount)
+            .with('small', () => 3.32 / 100)
+            .with('medium', () => 4.27 / 100)
+            .with('large', () => 4.75 / 100)
+            .with('extra-large', () => 5.22 / 100)
+            .with('super-large', () => 5.69 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(def * memoriaRate * calibration * probability),
+          };
+        })
+        .with('Sp.DEF', () => {
+          const skillRate = match(amount)
+            .with('small', () => 3.32 / 100)
+            .with('medium', () => 4.27 / 100)
+            .with('large', () => 4.75 / 100)
+            .with('extra-large', () => 5.22 / 100)
+            .with('super-large', () => 5.69 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(spDef * memoriaRate * calibration * probability),
+          };
+        })
+        .with(P.union('Fire ATK', 'Water ATK', 'Wind ATK'), () => {
+          const skillRate = match(amount)
+            .with('small', () => 3.25 / 100)
+            .with('medium', () => 4.0 / 100)
+            .with('large', () => 4.89 / 100)
+            .with('extra-large', () => 5.78 / 100) // 現状存在しない
+            .with('super-large', () => 6.67 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              Math.floor((atk + spAtk) / 2) *
+                memoriaRate *
+                calibration *
+                probability,
+            ),
+          };
+        })
+        .with(P.union('Fire DEF', 'Water DEF', 'Wind DEF'), () => {
+          const skillRate = match(amount)
+            .with('small', () => 4.74 / 100)
+            .with('medium', () => 5.65 / 100)
+            .with('large', () => 6.11 / 100)
+            .with('extra-large', () => 6.57 / 100) // 現状存在しない
+            .with('super-large', () => 7.03 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              Math.floor((def + spDef) / 2) *
+                memoriaRate *
+                calibration *
+                probability,
+            ),
+          };
+        })
+        .exhaustive();
+    })
+    .forEach(({ type, amount }) => {
+      result[type] += amount;
+    });
+  return result;
 }
