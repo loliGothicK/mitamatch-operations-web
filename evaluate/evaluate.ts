@@ -119,6 +119,14 @@ export function evaluate(
           memoria,
           deck,
         ),
+        debuff: debuff(
+          [atk, spAtk, def, spDef],
+          calibration,
+          skillLevel,
+          range,
+          memoria,
+          deck,
+        ),
         recovery: recovery(
           def + spDef,
           calibration,
@@ -315,6 +323,184 @@ function buff(
                 range,
             ),
           };
+        })
+        .exhaustive();
+    });
+}
+
+function debuff(
+  [atk, spAtk, def, spDef]: [number, number, number, number],
+  calibration: number,
+  skillLevel: number,
+  range: number,
+  memoria: MemoriaWithConcentration,
+  deck: MemoriaWithConcentration[],
+):
+  | {
+      type: StatusKind;
+      amount: number;
+    }[]
+  | undefined {
+  const skill = parse_skill(memoria.skill.name, memoria.skill.description);
+  if (!skill.effects.some((effect) => effect.type === 'debuff'))
+    return undefined;
+
+  const support = deck
+    .map(
+      (memoria) =>
+        [
+          parse_support(memoria.support.name, memoria.support.description),
+          memoria.concentration || 4,
+        ] as const,
+    )
+    .map(([support, concentration]) => {
+      const up = support.effects.find((effect) => effect.type === 'SupportUp');
+      if (!up) return 0;
+      const level = match(up.amount)
+        .with('small', () => 1.01)
+        .with('medium', () => 1.15)
+        .with('large', () => 1.18)
+        .with('extra-large', () => 1.21)
+        .with('super-large', () => 1.24)
+        .exhaustive();
+      const probability = match(support.probability)
+        .with('small', () => {
+          if (concentration === 0) return 0.12;
+          if (concentration === 1) return 0.125;
+          if (concentration === 2) return 0.13;
+          if (concentration === 3) return 0.135;
+          if (concentration === 4) return 0.15;
+          throw new Error('Invalid concentration');
+        })
+        .with('medium', () => {
+          if (concentration === 0) return 0.18;
+          if (concentration === 1) return 0.1875;
+          if (concentration === 2) return 0.195;
+          if (concentration === 3) return 0.2025;
+          if (concentration === 4) return 0.225;
+          throw new Error('Invalid concentration');
+        })
+        .exhaustive();
+      return level * probability;
+    })
+    .reduce((acc, cur) => acc + cur, 0);
+
+  return skill.effects
+    .filter((effect) => effect.type === 'debuff')
+    .map(({ amount, status }) => {
+      return match(status!)
+        .with('ATK', () => {
+          const skillRate = match(amount)
+            .with('small', () => 2.5 / 100)
+            .with('medium', () => 3.34 / 100)
+            .with('large', () => 4.18 / 100)
+            .with('extra-large', () => 4.71 / 100)
+            .with('super-large', () => 5.24 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              atk * memoriaRate * calibration * support * range,
+            ),
+          };
+        })
+        .with('Sp.ATK', () => {
+          const skillRate = match(amount)
+            .with('small', () => 2.5 / 100)
+            .with('medium', () => 3.34 / 100)
+            .with('large', () => 4.18 / 100)
+            .with('extra-large', () => 4.71 / 100)
+            .with('super-large', () => 5.24 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              spAtk * memoriaRate * calibration * support * range,
+            ),
+          };
+        })
+        .with('DEF', () => {
+          const skillRate = match(amount)
+            .with('small', () => 3.65 / 100)
+            .with('medium', () => 4.71 / 100)
+            .with('large', () => 5.23 / 100)
+            .with('extra-large', () => 5.75 / 100)
+            .with('super-large', () => 6.27 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              def * memoriaRate * calibration * support * range,
+            ),
+          };
+        })
+        .with('Sp.DEF', () => {
+          const skillRate = match(amount)
+            .with('small', () => 3.65 / 100)
+            .with('medium', () => 4.71 / 100)
+            .with('large', () => 5.23 / 100)
+            .with('extra-large', () => 5.75 / 100)
+            .with('super-large', () => 6.27 / 100) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              spDef * memoriaRate * calibration * support * range,
+            ),
+          };
+        })
+        .with(
+          P.union('Fire ATK', 'Water ATK', 'Wind ATK', 'Light ATK', 'Dark ATK'),
+          () => {
+            const skillRate = match(amount)
+              .with('small', () => 3.25 / 100)
+              .with('medium', () => 4.0 / 100)
+              .with('large', () => 4.89 / 100)
+              .with('extra-large', () => 5.78 / 100) // 現状存在しない
+              .with('super-large', () => 6.67 / 100) // 現状存在しない
+              .exhaustive();
+            const memoriaRate = skillRate * skillLevel;
+            return {
+              type: status!,
+              amount: Math.floor(
+                Math.floor((atk + spAtk) / 2) *
+                  memoriaRate *
+                  calibration *
+                  support *
+                  range,
+              ),
+            };
+          },
+        )
+        .with(
+          P.union('Fire DEF', 'Water DEF', 'Wind DEF', 'Light DEF', 'Dark DEF'),
+          () => {
+            const skillRate = match(amount)
+              .with('small', () => 4.74 / 100)
+              .with('medium', () => 5.65 / 100)
+              .with('large', () => 6.11 / 100)
+              .with('extra-large', () => 6.57 / 100) // 現状存在しない
+              .with('super-large', () => 7.03 / 100) // 現状存在しない
+              .exhaustive();
+            const memoriaRate = skillRate * skillLevel;
+            return {
+              type: status!,
+              amount: Math.floor(
+                Math.floor((def + spDef) / 2) *
+                  memoriaRate *
+                  calibration *
+                  support *
+                  range,
+              ),
+            };
+          },
+        )
+        .with('Life', () => {
+          throw new Error('Not implemented');
         })
         .exhaustive();
     });
