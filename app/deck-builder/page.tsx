@@ -963,64 +963,64 @@ function Calculator() {
             }}
           />
         </Grid>
+        <Grid item xs={12}>
+          <Stack direction={'row'} spacing={2}>
+            <TextField
+              label="Your ATK"
+              defaultValue={selfStatus[0]}
+              variant="standard"
+              onChange={(e) => {
+                setSelfStatus([
+                  parseInt(e.target.value),
+                  selfStatus[1],
+                  selfStatus[2],
+                  selfStatus[3],
+                ]);
+              }}
+            />
+            <TextField
+              label="Your Sp.ATK"
+              defaultValue={selfStatus[1]}
+              variant="standard"
+              onChange={(e) => {
+                setSelfStatus([
+                  selfStatus[0],
+                  parseInt(e.target.value),
+                  selfStatus[2],
+                  selfStatus[3],
+                ]);
+              }}
+            />
+            <TextField
+              label="Your DEF"
+              defaultValue={selfStatus[2]}
+              variant="standard"
+              onChange={(e) => {
+                setSelfStatus([
+                  selfStatus[0],
+                  selfStatus[1],
+                  parseInt(e.target.value),
+                  selfStatus[3],
+                ]);
+              }}
+            />
+            <TextField
+              label="Your Sp.DEF"
+              defaultValue={selfStatus[3]}
+              variant="standard"
+              onChange={(e) => {
+                setSelfStatus([
+                  selfStatus[0],
+                  selfStatus[1],
+                  selfStatus[2],
+                  parseInt(e.target.value),
+                ]);
+              }}
+            />
+          </Stack>
+        </Grid>
         {sw === 'sword' && (
           <>
-            <Grid item xs={12}>
-              <Stack direction={'row'} spacing={2}>
-                <TextField
-                  label="Your ATK"
-                  defaultValue={selfStatus[0]}
-                  variant="standard"
-                  onChange={(e) => {
-                    setSelfStatus([
-                      parseInt(e.target.value),
-                      selfStatus[1],
-                      selfStatus[2],
-                      selfStatus[3],
-                    ]);
-                  }}
-                />
-                <TextField
-                  label="Your Sp.ATK"
-                  defaultValue={selfStatus[1]}
-                  variant="standard"
-                  onChange={(e) => {
-                    setSelfStatus([
-                      selfStatus[0],
-                      parseInt(e.target.value),
-                      selfStatus[2],
-                      selfStatus[3],
-                    ]);
-                  }}
-                />
-                <TextField
-                  label="Your DEF"
-                  defaultValue={selfStatus[2]}
-                  variant="standard"
-                  onChange={(e) => {
-                    setSelfStatus([
-                      selfStatus[0],
-                      selfStatus[1],
-                      parseInt(e.target.value),
-                      selfStatus[3],
-                    ]);
-                  }}
-                />
-                <TextField
-                  label="Your Sp.DEF"
-                  defaultValue={selfStatus[3]}
-                  variant="standard"
-                  onChange={(e) => {
-                    setSelfStatus([
-                      selfStatus[0],
-                      selfStatus[1],
-                      selfStatus[2],
-                      parseInt(e.target.value),
-                    ]);
-                  }}
-                />
-              </Stack>
-            </Grid>
             <Grid item xs={12}>
               <Stack direction={'row'} spacing={2}>
                 <TextField
