@@ -39,10 +39,10 @@ export default function FlowChart() {
 
   useEffect(() => {
     setNodes(cachedNodes);
-  }, [cachedNodes]);
+  }, [cachedNodes, setNodes]);
   useEffect(() => {
     setEdges(cachedEdges);
-  }, [cachedEdges]);
+  }, [cachedEdges, setEdges]);
 
   const getCount = () => {
     setCount((prev) => prev + 1);
@@ -55,7 +55,7 @@ export default function FlowChart() {
       setEdges((eds) => addEdge(edge, eds));
       setEdgeStorage((eds) => addEdge(edge, eds));
     },
-    [setEdges],
+    [setEdges, setEdgeStorage],
   );
 
   const nodeTypes = useMemo(() => ({ order: OrderNode }), []);

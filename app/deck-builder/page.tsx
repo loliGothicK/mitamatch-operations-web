@@ -979,8 +979,8 @@ function Calculator() {
           .filter((kind) => expectedTotalBuff.get(kind) !== undefined)
           .map((kind) => {
             return (
-              <Grid item>
-                <Typography variant="body1" key={kind}>
+              <Grid item key={kind}>
+                <Typography variant="body1">
                   {`${kind}: ${expectedTotalBuff.get(kind)!}`}
                 </Typography>
               </Grid>
@@ -990,8 +990,8 @@ function Calculator() {
           .filter((kind) => expectedTotalDebuff.get(kind) !== undefined)
           .map((kind) => {
             return (
-              <Grid item>
-                <Typography variant="body1" key={kind}>
+              <Grid item key={kind}>
+                <Typography variant="body1">
                   {`${kind}: ${expectedTotalDebuff.get(kind)!}`}
                 </Typography>
               </Grid>
