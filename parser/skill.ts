@@ -58,11 +58,12 @@ export type Skill = {
 };
 
 function parse_damage(description: string): SkillEffect[] {
+  let result: SkillEffect[] = [];
   const damage = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
   const _match = description.match(damage);
 
   if (!_match) {
-    return [];
+    return result;
   }
 
   const range = ((r) => {
@@ -81,7 +82,110 @@ function parse_damage(description: string): SkillEffect[] {
     .with('超特大ダメージ', () => 'super-large')
     .run();
 
-  return [{ type: 'damage', range, amount }];
+  result.push({ type: 'damage', range, amount });
+
+  const buff = /自身の(.*?)を(.*?アップ)させる/;
+  const debuff = /敵の(.*?)を(.*?ダウン)させる/;
+
+  const buffMatch = description.match(buff);
+
+  if (buffMatch) {
+    const statuses = buffMatch[1].split('と').flatMap((s) => {
+      return match<string, StatusKind[]>(s)
+        .with('ATK', () => ['ATK'])
+        .with('Sp.ATK', () => ['Sp.ATK'])
+        .with('DEF', () => ['DEF'])
+        .with('Sp.DEF', () => ['Sp.DEF'])
+        .with('火属性攻撃力', () => ['Fire ATK'])
+        .with('水属性攻撃力', () => ['Water ATK'])
+        .with('風属性攻撃力', () => ['Wind ATK'])
+        .with('光属性攻撃力', () => ['Light ATK'])
+        .with('闇属性攻撃力', () => ['Dark ATK'])
+        .with('火属性防御力', () => ['Fire DEF'])
+        .with('水属性防御力', () => ['Water DEF'])
+        .with('風属性防御力', () => ['Wind DEF'])
+        .with('光属性防御力', () => ['Light DEF'])
+        .with('闇属性防御力', () => ['Dark DEF'])
+        .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
+          'Fire ATK',
+          'Water ATK',
+          'Wind ATK',
+        ])
+        .with('火属性防御力・水属性防御力・風属性防御力', () => [
+          'Fire DEF',
+          'Water DEF',
+          'Wind DEF',
+        ])
+        .run();
+    });
+
+    const debuffAmount = match<string, Amount>(buffMatch[2])
+      .with('小アップ', () => 'small')
+      .with('アップ', () => 'medium')
+      .with('大アップ', () => 'large')
+      .with('特大アップ', () => 'extra-large')
+      .run();
+
+    statuses.forEach((status) => {
+      result.push({
+        type: 'buff',
+        range,
+        amount: debuffAmount,
+        status,
+      });
+    });
+  }
+
+  const debuffMatch = description.match(debuff);
+
+  if (debuffMatch) {
+    const statuses = debuffMatch[1].split('と').flatMap((s) => {
+      return match<string, StatusKind[]>(s)
+        .with('ATK', () => ['ATK'])
+        .with('Sp.ATK', () => ['Sp.ATK'])
+        .with('DEF', () => ['DEF'])
+        .with('Sp.DEF', () => ['Sp.DEF'])
+        .with('火属性攻撃力', () => ['Fire ATK'])
+        .with('水属性攻撃力', () => ['Water ATK'])
+        .with('風属性攻撃力', () => ['Wind ATK'])
+        .with('光属性攻撃力', () => ['Light ATK'])
+        .with('闇属性攻撃力', () => ['Dark ATK'])
+        .with('火属性防御力', () => ['Fire DEF'])
+        .with('水属性防御力', () => ['Water DEF'])
+        .with('風属性防御力', () => ['Wind DEF'])
+        .with('光属性防御力', () => ['Light DEF'])
+        .with('闇属性防御力', () => ['Dark DEF'])
+        .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
+          'Fire ATK',
+          'Water ATK',
+          'Wind ATK',
+        ])
+        .with('火属性防御力・水属性防御力・風属性防御力', () => [
+          'Fire DEF',
+          'Water DEF',
+          'Wind DEF',
+        ])
+        .run();
+    });
+
+    const debuffAmount = match<string, Amount>(debuffMatch[2])
+      .with('小ダウン', () => 'small')
+      .with('ダウン', () => 'medium')
+      .with('大ダウン', () => 'large')
+      .with('特大ダウン', () => 'extra-large')
+      .run();
+
+    statuses.forEach((status) => {
+      result.push({
+        type: 'debuff',
+        range,
+        amount: debuffAmount,
+        status,
+      });
+    });
+  }
+
+  return result;
 }
 
 function parse_buff(description: string): SkillEffect[] {

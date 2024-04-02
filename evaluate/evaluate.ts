@@ -43,6 +43,8 @@ function parse_costume(description?: string): Map<string, number> {
 
 export function evaluate(
   deck: MemoriaWithConcentration[],
+  [atk, spAtk, def, spDef]: [number, number, number, number],
+  [opDef, opSpDef]: [number, number],
   charm?: Charm,
   costume?: Costume,
 ): {
@@ -68,15 +70,6 @@ export function evaluate(
     ['闇', 1.0],
   ]);
   const graceRate = 1.1;
-  const [atk, spAtk, def, spDef] = deck.reduce(
-    ([atk, spAtk, def, spDef], cur) => [
-      atk + cur.status[cur.concentration || 4][0],
-      spAtk + cur.status[cur.concentration || 4][1],
-      def + cur.status[cur.concentration || 4][2],
-      spDef + cur.status[cur.concentration || 4][3],
-    ],
-    charm?.status || [0, 0, 0, 0],
-  );
   const charmRate = 1.1;
   const charmEx = parse_ability(charm?.ability);
   const costumeRate = 1.15;
@@ -111,6 +104,15 @@ export function evaluate(
     return {
       memoria,
       expected: {
+        damage: damage(
+          [atk, spAtk],
+          [opDef, opSpDef],
+          calibration,
+          skillLevel,
+          range,
+          memoria,
+          deck,
+        ),
         buff: buff(
           [atk, spAtk, def, spDef],
           calibration,
@@ -140,21 +142,67 @@ export function evaluate(
   });
 }
 
-function buff(
-  [atk, spAtk, def, spDef]: [number, number, number, number],
+function damage(
+  [atk, spAtk]: [number, number],
+  [opDef, opSpDef]: [number, number],
   calibration: number,
   skillLevel: number,
   range: number,
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
-):
-  | {
-      type: StatusKind;
-      amount: number;
-    }[]
-  | undefined {
+): number | undefined {
   const skill = parse_skill(memoria.skill.name, memoria.skill.description);
-  if (!skill.effects.some((effect) => effect.type === 'buff')) return undefined;
+  if (!skill.effects.some((effect) => effect.type === 'damage'))
+    return undefined;
+
+  const skillRate = match(memoria.kind)
+    .when(
+      (kind) => kind.includes('単体'),
+      () =>
+        match(memoria.skill.description)
+          .when(
+            (sentence) => sentence.includes('超特大ダメージ'),
+            () => 15.0 / 100,
+          )
+          .when(
+            (sentence) => sentence.includes('特大ダメージ'),
+            () => 13.5 / 100,
+          )
+          .when(
+            (sentence) => sentence.includes('大ダメージ'),
+            () => 11.5 / 100,
+          )
+          .when(
+            (sentence) => sentence.includes('ダメージ'),
+            () => 10.0 / 100,
+          )
+          .run(),
+    )
+    .when(
+      (kind) => kind.includes('範囲'),
+      () =>
+        match(memoria.skill.description)
+          .when(
+            (sentence) => sentence.includes('特大ダメージ'),
+            () => 11.0 / 100,
+          )
+          .when(
+            (sentence) => sentence.includes('大ダメージ'),
+            () => 10.0 / 100,
+          )
+          .when(
+            (sentence) => sentence.includes('小ダメージ'),
+            () => 7.0 / 100,
+          )
+          .when(
+            (sentence) => sentence.includes('ダメージ'),
+            () => 8.5 / 100,
+          )
+          .run(),
+    )
+    .otherwise(() => {
+      throw new Error('Invalid kind');
+    });
 
   const support = deck
     .map(
@@ -165,7 +213,7 @@ function buff(
         ] as const,
     )
     .map(([support, concentration]) => {
-      const up = support.effects.find((effect) => effect.type === 'SupportUp');
+      const up = support.effects.find((effect) => effect.type === 'DamageUp');
       if (!up) return 0;
       const level = match(up.amount)
         .with('small', () => 1.01)
@@ -195,6 +243,82 @@ function buff(
       return level * probability;
     })
     .reduce((acc, cur) => acc + cur, 0);
+
+  const memoriaRate = skillRate * skillLevel;
+  return Math.floor(
+    (memoria.kind.includes('通常')
+      ? atk - (2 / 3) * opDef
+      : spAtk - (2 / 3) * opSpDef) *
+      memoriaRate *
+      calibration *
+      support *
+      range,
+  );
+}
+
+function buff(
+  [atk, spAtk, def, spDef]: [number, number, number, number],
+  calibration: number,
+  skillLevel: number,
+  range: number,
+  memoria: MemoriaWithConcentration,
+  deck: MemoriaWithConcentration[],
+):
+  | {
+      type: StatusKind;
+      amount: number;
+    }[]
+  | undefined {
+  const skill = parse_skill(memoria.skill.name, memoria.skill.description);
+  if (!skill.effects.some((effect) => effect.type === 'buff')) return undefined;
+
+  const support =
+    memoria.kind.includes('特殊') || memoria.kind.includes('通常')
+      ? 1.0
+      : deck
+          .map(
+            (memoria) =>
+              [
+                parse_support(
+                  memoria.support.name,
+                  memoria.support.description,
+                ),
+                memoria.concentration || 4,
+              ] as const,
+          )
+          .map(([support, concentration]) => {
+            const up = support.effects.find(
+              (effect) => effect.type === 'SupportUp',
+            );
+            if (!up) return 0;
+            const level = match(up.amount)
+              .with('small', () => 1.01)
+              .with('medium', () => 1.15)
+              .with('large', () => 1.18)
+              .with('extra-large', () => 1.21)
+              .with('super-large', () => 1.24)
+              .exhaustive();
+            const probability = match(support.probability)
+              .with('small', () => {
+                if (concentration === 0) return 0.12;
+                if (concentration === 1) return 0.125;
+                if (concentration === 2) return 0.13;
+                if (concentration === 3) return 0.135;
+                if (concentration === 4) return 0.15;
+                throw new Error('Invalid concentration');
+              })
+              .with('medium', () => {
+                if (concentration === 0) return 0.18;
+                if (concentration === 1) return 0.1875;
+                if (concentration === 2) return 0.195;
+                if (concentration === 3) return 0.2025;
+                if (concentration === 4) return 0.225;
+                throw new Error('Invalid concentration');
+              })
+              .exhaustive();
+            return level * probability;
+          })
+          .reduce((acc, cur) => acc + cur, 0);
 
   return skill.effects
     .filter((effect) => effect.type === 'buff')
@@ -345,45 +469,53 @@ function debuff(
   if (!skill.effects.some((effect) => effect.type === 'debuff'))
     return undefined;
 
-  const support = deck
-    .map(
-      (memoria) =>
-        [
-          parse_support(memoria.support.name, memoria.support.description),
-          memoria.concentration || 4,
-        ] as const,
-    )
-    .map(([support, concentration]) => {
-      const up = support.effects.find((effect) => effect.type === 'SupportUp');
-      if (!up) return 0;
-      const level = match(up.amount)
-        .with('small', () => 1.01)
-        .with('medium', () => 1.15)
-        .with('large', () => 1.18)
-        .with('extra-large', () => 1.21)
-        .with('super-large', () => 1.24)
-        .exhaustive();
-      const probability = match(support.probability)
-        .with('small', () => {
-          if (concentration === 0) return 0.12;
-          if (concentration === 1) return 0.125;
-          if (concentration === 2) return 0.13;
-          if (concentration === 3) return 0.135;
-          if (concentration === 4) return 0.15;
-          throw new Error('Invalid concentration');
-        })
-        .with('medium', () => {
-          if (concentration === 0) return 0.18;
-          if (concentration === 1) return 0.1875;
-          if (concentration === 2) return 0.195;
-          if (concentration === 3) return 0.2025;
-          if (concentration === 4) return 0.225;
-          throw new Error('Invalid concentration');
-        })
-        .exhaustive();
-      return level * probability;
-    })
-    .reduce((acc, cur) => acc + cur, 0);
+  const support =
+    memoria.kind.includes('特殊') || memoria.kind.includes('通常')
+      ? 1.0
+      : deck
+          .map(
+            (memoria) =>
+              [
+                parse_support(
+                  memoria.support.name,
+                  memoria.support.description,
+                ),
+                memoria.concentration || 4,
+              ] as const,
+          )
+          .map(([support, concentration]) => {
+            const up = support.effects.find(
+              (effect) => effect.type === 'SupportUp',
+            );
+            if (!up) return 0;
+            const level = match(up.amount)
+              .with('small', () => 1.01)
+              .with('medium', () => 1.15)
+              .with('large', () => 1.18)
+              .with('extra-large', () => 1.21)
+              .with('super-large', () => 1.24)
+              .exhaustive();
+            const probability = match(support.probability)
+              .with('small', () => {
+                if (concentration === 0) return 0.12;
+                if (concentration === 1) return 0.125;
+                if (concentration === 2) return 0.13;
+                if (concentration === 3) return 0.135;
+                if (concentration === 4) return 0.15;
+                throw new Error('Invalid concentration');
+              })
+              .with('medium', () => {
+                if (concentration === 0) return 0.18;
+                if (concentration === 1) return 0.1875;
+                if (concentration === 2) return 0.195;
+                if (concentration === 3) return 0.2025;
+                if (concentration === 4) return 0.225;
+                throw new Error('Invalid concentration');
+              })
+              .exhaustive();
+            return level * probability;
+          })
+          .reduce((acc, cur) => acc + cur, 0);
 
   return skill.effects
     .filter((effect) => effect.type === 'debuff')

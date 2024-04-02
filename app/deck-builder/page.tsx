@@ -870,8 +870,29 @@ function Calculator() {
   const [sw] = useAtom(swAtom);
   const [charm, setCharm] = useState<Charm>(charmList.reverse()[0]);
   const [costume, setCostume] = useState<Costume>(costumeList.reverse()[0]);
+  const [def, setDef] = useState(400_000);
+  const [spDef, setSpDef] = useState(400_000);
+  const [selfStatus, setSelfStatus] = useState<
+    [number, number, number, number]
+  >(
+    [...deck, ...legendaryDeck].reduce(
+      ([atk, spAtk, def, spDef], cur) => [
+        atk + cur.status[cur.concentration || 4][0],
+        spAtk + cur.status[cur.concentration || 4][1],
+        def + cur.status[cur.concentration || 4][2],
+        spDef + cur.status[cur.concentration || 4][3],
+      ],
+      charm?.status || [0, 0, 0, 0],
+    ),
+  );
 
-  const expected = evaluate([...deck, ...legendaryDeck], charm, costume);
+  const expected = evaluate(
+    [...deck, ...legendaryDeck],
+    selfStatus,
+    [def, spDef],
+    charm,
+    costume,
+  );
 
   const expectedToalDamage = expected
     .map(({ expected }) => expected.damage)
@@ -917,11 +938,10 @@ function Calculator() {
   return (
     <Container>
       <Grid container spacing={2}>
-        <Grid item>
+        <Grid item xs={12} md={6}>
           <Autocomplete
             disablePortal
             options={charmList.map((charm) => charm.name)}
-            sx={{ width: 400 }}
             renderInput={(params) => <TextField {...params} label="charm" />}
             onChange={(_, value) => {
               if (value) {
@@ -930,13 +950,12 @@ function Calculator() {
             }}
           />
         </Grid>
-        <Grid item>
+        <Grid item xs={12} md={6}>
           <Autocomplete
             disablePortal
             options={costumeList.map(
               (costume) => `${costume.lily}/${costume.name}`,
             )}
-            sx={{ width: 400 }}
             renderInput={(params) => <TextField {...params} label="costume" />}
             onChange={(_, value) => {
               if (value) {
@@ -949,6 +968,86 @@ function Calculator() {
             }}
           />
         </Grid>
+        {sw === 'sword' && (
+          <>
+            <Grid item xs={12}>
+              <Stack direction={'row'} spacing={2}>
+                <TextField
+                  label="Your ATK"
+                  defaultValue={selfStatus[0]}
+                  variant="standard"
+                  onChange={(e) => {
+                    setSelfStatus([
+                      parseInt(e.target.value),
+                      selfStatus[1],
+                      selfStatus[2],
+                      selfStatus[3],
+                    ]);
+                  }}
+                />
+                <TextField
+                  label="Your Sp.ATK"
+                  defaultValue={selfStatus[1]}
+                  variant="standard"
+                  onChange={(e) => {
+                    setSelfStatus([
+                      selfStatus[0],
+                      parseInt(e.target.value),
+                      selfStatus[2],
+                      selfStatus[3],
+                    ]);
+                  }}
+                />
+                <TextField
+                  label="Your DEF"
+                  defaultValue={selfStatus[2]}
+                  variant="standard"
+                  onChange={(e) => {
+                    setSelfStatus([
+                      selfStatus[0],
+                      selfStatus[1],
+                      parseInt(e.target.value),
+                      selfStatus[3],
+                    ]);
+                  }}
+                />
+                <TextField
+                  label="Your Sp.DEF"
+                  defaultValue={selfStatus[3]}
+                  variant="standard"
+                  onChange={(e) => {
+                    setSelfStatus([
+                      selfStatus[0],
+                      selfStatus[1],
+                      selfStatus[2],
+                      parseInt(e.target.value),
+                    ]);
+                  }}
+                />
+              </Stack>
+            </Grid>
+            <Grid item xs={12}>
+              <Stack direction={'row'} spacing={2}>
+                <TextField
+                  label="Opponent's DEF"
+                  defaultValue={def}
+                  variant="standard"
+                  onChange={(e) => {
+                    setDef(parseInt(e.target.value));
+                  }}
+                />
+                <TextField
+                  label="Opponent's Sp.DEF"
+                  defaultValue={spDef}
+                  variant="standard"
+                  onChange={(e) => {
+                    setSpDef(parseInt(e.target.value));
+                  }}
+                />
+              </Stack>
+            </Grid>
+          </>
+        )}
       </Grid>
       <Divider sx={{ margin: 2 }}>
         <StyledBadge
@@ -967,36 +1066,46 @@ function Calculator() {
       </Divider>
       <Grid container spacing={2} direction={'row'}>
         {sw === 'sword' ? (
-          <Grid item>
-            <Typography variant="body1">{`damage: ${expectedToalDamage}`}</Typography>
+          <Grid item xs={12}>
+            <Typography variant="body1">{`ダメージ量: ${expectedToalDamage}`}</Typography>
           </Grid>
         ) : (
-          <Grid item>
-            <Typography variant="body1">{`recovery: ${expectedTotalRecovery}`}</Typography>
+          <Grid item xs={12}>
+            <Typography variant="body1">{`回復量: ${expectedTotalRecovery}`}</Typography>
           </Grid>
         )}
-        {statusKind
-          .filter((kind) => expectedTotalBuff.get(kind) !== undefined)
-          .map((kind) => {
-            return (
-              <Grid item key={kind}>
-                <Typography variant="body1">
-                  {`${kind}: ${expectedTotalBuff.get(kind)!}`}
-                </Typography>
-              </Grid>
-            );
-          })}
-        {statusKind
-          .filter((kind) => expectedTotalDebuff.get(kind) !== undefined)
-          .map((kind) => {
-            return (
-              <Grid item key={kind}>
-                <Typography variant="body1">
-                  {`${kind}: ${expectedTotalDebuff.get(kind)!}`}
-                </Typography>
-              </Grid>
-            );
-          })}
+        <Grid container item xs={12} spacing={2}>
+          <Grid item key={'buff'}>
+            <Typography>{'バフ量:'}</Typography>
+          </Grid>
+          {statusKind
+            .filter((kind) => expectedTotalBuff.get(kind) !== undefined)
+            .map((kind) => {
+              return (
+                <Grid item key={kind}>
+                  <Typography variant="body1">
+                    {`${kind}: ${expectedTotalBuff.get(kind)!}`}
+                  </Typography>
+                </Grid>
+              );
+            })}
+        </Grid>
+        <Grid container item xs={12} spacing={2}>
+          <Grid item key={'debuff'}>
+            <Typography>{'デバフ量:'}</Typography>
+          </Grid>
+          {statusKind
+            .filter((kind) => expectedTotalDebuff.get(kind) !== undefined)
+            .map((kind) => {
+              return (
+                <Grid item key={kind}>
+                  <Typography variant="body1">
+                    {`${kind}: ${expectedTotalDebuff.get(kind)!}`}
+                  </Typography>
+                </Grid>
+              );
+            })}
+        </Grid>
       </Grid>
       <Divider sx={{ margin: 2 }}>{'詳細'}</Divider>
       <Grid container spacing={2}>
