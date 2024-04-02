@@ -72,7 +72,7 @@ import {
   sortKindAtom,
   swAtom,
 } from '@/jotai/memoriaAtoms';
-import { StatusKind } from '@/parser/skill';
+import { statusKind, StatusKind } from '@/parser/skill';
 
 import { DndContext } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
@@ -975,26 +975,28 @@ function Calculator() {
             <Typography variant="body1">{`recovery: ${expectedTotalRecovery}`}</Typography>
           </Grid>
         )}
-        {[...expectedTotalBuff.entries()].map((entry) => {
-          const [type, amount] = entry;
-          return (
-            <Grid item>
-              <Typography variant="body1" key={type}>
-                {`${type}: ${amount}`}
-              </Typography>
-            </Grid>
-          );
-        })}
-        {[...expectedTotalDebuff.entries()].map((entry) => {
-          const [type, amount] = entry;
-          return (
-            <Grid item>
-              <Typography variant="body1" key={type}>
-                {`${type}: ${amount}`}
-              </Typography>
-            </Grid>
-          );
-        })}
+        {statusKind
+          .filter((kind) => expectedTotalBuff.get(kind) !== undefined)
+          .map((kind) => {
+            return (
+              <Grid item>
+                <Typography variant="body1" key={kind}>
+                  {`${kind}: ${expectedTotalBuff.get(kind)!}`}
+                </Typography>
+              </Grid>
+            );
+          })}
+        {statusKind
+          .filter((kind) => expectedTotalDebuff.get(kind) !== undefined)
+          .map((kind) => {
+            return (
+              <Grid item>
+                <Typography variant="body1" key={kind}>
+                  {`${kind}: ${expectedTotalDebuff.get(kind)!}`}
+                </Typography>
+              </Grid>
+            );
+          })}
       </Grid>
       <Divider sx={{ margin: 2 }}>{'詳細'}</Divider>
       <Grid container spacing={2}>
