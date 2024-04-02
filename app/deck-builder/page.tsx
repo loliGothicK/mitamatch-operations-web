@@ -920,14 +920,23 @@ function Calculator() {
     .map(({ expected }) => expected.recovery)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
 
-  const displayBuffDebuff = ({
+  const displayBuff = ({
     type,
     amount,
   }: {
     type: StatusKind;
     amount: number;
   }) => {
-    return `${type}: ${amount}`;
+    return `${type}/UP: ${amount}`;
+  };
+  const displayDebuff = ({
+    type,
+    amount,
+  }: {
+    type: StatusKind;
+    amount: number;
+  }) => {
+    return `${type}/DOWN: ${amount}`;
   };
 
   return (
@@ -1049,7 +1058,7 @@ function Calculator() {
           badgeContent={
             <Tooltip
               title={
-                'すべてのメモリアを1回ずつ打ち切ったときの効果量の期待値の合計'
+                'すべてのメモリアを無限回使ったときの1回あたりの効果量の合計'
               }
             >
               <QuestionMark fontSize={'small'} />
@@ -1078,8 +1087,8 @@ function Calculator() {
             .map((kind) => {
               return (
                 <Grid item key={kind}>
-                  <Typography variant="body1">
-                    {`${kind}: ${expectedTotalBuff.get(kind)!}`}
+                  <Typography variant="body1" color={'darkred'}>
+                    {`${kind}/UP: ${expectedTotalBuff.get(kind)!}`}
                   </Typography>
                 </Grid>
               );
@@ -1094,8 +1103,8 @@ function Calculator() {
             .map((kind) => {
               return (
                 <Grid item key={kind}>
-                  <Typography variant="body1">
-                    {`${kind}: ${expectedTotalDebuff.get(kind)!}`}
+                  <Typography variant="body1" color={'darkblue'}>
+                    {`${kind}/DOWN: ${expectedTotalDebuff.get(kind)!}`}
                   </Typography>
                 </Grid>
               );
@@ -1133,8 +1142,12 @@ function Calculator() {
                     <>
                       {expected.buff.map((buff) => {
                         return (
-                          <Typography key={buff.type} variant="body2">
-                            {displayBuffDebuff(buff)}
+                          <Typography
+                            key={buff.type}
+                            variant="body2"
+                            color={'darkred'}
+                          >
+                            {displayBuff(buff)}
                           </Typography>
                         );
                       })}
@@ -1146,8 +1159,12 @@ function Calculator() {
                     <>
                       {expected.debuff.map((debuff) => {
                         return (
-                          <Typography key={debuff.type} variant="body2">
-                            {displayBuffDebuff(debuff)}
+                          <Typography
+                            key={debuff.type}
+                            variant="body2"
+                            color={'darkblue'}
+                          >
+                            {displayDebuff(debuff)}
                           </Typography>
                         );
                       })}
