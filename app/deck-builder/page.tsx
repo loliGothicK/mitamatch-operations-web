@@ -881,7 +881,7 @@ function Calculator() {
   const [spDef, setSpDef] = useAtom(spDefAtom);
   const [selfStatus, setSelfStatus] = useAtom(statusAtom);
 
-  const expected = evaluate(
+  const { skill } = evaluate(
     [...deck, ...legendaryDeck],
     selfStatus,
     [def, spDef],
@@ -889,10 +889,10 @@ function Calculator() {
     costume,
   );
 
-  const expectedToalDamage = expected
+  const expectedToalDamage = skill
     .map(({ expected }) => expected.damage)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
-  const expectedTotalBuff = expected
+  const expectedTotalBuff = skill
     .map(({ expected }) => expected.buff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
       if (!cur) return acc;
@@ -904,7 +904,7 @@ function Calculator() {
       }
       return acc;
     }, new Map());
-  const expectedTotalDebuff = expected
+  const expectedTotalDebuff = skill
     .map(({ expected }) => expected.debuff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
       if (!cur) return acc;
@@ -916,7 +916,7 @@ function Calculator() {
       }
       return acc;
     }, new Map());
-  const expectedTotalRecovery = expected
+  const expectedTotalRecovery = skill
     .map(({ expected }) => expected.recovery)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
 
@@ -1113,7 +1113,7 @@ function Calculator() {
       </Grid>
       <Divider sx={{ margin: 2 }}>{'詳細'}</Divider>
       <Grid container spacing={2}>
-        {expected.map(({ memoria, expected }) => {
+        {skill.map(({ memoria, expected }) => {
           return (
             <Grid item key={memoria.id} xs={12} md={6}>
               <Card sx={{ display: 'flex' }}>

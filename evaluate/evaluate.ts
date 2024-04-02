@@ -48,20 +48,30 @@ export function evaluate(
   charm?: Charm,
   costume?: Costume,
 ): {
-  memoria: MemoriaWithConcentration;
-  expected: {
-    damage?: number;
-    buff?: {
-      type: StatusKind;
-      amount: number;
-    }[];
-    debuff?: {
-      type: StatusKind;
-      amount: number;
-    }[];
-    recovery?: number;
-  };
-}[] {
+  skill: {
+    memoria: MemoriaWithConcentration;
+    expected: {
+      damage?: number;
+      buff?: {
+        type: StatusKind;
+        amount: number;
+      }[];
+      debuff?: {
+        type: StatusKind;
+        amount: number;
+      }[];
+      recovery?: number;
+    };
+  }[];
+  supportBuff: {
+    type: StatusKind;
+    amount: number;
+  }[];
+  supportDebuff: {
+    type: StatusKind;
+    amount: number;
+  }[];
+} {
   const themeRate = new Map<string, number>([
     ['火', 1.1],
     ['水', 1.1],
@@ -75,7 +85,7 @@ export function evaluate(
   const costumeRate = 1.15;
   const costumeEx = parse_costume(costume?.ex?.description);
 
-  return deck.map((memoria) => {
+  const skill = deck.map((memoria) => {
     const skill = parse_skill(memoria.skill.name, memoria.skill.description);
 
     const skillLevel = match(memoria.concentration)
@@ -164,6 +174,12 @@ export function evaluate(
       },
     };
   });
+
+  return {
+    skill,
+    supportBuff: [],
+    supportDebuff: [],
+  };
 }
 
 function damage(
