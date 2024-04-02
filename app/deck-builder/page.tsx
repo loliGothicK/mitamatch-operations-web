@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { ReactNode, SyntheticEvent, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,12 +14,19 @@ import {
   FilterAlt,
   Launch,
   LinkSharp,
+  QuestionMark,
   Remove,
   SearchOutlined,
 } from '@mui/icons-material';
 import {
+  Autocomplete,
   Avatar,
+  Badge,
+  BadgeProps,
   Button,
+  Card,
+  CardContent,
+  CardMedia,
   Dialog,
   DialogActions,
   DialogContent,
@@ -30,6 +37,8 @@ import {
   Skeleton,
   Stack,
   Switch,
+  Tabs,
+  TextField,
   Tooltip,
 } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -41,6 +50,8 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { styled } from '@mui/material/styles';
+import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 
 import { decodeDeck, encodeDeck } from '@/actions/serde';
@@ -48,6 +59,9 @@ import Details from '@/component/deck-builder/Details';
 import Filter from '@/component/deck-builder/Filter';
 import Search from '@/component/deck-builder/Search';
 import { Layout } from '@/component/Layout';
+import { Charm, charmList } from '@/domain/charm/charm';
+import { Costume, costumeList } from '@/domain/costume/costume';
+import { evaluate } from '@/evaluate/evaluate';
 import {
   deckAtom,
   filteredMemoriaAtom,
@@ -58,6 +72,7 @@ import {
   sortKindAtom,
   swAtom,
 } from '@/jotai/memoriaAtoms';
+import { StatusKind } from '@/parser/skill';
 
 import { DndContext } from '@dnd-kit/core';
 import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
@@ -724,7 +739,7 @@ function SearchModal() {
   );
 }
 
-export default function DeckBuilder() {
+function DeckBuilder() {
   const params = useSearchParams();
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
@@ -782,63 +797,326 @@ export default function DeckBuilder() {
   }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, value]);
 
   return (
-    <Layout>
-      <Grid container direction={'row'} alignItems={'right'}>
-        <Grid
-          container
-          item
-          spacing={2}
-          xs={12}
-          direction={'row'}
-          alignItems={'left'}
-          flexShrink={2}
-        >
-          <Grid item xs={12} md={4} lg={2}>
-            <Grid container direction={'column'} alignItems={'center'}>
-              <Details />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} md={8} lg={6} alignItems={'center'}>
-            <Tooltip title="clear all" placement={'top'}>
-              <Button
-                onClick={() => {
-                  setDeck([]);
-                  setLegendaryDeck([]);
-                }}
-              >
-                <ClearAll />
-              </Button>
-            </Tooltip>
-            <Tooltip title={'generate share link'} placement={'top'}>
-              <Link
-                href={`/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`}
-                onClick={shareHandler}
-              >
-                <IconButton aria-label="share">
-                  <LinkSharp />
-                </IconButton>
-              </Link>
-            </Tooltip>
-            <Container
-              maxWidth={false}
-              sx={{
-                bgcolor: 'grey',
-                minHeight: '60vh',
-                maxWidth: 620,
-                paddingTop: 2,
-                paddingBottom: 2,
-              }}
-            >
-              <LegendaryDeck />
-              <Divider sx={{ margin: 2 }} />
-              <Deck />
-            </Container>
-          </Grid>
-          <Grid item xs={12} md={12} lg={4}>
-            <Source />
+    <Grid container direction={'row'} alignItems={'right'}>
+      <Grid
+        container
+        item
+        spacing={2}
+        xs={12}
+        direction={'row'}
+        alignItems={'left'}
+        flexShrink={2}
+      >
+        <Grid item xs={12} md={4} lg={2}>
+          <Grid container direction={'column'} alignItems={'center'}>
+            <Details />
           </Grid>
         </Grid>
+        <Grid item xs={12} md={8} lg={6} alignItems={'center'}>
+          <Tooltip title="clear all" placement={'top'}>
+            <Button
+              onClick={() => {
+                setDeck([]);
+                setLegendaryDeck([]);
+              }}
+            >
+              <ClearAll />
+            </Button>
+          </Tooltip>
+          <Tooltip title={'generate share link'} placement={'top'}>
+            <Link
+              href={`/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`}
+              onClick={shareHandler}
+            >
+              <IconButton aria-label="share">
+                <LinkSharp />
+              </IconButton>
+            </Link>
+          </Tooltip>
+          <Container
+            maxWidth={false}
+            sx={{
+              bgcolor: 'grey',
+              minHeight: '60vh',
+              maxWidth: 620,
+              paddingTop: 2,
+              paddingBottom: 2,
+            }}
+          >
+            <LegendaryDeck />
+            <Divider sx={{ margin: 2 }} />
+            <Deck />
+          </Container>
+        </Grid>
+        <Grid item xs={12} md={12} lg={4}>
+          <Source />
+        </Grid>
       </Grid>
+    </Grid>
+  );
+}
+
+const StyledBadge = styled(Badge)<BadgeProps>(() => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: -3,
+    padding: '0 4px',
+  },
+}));
+
+function Calculator() {
+  const [deck] = useAtom(deckAtom);
+  const [legendaryDeck] = useAtom(legendaryDeckAtom);
+  const [sw] = useAtom(swAtom);
+  const [charm, setCharm] = useState<Charm>(charmList.reverse()[0]);
+  const [costume, setCostume] = useState<Costume>(costumeList.reverse()[0]);
+
+  const expected = evaluate([...deck, ...legendaryDeck], charm, costume);
+
+  const expectedToalDamage = expected
+    .map(({ expected }) => expected.damage)
+    .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
+  const expectedTotalBuff = expected
+    .map(({ expected }) => expected.buff)
+    .reduce((acc: Map<StatusKind, number>, cur) => {
+      if (!cur) return acc;
+      for (const elem of cur) {
+        const { type, amount } = elem;
+        if (type) {
+          acc.set(type, (acc.get(type) || 0) + amount);
+        }
+      }
+      return acc;
+    }, new Map());
+  const expectedTotalDebuff = expected
+    .map(({ expected }) => expected.debuff)
+    .reduce((acc: Map<StatusKind, number>, cur) => {
+      if (!cur) return acc;
+      for (const elem of cur) {
+        const { type, amount } = elem;
+        if (type) {
+          acc.set(type, (acc.get(type) || 0) + amount);
+        }
+      }
+      return acc;
+    }, new Map());
+  const expectedTotalRecovery = expected
+    .map(({ expected }) => expected.recovery)
+    .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
+
+  const displayBuffDebuff = ({
+    type,
+    amount,
+  }: {
+    type: StatusKind;
+    amount: number;
+  }) => {
+    return `${type}: ${amount}`;
+  };
+
+  return (
+    <Container>
+      <Grid container spacing={2}>
+        <Grid item>
+          <Autocomplete
+            disablePortal
+            options={charmList.map((charm) => charm.name)}
+            sx={{ width: 400 }}
+            renderInput={(params) => <TextField {...params} label="charm" />}
+            onChange={(_, value) => {
+              if (value) {
+                setCharm(charmList.find((charm) => charm.name === value)!);
+              }
+            }}
+          />
+        </Grid>
+        <Grid item>
+          <Autocomplete
+            disablePortal
+            options={costumeList.map(
+              (costume) => `${costume.lily}/${costume.name}`,
+            )}
+            sx={{ width: 400 }}
+            renderInput={(params) => <TextField {...params} label="costume" />}
+            onChange={(_, value) => {
+              if (value) {
+                setCostume(
+                  costumeList.find(
+                    (costume) => `${costume.lily}/${costume.name}` === value,
+                  )!,
+                );
+              }
+            }}
+          />
+        </Grid>
+      </Grid>
+      <Divider sx={{ margin: 2 }}>
+        <StyledBadge
+          badgeContent={
+            <Tooltip
+              title={
+                'すべてのメモリアを1回ずつ打ち切ったときの効果量の期待値の合計'
+              }
+            >
+              <QuestionMark fontSize={'small'} />
+            </Tooltip>
+          }
+        >
+          {'期待値総量'}
+        </StyledBadge>
+      </Divider>
+      <Grid container spacing={2} direction={'row'}>
+        {sw === 'sword' ? (
+          <Grid item>
+            <Typography variant="body1">{`damage: ${expectedToalDamage}`}</Typography>
+          </Grid>
+        ) : (
+          <Grid item>
+            <Typography variant="body1">{`recovery: ${expectedTotalRecovery}`}</Typography>
+          </Grid>
+        )}
+        {[...expectedTotalBuff.entries()].map((entry) => {
+          const [type, amount] = entry;
+          return (
+            <Grid item>
+              <Typography variant="body1" key={type}>
+                {`${type}: ${amount}`}
+              </Typography>
+            </Grid>
+          );
+        })}
+        {[...expectedTotalDebuff.entries()].map((entry) => {
+          const [type, amount] = entry;
+          return (
+            <Grid item>
+              <Typography variant="body1" key={type}>
+                {`${type}: ${amount}`}
+              </Typography>
+            </Grid>
+          );
+        })}
+      </Grid>
+      <Divider sx={{ margin: 2 }}>{'詳細'}</Divider>
+      <Grid container spacing={2}>
+        {expected.map(({ memoria, expected }) => {
+          return (
+            <Grid item key={memoria.id} xs={12} md={6}>
+              <Card sx={{ display: 'flex' }}>
+                <CardMedia
+                  component="img"
+                  sx={{ width: 100, height: 100 }}
+                  image={`/memoria/${memoria.name}.png`}
+                  alt={memoria.name}
+                />
+                <CardContent
+                  sx={{
+                    flex: '1 0 auto',
+                  }}
+                >
+                  {expected.damage ? (
+                    <Typography variant="body2">{`damage: ${expected.damage}`}</Typography>
+                  ) : (
+                    <></>
+                  )}
+                  {expected.recovery ? (
+                    <Typography variant="body2">{`recovery: ${expected.recovery}`}</Typography>
+                  ) : (
+                    <></>
+                  )}
+                  {expected.buff ? (
+                    <>
+                      {expected.buff.map((buff) => {
+                        return (
+                          <Typography key={buff.type} variant="body2">
+                            {displayBuffDebuff(buff)}
+                          </Typography>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {expected.debuff ? (
+                    <>
+                      {expected.debuff.map((debuff) => {
+                        return (
+                          <Typography key={debuff.type} variant="body2">
+                            {displayBuffDebuff(debuff)}
+                          </Typography>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </CardContent>
+              </Card>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Container>
+  );
+}
+
+interface TabPanelProps {
+  children?: ReactNode;
+  index: number;
+  value: number;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+export default function BasicTabs() {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (_: SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Layout>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label={'Builder'} {...a11yProps(0)} />
+          <Tab label={'Calculator'} {...a11yProps(1)} />
+        </Tabs>
+      </Box>
+      <CustomTabPanel value={value} index={0}>
+        <DeckBuilder />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+        <Calculator />
+      </CustomTabPanel>
     </Layout>
   );
 }

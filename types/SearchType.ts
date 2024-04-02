@@ -90,16 +90,14 @@ export function allOtherSkillSearch(): OtherSkillSearch[] {
 }
 
 export type VanguardSupportSearch =
-  | 'NormalMatchPtUp'
-  | 'SpecialMatchPtUp'
+  | 'MatchPtUp'
   | 'DamageUp'
   | BasicStatusSearch
   | ElementStatusSearch;
 
 export function allVanguardSupportSearch(): VanguardSupportSearch[] {
   return [
-    'NormalMatchPtUp',
-    'SpecialMatchPtUp',
+    'MatchPtUp',
     'DamageUp',
     ...allBasicStatusSearch(),
     ...allElementStatusSearch(),

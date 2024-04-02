@@ -2,6 +2,8 @@ import { z } from 'zod';
 
 import memoriaData from './memoria.json';
 
+const statusSchema = z.tuple([z.number(), z.number(), z.number(), z.number()]);
+
 export const memoriaSchema = z.object({
   id: z.number(),
   link: z.string(),
@@ -17,7 +19,13 @@ export const memoriaSchema = z.object({
     '回復',
   ]),
   element: z.enum(['火', '水', '風', '光', '闇']),
-  status: z.array(z.array(z.number())),
+  status: z.tuple([
+    statusSchema,
+    statusSchema,
+    statusSchema,
+    statusSchema,
+    statusSchema,
+  ]),
   cost: z.number(),
   skill: z.object({
     name: z.string(),

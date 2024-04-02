@@ -209,16 +209,16 @@ function parse_heal(description: string): SkillEffect[] {
     }
   })(_match[1].split('～').map((n) => parseInt(n)));
 
-  const amount = match<string, Amount>(_match[2])
+  const healAmount = match<string, Amount>(_match[2])
     .with('小回復', () => 'small')
     .with('回復', () => 'medium')
     .with('大回復', () => 'large')
     .with('特大回復', () => 'extra-large')
     .run();
 
-  result.push({ type: 'heal', range, amount });
+  result.push({ type: 'heal', range, amount: healAmount });
 
-  const buff = /さらに味方の(.*)を(.*アップ)する/;
+  const buff = /(ATK.*?|Sp\.ATK.*?|DEF.*?|Sp\.DEF.*?)を(.*?アップ)/;
 
   const __match = description.match(buff);
 
@@ -248,12 +248,24 @@ function parse_heal(description: string): SkillEffect[] {
         'Water ATK',
         'Wind ATK',
       ])
+      .with('火属性防御力・水属性防御力・風属性防御力', () => [
+        'Fire DEF',
+        'Water DEF',
+        'Wind DEF',
+      ])
       .run();
   });
 
+  const buffAmount = match<string, Amount>(__match[2])
+    .with('小アップ', () => 'small')
+    .with('アップ', () => 'medium')
+    .with('大アップ', () => 'large')
+    .with('特大アップ', () => 'extra-large')
+    .run();
+
   return result.concat(
-    status.map((s) => {
-      return { type: 'buff', range, amount, status: s };
+    status.map((stat) => {
+      return { type: 'buff', range, amount: buffAmount, status: stat };
     }),
   );
 }
