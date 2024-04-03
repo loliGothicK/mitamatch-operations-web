@@ -33,11 +33,11 @@ export function decodeDeck(encoded: string): {
     sw,
     legendaryDeck: legendaryDeck.map(
       ([id, concentration]: [number, number]) => {
-        return { ...deckMap.get(id), concentration: concentration };
+        return { ...deckMap.get(id), concentration: concentration || 4 };
       },
     ),
     deck: deck.map(([id, concentration]: [number, number]) => {
-      return { ...deckMap.get(id), concentration: concentration };
+      return { ...deckMap.get(id), concentration: concentration || 4 };
     }),
   };
 }
