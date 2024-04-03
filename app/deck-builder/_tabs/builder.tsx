@@ -78,18 +78,28 @@ function Icon({
   element: string;
   position?: number;
 }) {
-  const image = (src: string) => (
-    <Image src={src} alt={'kind'} width={25} height={25} />
-  );
-
   const kindImage = match(kind)
-    .with('通常単体', () => image('/NormalSingle.png'))
-    .with('通常範囲', () => image('/NormalRange.png'))
-    .with('特殊単体', () => image('/SpecialSingle.png'))
-    .with('特殊範囲', () => image('/SpecialRange.png'))
-    .with('支援', () => image('/Support.png'))
-    .with('妨害', () => image('/Interference.png'))
-    .with('回復', () => image('/Recovery.png'))
+    .with('通常単体', () => (
+      <Image src={'/NormalSingle.png'} alt={'kind'} width={25} height={25} />
+    ))
+    .with('通常範囲', () => (
+      <Image src={'/NormalRange.png'} alt={'kind'} width={25} height={25} />
+    ))
+    .with('特殊単体', () => (
+      <Image src={'/SpecialSingle.png'} alt={'kind'} width={25} height={25} />
+    ))
+    .with('特殊範囲', () => (
+      <Image src={'/SpecialRange.png'} alt={'kind'} width={25} height={25} />
+    ))
+    .with('支援', () => (
+      <Image src={'/Assist.png'} alt={'kind'} width={25} height={25} />
+    ))
+    .with('妨害', () => (
+      <Image src={'/Interference.png'} alt={'kind'} width={25} height={25} />
+    ))
+    .with('回復', () => (
+      <Image src={'/Recovery.png'} alt={'kind'} width={25} height={25} />
+    ))
     .run();
 
   const avatar = (color: string) => (

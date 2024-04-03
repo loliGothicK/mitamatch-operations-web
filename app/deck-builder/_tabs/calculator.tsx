@@ -84,7 +84,8 @@ export function Calculator() {
     .forEach(([type, amount]) => {
       expectedTotalBuff.set(
         type as StatusKind,
-        (expectedTotalBuff.get(type as StatusKind) || 0) + amount,
+        (expectedTotalBuff.get(type as StatusKind) || 0) +
+          amount * [...deck, ...legendaryDeck].length,
       );
     });
   Object.entries(supportDebuff)
@@ -92,7 +93,8 @@ export function Calculator() {
     .forEach(([type, amount]) => {
       expectedTotalDebuff.set(
         type as StatusKind,
-        (expectedTotalDebuff.get(type as StatusKind) || 0) + amount,
+        (expectedTotalDebuff.get(type as StatusKind) || 0) +
+          amount * [...deck, ...legendaryDeck].length,
       );
     });
 

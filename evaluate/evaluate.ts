@@ -181,12 +181,10 @@ export function evaluate(
     };
   });
 
-  const calibration = charmRate * costumeRate * graceRate;
-
   return {
     skill,
-    supportBuff: support('UP', [atk, spAtk, def, spDef], calibration, deck),
-    supportDebuff: support('DOWN', [atk, spAtk, def, spDef], calibration, deck),
+    supportBuff: support('UP', [atk, spAtk, def, spDef], deck),
+    supportDebuff: support('DOWN', [atk, spAtk, def, spDef], deck),
   };
 }
 
@@ -969,7 +967,7 @@ function recovery(
     闇: 1,
   };
   deck
-    .filter((memoria) => !!memoria.legendary)
+    .filter((memoria) => !!memoria.legendary && memoria.kind === '回復')
     .forEach((memoria) => {
       match(memoria.legendary)
         .when(
@@ -1061,7 +1059,6 @@ function recovery(
 function support(
   type: 'UP' | 'DOWN',
   [atk, spAtk, def, spDef]: [number, number, number, number],
-  calibration: number,
   deck: MemoriaWithConcentration[],
 ): Record<
   Exclude<
@@ -1117,95 +1114,81 @@ function support(
       return match(status!)
         .with('ATK', () => {
           const skillRate = match(amount)
-            .with('small', () => 2.28 / 100)
-            .with('medium', () => 3.04 / 100)
-            .with('large', () => 3.8 / 100)
-            .with('extra-large', () => 4.27 / 100)
-            .with('super-large', () => 4.74 / 100) // 現状存在しない
-            .exhaustive();
+            .with('medium', () => 1.0 / 100)
+            .with('large', () => 1.5 / 100)
+            .with('extra-large', () => 1.8 / 100)
+            .with('super-large', () => 2.1 / 100) // 現状存在しない
+            .run();
           const memoriaRate = skillRate * skillLevel;
           return {
             type: status!,
-            amount: Math.floor(atk * memoriaRate * calibration * probability),
+            amount: Math.floor(atk * memoriaRate * probability),
           };
         })
         .with('Sp.ATK', () => {
           const skillRate = match(amount)
-            .with('small', () => 2.28 / 100)
-            .with('medium', () => 3.04 / 100)
-            .with('large', () => 3.8 / 100)
-            .with('extra-large', () => 4.27 / 100)
-            .with('super-large', () => 4.74 / 100) // 現状存在しない
-            .exhaustive();
+            .with('medium', () => 1.0 / 100)
+            .with('large', () => 1.5 / 100)
+            .with('extra-large', () => 1.8 / 100)
+            .with('super-large', () => 2.1 / 100) // 現状存在しない
+            .run();
           const memoriaRate = skillRate * skillLevel;
           return {
             type: status!,
-            amount: Math.floor(spAtk * memoriaRate * calibration * probability),
+            amount: Math.floor(spAtk * memoriaRate * probability),
           };
         })
         .with('DEF', () => {
           const skillRate = match(amount)
-            .with('small', () => 3.32 / 100)
-            .with('medium', () => 4.27 / 100)
-            .with('large', () => 4.75 / 100)
-            .with('extra-large', () => 5.22 / 100)
-            .with('super-large', () => 5.69 / 100) // 現状存在しない
-            .exhaustive();
+            .with('medium', () => 1.0 / 100)
+            .with('large', () => 1.5 / 100)
+            .with('extra-large', () => 1.8 / 100)
+            .with('super-large', () => 2.1 / 100) // 現状存在しない
+            .run();
           const memoriaRate = skillRate * skillLevel;
           return {
             type: status!,
-            amount: Math.floor(def * memoriaRate * calibration * probability),
+            amount: Math.floor(def * memoriaRate * probability),
           };
         })
         .with('Sp.DEF', () => {
           const skillRate = match(amount)
-            .with('small', () => 3.32 / 100)
-            .with('medium', () => 4.27 / 100)
-            .with('large', () => 4.75 / 100)
-            .with('extra-large', () => 5.22 / 100)
-            .with('super-large', () => 5.69 / 100) // 現状存在しない
-            .exhaustive();
+            .with('medium', () => 1.0 / 100)
+            .with('large', () => 1.5 / 100)
+            .with('extra-large', () => 1.8 / 100)
+            .with('super-large', () => 2.1 / 100) // 現状存在しない
+            .run();
           const memoriaRate = skillRate * skillLevel;
           return {
             type: status!,
-            amount: Math.floor(spDef * memoriaRate * calibration * probability),
+            amount: Math.floor(spDef * memoriaRate * probability),
           };
         })
         .with(P.union('Fire ATK', 'Water ATK', 'Wind ATK'), () => {
           const skillRate = match(amount)
-            .with('small', () => 3.25 / 100)
-            .with('medium', () => 4.0 / 100)
-            .with('large', () => 4.89 / 100)
-            .with('extra-large', () => 5.78 / 100) // 現状存在しない
-            .with('super-large', () => 6.67 / 100) // 現状存在しない
-            .exhaustive();
+            .with('medium', () => 1.5 / 100)
+            .with('large', () => 1.8 / 100)
+            .with('extra-large', () => 2.1 / 100)
+            .run();
           const memoriaRate = skillRate * skillLevel;
           return {
             type: status!,
             amount: Math.floor(
-              Math.floor((atk + spAtk) / 2) *
-                memoriaRate *
-                calibration *
-                probability,
+              Math.floor((atk + spAtk) / 2) * memoriaRate * probability,
             ),
           };
         })
         .with(P.union('Fire DEF', 'Water DEF', 'Wind DEF'), () => {
           const skillRate = match(amount)
-            .with('small', () => 4.74 / 100)
-            .with('medium', () => 5.65 / 100)
-            .with('large', () => 6.11 / 100)
-            .with('extra-large', () => 6.57 / 100) // 現状存在しない
-            .with('super-large', () => 7.03 / 100) // 現状存在しない
-            .exhaustive();
+            .with('medium', () => 1.5 / 100)
+            .with('large', () => 1.8 / 100)
+            .with('extra-large', () => 2.1 / 100)
+            .run();
           const memoriaRate = skillRate * skillLevel;
           return {
             type: status!,
             amount: Math.floor(
-              Math.floor((def + spDef) / 2) *
-                memoriaRate *
-                calibration *
-                probability,
+              Math.floor((def + spDef) / 2) * memoriaRate * probability,
             ),
           };
         })
