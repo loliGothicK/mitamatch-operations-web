@@ -21,6 +21,7 @@ import {
 import {
   Autocomplete,
   Avatar,
+  Badge,
   Button,
   Card,
   CardContent,
@@ -1248,7 +1249,15 @@ export default function BasicTabs() {
           aria-label="basic tabs example"
         >
           <Tab label={'Builder'} {...a11yProps(0)} />
-          <Tab label={'Calculator'} {...a11yProps(1)} />
+          <Tab
+            label={
+              <Badge badgeContent={'new'} color="primary">
+                {'Calculator'}
+              </Badge>
+            }
+            {...a11yProps(1)}
+            sx={{ paddingRight: 5 }}
+          />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>

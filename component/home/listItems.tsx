@@ -20,7 +20,11 @@ const links = [
   {
     title: 'Deck Builder',
     href: '/deck-builder',
-    icon: <ViewCompact />,
+    icon: (
+      <Badge badgeContent={'updated'} color="primary">
+        <ViewCompact />
+      </Badge>
+    ),
   },
   {
     title: 'Timeline Builder',
@@ -57,6 +61,13 @@ export const mainListItems = (
 );
 
 const updates = [
+  {
+    name: 'Calculator in Deck Builder is now available for preview',
+    description: [
+      'You can calculate your deck total damage or recovery, and buff/debuff.',
+      'This feature is still in preview.',
+    ],
+  },
   {
     name: 'Flow Chart is now available for preview',
     description: ['You can create, edit, and share your flow chart.'],
