@@ -246,9 +246,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   const [sw] = useAtom(swAtom);
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
-  const [concentrationValue, setConcentration] = useState(
-    concentration ? concentration : 4,
-  );
+  const [concentrationValue, setConcentration] = useState(concentration);
   const [isLoaded, setIsLoaded] = useState(false);
 
   const {
@@ -271,7 +269,10 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     setDeck((prev) => {
       return prev.map((memoria) => {
         if (memoria.name === name) {
-          return { ...memoria, concentration: concentrationValue };
+          return {
+            ...memoria,
+            concentration: concentrationValue > 0 ? concentrationValue - 1 : 4,
+          };
         }
         return memoria;
       });
@@ -279,7 +280,10 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     setLegendaryDeck((prev) => {
       return prev.map((memoria) => {
         if (memoria.name === name) {
-          return { ...memoria, concentration: concentrationValue };
+          return {
+            ...memoria,
+            concentration: concentrationValue > 0 ? concentrationValue - 1 : 4,
+          };
         }
         return memoria;
       });
@@ -290,13 +294,21 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
         sw,
         deck.map((memoria) => {
           if (memoria.name === name) {
-            return { ...memoria, concentration: concentrationValue };
+            return {
+              ...memoria,
+              concentration:
+                concentrationValue > 0 ? concentrationValue - 1 : 4,
+            };
           }
           return memoria;
         }),
         legendaryDeck.map((memoria) => {
           if (memoria.name === name) {
-            return { ...memoria, concentration: concentrationValue };
+            return {
+              ...memoria,
+              concentration:
+                concentrationValue > 0 ? concentrationValue - 1 : 4,
+            };
           }
           return memoria;
         }),
@@ -511,21 +523,30 @@ function VirtualizedList() {
                       }}
                       onClick={() => {
                         if (memoria[index].labels.includes('legendary')) {
-                          setLegendaryDeck((prev) => [...prev, memoria[index]]);
+                          setLegendaryDeck((prev) => [
+                            ...prev,
+                            { ...memoria[index], concentration: 4 },
+                          ]);
                           Cookies.set(
                             'deck',
                             encodeDeck(sw, deck, [
                               ...legendaryDeck,
-                              memoria[index],
+                              { ...memoria[index], concentration: 4 },
                             ]),
                           );
                         } else {
-                          setDeck((prev) => [...prev, memoria[index]]);
+                          setDeck((prev) => [
+                            ...prev,
+                            { ...memoria[index], concentration: 4 },
+                          ]);
                           Cookies.set(
                             'deck',
                             encodeDeck(
                               sw,
-                              [...deck, memoria[index]],
+                              [
+                                ...deck,
+                                { ...memoria[index], concentration: 4 },
+                              ],
                               legendaryDeck,
                             ),
                           );

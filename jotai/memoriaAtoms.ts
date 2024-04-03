@@ -23,7 +23,7 @@ import {
 
 import { match } from 'ts-pattern';
 
-export type MemoriaWithConcentration = Memoria & { concentration?: number };
+export type MemoriaWithConcentration = Memoria & { concentration: number };
 
 export const sortKind = [
   'ID',

@@ -35,6 +35,7 @@ export const memoriaSchema = z.object({
     name: z.string(),
     description: z.string(),
   }),
+  legendary: z.string().optional(),
   labels: z.array(z.string()),
 });
 

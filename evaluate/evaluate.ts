@@ -203,6 +203,74 @@ function damage(
   if (!skill.effects.some((effect) => effect.type === 'damage'))
     return undefined;
 
+  let normalLegendary = {
+    火: 1,
+    水: 1,
+    風: 1,
+    光: 1,
+    闇: 1,
+  };
+  let specialLegendary = {
+    火: 1,
+    水: 1,
+    風: 1,
+    光: 1,
+    闇: 1,
+  };
+  deck
+    .filter((memoria) => !!memoria.legendary)
+    .forEach((memoria) => {
+      match(memoria.legendary)
+        .when(
+          (legendary) => legendary!.includes('火通'),
+          () => {
+            normalLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('水通'),
+          () => {
+            normalLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('風通'),
+          () => {
+            normalLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('火特'),
+          () => {
+            specialLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('水特'),
+          () => {
+            specialLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('風特'),
+          () => {
+            specialLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .otherwise(() => {});
+    });
+
+  calibration = match(memoria.kind)
+    .with(
+      P.union('通常単体', '通常範囲'),
+      () => calibration * normalLegendary[memoria.element],
+    )
+    .with(
+      P.union('特殊単体', '特殊範囲'),
+      () => calibration * specialLegendary[memoria.element],
+    )
+    .otherwise(() => calibration);
+
   const skillRate = match(memoria.kind)
     .when(
       (kind) => kind.includes('単体'),
@@ -257,7 +325,7 @@ function damage(
       (memoria) =>
         [
           parse_support(memoria.support.name, memoria.support.description),
-          memoria.concentration || 4,
+          memoria.concentration,
         ] as const,
     )
     .map(([support, concentration]) => {
@@ -320,6 +388,104 @@ function buff(
   const skill = parse_skill(memoria.skill.name, memoria.skill.description);
   if (!skill.effects.some((effect) => effect.type === 'buff')) return undefined;
 
+  let supportLegendary = {
+    火: 1,
+    水: 1,
+    風: 1,
+    光: 1,
+    闇: 1,
+  };
+  let normalLegendary = {
+    火: 1,
+    水: 1,
+    風: 1,
+    光: 1,
+    闇: 1,
+  };
+  let specialLegendary = {
+    火: 1,
+    水: 1,
+    風: 1,
+    光: 1,
+    闇: 1,
+  };
+  deck
+    .filter((memoria) => !!memoria.legendary)
+    .forEach((memoria) => {
+      match(memoria.legendary)
+        .when(
+          (legendary) => legendary!.includes('火援'),
+          () => {
+            supportLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('水援'),
+          () => {
+            supportLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('風援'),
+          () => {
+            supportLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('火通'),
+          () => {
+            normalLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('水通'),
+          () => {
+            normalLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('風通'),
+          () => {
+            normalLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('火特'),
+          () => {
+            specialLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('水特'),
+          () => {
+            specialLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('風特'),
+          () => {
+            specialLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .otherwise(() => {});
+    });
+
+  calibration = match(memoria.kind)
+    .with(
+      P.union('通常単体', '通常範囲'),
+      () => calibration * normalLegendary[memoria.element],
+    )
+    .with(
+      P.union('特殊単体', '特殊範囲'),
+      () => calibration * specialLegendary[memoria.element],
+    )
+    .with(
+      P.union('支援', '妨害'),
+      () => calibration * supportLegendary[memoria.element],
+    )
+    .with('回復', () => calibration)
+    .exhaustive();
+
   const support =
     memoria.kind.includes('特殊') || memoria.kind.includes('通常')
       ? 1.0
@@ -331,7 +497,7 @@ function buff(
                   memoria.support.name,
                   memoria.support.description,
                 ),
-                memoria.concentration || 4,
+                memoria.concentration,
               ] as const,
           )
           .map(([support, concentration]) => {
@@ -517,6 +683,104 @@ function debuff(
   if (!skill.effects.some((effect) => effect.type === 'debuff'))
     return undefined;
 
+  let supportLegendary = {
+    火: 1,
+    水: 1,
+    風: 1,
+    光: 1,
+    闇: 1,
+  };
+  let normalLegendary = {
+    火: 1,
+    水: 1,
+    風: 1,
+    光: 1,
+    闇: 1,
+  };
+  let specialLegendary = {
+    火: 1,
+    水: 1,
+    風: 1,
+    光: 1,
+    闇: 1,
+  };
+  deck
+    .filter((memoria) => !!memoria.legendary)
+    .forEach((memoria) => {
+      match(memoria.legendary)
+        .when(
+          (legendary) => legendary!.includes('火援'),
+          () => {
+            supportLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('水援'),
+          () => {
+            supportLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('風援'),
+          () => {
+            supportLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('火通'),
+          () => {
+            normalLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('水通'),
+          () => {
+            normalLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('風通'),
+          () => {
+            normalLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('火特'),
+          () => {
+            specialLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('水特'),
+          () => {
+            specialLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('風特'),
+          () => {
+            specialLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .otherwise(() => {});
+    });
+
+  calibration = match(memoria.kind)
+    .with(
+      P.union('通常単体', '通常範囲'),
+      () => calibration * normalLegendary[memoria.element],
+    )
+    .with(
+      P.union('特殊単体', '特殊範囲'),
+      () => calibration * specialLegendary[memoria.element],
+    )
+    .with(
+      P.union('支援', '妨害'),
+      () => calibration * supportLegendary[memoria.element],
+    )
+    .with('回復', () => calibration)
+    .exhaustive();
+
   const support =
     memoria.kind.includes('特殊') || memoria.kind.includes('通常')
       ? 1.0
@@ -528,7 +792,7 @@ function debuff(
                   memoria.support.name,
                   memoria.support.description,
                 ),
-                memoria.concentration || 4,
+                memoria.concentration,
               ] as const,
           )
           .map(([support, concentration]) => {
@@ -697,6 +961,37 @@ function recovery(
   deck: MemoriaWithConcentration[],
 ): number | undefined {
   if (memoria.kind !== '回復') return undefined;
+  let legendary = {
+    火: 1,
+    水: 1,
+    風: 1,
+    光: 1,
+    闇: 1,
+  };
+  deck
+    .filter((memoria) => !!memoria.legendary)
+    .forEach((memoria) => {
+      match(memoria.legendary)
+        .when(
+          (legendary) => legendary!.includes('火回'),
+          () => {
+            legendary['火'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('水回'),
+          () => {
+            legendary['水'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .when(
+          (legendary) => legendary!.includes('風回'),
+          () => {
+            legendary['風'] += 0.02 + 0.0025 * memoria.concentration;
+          },
+        )
+        .run();
+    });
   const skillRate = match(memoria.skill.description)
     .when(
       (sentence) => sentence.includes('特大回復'),
@@ -711,12 +1006,13 @@ function recovery(
       () => 7.7 / 100,
     )
     .run();
+
   const support = deck
     .map(
       (memoria) =>
         [
           parse_support(memoria.support.name, memoria.support.description),
-          memoria.concentration || 4,
+          memoria.concentration,
         ] as const,
     )
     .map(([support, concentration]) => {
@@ -752,7 +1048,14 @@ function recovery(
     .reduce((acc, cur) => acc + cur, 1);
 
   const memoriaRate = skillRate * skillLevel;
-  return Math.floor(dsd * memoriaRate * calibration * support * range);
+  return Math.floor(
+    dsd *
+      memoriaRate *
+      calibration *
+      legendary[memoria.element] *
+      support *
+      range,
+  );
 }
 
 function support(
@@ -792,7 +1095,7 @@ function support(
         memoria.support.description,
       );
       return support.effects.map(
-        (effect) => [memoria.concentration || 4, effect] as const,
+        (effect) => [memoria.concentration, effect] as const,
       );
     })
     .filter(([, effect]) => effect.type === type)
