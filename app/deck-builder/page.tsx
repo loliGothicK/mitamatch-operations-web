@@ -59,6 +59,7 @@ import Search from '@/component/deck-builder/Search';
 import { Layout } from '@/component/Layout';
 import { Charm, charmList } from '@/domain/charm/charm';
 import { Costume, costumeList } from '@/domain/costume/costume';
+import { Memoria } from '@/domain/memoria/memoria';
 import { evaluate } from '@/evaluate/evaluate';
 import {
   deckAtom,
@@ -90,108 +91,40 @@ function Icon({
   element: string;
   position?: number;
 }) {
+  const image = (src: string) => (
+    <Image src={src} alt={'kind'} width={25} height={25} />
+  );
+
   const kindImage = match(kind)
-    .with('通常単体', () => {
-      return (
-        <Image src={'/NormalSingle.png'} alt={'kind'} width={25} height={25} />
-      );
-    })
-    .with('通常範囲', () => {
-      return (
-        <Image src={'/NormalRange.png'} alt={'kind'} width={25} height={25} />
-      );
-    })
-    .with('特殊単体', () => {
-      return (
-        <Image src={'/SpecialSingle.png'} alt={'kind'} width={25} height={25} />
-      );
-    })
-    .with('特殊範囲', () => {
-      return (
-        <Image src={'/SpecialRange.png'} alt={'kind'} width={25} height={25} />
-      );
-    })
-    .with('支援', () => {
-      return <Image src={'/Assist.png'} alt={'kind'} width={25} height={25} />;
-    })
-    .with('妨害', () => {
-      return (
-        <Image src={'/Interference.png'} alt={'kind'} width={25} height={25} />
-      );
-    })
-    .with('回復', () => {
-      return (
-        <Image src={'/Recovery.png'} alt={'kind'} width={25} height={25} />
-      );
-    })
+    .with('通常単体', () => image('/NormalSingle.png'))
+    .with('通常範囲', () => image('/NormalRange.png'))
+    .with('特殊単体', () => image('/SpecialSingle.png'))
+    .with('特殊範囲', () => image('/SpecialRange.png'))
+    .with('支援', () => image('/Support.png'))
+    .with('妨害', () => image('/Interference.png'))
+    .with('回復', () => image('/Recovery.png'))
     .run();
 
+  const avatar = (color: string) => (
+    <Avatar
+      sx={{
+        width: 30,
+        height: 30,
+        left: position,
+        position: 'absolute',
+        bgcolor: color,
+      }}
+    >
+      {kindImage}
+    </Avatar>
+  );
+
   return match(element)
-    .with('火', () => (
-      <Avatar
-        sx={{
-          width: 30,
-          height: 30,
-          left: position,
-          position: 'absolute',
-          bgcolor: red[500],
-        }}
-      >
-        {kindImage}
-      </Avatar>
-    ))
-    .with('水', () => (
-      <Avatar
-        sx={{
-          width: 30,
-          height: 30,
-          left: position,
-          position: 'absolute',
-          bgcolor: blue[500],
-        }}
-      >
-        {kindImage}
-      </Avatar>
-    ))
-    .with('風', () => (
-      <Avatar
-        sx={{
-          width: 30,
-          height: 30,
-          left: position,
-          position: 'absolute',
-          bgcolor: green[500],
-        }}
-      >
-        {kindImage}
-      </Avatar>
-    ))
-    .with('光', () => (
-      <Avatar
-        sx={{
-          width: 30,
-          height: 30,
-          left: position,
-          position: 'absolute',
-          bgcolor: yellow[500],
-        }}
-      >
-        {kindImage}
-      </Avatar>
-    ))
-    .with('闇', () => (
-      <Avatar
-        sx={{
-          width: 30,
-          height: 30,
-          left: position,
-          position: 'absolute',
-          bgcolor: purple[500],
-        }}
-      >
-        {kindImage}
-      </Avatar>
-    ))
+    .with('火', () => avatar(red[500]))
+    .with('水', () => avatar(blue[500]))
+    .with('風', () => avatar(green[500]))
+    .with('光', () => avatar(yellow[500]))
+    .with('闇', () => avatar(purple[500]))
     .run();
 }
 
@@ -261,59 +194,29 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     id,
   });
 
+  const changeValue = (prev: MemoriaWithConcentration[]) => {
+    return prev.map((memoria) => {
+      if (memoria.name === name) {
+        return {
+          ...memoria,
+          concentration: concentrationValue > 0 ? concentrationValue - 1 : 4,
+        };
+      }
+      return memoria;
+    });
+  };
+
   const handleConcentration = () => {
     if (concentrationValue > 0) {
       setConcentration(concentrationValue - 1);
     } else {
       setConcentration(4);
     }
-    setDeck((prev) => {
-      return prev.map((memoria) => {
-        if (memoria.name === name) {
-          return {
-            ...memoria,
-            concentration: concentrationValue > 0 ? concentrationValue - 1 : 4,
-          };
-        }
-        return memoria;
-      });
-    });
-    setLegendaryDeck((prev) => {
-      return prev.map((memoria) => {
-        if (memoria.name === name) {
-          return {
-            ...memoria,
-            concentration: concentrationValue > 0 ? concentrationValue - 1 : 4,
-          };
-        }
-        return memoria;
-      });
-    });
+    setDeck(changeValue);
+    setLegendaryDeck(changeValue);
     Cookies.set(
       'deck',
-      encodeDeck(
-        sw,
-        deck.map((memoria) => {
-          if (memoria.name === name) {
-            return {
-              ...memoria,
-              concentration:
-                concentrationValue > 0 ? concentrationValue - 1 : 4,
-            };
-          }
-          return memoria;
-        }),
-        legendaryDeck.map((memoria) => {
-          if (memoria.name === name) {
-            return {
-              ...memoria,
-              concentration:
-                concentrationValue > 0 ? concentrationValue - 1 : 4,
-            };
-          }
-          return memoria;
-        }),
-      ),
+      encodeDeck(sw, changeValue(deck), changeValue(legendaryDeck)),
     );
   };
 
@@ -483,6 +386,12 @@ function VirtualizedList() {
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const addMemoria = (
+    prev: MemoriaWithConcentration[],
+    newMemoria: Memoria,
+  ) => {
+    return [...prev, { ...newMemoria, concentration: 4 }];
+  };
   return (
     <AutoSizer>
       {({ height, width }) => (
@@ -524,30 +433,24 @@ function VirtualizedList() {
                       }}
                       onClick={() => {
                         if (memoria[index].labels.includes('legendary')) {
-                          setLegendaryDeck((prev) => [
-                            ...prev,
-                            { ...memoria[index], concentration: 4 },
-                          ]);
-                          Cookies.set(
-                            'deck',
-                            encodeDeck(sw, deck, [
-                              ...legendaryDeck,
-                              { ...memoria[index], concentration: 4 },
-                            ]),
+                          setLegendaryDeck((prev) =>
+                            addMemoria(prev, memoria[index]),
                           );
-                        } else {
-                          setDeck((prev) => [
-                            ...prev,
-                            { ...memoria[index], concentration: 4 },
-                          ]);
                           Cookies.set(
                             'deck',
                             encodeDeck(
                               sw,
-                              [
-                                ...deck,
-                                { ...memoria[index], concentration: 4 },
-                              ],
+                              deck,
+                              addMemoria(legendaryDeck, memoria[index]),
+                            ),
+                          );
+                        } else {
+                          setDeck((prev) => addMemoria(prev, memoria[index]));
+                          Cookies.set(
+                            'deck',
+                            encodeDeck(
+                              sw,
+                              addMemoria(deck, memoria[index]),
                               legendaryDeck,
                             ),
                           );
