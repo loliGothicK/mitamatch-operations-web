@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
 import {
   Add,
@@ -647,6 +648,8 @@ function SearchModal() {
   );
 }
 
+const fstAtom = atomWithStorage('fst', true);
+
 export function DeckBuilder() {
   const params = useSearchParams();
   const [deck, setDeck] = useAtom(deckAtom);
@@ -655,6 +658,7 @@ export function DeckBuilder() {
   const [, setRoleFilter] = useAtom(roleFilterAtom);
   const value = params.get('deck');
   const pathname = usePathname();
+  const [fst, setFst] = useAtom(fstAtom);
 
   const shareHandler = async () => {
     try {
@@ -668,25 +672,10 @@ export function DeckBuilder() {
   };
 
   useEffect(() => {
-    if (value) {
-      const { sw, deck, legendaryDeck } = decodeDeck(value);
-      setSw(sw);
-      setRoleFilter(
-        sw === 'shield'
-          ? ['support', 'interference', 'recovery']
-          : [
-              'normal_single',
-              'normal_range',
-              'special_single',
-              'special_range',
-            ],
-      );
-      setDeck(deck);
-      setLegendaryDeck(legendaryDeck);
-    } else {
-      const cookie = Cookies.get('deck');
-      if (cookie) {
-        const { sw, deck, legendaryDeck } = decodeDeck(cookie);
+    if (fst) {
+      setFst(false);
+      if (value) {
+        const { sw, deck, legendaryDeck } = decodeDeck(value);
         setSw(sw);
         setRoleFilter(
           sw === 'shield'
@@ -700,9 +689,27 @@ export function DeckBuilder() {
         );
         setDeck(deck);
         setLegendaryDeck(legendaryDeck);
+      } else {
+        const cookie = Cookies.get('deck');
+        if (cookie) {
+          const { sw, deck, legendaryDeck } = decodeDeck(cookie);
+          setSw(sw);
+          setRoleFilter(
+            sw === 'shield'
+              ? ['support', 'interference', 'recovery']
+              : [
+                  'normal_single',
+                  'normal_range',
+                  'special_single',
+                  'special_range',
+                ],
+          );
+          setDeck(deck);
+          setLegendaryDeck(legendaryDeck);
+        }
       }
     }
-  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, value]);
+  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, value, fst]);
 
   return (
     <Grid container direction={'row'} alignItems={'right'}>
