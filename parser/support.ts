@@ -30,58 +30,67 @@ type Support = {
 };
 
 function parse_status(description: string): SupportKind[] {
-  const first =
-    /(敵|敵前衛1体|味方|味方前衛1体|自身)の(.+)を(.*アップ|.*ダウン)/;
-  const _match = description.match(first);
+  const global =
+    /(ATK|DEF|Sp\.ATK|Sp\.DEF|火属性|水属性|風属性).*?を.*?(アップ|ダウン)/g;
+  const globalMatch = description.match(global);
 
-  if (!_match) {
+  if (!globalMatch) {
     return [];
   }
 
-  const statuses = _match[2].split('と').flatMap((status) => {
-    return match<string, PossibleStatus[]>(status)
-      .with('ATK', () => ['ATK'])
-      .with('DEF', () => ['DEF'])
-      .with('Sp.ATK', () => ['Sp.ATK'])
-      .with('Sp.DEF', () => ['Sp.DEF'])
-      .with('火属性攻撃力', () => ['Fire ATK'])
-      .with('水属性攻撃力', () => ['Water ATK'])
-      .with('風属性攻撃力', () => ['Wind ATK'])
-      .with('火属性防御力', () => ['Fire DEF'])
-      .with('水属性防御力', () => ['Water DEF'])
-      .with('風属性防御力', () => ['Wind DEF'])
-      .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
-        'Fire ATK',
-        'Water ATK',
-        'Wind ATK',
-      ])
-      .with('火属性防御力・水属性防御力・風属性防御力', () => [
-        'Fire DEF',
-        'Water DEF',
-        'Wind DEF',
-      ])
-      .run();
-  });
+  return globalMatch.flatMap((sentence) => {
+    const regExp =
+      /(ATK.*?|DEF.*?|Sp\.ATK.*?|Sp\.DEF.*?|火属性.*?|水属性.*?|風属性.*?)を.*?(アップ|ダウン)/;
+    const _match = sentence.match(regExp);
+    if (!_match) {
+      return [];
+    } else {
+      const statuses = _match[1].split('と').flatMap((status) => {
+        return match<string, PossibleStatus[]>(status)
+          .with('ATK', () => ['ATK'])
+          .with('DEF', () => ['DEF'])
+          .with('Sp.ATK', () => ['Sp.ATK'])
+          .with('Sp.DEF', () => ['Sp.DEF'])
+          .with('火属性攻撃力', () => ['Fire ATK'])
+          .with('水属性攻撃力', () => ['Water ATK'])
+          .with('風属性攻撃力', () => ['Wind ATK'])
+          .with('火属性防御力', () => ['Fire DEF'])
+          .with('水属性防御力', () => ['Water DEF'])
+          .with('風属性防御力', () => ['Wind DEF'])
+          .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
+            'Fire ATK',
+            'Water ATK',
+            'Wind ATK',
+          ])
+          .with('火属性防御力・水属性防御力・風属性防御力', () => [
+            'Fire DEF',
+            'Water DEF',
+            'Wind DEF',
+          ])
+          .run();
+      });
 
-  const [amount, type] = match<string, [Amount, 'UP' | 'DOWN']>(_match[3])
-    .with('小アップ', () => ['small', 'UP'])
-    .with('アップ', () => ['medium', 'UP'])
-    .with('大アップ', () => ['large', 'UP'])
-    .with('特大アップ', () => ['extra-large', 'UP'])
-    .with('超特大アップ', () => ['super-large', 'UP'])
-    .with('小ダウン', () => ['small', 'DOWN'])
-    .with('ダウン', () => ['medium', 'DOWN'])
-    .with('大ダウン', () => ['large', 'DOWN'])
-    .with('特大ダウン', () => ['extra-large', 'DOWN'])
-    .with('超特大ダウン', () => ['super-large', 'DOWN'])
-    .run();
+      const [amount, type] = match<string, [Amount, 'UP' | 'DOWN']>(_match[2])
+        .with('小アップ', () => ['small', 'UP'])
+        .with('アップ', () => ['medium', 'UP'])
+        .with('大アップ', () => ['large', 'UP'])
+        .with('特大アップ', () => ['extra-large', 'UP'])
+        .with('超特大アップ', () => ['super-large', 'UP'])
+        .with('小ダウン', () => ['small', 'DOWN'])
+        .with('ダウン', () => ['medium', 'DOWN'])
+        .with('大ダウン', () => ['large', 'DOWN'])
+        .with('特大ダウン', () => ['extra-large', 'DOWN'])
+        .with('超特大ダウン', () => ['super-large', 'DOWN'])
+        .run();
 
-  return statuses.map((status) => {
-    return {
-      type,
-      status,
-      amount,
-    };
+      return statuses.map((status) => {
+        return {
+          type,
+          status,
+          amount,
+        };
+      });
+    }
   });
 }
 
