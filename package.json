@@ -57,7 +57,7 @@
     "jsonwebtoken": "9.0.2",
     "prettier": "3.2.5",
     "ts-jest": "29.1.2",
-    "typescript": "5.4.3",
+    "typescript": "5.4.4",
     "zod": "3.22.4"
   },
   "volta": {
