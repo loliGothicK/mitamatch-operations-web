@@ -8,7 +8,13 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 import { useAtom } from 'jotai';
 
-import { Add, Edit, LinkSharp, Remove } from '@mui/icons-material';
+import {
+  Add,
+  DragIndicator,
+  Edit,
+  LinkSharp,
+  Remove,
+} from '@mui/icons-material';
 import {
   Avatar,
   Button,
@@ -126,10 +132,16 @@ function Info({ order }: { order: OrderWithPIC }) {
 
 function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
   const [, setTimeline] = useAtom(timelineAtom);
-  const { setNodeRef, attributes, listeners, transform, transition } =
-    useSortable({
-      id: order.id,
-    });
+  const {
+    isDragging,
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+  } = useSortable({
+    id: order.id,
+  });
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -140,8 +152,14 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
     setOpen(false);
   };
 
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? Number.POSITIVE_INFINITY : 'auto',
+  };
+
   return (
-    <>
+    <div ref={setNodeRef} style={style}>
       <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
         <Typography fontSize={10}>
           {`${left < 0 ? '-' : ''}${Math.trunc(left / 60)}`}:
@@ -151,34 +169,27 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
         </Typography>
       </Divider>
       <Stack direction={'row'} padding={0} alignItems={'center'}>
-        <div
-          ref={setNodeRef}
-          {...attributes}
-          {...listeners}
-          style={{
-            transform: CSS.Transform.toString(transform),
-            transition,
-          }}
-        >
-          <Stack direction={'row'} padding={0} alignItems={'center'}>
-            <ListItem key={order.id} sx={{ padding: 0 }}>
-              <ListItemAvatar>
-                <Avatar>
-                  <Image
-                    src={`/order/${order.name}.png`}
-                    alt={order.name}
-                    width={50}
-                    height={50}
-                  />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={<Info order={order} />}
-                secondary={order.effect}
-              />
-            </ListItem>
-          </Stack>
+        <div {...attributes} {...listeners}>
+          <DragIndicator sx={{ color: 'dimgrey' }} />
         </div>
+        <Stack direction={'row'} padding={0} alignItems={'center'}>
+          <ListItem key={order.id} sx={{ padding: 0 }}>
+            <ListItemAvatar>
+              <Avatar>
+                <Image
+                  src={`/order/${order.name}.png`}
+                  alt={order.name}
+                  width={50}
+                  height={50}
+                />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary={<Info order={order} />}
+              secondary={order.effect}
+            />
+          </ListItem>
+        </Stack>
         <IconButton
           size={'small'}
           sx={{
@@ -280,7 +291,7 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
           <Button type="submit">Save</Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 }
 
