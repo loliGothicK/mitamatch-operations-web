@@ -28,7 +28,7 @@ import { Charm, charmList } from '@/domain/charm/charm';
 import { Costume, costumeList } from '@/domain/costume/costume';
 import { evaluate } from '@/evaluate/evaluate';
 import { deckAtom, legendaryDeckAtom, swAtom } from '@/jotai/memoriaAtoms';
-import { Elements, statusKind, StatusKind } from '@/parser/skill';
+import { statusKind, StatusKind } from '@/parser/skill';
 
 const defAtom = atomWithStorage('def', 400_000);
 const spDefAtom = atomWithStorage('spDef', 400_000);
@@ -147,6 +147,7 @@ export function Calculator() {
   };
   const charmOptions = charmList
     .filter((charm) => {
+      if (charmFilter.length === 0) return true;
       return charmFilter.every((elem) => charm.ability.includes(elem));
     })
     .map((charm) => ({
@@ -156,13 +157,14 @@ export function Calculator() {
   const costumeOptions = costumeList
     .filter((costume) => {
       if (costume.ex === undefined || costume.ex === null) return false;
+      else if (costumeFilter.length === 0) return true;
       return costumeFilter.every((option) =>
         option === '通常衣装'
           ? costume.status[0] > costume.status[1]
           : option === '特殊衣装'
             ? costume.status[0] < costume.status[1]
             : option === '火' || option === '水' || option === '風'
-              ? costume.ex?.description.includes(option)
+              ? costume.ex?.description.includes(option) || false
               : costume.type.includes(option),
       );
     })
