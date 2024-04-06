@@ -15,11 +15,13 @@ import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
+  SortingStrategy,
 } from '@dnd-kit/sortable';
 
 export type SortableListProps<T extends { id: UniqueIdentifier }> = {
   items: T[];
   setItems?: React.Dispatch<SetStateAction<T[]>>;
+  strategy?: SortingStrategy;
   dnd?: DndContextProps;
 };
 
@@ -43,7 +45,9 @@ export default function Sortable<T extends { id: UniqueIdentifier }>(
       onDragEnd={props.dnd?.onDragEnd ? props.dnd?.onDragEnd : handleDragEnd}
       {...props.dnd}
     >
-      <SortableContext items={items}>{props.children}</SortableContext>
+      <SortableContext items={items} strategy={props.strategy}>
+        {props.children}
+      </SortableContext>
     </DndContext>
   );
 
