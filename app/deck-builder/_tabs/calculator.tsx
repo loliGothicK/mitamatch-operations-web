@@ -35,11 +35,27 @@ const spDefAtom = atomWithStorage('spDef', 400_000);
 const statusAtom = atomWithStorage('status', [
   400_000, 400_000, 400_000, 400_000,
 ] as [number, number, number, number]);
-const charmFilterAtom = atomWithStorage<Elements[]>('charmFilter', []);
-const costumeFilterAtom = atomWithStorage<(Elements | 'Normal' | 'Special')[]>(
-  'costumeFilter',
+const charmFilterAtom = atomWithStorage<('火' | '水' | '風')[]>(
+  'charmFilter',
   [],
 );
+const costumeFilterOptions = [
+  '火',
+  '水',
+  '風',
+  '通単',
+  '通範',
+  '特単',
+  '特範',
+  '支援',
+  '妨害',
+  '回復',
+  '通常衣装',
+  '特殊衣装',
+] as const;
+const costumeFilterAtom = atomWithStorage<
+  (typeof costumeFilterOptions)[number][]
+>('costumeFilter', []);
 
 export function Calculator() {
   const [deck] = useAtom(deckAtom);
@@ -129,19 +145,9 @@ export function Calculator() {
   }) => {
     return `${type}/DOWN: ${amount}`;
   };
-  const elementsMap = {
-    Fire: '火',
-    Water: '水',
-    Wind: '風',
-    Light: '光',
-    Dark: '闇',
-  };
   const charmOptions = charmList
     .filter((charm) => {
-      if (charmFilter.length === 0) return true;
-      return charmFilter.some((elem) =>
-        charm.ability.includes(elementsMap[elem]),
-      );
+      return charmFilter.every((elem) => charm.ability.includes(elem));
     })
     .map((charm) => ({
       title: charm.name,
@@ -150,13 +156,14 @@ export function Calculator() {
   const costumeOptions = costumeList
     .filter((costume) => {
       if (costume.ex === undefined || costume.ex === null) return false;
-      if (costumeFilter.length === 0) return true;
-      return costumeFilter.some((elem) =>
-        elem === 'Normal'
+      return costumeFilter.every((option) =>
+        option === '通常衣装'
           ? costume.status[0] > costume.status[1]
-          : elem === 'Special'
+          : option === '特殊衣装'
             ? costume.status[0] < costume.status[1]
-            : costume.ex?.description.includes(elementsMap[elem]),
+            : option === '火' || option === '水' || option === '風'
+              ? costume.ex?.description.includes(option)
+              : costume.type.includes(option),
       );
     })
     .map((costume) => ({
@@ -168,15 +175,15 @@ export function Calculator() {
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
-          <FormGroup sx={{ flexDirection: 'row' }}>
+          <FormGroup sx={{ flexDirection: 'row', height: 56 }}>
             <FormControlLabel
               control={<Checkbox defaultChecked={false} />}
               label="火"
               onChange={(_, checked) => {
                 if (checked) {
-                  setCharmFilter([...charmFilter, 'Fire']);
+                  setCharmFilter([...charmFilter, '火']);
                 } else {
-                  setCharmFilter(charmFilter.filter((elem) => elem !== 'Fire'));
+                  setCharmFilter(charmFilter.filter((elem) => elem !== '火'));
                 }
               }}
             />
@@ -185,11 +192,9 @@ export function Calculator() {
               label="水"
               onChange={(_, checked) => {
                 if (checked) {
-                  setCharmFilter([...charmFilter, 'Water']);
+                  setCharmFilter([...charmFilter, '水']);
                 } else {
-                  setCharmFilter(
-                    charmFilter.filter((elem) => elem !== 'Water'),
-                  );
+                  setCharmFilter(charmFilter.filter((elem) => elem !== '水'));
                 }
               }}
             />
@@ -198,9 +203,9 @@ export function Calculator() {
               label="風"
               onChange={(_, checked) => {
                 if (checked) {
-                  setCharmFilter([...charmFilter, 'Wind']);
+                  setCharmFilter([...charmFilter, '風']);
                 } else {
-                  setCharmFilter(charmFilter.filter((elem) => elem !== 'Wind'));
+                  setCharmFilter(charmFilter.filter((elem) => elem !== '風'));
                 }
               }}
             />
@@ -226,76 +231,20 @@ export function Calculator() {
                 );
               }
             }}
+            sx={{ marginTop: 2 }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <FormGroup sx={{ flexDirection: 'row' }}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked={false} />}
-              label="火"
-              onChange={(_, checked) => {
-                if (checked) {
-                  setCostumeFilter([...costumeFilter, 'Fire']);
-                } else {
-                  setCostumeFilter(
-                    costumeFilter.filter((elem) => elem !== 'Fire'),
-                  );
-                }
-              }}
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked={false} />}
-              label="水"
-              onChange={(_, checked) => {
-                if (checked) {
-                  setCostumeFilter([...costumeFilter, 'Water']);
-                } else {
-                  setCostumeFilter(
-                    costumeFilter.filter((elem) => elem !== 'Water'),
-                  );
-                }
-              }}
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked={false} />}
-              label="風"
-              onChange={(_, checked) => {
-                if (checked) {
-                  setCostumeFilter([...costumeFilter, 'Wind']);
-                } else {
-                  setCostumeFilter(
-                    costumeFilter.filter((elem) => elem !== 'Wind'),
-                  );
-                }
-              }}
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked={false} />}
-              label="通常"
-              onChange={(_, checked) => {
-                if (checked) {
-                  setCostumeFilter([...costumeFilter, 'Normal']);
-                } else {
-                  setCostumeFilter(
-                    costumeFilter.filter((elem) => elem !== 'Normal'),
-                  );
-                }
-              }}
-            />
-            <FormControlLabel
-              control={<Checkbox defaultChecked={false} />}
-              label="特殊"
-              onChange={(_, checked) => {
-                if (checked) {
-                  setCostumeFilter([...costumeFilter, 'Special']);
-                } else {
-                  setCostumeFilter(
-                    costumeFilter.filter((elem) => elem !== 'Special'),
-                  );
-                }
-              }}
-            />
-          </FormGroup>
+          <Autocomplete
+            renderInput={(params) => <TextField {...params} label="衣装検索" />}
+            options={costumeFilterOptions}
+            multiple
+            onChange={(_, value) => {
+              setCostumeFilter(
+                value as (typeof costumeFilterOptions)[number][],
+              );
+            }}
+          />
           <Autocomplete
             options={costumeOptions.sort((a, b) =>
               a.ex!.name.localeCompare(b.ex!.name),
@@ -319,6 +268,7 @@ export function Calculator() {
                 );
               }
             }}
+            sx={{ marginTop: 2 }}
           />
         </Grid>
         <Grid item xs={12}>
