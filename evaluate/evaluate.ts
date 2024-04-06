@@ -558,7 +558,7 @@ function buff(
             .with('medium', () => 3.04 / 100)
             .with('large', () => 3.8 / 100)
             .with('extra-large', () => 4.27 / 100)
-            .with('super-large', () => 4.74 / 100) // 現状存在しない
+            .with('super-large', () => 4.75 / 100) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
