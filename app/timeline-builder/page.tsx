@@ -17,30 +17,29 @@ import {
 } from '@mui/icons-material';
 import {
   Avatar,
+  Box,
   Button,
+  Container,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
+  Divider,
+  Grid,
+  IconButton,
+  List,
   ListItem,
   ListItemAvatar,
+  ListItemText,
   Menu,
   MenuItem,
   Snackbar,
   Stack,
   Switch,
   TextField,
+  Typography,
 } from '@mui/material';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItemText from '@mui/material/ListItemText';
 import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import { useMediaQuery } from '@mui/system';
 
 import { decodeTimeline, encodeTimeline } from '@/actions/serde';
@@ -253,7 +252,6 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
       >
         <DialogTitle>Edit</DialogTitle>
         <DialogContent>
-          <DialogContentText></DialogContentText>
           <TextField
             autoFocus
             defaultValue={order.delay}

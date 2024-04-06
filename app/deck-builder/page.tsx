@@ -2,10 +2,7 @@
 
 import React, { ReactNode, SyntheticEvent, useState } from 'react';
 
-import { Badge, Tabs } from '@mui/material';
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
+import { Badge, Box, Tab, Tabs, Typography } from '@mui/material';
 
 import { DeckBuilder } from '@/app/deck-builder/_tabs/builder';
 import { Calculator } from '@/app/deck-builder/_tabs/calculator';

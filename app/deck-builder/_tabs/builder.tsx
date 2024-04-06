@@ -20,29 +20,29 @@ import {
 } from '@mui/icons-material';
 import {
   Avatar,
+  Box,
   Button,
+  Container,
   Dialog,
   DialogActions,
   DialogContent,
+  Divider,
+  FormControlLabel,
+  Grid,
+  IconButton,
   ImageListItem,
   ImageListItemBar,
+  ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
   Skeleton,
   Stack,
   Switch,
   Tooltip,
+  Typography,
 } from '@mui/material';
-import Box from '@mui/material/Box';
 import { blue, green, purple, red, yellow } from '@mui/material/colors';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
 
 import { decodeDeck, encodeDeck } from '@/actions/serde';
 import Details from '@/component/deck-builder/Details';
@@ -685,7 +685,7 @@ export function DeckBuilder() {
         }
       }
     }
-  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, value, fst]);
+  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, value, fst, setFst]);
 
   return (
     <Grid container direction={'row'} alignItems={'right'}>
