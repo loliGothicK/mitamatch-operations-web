@@ -45,6 +45,7 @@ import { useMediaQuery } from '@mui/system';
 
 import { decodeTimeline, encodeTimeline } from '@/actions/serde';
 import { Layout } from '@/component/Layout';
+import Sortable from '@/component/sortable/Sortable';
 import {
   filterAtom,
   filteredOrderAtom,
@@ -53,8 +54,7 @@ import {
   timelineAtom,
 } from '@/jotai/orderAtoms';
 
-import { DndContext } from '@dnd-kit/core';
-import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
+import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { takeLeft } from 'fp-ts/Array';
 import Cookies from 'js-cookie';
@@ -298,78 +298,51 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
 function Timeline() {
   const [timeline, setTimeline] = useAtom(timelineAtom);
 
+  const reducer = (
+    value: number,
+    order: OrderWithPIC,
+    index: number,
+  ): number => {
+    const prepareTime =
+      index == 0
+        ? order.prepare_time
+        : timeline[index - 1].name.includes('戦術加速')
+          ? 5
+          : order.prepare_time;
+    const delay =
+      index > timeline.length - 2 ? 0 : timeline[index + 1].delay || 0;
+    return value - prepareTime - order.active_time - delay;
+  };
+
   return timeline.length == 0 ? (
     <></>
   ) : (
-    <DndContext
-      onDragEnd={(event) => {
-        const { active, over } = event;
-        if (over == null) {
-          return;
-        }
-        if (active.id !== over.id) {
-          setTimeline((items) => {
-            const oldIndex = items.findIndex((item) => item.id === active.id);
-            const newIndex = items.findIndex((item) => item.id === over.id);
-            return arrayMove(items, oldIndex, newIndex);
-          });
-        }
-      }}
-    >
-      <SortableContext items={timeline}>
-        <List sx={{ width: '100%', maxWidth: '65vh', overflow: 'auto' }}>
-          {timeline.map((order, index) => (
-            <TimelineItem
-              key={order.id}
-              order={order}
-              left={takeLeft(index)(timeline).reduce(
-                (value: number, order: OrderWithPIC, index): number => {
-                  const prepareTime =
-                    index == 0
-                      ? order.prepare_time
-                      : timeline[index - 1].name.includes('戦術加速')
-                        ? 5
-                        : order.prepare_time;
-                  const delay =
-                    index > timeline.length - 2
-                      ? 0
-                      : timeline[index + 1].delay || 0;
-                  return value - prepareTime - order.active_time - delay;
-                },
+    <Sortable items={timeline} setItems={setTimeline}>
+      <List sx={{ width: '100%', maxWidth: '65vh', overflow: 'auto' }}>
+        {timeline.map((order, index) => (
+          <TimelineItem
+            key={order.id}
+            order={order}
+            left={takeLeft(index)(timeline).reduce(reducer, 900)}
+          />
+        ))}
+        <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
+          <Typography fontSize={10}>
+            {(() => {
+              const left = takeLeft(timeline.length)(timeline).reduce(
+                reducer,
                 900,
-              )}
-            />
-          ))}
-          <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
-            <Typography fontSize={10}>
-              {(() => {
-                const left = takeLeft(timeline.length)(timeline).reduce(
-                  (value: number, order: OrderWithPIC, index): number => {
-                    const prepareTime =
-                      index == 0
-                        ? order.prepare_time
-                        : timeline[index - 1].name.includes('戦術加速')
-                          ? 5
-                          : order.prepare_time;
-                    const delay =
-                      index > timeline.length - 2
-                        ? 0
-                        : timeline[index + 1].delay || 0;
-                    return value - prepareTime - order.active_time - delay;
-                  },
-                  900,
-                );
-                return `${left < 0 ? '-' : ''}${Math.trunc(left / 60)}:${Math.abs(
-                  left % 60,
-                )
-                  .toString()
-                  .padStart(2, '0')}`;
-              })()}
-            </Typography>
-          </Divider>
-        </List>
-      </SortableContext>
-    </DndContext>
+              );
+              return `${left < 0 ? '-' : ''}${Math.trunc(left / 60)}:${Math.abs(
+                left % 60,
+              )
+                .toString()
+                .padStart(2, '0')}`;
+            })()}
+          </Typography>
+        </Divider>
+      </List>
+    </Sortable>
   );
 }
 

@@ -48,6 +48,7 @@ import { decodeDeck, encodeDeck } from '@/actions/serde';
 import Details from '@/component/deck-builder/Details';
 import Filter from '@/component/deck-builder/Filter';
 import Search from '@/component/deck-builder/Search';
+import Sortable from '@/component/sortable/Sortable';
 import { Memoria } from '@/domain/memoria/memoria';
 import {
   deckAtom,
@@ -60,8 +61,7 @@ import {
   swAtom,
 } from '@/jotai/memoriaAtoms';
 
-import { DndContext } from '@dnd-kit/core';
-import { arrayMove, SortableContext, useSortable } from '@dnd-kit/sortable';
+import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
@@ -181,12 +181,12 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const {
+    isDragging,
     setNodeRef,
     attributes,
     listeners,
     transform,
     transition,
-    isSorting,
   } = useSortable({
     id,
   });
@@ -217,26 +217,24 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     );
   };
 
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    zIndex: isDragging ? Number.POSITIVE_INFINITY : 'auto',
+  };
+
   return (
-    <Grid item key={id}>
+    <Grid item key={id} ref={setNodeRef} style={style}>
       {!isLoaded && <Skeleton variant="rectangular" width={100} height={100} />}
       <ImageListItem>
-        <Box display={isSorting ? 'none' : 'inline'}>
+        <Box>
           <Icon kind={memoria.kind} element={memoria.element} position={70} />
           <Concentration
             concentration={concentrationValue}
             handleConcentration={handleConcentration}
           />
         </Box>
-        <div
-          ref={setNodeRef}
-          {...attributes}
-          {...listeners}
-          style={{
-            transform: CSS.Transform.toString(transform),
-            transition,
-          }}
-        >
+        <div {...attributes} {...listeners}>
           <Tooltip
             title={
               <Stack>
@@ -264,7 +262,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
           position={'top'}
           actionPosition={'right'}
         />
-        <Box display={isSorting ? 'none' : 'inline'}>
+        <Box>
           <ImageListItemBar
             sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
             position={'top'}
@@ -308,35 +306,19 @@ function Deck() {
   const [deck, setDeck] = useAtom(deckAtom);
 
   return (
-    <DndContext
-      onDragEnd={(event) => {
-        const { active, over } = event;
-        if (over == null) {
-          return;
-        }
-        if (active.id !== over.id) {
-          setDeck((items) => {
-            const oldIndex = items.findIndex((item) => item.id === active.id);
-            const newIndex = items.findIndex((item) => item.id === over.id);
-            return arrayMove(items, oldIndex, newIndex);
-          });
-        }
-      }}
-    >
-      <SortableContext items={deck}>
-        <Grid
-          container
-          direction={'row'}
-          alignItems={'left'}
-          spacing={2}
-          sx={{ maxWidth: 600, minHeight: 100 }}
-        >
-          {deck.map((memoria) => {
-            return <MemoriaItem memoria={memoria} key={memoria.id} />;
-          })}
-        </Grid>
-      </SortableContext>
-    </DndContext>
+    <Sortable items={deck} setItems={setDeck}>
+      <Grid
+        container
+        direction={'row'}
+        alignItems={'left'}
+        spacing={2}
+        sx={{ maxWidth: 600, minHeight: 100 }}
+      >
+        {deck.map((memoria) => {
+          return <MemoriaItem memoria={memoria} key={memoria.id} />;
+        })}
+      </Grid>
+    </Sortable>
   );
 }
 
@@ -344,35 +326,19 @@ function LegendaryDeck() {
   const [deck, setDeck] = useAtom(legendaryDeckAtom);
 
   return (
-    <DndContext
-      onDragEnd={(event) => {
-        const { active, over } = event;
-        if (over == null) {
-          return;
-        }
-        if (active.id !== over.id) {
-          setDeck((items) => {
-            const oldIndex = items.findIndex((item) => item.id === active.id);
-            const newIndex = items.findIndex((item) => item.id === over.id);
-            return arrayMove(items, oldIndex, newIndex);
-          });
-        }
-      }}
-    >
-      <SortableContext items={deck}>
-        <Grid
-          container
-          direction={'row'}
-          alignItems={'left'}
-          spacing={2}
-          sx={{ maxWidth: 600, minHeight: 100 }}
-        >
-          {deck.map((memoria) => {
-            return <MemoriaItem memoria={memoria} key={memoria.id} />;
-          })}
-        </Grid>
-      </SortableContext>
-    </DndContext>
+    <Sortable items={deck} setItems={setDeck}>
+      <Grid
+        container
+        direction={'row'}
+        alignItems={'left'}
+        spacing={2}
+        sx={{ maxWidth: 600, minHeight: 100 }}
+      >
+        {deck.map((memoria) => {
+          return <MemoriaItem memoria={memoria} key={memoria.id} />;
+        })}
+      </Grid>
+    </Sortable>
   );
 }
 
