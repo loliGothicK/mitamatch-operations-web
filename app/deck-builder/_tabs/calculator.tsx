@@ -10,25 +10,36 @@ import {
   Card,
   CardContent,
   CardMedia,
+  darken,
+  FormControlLabel,
+  FormGroup,
+  lighten,
   Stack,
   TextField,
 } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { Charm, charmList } from '@/domain/charm/charm';
 import { Costume, costumeList } from '@/domain/costume/costume';
 import { evaluate } from '@/evaluate/evaluate';
 import { deckAtom, legendaryDeckAtom, swAtom } from '@/jotai/memoriaAtoms';
-import { statusKind, StatusKind } from '@/parser/skill';
+import { Elements, statusKind, StatusKind } from '@/parser/skill';
 
 const defAtom = atomWithStorage('def', 400_000);
 const spDefAtom = atomWithStorage('spDef', 400_000);
 const statusAtom = atomWithStorage('status', [
   400_000, 400_000, 400_000, 400_000,
 ] as [number, number, number, number]);
+const charmFilterAtom = atomWithStorage<Elements[]>('charmFilter', []);
+const costumeFilterAtom = atomWithStorage<(Elements | 'Normal' | 'Special')[]>(
+  'costumeFilter',
+  [],
+);
 
 export function Calculator() {
   const [deck] = useAtom(deckAtom);
@@ -39,6 +50,8 @@ export function Calculator() {
   const [def, setDef] = useAtom(defAtom);
   const [spDef, setSpDef] = useAtom(spDefAtom);
   const [selfStatus, setSelfStatus] = useAtom(statusAtom);
+  const [charmFilter, setCharmFilter] = useAtom(charmFilterAtom);
+  const [costumeFilter, setCostumeFilter] = useAtom(costumeFilterAtom);
 
   const { skill, supportBuff, supportDebuff } = evaluate(
     [...deck, ...legendaryDeck],
@@ -116,34 +129,192 @@ export function Calculator() {
   }) => {
     return `${type}/DOWN: ${amount}`;
   };
+  const elementsMap = {
+    Fire: '火',
+    Water: '水',
+    Wind: '風',
+    Light: '光',
+    Dark: '闇',
+  };
+  const charmOptions = charmList
+    .filter((charm) => {
+      if (charmFilter.length === 0) return true;
+      return charmFilter.some((elem) =>
+        charm.ability.includes(elementsMap[elem]),
+      );
+    })
+    .map((charm) => ({
+      title: charm.name,
+      ability: charm.ability,
+    }));
+  const costumeOptions = costumeList
+    .filter((costume) => {
+      if (costume.ex === undefined || costume.ex === null) return false;
+      if (costumeFilter.length === 0) return true;
+      return costumeFilter.some((elem) =>
+        elem === 'Normal'
+          ? costume.status[0] > costume.status[1]
+          : elem === 'Special'
+            ? costume.status[0] < costume.status[1]
+            : costume.ex?.description.includes(elementsMap[elem]),
+      );
+    })
+    .map((costume) => ({
+      title: `${costume.lily}/${costume.name}`,
+      ex: costume.ex,
+    }));
 
   return (
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
+          <FormGroup sx={{ flexDirection: 'row' }}>
+            <FormControlLabel
+              control={<Checkbox defaultChecked={false} />}
+              label="火"
+              onChange={(_, checked) => {
+                if (checked) {
+                  setCharmFilter([...charmFilter, 'Fire']);
+                } else {
+                  setCharmFilter(charmFilter.filter((elem) => elem !== 'Fire'));
+                }
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked={false} />}
+              label="水"
+              onChange={(_, checked) => {
+                if (checked) {
+                  setCharmFilter([...charmFilter, 'Water']);
+                } else {
+                  setCharmFilter(
+                    charmFilter.filter((elem) => elem !== 'Water'),
+                  );
+                }
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked={false} />}
+              label="風"
+              onChange={(_, checked) => {
+                if (checked) {
+                  setCharmFilter([...charmFilter, 'Wind']);
+                } else {
+                  setCharmFilter(charmFilter.filter((elem) => elem !== 'Wind'));
+                }
+              }}
+            />
+          </FormGroup>
           <Autocomplete
             disablePortal
-            options={charmList.map((charm) => charm.name)}
+            options={charmOptions.sort((a, b) =>
+              a.ability.localeCompare(b.ability),
+            )}
+            groupBy={(option) => option.ability}
+            getOptionLabel={(option) => option.title}
             renderInput={(params) => <TextField {...params} label="charm" />}
+            renderGroup={(params) => (
+              <li key={params.key}>
+                <GroupHeader>{params.group}</GroupHeader>
+                <GroupItems>{params.children}</GroupItems>
+              </li>
+            )}
             onChange={(_, value) => {
               if (value) {
-                setCharm(charmList.find((charm) => charm.name === value)!);
+                setCharm(
+                  charmList.find((charm) => charm.name === value.title)!,
+                );
               }
             }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
+          <FormGroup sx={{ flexDirection: 'row' }}>
+            <FormControlLabel
+              control={<Checkbox defaultChecked={false} />}
+              label="火"
+              onChange={(_, checked) => {
+                if (checked) {
+                  setCostumeFilter([...costumeFilter, 'Fire']);
+                } else {
+                  setCostumeFilter(
+                    costumeFilter.filter((elem) => elem !== 'Fire'),
+                  );
+                }
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked={false} />}
+              label="水"
+              onChange={(_, checked) => {
+                if (checked) {
+                  setCostumeFilter([...costumeFilter, 'Water']);
+                } else {
+                  setCostumeFilter(
+                    costumeFilter.filter((elem) => elem !== 'Water'),
+                  );
+                }
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked={false} />}
+              label="風"
+              onChange={(_, checked) => {
+                if (checked) {
+                  setCostumeFilter([...costumeFilter, 'Wind']);
+                } else {
+                  setCostumeFilter(
+                    costumeFilter.filter((elem) => elem !== 'Wind'),
+                  );
+                }
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked={false} />}
+              label="通常"
+              onChange={(_, checked) => {
+                if (checked) {
+                  setCostumeFilter([...costumeFilter, 'Normal']);
+                } else {
+                  setCostumeFilter(
+                    costumeFilter.filter((elem) => elem !== 'Normal'),
+                  );
+                }
+              }}
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked={false} />}
+              label="特殊"
+              onChange={(_, checked) => {
+                if (checked) {
+                  setCostumeFilter([...costumeFilter, 'Special']);
+                } else {
+                  setCostumeFilter(
+                    costumeFilter.filter((elem) => elem !== 'Special'),
+                  );
+                }
+              }}
+            />
+          </FormGroup>
           <Autocomplete
-            disablePortal
-            options={costumeList.map(
-              (costume) => `${costume.lily}/${costume.name}`,
+            options={costumeOptions.sort((a, b) =>
+              a.ex!.name.localeCompare(b.ex!.name),
             )}
+            groupBy={(option) => option.ex!.name}
+            getOptionLabel={(option) => option.title}
             renderInput={(params) => <TextField {...params} label="costume" />}
+            renderGroup={(params) => (
+              <li key={params.key}>
+                <GroupHeader>{params.group}</GroupHeader>
+                <GroupItems>{params.children}</GroupItems>
+              </li>
+            )}
             onChange={(_, value) => {
               if (value) {
                 setCostume(
                   costumeList.find(
-                    (costume) => `${costume.lily}/${costume.name}` === value,
+                    (costume) =>
+                      `${costume.lily}/${costume.name}` === value.title,
                   )!,
                 );
               }
@@ -350,3 +521,18 @@ export function Calculator() {
     </Container>
   );
 }
+
+const GroupHeader = styled('div')(({ theme }) => ({
+  position: 'sticky',
+  top: '-8px',
+  padding: '4px 10px',
+  color: theme.palette.primary.main,
+  backgroundColor:
+    theme.palette.mode === 'light'
+      ? lighten(theme.palette.primary.light, 0.85)
+      : darken(theme.palette.primary.main, 0.8),
+}));
+
+const GroupItems = styled('ul')({
+  padding: 0,
+});
