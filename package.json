@@ -37,7 +37,7 @@
     "reactflow": "11.11.0",
     "recharts": "2.12.4",
     "ts-node": "10.9.2",
-    "ts-pattern": "5.1.0"
+    "ts-pattern": "5.1.1"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
