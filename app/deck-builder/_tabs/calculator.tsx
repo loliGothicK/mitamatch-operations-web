@@ -127,23 +127,16 @@ export function Calculator() {
       );
     });
 
-  const displayBuff = ({
+  const display = ({
+    upDown,
     type,
     amount,
   }: {
+    upDown: 'UP' | 'DOWN';
     type: StatusKind;
     amount: number;
   }) => {
-    return `${type}/UP: ${amount}`;
-  };
-  const displayDebuff = ({
-    type,
-    amount,
-  }: {
-    type: StatusKind;
-    amount: number;
-  }) => {
-    return `${type}/DOWN: ${amount}`;
+    return `${type}/${upDown}: ${amount}`;
   };
   const charmOptions = charmList
     .filter((charm) => {
@@ -439,7 +432,7 @@ export function Calculator() {
                             variant="body2"
                             color={'darkred'}
                           >
-                            {displayBuff(buff)}
+                            {display({ ...buff, upDown: 'UP' })}
                           </Typography>
                         );
                       })}
@@ -456,7 +449,7 @@ export function Calculator() {
                             variant="body2"
                             color={'darkblue'}
                           >
-                            {displayDebuff(debuff)}
+                            {display({ ...debuff, upDown: 'DOWN' })}
                           </Typography>
                         );
                       })}
