@@ -1,27 +1,30 @@
-import React, { PropsWithChildren, SetStateAction } from 'react';
+import type React from 'react';
+import type { PropsWithChildren, SetStateAction } from 'react';
 
+import type {
+  DndContextProps,
+  DragEndEvent,
+  UniqueIdentifier,
+} from '@dnd-kit/core';
 import {
   closestCenter,
   DndContext,
-  DndContextProps,
-  DragEndEvent,
   KeyboardSensor,
   PointerSensor,
-  UniqueIdentifier,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
+import type { SortingStrategy } from '@dnd-kit/sortable';
 import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  SortingStrategy,
 } from '@dnd-kit/sortable';
 
 /**
  * Props for Sortable component
  */
-export type SortableProps<T extends { id: UniqueIdentifier }> = {
+export type SortableProps<T> = PropsWithChildren<{
   /**
    * ソート対象のアイテム
    */
@@ -57,7 +60,7 @@ export type SortableProps<T extends { id: UniqueIdentifier }> = {
    * @see https://docs.dndkit.com/api-documentation/context-provider#props
    */
   dnd?: DndContextProps;
-};
+}>;
 
 /**
  * Sortable component
@@ -85,7 +88,24 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
   children,
   strategy,
   dnd,
-}: PropsWithChildren<SortableProps<T>>) {
+}: SortableProps<T>) {
+  const onDragEnd =
+    dnd !== undefined && dnd.onDragEnd !== undefined
+      ? (event: DragEndEvent) => {
+          dnd.onDragEnd!(event);
+        }
+      : (event: DragEndEvent) => {
+          const { active, over } = event;
+
+          if (over !== null && active.id !== over.id) {
+            setItems((items) => {
+              const oldIndex = items.findIndex((item) => item.id === active.id);
+              const newIndex = items.findIndex((item) => item.id === over.id);
+
+              return arrayMove(items, oldIndex, newIndex);
+            });
+          }
+        };
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -97,7 +117,7 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
-      onDragEnd={dnd?.onDragEnd ? dnd?.onDragEnd : handleDragEnd}
+      onDragEnd={onDragEnd}
       {...dnd}
     >
       <SortableContext items={items} strategy={strategy}>
@@ -105,17 +125,4 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
       </SortableContext>
     </DndContext>
   );
-
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-
-    if (!!over && active.id !== over.id) {
-      setItems((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
-
-        return arrayMove(items, oldIndex, newIndex);
-      });
-    }
-  }
 }
