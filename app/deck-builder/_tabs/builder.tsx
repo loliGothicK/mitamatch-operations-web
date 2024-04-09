@@ -306,7 +306,7 @@ function Deck() {
   const [deck, setDeck] = useAtom(deckAtom);
 
   return (
-    <Sortable items={deck} setItems={setDeck}>
+    <Sortable items={deck} onChangeOrder={setDeck}>
       <Grid
         container
         direction={'row'}
@@ -326,7 +326,7 @@ function LegendaryDeck() {
   const [deck, setDeck] = useAtom(legendaryDeckAtom);
 
   return (
-    <Sortable items={deck} setItems={setDeck}>
+    <Sortable items={deck} onChangeOrder={setDeck}>
       <Grid
         container
         direction={'row'}

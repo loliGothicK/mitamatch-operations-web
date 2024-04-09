@@ -315,7 +315,7 @@ function Timeline() {
   return timeline.length == 0 ? (
     <></>
   ) : (
-    <Sortable items={timeline} setItems={setTimeline}>
+    <Sortable items={timeline} onChangeOrder={setTimeline}>
       <List sx={{ width: '100%', maxWidth: '65vh', overflow: 'auto' }}>
         {timeline.map((order, index) => (
           <TimelineItem

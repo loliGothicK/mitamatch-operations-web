@@ -20,6 +20,7 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
+import type { OmitProperties } from 'ts-essentials';
 
 /**
  * Props for Sortable component
@@ -38,7 +39,7 @@ export type SortableProps<T> = PropsWithChildren<{
    *   ...
    * </Sortable>
    */
-  setItems: React.Dispatch<SetStateAction<T[]>>;
+  onChangeOrder: React.Dispatch<SetStateAction<T[]>>;
   /**
    * ソートの戦略
    *
@@ -59,13 +60,13 @@ export type SortableProps<T> = PropsWithChildren<{
    *
    * @see https://docs.dndkit.com/api-documentation/context-provider#props
    */
-  dnd?: DndContextProps;
+  dnd?: OmitProperties<DndContextProps, 'onDragEnd'>;
 }>;
 
 /**
  * Sortable component
  * @param items - ソート対象のアイテム
- * @param setItems - ソート対象のアイテムを更新する {@link React.Dispatch} 関数
+ * @param onChangeOrder - ソート時に呼び出される {@link React.Dispatch} 関数
  * @param children - ソート対象のアイテムを表示するコンポーネント
  * @param strategy - [optional] ソートの戦略
  * @param dnd - [optional] {@link DndContext} のプロパティ
@@ -84,28 +85,23 @@ export type SortableProps<T> = PropsWithChildren<{
  */
 export default function Sortable<T extends { id: UniqueIdentifier }>({
   items,
-  setItems,
+  onChangeOrder,
   children,
   strategy,
   dnd,
 }: SortableProps<T>) {
-  const onDragEnd =
-    dnd !== undefined && dnd.onDragEnd !== undefined
-      ? (event: DragEndEvent) => {
-          dnd.onDragEnd!(event);
-        }
-      : (event: DragEndEvent) => {
-          const { active, over } = event;
+  const onDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
 
-          if (over !== null && active.id !== over.id) {
-            setItems((items) => {
-              const oldIndex = items.findIndex((item) => item.id === active.id);
-              const newIndex = items.findIndex((item) => item.id === over.id);
+    if (over !== null && active.id !== over.id) {
+      const oldIndex = items.findIndex((item) => item.id === active.id);
+      const newIndex = items.findIndex((item) => item.id === over.id);
 
-              return arrayMove(items, oldIndex, newIndex);
-            });
-          }
-        };
+      const newItems = arrayMove(items, oldIndex, newIndex);
+
+      onChangeOrder(newItems);
+    }
+  };
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {

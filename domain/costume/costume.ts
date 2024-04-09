@@ -1,3 +1,4 @@
+import { OmitProperties } from 'ts-essentials';
 import { z } from 'zod';
 
 import costumeData from './costume.json';
@@ -21,7 +22,10 @@ const costumeSchema = z.object({
   skills: z.array(z.string()),
 });
 
-export type Costume = Omit<z.infer<typeof costumeSchema>, 'skills'> & {
+export type Costume = OmitProperties<
+  z.infer<typeof costumeSchema>,
+  'skills'
+> & {
   status: [number, number, number, number];
 };
 

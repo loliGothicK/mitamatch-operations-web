@@ -36,6 +36,7 @@
     "react-virtualized": "9.22.5",
     "reactflow": "11.11.0",
     "recharts": "2.12.4",
+    "ts-essentials": "^9.4.2",
     "ts-node": "10.9.2",
     "ts-pattern": "5.1.1"
   },
