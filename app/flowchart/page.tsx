@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useAtom } from 'jotai';
 
@@ -12,17 +12,17 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
-import LabeledEdge from '@/component/flow/edge/LabeledEdge';
-import OrderNode from '@/component/flow/node/OrderNode';
-import { Layout } from '@/component/Layout';
-import { Order, orderList } from '@/domain/order/order';
+import { Layout } from '@/components/Layout';
+import LabeledEdge from '@/components/flow/edge/LabeledEdge';
+import OrderNode from '@/components/flow/node/OrderNode';
+import { type Order, orderList } from '@/domain/order/order';
 import { edgeStorageAtom, idAtom, nodeStorageAtom } from '@/jotai/flowAtoms';
 
 import ReactFlow, {
   addEdge,
   Background,
   BackgroundVariant,
-  Connection,
+  type Connection,
   MiniMap,
   useEdgesState,
   useNodesState,
@@ -45,15 +45,15 @@ export default function FlowChart() {
   }, [cachedEdges, setEdges]);
 
   const getCount = () => {
-    setCount((prev) => prev + 1);
+    setCount(prev => prev + 1);
     return count;
   };
 
   const onConnect = useCallback(
     (connection: Connection) => {
       const edge = { ...connection, type: 'labeld-edge' };
-      setEdges((eds) => addEdge(edge, eds));
-      setEdgeStorage((eds) => addEdge(edge, eds));
+      setEdges(eds => addEdge(edge, eds));
+      setEdgeStorage(eds => addEdge(edge, eds));
     },
     [setEdges, setEdgeStorage],
   );
@@ -76,15 +76,16 @@ export default function FlowChart() {
             <Autocomplete
               disablePortal
               options={orderList
-                .filter((order) => order.payed)
-                .map((order) => order.name)}
+                .filter(order => order.payed)
+                .map(order => order.name)}
               sx={{ width: 250 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Select Order" />
+              renderInput={params => (
+                <TextField {...params} label='Select Order' />
               )}
               onChange={(_, value) => {
                 if (value) {
-                  setSelect(orderList.find((order) => order.name === value)!);
+                  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                  setSelect(orderList.find(order => order.name === value)!);
                 }
               }}
             />
@@ -128,27 +129,27 @@ export default function FlowChart() {
         <ReactFlow
           nodes={nodes}
           edges={edges}
-          onNodesChange={(changes) => {
+          onNodesChange={changes => {
             onNodesChange(changes);
-            setNodeStorage((prev) => {
-              changes.forEach((change) => {
+            setNodeStorage(prev => {
+              for (const change of changes) {
                 if (change.type === 'remove') {
-                  const idx = prev.findIndex((n) => n.id === change.id);
+                  const idx = prev.findIndex(n => n.id === change.id);
                   prev.splice(idx, 1);
                 }
-              });
+              }
               return prev;
             });
           }}
-          onEdgesChange={(changes) => {
+          onEdgesChange={changes => {
             onEdgesChange(changes);
-            setEdgeStorage((prev) => {
-              changes.forEach((change) => {
+            setEdgeStorage(prev => {
+              for (const change of changes) {
                 if (change.type === 'remove') {
-                  const idx = prev.findIndex((e) => e.id === change.id);
+                  const idx = prev.findIndex(e => e.id === change.id);
                   prev.splice(idx, 1);
                 }
-              });
+              }
               return prev;
             });
           }}
@@ -156,14 +157,14 @@ export default function FlowChart() {
           edgeTypes={edgeTypes}
           onConnect={onConnect}
           onNodeDragStop={(_, node) => {
-            setNodeStorage((prev) => {
-              const idx = prev.findIndex((n) => n.id === node.id);
+            setNodeStorage(prev => {
+              const idx = prev.findIndex(n => n.id === node.id);
               prev[idx] = node;
               return prev;
             });
           }}
         >
-          <Background color="grey" variant={BackgroundVariant.Dots} />
+          <Background color='grey' variant={BackgroundVariant.Dots} />
           <MiniMap nodeStrokeWidth={3} zoomable pannable />
         </ReactFlow>
       </div>
@@ -181,7 +182,7 @@ export default function FlowChart() {
             p: 4,
           }}
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
             Flowchart の使い方
           </Typography>
           {[
@@ -190,8 +191,8 @@ export default function FlowChart() {
             '3. ノードのハンドルをドラッグしてエッジを作成',
             '4. ノードまたはエッジをクリックして Backspace を押すと削除',
             '5. ノードまたはエッジを右クリックすると編集メニューが表示',
-          ].map((text, index) => (
-            <Typography key={index} sx={{ mt: 2 }}>
+          ].map(text => (
+            <Typography key={text} sx={{ mt: 2 }}>
               {text}
             </Typography>
           ))}

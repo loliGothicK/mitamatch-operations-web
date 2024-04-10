@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { useAtom } from 'jotai';
 
 import Box from '@mui/material/Box';
@@ -7,18 +5,18 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 
-import { CheckBoxItem } from '@/component/deck-builder/CheckBoxItem';
+import { CheckBoxItem } from '@/components/deck-builder/CheckBoxItem';
 import {
   currentRoleFilterAtom,
   elementFilterAtom,
   roleFilterAtom,
 } from '@/jotai/memoriaAtoms';
 import {
+  type FilterType,
   elementFilter,
   elementFilterMap,
-  FilterType,
   roleFilterMap,
-} from '@/types/FilterType';
+} from '@/types/filterType';
 
 function RoleCheckbox() {
   const [filter, setFilter] = useAtom(roleFilterAtom);
@@ -35,46 +33,42 @@ function RoleCheckbox() {
               filter.length > 0 && filter.length < currentRoleFilter.length
             }
             onChange={() => {
-              setFilter((prev) => {
+              setFilter(prev => {
                 if (filter.length === currentRoleFilter.length) {
                   return [
                     ...prev.filter(
-                      (v) =>
+                      v =>
                         !(currentRoleFilter as readonly FilterType[]).includes(
                           v,
                         ),
                     ),
-                  ];
-                } else {
-                  return [
-                    ...prev.filter(
-                      (v) =>
-                        !(currentRoleFilter as readonly FilterType[]).includes(
-                          v,
-                        ),
-                    ),
-                    ...currentRoleFilter,
                   ];
                 }
+                return [
+                  ...prev.filter(
+                    v =>
+                      !(currentRoleFilter as readonly FilterType[]).includes(v),
+                  ),
+                  ...currentRoleFilter,
+                ];
               });
             }}
           />
         }
       />
       <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-        {currentRoleFilter.map((flag) => {
+        {currentRoleFilter.map(flag => {
           return (
             <CheckBoxItem
               key={flag}
               name={roleFilterMap[flag]}
               checked={filter.includes(flag)}
               handleChange={() => {
-                setFilter((prev) => {
+                setFilter(prev => {
                   if (filter.includes(flag)) {
-                    return prev.filter((v) => v !== flag);
-                  } else {
-                    return [...prev, flag];
+                    return prev.filter(v => v !== flag);
                   }
+                  return [...prev, flag];
                 });
               }}
             />
@@ -99,38 +93,36 @@ function ElementCheckbox() {
               filter.length > 0 && filter.length < elementFilter.length
             }
             onChange={() => {
-              setFilter((prev) => {
+              setFilter(prev => {
                 if (filter.length === elementFilter.length) {
                   return prev.filter(
-                    (v) => !(elementFilter as readonly string[]).includes(v),
+                    v => !(elementFilter as readonly string[]).includes(v),
                   );
-                } else {
-                  return [
-                    ...prev.filter(
-                      (v) => !(elementFilter as readonly string[]).includes(v),
-                    ),
-                    ...elementFilter,
-                  ];
                 }
+                return [
+                  ...prev.filter(
+                    v => !(elementFilter as readonly string[]).includes(v),
+                  ),
+                  ...elementFilter,
+                ];
               });
             }}
           />
         }
       />
       <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-        {elementFilter.map((flag) => {
+        {elementFilter.map(flag => {
           return (
             <CheckBoxItem
               key={flag}
               name={elementFilterMap[flag]}
               checked={filter.includes(flag)}
               handleChange={() => {
-                setFilter((prev) => {
+                setFilter(prev => {
                   if (filter.includes(flag)) {
-                    return prev.filter((v) => v !== flag);
-                  } else {
-                    return [...prev, flag];
+                    return prev.filter(v => v !== flag);
                   }
+                  return [...prev, flag];
                 });
               }}
             />

@@ -1,15 +1,15 @@
 import { memoriaList } from '@/domain/memoria/memoria';
 import { orderList } from '@/domain/order/order';
-import { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
-import { OrderWithPIC } from '@/jotai/orderAtoms';
+import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
+import type { OrderWithPic } from '@/jotai/orderAtoms';
 
 export function encodeDeck(
   sw: 'sword' | 'shield',
   deck: MemoriaWithConcentration[],
   legendaryDeck: MemoriaWithConcentration[],
 ) {
-  const deckInfo = deck.map((memoria) => [memoria.id, memoria.concentration]);
-  const legendaryDeckInfo = legendaryDeck.map((memoria) => [
+  const deckInfo = deck.map(memoria => [memoria.id, memoria.concentration]);
+  const legendaryDeckInfo = legendaryDeck.map(memoria => [
     memoria.id,
     memoria.concentration,
   ]);
@@ -28,7 +28,7 @@ export function decodeDeck(encoded: string): {
   legendaryDeck: MemoriaWithConcentration[];
 } {
   const { sw, deck, legendaryDeck } = JSON.parse(atob(encoded));
-  const deckMap = new Map(memoriaList.map((memoria) => [memoria.id, memoria]));
+  const deckMap = new Map(memoriaList.map(memoria => [memoria.id, memoria]));
   return {
     sw,
     legendaryDeck: legendaryDeck.map(
@@ -42,8 +42,8 @@ export function decodeDeck(encoded: string): {
   };
 }
 
-export function encodeTimeline(timeline: OrderWithPIC[]) {
-  const timelineInfo = timeline.map((order) => {
+export function encodeTimeline(timeline: OrderWithPic[]) {
+  const timelineInfo = timeline.map(order => {
     return {
       id: order.id,
       delay: order.delay,
@@ -54,14 +54,14 @@ export function encodeTimeline(timeline: OrderWithPIC[]) {
   return btoa(JSON.stringify({ timeline: timelineInfo }));
 }
 
-export function decodeTimeline(encoded: string): OrderWithPIC[] {
-  const orderMap = new Map(orderList.map((order) => [order.id, order]));
+export function decodeTimeline(encoded: string): OrderWithPic[] {
+  const orderMap = new Map(orderList.map(order => [order.id, order]));
   const { timeline } = JSON.parse(atob(encoded));
 
   return timeline.map(
     (item: { id: number; delay?: number; pic?: string; sub?: string }) => {
       return {
-        ...orderMap.get(item.id)!,
+        ...orderMap.get(item.id),
         delay: item.delay,
         pic: item.pic ? decodeURIComponent(item.pic) : undefined,
         sub: item.sub ? decodeURIComponent(item.sub) : undefined,

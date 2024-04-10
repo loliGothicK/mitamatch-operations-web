@@ -1,7 +1,6 @@
-import * as React from 'react';
-
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import type { ChangeEvent } from 'react';
 
 export function CheckBoxItem({
   name,
@@ -10,7 +9,7 @@ export function CheckBoxItem({
 }: {
   name: string;
   checked: boolean;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <FormControlLabel

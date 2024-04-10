@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
@@ -10,25 +10,25 @@ import {
   Card,
   CardContent,
   CardMedia,
-  darken,
   FormControlLabel,
   FormGroup,
-  lighten,
   Stack,
   TextField,
+  darken,
+  lighten,
 } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 
-import { Charm, charmList } from '@/domain/charm/charm';
-import { Costume, costumeList } from '@/domain/costume/costume';
+import { type Charm, charmList } from '@/domain/charm/charm';
+import { type Costume, costumeList } from '@/domain/costume/costume';
 import { evaluate } from '@/evaluate/evaluate';
 import { deckAtom, legendaryDeckAtom, swAtom } from '@/jotai/memoriaAtoms';
-import { statusKind, StatusKind } from '@/parser/skill';
+import { type StatusKind, statusKind } from '@/parser/skill';
 
 const defAtom = atomWithStorage('def', 400_000);
 const spDefAtom = atomWithStorage('spDef', 400_000);
@@ -83,7 +83,9 @@ export function Calculator() {
   const expectedTotalBuff = skill
     .map(({ expected }) => expected.buff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
-      if (!cur) return acc;
+      if (!cur) {
+        return acc;
+      }
       for (const elem of cur) {
         const { type, amount } = elem;
         if (type) {
@@ -95,7 +97,9 @@ export function Calculator() {
   const expectedTotalDebuff = skill
     .map(({ expected }) => expected.debuff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
-      if (!cur) return acc;
+      if (!cur) {
+        return acc;
+      }
       for (const elem of cur) {
         const { type, amount } = elem;
         if (type) {
@@ -108,24 +112,25 @@ export function Calculator() {
     .map(({ expected }) => expected.recovery)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
 
-  Object.entries(supportBuff)
-    .filter(([, amount]) => !!amount)
-    .forEach(([type, amount]) => {
-      expectedTotalBuff.set(
-        type as StatusKind,
-        (expectedTotalBuff.get(type as StatusKind) || 0) +
-          amount * [...deck, ...legendaryDeck].length,
-      );
-    });
-  Object.entries(supportDebuff)
-    .filter(([, amount]) => !!amount)
-    .forEach(([type, amount]) => {
-      expectedTotalDebuff.set(
-        type as StatusKind,
-        (expectedTotalDebuff.get(type as StatusKind) || 0) +
-          amount * [...deck, ...legendaryDeck].length,
-      );
-    });
+  for (const [type, amount] of Object.entries(supportBuff).filter(
+    ([, amount]) => !!amount,
+  )) {
+    expectedTotalBuff.set(
+      type as StatusKind,
+      (expectedTotalBuff.get(type as StatusKind) || 0) +
+        amount * [...deck, ...legendaryDeck].length,
+    );
+  }
+
+  for (const [type, amount] of Object.entries(supportDebuff).filter(
+    ([, amount]) => !!amount,
+  )) {
+    expectedTotalDebuff.set(
+      type as StatusKind,
+      (expectedTotalDebuff.get(type as StatusKind) || 0) +
+        amount * [...deck, ...legendaryDeck].length,
+    );
+  }
 
   const display = ({
     upDown,
@@ -139,29 +144,35 @@ export function Calculator() {
     return `${type}/${upDown}: ${amount}`;
   };
   const charmOptions = charmList
-    .filter((charm) => {
-      if (charmFilter.length === 0) return true;
-      return charmFilter.every((elem) => charm.ability.includes(elem));
+    .filter(charm => {
+      if (charmFilter.length === 0) {
+        return true;
+      }
+      return charmFilter.every(elem => charm.ability.includes(elem));
     })
-    .map((charm) => ({
+    .map(charm => ({
       title: charm.name,
       ability: charm.ability,
     }));
   const costumeOptions = costumeList
-    .filter((costume) => {
-      if (costume.ex === undefined || costume.ex === null) return false;
-      else if (costumeFilter.length === 0) return true;
-      return costumeFilter.every((option) =>
+    .filter(costume => {
+      if (costume.ex === undefined || costume.ex === null) {
+        return false;
+      }
+      if (costumeFilter.length === 0) {
+        return true;
+      }
+      return costumeFilter.every(option =>
         option === '通常衣装'
           ? costume.status[0] > costume.status[1]
           : option === '特殊衣装'
             ? costume.status[0] < costume.status[1]
             : option === '火' || option === '水' || option === '風'
-              ? costume.ex?.description.includes(option) || false
+              ? costume.ex?.description.includes(option)
               : costume.type.includes(option),
       );
     })
-    .map((costume) => ({
+    .map(costume => ({
       title: `${costume.lily}/${costume.name}`,
       ex: costume.ex,
     }));
@@ -173,34 +184,34 @@ export function Calculator() {
           <FormGroup sx={{ flexDirection: 'row', height: 56 }}>
             <FormControlLabel
               control={<Checkbox defaultChecked={false} />}
-              label="火"
+              label='火'
               onChange={(_, checked) => {
                 if (checked) {
                   setCharmFilter([...charmFilter, '火']);
                 } else {
-                  setCharmFilter(charmFilter.filter((elem) => elem !== '火'));
+                  setCharmFilter(charmFilter.filter(elem => elem !== '火'));
                 }
               }}
             />
             <FormControlLabel
               control={<Checkbox defaultChecked={false} />}
-              label="水"
+              label='水'
               onChange={(_, checked) => {
                 if (checked) {
                   setCharmFilter([...charmFilter, '水']);
                 } else {
-                  setCharmFilter(charmFilter.filter((elem) => elem !== '水'));
+                  setCharmFilter(charmFilter.filter(elem => elem !== '水'));
                 }
               }}
             />
             <FormControlLabel
               control={<Checkbox defaultChecked={false} />}
-              label="風"
+              label='風'
               onChange={(_, checked) => {
                 if (checked) {
                   setCharmFilter([...charmFilter, '風']);
                 } else {
-                  setCharmFilter(charmFilter.filter((elem) => elem !== '風'));
+                  setCharmFilter(charmFilter.filter(elem => elem !== '風'));
                 }
               }}
             />
@@ -210,10 +221,10 @@ export function Calculator() {
             options={charmOptions.sort((a, b) =>
               a.ability.localeCompare(b.ability),
             )}
-            groupBy={(option) => option.ability}
-            getOptionLabel={(option) => option.title}
-            renderInput={(params) => <TextField {...params} label="charm" />}
-            renderGroup={(params) => (
+            groupBy={option => option.ability}
+            getOptionLabel={option => option.title}
+            renderInput={params => <TextField {...params} label='charm' />}
+            renderGroup={params => (
               <li key={params.key}>
                 <GroupHeader>{params.group}</GroupHeader>
                 <GroupItems>{params.children}</GroupItems>
@@ -221,9 +232,8 @@ export function Calculator() {
             )}
             onChange={(_, value) => {
               if (value) {
-                setCharm(
-                  charmList.find((charm) => charm.name === value.title)!,
-                );
+                // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                setCharm(charmList.find(charm => charm.name === value.title)!);
               }
             }}
             sx={{ marginTop: 2 }}
@@ -231,7 +241,7 @@ export function Calculator() {
         </Grid>
         <Grid item xs={12} md={6}>
           <Autocomplete
-            renderInput={(params) => <TextField {...params} label="衣装検索" />}
+            renderInput={params => <TextField {...params} label='衣装検索' />}
             options={costumeFilterOptions}
             multiple
             onChange={(_, value) => {
@@ -242,12 +252,14 @@ export function Calculator() {
           />
           <Autocomplete
             options={costumeOptions.sort((a, b) =>
-              a.ex!.name.localeCompare(b.ex!.name),
+              a.ex?.name && b.ex?.name
+                ? a.ex.name.localeCompare(b.ex.name)
+                : a.title.localeCompare(b.title),
             )}
-            groupBy={(option) => option.ex!.name}
-            getOptionLabel={(option) => option.title}
-            renderInput={(params) => <TextField {...params} label="costume" />}
-            renderGroup={(params) => (
+            groupBy={option => option.ex?.name || 'その他'}
+            getOptionLabel={option => option.title}
+            renderInput={params => <TextField {...params} label='costume' />}
+            renderGroup={params => (
               <li key={params.key}>
                 <GroupHeader>{params.group}</GroupHeader>
                 <GroupItems>{params.children}</GroupItems>
@@ -256,8 +268,9 @@ export function Calculator() {
             onChange={(_, value) => {
               if (value) {
                 setCostume(
+                  // biome-ignore lint/style/noNonNullAssertion: <explanation>
                   costumeList.find(
-                    (costume) =>
+                    costume =>
                       `${costume.lily}/${costume.name}` === value.title,
                   )!,
                 );
@@ -269,12 +282,12 @@ export function Calculator() {
         <Grid item xs={12}>
           <Stack direction={'row'} spacing={2}>
             <TextField
-              label="Your ATK"
+              label='Your ATK'
               defaultValue={selfStatus[0]}
-              variant="standard"
-              onChange={(e) => {
+              variant='standard'
+              onChange={e => {
                 setSelfStatus([
-                  parseInt(e.target.value),
+                  Number.parseInt(e.target.value),
                   selfStatus[1],
                   selfStatus[2],
                   selfStatus[3],
@@ -282,41 +295,41 @@ export function Calculator() {
               }}
             />
             <TextField
-              label="Your Sp.ATK"
+              label='Your Sp.ATK'
               defaultValue={selfStatus[1]}
-              variant="standard"
-              onChange={(e) => {
+              variant='standard'
+              onChange={e => {
                 setSelfStatus([
                   selfStatus[0],
-                  parseInt(e.target.value),
+                  Number.parseInt(e.target.value),
                   selfStatus[2],
                   selfStatus[3],
                 ]);
               }}
             />
             <TextField
-              label="Your DEF"
+              label='Your DEF'
               defaultValue={selfStatus[2]}
-              variant="standard"
-              onChange={(e) => {
+              variant='standard'
+              onChange={e => {
                 setSelfStatus([
                   selfStatus[0],
                   selfStatus[1],
-                  parseInt(e.target.value),
+                  Number.parseInt(e.target.value),
                   selfStatus[3],
                 ]);
               }}
             />
             <TextField
-              label="Your Sp.DEF"
+              label='Your Sp.DEF'
               defaultValue={selfStatus[3]}
-              variant="standard"
-              onChange={(e) => {
+              variant='standard'
+              onChange={e => {
                 setSelfStatus([
                   selfStatus[0],
                   selfStatus[1],
                   selfStatus[2],
-                  parseInt(e.target.value),
+                  Number.parseInt(e.target.value),
                 ]);
               }}
             />
@@ -329,17 +342,17 @@ export function Calculator() {
                 <TextField
                   label="Opponent's DEF"
                   defaultValue={def}
-                  variant="standard"
-                  onChange={(e) => {
-                    setDef(parseInt(e.target.value));
+                  variant='standard'
+                  onChange={e => {
+                    setDef(Number.parseInt(e.target.value));
                   }}
                 />
                 <TextField
                   label="Opponent's Sp.DEF"
                   defaultValue={spDef}
-                  variant="standard"
-                  onChange={(e) => {
-                    setSpDef(parseInt(e.target.value));
+                  variant='standard'
+                  onChange={e => {
+                    setSpDef(Number.parseInt(e.target.value));
                   }}
                 />
               </Stack>
@@ -351,15 +364,17 @@ export function Calculator() {
       <Grid container spacing={2} direction={'row'}>
         {sw === 'sword' ? (
           <Grid item xs={12}>
-            <Typography variant="body1">{`ダメージ量: ${expectedToalDamage}`}</Typography>
+            <Typography variant='body1'>{`ダメージ量: ${expectedToalDamage}`}</Typography>
           </Grid>
         ) : (
           <>
             <Grid item xs={6}>
-              <Typography variant="body1">{`総合回復量: ${expectedTotalRecovery}`}</Typography>
+              <Typography variant='body1'>{`総合回復量: ${expectedTotalRecovery}`}</Typography>
             </Grid>
             <Grid item xs={6}>
-              <Typography variant="body1">{`平均回復量: ${Math.floor(expectedTotalRecovery / [...deck, ...legendaryDeck].length)}`}</Typography>
+              <Typography variant='body1'>{`平均回復量: ${Math.floor(
+                expectedTotalRecovery / [...deck, ...legendaryDeck].length,
+              )}`}</Typography>
             </Grid>
           </>
         )}
@@ -368,12 +383,15 @@ export function Calculator() {
             <Typography>{'バフ量:'}</Typography>
           </Grid>
           {statusKind
-            .filter((kind) => expectedTotalBuff.get(kind) !== undefined)
-            .map((kind) => {
+            .filter(kind => expectedTotalBuff.get(kind) !== undefined)
+            .map(kind => {
               return (
                 <Grid item key={kind}>
-                  <Typography variant="body1" color={'darkred'}>
-                    {`${kind}/UP: ${expectedTotalBuff.get(kind)!}`}
+                  <Typography variant='body1' color={'darkred'}>
+                    {`${kind}/UP: ${
+                      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                      expectedTotalBuff.get(kind)!
+                    }`}
                   </Typography>
                 </Grid>
               );
@@ -384,12 +402,15 @@ export function Calculator() {
             <Typography>{'デバフ量:'}</Typography>
           </Grid>
           {statusKind
-            .filter((kind) => expectedTotalDebuff.get(kind) !== undefined)
-            .map((kind) => {
+            .filter(kind => expectedTotalDebuff.get(kind) !== undefined)
+            .map(kind => {
               return (
                 <Grid item key={kind}>
-                  <Typography variant="body1" color={'darkblue'}>
-                    {`${kind}/DOWN: ${expectedTotalDebuff.get(kind)!}`}
+                  <Typography variant='body1' color={'darkblue'}>
+                    {`${kind}/DOWN: ${
+                      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                      expectedTotalDebuff.get(kind)!
+                    }`}
                   </Typography>
                 </Grid>
               );
@@ -403,7 +424,7 @@ export function Calculator() {
             <Grid item key={memoria.id} xs={12} md={6}>
               <Card sx={{ display: 'flex' }}>
                 <CardMedia
-                  component="img"
+                  component='img'
                   sx={{ width: 100, height: 100 }}
                   image={`/memoria/${memoria.name}.png`}
                   alt={memoria.name}
@@ -414,22 +435,22 @@ export function Calculator() {
                   }}
                 >
                   {expected.damage ? (
-                    <Typography variant="body2">{`damage: ${expected.damage}`}</Typography>
+                    <Typography variant='body2'>{`damage: ${expected.damage}`}</Typography>
                   ) : (
                     <></>
                   )}
                   {expected.recovery ? (
-                    <Typography variant="body2">{`recovery: ${expected.recovery}`}</Typography>
+                    <Typography variant='body2'>{`recovery: ${expected.recovery}`}</Typography>
                   ) : (
                     <></>
                   )}
                   {expected.buff ? (
                     <>
-                      {expected.buff.map((buff) => {
+                      {expected.buff.map(buff => {
                         return (
                           <Typography
                             key={buff.type}
-                            variant="body2"
+                            variant='body2'
                             color={'darkred'}
                           >
                             {display({ ...buff, upDown: 'UP' })}
@@ -442,11 +463,11 @@ export function Calculator() {
                   )}
                   {expected.debuff ? (
                     <>
-                      {expected.debuff.map((debuff) => {
+                      {expected.debuff.map(debuff => {
                         return (
                           <Typography
                             key={debuff.type}
-                            variant="body2"
+                            variant='body2'
                             color={'darkblue'}
                           >
                             {display({ ...debuff, upDown: 'DOWN' })}

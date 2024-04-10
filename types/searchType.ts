@@ -1,11 +1,10 @@
 import {
-  Elemental,
-  ElementalKind,
+  type Elemental,
+  type ElementalKind,
+  type Elements,
   elementalKind,
-  Elements,
   elements,
 } from '@/parser/skill';
-
 import { match } from 'ts-pattern';
 
 export const labelSearch = ['legendary', 'ultimate'] as const;
@@ -32,18 +31,18 @@ export type ElementStatusSearch = {
 };
 
 export function allBasicStatusSearch(): BasicStatusSearch[] {
-  return basicStatus.flatMap((status) => {
+  return basicStatus.flatMap(status => {
     return ['UP', 'DOWN']
-      .map((upDown) => {
+      .map(upDown => {
         return { status, upDown: upDown as 'UP' | 'DOWN' };
       })
-      .filter((v) => v.status !== 'Life' || v.upDown === 'UP');
+      .filter(v => v.status !== 'Life' || v.upDown === 'UP');
   });
 }
 
 export function allElementStatusSearch(): ElementStatusSearch[] {
-  return elementStatus.flatMap((status) => {
-    return ['UP', 'DOWN'].map((upDown) => {
+  return elementStatus.flatMap(status => {
+    return ['UP', 'DOWN'].map(upDown => {
       return { status, upDown: upDown as 'UP' | 'DOWN' };
     });
   });
@@ -83,8 +82,8 @@ export function allOtherSkillSearch(): OtherSkillSearch[] {
     'charge',
     'counter',
     'heal',
-    ...elementalKind.flatMap((kind) =>
-      elements.map((element) => ({ kind, element })),
+    ...elementalKind.flatMap(kind =>
+      elements.map(element => ({ kind, element })),
     ),
   ];
 }

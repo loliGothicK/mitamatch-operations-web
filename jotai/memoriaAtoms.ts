@@ -1,16 +1,16 @@
 import { atom } from 'jotai';
 
-import { Memoria, memoriaList } from '@/domain/memoria/memoria';
-import { parse_skill } from '@/parser/skill';
-import { parse_support } from '@/parser/support';
+import { type Memoria, memoriaList } from '@/domain/memoria/memoria';
+import { parseSkill } from '@/parser/skill';
+import { parseSupport } from '@/parser/support';
 import {
+  type ElementFilterType,
+  type RoleFilterType,
   elementFilter,
   elementFilterMap,
-  ElementFilterType,
   roleFilterMap,
-  RoleFilterType,
-} from '@/types/FilterType';
-import {
+} from '@/types/filterType';
+import type {
   AssistSupportSearch,
   BasicStatusSearch,
   ElementStatusSearch,
@@ -19,7 +19,7 @@ import {
   OtherSupportSearch,
   RecoverySupportSearch,
   VanguardSupportSearch,
-} from '@/types/SearchType';
+} from '@/types/searchType';
 
 import { match } from 'ts-pattern';
 
@@ -48,7 +48,7 @@ export const roleFilterAtom = atom<RoleFilterType[]>([
 export const elementFilterAtom = atom<ElementFilterType[]>([...elementFilter]);
 export const labelFilterAtom = atom<LabelSearch[]>([]);
 
-export const currentRoleFilterAtom = atom((get) => {
+export const currentRoleFilterAtom = atom(get => {
   const sw = get(swAtom);
   return match<'sword' | 'shield', RoleFilterType[]>(sw)
     .with('shield', () => ['support', 'interference', 'recovery'])
@@ -82,9 +82,9 @@ export const resetFilterAtom = atom(null, (_, set) => {
 
 export const sortKindAtom = atom<SortKind>('ID');
 
-export const filteredMemoriaAtom = atom((get) => {
+export const filteredMemoriaAtom = atom(get => {
   return memoriaList
-    .filter((memoria) => {
+    .filter(memoria => {
       const sw = match(get(swAtom))
         .with('shield', () => ['支援', '妨害', '回復'].includes(memoria.kind))
         .with('sword', () =>
@@ -94,22 +94,22 @@ export const filteredMemoriaAtom = atom((get) => {
         )
         .exhaustive();
 
-      const role = get(roleFilterAtom).some((filter) => {
+      const role = get(roleFilterAtom).some(filter => {
         return memoria.kind === roleFilterMap[filter];
       });
 
-      const element = get(elementFilterAtom).some((filter) => {
+      const element = get(elementFilterAtom).some(filter => {
         return memoria.element === elementFilterMap[filter];
       });
 
-      const label = get(labelFilterAtom).every((filter) => {
+      const label = get(labelFilterAtom).every(filter => {
         return memoria.labels.includes(filter);
       });
 
-      const skill = parse_skill(memoria.skill.name, memoria.skill.description);
+      const skill = parseSkill(memoria.skill.name, memoria.skill.description);
 
-      const basicStatus = get(basicStatusFilterAtom).every((filter) => {
-        return skill.effects.some((x) => {
+      const basicStatus = get(basicStatusFilterAtom).every(filter => {
+        return skill.effects.some(x => {
           return (
             x.status === filter.status &&
             (filter.upDown === 'UP' ? x.type === 'buff' : x.type === 'debuff')
@@ -117,8 +117,8 @@ export const filteredMemoriaAtom = atom((get) => {
         });
       });
 
-      const elementStatus = get(elementStatusFilterAtom).every((filter) => {
-        return skill.effects.some((x) => {
+      const elementStatus = get(elementStatusFilterAtom).every(filter => {
+        return skill.effects.some(x => {
           return (
             x.status === filter.status &&
             (filter.upDown === 'UP' ? x.type === 'buff' : x.type === 'debuff')
@@ -126,8 +126,8 @@ export const filteredMemoriaAtom = atom((get) => {
         });
       });
 
-      const otherSkill = get(otherSkillFilterAtom).every((filter) => {
-        return skill.kinds?.some((x) => {
+      const otherSkill = get(otherSkillFilterAtom).every(filter => {
+        return skill.kinds?.some(x => {
           return typeof x === 'string' && typeof filter === 'string'
             ? x === filter
             : typeof x !== 'string' && typeof filter !== 'string'
@@ -136,43 +136,40 @@ export const filteredMemoriaAtom = atom((get) => {
         });
       });
 
-      const support = parse_support(
+      const support = parseSupport(
         memoria.support.name,
         memoria.support.description,
       );
 
-      const vanguardSupport = get(vanguardSupportFilterAtom).every((filter) => {
+      const vanguardSupport = get(vanguardSupportFilterAtom).every(filter => {
         if (typeof filter === 'string') {
-          return support.effects.some((x) => x.type === filter);
-        } else {
-          return support.effects.some((x) => {
-            return x.status === filter.status && x.type === filter.upDown;
-          });
+          return support.effects.some(x => x.type === filter);
         }
+        return support.effects.some(x => {
+          return x.status === filter.status && x.type === filter.upDown;
+        });
       });
 
-      const assistSupport = get(assistSupportFilterAtom).every((filter) => {
+      const assistSupport = get(assistSupportFilterAtom).every(filter => {
         if (typeof filter === 'string') {
-          return support.effects.some((x) => x.type === filter);
-        } else {
-          return support.effects.some((x) => {
-            return x.status === filter.status && x.type === filter.upDown;
-          });
+          return support.effects.some(x => x.type === filter);
         }
+        return support.effects.some(x => {
+          return x.status === filter.status && x.type === filter.upDown;
+        });
       });
 
-      const recoverySupport = get(recoverySupportFilterAtom).every((filter) => {
+      const recoverySupport = get(recoverySupportFilterAtom).every(filter => {
         if (typeof filter === 'string') {
-          return support.effects.some((x) => x.type === filter);
-        } else {
-          return support.effects.some((x) => {
-            return x.status === filter.status && x.type === filter.upDown;
-          });
+          return support.effects.some(x => x.type === filter);
         }
+        return support.effects.some(x => {
+          return x.status === filter.status && x.type === filter.upDown;
+        });
       });
 
-      const otherSupport = get(otherSupportFilterAtom).every((filter) => {
-        return support.effects.some((x) => {
+      const otherSupport = get(otherSupportFilterAtom).every(filter => {
+        return support.effects.some(x => {
           return x.type === filter;
         });
       });

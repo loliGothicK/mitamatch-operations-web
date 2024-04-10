@@ -1,8 +1,8 @@
-import * as React from 'react';
-
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import MuiAppBar, {
+  type AppBarProps as MuiAppBarProps,
+} from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,12 +10,13 @@ import Divider from '@mui/material/Divider';
 import MuiDrawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
-import { createTheme, styled, ThemeProvider } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
+import * as React from 'react';
 
-import Footer from '@/component/Footer';
-import { mainListItems } from '@/component/home/listItems';
+import Footer from '@/components/Footer';
+import { mainListItems } from '@/components/home/listItems';
 
 const drawerWidth: number = 240;
 
@@ -24,7 +25,7 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: prop => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(['width', 'margin'], {
@@ -42,7 +43,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: prop => prop !== 'open',
 })(({ theme, open }) => ({
   '& .MuiDrawer-paper': {
     position: 'relative',
@@ -79,16 +80,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex', bgcolor: 'lightsteelblue' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position='absolute' open={open}>
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
             <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
+              edge='start'
+              color='inherit'
+              aria-label='open drawer'
               onClick={toggleDrawer}
               sx={{
                 marginRight: '36px',
@@ -98,9 +99,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <MenuIcon />
             </IconButton>
             <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
+              component='h1'
+              variant='h6'
+              color='inherit'
               noWrap
               sx={{ flexGrow: 1 }}
             >
@@ -108,7 +109,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant='permanent' open={open}>
           <Toolbar
             sx={{
               display: 'flex',
@@ -122,10 +123,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">{mainListItems}</List>
+          <List component='nav'>{mainListItems}</List>
         </Drawer>
         <Box
-          component="main"
+          component='main'
           sx={{
             flexGrow: 1,
             height: '100vh',

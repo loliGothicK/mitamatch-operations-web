@@ -1,4 +1,4 @@
-import { FormEvent, MouseEvent, useState } from 'react';
+import { type FormEvent, type MouseEvent, useState } from 'react';
 
 import { useAtom } from 'jotai';
 
@@ -20,15 +20,15 @@ import {
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import { Order, orderList } from '@/domain/order/order';
+import { type Order, orderList } from '@/domain/order/order';
 import {
+  type NodeData,
   edgeStorageAtom,
   idAtom,
-  NodeData,
   nodeStorageAtom,
 } from '@/jotai/flowAtoms';
 
-import { Handle, NodeProps, Position } from 'reactflow';
+import { Handle, type NodeProps, Position } from 'reactflow';
 
 function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
   const [count, setCount] = useAtom(idAtom);
@@ -39,7 +39,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
   const [order, setOrder] = useState<Order | undefined>(data.order);
 
   const getCount = () => {
-    setCount((prev) => prev + 1);
+    setCount(prev => prev + 1);
     return count;
   };
 
@@ -73,17 +73,17 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
 
   return (
     <Box onContextMenu={handleContextMenu}>
-      <div className="order-node" style={{ padding: 0 }}>
+      <div className='order-node' style={{ padding: 0 }}>
         <Handle
-          type="target"
+          type='target'
           position={Position.Top}
-          id="top"
+          id='top'
           isConnectable={isConnectable}
         />
         <Handle
-          type="source"
+          type='source'
           position={Position.Left}
-          id="left"
+          id='left'
           isConnectable={isConnectable}
         />
         <Card sx={{ display: 'flex', padding: 0 }}>
@@ -97,22 +97,22 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
           >
             {order ? (
               <CardMedia
-                component="img"
+                component='img'
                 sx={{ width: 50, height: 50, padding: 0 }}
                 image={`/order/${order.name}.png`}
               />
             ) : (
-              <CardMedia component="div">
+              <CardMedia component='div'>
                 <Skeleton width={50} height={50} />
               </CardMedia>
             )}
             <CardContent>
               {order ? (
                 <Typography
-                  variant="body1"
+                  variant='body1'
                   fontSize={10}
-                  color="text.secondary"
-                  component="div"
+                  color='text.secondary'
+                  component='div'
                 >
                   {order.name}
                 </Typography>
@@ -120,10 +120,10 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
                 <Skeleton width={100} />
               )}
               <Typography
-                variant="body1"
+                variant='body1'
                 fontSize={12}
-                color="text.secondary"
-                component="div"
+                color='text.secondary'
+                component='div'
               >
                 {pic}
               </Typography>
@@ -131,22 +131,22 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
           </Box>
         </Card>
         <Handle
-          type="source"
+          type='source'
           position={Position.Bottom}
-          id="bottom"
+          id='bottom'
           isConnectable={isConnectable}
         />
         <Handle
-          type="source"
+          type='source'
           position={Position.Right}
-          id="right"
+          id='right'
           isConnectable={isConnectable}
         />
       </div>
       <Menu
         open={contextMenu !== null}
         onClose={() => setContextMenu(null)}
-        anchorReference="anchorPosition"
+        anchorReference='anchorPosition'
         anchorPosition={
           contextMenu !== null
             ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
@@ -163,7 +163,8 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            const self = nodes.find((n) => n.id === id)!;
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            const self = nodes.find(n => n.id === id)!;
             const newId = getCount().toString();
             setNodeStorage([
               ...nodes,
@@ -201,9 +202,9 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
           onSubmit: (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries((formData as any).entries());
-            setPic(formJson.pic);
-            setOrder(orderList.find((o) => o.name === formJson.order)!);
+            const formJson = Object.fromEntries(formData.entries());
+            setPic(formJson.pic as string);
+            setOrder(orderList.find(o => o.name === formJson.order));
             handleClose();
           },
         }}
@@ -211,18 +212,18 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
         <DialogTitle>Edit</DialogTitle>
         <DialogContent>
           <Autocomplete
-            options={orderList.filter((o) => o.payed).map((o) => o.name)}
+            options={orderList.filter(o => o.payed).map(o => o.name)}
             defaultValue={order?.name}
-            renderInput={(params) => (
+            renderInput={params => (
               <TextField
                 {...params}
                 autoFocus
-                margin="dense"
-                id="order"
-                name="order"
-                label="Order"
-                type="text"
-                variant="standard"
+                margin='dense'
+                id='order'
+                name='order'
+                label='Order'
+                type='text'
+                variant='standard'
               />
             )}
           />
@@ -231,17 +232,17 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
           <TextField
             autoFocus
             defaultValue={pic}
-            margin="dense"
-            id="pic"
-            name="pic"
-            label="PIC"
-            type="text"
-            variant="standard"
+            margin='dense'
+            id='pic'
+            name='pic'
+            label='PIC'
+            type='text'
+            variant='standard'
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Save</Button>
+          <Button type='submit'>Save</Button>
         </DialogActions>
       </Dialog>
     </Box>

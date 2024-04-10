@@ -1,4 +1,4 @@
-import { FormEvent, MouseEvent, useState } from 'react';
+import { type FormEvent, type MouseEvent, useState } from 'react';
 
 import {
   Button,
@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material';
 
-import { EdgeLabelRenderer, EdgeProps, getBezierPath } from 'reactflow';
+import { EdgeLabelRenderer, type EdgeProps, getBezierPath } from 'reactflow';
 
 export default function LabeledEdge({
   id,
@@ -53,7 +53,7 @@ export default function LabeledEdge({
     <>
       <path
         d={edgePath}
-        className="react-flow__edge-path"
+        className='react-flow__edge-path'
         style={{
           ...style,
           stroke: 'transparent',
@@ -66,7 +66,7 @@ export default function LabeledEdge({
       <path // 実際の線
         id={id}
         d={edgePath}
-        className="react-flow__edge-path"
+        className='react-flow__edge-path'
         markerEnd={markerEnd}
         style={{ ...style, stroke: 'dimgrey' }}
       />
@@ -89,7 +89,7 @@ export default function LabeledEdge({
       <Menu
         open={contextMenu !== null}
         onClose={() => setContextMenu(null)}
-        anchorReference="anchorPosition"
+        anchorReference='anchorPosition'
         anchorPosition={
           contextMenu !== null
             ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
@@ -113,8 +113,8 @@ export default function LabeledEdge({
           onSubmit: (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries((formData as any).entries());
-            setComment(formJson.comment);
+            const formJson = Object.fromEntries(formData.entries());
+            setComment(formJson.comment as string);
             setDialogOpen(false);
           },
         }}
@@ -123,18 +123,18 @@ export default function LabeledEdge({
           <TextField
             autoFocus
             required
-            margin="dense"
-            id="comment"
-            name="comment"
-            label="コメント"
+            margin='dense'
+            id='comment'
+            name='comment'
+            label='コメント'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
           <Button
-            type="submit"
+            type='submit'
             onClick={() => {
               setComment('');
               setDialogOpen(false);
@@ -142,7 +142,7 @@ export default function LabeledEdge({
           >
             Delete
           </Button>
-          <Button type="submit">Save</Button>
+          <Button type='submit'>Save</Button>
         </DialogActions>
       </Dialog>
     </>

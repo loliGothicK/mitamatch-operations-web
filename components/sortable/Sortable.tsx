@@ -7,23 +7,23 @@ import type {
   UniqueIdentifier,
 } from '@dnd-kit/core';
 import {
-  closestCenter,
   DndContext,
   KeyboardSensor,
   PointerSensor,
+  closestCenter,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
 import type { SortingStrategy } from '@dnd-kit/sortable';
 import {
-  arrayMove,
   SortableContext,
+  arrayMove,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
 import type { OmitProperties } from 'ts-essentials';
 
 /**
- * Props for Sortable component
+ * Props for Sortable components
  */
 export type SortableProps<T> = PropsWithChildren<{
   /**
@@ -64,7 +64,7 @@ export type SortableProps<T> = PropsWithChildren<{
 }>;
 
 /**
- * Sortable component
+ * Sortable components
  * @param items - ソート対象のアイテム
  * @param onChangeOrder - ソート時に呼び出される {@link React.Dispatch} 関数
  * @param children - ソート対象のアイテムを表示するコンポーネント
@@ -94,8 +94,8 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
     const { active, over } = event;
 
     if (over !== null && active.id !== over.id) {
-      const oldIndex = items.findIndex((item) => item.id === active.id);
-      const newIndex = items.findIndex((item) => item.id === over.id);
+      const oldIndex = items.findIndex(item => item.id === active.id);
+      const newIndex = items.findIndex(item => item.id === over.id);
 
       const newItems = arrayMove(items, oldIndex, newIndex);
 

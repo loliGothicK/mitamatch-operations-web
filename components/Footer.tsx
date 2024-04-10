@@ -4,8 +4,8 @@ import { Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
-import { styled, useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import { styled, useTheme } from '@mui/material/styles';
 
 const FooterBox = styled(Box)(({ theme }) => ({
   footerNav: {
@@ -37,13 +37,13 @@ export default function Footer({ ...props }) {
   return (
     <Container sx={{ bgcolor: theme.palette.primary.main, minWidth: '100vw' }}>
       <footer>
-        <Box py={6} textAlign="center">
-          <FooterBox component="nav">
-            {content.links.map((link) => {
+        <Box py={6} textAlign='center'>
+          <FooterBox component='nav'>
+            {content.links.map(link => {
               return (
                 <Link
                   href={`${link.href}`}
-                  variant="body1"
+                  variant='body1'
                   color={theme.palette.text.secondary}
                   key={link.content}
                   sx={{ m: 3 }}
@@ -55,13 +55,13 @@ export default function Footer({ ...props }) {
           </FooterBox>
           <Box mb={3}>
             <IconButton
-              aria-label="Twitter"
+              aria-label='Twitter'
               sx={{ color: theme.palette.text.secondary }}
             >
               <TwitterIcon />
             </IconButton>
             <IconButton
-              aria-label="GitHub"
+              aria-label='GitHub'
               sx={{ color: theme.palette.text.secondary }}
             >
               <GitHubIcon />
@@ -69,16 +69,16 @@ export default function Footer({ ...props }) {
           </Box>
           <Typography
             color={theme.palette.text.secondary}
-            component="p"
-            variant="body2"
+            component='p'
+            variant='body2'
             gutterBottom={false}
           >
-            {content['copy']}
+            {content.copy}
           </Typography>
           <Typography
             color={theme.palette.text.secondary}
-            component="p"
-            variant="body2"
+            component='p'
+            variant='body2'
             gutterBottom={false}
           >
             All copyrights (images, text, data, etc.) on this website are owned

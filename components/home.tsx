@@ -1,15 +1,15 @@
-import * as React from 'react';
-
 import Image from 'next/image';
 
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import {
+  Container,
+  Divider,
+  Grid,
+  List,
+  Paper,
+  Typography,
+} from '@mui/material';
 
-import { UpdateListItems } from '@/component/home/listItems';
+import { UpdateListItems } from '@/components/home/listItems';
 
 export default function Home() {
   return (
@@ -52,7 +52,7 @@ export default function Home() {
         </Grid>
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-            <Typography variant="h6" gutterBottom component="div">
+            <Typography variant='h6' gutterBottom component='div'>
               Recent Updates
             </Typography>
             <Divider />

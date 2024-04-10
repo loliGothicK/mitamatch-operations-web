@@ -8,6 +8,7 @@ export const memoriaSchema = z.object({
   id: z.number(),
   link: z.string(),
   name: z.string(),
+  // biome-ignore lint/style/useNamingConvention: <explanation>
   full_name: z.string(),
   kind: z.enum([
     '通常単体',
@@ -41,6 +42,6 @@ export const memoriaSchema = z.object({
 
 export type Memoria = z.infer<typeof memoriaSchema>;
 
-export const memoriaList = memoriaData.data.map((memoria) =>
+export const memoriaList = memoriaData.data.map(memoria =>
   memoriaSchema.parse(memoria),
 );

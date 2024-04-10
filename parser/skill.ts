@@ -1,5 +1,5 @@
 import { option } from 'fp-ts';
-import { Option } from 'fp-ts/Option';
+import type { Option } from 'fp-ts/Option';
 import { match } from 'ts-pattern';
 
 export const statusKind = [
@@ -57,8 +57,8 @@ export type Skill = {
   kinds?: SkillKind[];
 };
 
-function parse_damage(description: string): SkillEffect[] {
-  let result: SkillEffect[] = [];
+function parseDamage(description: string): SkillEffect[] {
+  const result: SkillEffect[] = [];
   const damage = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
   const _match = description.match(damage);
 
@@ -66,13 +66,12 @@ function parse_damage(description: string): SkillEffect[] {
     return result;
   }
 
-  const range = ((r) => {
+  const range = (r => {
     if (r.length === 1) {
       return [r[0], r[0]] as [number, number];
-    } else {
-      return [r[0], r[1]] as [number, number];
     }
-  })(_match[1].split('～').map((n) => parseInt(n)));
+    return [r[0], r[1]] as [number, number];
+  })(_match[1].split('～').map(n => Number.parseInt(n)));
 
   const amount = match<string, Amount>(_match[3])
     .with('小ダメージ', () => 'small')
@@ -90,7 +89,7 @@ function parse_damage(description: string): SkillEffect[] {
   const buffMatch = description.match(buff);
 
   if (buffMatch) {
-    const statuses = buffMatch[1].split('と').flatMap((s) => {
+    const statuses = buffMatch[1].split('と').flatMap(s => {
       return match<string, StatusKind[]>(s)
         .with('ATK', () => ['ATK'])
         .with('Sp.ATK', () => ['Sp.ATK'])
@@ -126,20 +125,20 @@ function parse_damage(description: string): SkillEffect[] {
       .with('特大アップ', () => 'extra-large')
       .run();
 
-    statuses.forEach((status) => {
+    for (const status of statuses) {
       result.push({
         type: 'buff',
         range,
         amount: debuffAmount,
         status,
       });
-    });
+    }
   }
 
   const debuffMatch = description.match(debuff);
 
   if (debuffMatch) {
-    const statuses = debuffMatch[1].split('と').flatMap((s) => {
+    const statuses = debuffMatch[1].split('と').flatMap(s => {
       return match<string, StatusKind[]>(s)
         .with('ATK', () => ['ATK'])
         .with('Sp.ATK', () => ['Sp.ATK'])
@@ -175,20 +174,20 @@ function parse_damage(description: string): SkillEffect[] {
       .with('特大ダウン', () => 'extra-large')
       .run();
 
-    statuses.forEach((status) => {
+    for (const status of statuses) {
       result.push({
         type: 'debuff',
         range,
         amount: debuffAmount,
         status,
       });
-    });
+    }
   }
 
   return result;
 }
 
-function parse_buff(description: string): SkillEffect[] {
+function parseBuff(description: string): SkillEffect[] {
   const buff = /味方(.+)体の(.+)を(.*?アップ)させる/;
   const _match = description.match(buff);
 
@@ -196,15 +195,14 @@ function parse_buff(description: string): SkillEffect[] {
     return [];
   }
 
-  const range = ((r) => {
+  const range = (r => {
     if (r.length === 1) {
       return [r[0], r[0]] as [number, number];
-    } else {
-      return [r[0], r[1]] as [number, number];
     }
-  })(_match[1].split('～').map((n) => parseInt(n)));
+    return [r[0], r[1]] as [number, number];
+  })(_match[1].split('～').map(n => Number.parseInt(n)));
 
-  const status = _match[2].split('と').flatMap((s) => {
+  const status = _match[2].split('と').flatMap(s => {
     return match<string, StatusKind[]>(s)
       .with('ATK', () => ['ATK'])
       .with('DEF', () => ['DEF'])
@@ -237,12 +235,12 @@ function parse_buff(description: string): SkillEffect[] {
     .with('超特大アップ', () => 'super-large')
     .run();
 
-  return status.map((s) => {
+  return status.map(s => {
     return { type: 'buff', range, amount, status: s };
   });
 }
 
-function parse_debuff(description: string): SkillEffect[] {
+function parseDebuff(description: string): SkillEffect[] {
   const debuff = /敵(.+)体の(.+)を(.*?ダウン)させる/;
   const _match = description.match(debuff);
 
@@ -250,15 +248,14 @@ function parse_debuff(description: string): SkillEffect[] {
     return [];
   }
 
-  const range = ((r) => {
+  const range = (r => {
     if (r.length === 1) {
       return [r[0], r[0]] as [number, number];
-    } else {
-      return [r[0], r[1]] as [number, number];
     }
-  })(_match[1].split('～').map((n) => parseInt(n)));
+    return [r[0], r[1]] as [number, number];
+  })(_match[1].split('～').map(n => Number.parseInt(n)));
 
-  const status = _match[2].split('と').flatMap((s) => {
+  const status = _match[2].split('と').flatMap(s => {
     return match<string, StatusKind[]>(s)
       .with('ATK', () => ['ATK'])
       .with('DEF', () => ['DEF'])
@@ -291,13 +288,13 @@ function parse_debuff(description: string): SkillEffect[] {
     .with('超特大ダウン', () => 'super-large')
     .run();
 
-  return status.map((s) => {
+  return status.map(s => {
     return { type: 'debuff', range, amount, status: s };
   });
 }
 
-function parse_heal(description: string): SkillEffect[] {
-  let result: SkillEffect[] = [];
+function parseHeal(description: string): SkillEffect[] {
+  const result: SkillEffect[] = [];
   const heal = /味方(.+)体のHPを(.*?回復)/;
   const _match = description.match(heal);
 
@@ -305,13 +302,12 @@ function parse_heal(description: string): SkillEffect[] {
     return [];
   }
 
-  const range = ((r) => {
+  const range = (r => {
     if (r.length === 1) {
       return [r[0], r[0]] as [number, number];
-    } else {
-      return [r[0], r[1]] as [number, number];
     }
-  })(_match[1].split('～').map((n) => parseInt(n)));
+    return [r[0], r[1]] as [number, number];
+  })(_match[1].split('～').map(n => Number.parseInt(n)));
 
   const healAmount = match<string, Amount>(_match[2])
     .with('小回復', () => 'small')
@@ -330,7 +326,7 @@ function parse_heal(description: string): SkillEffect[] {
     return result;
   }
 
-  const status = __match[1].split('と').flatMap((s) => {
+  const status = __match[1].split('と').flatMap(s => {
     return match<string, StatusKind[]>(s)
       .with('ATK', () => ['ATK'])
       .with('DEF', () => ['DEF'])
@@ -368,92 +364,92 @@ function parse_heal(description: string): SkillEffect[] {
     .run();
 
   return result.concat(
-    status.map((stat) => {
+    status.map(stat => {
       return { type: 'buff', range, amount: buffAmount, status: stat };
     }),
   );
 }
 
-export function parse_skill(name: string, description: string): Skill {
+export function parseSkill(name: string, description: string): Skill {
   const elemental = match<string, Option<SkillKind>>(name)
     .when(
-      (name) => name.startsWith('火：'),
+      name => name.startsWith('火：'),
       () => option.of({ element: 'Fire', kind: 'Stimulation' }),
     )
     .when(
-      (name) => name.startsWith('水：'),
+      name => name.startsWith('水：'),
       () => option.of({ element: 'Water', kind: 'Stimulation' }),
     )
     .when(
-      (name) => name.startsWith('風：'),
+      name => name.startsWith('風：'),
       () => option.of({ element: 'Wind', kind: 'Stimulation' }),
     )
     .when(
-      (name) => name.startsWith('光：'),
+      name => name.startsWith('光：'),
       () => option.of({ element: 'Light', kind: 'Stimulation' }),
     )
     .when(
-      (name) => name.startsWith('闇：'),
+      name => name.startsWith('闇：'),
       () => option.of({ element: 'Dark', kind: 'Stimulation' }),
     )
     .when(
-      (name) => name.startsWith('火拡：'),
+      name => name.startsWith('火拡：'),
       () => option.of({ element: 'Fire', kind: 'Spread' }),
     )
     .when(
-      (name) => name.startsWith('水拡：'),
+      name => name.startsWith('水拡：'),
       () => option.of({ element: 'Water', kind: 'Spread' }),
     )
     .when(
-      (name) => name.startsWith('風拡：'),
+      name => name.startsWith('風拡：'),
       () => option.of({ element: 'Wind', kind: 'Spread' }),
     )
     .when(
-      (name) => name.startsWith('光拡：'),
+      name => name.startsWith('光拡：'),
       () => option.of({ element: 'Light', kind: 'Spread' }),
     )
     .when(
-      (name) => name.startsWith('闇拡：'),
+      name => name.startsWith('闇拡：'),
       () => option.of({ element: 'Dark', kind: 'Spread' }),
     )
     .when(
-      (name) => name.startsWith('火強：'),
+      name => name.startsWith('火強：'),
       () => option.of({ element: 'Fire', kind: 'Strengthen' }),
     )
     .when(
-      (name) => name.startsWith('水強：'),
+      name => name.startsWith('水強：'),
       () => option.of({ element: 'Water', kind: 'Strengthen' }),
     )
     .when(
-      (name) => name.startsWith('風強：'),
+      name => name.startsWith('風強：'),
       () => option.of({ element: 'Wind', kind: 'Strengthen' }),
     )
     .when(
-      (name) => name.startsWith('光強：'),
+      name => name.startsWith('光強：'),
       () => option.of({ element: 'Light', kind: 'Strengthen' }),
     )
     .when(
-      (name) => name.startsWith('闇強：'),
+      name => name.startsWith('闇強：'),
       () => option.of({ element: 'Dark', kind: 'Strengthen' }),
     )
     .when(
-      (name) => name.startsWith('火弱：'),
+      name => name.startsWith('火弱：'),
       () => option.of({ element: 'Fire', kind: 'Weaken' }),
     )
     .when(
-      (name) => name.startsWith('水弱：'),
+      name => name.startsWith('水弱：'),
       () => option.of({ element: 'Water', kind: 'Weaken' }),
     )
     .when(
-      (name) => name.startsWith('風弱：'),
+      name => name.startsWith('風弱：'),
       () => option.of({ element: 'Wind', kind: 'Weaken' }),
     )
     .when(
-      (name) => name.startsWith('光弱：'),
+      name => name.startsWith('光弱：'),
       () => option.of({ element: 'Light', kind: 'Weaken' }),
     )
     .when(
-      (name) => name.startsWith('闇弱：'),
+      name => name.startsWith('闇弱：'),
       () => option.of({ element: 'Dark', kind: 'Weaken' }),
     )
     .otherwise(() => option.none);
@@ -471,13 +467,13 @@ export function parse_skill(name: string, description: string): Skill {
   return {
     raw: { name, description },
     effects: [
-      ...parse_damage(description),
-      ...parse_buff(description),
-      ...parse_debuff(description),
-      ...parse_heal(description),
+      ...parseDamage(description),
+      ...parseBuff(description),
+      ...parseDebuff(description),
+      ...parseHeal(description),
     ],
     kinds: [elemental, counter, charge, heal]
       .filter(option.isSome)
-      .map((o) => o.value),
+      .map(o => o.value),
   } satisfies Skill;
 }

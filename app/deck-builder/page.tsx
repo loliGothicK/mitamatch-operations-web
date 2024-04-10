@@ -1,12 +1,12 @@
 'use client';
 
-import React, { ReactNode, SyntheticEvent, useState } from 'react';
+import { type ReactNode, type SyntheticEvent, useState } from 'react';
 
 import { Box, Tab, Tabs } from '@mui/material';
 
 import { DeckBuilder } from '@/app/deck-builder/_tabs/builder';
 import { Calculator } from '@/app/deck-builder/_tabs/calculator';
-import { Layout } from '@/component/Layout';
+import { Layout } from '@/components/Layout';
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -19,7 +19,7 @@ function CustomTabPanel(props: TabPanelProps) {
 
   return (
     <div
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
@@ -50,7 +50,7 @@ export default function BasicTabs() {
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="basic tabs example"
+          aria-label='basic tabs example'
         >
           <Tab label={'Builder'} {...a11yProps(0)} />
           <Tab

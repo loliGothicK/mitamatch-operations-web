@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import Link from 'next/link';
 
 import { Home, Schema, ViewCompact, ViewTimeline } from '@mui/icons-material';
@@ -20,7 +18,7 @@ const links = [
     title: 'Deck Builder',
     href: '/deck-builder',
     icon: (
-      <Badge badgeContent={'updated'} color="primary">
+      <Badge badgeContent={'updated'} color='primary'>
         <ViewCompact />
       </Badge>
     ),
@@ -34,7 +32,7 @@ const links = [
     title: 'Flow Chart',
     href: '/flowchart',
     icon: (
-      <Badge badgeContent={'preview'} color="primary">
+      <Badge badgeContent={'preview'} color='primary'>
         <Schema />
       </Badge>
     ),
@@ -42,13 +40,13 @@ const links = [
 ];
 
 export const mainListItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
+  <>
+    <ListSubheader component='div' inset>
       Menu
     </ListSubheader>
-    {links.map(({ title, href, icon }, index) => {
+    {links.map(({ title, href, icon }) => {
       return (
-        <Link href={href} key={index}>
+        <Link href={href} key={title}>
           <ListItemButton>
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText primary={title} />
@@ -56,7 +54,7 @@ export const mainListItems = (
         </Link>
       );
     })}
-  </React.Fragment>
+  </>
 );
 
 const updates = [
@@ -85,8 +83,8 @@ const updates = [
 ];
 
 export const UpdateListItems = (
-  <React.Fragment>
-    {updates.map((item) => {
+  <>
+    {updates.map(item => {
       return (
         <ListItemButton key={item.name}>
           <ListItemIcon>
@@ -96,5 +94,5 @@ export const UpdateListItems = (
         </ListItemButton>
       );
     })}
-  </React.Fragment>
+  </>
 );

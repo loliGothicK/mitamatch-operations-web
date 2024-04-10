@@ -6,18 +6,18 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { Memoria } from '@/domain/memoria/memoria';
+import type { Memoria } from '@/domain/memoria/memoria';
 import { deckAtom, legendaryDeckAtom } from '@/jotai/memoriaAtoms';
-import { parse_skill, StatusKind, statusKind } from '@/parser/skill';
-import { parse_support, SupportKind } from '@/parser/support';
-import { elementFilter, elementFilterMap } from '@/types/FilterType';
+import { type StatusKind, parseSkill, statusKind } from '@/parser/skill';
+import { type SupportKind, parseSupport } from '@/parser/support';
+import { elementFilter, elementFilterMap } from '@/types/filterType';
 
 import { Lens } from 'monocle-ts';
 import { match } from 'ts-pattern';
 
 type UpDown = 'UP' | 'DOWN';
 type StatusPattern = `${StatusKind}/${UpDown}`;
-const statusPattern: StatusPattern[] = statusKind.flatMap((s) => {
+const statusPattern: StatusPattern[] = statusKind.flatMap(s => {
   return [`${s}/UP`, `${s}/DOWN`] as StatusPattern[];
 });
 
@@ -81,33 +81,33 @@ const supportPattern: SupportPattern[] = [
     'Water DEF',
     'Wind ATK',
     'Wind DEF',
-  ].flatMap((s) => {
+  ].flatMap(s => {
     return [`${s}/UP`, `${s}/DOWN`] as SupportPattern[];
   }),
 ] as const;
 
 export function supportPatternToJapanese(pattern: SupportPattern): string {
   return match(pattern)
-    .with('ATK/UP', () => `攻UP`)
-    .with('DEF/UP', () => `防UP`)
-    .with('Sp.ATK/UP', () => `特攻UP`)
-    .with('Sp.DEF/UP', () => `特防UP`)
-    .with('ATK/DOWN', () => `攻DOWN`)
-    .with('DEF/DOWN', () => `防DOWN`)
-    .with('Sp.ATK/DOWN', () => `特攻DOWN`)
-    .with('Sp.DEF/DOWN', () => `特防DOWN`)
-    .with('Fire ATK/UP', () => `火攻UP`)
-    .with('Fire DEF/UP', () => `火防UP`)
-    .with('Water ATK/UP', () => `水攻UP`)
-    .with('Water DEF/UP', () => `水防UP`)
-    .with('Wind ATK/UP', () => `風攻UP`)
-    .with('Wind DEF/UP', () => `風防UP`)
-    .with('Fire ATK/DOWN', () => `火攻DOWN`)
-    .with('Fire DEF/DOWN', () => `火防DOWN`)
-    .with('Water ATK/DOWN', () => `水攻DOWN`)
-    .with('Water DEF/DOWN', () => `水防DOWN`)
-    .with('Wind ATK/DOWN', () => `風攻DOWN`)
-    .with('Wind DEF/DOWN', () => `風防DOWN`)
+    .with('ATK/UP', () => '攻UP')
+    .with('DEF/UP', () => '防UP')
+    .with('Sp.ATK/UP', () => '特攻UP')
+    .with('Sp.DEF/UP', () => '特防UP')
+    .with('ATK/DOWN', () => '攻DOWN')
+    .with('DEF/DOWN', () => '防DOWN')
+    .with('Sp.ATK/DOWN', () => '特攻DOWN')
+    .with('Sp.DEF/DOWN', () => '特防DOWN')
+    .with('Fire ATK/UP', () => '火攻UP')
+    .with('Fire DEF/UP', () => '火防UP')
+    .with('Water ATK/UP', () => '水攻UP')
+    .with('Water DEF/UP', () => '水防UP')
+    .with('Wind ATK/UP', () => '風攻UP')
+    .with('Wind DEF/UP', () => '風防UP')
+    .with('Fire ATK/DOWN', () => '火攻DOWN')
+    .with('Fire DEF/DOWN', () => '火防DOWN')
+    .with('Water ATK/DOWN', () => '水攻DOWN')
+    .with('Water DEF/DOWN', () => '水防DOWN')
+    .with('Wind ATK/DOWN', () => '風攻DOWN')
+    .with('Wind DEF/DOWN', () => '風防DOWN')
     .with('DamageUp', () => 'ダメージUP')
     .with('SupportUp', () => '支援UP')
     .with('RecoveryUp', () => '回復UP')
@@ -125,8 +125,12 @@ export function intoSupportPattern(kind: SupportKind): SupportPattern {
     .with('MatchPtUp', () => 'MatchPtUp')
     .with('MpCostDown', () => 'MpCostDown')
     .with('RangeUp', () => 'RangeUp')
-    .with('UP', () => intoStatusPattern({ status: kind.status!, upDown: 'UP' }))
+    .with('UP', () =>
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      intoStatusPattern({ status: kind.status!, upDown: 'UP' }),
+    )
     .with('DOWN', () =>
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       intoStatusPattern({ status: kind.status!, upDown: 'DOWN' }),
     )
     .exhaustive() as SupportPattern;
@@ -144,16 +148,17 @@ export default function Details() {
     'description',
   ]);
 
-  const skills = [...deck, ...legendaryDeck].map((memoria) => {
-    return parse_skill(skillName.get(memoria), skillDescription.get(memoria));
+  const skills = [...deck, ...legendaryDeck].map(memoria => {
+    return parseSkill(skillName.get(memoria), skillDescription.get(memoria));
   });
 
   const skillAggregate = new Map<StatusPattern, number>();
-  for (const pattern of skills.flatMap((skill) => {
+  for (const pattern of skills.flatMap(skill => {
     return skill.effects
-      .filter((eff) => eff.status !== undefined)
-      .map((eff) => {
+      .filter(eff => eff.status !== undefined)
+      .map(eff => {
         return intoStatusPattern({
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
           status: eff.status!,
           upDown: eff.type === 'buff' ? 'UP' : 'DOWN',
         });
@@ -162,16 +167,16 @@ export default function Details() {
     skillAggregate.set(pattern, (skillAggregate.get(pattern) || 0) + 1);
   }
 
-  const supports = [...deck, ...legendaryDeck].map((memoria) => {
-    return parse_support(
+  const supports = [...deck, ...legendaryDeck].map(memoria => {
+    return parseSupport(
       supportName.get(memoria),
       supportDescription.get(memoria),
     );
   });
 
   const supportAggregate = new Map<SupportPattern, number>();
-  for (const pattern of supports.flatMap((support) => {
-    return support.effects.map((eff) => {
+  for (const pattern of supports.flatMap(support => {
+    return support.effects.map(eff => {
       return intoSupportPattern(eff);
     });
   })) {
@@ -179,14 +184,14 @@ export default function Details() {
   }
 
   const elementAggregate = new Map<string, number>();
-  for (const element of [...deck, ...legendaryDeck].map((memoria) => {
+  for (const element of [...deck, ...legendaryDeck].map(memoria => {
     return memoria.element;
   })) {
     elementAggregate.set(element, (elementAggregate.get(element) || 0) + 1);
   }
 
   const kindAggregate = new Map<string, number>();
-  for (const kind of [...deck, ...legendaryDeck].map((memoria) => {
+  for (const kind of [...deck, ...legendaryDeck].map(memoria => {
     return memoria.kind;
   })) {
     kindAggregate.set(kind, (kindAggregate.get(kind) || 0) + 1);
@@ -200,17 +205,17 @@ export default function Details() {
       direction={'column'}
       sx={{ marginTop: 5 }}
     >
-      <Typography variant="body1">スキル</Typography>
+      <Typography variant='body1'>スキル</Typography>
       <Divider sx={{ margin: 2 }} />
       <Grid container spacing={1}>
-        {skillAggregate.size == 0 ? (
+        {skillAggregate.size === 0 ? (
           <></>
         ) : (
           statusPattern
-            .filter((pattern) => skillAggregate.get(pattern) != undefined)
-            .map((pattern, index) => {
+            .filter(pattern => skillAggregate.get(pattern) !== undefined)
+            .map(pattern => {
               return (
-                <Grid item xs={4} key={index}>
+                <Grid item xs={4} key={pattern}>
                   <Typography fontSize={10}>
                     {statusPatternToJapanese(pattern)} :{' '}
                     {skillAggregate.get(pattern)}
@@ -220,19 +225,19 @@ export default function Details() {
             })
         )}
       </Grid>
-      <Typography variant="body1" marginTop={5}>
+      <Typography variant='body1' marginTop={5}>
         補助スキル
       </Typography>
       <Divider sx={{ margin: 2 }} />
       <Grid container spacing={1}>
-        {supportAggregate.size == 0 ? (
+        {supportAggregate.size === 0 ? (
           <></>
         ) : (
           supportPattern
-            .filter((pattern) => supportAggregate.get(pattern) != undefined)
-            .map((pattern, index) => {
+            .filter(pattern => supportAggregate.get(pattern) !== undefined)
+            .map(pattern => {
               return (
-                <Grid item xs={4} key={index}>
+                <Grid item xs={4} key={pattern}>
                   <Typography fontSize={10}>
                     {supportPatternToJapanese(pattern)} :{' '}
                     {supportAggregate.get(pattern)}
@@ -242,18 +247,18 @@ export default function Details() {
             })
         )}
       </Grid>
-      <Typography variant="body1" marginTop={5}>
+      <Typography variant='body1' marginTop={5}>
         属性
       </Typography>
       <Divider sx={{ margin: 2 }} />
       <Grid container spacing={1}>
-        {elementAggregate.size == 0 ? (
+        {elementAggregate.size === 0 ? (
           <></>
         ) : (
           elementFilter
-            .map((kind) => elementFilterMap[kind])
-            .filter((kind) => elementAggregate.get(kind) != undefined)
-            .map((kind) => {
+            .map(kind => elementFilterMap[kind])
+            .filter(kind => elementAggregate.get(kind) !== undefined)
+            .map(kind => {
               return (
                 <Grid item xs={4} key={kind}>
                   <Typography fontSize={10}>
@@ -264,12 +269,12 @@ export default function Details() {
             })
         )}
       </Grid>
-      <Typography variant="body1" marginTop={5}>
+      <Typography variant='body1' marginTop={5}>
         内訳
       </Typography>
       <Divider sx={{ margin: 2 }} />
       <Grid container spacing={1}>
-        {kindAggregate.size == 0 ? (
+        {kindAggregate.size === 0 ? (
           <></>
         ) : (
           [
@@ -281,8 +286,8 @@ export default function Details() {
             '妨害',
             '回復',
           ]
-            .filter((kind) => kindAggregate.get(kind) != undefined)
-            .map((kind) => {
+            .filter(kind => kindAggregate.get(kind) !== undefined)
+            .map(kind => {
               return (
                 <Grid item xs={4} key={kind}>
                   <Typography fontSize={10}>

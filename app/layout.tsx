@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Inter } from 'next/font/google';
 
 import { Provider } from 'jotai';
@@ -7,6 +5,7 @@ import { Provider } from 'jotai';
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -50,10 +49,10 @@ export const metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang='ja'>
       <body className={inter.className}>
         <Provider>{children}</Provider>
         <Analytics />

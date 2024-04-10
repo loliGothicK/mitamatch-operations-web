@@ -1,12 +1,12 @@
-import { Charm } from '@/domain/charm/charm';
-import { Costume } from '@/domain/costume/costume';
-import { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
-import { parse_skill, StatusKind } from '@/parser/skill';
-import { parse_support } from '@/parser/support';
+import type { Charm } from '@/domain/charm/charm';
+import type { Costume } from '@/domain/costume/costume';
+import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
+import { type StatusKind, parseSkill } from '@/parser/skill';
+import { parseSupport } from '@/parser/support';
 
-import { match, P } from 'ts-pattern';
+import { P, match } from 'ts-pattern';
 
-function parse_ability(description?: string): Map<string, number> {
+function parseAbility(description?: string): Map<string, number> {
   const result = new Map<string, number>([
     ['火', 1.0],
     ['水', 1.0],
@@ -14,18 +14,22 @@ function parse_ability(description?: string): Map<string, number> {
     ['光', 1.0],
     ['闇', 1.0],
   ]);
-  if (!description) return result;
+  if (!description) {
+    return result;
+  }
   const ability =
     /メモリア使用時、それが(.+)属性メモリアの場合、さらにメモリアスキル効果UP\+(\d+)%/;
   const _match = description.match(ability);
-  if (!_match) return result;
-  _match[1].split('/').forEach((element) => {
+  if (!_match) {
+    return result;
+  }
+  for (const element of _match[1].split('/')) {
     result.set(element, 1.0 + Number(_match[2]) / 100);
-  });
+  }
   return result;
 }
 
-function parse_costume(description?: string): Map<string, number> {
+function parseCostume(description?: string): Map<string, number> {
   const result = new Map<string, number>([
     ['火', 1.0],
     ['水', 1.0],
@@ -33,10 +37,14 @@ function parse_costume(description?: string): Map<string, number> {
     ['光', 1.0],
     ['闇', 1.0],
   ]);
-  if (!description) return result;
+  if (!description) {
+    return result;
+  }
   const costume = /自身が使用する(.+)属性メモリアのスキル効果(\d+)%UP/;
   const _match = description.match(costume);
-  if (!_match) return result;
+  if (!_match) {
+    return result;
+  }
   result.set(_match[1], 1.0 + Number(_match[2]) / 100);
   return result;
 }
@@ -87,12 +95,12 @@ export function evaluate(
   ]);
   const graceRate = 1.1;
   const charmRate = 1.1;
-  const charmEx = parse_ability(charm?.ability);
+  const charmEx = parseAbility(charm?.ability);
   const costumeRate = 1.15;
-  const costumeEx = parse_costume(costume?.ex?.description);
+  const costumeEx = parseCostume(costume?.ex?.description);
 
-  const skill = deck.map((memoria) => {
-    const skill = parse_skill(memoria.skill.name, memoria.skill.description);
+  const skill = deck.map(memoria => {
+    const skill = parseSkill(memoria.skill.name, memoria.skill.description);
 
     const skillLevel = match(memoria.concentration)
       .with(0, () => 1.35)
@@ -113,17 +121,17 @@ export function evaluate(
     const rangePlus =
       1.0 -
       deck
-        .map((memoria) =>
-          parse_support(memoria.support.name, memoria.support.description),
+        .map(memoria =>
+          parseSupport(memoria.support.name, memoria.support.description),
         )
-        .filter((support) =>
-          support.effects.some((effect) => effect.type === 'RangeUp'),
+        .filter(support =>
+          support.effects.some(effect => effect.type === 'RangeUp'),
         )
-        .map((rangeUp) => {
-          const up = rangeUp.effects.find(
-            (effect) => effect.type === 'RangeUp',
-          );
-          if (!up) return 0;
+        .map(rangeUp => {
+          const up = rangeUp.effects.find(effect => effect.type === 'RangeUp');
+          if (!up) {
+            return 0;
+          }
           return match(memoria.concentration)
             .with(0, () => 0.12)
             .with(1, () => 0.125)
@@ -136,10 +144,13 @@ export function evaluate(
 
     const calibration =
       charmRate *
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       charmEx.get(memoria.element)! *
       costumeRate *
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       costumeEx.get(memoria.element)! *
       graceRate *
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       themeRate.get(memoria.element)!;
     return {
       memoria,
@@ -197,68 +208,69 @@ function damage(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
 ): number | undefined {
-  const skill = parse_skill(memoria.skill.name, memoria.skill.description);
-  if (!skill.effects.some((effect) => effect.type === 'damage'))
+  const skill = parseSkill(memoria.skill.name, memoria.skill.description);
+  if (!skill.effects.some(effect => effect.type === 'damage')) {
     return undefined;
+  }
 
-  let normalLegendary = {
+  const normalLegendary = {
     火: 1,
     水: 1,
     風: 1,
     光: 1,
     闇: 1,
   };
-  let specialLegendary = {
+  const specialLegendary = {
     火: 1,
     水: 1,
     風: 1,
     光: 1,
     闇: 1,
   };
-  deck
-    .filter((memoria) => !!memoria.legendary)
-    .forEach((memoria) => {
-      match(memoria.legendary)
-        .when(
-          (legendary) => legendary!.includes('火通'),
-          () => {
-            normalLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('水通'),
-          () => {
-            normalLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('風通'),
-          () => {
-            normalLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('火特'),
-          () => {
-            specialLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('水特'),
-          () => {
-            specialLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('風特'),
-          () => {
-            specialLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .otherwise(() => {});
-    });
 
-  calibration = match(memoria.kind)
+  for (const memoria of deck.filter(memoria => !!memoria.legendary)) {
+    match(memoria.legendary)
+      .when(
+        legendary => legendary?.includes('火通'),
+        () => {
+          normalLegendary.火 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('水通'),
+        () => {
+          normalLegendary.水 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('風通'),
+        () => {
+          normalLegendary.風 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('火特'),
+        () => {
+          specialLegendary.火 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('水特'),
+        () => {
+          specialLegendary.水 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('風特'),
+        () => {
+          specialLegendary.風 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
+      .otherwise(() => {});
+  }
+
+  const finalCalibration = match(memoria.kind)
     .with(
       P.union('通常単体', '通常範囲'),
       () => calibration * normalLegendary[memoria.element],
@@ -271,45 +283,45 @@ function damage(
 
   const skillRate = match(memoria.kind)
     .when(
-      (kind) => kind.includes('単体'),
+      kind => kind.includes('単体'),
       () =>
         match(memoria.skill.description)
           .when(
-            (sentence) => sentence.includes('超特大ダメージ'),
+            sentence => sentence.includes('超特大ダメージ'),
             () => 15.0 / 100,
           )
           .when(
-            (sentence) => sentence.includes('特大ダメージ'),
+            sentence => sentence.includes('特大ダメージ'),
             () => 13.5 / 100,
           )
           .when(
-            (sentence) => sentence.includes('大ダメージ'),
+            sentence => sentence.includes('大ダメージ'),
             () => 11.5 / 100,
           )
           .when(
-            (sentence) => sentence.includes('ダメージ'),
+            sentence => sentence.includes('ダメージ'),
             () => 10.0 / 100,
           )
           .run(),
     )
     .when(
-      (kind) => kind.includes('範囲'),
+      kind => kind.includes('範囲'),
       () =>
         match(memoria.skill.description)
           .when(
-            (sentence) => sentence.includes('特大ダメージ'),
+            sentence => sentence.includes('特大ダメージ'),
             () => 11.0 / 100,
           )
           .when(
-            (sentence) => sentence.includes('大ダメージ'),
+            sentence => sentence.includes('大ダメージ'),
             () => 10.0 / 100,
           )
           .when(
-            (sentence) => sentence.includes('小ダメージ'),
+            sentence => sentence.includes('小ダメージ'),
             () => 7.0 / 100,
           )
           .when(
-            (sentence) => sentence.includes('ダメージ'),
+            sentence => sentence.includes('ダメージ'),
             () => 8.5 / 100,
           )
           .run(),
@@ -320,15 +332,17 @@ function damage(
 
   const support = deck
     .map(
-      (memoria) =>
+      memoria =>
         [
-          parse_support(memoria.support.name, memoria.support.description),
+          parseSupport(memoria.support.name, memoria.support.description),
           memoria.concentration,
         ] as const,
     )
     .map(([support, concentration]) => {
-      const up = support.effects.find((effect) => effect.type === 'DamageUp');
-      if (!up) return 0;
+      const up = support.effects.find(effect => effect.type === 'DamageUp');
+      if (!up) {
+        return 0;
+      }
       const level = match(up.amount)
         .with('small', () => 1 / 100)
         .with('medium', () => 15 / 100)
@@ -338,19 +352,39 @@ function damage(
         .exhaustive();
       const probability = match(support.probability)
         .with('small', () => {
-          if (concentration === 0) return 0.12;
-          if (concentration === 1) return 0.125;
-          if (concentration === 2) return 0.13;
-          if (concentration === 3) return 0.135;
-          if (concentration === 4) return 0.15;
+          if (concentration === 0) {
+            return 0.12;
+          }
+          if (concentration === 1) {
+            return 0.125;
+          }
+          if (concentration === 2) {
+            return 0.13;
+          }
+          if (concentration === 3) {
+            return 0.135;
+          }
+          if (concentration === 4) {
+            return 0.15;
+          }
           throw new Error('Invalid concentration');
         })
         .with('medium', () => {
-          if (concentration === 0) return 0.18;
-          if (concentration === 1) return 0.1875;
-          if (concentration === 2) return 0.195;
-          if (concentration === 3) return 0.2025;
-          if (concentration === 4) return 0.225;
+          if (concentration === 0) {
+            return 0.18;
+          }
+          if (concentration === 1) {
+            return 0.1875;
+          }
+          if (concentration === 2) {
+            return 0.195;
+          }
+          if (concentration === 3) {
+            return 0.2025;
+          }
+          if (concentration === 4) {
+            return 0.225;
+          }
           throw new Error('Invalid concentration');
         })
         .exhaustive();
@@ -364,7 +398,7 @@ function damage(
       ? atk - (2 / 3) * opDef
       : spAtk - (2 / 3) * opSpDef) *
       memoriaRate *
-      calibration *
+      finalCalibration *
       support *
       range,
   );
@@ -383,92 +417,94 @@ function buff(
       amount: number;
     }[]
   | undefined {
-  const skill = parse_skill(memoria.skill.name, memoria.skill.description);
-  if (!skill.effects.some((effect) => effect.type === 'buff')) return undefined;
+  const skill = parseSkill(memoria.skill.name, memoria.skill.description);
+  if (!skill.effects.some(effect => effect.type === 'buff')) {
+    return undefined;
+  }
 
-  let supportLegendary = {
+  const supportLegendary = {
     火: 1,
     水: 1,
     風: 1,
     光: 1,
     闇: 1,
   };
-  let normalLegendary = {
+  const normalLegendary = {
     火: 1,
     水: 1,
     風: 1,
     光: 1,
     闇: 1,
   };
-  let specialLegendary = {
+  const specialLegendary = {
     火: 1,
     水: 1,
     風: 1,
     光: 1,
     闇: 1,
   };
-  deck
-    .filter((memoria) => !!memoria.legendary)
-    .forEach((memoria) => {
-      match(memoria.legendary)
-        .when(
-          (legendary) => legendary!.includes('火援'),
-          () => {
-            supportLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('水援'),
-          () => {
-            supportLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('風援'),
-          () => {
-            supportLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('火通'),
-          () => {
-            normalLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('水通'),
-          () => {
-            normalLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('風通'),
-          () => {
-            normalLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('火特'),
-          () => {
-            specialLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('水特'),
-          () => {
-            specialLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('風特'),
-          () => {
-            specialLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .otherwise(() => {});
-    });
 
-  calibration = match(memoria.kind)
+  for (const memoria of deck.filter(memoria => !!memoria.legendary)) {
+    match(memoria.legendary)
+      .when(
+        legendary => legendary?.includes('火援'),
+        () => {
+          supportLegendary.火 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('水援'),
+        () => {
+          supportLegendary.水 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('風援'),
+        () => {
+          supportLegendary.風 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('火通'),
+        () => {
+          normalLegendary.火 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('水通'),
+        () => {
+          normalLegendary.水 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('風通'),
+        () => {
+          normalLegendary.風 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('火特'),
+        () => {
+          specialLegendary.火 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('水特'),
+        () => {
+          specialLegendary.水 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('風特'),
+        () => {
+          specialLegendary.風 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
+      .otherwise(() => {});
+  }
+
+  const finalCalibration = match(memoria.kind)
     .with(
       P.union('通常単体', '通常範囲'),
       () => calibration * normalLegendary[memoria.element],
@@ -489,20 +525,19 @@ function buff(
       ? 1.0
       : deck
           .map(
-            (memoria) =>
+            memoria =>
               [
-                parse_support(
-                  memoria.support.name,
-                  memoria.support.description,
-                ),
+                parseSupport(memoria.support.name, memoria.support.description),
                 memoria.concentration,
               ] as const,
           )
           .map(([support, concentration]) => {
             const up = support.effects.find(
-              (effect) => effect.type === 'SupportUp',
+              effect => effect.type === 'SupportUp',
             );
-            if (!up) return 0;
+            if (!up) {
+              return 0;
+            }
             const level = match(up.amount)
               .with('small', () => 1 / 100)
               .with('medium', () => 15 / 100)
@@ -512,19 +547,39 @@ function buff(
               .exhaustive();
             const probability = match(support.probability)
               .with('small', () => {
-                if (concentration === 0) return 0.12;
-                if (concentration === 1) return 0.125;
-                if (concentration === 2) return 0.13;
-                if (concentration === 3) return 0.135;
-                if (concentration === 4) return 0.15;
+                if (concentration === 0) {
+                  return 0.12;
+                }
+                if (concentration === 1) {
+                  return 0.125;
+                }
+                if (concentration === 2) {
+                  return 0.13;
+                }
+                if (concentration === 3) {
+                  return 0.135;
+                }
+                if (concentration === 4) {
+                  return 0.15;
+                }
                 throw new Error('Invalid concentration');
               })
               .with('medium', () => {
-                if (concentration === 0) return 0.18;
-                if (concentration === 1) return 0.1875;
-                if (concentration === 2) return 0.195;
-                if (concentration === 3) return 0.2025;
-                if (concentration === 4) return 0.225;
+                if (concentration === 0) {
+                  return 0.18;
+                }
+                if (concentration === 1) {
+                  return 0.1875;
+                }
+                if (concentration === 2) {
+                  return 0.195;
+                }
+                if (concentration === 3) {
+                  return 0.2025;
+                }
+                if (concentration === 4) {
+                  return 0.225;
+                }
                 throw new Error('Invalid concentration');
               })
               .exhaustive();
@@ -533,8 +588,9 @@ function buff(
           .reduce((acc, cur) => acc + cur, 1);
 
   return skill.effects
-    .filter((effect) => effect.type === 'buff')
+    .filter(effect => effect.type === 'buff')
     .map(({ amount, status }) => {
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return match(status!)
         .with('ATK', () => {
           const skillRate = match(amount)
@@ -546,9 +602,10 @@ function buff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              atk * memoriaRate * calibration * support * range,
+              atk * memoriaRate * finalCalibration * support * range,
             ),
           };
         })
@@ -562,9 +619,10 @@ function buff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              spAtk * memoriaRate * calibration * support * range,
+              spAtk * memoriaRate * finalCalibration * support * range,
             ),
           };
         })
@@ -578,9 +636,10 @@ function buff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              def * memoriaRate * calibration * support * range,
+              def * memoriaRate * finalCalibration * support * range,
             ),
           };
         })
@@ -594,9 +653,10 @@ function buff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              spDef * memoriaRate * calibration * support * range,
+              spDef * memoriaRate * finalCalibration * support * range,
             ),
           };
         })
@@ -612,11 +672,12 @@ function buff(
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
+              // biome-ignore lint/style/noNonNullAssertion: <explanation>
               type: status!,
               amount: Math.floor(
                 Math.floor((atk + spAtk) / 2) *
                   memoriaRate *
-                  calibration *
+                  finalCalibration *
                   support *
                   range,
               ),
@@ -635,11 +696,12 @@ function buff(
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
+              // biome-ignore lint/style/noNonNullAssertion: <explanation>
               type: status!,
               amount: Math.floor(
                 Math.floor((def + spDef) / 2) *
                   memoriaRate *
-                  calibration *
+                  finalCalibration *
                   support *
                   range,
               ),
@@ -650,11 +712,12 @@ function buff(
           const skillRate = 0.45 / 100;
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
               Math.floor((def + spDef) / 2) *
                 memoriaRate *
-                calibration *
+                finalCalibration *
                 support *
                 range,
             ),
@@ -677,93 +740,93 @@ function debuff(
       amount: number;
     }[]
   | undefined {
-  const skill = parse_skill(memoria.skill.name, memoria.skill.description);
-  if (!skill.effects.some((effect) => effect.type === 'debuff'))
+  const skill = parseSkill(memoria.skill.name, memoria.skill.description);
+  if (!skill.effects.some(effect => effect.type === 'debuff')) {
     return undefined;
+  }
 
-  let supportLegendary = {
+  const supportLegendary = {
     火: 1,
     水: 1,
     風: 1,
     光: 1,
     闇: 1,
   };
-  let normalLegendary = {
+  const normalLegendary = {
     火: 1,
     水: 1,
     風: 1,
     光: 1,
     闇: 1,
   };
-  let specialLegendary = {
+  const specialLegendary = {
     火: 1,
     水: 1,
     風: 1,
     光: 1,
     闇: 1,
   };
-  deck
-    .filter((memoria) => !!memoria.legendary)
-    .forEach((memoria) => {
-      match(memoria.legendary)
-        .when(
-          (legendary) => legendary!.includes('火援'),
-          () => {
-            supportLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('水援'),
-          () => {
-            supportLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('風援'),
-          () => {
-            supportLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('火通'),
-          () => {
-            normalLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('水通'),
-          () => {
-            normalLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('風通'),
-          () => {
-            normalLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('火特'),
-          () => {
-            specialLegendary['火'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('水特'),
-          () => {
-            specialLegendary['水'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('風特'),
-          () => {
-            specialLegendary['風'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .otherwise(() => {});
-    });
+  for (const memoria of deck.filter(memoria => !!memoria.legendary)) {
+    match(memoria.legendary)
+      .when(
+        legendary => legendary?.includes('火援'),
+        () => {
+          supportLegendary.火 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('水援'),
+        () => {
+          supportLegendary.水 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('風援'),
+        () => {
+          supportLegendary.風 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('火通'),
+        () => {
+          normalLegendary.火 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('水通'),
+        () => {
+          normalLegendary.水 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('風通'),
+        () => {
+          normalLegendary.風 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('火特'),
+        () => {
+          specialLegendary.火 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('水特'),
+        () => {
+          specialLegendary.水 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('風特'),
+        () => {
+          specialLegendary.風 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
+      .otherwise(() => {});
+  }
 
-  calibration = match(memoria.kind)
+  const finalCalibration = match(memoria.kind)
     .with(
       P.union('通常単体', '通常範囲'),
       () => calibration * normalLegendary[memoria.element],
@@ -784,20 +847,19 @@ function debuff(
       ? 1.0
       : deck
           .map(
-            (memoria) =>
+            memoria =>
               [
-                parse_support(
-                  memoria.support.name,
-                  memoria.support.description,
-                ),
+                parseSupport(memoria.support.name, memoria.support.description),
                 memoria.concentration,
               ] as const,
           )
           .map(([support, concentration]) => {
             const up = support.effects.find(
-              (effect) => effect.type === 'SupportUp',
+              effect => effect.type === 'SupportUp',
             );
-            if (!up) return 0;
+            if (!up) {
+              return 0;
+            }
             const level = match(up.amount)
               .with('small', () => 1 / 100)
               .with('medium', () => 15 / 100)
@@ -807,19 +869,39 @@ function debuff(
               .exhaustive();
             const probability = match(support.probability)
               .with('small', () => {
-                if (concentration === 0) return 0.12;
-                if (concentration === 1) return 0.125;
-                if (concentration === 2) return 0.13;
-                if (concentration === 3) return 0.135;
-                if (concentration === 4) return 0.15;
+                if (concentration === 0) {
+                  return 0.12;
+                }
+                if (concentration === 1) {
+                  return 0.125;
+                }
+                if (concentration === 2) {
+                  return 0.13;
+                }
+                if (concentration === 3) {
+                  return 0.135;
+                }
+                if (concentration === 4) {
+                  return 0.15;
+                }
                 throw new Error('Invalid concentration');
               })
               .with('medium', () => {
-                if (concentration === 0) return 0.18;
-                if (concentration === 1) return 0.1875;
-                if (concentration === 2) return 0.195;
-                if (concentration === 3) return 0.2025;
-                if (concentration === 4) return 0.225;
+                if (concentration === 0) {
+                  return 0.18;
+                }
+                if (concentration === 1) {
+                  return 0.1875;
+                }
+                if (concentration === 2) {
+                  return 0.195;
+                }
+                if (concentration === 3) {
+                  return 0.2025;
+                }
+                if (concentration === 4) {
+                  return 0.225;
+                }
                 throw new Error('Invalid concentration');
               })
               .exhaustive();
@@ -828,8 +910,9 @@ function debuff(
           .reduce((acc, cur) => acc + cur, 1);
 
   return skill.effects
-    .filter((effect) => effect.type === 'debuff')
+    .filter(effect => effect.type === 'debuff')
     .map(({ amount, status }) => {
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return match(status!)
         .with('ATK', () => {
           const skillRate = match(amount)
@@ -841,9 +924,10 @@ function debuff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              atk * memoriaRate * calibration * support * range,
+              atk * memoriaRate * finalCalibration * support * range,
             ),
           };
         })
@@ -857,9 +941,10 @@ function debuff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              spAtk * memoriaRate * calibration * support * range,
+              spAtk * memoriaRate * finalCalibration * support * range,
             ),
           };
         })
@@ -873,9 +958,10 @@ function debuff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              def * memoriaRate * calibration * support * range,
+              def * memoriaRate * finalCalibration * support * range,
             ),
           };
         })
@@ -889,9 +975,10 @@ function debuff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              spDef * memoriaRate * calibration * support * range,
+              spDef * memoriaRate * finalCalibration * support * range,
             ),
           };
         })
@@ -907,11 +994,12 @@ function debuff(
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
+              // biome-ignore lint/style/noNonNullAssertion: <explanation>
               type: status!,
               amount: Math.floor(
                 Math.floor((atk + spAtk) / 2) *
                   memoriaRate *
-                  calibration *
+                  finalCalibration *
                   support *
                   range,
               ),
@@ -930,11 +1018,12 @@ function debuff(
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
+              // biome-ignore lint/style/noNonNullAssertion: <explanation>
               type: status!,
               amount: Math.floor(
                 Math.floor((def + spDef) / 2) *
                   memoriaRate *
-                  calibration *
+                  finalCalibration *
                   support *
                   range,
               ),
@@ -958,64 +1047,69 @@ function recovery(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
 ): number | undefined {
-  if (memoria.kind !== '回復') return undefined;
-  let legendary = {
+  if (memoria.kind !== '回復') {
+    return undefined;
+  }
+  const legendary = {
     火: 1,
     水: 1,
     風: 1,
     光: 1,
     闇: 1,
   };
-  deck
-    .filter((memoria) => !!memoria.legendary && memoria.kind === '回復')
-    .forEach((memoria) => {
-      match(memoria.legendary)
-        .when(
-          (legendary) => legendary!.includes('火回'),
-          () => {
-            legendary['火'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('水回'),
-          () => {
-            legendary['水'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .when(
-          (legendary) => legendary!.includes('風回'),
-          () => {
-            legendary['風'] += 0.02 + 0.0025 * memoria.concentration;
-          },
-        )
-        .run();
-    });
+  for (const memoria of deck.filter(
+    memoria => !!memoria.legendary && memoria.kind === '回復',
+  )) {
+    match(memoria.legendary)
+      .when(
+        legendary => legendary?.includes('火回'),
+        () => {
+          legendary.火 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('水回'),
+        () => {
+          legendary.水 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .when(
+        legendary => legendary?.includes('風回'),
+        () => {
+          legendary.風 += 0.02 + 0.0025 * memoria.concentration;
+        },
+      )
+      .run();
+  }
+
   const skillRate = match(memoria.skill.description)
     .when(
-      (sentence) => sentence.includes('特大回復'),
+      sentence => sentence.includes('特大回復'),
       () => 13.2 / 100,
     )
     .when(
-      (sentence) => sentence.includes('大回復'),
+      sentence => sentence.includes('大回復'),
       () => 9.35 / 100,
     )
     .when(
-      (sentence) => sentence.includes('回復'),
+      sentence => sentence.includes('回復'),
       () => 7.7 / 100,
     )
     .run();
 
   const support = deck
     .map(
-      (memoria) =>
+      memoria =>
         [
-          parse_support(memoria.support.name, memoria.support.description),
+          parseSupport(memoria.support.name, memoria.support.description),
           memoria.concentration,
         ] as const,
     )
     .map(([support, concentration]) => {
-      const up = support.effects.find((effect) => effect.type === 'RecoveryUp');
-      if (!up) return 0;
+      const up = support.effects.find(effect => effect.type === 'RecoveryUp');
+      if (!up) {
+        return 0;
+      }
       const level = match(up.amount)
         .with('small', () => 1 / 100)
         .with('medium', () => 15 / 100)
@@ -1025,19 +1119,39 @@ function recovery(
         .exhaustive();
       const probability = match(support.probability)
         .with('small', () => {
-          if (concentration === 0) return 0.12;
-          if (concentration === 1) return 0.125;
-          if (concentration === 2) return 0.13;
-          if (concentration === 3) return 0.135;
-          if (concentration === 4) return 0.15;
+          if (concentration === 0) {
+            return 0.12;
+          }
+          if (concentration === 1) {
+            return 0.125;
+          }
+          if (concentration === 2) {
+            return 0.13;
+          }
+          if (concentration === 3) {
+            return 0.135;
+          }
+          if (concentration === 4) {
+            return 0.15;
+          }
           throw new Error('Invalid concentration');
         })
         .with('medium', () => {
-          if (concentration === 0) return 0.18;
-          if (concentration === 1) return 0.1875;
-          if (concentration === 2) return 0.195;
-          if (concentration === 3) return 0.2025;
-          if (concentration === 4) return 0.225;
+          if (concentration === 0) {
+            return 0.18;
+          }
+          if (concentration === 1) {
+            return 0.1875;
+          }
+          if (concentration === 2) {
+            return 0.195;
+          }
+          if (concentration === 3) {
+            return 0.2025;
+          }
+          if (concentration === 4) {
+            return 0.225;
+          }
           throw new Error('Invalid concentration');
         })
         .exhaustive();
@@ -1067,15 +1181,17 @@ function support(
   >,
   number
 > {
-  let result: Record<
+  const result: Record<
     Exclude<
       StatusKind,
       'Light ATK' | 'Dark ATK' | 'Light DEF' | 'Dark DEF' | 'Life'
     >,
     number
   > = {
+    // biome-ignore lint/style/useNamingConvention: <explanation>
     ATK: 0,
     'Sp.ATK': 0,
+    // biome-ignore lint/style/useNamingConvention: <explanation>
     DEF: 0,
     'Sp.DEF': 0,
     'Fire ATK': 0,
@@ -1085,14 +1201,14 @@ function support(
     'Water DEF': 0,
     'Wind DEF': 0,
   };
-  deck
-    .flatMap((memoria) => {
-      const support = parse_support(
+  const map = deck
+    .flatMap(memoria => {
+      const support = parseSupport(
         memoria.support.name,
         memoria.support.description,
       );
       return support.effects.map(
-        (effect) => [memoria.concentration, effect] as const,
+        effect => [memoria.concentration, effect] as const,
       );
     })
     .filter(([, effect]) => effect.type === type)
@@ -1111,6 +1227,7 @@ function support(
         .with(3, () => 1.425)
         .with(4, () => 1.5)
         .otherwise(() => 1.5);
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return match(status!)
         .with('ATK', () => {
           const skillRate = match(amount)
@@ -1121,6 +1238,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(atk * memoriaRate * probability),
           };
@@ -1134,6 +1252,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(spAtk * memoriaRate * probability),
           };
@@ -1147,6 +1266,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(def * memoriaRate * probability),
           };
@@ -1160,6 +1280,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(spDef * memoriaRate * probability),
           };
@@ -1172,6 +1293,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
               Math.floor((atk + spAtk) / 2) * memoriaRate * probability,
@@ -1186,6 +1308,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
               Math.floor((def + spDef) / 2) * memoriaRate * probability,
@@ -1193,9 +1316,11 @@ function support(
           };
         })
         .exhaustive();
-    })
-    .forEach(({ type, amount }) => {
-      result[type] += amount;
     });
+
+  for (const { type, amount } of map) {
+    result[type] += amount;
+  }
+
   return result;
 }

@@ -26,7 +26,9 @@ export const orderSchema = z.object({
   status: z.array(z.number()),
   effect: z.string(),
   description: z.string(),
+  // biome-ignore lint/style/useNamingConvention: <explanation>
   prepare_time: z.number(),
+  // biome-ignore lint/style/useNamingConvention: <explanation>
   active_time: z.number(),
   payed: z.boolean(),
   kind: z.enum(orderKind),
@@ -35,6 +37,4 @@ export const orderSchema = z.object({
 
 export type Order = z.infer<typeof orderSchema>;
 
-export const orderList = orderData.data.map((order) =>
-  orderSchema.parse(order),
-);
+export const orderList = orderData.data.map(order => orderSchema.parse(order));

@@ -1,8 +1,8 @@
 import { atom } from 'jotai';
 
-import { Order } from '@/domain/order/order';
+import type { Order } from '@/domain/order/order';
 
-import { Edge, Node } from 'reactflow';
+import type { Edge, Node } from 'reactflow';
 
 export const idAtom = atom<number>(0);
 

@@ -1,14 +1,14 @@
 import { atom } from 'jotai';
 
-import { Order, OrderKind, orderList } from '@/domain/order/order';
+import { type Order, type OrderKind, orderList } from '@/domain/order/order';
 
-export type OrderWithPIC = Order & {
+export type OrderWithPic = Order & {
   delay?: number;
   pic?: string;
   sub?: string;
 };
 
-export const timelineAtom = atom<OrderWithPIC[]>([]);
+export const timelineAtom = atom<OrderWithPic[]>([]);
 
 export const payedAtom = atom(true);
 export const filterAtom = atom<
@@ -25,16 +25,16 @@ export const filterAtom = atom<
   | 'Usually'
 >('Usually');
 
-export const filteredOrderAtom = atom((get) => {
+export const filteredOrderAtom = atom(get => {
   const filter = get(filterAtom);
   return orderList
-    .filter((order) =>
+    .filter(order =>
       filter === 'Usually'
         ? order.usually
         : filter === 'Elemental'
           ? order.kind.startsWith('Elemental')
           : order.kind === filter,
     )
-    .filter((order) => get(timelineAtom).every((o) => o.id != order.id))
-    .filter((order) => (get(payedAtom) ? order.payed : !order.payed));
+    .filter(order => get(timelineAtom).every(o => o.id !== order.id))
+    .filter(order => (get(payedAtom) ? order.payed : !order.payed));
 });

@@ -1,4 +1,4 @@
-import { Amount, StatusKind } from '@/parser/skill';
+import type { Amount, StatusKind } from '@/parser/skill';
 
 import { match } from 'ts-pattern';
 
@@ -29,7 +29,7 @@ type Support = {
   effects: SupportKind[];
 };
 
-function parse_status(description: string): SupportKind[] {
+function parseStatus(description: string): SupportKind[] {
   const global =
     /(ATK|DEF|Sp\.ATK|Sp\.DEF|火属性|水属性|風属性).*?を.*?(アップ|ダウン)/g;
   const globalMatch = description.match(global);
@@ -38,14 +38,12 @@ function parse_status(description: string): SupportKind[] {
     return [];
   }
 
-  return globalMatch.flatMap((sentence) => {
+  return globalMatch.flatMap(sentence => {
     const regExp =
       /(ATK.*?|DEF.*?|Sp\.ATK.*?|Sp\.DEF.*?|火属性.*?|水属性.*?|風属性.*?)を.*?(アップ|ダウン)/;
     const _match = sentence.match(regExp);
-    if (!_match) {
-      return [];
-    } else {
-      const statuses = _match[1].split('と').flatMap((status) => {
+    if (_match) {
+      const statuses = _match[1].split('と').flatMap(status => {
         return match<string, PossibleStatus[]>(status)
           .with('ATK', () => ['ATK'])
           .with('DEF', () => ['DEF'])
@@ -83,7 +81,7 @@ function parse_status(description: string): SupportKind[] {
         .with('超特大ダウン', () => ['super-large', 'DOWN'])
         .run();
 
-      return statuses.map((status) => {
+      return statuses.map(status => {
         return {
           type,
           status,
@@ -91,10 +89,11 @@ function parse_status(description: string): SupportKind[] {
         };
       });
     }
+    return [];
   });
 }
 
-function parse_amount(amount: string): Amount {
+function parseAmount(amount: string): Amount {
   return match<string, Amount>(amount)
     .with('小アップ', () => 'small')
     .with('アップ', () => 'medium')
@@ -104,7 +103,7 @@ function parse_amount(amount: string): Amount {
     .run();
 }
 
-function parse_damage(description: string): SupportKind[] {
+function parseDamage(description: string): SupportKind[] {
   const damage = /攻撃ダメージを(.*アップ)させる/;
   const _match = description.match(damage);
 
@@ -112,10 +111,10 @@ function parse_damage(description: string): SupportKind[] {
     return [];
   }
 
-  return [{ type: 'DamageUp', amount: parse_amount(_match[1]) }];
+  return [{ type: 'DamageUp', amount: parseAmount(_match[1]) }];
 }
 
-function parse_assist(description: string): SupportKind[] {
+function parseAssist(description: string): SupportKind[] {
   const assist = /支援\/妨害効果を(.*アップ)/;
   const _match = description.match(assist);
 
@@ -123,10 +122,10 @@ function parse_assist(description: string): SupportKind[] {
     return [];
   }
 
-  return [{ type: 'SupportUp', amount: parse_amount(_match[1]) }];
+  return [{ type: 'SupportUp', amount: parseAmount(_match[1]) }];
 }
 
-function parse_recovery(description: string): SupportKind[] {
+function parseRecovery(description: string): SupportKind[] {
   const recovery = /HPの回復量を(.*アップ)/;
   const _match = description.match(recovery);
 
@@ -134,10 +133,10 @@ function parse_recovery(description: string): SupportKind[] {
     return [];
   }
 
-  return [{ type: 'RecoveryUp', amount: parse_amount(_match[1]) }];
+  return [{ type: 'RecoveryUp', amount: parseAmount(_match[1]) }];
 }
 
-function parse_match_pt(description: string): SupportKind[] {
+function parseMatchPt(description: string): SupportKind[] {
   const matchPt = /自身のマッチPtの獲得量が(.*アップ)する/;
   const _match = description.match(matchPt);
 
@@ -156,7 +155,7 @@ function parse_match_pt(description: string): SupportKind[] {
   return [{ type: 'MatchPtUp', amount }];
 }
 
-function parse_mp_cost(description: string): SupportKind[] {
+function parseMpCost(description: string): SupportKind[] {
   const mpCost = /一定確率でMP消費を抑える/;
   const _match = description.match(mpCost);
 
@@ -167,7 +166,7 @@ function parse_mp_cost(description: string): SupportKind[] {
   return [{ type: 'MpCostDown', amount: 'medium' }];
 }
 
-function parse_range(description: string): SupportKind[] {
+function parseRange(description: string): SupportKind[] {
   const range = /効果対象範囲が(.+)される/;
   const _match = description.match(range);
 
@@ -178,22 +177,22 @@ function parse_range(description: string): SupportKind[] {
   return [{ type: 'RangeUp', amount: 'medium' }];
 }
 
-export function parse_support(name: string, description: string): Support {
+export function parseSupport(name: string, description: string): Support {
   const trigger = match<string, Trigger>(name)
     .when(
-      (name) => name.startsWith('攻:'),
+      name => name.startsWith('攻:'),
       () => 'Attack',
     )
     .when(
-      (name) => name.startsWith('援:'),
+      name => name.startsWith('援:'),
       () => 'Assist',
     )
     .when(
-      (name) => name.startsWith('回:'),
+      name => name.startsWith('回:'),
       () => 'Recovery',
     )
     .when(
-      (name) => name.startsWith('コ:'),
+      name => name.startsWith('コ:'),
       () => 'Command',
     )
     .run();
@@ -205,23 +204,23 @@ export function parse_support(name: string, description: string): Support {
       Exclude<Amount, 'large' | 'extra-large' | 'super-large'>
     >(description)
       .when(
-        (sentence) => sentence.includes('一定確率'),
+        sentence => sentence.includes('一定確率'),
         () => 'small',
       )
       .when(
-        (sentence) => sentence.includes('中確率'),
+        sentence => sentence.includes('中確率'),
         () => 'medium',
       )
       .run(),
-    effects: description.split('。').flatMap((sentence) => {
+    effects: description.split('。').flatMap(sentence => {
       return [
-        ...parse_damage(sentence),
-        ...parse_assist(sentence),
-        ...parse_recovery(sentence),
-        ...parse_match_pt(sentence),
-        ...parse_mp_cost(sentence),
-        ...parse_range(sentence),
-        ...parse_status(sentence),
+        ...parseDamage(sentence),
+        ...parseAssist(sentence),
+        ...parseRecovery(sentence),
+        ...parseMatchPt(sentence),
+        ...parseMpCost(sentence),
+        ...parseRange(sentence),
+        ...parseStatus(sentence),
       ];
     }),
   };

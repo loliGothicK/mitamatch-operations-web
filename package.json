@@ -6,9 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "fmt": "prettier --write --ignore-path .gitignore ./**/*.{ts,tsx,css}",
-    "fmt:check": "prettier --check --ignore-path .gitignore ./**/*.{ts,tsx,css}",
+    "lint": "yarn biome lint --files-max-size=20000000 ./actions ./app ./components ./domain ./evaluate ./hooks ./jotai ./parser ./types",
+    "lint:fix": "yarn biome lint --files-max-size=20000000 --apply ./actions ./app ./components ./domain ./evaluate ./hooks ./jotai ./parser ./types",
+    "fmt": "yarn biome format --files-max-size=20000000 --write ./actions ./app ./components ./domain ./evaluate ./hooks ./jotai ./parser ./types",
+    "fmt:check": "yarn biome format --files-max-size=20000000 ./actions ./app ./components ./domain ./evaluate ./hooks ./jotai ./parser ./types",
     "test": "jest"
   },
   "dependencies": {
@@ -41,7 +42,7 @@
     "ts-pattern": "5.1.1"
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "4.3.0",
+    "@biomejs/biome": "1.6.4",
     "@types/jest": "29.5.12",
     "@types/js-cookie": "3.0.6",
     "@types/jsonwebtoken": "9.0.6",
@@ -51,12 +52,8 @@
     "@types/react-dom": "18.2.24",
     "@types/react-virtualized": "9.21.30",
     "@types/react-window": "1.8.8",
-    "eslint": "8.57.0",
-    "eslint-config-next": "14.1.4",
-    "eslint-config-prettier": "9.1.0",
     "jest": "29.7.0",
     "jsonwebtoken": "9.0.2",
-    "prettier": "3.2.5",
     "ts-jest": "29.1.2",
     "typescript": "5.4.4",
     "zod": "3.22.4"

@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { type FormEvent, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -43,12 +43,12 @@ import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/system';
 
 import { decodeTimeline, encodeTimeline } from '@/actions/serde';
-import { Layout } from '@/component/Layout';
-import Sortable from '@/component/sortable/Sortable';
+import { Layout } from '@/components/Layout';
+import Sortable from '@/components/sortable/Sortable';
 import {
+  type OrderWithPic,
   filterAtom,
   filteredOrderAtom,
-  OrderWithPIC,
   payedAtom,
   timelineAtom,
 } from '@/jotai/orderAtoms';
@@ -60,76 +60,81 @@ import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { AutoSizer, List as VirtulizedList } from 'react-virtualized';
 
-function Info({ order }: { order: OrderWithPIC }) {
+function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
     return (
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant='body1'>{order.name}</Typography>
+        <Typography variant='body2' fontSize={10}>
           [ {order.pic} / {order.sub} ] (+{order.delay} sec)
         </Typography>
       </Stack>
     );
-  } else if (order.pic && order.sub) {
+  }
+  if (order.pic && order.sub) {
     return (
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant='body1'>{order.name}</Typography>
+        <Typography variant='body2' fontSize={10}>
           [ {order.pic} / {order.sub} ]
         </Typography>
       </Stack>
     );
-  } else if (order.sub && order.delay) {
+  }
+  if (order.sub && order.delay) {
     return (
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant='body1'>{order.name}</Typography>
+        <Typography variant='body2' fontSize={10}>
           [ {order.sub} ] (+{order.delay} sec)
         </Typography>
       </Stack>
     );
-  } else if (order.pic && order.delay) {
+  }
+  if (order.pic && order.delay) {
     return (
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant='body1'>{order.name}</Typography>
+        <Typography variant='body2' fontSize={10}>
           [ {order.pic} ] (+{order.delay} sec)
         </Typography>
       </Stack>
     );
-  } else if (order.pic) {
+  }
+  if (order.pic) {
     return (
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant='body1'>{order.name}</Typography>
+        <Typography variant='body2' fontSize={10}>
           [ {order.pic} ]
         </Typography>
       </Stack>
     );
-  } else if (order.sub) {
+  }
+  if (order.sub) {
     return (
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant='body1'>{order.name}</Typography>
+        <Typography variant='body2' fontSize={10}>
           [ {order.sub} ]
         </Typography>
       </Stack>
     );
-  } else if (order.delay) {
+  }
+  if (order.delay) {
     return (
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant='body1'>{order.name}</Typography>
+        <Typography variant='body2' fontSize={10}>
           (+{order.delay} sec)
         </Typography>
       </Stack>
     );
-  } else {
-    return <Typography variant="body1">{order.name}</Typography>;
   }
+  return <Typography variant='body1'>{order.name}</Typography>;
 }
 
-function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
+function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
   const [, setTimeline] = useAtom(timelineAtom);
   const {
     isDragging,
@@ -200,12 +205,12 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
           aria-label={`remove ${order.name}`}
           onClick={() => {
             // remove order from timeline
-            setTimeline((prev) => {
+            setTimeline(prev => {
               Cookies.set(
                 'timeline',
-                encodeTimeline(prev.filter((o) => o.id !== order.id)),
+                encodeTimeline(prev.filter(o => o.id !== order.id)),
               );
-              return prev.filter((o) => o.id !== order.id);
+              return prev.filter(o => o.id !== order.id);
             });
           }}
         >
@@ -233,15 +238,15 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
           onSubmit: (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries((formData as any).entries());
-            setTimeline((prev) =>
-              prev.map((o) =>
+            const formJson = Object.fromEntries(formData.entries());
+            setTimeline(prev =>
+              prev.map(o =>
                 o.id === order.id
                   ? {
                       ...o,
-                      delay: formJson.delay,
-                      pic: formJson.pic,
-                      sub: formJson.sub,
+                      delay: Number.parseInt(formJson.delay as string),
+                      pic: formJson.pic as string,
+                      sub: formJson.sub as string,
                     }
                   : o,
               ),
@@ -255,38 +260,38 @@ function TimelineItem({ order, left }: { order: OrderWithPIC; left: number }) {
           <TextField
             autoFocus
             defaultValue={order.delay}
-            margin="dense"
-            id="delay"
-            name="delay"
-            label="delay"
-            type="number"
+            margin='dense'
+            id='delay'
+            name='delay'
+            label='delay'
+            type='number'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
           <TextField
             autoFocus
             defaultValue={order.pic}
-            margin="dense"
-            id="pic"
-            name="pic"
-            label="PIC"
+            margin='dense'
+            id='pic'
+            name='pic'
+            label='PIC'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
           <TextField
             autoFocus
             defaultValue={order.sub}
-            margin="dense"
-            id="sub"
-            name="sub"
-            label="Sub PIC"
+            margin='dense'
+            id='sub'
+            name='sub'
+            label='Sub PIC'
             fullWidth
-            variant="standard"
+            variant='standard'
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Save</Button>
+          <Button type='submit'>Save</Button>
         </DialogActions>
       </Dialog>
     </div>
@@ -298,11 +303,11 @@ function Timeline() {
 
   const reducer = (
     value: number,
-    order: OrderWithPIC,
+    order: OrderWithPic,
     index: number,
   ): number => {
     const prepareTime =
-      index == 0
+      index === 0
         ? order.prepare_time
         : timeline[index - 1].name.includes('戦術加速')
           ? 5
@@ -312,7 +317,7 @@ function Timeline() {
     return value - prepareTime - order.active_time - delay;
   };
 
-  return timeline.length == 0 ? (
+  return timeline.length === 0 ? (
     <></>
   ) : (
     <Sortable items={timeline} onChangeOrder={setTimeline}>
@@ -371,8 +376,8 @@ function Source() {
                   alignItems={'center'}
                 >
                   <IconButton
-                    edge="start"
-                    aria-label="comments"
+                    edge='start'
+                    aria-label='comments'
                     sx={{
                       position: 'absolute',
                       top: 0,
@@ -382,15 +387,15 @@ function Source() {
                     onClick={() => {
                       if (
                         orders[index].kind.includes('Elemental') &&
-                        timeline.some((order) => {
-                          return order.kind == orders[index].kind;
+                        timeline.some(order => {
+                          return order.kind === orders[index].kind;
                         })
                       ) {
                         setOpen(true);
                         return;
                       }
-                      setSelectedOrder((prev) => {
-                        const delay = prev.length == 0 ? undefined : 5;
+                      setSelectedOrder(prev => {
+                        const delay = prev.length === 0 ? undefined : 5;
                         Cookies.set(
                           'timeline',
                           encodeTimeline([
@@ -411,14 +416,14 @@ function Source() {
                     height={100}
                   />
                   <Stack marginLeft={2}>
-                    <Typography variant="body1">
+                    <Typography variant='body1'>
                       {orders[index].name}
                     </Typography>
                     <Divider />
-                    <Typography variant="body2">
+                    <Typography variant='body2'>
                       {orders[index].effect}
                     </Typography>
-                    <Typography variant="body2" fontSize={10}>
+                    <Typography variant='body2' fontSize={10}>
                       {orders[index].description}
                     </Typography>
                   </Stack>
@@ -432,7 +437,7 @@ function Source() {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={open}
         onClose={handleClose}
-        message="同属性オーダーがすでにタイムラインに存在します"
+        message='同属性オーダーがすでにタイムラインに存在します'
       />
     </>
   );
@@ -442,12 +447,12 @@ function FilterMenu() {
   const [filter, setFilter] = useAtom(filterAtom);
   return (
     <PopupState
-      variant="popover"
-      popupId="demo-popup-menu"
+      variant='popover'
+      popupId='demo-popup-menu'
       disableAutoFocus={false}
       parentPopupState={null}
     >
-      {(popupState) => (
+      {popupState => (
         <>
           <Button {...bindTrigger(popupState)}>{filter}</Button>
           <Menu {...bindMenu(popupState)}>
@@ -464,7 +469,7 @@ function FilterMenu() {
                 'Stack',
                 'Other',
               ] as const
-            ).map((kind) => {
+            ).map(kind => {
               return (
                 <MenuItem
                   key={kind}
@@ -499,7 +504,7 @@ export default function TimelineBuilder() {
         `https://mitama.io/${pathname}?timeline=${encodeTimeline(timeline)}`,
       );
       alert('クリップボードに保存しました。');
-    } catch (error) {
+    } catch (_error) {
       alert('失敗しました。');
     }
   };
@@ -532,7 +537,7 @@ export default function TimelineBuilder() {
               href={`/timeline-builder?timeline=${encodeTimeline(timeline)}`}
               onClick={shareHandler}
             >
-              <IconButton aria-label="share">
+              <IconButton aria-label='share'>
                 <LinkSharp />
               </IconButton>
             </Link>
@@ -549,19 +554,16 @@ export default function TimelineBuilder() {
           </Grid>
           <Grid item xs={12} md={6} lg={6}>
             <Box
-              flexDirection="row"
-              justifyContent="flex-end"
-              display="flex"
+              flexDirection='row'
+              justifyContent='flex-end'
+              display='flex'
               alignItems={'center'}
               paddingRight={20}
             >
               <FilterMenu />
-              <Divider orientation="vertical" flexItem sx={{ margin: 1 }} />
+              <Divider orientation='vertical' flexItem sx={{ margin: 1 }} />
               <Typography>無課金</Typography>
-              <Switch
-                defaultChecked={true}
-                onChange={() => setPayed((prev) => !prev)}
-              />
+              <Switch defaultChecked onChange={() => setPayed(prev => !prev)} />
               <Typography>課金</Typography>
             </Box>
             <Container

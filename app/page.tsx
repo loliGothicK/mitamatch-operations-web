@@ -1,7 +1,7 @@
 'use client';
 
-import Home from '@/component/home';
-import { Layout } from '@/component/Layout';
+import { Layout } from '@/components/Layout';
+import Home from '@/components/home';
 
 export default function Index() {
   return (

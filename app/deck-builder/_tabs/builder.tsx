@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -45,16 +45,16 @@ import {
 import { blue, green, purple, red, yellow } from '@mui/material/colors';
 
 import { decodeDeck, encodeDeck } from '@/actions/serde';
-import Details from '@/component/deck-builder/Details';
-import Filter from '@/component/deck-builder/Filter';
-import Search from '@/component/deck-builder/Search';
-import Sortable from '@/component/sortable/Sortable';
-import { Memoria } from '@/domain/memoria/memoria';
+import Details from '@/components/deck-builder/Details';
+import Filter from '@/components/deck-builder/Filter';
+import Search from '@/components/deck-builder/Search';
+import Sortable from '@/components/sortable/Sortable';
+import type { Memoria } from '@/domain/memoria/memoria';
 import {
+  type MemoriaWithConcentration,
   deckAtom,
   filteredMemoriaAtom,
   legendaryDeckAtom,
-  MemoriaWithConcentration,
   roleFilterAtom,
   sortKind,
   sortKindAtom,
@@ -141,10 +141,10 @@ function Concentration({
         position: 'absolute',
       }}
     >
-      {concentration == 4 ? (
+      {concentration === 4 ? (
         <Typography
-          variant="body2"
-          color="white"
+          variant='body2'
+          color='white'
           sx={{
             position: 'absolute',
           }}
@@ -153,8 +153,8 @@ function Concentration({
         </Typography>
       ) : (
         <Typography
-          variant="body2"
-          color="white"
+          variant='body2'
+          color='white'
           sx={{
             position: 'absolute',
           }}
@@ -192,7 +192,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   });
 
   const changeValue = (prev: MemoriaWithConcentration[]) => {
-    return prev.map((memoria) => {
+    return prev.map(memoria => {
       if (memoria.name === name) {
         return {
           ...memoria,
@@ -225,7 +225,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
 
   return (
     <Grid item key={id} ref={setNodeRef} style={style}>
-      {!isLoaded && <Skeleton variant="rectangular" width={100} height={100} />}
+      {!isLoaded && <Skeleton variant='rectangular' width={100} height={100} />}
       <ImageListItem>
         <Box>
           <Icon kind={memoria.kind} element={memoria.element} position={70} />
@@ -238,9 +238,9 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
           <Tooltip
             title={
               <Stack>
-                <Typography variant="h6">{name}</Typography>
-                <Typography variant="body2">{skill.name}</Typography>
-                <Typography variant="body2">{support.name}</Typography>
+                <Typography variant='h6'>{name}</Typography>
+                <Typography variant='body2'>{skill.name}</Typography>
+                <Typography variant='body2'>{support.name}</Typography>
               </Stack>
             }
             placement={'top'}
@@ -276,18 +276,18 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
                 }}
                 aria-label={`remove ${name}`}
                 onClick={() => {
-                  setDeck((prev) =>
-                    prev.filter((memoria) => memoria.name !== name),
+                  setDeck(prev =>
+                    prev.filter(memoria => memoria.name !== name),
                   );
-                  setLegendaryDeck((prev) =>
-                    prev.filter((memoria) => memoria.name !== name),
+                  setLegendaryDeck(prev =>
+                    prev.filter(memoria => memoria.name !== name),
                   );
                   Cookies.set(
                     'deck',
                     encodeDeck(
                       sw,
-                      deck.filter((memoria) => memoria.name !== name),
-                      legendaryDeck.filter((memoria) => memoria.name !== name),
+                      deck.filter(memoria => memoria.name !== name),
+                      legendaryDeck.filter(memoria => memoria.name !== name),
                     ),
                   );
                 }}
@@ -314,7 +314,7 @@ function Deck() {
         spacing={2}
         sx={{ maxWidth: 600, minHeight: 100 }}
       >
-        {deck.map((memoria) => {
+        {deck.map(memoria => {
           return <MemoriaItem memoria={memoria} key={memoria.id} />;
         })}
       </Grid>
@@ -334,7 +334,7 @@ function LegendaryDeck() {
         spacing={2}
         sx={{ maxWidth: 600, minHeight: 100 }}
       >
-        {deck.map((memoria) => {
+        {deck.map(memoria => {
           return <MemoriaItem memoria={memoria} key={memoria.id} />;
         })}
       </Grid>
@@ -380,14 +380,14 @@ function VirtualizedList() {
                     />
                     {!isLoaded && (
                       <Skeleton
-                        variant="rectangular"
+                        variant='rectangular'
                         width={100}
                         height={100}
                       />
                     )}
                     <IconButton
-                      edge="start"
-                      aria-label="comments"
+                      edge='start'
+                      aria-label='comments'
                       sx={{
                         position: 'absolute',
                         top: 0,
@@ -396,7 +396,7 @@ function VirtualizedList() {
                       }}
                       onClick={() => {
                         if (memoria[index].labels.includes('legendary')) {
-                          setLegendaryDeck((prev) =>
+                          setLegendaryDeck(prev =>
                             addMemoria(prev, memoria[index]),
                           );
                           Cookies.set(
@@ -408,7 +408,7 @@ function VirtualizedList() {
                             ),
                           );
                         } else {
-                          setDeck((prev) => addMemoria(prev, memoria[index]));
+                          setDeck(prev => addMemoria(prev, memoria[index]));
                           Cookies.set(
                             'deck',
                             encodeDeck(
@@ -438,21 +438,21 @@ function VirtualizedList() {
                     secondary={
                       <>
                         <Typography
-                          component="span"
-                          fontWeight="bold"
+                          component='span'
+                          fontWeight='bold'
                           fontSize={12}
                           sx={{ display: 'block' }}
-                          color="text.primary"
+                          color='text.primary'
                         >
                           {memoria[index].skill.name}
                         </Typography>
                         <Divider sx={{ margin: 1 }} />
                         <Typography
-                          component="span"
-                          fontWeight="bold"
+                          component='span'
+                          fontWeight='bold'
                           fontSize={12}
                           sx={{ display: 'block' }}
-                          color="text.primary"
+                          color='text.primary'
                         >
                           {memoria[index].support.name}
                         </Typography>
@@ -484,16 +484,16 @@ function SortMenu() {
   const [sort, setSort] = useAtom(sortKindAtom);
   return (
     <PopupState
-      variant="popover"
-      popupId="demo-popup-menu"
+      variant='popover'
+      popupId='demo-popup-menu'
       disableAutoFocus={false}
       parentPopupState={null}
     >
-      {(popupState) => (
+      {popupState => (
         <>
           <Button {...bindTrigger(popupState)}>sorted by {sort}</Button>
           <Menu {...bindMenu(popupState)}>
-            {sortKind.map((kind) => {
+            {sortKind.map(kind => {
               return (
                 <MenuItem
                   key={kind}
@@ -541,7 +541,7 @@ function ToggleButtons() {
   return (
     <FormControlLabel
       control={<Switch checked={sw === 'shield'} />}
-      label="前衛 <=> 後衛"
+      label='前衛 <=> 後衛'
       onChange={() => {
         if (sw === 'shield') {
           setSw('sword');
@@ -580,7 +580,7 @@ function FilterModal() {
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
             Filter
           </Typography>
           <Filter />
@@ -611,7 +611,7 @@ function SearchModal() {
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
             Search
           </Typography>
           <Search />
@@ -638,10 +638,14 @@ export function DeckBuilder() {
   const shareHandler = async () => {
     try {
       await navigator.clipboard.writeText(
-        `https://mitama.io/${pathname}?deck=${encodeDeck(sw, deck, legendaryDeck)}`,
+        `https://mitama.io/${pathname}?deck=${encodeDeck(
+          sw,
+          deck,
+          legendaryDeck,
+        )}`,
       );
       alert('クリップボードに保存しました。');
-    } catch (error) {
+    } catch (_error) {
       alert('失敗しました。');
     }
   };
@@ -685,7 +689,15 @@ export function DeckBuilder() {
         }
       }
     }
-  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, fst, setFst]);
+  }, [
+    setDeck,
+    setLegendaryDeck,
+    setRoleFilter,
+    setSw,
+    fst,
+    setFst,
+    params.get,
+  ]);
 
   return (
     <Grid container direction={'row'} alignItems={'right'}>
@@ -704,7 +716,7 @@ export function DeckBuilder() {
           </Grid>
         </Grid>
         <Grid item xs={12} md={8} lg={6} alignItems={'center'}>
-          <Tooltip title="clear all" placement={'top'}>
+          <Tooltip title='clear all' placement={'top'}>
             <Button
               onClick={() => {
                 setDeck([]);
@@ -719,7 +731,7 @@ export function DeckBuilder() {
               href={`/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`}
               onClick={shareHandler}
             >
-              <IconButton aria-label="share">
+              <IconButton aria-label='share'>
                 <LinkSharp />
               </IconButton>
             </Link>
