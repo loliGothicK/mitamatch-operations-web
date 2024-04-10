@@ -2,7 +2,7 @@
 
 import React, { ReactNode, SyntheticEvent, useState } from 'react';
 
-import { Badge, Box, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 
 import { DeckBuilder } from '@/app/deck-builder/_tabs/builder';
 import { Calculator } from '@/app/deck-builder/_tabs/calculator';
@@ -25,11 +25,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -58,11 +54,7 @@ export default function BasicTabs() {
         >
           <Tab label={'Builder'} {...a11yProps(0)} />
           <Tab
-            label={
-              <Badge badgeContent={'new'} color="primary">
-                {'Calculator'}
-              </Badge>
-            }
+            label={'Calculator'}
             {...a11yProps(1)}
             sx={{ paddingRight: 5 }}
           />

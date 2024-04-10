@@ -632,7 +632,6 @@ export function DeckBuilder() {
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
   const [, setRoleFilter] = useAtom(roleFilterAtom);
-  const value = params.get('deck');
   const pathname = usePathname();
   const [fst, setFst] = useAtom(fstAtom);
 
@@ -650,6 +649,7 @@ export function DeckBuilder() {
   useEffect(() => {
     if (fst) {
       setFst(false);
+      const value = params.get('deck');
       if (value) {
         const { sw, deck, legendaryDeck } = decodeDeck(value);
         setSw(sw);
@@ -685,7 +685,7 @@ export function DeckBuilder() {
         }
       }
     }
-  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, value, fst, setFst]);
+  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, fst, setFst]);
 
   return (
     <Grid container direction={'row'} alignItems={'right'}>
