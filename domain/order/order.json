@@ -1,6 +1,19 @@
 {
   "data": [
     {
+      "id": 159,
+      "name": "業炎の軍勢",
+      "status": [2267, 1568, 2240, 1547],
+      "effect": "火属性効果増加Lv.4",
+      "description": "火属性のメモリアのスキル効果が超特大増加する。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": false,
+      "kind": "Elemental/Fire",
+      "has_template": false,
+      "usually": true
+    },
+    {
       "id": 158,
       "name": "水刃縛りの大棘蔦",
       "status": [2684, 1866, 2681, 1902],
