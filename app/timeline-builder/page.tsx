@@ -160,6 +160,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
     transform: CSS.Transform.toString(transform),
     transition,
     zIndex: isDragging ? Number.POSITIVE_INFINITY : 'auto',
+    touchAction: 'none',
   };
 
   return (
@@ -500,7 +501,6 @@ export default function TimelineBuilder() {
   const [timeline, setTimeline] = useAtom(timelineAtom);
   const [, setPayed] = useAtom(payedAtom);
   const params = useSearchParams();
-  const value = params.get('timeline');
 
   const shareHandler = async () => {
     try {
@@ -514,6 +514,7 @@ export default function TimelineBuilder() {
   };
 
   useEffect(() => {
+    const value = params.get('timeline');
     if (value) {
       setTimeline(decodeTimeline(value));
     } else {
@@ -522,7 +523,7 @@ export default function TimelineBuilder() {
         setTimeline(decodeTimeline(cookie));
       }
     }
-  }, [setTimeline, value]);
+  }, [setTimeline, params.get]);
 
   return (
     <Layout>
