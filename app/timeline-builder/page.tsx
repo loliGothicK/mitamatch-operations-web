@@ -53,7 +53,7 @@ import {
   timelineAtom,
 } from '@/jotai/orderAtoms';
 
-import { useSortable } from '@dnd-kit/sortable';
+import { useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { takeLeft } from 'fp-ts/Array';
 import Cookies from 'js-cookie';
@@ -320,7 +320,11 @@ function Timeline() {
   return timeline.length === 0 ? (
     <></>
   ) : (
-    <Sortable items={timeline} onChangeOrder={setTimeline}>
+    <Sortable
+      items={timeline}
+      onChangeOrder={setTimeline}
+      strategy={verticalListSortingStrategy}
+    >
       <List sx={{ width: '100%', maxWidth: '65vh', overflow: 'auto' }}>
         {timeline.map((order, index) => (
           <TimelineItem
