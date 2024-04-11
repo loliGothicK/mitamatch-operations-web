@@ -8,7 +8,13 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 import { useAtom } from 'jotai';
 
-import { Add, Edit, LinkSharp, Remove } from '@mui/icons-material';
+import {
+  Add,
+  DragIndicator,
+  Edit,
+  LinkSharp,
+  Remove,
+} from '@mui/icons-material';
 import {
   Avatar,
   Box,
@@ -157,7 +163,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div ref={setNodeRef} style={style}>
       <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
         <Typography fontSize={10}>
           {`${left < 0 ? '-' : ''}${Math.trunc(left / 60)}`}:
@@ -167,6 +173,9 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
         </Typography>
       </Divider>
       <Stack direction={'row'} padding={0} alignItems={'center'}>
+        <div {...attributes} {...listeners}>
+          <DragIndicator sx={{ color: 'dimgrey' }} />
+        </div>
         <Stack direction={'row'} padding={0} alignItems={'center'}>
           <ListItem key={order.id} sx={{ padding: 0 }}>
             <ListItemAvatar>
