@@ -175,7 +175,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
       </Divider>
       <Stack direction={'row'} padding={0} alignItems={'center'}>
         <div {...attributes} {...listeners}>
-          <DragIndicator sx={{ color: 'dimgrey' }} />
+          <DragIndicator sx={{ color: 'dimgrey', touchAction: 'none' }} />
         </div>
         <Stack direction={'row'} padding={0} alignItems={'center'}>
           <ListItem key={order.id} sx={{ padding: 0 }}>
