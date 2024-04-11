@@ -1,10 +1,11 @@
 import type React from 'react';
 import type { PropsWithChildren, SetStateAction } from 'react';
 
-import type {
-  DndContextProps,
-  DragEndEvent,
-  UniqueIdentifier,
+import {
+  type DndContextProps,
+  type DragEndEvent,
+  TouchSensor,
+  type UniqueIdentifier,
 } from '@dnd-kit/core';
 import {
   DndContext,
@@ -66,7 +67,7 @@ export type SortableProps<T> = PropsWithChildren<{
 /**
  * Sortable components
  * @param items - ソート対象のアイテム
- * @param onChangeOrder - ソート時に呼び出される {@link React.Dispatch} 関数
+ * @param onChangeOrder - ソート対象のアイテムを更新する {@link React.Dispatch} 関数
  * @param children - ソート対象のアイテムを表示するコンポーネント
  * @param strategy - [optional] ソートの戦略
  * @param dnd - [optional] {@link DndContext} のプロパティ
@@ -102,8 +103,13 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
       onChangeOrder(newItems);
     }
   };
+  const detectSensor = () => {
+    const isWebEntry = JSON.parse(sessionStorage.getItem('isWebEntry') || '{}');
+    return isWebEntry ? PointerSensor : TouchSensor;
+  };
+
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(detectSensor()),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
