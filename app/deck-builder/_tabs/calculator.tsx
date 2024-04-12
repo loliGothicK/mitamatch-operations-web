@@ -22,7 +22,7 @@ import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 
 import { type Charm, charmList } from '@/domain/charm/charm';
 import { type Costume, costumeList } from '@/domain/costume/costume';
@@ -58,6 +58,7 @@ const costumeFilterAtom = atomWithStorage<
 >('costumeFilter', []);
 
 export function Calculator() {
+  const theme = useTheme();
   const [deck] = useAtom(deckAtom);
   const [legendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw] = useAtom(swAtom);
@@ -387,7 +388,10 @@ export function Calculator() {
             .map(kind => {
               return (
                 <Grid item key={kind}>
-                  <Typography variant='body1' color={'darkred'}>
+                  <Typography
+                    variant='body1'
+                    color={theme.palette.mode === 'light' ? 'darkred' : 'pink'}
+                  >
                     {`${kind}/UP: ${
                       // biome-ignore lint/style/noNonNullAssertion: <explanation>
                       expectedTotalBuff.get(kind)!
@@ -406,7 +410,12 @@ export function Calculator() {
             .map(kind => {
               return (
                 <Grid item key={kind}>
-                  <Typography variant='body1' color={'darkblue'}>
+                  <Typography
+                    variant='body1'
+                    color={
+                      theme.palette.mode === 'light' ? 'darkblue' : 'turquoise'
+                    }
+                  >
                     {`${kind}/DOWN: ${
                       // biome-ignore lint/style/noNonNullAssertion: <explanation>
                       expectedTotalDebuff.get(kind)!
@@ -451,7 +460,11 @@ export function Calculator() {
                           <Typography
                             key={buff.type}
                             variant='body2'
-                            color={'darkred'}
+                            color={
+                              theme.palette.mode === 'light'
+                                ? 'darkred'
+                                : 'pink'
+                            }
                           >
                             {display({ ...buff, upDown: 'UP' })}
                           </Typography>
@@ -468,7 +481,11 @@ export function Calculator() {
                           <Typography
                             key={debuff.type}
                             variant='body2'
-                            color={'darkblue'}
+                            color={
+                              theme.palette.mode === 'light'
+                                ? 'darkblue'
+                                : 'turquoise'
+                            }
                           >
                             {display({ ...debuff, upDown: 'DOWN' })}
                           </Typography>

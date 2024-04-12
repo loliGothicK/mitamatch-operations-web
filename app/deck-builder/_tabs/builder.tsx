@@ -41,6 +41,7 @@ import {
   Switch,
   Tooltip,
   Typography,
+  alpha,
 } from '@mui/material';
 import { blue, green, purple, red, yellow } from '@mui/material/colors';
 
@@ -63,6 +64,7 @@ import {
 
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useTheme } from '@mui/material/styles';
 import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { AutoSizer, List } from 'react-virtualized';
@@ -343,6 +345,7 @@ function LegendaryDeck() {
 }
 
 function VirtualizedList() {
+  const theme = useTheme();
   const [memoria] = useAtom(filteredMemoriaAtom);
   const [sw] = useAtom(swAtom);
   const [deck, setDeck] = useAtom(deckAtom);
@@ -369,7 +372,11 @@ function VirtualizedList() {
                 direction={'row'}
                 key={key}
                 style={style}
-                sx={{ bgcolor: 'grey' }}
+                bgcolor={
+                  theme.palette.mode === 'dark'
+                    ? 'rgba(255, 255, 255, 0.1)'
+                    : alpha(theme.palette.primary.main, 0.2)
+                }
               >
                 <Stack direction={'row'} alignItems={'center'}>
                   <ListItemIcon>
@@ -628,6 +635,7 @@ const fstAtom = atomWithStorage('fst', true);
 
 export function DeckBuilder() {
   const params = useSearchParams();
+  const theme = useTheme();
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
@@ -739,7 +747,10 @@ export function DeckBuilder() {
           <Container
             maxWidth={false}
             sx={{
-              bgcolor: 'grey',
+              bgcolor:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255, 255, 255, 0.1)'
+                  : alpha(theme.palette.primary.main, 0.2),
               minHeight: '60vh',
               maxWidth: 620,
               paddingTop: 2,

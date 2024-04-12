@@ -38,6 +38,7 @@ import {
   Switch,
   TextField,
   Typography,
+  alpha,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/system';
@@ -498,7 +499,7 @@ function FilterMenu() {
   );
 }
 
-export default function TimelineBuilder() {
+function TimelineBuilder() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('lg'));
   const pathname = usePathname();
@@ -530,64 +531,76 @@ export default function TimelineBuilder() {
   }, [setTimeline, params.get]);
 
   return (
-    <Layout>
-      <Grid container direction={'row'} alignItems={'right'}>
-        <Grid
-          container
-          item
-          spacing={2}
-          xs={12}
-          direction={'row'}
-          alignItems={'left'}
-          flexShrink={1}
-        >
-          <Grid item xs={12} md={6} lg={6} alignItems={'center'}>
-            <Link
-              href={`/timeline-builder?timeline=${encodeTimeline(timeline)}`}
-              onClick={shareHandler}
-            >
-              <IconButton aria-label='share'>
-                <LinkSharp />
-              </IconButton>
-            </Link>
-            <Container
-              maxWidth={false}
-              sx={{
-                bgcolor: 'grey',
-                minHeight: '70vh',
-                maxWidth: matches ? '25vw' : '100%',
-              }}
-            >
-              <Timeline />
-            </Container>
-          </Grid>
-          <Grid item xs={12} md={6} lg={6}>
-            <Box
-              flexDirection='row'
-              justifyContent='flex-end'
-              display='flex'
-              alignItems={'center'}
-              paddingRight={20}
-            >
-              <FilterMenu />
-              <Divider orientation='vertical' flexItem sx={{ margin: 1 }} />
-              <Typography>無課金</Typography>
-              <Switch defaultChecked onChange={() => setPayed(prev => !prev)} />
-              <Typography>課金</Typography>
-            </Box>
-            <Container
-              maxWidth={false}
-              sx={{
-                bgcolor: 'grey',
-                minHeight: '70vh',
-                maxWidth: matches ? '25vw' : '100%',
-              }}
-            >
-              <Source />
-            </Container>
-          </Grid>
+    <Grid container direction={'row'} alignItems={'right'}>
+      <Grid
+        container
+        item
+        spacing={2}
+        xs={12}
+        direction={'row'}
+        alignItems={'left'}
+        flexShrink={1}
+      >
+        <Grid item xs={12} md={6} lg={6} alignItems={'center'}>
+          <Link
+            href={`/timeline-builder?timeline=${encodeTimeline(timeline)}`}
+            onClick={shareHandler}
+          >
+            <IconButton aria-label='share'>
+              <LinkSharp />
+            </IconButton>
+          </Link>
+          <Container
+            maxWidth={false}
+            sx={{
+              bgcolor:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255, 0.1)'
+                  : alpha(theme.palette.primary.main, 0.2),
+              minHeight: '70vh',
+              maxWidth: matches ? '25vw' : '100%',
+            }}
+          >
+            <Timeline />
+          </Container>
+        </Grid>
+        <Grid item xs={12} md={6} lg={6}>
+          <Box
+            flexDirection='row'
+            justifyContent='flex-end'
+            display='flex'
+            alignItems={'center'}
+            paddingRight={20}
+          >
+            <FilterMenu />
+            <Divider orientation='vertical' flexItem sx={{ margin: 1 }} />
+            <Typography>無課金</Typography>
+            <Switch defaultChecked onChange={() => setPayed(prev => !prev)} />
+            <Typography>課金</Typography>
+          </Box>
+          <Container
+            maxWidth={false}
+            sx={{
+              bgcolor:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255, 0.1)'
+                  : alpha(theme.palette.primary.main, 0.2),
+              minHeight: '70vh',
+              maxWidth: matches ? '25vw' : '100%',
+            }}
+          >
+            <Source />
+          </Container>
         </Grid>
       </Grid>
+    </Grid>
+  );
+}
+
+export default function TimelineBuilderPage() {
+  return (
+    <Layout>
+      <TimelineBuilder />
     </Layout>
   );
 }

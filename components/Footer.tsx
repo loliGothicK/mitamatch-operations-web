@@ -35,7 +35,9 @@ export default function Footer({ ...props }) {
   };
 
   return (
-    <Container sx={{ bgcolor: theme.palette.primary.main, minWidth: '100vw' }}>
+    <Container
+      sx={{ bgcolor: theme.palette.background.paper, minWidth: '100vw' }}
+    >
       <footer>
         <Box py={6} textAlign='center'>
           <FooterBox component='nav'>
