@@ -428,7 +428,11 @@ function Source() {
                     <Typography variant='body2'>
                       {orders[index].effect}
                     </Typography>
-                    <Typography variant='body2' fontSize={10}>
+                    <Typography
+                      variant='body2'
+                      fontSize={10}
+                      sx={{ display: { xs: 'none', md: 'none', lg: 'block' } }}
+                    >
                       {orders[index].description}
                     </Typography>
                   </Stack>
