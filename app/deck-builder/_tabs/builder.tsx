@@ -234,7 +234,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
             handleConcentration={handleConcentration}
           />
         </Box>
-        <div {...attributes} {...listeners}>
+        <div {...attributes} {...listeners} style={{ touchAction: 'none' }}>
           <Tooltip
             title={
               <Stack>
