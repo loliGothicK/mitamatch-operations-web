@@ -259,14 +259,14 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.24.0"
 
-"@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.6", "@babel/runtime@^7.23.9", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.12.5", "@babel/runtime@^7.18.3", "@babel/runtime@^7.20.6", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.7":
   version "7.24.1"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.24.1.tgz#431f9a794d173b53720e69a6464abc6f0e2a5c57"
   integrity sha512-+BIznRzyqBf+2wCTxcKE3wDjfGeCoVE61KSHGpkzqrLi8qxqFwBeUFyId2cxkTmm55fzDGnm0+yCxaxygrLUnQ==
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@babel/runtime@^7.24.0":
+"@babel/runtime@^7.23.9", "@babel/runtime@^7.24.0":
   version "7.24.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.24.4.tgz#de795accd698007a66ba44add6cc86542aff1edd"
   integrity sha512-dkxf7+hn8mFBwKjs9bvBlArzLVxVbS8usaPUDd5p2a9JCL9tB8OaOVN1isD4+Xyk4ns89/xeOmbQvgdK7IIVdA==
@@ -910,9 +910,9 @@
     react-is "^18.2.0"
 
 "@mui/x-charts@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.1.1.tgz#812bd3e8200aa41933bbc68f51b14ff82d11f2d2"
-  integrity sha512-7YFrJwnJ2wygnKAZS8F2r4Nj0ei9hX95OAOFd6AI4j7y21j+6kjU6qzNdaJvO+pESdxc3EYTCpS+KzrrOiqPEw==
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.2.0.tgz#4d252a8a65caa713b79b85e7f57b8672d8f02b1b"
+  integrity sha512-aEVkdEY5j1dSYsYZxb1nsKNfFX1anQFGZF06HyumiPwYtUW+v1Bd5xlojwMVuFKGLgSq1nvMfXvbRmG+Imq68A==
   dependencies:
     "@babel/runtime" "^7.24.0"
     "@mui/base" "^5.0.0-beta.40"
