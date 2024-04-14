@@ -1,12 +1,20 @@
 import Link from 'next/link';
 
-import { Home, Schema, ViewCompact, ViewTimeline } from '@mui/icons-material';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import { Badge } from '@mui/material';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
+import {
+  Assignment,
+  DataObject,
+  Home,
+  Schema,
+  ViewCompact,
+  ViewTimeline,
+} from '@mui/icons-material';
+import {
+  Badge,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+} from '@mui/material';
 
 const links = [
   {
@@ -17,11 +25,7 @@ const links = [
   {
     title: 'Deck Builder',
     href: '/deck-builder',
-    icon: (
-      <Badge badgeContent={'updated'} color='primary'>
-        <ViewCompact />
-      </Badge>
-    ),
+    icon: <ViewCompact />,
   },
   {
     title: 'Timeline Builder',
@@ -34,6 +38,15 @@ const links = [
     icon: (
       <Badge badgeContent={'preview'} color='primary'>
         <Schema />
+      </Badge>
+    ),
+  },
+  {
+    title: 'Database',
+    href: '/database',
+    icon: (
+      <Badge badgeContent={'preview'} color='primary'>
+        <DataObject />
       </Badge>
     ),
   },
@@ -58,6 +71,17 @@ export const mainListItems = (
 );
 
 const updates = [
+  {
+    name: 'Database is now available (preview)',
+    description: [
+      'You can check the implementation overview',
+      'This feature is still in preview.',
+    ],
+  },
+  {
+    name: 'light/dark mode is now available',
+    description: ['You can toggle the color mode between light and dark.'],
+  },
   {
     name: 'Calculator in Deck Builder is now available for preview',
     description: [
@@ -88,7 +112,7 @@ export const UpdateListItems = (
       return (
         <ListItemButton key={item.name}>
           <ListItemIcon>
-            <AssignmentIcon />
+            <Assignment />
           </ListItemIcon>
           <ListItemText primary={item.name} secondary={item.description} />
         </ListItemButton>

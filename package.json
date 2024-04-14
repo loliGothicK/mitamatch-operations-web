@@ -22,6 +22,7 @@
     "@mui/icons-material": "5.15.15",
     "@mui/lab": "5.0.0-alpha.170",
     "@mui/material": "5.15.15",
+    "@mui/x-charts": "^7.1.1",
     "@next/third-parties": "14.2.1",
     "@vercel/analytics": "1.2.2",
     "@vercel/speed-insights": "1.0.10",
@@ -36,7 +37,6 @@
     "react-dom": "18.2.0",
     "react-virtualized": "9.22.5",
     "reactflow": "11.11.1",
-    "recharts": "2.12.5",
     "ts-essentials": "^9.4.2",
     "ts-node": "10.9.2",
     "ts-pattern": "5.1.1"
