@@ -47,12 +47,14 @@ function HealDataset() {
       id: 'fireHeal',
       normal: memoriaData.filter(
         m =>
+          m.kind === '回復' &&
           m.skillData.effects.some(eff => eff.type === 'heal') &&
           m.skillData.effects.some(eff => eff.status === 'Fire DEF') &&
           m.skillData.effects.some(eff => eff.status === 'DEF'),
       ).length,
       special: memoriaData.filter(
         m =>
+          m.kind === '回復' &&
           m.skillData.effects.some(eff => eff.type === 'heal') &&
           m.skillData.effects.some(eff => eff.status === 'Fire DEF') &&
           m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
@@ -63,12 +65,14 @@ function HealDataset() {
       id: 'waterHeal',
       normal: memoriaData.filter(
         m =>
+          m.kind === '回復' &&
           m.skillData.effects.some(eff => eff.type === 'heal') &&
           m.skillData.effects.some(eff => eff.status === 'Water DEF') &&
           m.skillData.effects.some(eff => eff.status === 'DEF'),
       ).length,
       special: memoriaData.filter(
         m =>
+          m.kind === '回復' &&
           m.skillData.effects.some(eff => eff.type === 'heal') &&
           m.skillData.effects.some(eff => eff.status === 'Water DEF') &&
           m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
@@ -79,12 +83,14 @@ function HealDataset() {
       id: 'windHeal',
       normal: memoriaData.filter(
         m =>
+          m.kind === '回復' &&
           m.skillData.effects.some(eff => eff.type === 'heal') &&
           m.skillData.effects.some(eff => eff.status === 'Wind DEF') &&
           m.skillData.effects.some(eff => eff.status === 'DEF'),
       ).length,
       special: memoriaData.filter(
         m =>
+          m.kind === '回復' &&
           m.skillData.effects.some(eff => eff.type === 'heal') &&
           m.skillData.effects.some(eff => eff.status === 'Wind DEF') &&
           m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
@@ -131,6 +137,7 @@ function HealDataset() {
           onItemClick={(_, id) => {
             const normal = memoriaData.filter(
               m =>
+                m.kind === '回復' &&
                 m.skillData.effects.some(eff => eff.type === 'heal') &&
                 m.skillData.effects.some(
                   eff => eff.status === map[id.dataIndex],
@@ -139,6 +146,7 @@ function HealDataset() {
             );
             const special = memoriaData.filter(
               m =>
+                m.kind === '回復' &&
                 m.skillData.effects.some(eff => eff.type === 'heal') &&
                 m.skillData.effects.some(
                   eff => eff.status === map[id.dataIndex],
@@ -231,12 +239,14 @@ function AssistDataset() {
       id: 'fireAssist',
       normal: memoriaData.filter(
         m =>
+          m.kind === '支援' &&
           m.skillData.effects.some(eff => eff.type === 'buff') &&
           m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
           m.skillData.effects.some(eff => eff.status === 'ATK'),
       ).length,
       special: memoriaData.filter(
         m =>
+          m.kind === '支援' &&
           m.skillData.effects.some(eff => eff.type === 'buff') &&
           m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
           m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
@@ -247,12 +257,14 @@ function AssistDataset() {
       id: 'waterAssist',
       normal: memoriaData.filter(
         m =>
+          m.kind === '支援' &&
           m.skillData.effects.some(eff => eff.type === 'buff') &&
           m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
           m.skillData.effects.some(eff => eff.status === 'ATK'),
       ).length,
       special: memoriaData.filter(
         m =>
+          m.kind === '支援' &&
           m.skillData.effects.some(eff => eff.type === 'buff') &&
           m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
           m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
@@ -263,12 +275,14 @@ function AssistDataset() {
       id: 'windAssist',
       normal: memoriaData.filter(
         m =>
+          m.kind === '支援' &&
           m.skillData.effects.some(eff => eff.type === 'buff') &&
           m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
           m.skillData.effects.some(eff => eff.status === 'ATK'),
       ).length,
       special: memoriaData.filter(
         m =>
+          m.kind === '支援' &&
           m.skillData.effects.some(eff => eff.type === 'buff') &&
           m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
           m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
@@ -315,6 +329,7 @@ function AssistDataset() {
           onItemClick={(_, id) => {
             const normal = memoriaData.filter(
               m =>
+                m.kind === '支援' &&
                 m.skillData.effects.some(eff => eff.type === 'buff') &&
                 m.skillData.effects.some(
                   eff => eff.status === map[id.dataIndex],
@@ -323,6 +338,7 @@ function AssistDataset() {
             );
             const special = memoriaData.filter(
               m =>
+                m.kind === '支援' &&
                 m.skillData.effects.some(eff => eff.type === 'buff') &&
                 m.skillData.effects.some(
                   eff => eff.status === map[id.dataIndex],
@@ -415,12 +431,14 @@ function InterferenceDataset() {
       id: 'fireAssist',
       normal: memoriaData.filter(
         m =>
+          m.kind === '妨害' &&
           m.skillData.effects.some(eff => eff.type === 'debuff') &&
           m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
           m.skillData.effects.some(eff => eff.status === 'ATK'),
       ).length,
       special: memoriaData.filter(
         m =>
+          m.kind === '妨害' &&
           m.skillData.effects.some(eff => eff.type === 'debuff') &&
           m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
           m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
@@ -431,12 +449,14 @@ function InterferenceDataset() {
       id: 'waterAssist',
       normal: memoriaData.filter(
         m =>
+          m.kind === '妨害' &&
           m.skillData.effects.some(eff => eff.type === 'debuff') &&
           m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
           m.skillData.effects.some(eff => eff.status === 'ATK'),
       ).length,
       special: memoriaData.filter(
         m =>
+          m.kind === '妨害' &&
           m.skillData.effects.some(eff => eff.type === 'debuff') &&
           m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
           m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
@@ -447,12 +467,14 @@ function InterferenceDataset() {
       id: 'windAssist',
       normal: memoriaData.filter(
         m =>
+          m.kind === '妨害' &&
           m.skillData.effects.some(eff => eff.type === 'debuff') &&
           m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
           m.skillData.effects.some(eff => eff.status === 'ATK'),
       ).length,
       special: memoriaData.filter(
         m =>
+          m.kind === '妨害' &&
           m.skillData.effects.some(eff => eff.type === 'debuff') &&
           m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
           m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
@@ -499,6 +521,7 @@ function InterferenceDataset() {
           onItemClick={(_, id) => {
             const normal = memoriaData.filter(
               m =>
+                m.kind === '妨害' &&
                 m.skillData.effects.some(eff => eff.type === 'debuff') &&
                 m.skillData.effects.some(
                   eff => eff.status === map[id.dataIndex],
@@ -507,6 +530,7 @@ function InterferenceDataset() {
             );
             const special = memoriaData.filter(
               m =>
+                m.kind === '妨害' &&
                 m.skillData.effects.some(eff => eff.type === 'debuff') &&
                 m.skillData.effects.some(
                   eff => eff.status === map[id.dataIndex],
