@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
@@ -24,17 +22,22 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
 
-import { type Charm, charmList } from '@/domain/charm/charm';
-import { type Costume, costumeList } from '@/domain/costume/costume';
+import { charmList } from '@/domain/charm/charm';
+import { costumeList } from '@/domain/costume/costume';
+import { calcFinalStatus } from '@/evaluate/calc';
 import { evaluate } from '@/evaluate/evaluate';
-import { deckAtom, legendaryDeckAtom, swAtom } from '@/jotai/memoriaAtoms';
+import {
+  charmAtom,
+  costumeAtom,
+  deckAtom,
+  defAtom,
+  legendaryDeckAtom,
+  spDefAtom,
+  statusAtom,
+  swAtom,
+} from '@/jotai/memoriaAtoms';
 import { type StatusKind, statusKind } from '@/parser/skill';
 
-const defAtom = atomWithStorage('def', 400_000);
-const spDefAtom = atomWithStorage('spDef', 400_000);
-const statusAtom = atomWithStorage('status', [
-  400_000, 400_000, 400_000, 400_000,
-] as [number, number, number, number]);
 const charmFilterAtom = atomWithStorage<('火' | '水' | '風')[]>(
   'charmFilter',
   [],
@@ -62,17 +65,19 @@ export function Calculator() {
   const [deck] = useAtom(deckAtom);
   const [legendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw] = useAtom(swAtom);
-  const [charm, setCharm] = useState<Charm>(charmList.reverse()[0]);
-  const [costume, setCostume] = useState<Costume>(costumeList.reverse()[0]);
+  const [charm, setCharm] = useAtom(charmAtom);
+  const [costume, setCostume] = useAtom(costumeAtom);
   const [def, setDef] = useAtom(defAtom);
   const [spDef, setSpDef] = useAtom(spDefAtom);
   const [selfStatus, setSelfStatus] = useAtom(statusAtom);
   const [charmFilter, setCharmFilter] = useAtom(charmFilterAtom);
   const [costumeFilter, setCostumeFilter] = useAtom(costumeFilterAtom);
 
+  const finalStatus = calcFinalStatus([...deck, ...legendaryDeck]);
+
   const { skill, supportBuff, supportDebuff } = evaluate(
     [...deck, ...legendaryDeck],
-    selfStatus,
+    finalStatus,
     [def, spDef],
     charm,
     costume,
@@ -282,58 +287,70 @@ export function Calculator() {
         </Grid>
         <Grid item xs={12}>
           <Stack direction={'row'} spacing={2}>
-            <TextField
-              label='Your ATK'
-              defaultValue={selfStatus[0]}
-              variant='standard'
-              onChange={e => {
-                setSelfStatus([
-                  Number.parseInt(e.target.value),
-                  selfStatus[1],
-                  selfStatus[2],
-                  selfStatus[3],
-                ]);
-              }}
-            />
-            <TextField
-              label='Your Sp.ATK'
-              defaultValue={selfStatus[1]}
-              variant='standard'
-              onChange={e => {
-                setSelfStatus([
-                  selfStatus[0],
-                  Number.parseInt(e.target.value),
-                  selfStatus[2],
-                  selfStatus[3],
-                ]);
-              }}
-            />
-            <TextField
-              label='Your DEF'
-              defaultValue={selfStatus[2]}
-              variant='standard'
-              onChange={e => {
-                setSelfStatus([
-                  selfStatus[0],
-                  selfStatus[1],
-                  Number.parseInt(e.target.value),
-                  selfStatus[3],
-                ]);
-              }}
-            />
-            <TextField
-              label='Your Sp.DEF'
-              defaultValue={selfStatus[3]}
-              variant='standard'
-              onChange={e => {
-                setSelfStatus([
-                  selfStatus[0],
-                  selfStatus[1],
-                  selfStatus[2],
-                  Number.parseInt(e.target.value),
-                ]);
-              }}
-            />
+            <Stack>
+              <TextField
+                label='Your ATK'
+                defaultValue={selfStatus[0]}
+                variant='standard'
+                onChange={e => {
+                  setSelfStatus([
+                    Number.parseInt(e.target.value),
+                    selfStatus[1],
+                    selfStatus[2],
+                    selfStatus[3],
+                  ]);
+                }}
+              />
+              <Typography>{`=> ${finalStatus[0]}`}</Typography>
+            </Stack>
+            <Stack>
+              <TextField
+                label='Your Sp.ATK'
+                defaultValue={selfStatus[1]}
+                variant='standard'
+                onChange={e => {
+                  setSelfStatus([
+                    selfStatus[0],
+                    Number.parseInt(e.target.value),
+                    selfStatus[2],
+                    selfStatus[3],
+                  ]);
+                }}
+              />
+              <Typography>{`=> ${finalStatus[1]}`}</Typography>
+            </Stack>
+            <Stack>
+              <TextField
+                label='Your DEF'
+                defaultValue={selfStatus[2]}
+                variant='standard'
+                onChange={e => {
+                  setSelfStatus([
+                    selfStatus[0],
+                    selfStatus[1],
+                    Number.parseInt(e.target.value),
+                    selfStatus[3],
+                  ]);
+                }}
+              />
+              <Typography>{`=> ${finalStatus[2]}`}</Typography>
+            </Stack>
+            <Stack>
+              <TextField
+                label='Your Sp.DEF'
+                defaultValue={selfStatus[3]}
+                variant='standard'
+                onChange={e => {
+                  setSelfStatus([
+                    selfStatus[0],
+                    selfStatus[1],
+                    selfStatus[2],
+                    Number.parseInt(e.target.value),
+                  ]);
+                }}
+              />
+              <Typography>{`=> ${finalStatus[3]}`}</Typography>
+            </Stack>
           </Stack>
         </Grid>
         {sw === 'sword' && (

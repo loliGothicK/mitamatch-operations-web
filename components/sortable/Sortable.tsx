@@ -1,9 +1,12 @@
 import type React from 'react';
+import { useEffect } from 'react';
 import type { PropsWithChildren, SetStateAction } from 'react';
 
 import {
   type DndContextProps,
   type DragEndEvent,
+  type PointerSensorOptions,
+  type Sensor,
   TouchSensor,
   type UniqueIdentifier,
 } from '@dnd-kit/core';
@@ -103,13 +106,15 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
       onChangeOrder(newItems);
     }
   };
-  const detectSensor = () => {
-    const isWebEntry = JSON.parse(sessionStorage.getItem('isWebEntry') || '{}');
-    return isWebEntry ? PointerSensor : TouchSensor;
-  };
+  let sensor: Sensor<PointerSensorOptions> = PointerSensor;
+  useEffect(() => {
+    const hai = sessionStorage.getItem('isWebEntry');
+    const isWebEntry = hai === null ? false : JSON.parse(hai);
+    sensor = isWebEntry ? PointerSensor : TouchSensor;
+  }, [sensor]);
 
   const sensors = useSensors(
-    useSensor(detectSensor()),
+    useSensor(sensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),

@@ -21,8 +21,21 @@ import type {
   VanguardSupportSearch,
 } from '@/types/searchType';
 
+import { charmList } from '@/domain/charm/charm';
+import { costumeList } from '@/domain/costume/costume';
 import { match } from 'ts-pattern';
 
+export const compareModeAtom = atom<Memoria | undefined>(undefined);
+export const charmAtom = atom(charmList.reverse()[0]);
+export const costumeAtom = atom(costumeList.reverse()[0]);
+export const defAtom = atom(400_000);
+export const spDefAtom = atom(400_000);
+export const statusAtom = atom([162_747, 175_532, 175_219, 182_143] as [
+  number,
+  number,
+  number,
+  number,
+]);
 export type MemoriaWithConcentration = Memoria & { concentration: number };
 
 export const sortKind = [

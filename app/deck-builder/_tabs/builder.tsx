@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { type MouseEvent, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -53,6 +53,7 @@ import Sortable from '@/components/sortable/Sortable';
 import type { Memoria } from '@/domain/memoria/memoria';
 import {
   type MemoriaWithConcentration,
+  compareModeAtom,
   deckAtom,
   filteredMemoriaAtom,
   legendaryDeckAtom,
@@ -62,6 +63,7 @@ import {
   swAtom,
 } from '@/jotai/memoriaAtoms';
 
+import { calcDiff } from '@/evaluate/calc';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useTheme } from '@mui/material/styles';
@@ -181,6 +183,26 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [concentrationValue, setConcentration] = useState(concentration);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [compare, setCompare] = useAtom(compareModeAtom);
+  const [contextMenu, setContextMenu] = useState<{
+    mouseX: number;
+    mouseY: number;
+  } | null>(null);
+
+  const handleContextMenu = (event: MouseEvent<HTMLImageElement>) => {
+    event.preventDefault();
+    setContextMenu(
+      contextMenu === null
+        ? {
+            mouseX: event.clientX + 2,
+            mouseY: event.clientY - 6,
+          }
+        : // repeated contextmenu when it is already open closes it with Chrome 84 on Ubuntu
+          // Other native context menus might behave different.
+          // With this behavior we prevent contextmenu from the backdrop to re-locale existing context menus.
+          null,
+    );
+  };
 
   const {
     isDragging,
@@ -228,78 +250,119 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   return (
     <Grid item key={id} ref={setNodeRef} style={style}>
       {!isLoaded && <Skeleton variant='rectangular' width={100} height={100} />}
-      <ImageListItem>
-        <Box>
-          <Icon kind={memoria.kind} element={memoria.element} position={70} />
-          <Concentration
-            concentration={concentrationValue}
-            handleConcentration={handleConcentration}
-          />
-        </Box>
-        <div {...attributes} {...listeners} style={{ touchAction: 'none' }}>
-          <Tooltip
-            title={
-              <Stack>
-                <Typography variant='h6'>{name}</Typography>
-                <Typography variant='body2'>{skill.name}</Typography>
-                <Typography variant='body2'>{support.name}</Typography>
-              </Stack>
-            }
-            placement={'top'}
-            arrow
-          >
-            <Image
-              src={`/memoria/${name}.png`}
-              alt={name}
-              width={100}
-              height={100}
-              onLoad={() => {
-                setIsLoaded(true);
-              }}
+      <Box
+        sx={
+          compare && compare.id === memoria.id
+            ? {
+                filter: 'grayscale(80%)',
+              }
+            : {}
+        }
+      >
+        <ImageListItem>
+          <Box>
+            <Icon kind={memoria.kind} element={memoria.element} position={70} />
+            <Concentration
+              concentration={concentrationValue}
+              handleConcentration={handleConcentration}
             />
-          </Tooltip>
-        </div>
-        <ImageListItemBar
-          sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
-          position={'top'}
-          actionPosition={'right'}
-        />
-        <Box>
+          </Box>
+          <div {...attributes} {...listeners} style={{ touchAction: 'none' }}>
+            <Tooltip
+              title={
+                <Stack>
+                  <Typography variant='h6'>{name}</Typography>
+                  <Typography variant='body2'>{skill.name}</Typography>
+                  <Typography variant='body2'>{support.name}</Typography>
+                </Stack>
+              }
+              placement={'top'}
+              arrow
+            >
+              <Image
+                src={`/memoria/${name}.png`}
+                alt={name}
+                width={100}
+                height={100}
+                onLoad={() => {
+                  setIsLoaded(true);
+                }}
+                onContextMenu={handleContextMenu}
+              />
+            </Tooltip>
+          </div>
           <ImageListItemBar
             sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
             position={'top'}
-            actionPosition={'left'}
-            actionIcon={
-              <IconButton
-                sx={{
-                  color: 'rgba(255, 50, 50, 0.9)',
-                  bgcolor: 'rgba(0, 0, 0, 0.2)',
-                  zIndex: Number.POSITIVE_INFINITY,
-                }}
-                aria-label={`remove ${name}`}
-                onClick={() => {
-                  setDeck(prev =>
-                    prev.filter(memoria => memoria.name !== name),
-                  );
-                  setLegendaryDeck(prev =>
-                    prev.filter(memoria => memoria.name !== name),
-                  );
-                  Cookies.set(
-                    'deck',
-                    encodeDeck(
-                      sw,
-                      deck.filter(memoria => memoria.name !== name),
-                      legendaryDeck.filter(memoria => memoria.name !== name),
-                    ),
-                  );
-                }}
-              >
-                <Remove />
-              </IconButton>
-            }
+            actionPosition={'right'}
           />
-        </Box>
-      </ImageListItem>
+          <Box>
+            <ImageListItemBar
+              sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
+              position={'top'}
+              actionPosition={'left'}
+              actionIcon={
+                <IconButton
+                  sx={{
+                    color: 'rgba(255, 50, 50, 0.9)',
+                    bgcolor: 'rgba(0, 0, 0, 0.2)',
+                    zIndex: Number.POSITIVE_INFINITY,
+                  }}
+                  aria-label={`remove ${name}`}
+                  onClick={() => {
+                    setDeck(prev =>
+                      prev.filter(memoria => memoria.name !== name),
+                    );
+                    setLegendaryDeck(prev =>
+                      prev.filter(memoria => memoria.name !== name),
+                    );
+                    Cookies.set(
+                      'deck',
+                      encodeDeck(
+                        sw,
+                        deck.filter(memoria => memoria.name !== name),
+                        legendaryDeck.filter(memoria => memoria.name !== name),
+                      ),
+                    );
+                  }}
+                >
+                  <Remove />
+                </IconButton>
+              }
+            />
+          </Box>
+        </ImageListItem>
+      </Box>
+      <Menu
+        open={contextMenu !== null}
+        onClose={() => setContextMenu(null)}
+        anchorReference='anchorPosition'
+        anchorPosition={
+          contextMenu !== null
+            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+            : undefined
+        }
+      >
+        {compare === undefined ? (
+          <MenuItem
+            onClick={() => {
+              setContextMenu(null);
+              setCompare(memoria);
+            }}
+          >
+            入れ替え
+          </MenuItem>
+        ) : (
+          <MenuItem
+            onClick={() => {
+              setContextMenu(null);
+              setCompare(undefined);
+            }}
+          >
+            キャンセル
+          </MenuItem>
+        )}
+      </Menu>
     </Grid>
   );
 }
@@ -344,6 +407,139 @@ function LegendaryDeck() {
   );
 }
 
+function Compare({ candidate }: { candidate: MemoriaWithConcentration }) {
+  const [compare] = useAtom(compareModeAtom);
+  const diff = calcDiff(candidate);
+  return (
+    <>
+      <Stack>
+        <Typography variant='body2'>{`${compare?.name} => ${candidate.name}`}</Typography>
+        <Typography variant='body2'>{`${candidate.skill.name} => ${compare?.skill.name}`}</Typography>
+        <Typography variant='body2'>{`${candidate.support.name} => ${compare?.support.name}`}</Typography>
+      </Stack>
+      <Divider sx={{ margin: 2 }} />
+      <Stack>
+        {/* damage */}
+        {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0 &&
+          (() => {
+            if (diff.expectedToalDamage[1] - diff.expectedToalDamage[0] > 0) {
+              return (
+                <Stack direction={'row'}>
+                  <Typography variant='body2' color='success'>
+                    +{diff.expectedToalDamage[1] - diff.expectedToalDamage[0]}
+                  </Typography>
+                  <Typography variant='body2'>
+                    {`(${diff.expectedToalDamage[0]} => ${diff.expectedToalDamage[1]})`}
+                  </Typography>
+                </Stack>
+              );
+            }
+            return (
+              <Stack direction={'row'}>
+                <Typography variant='body2' color='error'>
+                  {diff.expectedToalDamage[1] - diff.expectedToalDamage[0]}
+                </Typography>
+                <Typography variant='body2'>
+                  {`(${diff.expectedToalDamage[0]} => ${diff.expectedToalDamage[1]})`}
+                </Typography>
+              </Stack>
+            );
+          })()}
+        {/* recovery */}
+        {diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] !== 0 &&
+          (() => {
+            if (
+              diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] >
+              0
+            ) {
+              return (
+                <Stack direction={'row'}>
+                  <Typography variant='body2' color='success'>
+                    +
+                    {diff.expectedTotalRecovery[1] -
+                      diff.expectedTotalRecovery[0]}
+                  </Typography>
+                  <Typography variant='body2'>
+                    {`(${diff.expectedTotalRecovery[0]} => ${diff.expectedTotalRecovery[1]})`}
+                  </Typography>
+                </Stack>
+              );
+            }
+            return (
+              <Stack direction={'row'}>
+                <Typography variant='body2' color='error'>
+                  {diff.expectedTotalRecovery[1] -
+                    diff.expectedTotalRecovery[0]}
+                </Typography>
+                <Typography variant='body2'>
+                  {`(${diff.expectedTotalRecovery[0]} => ${diff.expectedTotalRecovery[1]})`}
+                </Typography>
+              </Stack>
+            );
+          })()}
+      </Stack>
+      <Divider sx={{ margin: 2 }} />
+      <Stack>
+        {[...diff.expectedTotalBuff.entries()]
+          .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+          .map(([type, value]) => {
+            if (value[1] - value[0] > 0) {
+              return (
+                <Stack direction={'row'}>
+                  <Typography variant='body2' color='success'>
+                    {`${type}: +${value[1] - value[0]}`}
+                  </Typography>
+                  <Typography variant='body2'>
+                    {`(${value[0]} => ${value[1]})`}
+                  </Typography>
+                </Stack>
+              );
+            }
+            return (
+              <Stack direction={'row'}>
+                <Typography variant='body2' color='error'>
+                  {`${type}: ${value[1] - value[0]}`}
+                </Typography>
+                <Typography variant='body2'>
+                  {`(${value[0]} => ${value[1]})`}
+                </Typography>
+              </Stack>
+            );
+          })}
+      </Stack>
+      <Divider sx={{ margin: 2 }} />
+      <Stack>
+        {[...diff.expectedTotalDebuff.entries()]
+          .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+          .map(([type, value]) => {
+            if (value[1] - value[0] > 0) {
+              return (
+                <Stack direction={'row'}>
+                  <Typography variant='body2' color='success'>
+                    {`${type}: +${value[1] - value[0]}`}
+                  </Typography>
+                  <Typography variant='body2'>
+                    {`(${value[0]} => ${value[1]})`}
+                  </Typography>
+                </Stack>
+              );
+            }
+            return (
+              <Stack direction={'row'}>
+                <Typography variant='body2' color='error'>
+                  {`${type}: ${value[1] - value[0]}`}
+                </Typography>
+                <Typography variant='body2'>
+                  {`(${value[0]} => ${value[1]})`}
+                </Typography>
+              </Stack>
+            );
+          })}
+      </Stack>
+    </>
+  );
+}
+
 function VirtualizedList() {
   const theme = useTheme();
   const [memoria] = useAtom(filteredMemoriaAtom);
@@ -351,6 +547,11 @@ function VirtualizedList() {
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [compare] = useAtom(compareModeAtom);
+  const [open, setOpen] = useState(false);
+  const [hold, setHold] = useState<MemoriaWithConcentration | undefined>(
+    undefined,
+  );
 
   const addMemoria = (
     prev: MemoriaWithConcentration[],
@@ -358,132 +559,214 @@ function VirtualizedList() {
   ) => {
     return [...prev, { ...newMemoria, concentration: 4 }];
   };
+
   return (
-    <AutoSizer>
-      {({ height, width }) => (
-        <List
-          height={height}
-          width={width}
-          rowCount={memoria.length}
-          rowHeight={100}
-          rowRenderer={({ key, index, style }) => {
-            return (
-              <Stack
-                direction={'row'}
-                key={key}
-                style={style}
-                bgcolor={
-                  theme.palette.mode === 'dark'
-                    ? 'rgba(255, 255, 255, 0.1)'
-                    : alpha(theme.palette.primary.main, 0.2)
-                }
-              >
-                <Stack direction={'row'} alignItems={'center'}>
-                  <ListItemIcon>
-                    <Icon
-                      kind={memoria[index].kind}
-                      element={memoria[index].element}
-                      position={70}
-                    />
-                    {!isLoaded && (
-                      <Skeleton
-                        variant='rectangular'
-                        width={100}
-                        height={100}
+    <>
+      <AutoSizer>
+        {({ height, width }) => (
+          <List
+            height={height}
+            width={width}
+            rowCount={memoria.length}
+            rowHeight={100}
+            rowRenderer={({ key, index, style }) => {
+              return (
+                <Stack
+                  direction={'row'}
+                  key={key}
+                  style={style}
+                  bgcolor={
+                    theme.palette.mode === 'dark'
+                      ? 'rgba(255, 255, 255, 0.1)'
+                      : alpha(theme.palette.primary.main, 0.2)
+                  }
+                >
+                  <Stack direction={'row'} alignItems={'center'}>
+                    <ListItemIcon>
+                      <Icon
+                        kind={memoria[index].kind}
+                        element={memoria[index].element}
+                        position={70}
                       />
-                    )}
-                    <IconButton
-                      edge='start'
-                      aria-label='comments'
-                      sx={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 10,
-                        bgcolor: 'rgba(0, 0, 0, 0.2)',
-                      }}
-                      onClick={() => {
-                        if (memoria[index].labels.includes('legendary')) {
-                          setLegendaryDeck(prev =>
-                            addMemoria(prev, memoria[index]),
-                          );
-                          Cookies.set(
-                            'deck',
-                            encodeDeck(
-                              sw,
-                              deck,
-                              addMemoria(legendaryDeck, memoria[index]),
-                            ),
-                          );
-                        } else {
-                          setDeck(prev => addMemoria(prev, memoria[index]));
-                          Cookies.set(
-                            'deck',
-                            encodeDeck(
-                              sw,
-                              addMemoria(deck, memoria[index]),
-                              legendaryDeck,
-                            ),
-                          );
-                        }
-                      }}
-                    >
-                      <Add color={'warning'} />
-                    </IconButton>
-                    <Tooltip title={memoria[index].name} placement={'top'}>
-                      <Image
-                        src={`/memoria/${memoria[index].name}.png`}
-                        alt={memoria[index].name}
-                        width={100}
-                        height={100}
-                        onLoad={() => {
-                          setIsLoaded(true);
+                      {!isLoaded && (
+                        <Skeleton
+                          variant='rectangular'
+                          width={100}
+                          height={100}
+                        />
+                      )}
+                      <IconButton
+                        edge='start'
+                        aria-label='comments'
+                        sx={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 10,
+                          bgcolor: 'rgba(0, 0, 0, 0.2)',
                         }}
-                      />
-                    </Tooltip>
-                  </ListItemIcon>
-                  <ListItemText
-                    secondary={
-                      <>
-                        <Typography
-                          component='span'
-                          fontWeight='bold'
-                          fontSize={12}
-                          sx={{ display: 'block' }}
-                          color='text.primary'
-                        >
-                          {memoria[index].skill.name}
-                        </Typography>
-                        <Divider sx={{ margin: 1 }} />
-                        <Typography
-                          component='span'
-                          fontWeight='bold'
-                          fontSize={12}
-                          sx={{ display: 'block' }}
-                          color='text.primary'
-                        >
-                          {memoria[index].support.name}
-                        </Typography>
-                      </>
-                    }
-                    sx={{
-                      marginLeft: 2,
-                    }}
-                  />
+                        onClick={() => {
+                          if (compare !== undefined) {
+                            setOpen(true);
+                            setHold({ ...memoria[index], concentration: 4 });
+                            return;
+                          }
+                          if (memoria[index].labels.includes('legendary')) {
+                            setLegendaryDeck(prev =>
+                              addMemoria(prev, memoria[index]),
+                            );
+                            Cookies.set(
+                              'deck',
+                              encodeDeck(
+                                sw,
+                                deck,
+                                addMemoria(legendaryDeck, memoria[index]),
+                              ),
+                            );
+                          } else {
+                            setDeck(prev => addMemoria(prev, memoria[index]));
+                            Cookies.set(
+                              'deck',
+                              encodeDeck(
+                                sw,
+                                addMemoria(deck, memoria[index]),
+                                legendaryDeck,
+                              ),
+                            );
+                          }
+                        }}
+                      >
+                        <Add color={'warning'} />
+                      </IconButton>
+                      <Tooltip title={memoria[index].name} placement={'top'}>
+                        <Image
+                          src={`/memoria/${memoria[index].name}.png`}
+                          alt={memoria[index].name}
+                          width={100}
+                          height={100}
+                          onLoad={() => {
+                            setIsLoaded(true);
+                          }}
+                        />
+                      </Tooltip>
+                    </ListItemIcon>
+                    <ListItemText
+                      secondary={
+                        <>
+                          <Typography
+                            component='span'
+                            fontWeight='bold'
+                            fontSize={12}
+                            sx={{ display: 'block' }}
+                            color='text.primary'
+                          >
+                            {memoria[index].skill.name}
+                          </Typography>
+                          <Divider sx={{ margin: 1 }} />
+                          <Typography
+                            component='span'
+                            fontWeight='bold'
+                            fontSize={12}
+                            sx={{ display: 'block' }}
+                            color='text.primary'
+                          >
+                            {memoria[index].support.name}
+                          </Typography>
+                        </>
+                      }
+                      sx={{
+                        marginLeft: 2,
+                      }}
+                    />
+                  </Stack>
+                  <IconButton sx={{ position: 'absolute', right: 0 }}>
+                    <Link
+                      href={`https://allb.game-db.tw/memoria/${memoria[index].link}`}
+                      target={'_blank'}
+                    >
+                      <Launch />
+                    </Link>
+                  </IconButton>
                 </Stack>
-                <IconButton sx={{ position: 'absolute', right: 0 }}>
-                  <Link
-                    href={`https://allb.game-db.tw/memoria/${memoria[index].link}`}
-                    target={'_blank'}
-                  >
-                    <Launch />
-                  </Link>
-                </IconButton>
-              </Stack>
-            );
-          }}
-        />
-      )}
-    </AutoSizer>
+              );
+            }}
+          />
+        )}
+      </AutoSizer>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        {compare?.labels.includes('legendary') ===
+        hold?.labels.includes('legendary') ? (
+          <>
+            <DialogContent>
+              <Typography id='modal-modal-title' variant='h6' component='h2'>
+                Compare
+              </Typography>
+              {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
+              <Compare candidate={hold!} />
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => {
+                  setOpen(false);
+                  setHold(undefined);
+                  if (hold?.labels.includes('legendary')) {
+                    setLegendaryDeck(prev =>
+                      [...prev].map(memoria =>
+                        memoria.id === compare?.id ? hold : memoria,
+                      ),
+                    );
+                    Cookies.set(
+                      'deck',
+                      encodeDeck(
+                        sw,
+                        deck,
+                        legendaryDeck.map(memoria =>
+                          memoria.id === compare?.id ? hold : memoria,
+                        ),
+                      ),
+                    );
+                  } else {
+                    setDeck(prev =>
+                      [...prev].map(memoria =>
+                        // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                        memoria.id === compare?.id ? hold! : memoria,
+                      ),
+                    );
+                    Cookies.set(
+                      'deck',
+                      encodeDeck(
+                        sw,
+                        deck.map(memoria =>
+                          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                          memoria.id === compare?.id ? hold! : memoria,
+                        ),
+                        legendaryDeck,
+                      ),
+                    );
+                  }
+                }}
+              >
+                Comfirm
+              </Button>
+              <Button onClick={() => setOpen(false)}>Close</Button>
+            </DialogActions>
+          </>
+        ) : (
+          <>
+            <DialogContent>
+              <Typography id='modal-modal-title' variant='h6' component='h2'>
+                Error
+              </Typography>
+              <Typography variant='body2'>
+                レジェンダリーメモリアと通常メモリアを比較することはできません。
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setOpen(false)}>Close</Button>
+            </DialogActions>
+          </>
+        )}
+      </Dialog>
+    </>
   );
 }
 
@@ -544,6 +827,7 @@ function ToggleButtons() {
   const [, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
   const [, setRoleFilter] = useAtom(roleFilterAtom);
+  const [, setCompare] = useAtom(compareModeAtom);
 
   return (
     <FormControlLabel
@@ -564,6 +848,7 @@ function ToggleButtons() {
         }
         setDeck([]);
         setLegendaryDeck([]);
+        setCompare(undefined);
       }}
     />
   );
@@ -642,6 +927,7 @@ export function DeckBuilder() {
   const [, setRoleFilter] = useAtom(roleFilterAtom);
   const pathname = usePathname();
   const [fst, setFst] = useAtom(fstAtom);
+  const [, setCompare] = useAtom(compareModeAtom);
 
   const shareHandler = async () => {
     try {
@@ -677,6 +963,7 @@ export function DeckBuilder() {
         );
         setDeck(deck);
         setLegendaryDeck(legendaryDeck);
+        setCompare(undefined);
       } else {
         const cookie = Cookies.get('deck');
         if (cookie) {
@@ -694,6 +981,7 @@ export function DeckBuilder() {
           );
           setDeck(deck);
           setLegendaryDeck(legendaryDeck);
+          setCompare(undefined);
         }
       }
     }
@@ -705,6 +993,7 @@ export function DeckBuilder() {
     fst,
     setFst,
     params.get,
+    setCompare,
   ]);
 
   return (
@@ -729,6 +1018,7 @@ export function DeckBuilder() {
               onClick={() => {
                 setDeck([]);
                 setLegendaryDeck([]);
+                setCompare(undefined);
               }}
             >
               <ClearAll />
