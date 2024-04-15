@@ -1,13 +1,10 @@
-import * as React from 'react';
-
-import { useAtom } from 'jotai';
-
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
+import { useAtom } from 'jotai';
 
 import { CheckBoxItem } from '@/components/deck-builder/CheckBoxItem';
 import {
@@ -38,6 +35,7 @@ import {
   labelSearch,
   otherSupportSearch,
 } from '@/types/searchType';
+import { type SyntheticEvent, useState } from 'react';
 
 function LabelCheckbox() {
   const [filter, setFilter] = useAtom(labelFilterAtom);
@@ -407,9 +405,9 @@ export function OtherSupportCheckbox() {
 }
 
 export default function Search() {
-  const [value, setValue] = React.useState('1');
+  const [value, setValue] = useState('1');
   const [_, resetFilters] = useAtom(resetFilterAtom);
-  const handleChange = (_: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 

@@ -18,14 +18,20 @@ import {
   styled,
   useTheme,
 } from '@mui/material/styles';
-import * as React from 'react';
 
 import Footer from '@/components/Footer';
 import { mainListItems } from '@/components/home/listItems';
 import { themeOptions } from '@/theme/theme';
 import { DarkMode, LightMode } from '@mui/icons-material';
 import { useMediaQuery } from '@mui/system';
-import { useEffect, useMemo, useState } from 'react';
+import {
+  type ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 const drawerWidth: number = 240;
 
@@ -78,12 +84,12 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 // biome-ignore lint/suspicious/noEmptyBlockStatements: Suspicious empty block
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
-function BasicLayout({ children }: { children: React.ReactNode }) {
-  const colorMode = React.useContext(ColorModeContext);
+function BasicLayout({ children }: { children: ReactNode }) {
+  const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -168,7 +174,7 @@ function BasicLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export function Layout({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<'light' | 'dark'>('dark');
   const colorMode = useMemo(
     () => ({

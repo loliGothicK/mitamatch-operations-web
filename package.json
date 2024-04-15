@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "yarn biome lint --files-max-size=20000000 ./actions ./app ./components ./domain ./evaluate ./hooks ./jotai ./parser ./types",
-    "lint:fix": "yarn biome lint --files-max-size=20000000 --apply ./actions ./app ./components ./domain ./evaluate ./hooks ./jotai ./parser ./types",
-    "fmt": "yarn biome format --files-max-size=20000000 --write ./actions ./app ./components ./domain ./evaluate ./hooks ./jotai ./parser ./types",
-    "fmt:check": "yarn biome format --files-max-size=20000000 ./actions ./app ./components ./domain ./evaluate ./hooks ./jotai ./parser ./types",
+    "lint": "yarn biome lint .",
+    "lint:fix": "yarn biome lint --apply .",
+    "fmt": "yarn biome format --write .",
+    "fmt:check": "yarn biome format .",
     "test": "jest"
   },
   "dependencies": {
@@ -42,7 +42,7 @@
     "ts-pattern": "5.1.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.6.4",
+    "@biomejs/biome": "1.7.0",
     "@types/jest": "29.5.12",
     "@types/js-cookie": "3.0.6",
     "@types/jsonwebtoken": "9.0.6",

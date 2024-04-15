@@ -472,7 +472,7 @@ function Compare({ candidate }: { candidate: MemoriaWithConcentration }) {
           .map(([type, value]) => {
             if (value[1] - value[0] > 0) {
               return (
-                <Stack direction={'row'}>
+                <Stack direction={'row'} key={type}>
                   <Typography variant='body2' color='success'>
                     {`${type}: +${value[1] - value[0]}`}
                   </Typography>
@@ -483,7 +483,7 @@ function Compare({ candidate }: { candidate: MemoriaWithConcentration }) {
               );
             }
             return (
-              <Stack direction={'row'}>
+              <Stack direction={'row'} key={type}>
                 <Typography variant='body2' color='error'>
                   {`${type}: ${value[1] - value[0]}`}
                 </Typography>
@@ -501,7 +501,7 @@ function Compare({ candidate }: { candidate: MemoriaWithConcentration }) {
           .map(([type, value]) => {
             if (value[1] - value[0] > 0) {
               return (
-                <Stack direction={'row'}>
+                <Stack direction={'row'} key={type}>
                   <Typography variant='body2' color='success'>
                     {`${type}: +${value[1] - value[0]}`}
                   </Typography>
@@ -512,7 +512,7 @@ function Compare({ candidate }: { candidate: MemoriaWithConcentration }) {
               );
             }
             return (
-              <Stack direction={'row'}>
+              <Stack direction={'row'} key={type}>
                 <Typography variant='body2' color='error'>
                   {`${type}: ${value[1] - value[0]}`}
                 </Typography>
