@@ -547,7 +547,7 @@ function VirtualizedList() {
   const [deck, setDeck] = useAtom(deckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [compare] = useAtom(compareModeAtom);
+  const [compare, setCompare] = useAtom(compareModeAtom);
   const [open, setOpen] = useState(false);
   const [hold, setHold] = useState<MemoriaWithConcentration | undefined>(
     undefined,
@@ -708,6 +708,7 @@ function VirtualizedList() {
                 onClick={() => {
                   setOpen(false);
                   setHold(undefined);
+                  setCompare(undefined);
                   if (hold?.labels.includes('legendary')) {
                     setLegendaryDeck(prev =>
                       [...prev].map(memoria =>
