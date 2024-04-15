@@ -29,9 +29,9 @@ import { evaluate } from '@/evaluate/evaluate';
 import {
   charmAtom,
   costumeAtom,
-  deckAtom,
   defAtom,
-  legendaryDeckAtom,
+  rwDeckAtom,
+  rwLegendaryDeckAtom,
   spDefAtom,
   statusAtom,
   swAtom,
@@ -62,8 +62,8 @@ const costumeFilterAtom = atomWithStorage<
 
 export function Calculator() {
   const theme = useTheme();
-  const [deck] = useAtom(deckAtom);
-  const [legendaryDeck] = useAtom(legendaryDeckAtom);
+  const [deck] = useAtom(rwDeckAtom);
+  const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [sw] = useAtom(swAtom);
   const [charm, setCharm] = useAtom(charmAtom);
   const [costume, setCostume] = useAtom(costumeAtom);

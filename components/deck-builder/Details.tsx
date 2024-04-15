@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import type { Memoria } from '@/domain/memoria/memoria';
-import { deckAtom, legendaryDeckAtom } from '@/jotai/memoriaAtoms';
+import { rwDeckAtom, rwLegendaryDeckAtom } from '@/jotai/memoriaAtoms';
 import { type StatusKind, parseSkill, statusKind } from '@/parser/skill';
 import { type SupportKind, parseSupport } from '@/parser/support';
 import { elementFilter, elementFilterMap } from '@/types/filterType';
@@ -137,8 +137,8 @@ export function intoSupportPattern(kind: SupportKind): SupportPattern {
 }
 
 export default function Details() {
-  const [deck] = useAtom(deckAtom);
-  const [legendaryDeck] = useAtom(legendaryDeckAtom);
+  const [deck] = useAtom(rwDeckAtom);
+  const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
 
   const skillName = Lens.fromPath<Memoria>()(['skill', 'name']);
   const skillDescription = Lens.fromPath<Memoria>()(['skill', 'description']);

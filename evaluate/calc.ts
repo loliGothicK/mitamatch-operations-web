@@ -4,9 +4,9 @@ import {
   charmAtom,
   compareModeAtom,
   costumeAtom,
-  deckAtom,
   defAtom,
-  legendaryDeckAtom,
+  rwDeckAtom,
+  rwLegendaryDeckAtom,
   spDefAtom,
   statusAtom,
 } from '@/jotai/memoriaAtoms';
@@ -40,8 +40,8 @@ export function calcFinalStatus(deck: MemoriaWithConcentration[]) {
 }
 
 export function calcDiff(candidate: MemoriaWithConcentration) {
-  const [deck] = useAtom(deckAtom);
-  const [legendaryDeck] = useAtom(legendaryDeckAtom);
+  const [deck] = useAtom(rwDeckAtom);
+  const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [compareMode] = useAtom(compareModeAtom);
   const [def] = useAtom(defAtom);
   const [spDef] = useAtom(spDefAtom);

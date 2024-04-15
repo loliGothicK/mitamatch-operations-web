@@ -21,8 +21,10 @@ import type {
   VanguardSupportSearch,
 } from '@/types/searchType';
 
+import { encodeDeck } from '@/actions/serde';
 import { charmList } from '@/domain/charm/charm';
 import { costumeList } from '@/domain/costume/costume';
+import Cookies from 'js-cookie';
 import { match } from 'ts-pattern';
 
 export const compareModeAtom = atom<Memoria | undefined>(undefined);
@@ -50,8 +52,43 @@ export const sortKind = [
 ] as const;
 export type SortKind = (typeof sortKind)[number];
 
-export const legendaryDeckAtom = atom<MemoriaWithConcentration[]>([]);
-export const deckAtom = atom<MemoriaWithConcentration[]>([]);
+const deckAtom = atom<MemoriaWithConcentration[]>([]);
+export const rwDeckAtom = atom(
+  get => get(deckAtom),
+  (
+    get,
+    set,
+    update:
+      | MemoriaWithConcentration[]
+      | ((prev: MemoriaWithConcentration[]) => MemoriaWithConcentration[]),
+  ) => {
+    const newValue =
+      typeof update === 'function' ? update(get(deckAtom)) : update;
+    Cookies.set(
+      'deck',
+      encodeDeck(get(swAtom), newValue, get(rwLegendaryDeckAtom)),
+    );
+    set(deckAtom, newValue);
+  },
+);
+
+const legendaryDeckAtom = atom<MemoriaWithConcentration[]>([]);
+export const rwLegendaryDeckAtom = atom(
+  get => get(legendaryDeckAtom),
+  (
+    get,
+    set,
+    update:
+      | MemoriaWithConcentration[]
+      | ((prev: MemoriaWithConcentration[]) => MemoriaWithConcentration[]),
+  ) => {
+    const newValue =
+      typeof update === 'function' ? update(get(legendaryDeckAtom)) : update;
+    Cookies.set('deck', encodeDeck(get(swAtom), get(rwDeckAtom), newValue));
+    set(legendaryDeckAtom, newValue);
+  },
+);
+
 export const swAtom = atom<'sword' | 'shield'>('shield');
 export const roleFilterAtom = atom<RoleFilterType[]>([
   'support',
@@ -199,8 +236,8 @@ export const filteredMemoriaAtom = atom(get => {
         assistSupport &&
         recoverySupport &&
         otherSupport &&
-        !get(deckAtom).some(({ name }) => memoria.name === name) &&
-        !get(legendaryDeckAtom).some(({ name }) => memoria.name === name)
+        !get(rwDeckAtom).some(({ name }) => memoria.name === name) &&
+        !get(rwLegendaryDeckAtom).some(({ name }) => memoria.name === name)
       );
     })
     .sort((a, b) => {

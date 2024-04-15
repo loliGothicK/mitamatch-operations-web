@@ -54,10 +54,10 @@ import type { Memoria } from '@/domain/memoria/memoria';
 import {
   type MemoriaWithConcentration,
   compareModeAtom,
-  deckAtom,
   filteredMemoriaAtom,
-  legendaryDeckAtom,
   roleFilterAtom,
+  rwDeckAtom,
+  rwLegendaryDeckAtom,
   sortKind,
   sortKindAtom,
   swAtom,
@@ -178,9 +178,8 @@ function Concentration({
 
 function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
   const { name, id, skill, support, concentration } = memoria;
-  const [sw] = useAtom(swAtom);
-  const [deck, setDeck] = useAtom(deckAtom);
-  const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [, setDeck] = useAtom(rwDeckAtom);
+  const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [concentrationValue, setConcentration] = useState(concentration);
   const [isLoaded, setIsLoaded] = useState(false);
   const [compare, setCompare] = useAtom(compareModeAtom);
@@ -235,10 +234,6 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     }
     setDeck(changeValue);
     setLegendaryDeck(changeValue);
-    Cookies.set(
-      'deck',
-      encodeDeck(sw, changeValue(deck), changeValue(legendaryDeck)),
-    );
   };
 
   const style = {
@@ -316,14 +311,6 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
                     setLegendaryDeck(prev =>
                       prev.filter(memoria => memoria.name !== name),
                     );
-                    Cookies.set(
-                      'deck',
-                      encodeDeck(
-                        sw,
-                        deck.filter(memoria => memoria.name !== name),
-                        legendaryDeck.filter(memoria => memoria.name !== name),
-                      ),
-                    );
                   }}
                 >
                   <Remove />
@@ -368,7 +355,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
 }
 
 function Deck() {
-  const [deck, setDeck] = useAtom(deckAtom);
+  const [deck, setDeck] = useAtom(rwDeckAtom);
 
   return (
     <Sortable items={deck} onChangeOrder={setDeck}>
@@ -388,7 +375,7 @@ function Deck() {
 }
 
 function LegendaryDeck() {
-  const [deck, setDeck] = useAtom(legendaryDeckAtom);
+  const [deck, setDeck] = useAtom(rwLegendaryDeckAtom);
 
   return (
     <Sortable items={deck} onChangeOrder={setDeck}>
@@ -543,9 +530,8 @@ function Compare({ candidate }: { candidate: MemoriaWithConcentration }) {
 function VirtualizedList() {
   const theme = useTheme();
   const [memoria] = useAtom(filteredMemoriaAtom);
-  const [sw] = useAtom(swAtom);
-  const [deck, setDeck] = useAtom(deckAtom);
-  const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [, setDeck] = useAtom(rwDeckAtom);
+  const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [isLoaded, setIsLoaded] = useState(false);
   const [compare, setCompare] = useAtom(compareModeAtom);
   const [open, setOpen] = useState(false);
@@ -614,24 +600,8 @@ function VirtualizedList() {
                             setLegendaryDeck(prev =>
                               addMemoria(prev, memoria[index]),
                             );
-                            Cookies.set(
-                              'deck',
-                              encodeDeck(
-                                sw,
-                                deck,
-                                addMemoria(legendaryDeck, memoria[index]),
-                              ),
-                            );
                           } else {
                             setDeck(prev => addMemoria(prev, memoria[index]));
-                            Cookies.set(
-                              'deck',
-                              encodeDeck(
-                                sw,
-                                addMemoria(deck, memoria[index]),
-                                legendaryDeck,
-                              ),
-                            );
                           }
                         }}
                       >
@@ -715,32 +685,11 @@ function VirtualizedList() {
                         memoria.id === compare?.id ? hold : memoria,
                       ),
                     );
-                    Cookies.set(
-                      'deck',
-                      encodeDeck(
-                        sw,
-                        deck,
-                        legendaryDeck.map(memoria =>
-                          memoria.id === compare?.id ? hold : memoria,
-                        ),
-                      ),
-                    );
                   } else {
                     setDeck(prev =>
                       [...prev].map(memoria =>
                         // biome-ignore lint/style/noNonNullAssertion: <explanation>
                         memoria.id === compare?.id ? hold! : memoria,
-                      ),
-                    );
-                    Cookies.set(
-                      'deck',
-                      encodeDeck(
-                        sw,
-                        deck.map(memoria =>
-                          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-                          memoria.id === compare?.id ? hold! : memoria,
-                        ),
-                        legendaryDeck,
                       ),
                     );
                   }
@@ -824,8 +773,8 @@ function Source() {
 }
 
 function ToggleButtons() {
-  const [, setDeck] = useAtom(deckAtom);
-  const [, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [, setDeck] = useAtom(rwDeckAtom);
+  const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
   const [, setRoleFilter] = useAtom(roleFilterAtom);
   const [, setCompare] = useAtom(compareModeAtom);
@@ -922,8 +871,8 @@ const fstAtom = atomWithStorage('fst', true);
 export function DeckBuilder() {
   const params = useSearchParams();
   const theme = useTheme();
-  const [deck, setDeck] = useAtom(deckAtom);
-  const [legendaryDeck, setLegendaryDeck] = useAtom(legendaryDeckAtom);
+  const [deck, setDeck] = useAtom(rwDeckAtom);
+  const [legendaryDeck, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
   const [, setRoleFilter] = useAtom(roleFilterAtom);
   const pathname = usePathname();
