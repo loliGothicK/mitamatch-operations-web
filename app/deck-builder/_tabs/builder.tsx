@@ -450,15 +450,15 @@ function Compare() {
 
   const style = {
     display: 'grid',
-    gridTemplateColumns: 'auto 1fr',
+    gridTemplateColumns: 'auto auto 1fr',
     width: 'max-content',
     maxWidth: '100%',
     padding: '2rem',
     lineHeight: 2,
   };
 
-  const intoRow = ([type, value]: [string, [number, number]]) => {
-    if (value[1] - value[0] > 0) {
+  const intoRow = ([type, [before, after]]: [string, [number, number]]) => {
+    if (after - before > 0) {
       return (
         <>
           <dt
@@ -466,8 +466,9 @@ function Compare() {
               paddingRight: '1em',
               textAlignLast: 'justify',
             }}
-          >{`${type}: +${value[1] - value[0]}`}</dt>
-          <dd>{`(${value[0]} => ${value[1]})`}</dd>
+          >{`${type}:`}</dt>
+          <dd>{`+${after - before}`}</dd>
+          <dd>{`(${before} => ${before})`}</dd>
         </>
       );
     }
@@ -478,8 +479,9 @@ function Compare() {
             paddingRight: '1em',
             textAlignLast: 'justify',
           }}
-        >{`${type}: ${value[1] - value[0]}`}</dt>
-        <dd>{`(${value[0]} => ${value[1]})`}</dd>
+        >{`${type}:`}</dt>
+        <dd>{`${after - before}`}</dd>
+        <dd>{`(${before} => ${after})`}</dd>
       </>
     );
   };
