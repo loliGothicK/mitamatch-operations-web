@@ -1,23 +1,15 @@
+import type { Charm } from '@/domain/charm/charm';
+import type { Costume } from '@/domain/costume/costume';
 import { evaluate } from '@/evaluate/evaluate';
-import {
-  type MemoriaWithConcentration,
-  charmAtom,
-  compareModeAtom,
-  costumeAtom,
-  defAtom,
-  rwDeckAtom,
-  rwLegendaryDeckAtom,
-  spDefAtom,
-  statusAtom,
-} from '@/jotai/memoriaAtoms';
+import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
 import { type StatusKind, statusKind } from '@/parser/skill';
-import { useAtom } from 'jotai';
 
-export function calcFinalStatus(deck: MemoriaWithConcentration[]) {
-  const [selfStatus] = useAtom(statusAtom);
-  const [charm] = useAtom(charmAtom);
-  const [costume] = useAtom(costumeAtom);
-
+export function calcFinalStatus(
+  deck: MemoriaWithConcentration[],
+  selfStatus: [number, number, number, number],
+  charm: Charm,
+  costume: Costume,
+) {
   return deck.reduce(
     (
       prev: [number, number, number, number],
@@ -39,21 +31,22 @@ export function calcFinalStatus(deck: MemoriaWithConcentration[]) {
   );
 }
 
-export function calcDiff(candidate: MemoriaWithConcentration) {
-  const [deck] = useAtom(rwDeckAtom);
-  const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
-  const [compareMode] = useAtom(compareModeAtom);
-  const [def] = useAtom(defAtom);
-  const [spDef] = useAtom(spDefAtom);
-  const [charm] = useAtom(charmAtom);
-  const [costume] = useAtom(costumeAtom);
-
+export function calcDiff(
+  candidate: MemoriaWithConcentration,
+  deck: MemoriaWithConcentration[],
+  legendaryDeck: MemoriaWithConcentration[],
+  compareMode: MemoriaWithConcentration,
+  selfStatus: [number, number, number, number],
+  [def, spDef]: [number, number],
+  charm: Charm,
+  costume: Costume,
+) {
   const deckBefore = [...legendaryDeck, ...deck];
   const deckAfter = [...legendaryDeck, ...deck].map(m =>
     m.id === compareMode?.id ? candidate : m,
   );
-  const statusBefore = calcFinalStatus(deckBefore);
-  const statusAfter = calcFinalStatus(deckAfter);
+  const statusBefore = calcFinalStatus(deckBefore, selfStatus, charm, costume);
+  const statusAfter = calcFinalStatus(deckAfter, selfStatus, charm, costume);
 
   const resultBefore = evaluate(
     deckBefore,

@@ -27,7 +27,12 @@ import { costumeList } from '@/domain/costume/costume';
 import Cookies from 'js-cookie';
 import { match } from 'ts-pattern';
 
-export const compareModeAtom = atom<Memoria | undefined>(undefined);
+export const compareModeAtom = atom<MemoriaWithConcentration | undefined>(
+  undefined,
+);
+export const candidateAtom = atom<MemoriaWithConcentration | undefined>(
+  undefined,
+);
 export const charmAtom = atom(charmList.reverse()[0]);
 export const costumeAtom = atom(costumeList.reverse()[0]);
 export const defAtom = atom(400_000);

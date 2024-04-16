@@ -11,6 +11,7 @@ import { atomWithStorage } from 'jotai/utils';
 
 import {
   Add,
+  ArrowRightAlt,
   ClearAll,
   FilterAlt,
   Launch,
@@ -19,6 +20,7 @@ import {
   SearchOutlined,
 } from '@mui/icons-material';
 import {
+  AppBar,
   Avatar,
   Box,
   Button,
@@ -53,22 +55,30 @@ import Sortable from '@/components/sortable/Sortable';
 import type { Memoria } from '@/domain/memoria/memoria';
 import {
   type MemoriaWithConcentration,
+  candidateAtom,
+  charmAtom,
   compareModeAtom,
+  costumeAtom,
+  defAtom,
   filteredMemoriaAtom,
   roleFilterAtom,
   rwDeckAtom,
   rwLegendaryDeckAtom,
   sortKind,
   sortKindAtom,
+  spDefAtom,
+  statusAtom,
   swAtom,
 } from '@/jotai/memoriaAtoms';
 
 import { calcDiff } from '@/evaluate/calc';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
 import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
+import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon';
 import { AutoSizer, List } from 'react-virtualized';
 import 'react-virtualized/styles.css';
 import { match } from 'ts-pattern';
@@ -134,11 +144,11 @@ function Concentration({
   handleConcentration,
 }: {
   concentration: number;
-  handleConcentration: () => void;
+  handleConcentration: (() => void) | false;
 }) {
   return (
     <IconButton
-      onClick={handleConcentration}
+      onClick={handleConcentration === false ? undefined : handleConcentration}
       sx={{
         top: 25,
         left: 60,
@@ -176,7 +186,17 @@ function Concentration({
   );
 }
 
-function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
+function MemoriaItem({
+  memoria,
+  remove,
+  onConcentrationChange,
+  onContextMenu,
+}: {
+  memoria: MemoriaWithConcentration;
+  remove?: false;
+  onConcentrationChange?: ((value: number) => void) | false;
+  onContextMenu?: false;
+}) {
   const { name, id, skill, support, concentration } = memoria;
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
@@ -232,8 +252,14 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
     } else {
       setConcentration(4);
     }
-    setDeck(changeValue);
-    setLegendaryDeck(changeValue);
+    if (onConcentrationChange) {
+      onConcentrationChange(
+        concentrationValue > 0 ? concentrationValue - 1 : 4,
+      );
+    } else {
+      setDeck(changeValue);
+      setLegendaryDeck(changeValue);
+    }
   };
 
   const style = {
@@ -282,7 +308,7 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
                 onLoad={() => {
                   setIsLoaded(true);
                 }}
-                onContextMenu={handleContextMenu}
+                onContextMenu={onContextMenu ? undefined : handleContextMenu}
               />
             </Tooltip>
           </div>
@@ -297,24 +323,26 @@ function MemoriaItem({ memoria }: { memoria: MemoriaWithConcentration }) {
               position={'top'}
               actionPosition={'left'}
               actionIcon={
-                <IconButton
-                  sx={{
-                    color: 'rgba(255, 50, 50, 0.9)',
-                    bgcolor: 'rgba(0, 0, 0, 0.2)',
-                    zIndex: Number.POSITIVE_INFINITY,
-                  }}
-                  aria-label={`remove ${name}`}
-                  onClick={() => {
-                    setDeck(prev =>
-                      prev.filter(memoria => memoria.name !== name),
-                    );
-                    setLegendaryDeck(prev =>
-                      prev.filter(memoria => memoria.name !== name),
-                    );
-                  }}
-                >
-                  <Remove />
-                </IconButton>
+                remove === undefined && (
+                  <IconButton
+                    sx={{
+                      color: 'rgba(255, 50, 50, 0.9)',
+                      bgcolor: 'rgba(0, 0, 0, 0.2)',
+                      zIndex: Number.POSITIVE_INFINITY,
+                    }}
+                    aria-label={`remove ${name}`}
+                    onClick={() => {
+                      setDeck(prev =>
+                        prev.filter(memoria => memoria.name !== name),
+                      );
+                      setLegendaryDeck(prev =>
+                        prev.filter(memoria => memoria.name !== name),
+                      );
+                    }}
+                  >
+                    <Remove />
+                  </IconButton>
+                )
               }
             />
           </Box>
@@ -394,55 +422,142 @@ function LegendaryDeck() {
   );
 }
 
-function Compare({ candidate }: { candidate: MemoriaWithConcentration }) {
+function Compare() {
   const [compare] = useAtom(compareModeAtom);
-  const diff = calcDiff(candidate);
+  const [candidate, setCandidate] = useAtom(candidateAtom);
+  const [deck] = useAtom(rwDeckAtom);
+  const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
+  const [selfStatus] = useAtom(statusAtom);
+  const [def] = useAtom(defAtom);
+  const [spDef] = useAtom(spDefAtom);
+  const [charm] = useAtom(charmAtom);
+  const [costume] = useAtom(costumeAtom);
+
+  if (candidate === undefined || compare === undefined) {
+    return <Typography>error!</Typography>;
+  }
+
+  const diff = calcDiff(
+    candidate,
+    deck,
+    legendaryDeck,
+    compare,
+    selfStatus,
+    [def, spDef],
+    charm,
+    costume,
+  );
   return (
-    <>
-      <Stack>
-        <Typography variant='body2'>{`${compare?.name} => ${candidate.name}`}</Typography>
-        <Typography variant='body2'>{`${candidate.skill.name} => ${compare?.skill.name}`}</Typography>
-        <Typography variant='body2'>{`${candidate.support.name} => ${compare?.support.name}`}</Typography>
-      </Stack>
-      <Divider sx={{ margin: 2 }} />
-      <Stack>
-        {/* damage */}
-        {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0 &&
-          (() => {
-            if (diff.expectedToalDamage[1] - diff.expectedToalDamage[0] > 0) {
+    <Grid
+      container
+      direction={'column'}
+      alignItems='center'
+      justifyContent='space-between'
+    >
+      <Grid container item>
+        <Grid item xs={5}>
+          <Stack direction={'row'}>
+            <Grid container alignItems={'center'} justifyContent={'center'}>
+              <Grid item>
+                <MemoriaItem
+                  memoria={compare}
+                  onConcentrationChange={false}
+                  onContextMenu={false}
+                />
+              </Grid>
+              <Grid item>
+                <Stack direction={'column'} paddingLeft={5}>
+                  <Typography variant='body2'>{`${compare?.name}`}</Typography>
+                  <Typography variant='body2'>{`${compare.skill.name}`}</Typography>
+                  <Typography variant='body2'>{`${compare.support.name}`}</Typography>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Stack>
+        </Grid>
+        <Grid item xs={2}>
+          <ArrowRightAlt fontSize={'large'} />
+        </Grid>
+        <Grid item xs={5}>
+          <Stack direction={'row'}>
+            <Grid container alignItems={'center'} justifyContent={'center'}>
+              <Grid item>
+                <MemoriaItem
+                  memoria={candidate}
+                  onConcentrationChange={value => {
+                    setCandidate({ ...candidate, concentration: value });
+                  }}
+                  onContextMenu={false}
+                />
+              </Grid>
+              <Grid item>
+                <Stack direction={'column'} paddingLeft={5}>
+                  <Typography variant='body2'>{`${candidate?.name}`}</Typography>
+                  <Typography variant='body2'>{`${candidate.skill.name}`}</Typography>
+                  <Typography variant='body2'>{`${candidate.support.name}`}</Typography>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Stack>
+        </Grid>
+      </Grid>
+      <Divider textAlign={'left'} sx={{ margin: 2 }}>
+        {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0
+          ? 'ダメージ'
+          : '回復'}
+      </Divider>
+      <Grid item>
+        <Stack>
+          {/* damage */}
+          {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0 &&
+            (() => {
+              if (diff.expectedToalDamage[1] - diff.expectedToalDamage[0] > 0) {
+                return (
+                  <Stack direction={'row'}>
+                    <Typography variant='body2' color='success'>
+                      +{diff.expectedToalDamage[1] - diff.expectedToalDamage[0]}
+                    </Typography>
+                    <Typography variant='body2'>
+                      {`(${diff.expectedToalDamage[0]} => ${diff.expectedToalDamage[1]})`}
+                    </Typography>
+                  </Stack>
+                );
+              }
               return (
                 <Stack direction={'row'}>
-                  <Typography variant='body2' color='success'>
-                    +{diff.expectedToalDamage[1] - diff.expectedToalDamage[0]}
+                  <Typography variant='body2' color='error'>
+                    {diff.expectedToalDamage[1] - diff.expectedToalDamage[0]}
                   </Typography>
                   <Typography variant='body2'>
                     {`(${diff.expectedToalDamage[0]} => ${diff.expectedToalDamage[1]})`}
                   </Typography>
                 </Stack>
               );
-            }
-            return (
-              <Stack direction={'row'}>
-                <Typography variant='body2' color='error'>
-                  {diff.expectedToalDamage[1] - diff.expectedToalDamage[0]}
-                </Typography>
-                <Typography variant='body2'>
-                  {`(${diff.expectedToalDamage[0]} => ${diff.expectedToalDamage[1]})`}
-                </Typography>
-              </Stack>
-            );
-          })()}
-        {/* recovery */}
-        {diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] !== 0 &&
-          (() => {
-            if (
-              diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] >
-              0
-            ) {
+            })()}
+          {/* recovery */}
+          {diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] !==
+            0 &&
+            (() => {
+              if (
+                diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] >
+                0
+              ) {
+                return (
+                  <Stack direction={'row'}>
+                    <Typography variant='body2' color='success'>
+                      +
+                      {diff.expectedTotalRecovery[1] -
+                        diff.expectedTotalRecovery[0]}
+                    </Typography>
+                    <Typography variant='body2'>
+                      {`(${diff.expectedTotalRecovery[0]} => ${diff.expectedTotalRecovery[1]})`}
+                    </Typography>
+                  </Stack>
+                );
+              }
               return (
                 <Stack direction={'row'}>
-                  <Typography variant='body2' color='success'>
-                    +
+                  <Typography variant='body2' color='error'>
                     {diff.expectedTotalRecovery[1] -
                       diff.expectedTotalRecovery[0]}
                   </Typography>
@@ -451,79 +566,72 @@ function Compare({ candidate }: { candidate: MemoriaWithConcentration }) {
                   </Typography>
                 </Stack>
               );
-            }
-            return (
-              <Stack direction={'row'}>
-                <Typography variant='body2' color='error'>
-                  {diff.expectedTotalRecovery[1] -
-                    diff.expectedTotalRecovery[0]}
-                </Typography>
-                <Typography variant='body2'>
-                  {`(${diff.expectedTotalRecovery[0]} => ${diff.expectedTotalRecovery[1]})`}
-                </Typography>
-              </Stack>
-            );
-          })()}
-      </Stack>
+            })()}
+        </Stack>
+      </Grid>
       <Divider sx={{ margin: 2 }} />
-      <Stack>
-        {[...diff.expectedTotalBuff.entries()]
-          .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
-          .map(([type, value]) => {
-            if (value[1] - value[0] > 0) {
+      <Grid item>
+        <Stack>
+          {[...diff.expectedTotalBuff.entries()]
+            .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+            .map(([type, value]) => {
+              if (value[1] - value[0] > 0) {
+                return (
+                  <Stack direction={'row'} key={type}>
+                    <Typography variant='body2' color='success'>
+                      {`${type}: +${value[1] - value[0]}`}
+                    </Typography>
+                    <Typography variant='body2'>
+                      {`(${value[0]} => ${value[1]})`}
+                    </Typography>
+                  </Stack>
+                );
+              }
               return (
                 <Stack direction={'row'} key={type}>
-                  <Typography variant='body2' color='success'>
-                    {`${type}: +${value[1] - value[0]}`}
+                  <Typography variant='body2' color='error'>
+                    {`${type}: ${value[1] - value[0]}`}
                   </Typography>
                   <Typography variant='body2'>
                     {`(${value[0]} => ${value[1]})`}
                   </Typography>
                 </Stack>
               );
-            }
-            return (
-              <Stack direction={'row'} key={type}>
-                <Typography variant='body2' color='error'>
-                  {`${type}: ${value[1] - value[0]}`}
-                </Typography>
-                <Typography variant='body2'>
-                  {`(${value[0]} => ${value[1]})`}
-                </Typography>
-              </Stack>
-            );
-          })}
-      </Stack>
+            })}
+        </Stack>
+      </Grid>
       <Divider sx={{ margin: 2 }} />
-      <Stack>
-        {[...diff.expectedTotalDebuff.entries()]
-          .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
-          .map(([type, value]) => {
-            if (value[1] - value[0] > 0) {
+      <Grid item>
+        <Stack>
+          {[...diff.expectedTotalDebuff.entries()]
+            .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+            .map(([type, value]) => {
+              if (value[1] - value[0] > 0) {
+                return (
+                  <Stack direction={'row'} key={type}>
+                    <Typography variant='body2' color='success'>
+                      {`${type}: +${value[1] - value[0]}`}
+                    </Typography>
+                    <Typography variant='body2'>
+                      {`(${value[0]} => ${value[1]})`}
+                    </Typography>
+                  </Stack>
+                );
+              }
               return (
                 <Stack direction={'row'} key={type}>
-                  <Typography variant='body2' color='success'>
-                    {`${type}: +${value[1] - value[0]}`}
+                  <Typography variant='body2' color='error'>
+                    {`${type}: ${value[1] - value[0]}`}
                   </Typography>
                   <Typography variant='body2'>
                     {`(${value[0]} => ${value[1]})`}
                   </Typography>
                 </Stack>
               );
-            }
-            return (
-              <Stack direction={'row'} key={type}>
-                <Typography variant='body2' color='error'>
-                  {`${type}: ${value[1] - value[0]}`}
-                </Typography>
-                <Typography variant='body2'>
-                  {`(${value[0]} => ${value[1]})`}
-                </Typography>
-              </Stack>
-            );
-          })}
-      </Stack>
-    </>
+            })}
+        </Stack>
+      </Grid>
+    </Grid>
   );
 }
 
@@ -533,11 +641,9 @@ function VirtualizedList() {
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [compare, setCompare] = useAtom(compareModeAtom);
   const [open, setOpen] = useState(false);
-  const [hold, setHold] = useState<MemoriaWithConcentration | undefined>(
-    undefined,
-  );
+  const [compare, setCompare] = useAtom(compareModeAtom);
+  const [candidate, setCandidate] = useAtom(candidateAtom);
 
   const addMemoria = (
     prev: MemoriaWithConcentration[],
@@ -593,7 +699,10 @@ function VirtualizedList() {
                         onClick={() => {
                           if (compare !== undefined) {
                             setOpen(true);
-                            setHold({ ...memoria[index], concentration: 4 });
+                            setCandidate({
+                              ...memoria[index],
+                              concentration: 4,
+                            });
                             return;
                           }
                           if (memoria[index].labels.includes('legendary')) {
@@ -662,46 +771,61 @@ function VirtualizedList() {
           />
         )}
       </AutoSizer>
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        {compare?.labels.includes('legendary') ===
-        hold?.labels.includes('legendary') ? (
-          <>
+      <Dialog fullScreen open={open} onClose={() => setOpen(false)}>
+        <AppBar sx={{ position: 'relative' }}>
+          <Toolbar>
+            <IconButton
+              edge='start'
+              color='inherit'
+              onClick={() => setOpen(false)}
+              aria-label='close'
+            >
+              <CloseIcon />
+            </IconButton>
+
+            <Typography sx={{ ml: 2, flex: 1 }} variant='h6' component='div'>
+              期待値比較
+            </Typography>
+            <Button
+              autoFocus
+              color='inherit'
+              onClick={() => {
+                if (candidate?.labels.includes('legendary')) {
+                  setLegendaryDeck(prev =>
+                    [...prev].map(memoria =>
+                      memoria.id === compare?.id ? candidate : memoria,
+                    ),
+                  );
+                } else {
+                  setDeck(prev =>
+                    [...prev].map(memoria =>
+                      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                      memoria.id === compare?.id ? candidate! : memoria,
+                    ),
+                  );
+                }
+                setOpen(false);
+                setCandidate(undefined);
+                setCompare(undefined);
+              }}
+            >
+              save
+            </Button>
+          </Toolbar>
+        </AppBar>
+        <Grid
+          container
+          sx={{
+            paddingLeft: { xs: '5%', md: '10%', lg: '20%' },
+            paddingRight: { xs: '5%', md: '10%', lg: '20%' },
+          }}
+        >
+          {compare?.labels.includes('legendary') ===
+          candidate?.labels.includes('legendary') ? (
             <DialogContent>
-              <Typography id='modal-modal-title' variant='h6' component='h2'>
-                Compare
-              </Typography>
-              {/* biome-ignore lint/style/noNonNullAssertion: <explanation> */}
-              <Compare candidate={hold!} />
+              <Compare />
             </DialogContent>
-            <DialogActions>
-              <Button
-                onClick={() => {
-                  setOpen(false);
-                  setHold(undefined);
-                  setCompare(undefined);
-                  if (hold?.labels.includes('legendary')) {
-                    setLegendaryDeck(prev =>
-                      [...prev].map(memoria =>
-                        memoria.id === compare?.id ? hold : memoria,
-                      ),
-                    );
-                  } else {
-                    setDeck(prev =>
-                      [...prev].map(memoria =>
-                        // biome-ignore lint/style/noNonNullAssertion: <explanation>
-                        memoria.id === compare?.id ? hold! : memoria,
-                      ),
-                    );
-                  }
-                }}
-              >
-                Comfirm
-              </Button>
-              <Button onClick={() => setOpen(false)}>Close</Button>
-            </DialogActions>
-          </>
-        ) : (
-          <>
+          ) : (
             <DialogContent>
               <Typography id='modal-modal-title' variant='h6' component='h2'>
                 Error
@@ -710,11 +834,8 @@ function VirtualizedList() {
                 レジェンダリーメモリアと通常メモリアを比較することはできません。
               </Typography>
             </DialogContent>
-            <DialogActions>
-              <Button onClick={() => setOpen(false)}>Close</Button>
-            </DialogActions>
-          </>
-        )}
+          )}
+        </Grid>
       </Dialog>
     </>
   );

@@ -73,7 +73,12 @@ export function Calculator() {
   const [charmFilter, setCharmFilter] = useAtom(charmFilterAtom);
   const [costumeFilter, setCostumeFilter] = useAtom(costumeFilterAtom);
 
-  const finalStatus = calcFinalStatus([...deck, ...legendaryDeck]);
+  const finalStatus = calcFinalStatus(
+    [...deck, ...legendaryDeck],
+    selfStatus,
+    charm,
+    costume,
+  );
 
   const { skill, supportBuff, supportDebuff } = evaluate(
     [...deck, ...legendaryDeck],
