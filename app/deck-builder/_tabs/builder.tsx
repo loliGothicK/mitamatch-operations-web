@@ -448,6 +448,42 @@ function Compare() {
     costume,
   );
 
+  const style = {
+    display: 'grid',
+    gridTemplateColumns: 'auto 1fr',
+    width: 'max-content',
+    maxWidth: '100%',
+    padding: '2rem',
+    lineHeight: 2,
+  };
+
+  const intoRow = ([type, value]: [string, [number, number]]) => {
+    if (value[1] - value[0] > 0) {
+      return (
+        <>
+          <dt
+            style={{
+              paddingRight: '1em',
+              textAlignLast: 'justify',
+            }}
+          >{`${type}: +${value[1] - value[0]}`}</dt>
+          <dd>{`(${value[0]} => ${value[1]})`}</dd>
+        </>
+      );
+    }
+    return (
+      <>
+        <dt
+          style={{
+            paddingRight: '1em',
+            textAlignLast: 'justify',
+          }}
+        >{`${type}: ${value[1] - value[0]}`}</dt>
+        <dd>{`(${value[0]} => ${value[1]})`}</dd>
+      </>
+    );
+  };
+
   return (
     <Grid
       container
@@ -508,142 +544,34 @@ function Compare() {
           : '回復'}
       </Divider>
       <Grid item>
-        <Stack>
+        <dl style={style}>
           {/* damage */}
           {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0 &&
-            (() => {
-              if (diff.expectedToalDamage[1] - diff.expectedToalDamage[0] > 0) {
-                return (
-                  <Stack direction={'row'}>
-                    <Typography variant='body2' color='success'>
-                      {`ダメージ: +${
-                        diff.expectedToalDamage[1] - diff.expectedToalDamage[0]
-                      }`}
-                    </Typography>
-                    <Typography variant='body2'>
-                      {`(${diff.expectedToalDamage[0]} => ${diff.expectedToalDamage[1]})`}
-                    </Typography>
-                  </Stack>
-                );
-              }
-              return (
-                <Stack direction={'row'}>
-                  <Typography variant='body2' color='error'>
-                    {`ダメージ: ${
-                      diff.expectedToalDamage[1] - diff.expectedToalDamage[0]
-                    }`}
-                  </Typography>
-                  <Typography variant='body2'>
-                    {`(${diff.expectedToalDamage[0]} => ${diff.expectedToalDamage[1]})`}
-                  </Typography>
-                </Stack>
-              );
-            })()}
+            intoRow(['ダメージ', diff.expectedToalDamage])}
           {/* recovery */}
           {diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] !==
-            0 &&
-            (() => {
-              if (
-                diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] >
-                0
-              ) {
-                return (
-                  <Stack direction={'row'}>
-                    <Typography variant='body2' color='success'>
-                      {`回復: +
-                      ${
-                        diff.expectedTotalRecovery[1] -
-                        diff.expectedTotalRecovery[0]
-                      }`}
-                    </Typography>
-                    <Typography variant='body2'>
-                      {`(${diff.expectedTotalRecovery[0]} => ${diff.expectedTotalRecovery[1]})`}
-                    </Typography>
-                  </Stack>
-                );
-              }
-              return (
-                <Stack direction={'row'}>
-                  <Typography variant='body2' color='error'>
-                    {`回復: +
-                      ${
-                        diff.expectedTotalRecovery[1] -
-                        diff.expectedTotalRecovery[0]
-                      }`}
-                  </Typography>
-                  <Typography variant='body2'>
-                    {`(${diff.expectedTotalRecovery[0]} => ${diff.expectedTotalRecovery[1]})`}
-                  </Typography>
-                </Stack>
-              );
-            })()}
-        </Stack>
+            0 && intoRow(['回復', diff.expectedTotalRecovery])}
+        </dl>
       </Grid>
       <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
         {'バフ'}
       </Divider>
       <Grid item>
-        <Stack>
+        <dl style={style}>
           {[...diff.expectedTotalBuff.entries()]
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
-            .map(([type, value]) => {
-              if (value[1] - value[0] > 0) {
-                return (
-                  <Stack direction={'row'} key={type}>
-                    <Typography variant='body2' color='success'>
-                      {`${type}: +${value[1] - value[0]}`}
-                    </Typography>
-                    <Typography variant='body2'>
-                      {`(${value[0]} => ${value[1]})`}
-                    </Typography>
-                  </Stack>
-                );
-              }
-              return (
-                <Stack direction={'row'} key={type}>
-                  <Typography variant='body2' color='error'>
-                    {`${type}: ${value[1] - value[0]}`}
-                  </Typography>
-                  <Typography variant='body2'>
-                    {`(${value[0]} => ${value[1]})`}
-                  </Typography>
-                </Stack>
-              );
-            })}
-        </Stack>
+            .map(([type, value]) => intoRow([type, value]))}
+        </dl>
       </Grid>
       <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
         {'デバフ'}
       </Divider>
       <Grid item>
-        <Stack>
+        <dl style={style}>
           {[...diff.expectedTotalDebuff.entries()]
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
-            .map(([type, value]) => {
-              if (value[1] - value[0] > 0) {
-                return (
-                  <Stack direction={'row'} key={type}>
-                    <Typography variant='body2' color='success'>
-                      {`${type}: +${value[1] - value[0]}`}
-                    </Typography>
-                    <Typography variant='body2'>
-                      {`(${value[0]} => ${value[1]})`}
-                    </Typography>
-                  </Stack>
-                );
-              }
-              return (
-                <Stack direction={'row'} key={type}>
-                  <Typography variant='body2' color='error'>
-                    {`${type}: ${value[1] - value[0]}`}
-                  </Typography>
-                  <Typography variant='body2'>
-                    {`(${value[0]} => ${value[1]})`}
-                  </Typography>
-                </Stack>
-              );
-            })}
-        </Stack>
+            .map(([type, value]) => intoRow([type, value]))}
+        </dl>
       </Grid>
     </Grid>
   );
