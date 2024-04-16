@@ -423,6 +423,7 @@ function LegendaryDeck() {
 }
 
 function Compare() {
+  const theme = useTheme();
   const [compare] = useAtom(compareModeAtom);
   const [candidate, setCandidate] = useAtom(candidateAtom);
   const [deck] = useAtom(rwDeckAtom);
@@ -465,9 +466,14 @@ function Compare() {
             style={{
               paddingRight: '1em',
               textAlignLast: 'justify',
+              color: theme.palette.mode === 'dark' ? '#16A766' : '#077D55',
             }}
           >{`${type}:`}</dt>
-          <dd>{`+${after - before}`}</dd>
+          <dd
+            style={{
+              color: theme.palette.mode === 'dark' ? '#16A766' : '#077D55',
+            }}
+          >{`+${after - before}`}</dd>
           <dd>{`(${before} => ${before})`}</dd>
         </>
       );
@@ -478,9 +484,14 @@ function Compare() {
           style={{
             paddingRight: '1em',
             textAlignLast: 'justify',
+            color: theme.palette.mode === 'dark' ? '#FA5343' : '#D91F11',
           }}
         >{`${type}:`}</dt>
-        <dd>{`${after - before}`}</dd>
+        <dd
+          style={{
+            color: theme.palette.mode === 'dark' ? '#FA5343' : '#D91F11',
+          }}
+        >{`${after - before}`}</dd>
         <dd>{`(${before} => ${after})`}</dd>
       </>
     );
