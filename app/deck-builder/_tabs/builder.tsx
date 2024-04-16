@@ -475,7 +475,7 @@ function Compare() {
             </Grid>
           </Stack>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2} paddingTop={4}>
           <ArrowRightAlt fontSize={'large'} />
         </Grid>
         <Grid item xs={5}>
@@ -501,11 +501,7 @@ function Compare() {
           </Stack>
         </Grid>
       </Grid>
-      <Divider textAlign={'left'} sx={{ margin: 2 }}>
-        {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0
-          ? 'ダメージ'
-          : '回復'}
-      </Divider>
+      <Divider sx={{ margin: 2, width: '30vw' }} />
       <Grid item>
         <Stack>
           {/* damage */}
@@ -515,7 +511,9 @@ function Compare() {
                 return (
                   <Stack direction={'row'}>
                     <Typography variant='body2' color='success'>
-                      +{diff.expectedToalDamage[1] - diff.expectedToalDamage[0]}
+                      {`ダメージ: +${
+                        diff.expectedToalDamage[1] - diff.expectedToalDamage[0]
+                      }`}
                     </Typography>
                     <Typography variant='body2'>
                       {`(${diff.expectedToalDamage[0]} => ${diff.expectedToalDamage[1]})`}
@@ -526,7 +524,9 @@ function Compare() {
               return (
                 <Stack direction={'row'}>
                   <Typography variant='body2' color='error'>
-                    {diff.expectedToalDamage[1] - diff.expectedToalDamage[0]}
+                    {`ダメージ: ${
+                      diff.expectedToalDamage[1] - diff.expectedToalDamage[0]
+                    }`}
                   </Typography>
                   <Typography variant='body2'>
                     {`(${diff.expectedToalDamage[0]} => ${diff.expectedToalDamage[1]})`}
@@ -545,9 +545,11 @@ function Compare() {
                 return (
                   <Stack direction={'row'}>
                     <Typography variant='body2' color='success'>
-                      +
-                      {diff.expectedTotalRecovery[1] -
-                        diff.expectedTotalRecovery[0]}
+                      {`回復: +
+                      ${
+                        diff.expectedTotalRecovery[1] -
+                        diff.expectedTotalRecovery[0]
+                      }`}
                     </Typography>
                     <Typography variant='body2'>
                       {`(${diff.expectedTotalRecovery[0]} => ${diff.expectedTotalRecovery[1]})`}
@@ -558,8 +560,11 @@ function Compare() {
               return (
                 <Stack direction={'row'}>
                   <Typography variant='body2' color='error'>
-                    {diff.expectedTotalRecovery[1] -
-                      diff.expectedTotalRecovery[0]}
+                    {`回復: +
+                      ${
+                        diff.expectedTotalRecovery[1] -
+                        diff.expectedTotalRecovery[0]
+                      }`}
                   </Typography>
                   <Typography variant='body2'>
                     {`(${diff.expectedTotalRecovery[0]} => ${diff.expectedTotalRecovery[1]})`}
@@ -569,7 +574,7 @@ function Compare() {
             })()}
         </Stack>
       </Grid>
-      <Divider sx={{ margin: 2 }} />
+      <Divider sx={{ margin: 2, width: '30vw' }} />
       <Grid item>
         <Stack>
           {[...diff.expectedTotalBuff.entries()]
@@ -600,7 +605,7 @@ function Compare() {
             })}
         </Stack>
       </Grid>
-      <Divider sx={{ margin: 2 }} />
+      <Divider sx={{ margin: 2, width: '30vw' }} />
       <Grid item>
         <Stack>
           {[...diff.expectedTotalDebuff.entries()]
