@@ -447,6 +447,7 @@ function Compare() {
     charm,
     costume,
   );
+
   return (
     <Grid
       container
@@ -501,7 +502,11 @@ function Compare() {
           </Stack>
         </Grid>
       </Grid>
-      <Divider sx={{ margin: 2, width: '30vw' }} />
+      <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
+        {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0
+          ? 'ダメージ'
+          : '回復'}
+      </Divider>
       <Grid item>
         <Stack>
           {/* damage */}
@@ -574,7 +579,9 @@ function Compare() {
             })()}
         </Stack>
       </Grid>
-      <Divider sx={{ margin: 2, width: '30vw' }} />
+      <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
+        {'バフ'}
+      </Divider>
       <Grid item>
         <Stack>
           {[...diff.expectedTotalBuff.entries()]
@@ -605,7 +612,9 @@ function Compare() {
             })}
         </Stack>
       </Grid>
-      <Divider sx={{ margin: 2, width: '30vw' }} />
+      <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
+        {'デバフ'}
+      </Divider>
       <Grid item>
         <Stack>
           {[...diff.expectedTotalDebuff.entries()]
