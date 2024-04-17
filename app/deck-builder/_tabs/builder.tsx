@@ -459,40 +459,21 @@ function Compare() {
   };
 
   const intoRow = ([type, [before, after]]: [string, [number, number]]) => {
-    if (after - before > 0) {
-      return (
-        <>
-          <dt
-            style={{
-              paddingRight: '1em',
-              textAlignLast: 'justify',
-              color: theme.palette.mode === 'dark' ? '#16A766' : '#077D55',
-            }}
-          >{`${type}:`}</dt>
-          <dd
-            style={{
-              color: theme.palette.mode === 'dark' ? '#16A766' : '#077D55',
-            }}
-          >{`+${after - before}`}</dd>
-          <dd>{`(${before} => ${before})`}</dd>
-        </>
-      );
-    }
+    const sign = after - before > 0;
+    const color = {
+      color: theme.palette[sign ? 'success' : 'error'][theme.palette.mode],
+    };
     return (
       <>
         <dt
           style={{
             paddingRight: '1em',
             textAlignLast: 'justify',
-            color: theme.palette.mode === 'dark' ? '#FA5343' : '#D91F11',
+            ...color,
           }}
         >{`${type}:`}</dt>
-        <dd
-          style={{
-            color: theme.palette.mode === 'dark' ? '#FA5343' : '#D91F11',
-          }}
-        >{`${after - before}`}</dd>
-        <dd>{`(${before} => ${after})`}</dd>
+        <dd style={color}>{`${sign ? '+' : ''}${after - before}`}</dd>
+        <dd>{`(${before} => ${before})`}</dd>
       </>
     );
   };
