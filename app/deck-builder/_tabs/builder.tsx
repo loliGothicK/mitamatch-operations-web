@@ -1,13 +1,11 @@
 'use client';
 
-import { type MouseEvent, useEffect, useState } from 'react';
-
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-
-import { useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
+import { type MouseEvent, useEffect, useState } from 'react';
 
 import {
   Add,

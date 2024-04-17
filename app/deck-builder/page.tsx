@@ -1,12 +1,10 @@
 'use client';
 
-import { type ReactNode, type SyntheticEvent, useState } from 'react';
-
-import { Box, Tab, Tabs } from '@mui/material';
-
 import { DeckBuilder } from '@/app/deck-builder/_tabs/builder';
 import { Calculator } from '@/app/deck-builder/_tabs/calculator';
 import { Layout } from '@/components/Layout';
+import { Box, Tab, Tabs } from '@mui/material';
+import { type ReactNode, type SyntheticEvent, useState } from 'react';
 
 interface TabPanelProps {
   children?: ReactNode;

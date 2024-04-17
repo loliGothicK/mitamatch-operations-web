@@ -1,12 +1,10 @@
 'use client';
 
-import { type FormEvent, useEffect, useState } from 'react';
-
+import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-
-import { useAtom } from 'jotai';
+import { type FormEvent, useEffect, useState } from 'react';
 
 import {
   Add,

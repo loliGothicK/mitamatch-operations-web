@@ -1,8 +1,20 @@
 'use client';
 
-import { useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
-
+import { charmList } from '@/domain/charm/charm';
+import { costumeList } from '@/domain/costume/costume';
+import { calcFinalStatus } from '@/evaluate/calc';
+import { evaluate } from '@/evaluate/evaluate';
+import {
+  charmAtom,
+  costumeAtom,
+  defAtom,
+  rwDeckAtom,
+  rwLegendaryDeckAtom,
+  spDefAtom,
+  statusAtom,
+  swAtom,
+} from '@/jotai/memoriaAtoms';
+import { type StatusKind, statusKind } from '@/parser/skill';
 import {
   Autocomplete,
   Card,
@@ -21,22 +33,8 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
-
-import { charmList } from '@/domain/charm/charm';
-import { costumeList } from '@/domain/costume/costume';
-import { calcFinalStatus } from '@/evaluate/calc';
-import { evaluate } from '@/evaluate/evaluate';
-import {
-  charmAtom,
-  costumeAtom,
-  defAtom,
-  rwDeckAtom,
-  rwLegendaryDeckAtom,
-  spDefAtom,
-  statusAtom,
-  swAtom,
-} from '@/jotai/memoriaAtoms';
-import { type StatusKind, statusKind } from '@/parser/skill';
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 
 const charmFilterAtom = atomWithStorage<('火' | '水' | '風')[]>(
   'charmFilter',
