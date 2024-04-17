@@ -14,13 +14,13 @@ export const themeOptions: ThemeOptions = {
     },
     success: {
       main: '#4caf50',
-      light: '#077D55',
-      dark: '#16A766',
+      light: '#077d55',
+      dark: '#16a766',
     },
     error: {
       main: '#f44336',
-      light: '#D91F11',
-      dark: '#FA5343',
+      light: '#d91f11',
+      dark: '#fa5343',
     },
   },
 };
