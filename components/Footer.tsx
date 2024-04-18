@@ -59,12 +59,14 @@ export default function Footer({ ...props }) {
             <IconButton
               aria-label='Twitter'
               sx={{ color: theme.palette.text.secondary }}
+              onClick={() => window.open('https://twitter.com/mitama_rs')}
             >
               <TwitterIcon />
             </IconButton>
             <IconButton
               aria-label='GitHub'
               sx={{ color: theme.palette.text.secondary }}
+              onClick={() => window.open('https://github.com/loliGothicK')}
             >
               <GitHubIcon />
             </IconButton>

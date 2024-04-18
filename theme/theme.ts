@@ -9,8 +9,8 @@ export const themeOptions: ThemeOptions = {
     },
     secondary: {
       main: '#b5c97c',
-      light: '#e7f5c4',
-      dark: '#8fa34b',
+      light: '#8fa34b',
+      dark: '#e7f5c4',
     },
     success: {
       main: '#4caf50',
