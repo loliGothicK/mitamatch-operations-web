@@ -3,7 +3,6 @@ import type { Costume } from '@/domain/costume/costume';
 import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
 import { type StatusKind, parseSkill } from '@/parser/skill';
 import { parseSupport } from '@/parser/support';
-
 import { P, match } from 'ts-pattern';
 
 function parseAbility(description?: string): Map<string, number> {

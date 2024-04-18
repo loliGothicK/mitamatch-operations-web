@@ -4,6 +4,8 @@ const nextConfig = {
   experimental: {
     // biome-ignore lint/style/useNamingConvention: <explanation>
     missingSuspenseWithCSRBailout: false,
+    serverComponentsExternalPackages: ['@sentry/profiling-node'],
+    instrumentationHook: true,
   },
 };
 
