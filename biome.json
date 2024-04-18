@@ -3,7 +3,14 @@
   "extends": [],
   "files": {
     "ignoreUnknown": true,
-    "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"],
+    "include": [
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.mjs",
+      "**/*.json"
+    ],
     "ignore": [".next", "node_modules"],
     "maxSize": 20000000
   },

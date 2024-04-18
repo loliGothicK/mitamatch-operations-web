@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_OPTIONS='--require @newrelic/next' next start",
     "lint": "yarn biome lint .",
-    "lint:fix": "yarn biome lint --apply .",
+    "lint:fix": "yarn biome lint --apply-unsafe .",
     "fmt": "yarn biome format --write .",
     "fmt:check": "yarn biome format .",
     "test": "jest"
@@ -22,8 +22,9 @@
     "@mui/icons-material": "5.15.15",
     "@mui/lab": "5.0.0-alpha.170",
     "@mui/material": "5.15.15",
-    "@mui/x-charts": "^7.1.1",
+    "@mui/x-charts": "7.3.0",
     "@next/third-parties": "14.2.2",
+    "@sentry/nextjs": "7.105.0",
     "@vercel/analytics": "1.2.2",
     "@vercel/speed-insights": "1.0.10",
     "fp-ts": "2.16.5",
@@ -37,7 +38,7 @@
     "react-dom": "18.2.0",
     "react-virtualized": "9.22.5",
     "reactflow": "11.11.1",
-    "ts-essentials": "^9.4.2",
+    "ts-essentials": "9.4.2",
     "ts-node": "10.9.2",
     "ts-pattern": "5.1.1"
   },
