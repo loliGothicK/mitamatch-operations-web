@@ -23,6 +23,8 @@ init({
   // in development and sample at a lower rate in production
   replaysSessionSampleRate: 1.0,
 
+  profilesSampleRate: 1.0,
+
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
     new BrowserProfilingIntegration(),
