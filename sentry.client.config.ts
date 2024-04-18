@@ -2,7 +2,11 @@
 // The config you add here will be used whenever a users loads a page in their browser.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-import { init, replayIntegration } from '@sentry/nextjs';
+import {
+  BrowserProfilingIntegration,
+  init,
+  replayIntegration,
+} from '@sentry/nextjs';
 
 init({
   dsn: 'https://d811f383ea900362accb6a63e57d4302@o4507108758192128.ingest.us.sentry.io/4507108760223744',
@@ -21,6 +25,7 @@ init({
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
+    new BrowserProfilingIntegration(),
     replayIntegration({
       // Additional Replay configuration goes in here, for example:
       maskAllText: true,
