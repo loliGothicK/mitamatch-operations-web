@@ -1,6 +1,19 @@
 {
   "data": [
     {
+      "id": 160,
+      "name": "鳳凰炎天",
+      "status": [2699, 1867, 2681, 1891],
+      "effect": "火属性効果増加Lv.4",
+      "description": "火属性のメモリアのスキル効果が超特大増加する。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": true,
+      "kind": "Elemental/Fire",
+      "has_template": false,
+      "usually": true
+    },
+    {
       "id": 159,
       "name": "業炎の軍勢",
       "status": [2267, 1568, 2240, 1547],
@@ -1235,7 +1248,7 @@
       "active_time": 120,
       "payed": true,
       "kind": "Elemental/Fire",
-      "usually": true
+      "usually": false
     },
     {
       "id": 56,
@@ -1259,7 +1272,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Fire",
-      "usually": true
+      "usually": false
     },
     {
       "id": 54,
@@ -1379,7 +1392,7 @@
       "active_time": 120,
       "payed": true,
       "kind": "Elemental/Fire",
-      "usually": true
+      "usually": false
     },
     {
       "id": 44,
@@ -1391,7 +1404,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Fire",
-      "usually": true
+      "usually": false
     },
     {
       "id": 43,
