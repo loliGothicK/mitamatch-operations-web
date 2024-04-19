@@ -3,7 +3,7 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import {
-  BrowserProfilingIntegration,
+  browserProfilingIntegration,
   init,
   replayIntegration,
 } from '@sentry/nextjs';
@@ -27,7 +27,7 @@ init({
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
-    new BrowserProfilingIntegration(),
+    browserProfilingIntegration(),
     replayIntegration({
       // Additional Replay configuration goes in here, for example:
       maskAllText: true,
