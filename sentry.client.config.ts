@@ -5,6 +5,7 @@
 import {
   browserProfilingIntegration,
   browserTracingIntegration,
+  feedbackIntegration,
   init,
   replayIntegration,
 } from '@sentry/nextjs';
@@ -30,6 +31,10 @@ init({
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
+    feedbackIntegration({
+      colorScheme: 'system',
+      isNameRequired: true,
+    }),
     browserTracingIntegration(),
     browserProfilingIntegration(),
     replayIntegration({

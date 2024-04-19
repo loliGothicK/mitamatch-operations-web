@@ -143,7 +143,7 @@ export default function Footer({ ...props }) {
           </Stack>
         </Grid>
         <Divider sx={{ margin: 2, width: '100%' }} />
-        <Grid container direction={'row'}>
+        <Grid container direction={'row'} sx={{ paddingBottom: 10 }}>
           <Grid item flexGrow={0.9}>
             <Typography
               color={theme.palette.text.secondary}
@@ -163,7 +163,7 @@ export default function Footer({ ...props }) {
               owned by ©AZONE INTERNATIONAL and acus/アサルトリリィプロジェクト.
             </Typography>
           </Grid>
-          <Grid item sx={{ padding: 4 }}>
+          <Grid item>
             <IconButton
               aria-label='Twitter'
               sx={{ color: theme.palette.text.secondary }}
