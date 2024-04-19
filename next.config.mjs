@@ -1,6 +1,20 @@
 import { withSentryConfig } from '@sentry/nextjs';
 /** @types {import('next').NextConfig} */
 const nextConfig = {
+  // biome-ignore lint/suspicious/useAwait: <explanation>
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Document-Policy',
+            value: 'js-profiling',
+          },
+        ],
+      },
+    ];
+  },
   experimental: {
     // biome-ignore lint/style/useNamingConvention: <explanation>
     missingSuspenseWithCSRBailout: false,
