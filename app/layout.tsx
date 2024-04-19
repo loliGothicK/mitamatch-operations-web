@@ -56,7 +56,7 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
       </body>
-      <GoogleTagManager gtmId={`${process.env.GTAG}`} />
+      <GoogleTagManager gtmId={`${process.env.GTM}`} />
       <GoogleAnalytics gaId={`${process.env.GTAG}`} />
     </html>
   );
