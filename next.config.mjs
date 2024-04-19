@@ -2,7 +2,7 @@ import { withSentryConfig } from '@sentry/nextjs';
 /** @types {import('next').NextConfig} */
 const nextConfig = {
   // biome-ignore lint/suspicious/useAwait: <explanation>
-  async headers() {
+  headers: async () => {
     return [
       {
         source: '/(.*)',

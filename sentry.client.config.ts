@@ -4,6 +4,7 @@
 
 import {
   browserProfilingIntegration,
+  browserTracingIntegration,
   init,
   replayIntegration,
 } from '@sentry/nextjs';
@@ -25,8 +26,11 @@ init({
 
   instrumenter: 'otel',
 
+  tracePropagationTargets: ['localhost', /^https:\/\/mitama\.io\/.*/],
+
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
+    browserTracingIntegration(),
     browserProfilingIntegration(),
     replayIntegration({
       // Additional Replay configuration goes in here, for example:
