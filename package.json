@@ -48,7 +48,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-virtualized": "9.22.5",
-    "reactflow": "11.11.1",
+    "reactflow": "11.11.2",
     "remark-gfm": "4.0.0",
     "remark-slug": "7.0.1",
     "tocbot": "4.27.0",
