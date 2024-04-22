@@ -15,6 +15,7 @@ import {
   ListItemText,
   ListSubheader,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const links = [
   {
@@ -77,10 +78,12 @@ const updates = [
       'You can check the implementation overview',
       'This feature is still in preview.',
     ],
+    link: '/database',
   },
   {
     name: 'light/dark mode is now available',
     description: ['You can toggle the color mode between light and dark.'],
+    link: '/',
   },
   {
     name: 'Calculator in Deck Builder is now available for preview',
@@ -88,10 +91,12 @@ const updates = [
       'You can calculate your deck total damage or recovery, and buff/debuff.',
       'This feature is still in preview.',
     ],
+    link: '/deck-builder',
   },
   {
     name: 'Flow Chart is now available for preview',
     description: ['You can create, edit, and share your flow chart.'],
+    link: '/flowchart',
   },
   {
     name: 'Timeline Builder for Web is now generally available (GA)',
@@ -99,24 +104,39 @@ const updates = [
       'Timeline Builder is now generally available for Web.',
       'You can create, edit, and share your order timeline.',
     ],
+    link: '/timeline-builder',
   },
   {
     name: 'Deck Builder for Web is fully functional',
     description: ['Deck Builder all features are now available.'],
+    link: '/deck-builder',
   },
 ];
 
-export const UpdateListItems = (
-  <>
-    {updates.map(item => {
-      return (
-        <ListItemButton key={item.name}>
-          <ListItemIcon>
-            <Assignment />
-          </ListItemIcon>
-          <ListItemText primary={item.name} secondary={item.description} />
-        </ListItemButton>
-      );
-    })}
-  </>
-);
+export const UpdateListItems = () => {
+  const theme = useTheme();
+  return (
+    <>
+      {updates.map(item => {
+        return (
+          <Link
+            key={item.name}
+            href={item.link}
+            style={{ textDecoration: 'none', color: 'inherit' }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <Assignment />
+              </ListItemIcon>
+              <ListItemText
+                primary={item.name}
+                secondary={item.description}
+                color={theme.palette.text.secondary}
+              />
+            </ListItemButton>
+          </Link>
+        );
+      })}
+    </>
+  );
+};

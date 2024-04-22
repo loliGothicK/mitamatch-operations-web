@@ -1,0 +1,35 @@
+.mitamatch-markdown {
+    h1 {
+        font-size: 3.0em;
+        border-bottom: 1px solid;
+    }
+    h2 {
+        font-size: 1.5em;
+        border-bottom: 1px solid;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th {
+        border-bottom: 1px solid;
+        padding: 0.5em;
+    }
+    td {
+        padding: 0.5em;
+    }
+    tr {
+        border-bottom: 1px dashed;
+        padding: 0.5em;
+    }
+    tr:last-child {
+        border-bottom: none;
+        padding: 0.5em;
+    }
+    .aspect-video {
+        aspect-ratio: 16/9;
+    }
+    .w-full {
+        width: 100%;
+    }
+}

@@ -21,8 +21,6 @@ init({
 
   replaysOnErrorSampleRate: 1.0,
 
-  // This sets the sample rate to be 10%. You may want this to be 100% while
-  // in development and sample at a lower rate in production
   replaysSessionSampleRate: 1.0,
 
   instrumenter: 'otel',
@@ -43,4 +41,6 @@ init({
       blockAllMedia: true,
     }),
   ],
+
+  enabled: process.env.NODE_ENV !== 'development',
 });

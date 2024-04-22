@@ -96,11 +96,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position='absolute' open={open}>
-        <Toolbar
-          sx={{
-            pr: '24px', // keep right padding when drawer closed
-          }}
-        >
+        <Toolbar>
           <IconButton
             edge='start'
             color='inherit'
@@ -154,6 +150,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
           flexGrow: 1,
           height: '100vh',
           overflow: 'auto',
+          scrollPaddingTop: '100px',
         }}
       >
         <Toolbar />

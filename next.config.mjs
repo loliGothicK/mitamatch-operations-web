@@ -1,6 +1,12 @@
+import createMdx from '@next/mdx';
 import { withSentryConfig } from '@sentry/nextjs';
+import remarkGfm from 'remark-gfm';
+import remarkSlug from 'remark-slug';
+import rehypeImageSize from './plugin/rehype-image-size.mjs';
+
 /** @types {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   // biome-ignore lint/suspicious/useAwait: <explanation>
   headers: async () => {
     return [
@@ -23,8 +29,15 @@ const nextConfig = {
   },
 };
 
+const withMdx = createMdx({
+  options: {
+    remarkPlugins: [remarkGfm, remarkSlug],
+    rehypePlugins: [rehypeImageSize],
+  },
+});
+
 export default withSentryConfig(
-  nextConfig,
+  withMdx(nextConfig),
   {
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options

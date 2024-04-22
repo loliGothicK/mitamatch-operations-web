@@ -1,53 +1,41 @@
-import Image from 'next/image';
-
-import {
-  Container,
-  Divider,
-  Grid,
-  List,
-  Paper,
-  Typography,
-} from '@mui/material';
+import { Divider, Grid, Paper, Typography } from '@mui/material';
 
 import { UpdateListItems } from '@/components/home/listItems';
+import Link from 'next/link';
 
 export default function Home() {
   return (
     <>
       <Grid container spacing={3}>
-        <Grid item xs={12} md={12} lg={12}>
+        <Grid item xs={6}>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+            <Typography variant='h6' gutterBottom component='div'>
+              ようこそ Mitamatch Operations へ!
+            </Typography>
+            <Divider />
+            <Typography variant='body1' gutterBottom>
+              このサイトはアサルトリリィ Last Bullet
+              のレギオンマッチをより深く楽しむためのツールがそろっています。
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={6}>
           <Paper
             sx={{
               p: 2,
               display: 'flex',
-              alignItems: 'center',
               flexDirection: 'column',
-              height: 320,
-              backgroundColor: 'midnightblue',
+              height: '100%',
             }}
           >
-            <Container
-              maxWidth={'xs'}
-              sx={{ display: { xs: 'block', sm: 'none' } }}
-            >
-              <Image
-                src={'/MitamaLabLogo.png'}
-                alt={'logo'}
-                width={300}
-                height={300}
-              />
-            </Container>
-            <Container
-              maxWidth={'sm'}
-              sx={{ display: { xs: 'none', sm: 'block' } }}
-            >
-              <Image
-                src={'/MO_DARK.png'}
-                alt={'logo'}
-                width={900}
-                height={300}
-              />
-            </Container>
+            <Typography variant='h6' gutterBottom component='div'>
+              Getting Started
+            </Typography>
+            <Divider />
+            <Typography variant='body1' gutterBottom>
+              使い方は
+              <Link href={'/docs'}>こちら </Link>
+            </Typography>
           </Paper>
         </Grid>
         <Grid item xs={12}>
@@ -56,7 +44,7 @@ export default function Home() {
               Recent Updates
             </Typography>
             <Divider />
-            <List>{UpdateListItems}</List>
+            <UpdateListItems />
           </Paper>
         </Grid>
       </Grid>
