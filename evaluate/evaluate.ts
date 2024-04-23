@@ -28,7 +28,7 @@ function parseAbility(description?: string): Map<string, number> {
   return result;
 }
 
-function parseCostume(description?: string): Map<string, number> {
+function parseEx(description?: string): Map<string, number> {
   const result = new Map<string, number>([
     ['火', 1.0],
     ['水', 1.0],
@@ -48,12 +48,61 @@ function parseCostume(description?: string): Map<string, number> {
   return result;
 }
 
+function parseAdx(
+  adx: { name: string; description: string }[][] | undefined | null,
+  adxLevel: number,
+): [Map<string, number>, Map<string, number>] {
+  const effUp = new Map<string, number>([
+    ['火', 1.0],
+    ['水', 1.0],
+    ['風', 1.0],
+    ['光', 1.0],
+    ['闇', 1.0],
+  ]);
+  const rateUp = new Map<string, number>([
+    ['火', 1.0],
+    ['水', 1.0],
+    ['風', 1.0],
+    ['光', 1.0],
+    ['闇', 1.0],
+  ]);
+  if (!adx) {
+    return [effUp, rateUp];
+  }
+
+  {
+    const regExp = /自身が使用する(.+)属性メモリアのスキル効果(\d+)%UP/;
+    for (const skill of adx[adxLevel]) {
+      const _match = skill.description.match(regExp);
+      if (!_match) {
+        continue;
+      }
+      effUp.set(_match[1], 1.0 + Number(_match[2]) / 100);
+    }
+  }
+
+  {
+    const regExp =
+      /自身が使用する(.+?)属性メモリアの補助スキル発動確率が(\d+)％UP/;
+    for (const skill of adx[adxLevel]) {
+      const _match = skill.description.match(regExp);
+      if (!_match) {
+        continue;
+      }
+      rateUp.set(_match[1], 1.0 + Number(_match[2]) / 100);
+    }
+  }
+
+  return [effUp, rateUp];
+}
+
 export function evaluate(
   deck: MemoriaWithConcentration[],
   [atk, spAtk, def, spDef]: [number, number, number, number],
   [opDef, opSpDef]: [number, number],
-  charm?: Charm,
-  costume?: Costume,
+  charm: Charm,
+  costume: Costume,
+  adxLevel: number,
 ): {
   skill: {
     memoria: MemoriaWithConcentration;
@@ -96,7 +145,8 @@ export function evaluate(
   const charmRate = 1.1;
   const charmEx = parseAbility(charm?.ability);
   const costumeRate = 1.15;
-  const costumeEx = parseCostume(costume?.ex?.description);
+  const costumeEx = parseEx(costume?.ex?.description);
+  const [costumeAdx, rateAdx] = parseAdx(costume?.adx, adxLevel);
 
   const skill = deck.map(memoria => {
     const skill = parseSkill(memoria.skill.name, memoria.skill.description);
@@ -139,7 +189,12 @@ export function evaluate(
             .with(4, () => 0.15)
             .otherwise(() => 0.15);
         })
-        .reduce((acc: number, cur: number) => acc * (1.0 - cur), 1.0);
+        .reduce(
+          (acc: number, cur: number) =>
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            acc * (1.0 - cur * rateAdx.get(memoria.element)!),
+          1.0,
+        );
 
     const calibration =
       charmRate *
@@ -150,7 +205,10 @@ export function evaluate(
       costumeEx.get(memoria.element)! *
       graceRate *
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      themeRate.get(memoria.element)!;
+      themeRate.get(memoria.element)! *
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      costumeAdx.get(memoria.element)!;
+
     return {
       memoria,
       expected: {
@@ -162,6 +220,7 @@ export function evaluate(
           range + rangePlus,
           memoria,
           deck,
+          rateAdx,
         ),
         buff: buff(
           [atk, spAtk, def, spDef],
@@ -170,6 +229,7 @@ export function evaluate(
           range + rangePlus,
           memoria,
           deck,
+          rateAdx,
         ),
         debuff: debuff(
           [atk, spAtk, def, spDef],
@@ -178,6 +238,7 @@ export function evaluate(
           range + rangePlus,
           memoria,
           deck,
+          rateAdx,
         ),
         recovery: recovery(
           def + spDef,
@@ -206,6 +267,7 @@ function damage(
   range: number,
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
+  adx: Map<string, number>,
 ): number | undefined {
   const skill = parseSkill(memoria.skill.name, memoria.skill.description);
   if (!skill.effects.some(effect => effect.type === 'damage')) {
@@ -387,7 +449,8 @@ function damage(
           throw new Error('Invalid concentration');
         })
         .exhaustive();
-      return level * probability;
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      return level * probability * adx.get(memoria.element)!;
     })
     .reduce((acc, cur) => acc + cur, 1);
 
@@ -410,6 +473,7 @@ function buff(
   range: number,
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
+  adx: Map<string, number>,
 ):
   | {
       type: StatusKind;
@@ -582,7 +646,8 @@ function buff(
                 throw new Error('Invalid concentration');
               })
               .exhaustive();
-            return level * probability;
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            return level * probability * adx.get(memoria.element)!;
           })
           .reduce((acc, cur) => acc + cur, 1);
 
@@ -733,6 +798,7 @@ function debuff(
   range: number,
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
+  adx: Map<string, number>,
 ):
   | {
       type: StatusKind;
@@ -904,7 +970,8 @@ function debuff(
                 throw new Error('Invalid concentration');
               })
               .exhaustive();
-            return level * probability;
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            return level * probability * adx.get(memoria.element)!;
           })
           .reduce((acc, cur) => acc + cur, 1);
 

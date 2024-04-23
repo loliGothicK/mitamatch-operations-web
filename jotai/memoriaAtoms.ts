@@ -33,6 +33,7 @@ export const compareModeAtom = atom<MemoriaWithConcentration | undefined>(
 export const candidateAtom = atom<MemoriaWithConcentration | undefined>(
   undefined,
 );
+export const adLevelAtom = atom(3);
 export const charmAtom = atom(charmList.reverse()[0]);
 export const costumeAtom = atom(costumeList.reverse()[0]);
 export const defAtom = atom(400_000);

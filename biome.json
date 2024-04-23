@@ -54,7 +54,8 @@
       "style": {
         "noDefaultExport": "off",
         "noImplicitBoolean": "off"
-      }
+      },
+      "correctness": { "noUndeclaredVariables": "off" }
     }
   }
 }

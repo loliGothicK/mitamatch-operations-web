@@ -18,9 +18,10 @@ export const orderKind = [
   'Stack',
   'Other',
 ] as const;
+
 export type OrderKind = (typeof orderKind)[number];
 
-export const orderSchema = z.object({
+const orderSchema = z.object({
   id: z.number(),
   name: z.string(),
   status: z.array(z.number()),
@@ -35,6 +36,21 @@ export const orderSchema = z.object({
   usually: z.boolean(),
 });
 
+/**
+ * This type alias `Order` represents an order object in the application.
+ * It is inferred from the `orderSchema` which is a zod schema object.
+ * The `orderSchema` defines the structure of an order object, which includes:
+ * - id: a number representing the unique identifier of the order.
+ * - name: a string representing the name of the order.
+ * - status: an array of numbers representing the status of the order.
+ * - effect: a string representing the effect of the order.
+ * - description: a string representing the description of the order.
+ * - prepare_time: a number representing the preparation time of the order.
+ * - active_time: a number representing the active time of the order.
+ * - paid: a boolean representing whether the order is paid or not.
+ * - kind: an enum representing the kind of the order.
+ * - usually: a boolean representing whether the order is usually used or not.
+ */
 export type Order = z.infer<typeof orderSchema>;
 
 export const orderList = orderData.data.map(order => orderSchema.parse(order));

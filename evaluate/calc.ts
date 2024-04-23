@@ -40,6 +40,7 @@ export function calcDiff(
   [def, spDef]: [number, number],
   charm: Charm,
   costume: Costume,
+  adLevel: number,
 ) {
   const deckBefore = [...legendaryDeck, ...deck];
   const deckAfter = [...legendaryDeck, ...deck].map(m =>
@@ -54,6 +55,7 @@ export function calcDiff(
     [def, spDef],
     charm,
     costume,
+    adLevel,
   );
   const resultAfter = evaluate(
     deckAfter,
@@ -61,6 +63,7 @@ export function calcDiff(
     [def, spDef],
     charm,
     costume,
+    adLevel,
   );
 
   const expectedToalDamageBefore = resultBefore.skill

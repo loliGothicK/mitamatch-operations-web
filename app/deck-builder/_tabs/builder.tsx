@@ -53,6 +53,7 @@ import Sortable from '@/components/sortable/Sortable';
 import type { Memoria } from '@/domain/memoria/memoria';
 import {
   type MemoriaWithConcentration,
+  adLevelAtom,
   candidateAtom,
   charmAtom,
   compareModeAtom,
@@ -431,6 +432,7 @@ function Compare() {
   const [spDef] = useAtom(spDefAtom);
   const [charm] = useAtom(charmAtom);
   const [costume] = useAtom(costumeAtom);
+  const [adLevel] = useAtom(adLevelAtom);
 
   if (candidate === undefined || compare === undefined) {
     return <Typography>error!</Typography>;
@@ -445,6 +447,7 @@ function Compare() {
     [def, spDef],
     charm,
     costume,
+    adLevel,
   );
 
   const style = {

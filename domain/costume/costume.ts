@@ -19,9 +19,32 @@ const costumeSchema = z.object({
     })
     .optional()
     .nullable(),
+  adx: z
+    .array(
+      z.array(
+        z.object({
+          name: z.string(),
+          description: z.string(),
+        }),
+      ),
+    )
+    .optional()
+    .nullable(),
   skills: z.array(z.string()),
 });
 
+/**
+ * This type alias `Costume` represents a costume object in the application.
+ * It is inferred from the `costumeSchema` which is a zod schema object, with the 'skills' property omitted.
+ * The `costumeSchema` defines the structure of a costume object, which includes:
+ * - id: a number representing the unique identifier of the costume.
+ * - lily: a string representing the lily associated with the costume.
+ * - name: a string representing the name of the costume.
+ * - type: a string representing the type of the costume.
+ * - rare: an object with 'name' and 'description' properties representing the rarity of the costume.
+ * - ex: an optional object with 'name' and 'description' properties representing the extra information of the costume.
+ * - status: a tuple of four numbers representing the status of the costume ([Atk, Sp.ATK, DEF, Sp.DEF]).
+ */
 export type Costume = OmitProperties<
   z.infer<typeof costumeSchema>,
   'skills'
@@ -30,10 +53,10 @@ export type Costume = OmitProperties<
 };
 
 export const costumeList: Costume[] = costumeData.data.map(costume => {
-  costumeSchema.parse(costume);
+  const parsed = costumeSchema.parse(costume);
   return {
-    ...costume,
-    status: skillsToStatus(costume.skills),
+    ...parsed,
+    status: skillsToStatus(parsed.skills),
   };
 });
 
@@ -43,6 +66,7 @@ function skillsToStatus(skills: string[]): [number, number, number, number] {
   const statRegex = /^(.+)\+(\d+)$/;
 
   for (const [, stat, value] of skills
+    .filter(skill => skill.startsWith('固有'))
     .flatMap(skill => {
       const match = skill.match(regex);
       return match === null ? [] : match;
