@@ -38,6 +38,7 @@ export const charmAtom = atom(charmList.reverse()[0]);
 export const costumeAtom = atom(costumeList.reverse()[0]);
 export const defAtom = atom(400_000);
 export const spDefAtom = atom(400_000);
+/// [230_148, 243_832, 231_548, 236_140]
 export const statusAtom = atom([162_747, 175_532, 175_219, 182_143] as [
   number,
   number,
