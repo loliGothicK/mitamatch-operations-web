@@ -176,20 +176,26 @@ export function Calculator() {
       if (costumeFilter.length === 0) {
         return true;
       }
-      return costumeFilter.every(option =>
-        option === 'AD'
-          ? costume.adx !== undefined && costume.adx !== null
-          : option === '通常衣装'
-            ? costume.status[0] > costume.status[1]
-            : option === '特殊衣装'
-              ? costume.status[0] < costume.status[1]
-              : option === '火' || option === '水' || option === '風'
-                ? costume.ex?.description.includes(option) ||
-                  costume.adx
-                    ?.flatMap(ad => ad)
-                    .some(({ name }) => name.includes(`${option}属性効果増加`))
-                : costume.type.includes(option),
-      );
+      return costumeFilter.every(option => {
+        if (option === 'AD') {
+          return costume.adx !== undefined && costume.adx !== null;
+        }
+        if (option === '通常衣装') {
+          return costume.status[0] > costume.status[1];
+        }
+        if (option === '特殊衣装') {
+          return costume.status[0] < costume.status[1];
+        }
+        if (option === '火' || option === '水' || option === '風') {
+          return (
+            costume.ex?.description.includes(option) ||
+            costume.adx
+              ?.flatMap(ad => ad)
+              .some(({ name }) => name.includes(`${option}属性効果増加`))
+          );
+        }
+        return costume.type.includes(option);
+      });
     })
     .map(costume => ({
       title: `${costume.lily}/${costume.name}`,
