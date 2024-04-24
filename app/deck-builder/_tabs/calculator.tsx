@@ -1,5 +1,6 @@
 'use client';
 
+import NumberInput from '@/components/common/NumberInput';
 import { charmList } from '@/domain/charm/charm';
 import { costumeList } from '@/domain/costume/costume';
 import { calcFinalStatus } from '@/evaluate/calc';
@@ -16,11 +17,6 @@ import {
   swAtom,
 } from '@/jotai/memoriaAtoms';
 import { type StatusKind, statusKind } from '@/parser/skill';
-import {
-  Unstable_NumberInput as BaseNumberInput,
-  type NumberInputProps,
-  numberInputClasses,
-} from '@mui/base/Unstable_NumberInput';
 import {
   Autocomplete,
   Card,
@@ -41,33 +37,6 @@ import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { type ForwardedRef, forwardRef } from 'react';
-
-const NumberInput = forwardRef(function CustomNumberInput(
-  props: NumberInputProps,
-  ref: ForwardedRef<HTMLDivElement>,
-) {
-  return (
-    <BaseNumberInput
-      slots={{
-        root: StyledInputRoot,
-        input: StyledInputElement,
-        incrementButton: StyledButton,
-        decrementButton: StyledButton,
-      }}
-      slotProps={{
-        incrementButton: {
-          children: '▴',
-        },
-        decrementButton: {
-          children: '▾',
-        },
-      }}
-      {...props}
-      ref={ref}
-    />
-  );
-});
 
 const charmFilterAtom = atomWithStorage<('火' | '水' | '風')[]>(
   'charmFilter',
@@ -300,42 +269,56 @@ export function Calculator() {
               );
             }}
           />
-          <Autocomplete
-            options={costumeOptions.sort((a, b) =>
-              a.ex?.name && b.ex?.name
-                ? a.ex.name.localeCompare(b.ex.name)
-                : a.title.localeCompare(b.title),
+          <Grid
+            container
+            item
+            direction={'row'}
+            justifyContent={'center'}
+            alignItems={'center'}
+          >
+            <Grid item xs={costume.adx ? 9 : 12}>
+              <Autocomplete
+                options={costumeOptions.sort((a, b) =>
+                  a.ex?.name && b.ex?.name
+                    ? a.ex.name.localeCompare(b.ex.name)
+                    : a.title.localeCompare(b.title),
+                )}
+                groupBy={option => option.ex?.name || 'その他'}
+                getOptionLabel={option => option.title}
+                renderInput={params => (
+                  <TextField {...params} label='costume' />
+                )}
+                renderGroup={params => (
+                  <li key={params.key}>
+                    <GroupHeader>{params.group}</GroupHeader>
+                    <GroupItems>{params.children}</GroupItems>
+                  </li>
+                )}
+                onChange={(_, value) => {
+                  if (value) {
+                    setCostume(
+                      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                      costumeList.find(
+                        costume =>
+                          `${costume.lily}/${costume.name}` === value.title,
+                      )!,
+                    );
+                  }
+                }}
+                sx={{ marginTop: 2 }}
+              />
+            </Grid>
+            {costume?.adx && (
+              <Grid item xs={3} sx={{ marginTop: 2 }}>
+                <NumberInput
+                  defaultValue={adLevel}
+                  min={0}
+                  max={3}
+                  onChange={(_, val) => setAdLevel(val || 0)}
+                />
+              </Grid>
             )}
-            groupBy={option => option.ex?.name || 'その他'}
-            getOptionLabel={option => option.title}
-            renderInput={params => <TextField {...params} label='costume' />}
-            renderGroup={params => (
-              <li key={params.key}>
-                <GroupHeader>{params.group}</GroupHeader>
-                <GroupItems>{params.children}</GroupItems>
-              </li>
-            )}
-            onChange={(_, value) => {
-              if (value) {
-                setCostume(
-                  // biome-ignore lint/style/noNonNullAssertion: <explanation>
-                  costumeList.find(
-                    costume =>
-                      `${costume.lily}/${costume.name}` === value.title,
-                  )!,
-                );
-              }
-            }}
-            sx={{ marginTop: 2 }}
-          />
-          {costume?.adx && (
-            <NumberInput
-              defaultValue={adLevel}
-              min={0}
-              max={3}
-              onChange={(_, val) => setAdLevel(val || 0)}
-            />
-          )}
+          </Grid>
         </Grid>
         <Grid item xs={12}>
           <Stack direction={'row'} spacing={2}>
@@ -588,144 +571,3 @@ const GroupHeader = styled('div')(({ theme }) => ({
 const GroupItems = styled('ul')({
   padding: 0,
 });
-
-const blue = {
-  100: '#DAECFF',
-  200: '#80BFFF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-};
-
-const grey = {
-  50: '#F3F6F9',
-  100: '#E5EAF2',
-  200: '#DAE2ED',
-  300: '#C7D0DD',
-  400: '#B0B8C4',
-  500: '#9DA8B7',
-  600: '#6B7A90',
-  700: '#434D5B',
-  800: '#303740',
-  900: '#1C2025',
-};
-
-const StyledInputRoot = styled('div')(
-  ({ theme }) => `
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 400;
-  border-radius: 8px;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-  box-shadow: 0px 2px 2px ${
-    theme.palette.mode === 'dark' ? grey[900] : grey[50]
-  };
-  display: grid;
-  grid-template-columns: 1fr 19px;
-  grid-template-rows: 1fr 1fr;
-  overflow: hidden;
-  column-gap: 8px;
-  padding: 4px;
-
-  &.${numberInputClasses.focused} {
-    border-color: ${blue[400]};
-    box-shadow: 0 0 0 3px ${
-      theme.palette.mode === 'dark' ? blue[600] : blue[200]
-    };
-  }
-
-  &:hover {
-    border-color: ${blue[400]};
-  }
-
-  // firefox
-  &:focus-visible {
-    outline: 0;
-  }
-`,
-);
-
-const StyledInputElement = styled('input')(
-  ({ theme }) => `
-  font-size: 0.875rem;
-  font-family: inherit;
-  font-weight: 400;
-  line-height: 1.5;
-  grid-column: 1/2;
-  grid-row: 1/3;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  background: inherit;
-  border: none;
-  border-radius: inherit;
-  padding: 8px 12px;
-  outline: 0;
-`,
-);
-
-const StyledButton = styled('button')(
-  ({ theme }) => `
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  appearance: none;
-  padding: 0;
-  width: 19px;
-  height: 19px;
-  font-family: system-ui, sans-serif;
-  font-size: 0.875rem;
-  line-height: 1;
-  box-sizing: border-box;
-  background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-  border: 0;
-  color: ${theme.palette.mode === 'dark' ? grey[300] : grey[900]};
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 120ms;
-
-  &:hover {
-    background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
-    border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
-    cursor: pointer;
-  }
-
-  &.${numberInputClasses.incrementButton} {
-    grid-column: 2/3;
-    grid-row: 1/2;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    border: 1px solid;
-    border-bottom: 0;
-    &:hover {
-      cursor: pointer;
-      background: ${blue[400]};
-      color: ${grey[50]};
-    }
-
-  border-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
-  background: ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
-  color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
-  }
-
-  &.${numberInputClasses.decrementButton} {
-    grid-column: 2/3;
-    grid-row: 2/3;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border: 1px solid;
-    &:hover {
-      cursor: pointer;
-      background: ${blue[400]};
-      color: ${grey[50]};
-    }
-
-  border-color: ${theme.palette.mode === 'dark' ? grey[800] : grey[200]};
-  background: ${theme.palette.mode === 'dark' ? grey[900] : grey[50]};
-  color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
-  }
-  & .arrow {
-    transform: translateY(-1px);
-  }
-`,
-);
