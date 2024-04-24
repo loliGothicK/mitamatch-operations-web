@@ -25,7 +25,10 @@ init({
 
   instrumenter: 'otel',
 
-  tracePropagationTargets: ['localhost', /^https:\/\/mitama\.io\/.*/],
+  tracePropagationTargets: [
+    /^https:\/\/mitama\.io\/.*/,
+    /^https:\/\/mitamatch-operations-web.vercel.app\/.*/,
+  ],
 
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [

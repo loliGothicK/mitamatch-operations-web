@@ -19,7 +19,9 @@ init({
   debug: false,
 
   integrations: [
-    // Add profiling integration to list of integrations
+    // Add profiling integration to a list of integrations
     nodeProfilingIntegration(),
   ],
+
+  enabled: process.env.NODE_ENV !== 'development',
 });
