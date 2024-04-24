@@ -60,11 +60,11 @@ function parseAdx(
     ['闇', 1.0],
   ]);
   const rateUp = new Map<string, number>([
-    ['火', 1.0],
-    ['水', 1.0],
-    ['風', 1.0],
-    ['光', 1.0],
-    ['闇', 1.0],
+    ['火', 0.0],
+    ['水', 0.0],
+    ['風', 0.0],
+    ['光', 0.0],
+    ['闇', 0.0],
   ]);
   if (!adx) {
     return [effUp, rateUp];
@@ -89,7 +89,7 @@ function parseAdx(
       if (!_match) {
         continue;
       }
-      rateUp.set(_match[1], 1.0 + Number(_match[2]) / 100);
+      rateUp.set(_match[1], Number(_match[2]) / 100);
     }
   }
 
@@ -247,6 +247,7 @@ export function evaluate(
           range + rangePlus,
           memoria,
           deck,
+          rateAdx,
         ),
       },
     };
@@ -254,8 +255,8 @@ export function evaluate(
 
   return {
     skill,
-    supportBuff: support('UP', [atk, spAtk, def, spDef], deck),
-    supportDebuff: support('DOWN', [atk, spAtk, def, spDef], deck),
+    supportBuff: support('UP', [atk, spAtk, def, spDef], deck, rateAdx),
+    supportDebuff: support('DOWN', [atk, spAtk, def, spDef], deck, rateAdx),
   };
 }
 
@@ -450,7 +451,7 @@ function damage(
         })
         .exhaustive();
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
-      return level * probability * adx.get(memoria.element)!;
+      return level * (probability + adx.get(memoria.element)!);
     })
     .reduce((acc, cur) => acc + cur, 1);
 
@@ -647,7 +648,7 @@ function buff(
               })
               .exhaustive();
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
-            return level * probability * adx.get(memoria.element)!;
+            return level * (probability + adx.get(memoria.element)!);
           })
           .reduce((acc, cur) => acc + cur, 1);
 
@@ -971,7 +972,7 @@ function debuff(
               })
               .exhaustive();
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
-            return level * probability * adx.get(memoria.element)!;
+            return level * (probability + adx.get(memoria.element)!);
           })
           .reduce((acc, cur) => acc + cur, 1);
 
@@ -1112,6 +1113,7 @@ function recovery(
   range: number,
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
+  adx: Map<string, number>,
 ): number | undefined {
   if (memoria.kind !== '回復') {
     return undefined;
@@ -1221,7 +1223,8 @@ function recovery(
           throw new Error('Invalid concentration');
         })
         .exhaustive();
-      return level * probability;
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      return level * (probability + adx.get(memoria.element)!);
     })
     .reduce((acc, cur) => acc + cur, 1);
 
@@ -1240,6 +1243,7 @@ function support(
   type: 'UP' | 'DOWN',
   [atk, spAtk, def, spDef]: [number, number, number, number],
   deck: MemoriaWithConcentration[],
+  adx: Map<string, number>,
 ): Record<
   Exclude<
     StatusKind,
@@ -1274,18 +1278,20 @@ function support(
         memoria.support.description,
       );
       return support.effects.map(
-        effect => [memoria.concentration, effect] as const,
+        effect => [memoria.concentration, memoria.element, effect] as const,
       );
     })
-    .filter(([, effect]) => effect.type === type)
-    .map(([concentration, { amount, status }]) => {
-      const probability = match(concentration)
-        .with(0, () => 0.12)
-        .with(1, () => 0.125)
-        .with(2, () => 0.13)
-        .with(3, () => 0.135)
-        .with(4, () => 0.15)
-        .run();
+    .filter(([, , effect]) => effect.type === type)
+    .map(([concentration, element, { amount, status }]) => {
+      const probability =
+        match(concentration)
+          .with(0, () => 0.12)
+          .with(1, () => 0.125)
+          .with(2, () => 0.13)
+          .with(3, () => 0.135)
+          .with(4, () => 0.15)
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          .run() + adx.get(element)!;
       const skillLevel = match(concentration)
         .with(0, () => 1.35)
         .with(1, () => 1.375)
