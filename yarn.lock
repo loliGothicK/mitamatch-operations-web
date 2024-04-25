@@ -5699,10 +5699,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-tocbot@4.27.4:
-  version "4.27.4"
-  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.27.4.tgz#47f87b97aec2b23eee725c797248500ef0929fd0"
-  integrity sha512-RJMmos8JXMztNIaasVRyXc/eGQPE+APSkipNBJaFjLC++cYg6zCcRHQRy4EXncpiKiz1Nlax8RTsaSRJMam8CQ==
+tocbot@4.27.5:
+  version "4.27.5"
+  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.27.5.tgz#2670754ab0e7b449bc3dc5a273032d81e5df8d18"
+  integrity sha512-9xCkdQKaHffSB6YhPZB9BIU/Cs888pK47yGQYN7BRwWbyAwOsAaLrVhiruFy/iISdAqSDe3vXUrxcXkeTPWDXw==
 
 tough-cookie@^4.1.2:
   version "4.1.3"
