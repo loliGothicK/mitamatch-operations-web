@@ -2225,10 +2225,10 @@
   dependencies:
     server-only "^0.0.1"
 
-"@vercel/otel@1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@vercel/otel/-/otel-1.8.1.tgz#9600bd07f40c73f0b51124f8175f987a5f2fabcb"
-  integrity sha512-jHcmxGmA6Tv948uxzMtuixRHwxWoSrcl27KzrZgQBfDM6h0Xf77yLPtZtazj1j9L/yTH8ooFoXxkVXpYDNQ77g==
+"@vercel/otel@1.8.2":
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/@vercel/otel/-/otel-1.8.2.tgz#50a8f379448b31ea5a7dd41e359b266c31f752af"
+  integrity sha512-9OIORbSLy9iN0UNWMKvx7UVwwB4m9bTkvks4Cw2WX6iyvXtWX4FibNSNbN/Dkn/Sc0rOt0jn7n3m3llFXR+R1g==
 
 "@vercel/speed-insights@1.0.10":
   version "1.0.10"
