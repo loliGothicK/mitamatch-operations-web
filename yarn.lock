@@ -963,10 +963,10 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-"@mui/x-charts@7.3.0":
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.3.0.tgz#84d3fb086677322ddd34204bdd9338b37033c090"
-  integrity sha512-TicUELcLGFCUzF2YKHxZ/U4z93NkVkN8PMSsBs0rwQKRYbmO/C1vrmAWT0QUHk3hloCw4fcxbu0BCkz4Jd62TQ==
+"@mui/x-charts@7.3.1":
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.3.1.tgz#9591ead98603ab24e96f53c26feb04efd4e52b1e"
+  integrity sha512-BRoZW7xHeSeboyKgU0jQphuBotYMmgM4TkXun3JtgsDccOrfYaf24XuZzrjr22vTrRrqyv9yi+4UwAOO0oIZrw==
   dependencies:
     "@babel/runtime" "^7.24.0"
     "@mui/base" "^5.0.0-beta.40"
