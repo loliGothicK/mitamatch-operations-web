@@ -1,6 +1,32 @@
 {
   "data": [
     {
+      "id": 162,
+      "name": "劫火凶風",
+      "status": [2708, 2692, 1904, 1869],
+      "effect": "[火風]属性効果増加Lv.4",
+      "description": "火属性と風属性のメモリアスキル効果が超特大増加する。",
+      "prepare_time": 10,
+      "active_time": 65,
+      "payed": true,
+      "kind": "Elemental/Special",
+      "has_template": false,
+      "usually": true
+    },
+    {
+      "id": 161,
+      "name": "紅蓮と暴風の極意",
+      "status": [2262, 2263, 1546, 1543],
+      "effect": "[火風]属性効果増加Lv.4",
+      "description": "火属性と風属性のメモリアスキル効果が超特大増加する。",
+      "prepare_time": 10,
+      "active_time": 65,
+      "payed": false,
+      "kind": "Elemental/Special",
+      "has_template": false,
+      "usually": true
+    },
+    {
       "id": 160,
       "name": "鳳凰炎天",
       "status": [2699, 1867, 2681, 1891],
