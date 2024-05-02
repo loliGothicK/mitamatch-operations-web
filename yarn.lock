@@ -5675,10 +5675,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-tocbot@4.27.16:
-  version "4.27.16"
-  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.27.16.tgz#41f6f708fdec2f5ece2754ddd934d9e1c364548c"
-  integrity sha512-ZE+suY5GpDRSkxP3zza2BdPVQPHtBP+Ip1RZod/hha5jWMeLHiwjQ0tSMCRymlZP75aIOMobAAupDjWZxTJRUA==
+tocbot@4.27.18:
+  version "4.27.18"
+  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.27.18.tgz#2a132d7dd263b7dc7d800a452b6d17a73944ffbc"
+  integrity sha512-NYydMLcFjN5Yd7BY1cbnSKpoS3lpkCMAs2zx+UrFfDAm2LOu+mKK1zysZYcaVrY+mRU6diTCW2tSefwdSRFFUg==
 
 tough-cookie@^4.1.2:
   version "4.1.3"
