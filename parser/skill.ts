@@ -155,6 +155,7 @@ function parseDamage(description: string): SkillEffect[] {
         .with('風属性防御力', () => ['Wind DEF'])
         .with('光属性防御力', () => ['Light DEF'])
         .with('闇属性防御力', () => ['Dark DEF'])
+        .with('火属性防御力・風属性防御力', () => ['Fire DEF', 'Wind DEF'])
         .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
           'Fire ATK',
           'Water ATK',
