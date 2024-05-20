@@ -8,7 +8,13 @@ import Typography from '@mui/material/Typography';
 
 import type { Memoria } from '@/domain/memoria/memoria';
 import { rwDeckAtom, rwLegendaryDeckAtom } from '@/jotai/memoriaAtoms';
-import { type StatusKind, parseSkill, statusKind } from '@/parser/skill';
+import {
+  type StackEffect,
+  type StatusKind,
+  parseSkill,
+  stackEffect,
+  statusKind,
+} from '@/parser/skill';
 import { type SupportKind, parseSupport } from '@/parser/support';
 import { elementFilter, elementFilterMap } from '@/types/filterType';
 
@@ -49,6 +55,15 @@ export function statusPatternToJapanese(pattern: StatusPattern): string {
     .with('Light DEF', () => `光防${upDown}`)
     .with('Dark ATK', () => `闇攻${upDown}`)
     .with('Dark DEF', () => `闇防${upDown}`)
+    .exhaustive();
+}
+
+export function stackPatternToJapanese(pattern: StackEffect): string {
+  return match(pattern)
+    .with('Eden', () => 'エデン')
+    .with('Barrier', () => 'バリア')
+    .with('ANiMA', () => 'アニマ')
+    .with('Meteor', () => 'メテオ')
     .exhaustive();
 }
 
@@ -197,21 +212,14 @@ export default function Details() {
     kindAggregate.set(kind, (kindAggregate.get(kind) || 0) + 1);
   }
 
-  const stackAggregate = new Map<string, number>();
+  const stackAggregate = new Map<StackEffect, number>();
   for (const pattern of skills.flatMap(skill => {
     return skill.effects
-      .filter(eff => eff.stack !== undefined)
-      .map(eff => {
-        // biome-ignore lint/style/noNonNullAssertion: <explanation>
-        return match(eff.stack!)
-          .with('ANiMA', () => 'アニマ')
-          .with('Barrier', () => 'バリア')
-          .with('Eden', () => 'エデン')
-          .with('Meteor', () => 'メテオ')
-          .exhaustive();
-      });
+      .map(eff => eff.stack)
+      .filter(stack => stack !== undefined);
   })) {
-    stackAggregate.set(pattern, (stackAggregate.get(pattern) || 0) + 1);
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    stackAggregate.set(pattern!, (stackAggregate.get(pattern!) || 0) + 1);
   }
 
   return (
@@ -228,18 +236,32 @@ export default function Details() {
         {skillAggregate.size === 0 ? (
           <></>
         ) : (
-          statusPattern
-            .filter(pattern => skillAggregate.get(pattern) !== undefined)
-            .map(pattern => {
-              return (
-                <Grid item xs={4} key={pattern}>
-                  <Typography fontSize={10}>
-                    {statusPatternToJapanese(pattern)} :{' '}
-                    {skillAggregate.get(pattern)}
-                  </Typography>
-                </Grid>
-              );
-            })
+          <>
+            {statusPattern
+              .filter(pattern => skillAggregate.get(pattern) !== undefined)
+              .map(pattern => {
+                return (
+                  <Grid item xs={4} key={pattern}>
+                    <Typography fontSize={10}>
+                      {statusPatternToJapanese(pattern)} :{' '}
+                      {skillAggregate.get(pattern)}
+                    </Typography>
+                  </Grid>
+                );
+              })}
+            {stackEffect
+              .filter(pattern => stackAggregate.get(pattern) !== undefined)
+              .map(pattern => {
+                return (
+                  <Grid item xs={4} key={pattern}>
+                    <Typography fontSize={10}>
+                      {stackPatternToJapanese(pattern)} :{' '}
+                      {stackAggregate.get(pattern)}
+                    </Typography>
+                  </Grid>
+                );
+              })}
+          </>
         )}
       </Grid>
       <Typography variant='body1' marginTop={5}>
