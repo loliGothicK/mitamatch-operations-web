@@ -2,6 +2,7 @@ import {
   type Elemental,
   type ElementalKind,
   type Elements,
+  type StackEffect,
   elementalKind,
   elements,
 } from '@/parser/skill';
@@ -48,7 +49,12 @@ export function allElementStatusSearch(): ElementStatusSearch[] {
   });
 }
 
-export type OtherSkillSearch = 'charge' | 'counter' | 'heal' | Elemental;
+export type OtherSkillSearch =
+  | 'charge'
+  | 'counter'
+  | 'heal'
+  | Elemental
+  | StackEffect;
 export type ElementalSkillPattern =
   `${Elemental['element']}/${Elemental['kind']}`;
 export function intoElementalSkillPattern({
@@ -82,6 +88,10 @@ export function allOtherSkillSearch(): OtherSkillSearch[] {
     'charge',
     'counter',
     'heal',
+    'Meteor',
+    'ANiMA',
+    'Barrier',
+    'Eden',
     ...elementalKind.flatMap(kind =>
       elements.map(element => ({ kind, element })),
     ),

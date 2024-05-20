@@ -184,6 +184,14 @@ export const filteredMemoriaAtom = atom(get => {
       });
 
       const otherSkill = get(otherSkillFilterAtom).every(filter => {
+        if (
+          filter === 'Meteor' ||
+          filter === 'ANiMA' ||
+          filter === 'Barrier' ||
+          filter === 'Eden'
+        ) {
+          return skill.effects.some(x => x.stack === filter);
+        }
         return skill.kinds?.some(x => {
           return typeof x === 'string' && typeof filter === 'string'
             ? x === filter

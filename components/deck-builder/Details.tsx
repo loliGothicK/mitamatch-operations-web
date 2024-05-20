@@ -197,6 +197,23 @@ export default function Details() {
     kindAggregate.set(kind, (kindAggregate.get(kind) || 0) + 1);
   }
 
+  const stackAggregate = new Map<string, number>();
+  for (const pattern of skills.flatMap(skill => {
+    return skill.effects
+      .filter(eff => eff.stack !== undefined)
+      .map(eff => {
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        return match(eff.stack!)
+          .with('ANiMA', () => 'アニマ')
+          .with('Barrier', () => 'バリア')
+          .with('Eden', () => 'エデン')
+          .with('Meteor', () => 'メテオ')
+          .exhaustive();
+      });
+  })) {
+    stackAggregate.set(pattern, (stackAggregate.get(pattern) || 0) + 1);
+  }
+
   return (
     <Grid
       container

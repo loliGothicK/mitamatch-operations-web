@@ -146,7 +146,17 @@ function OtherSkillCheckbox() {
                   ? 'チャージ'
                   : flag === 'counter'
                     ? 'カウンター'
-                    : 'ヒール'
+                    : flag === 'heal'
+                      ? 'ヒール'
+                      : flag === 'Meteor'
+                        ? 'メテオ'
+                        : flag === 'Eden'
+                          ? 'エデン'
+                          : flag === 'Barrier'
+                            ? 'バリア'
+                            : flag === 'ANiMA'
+                              ? 'アニマ'
+                              : '???'
               }
               checked={filter.includes(flag)}
               handleChange={() => {

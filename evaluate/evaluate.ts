@@ -658,7 +658,8 @@ function buff(
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return match(status!)
         .with('ATK', () => {
-          const skillRate = match(amount)
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          const skillRate = match(amount!)
             .with('small', () => 2.28 / 100)
             .with('medium', () => 3.04 / 100)
             .with('large', () => 3.8 / 100)
@@ -675,7 +676,8 @@ function buff(
           };
         })
         .with('Sp.ATK', () => {
-          const skillRate = match(amount)
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          const skillRate = match(amount!)
             .with('small', () => 2.28 / 100)
             .with('medium', () => 3.04 / 100)
             .with('large', () => 3.8 / 100)
@@ -692,7 +694,8 @@ function buff(
           };
         })
         .with('DEF', () => {
-          const skillRate = match(amount)
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          const skillRate = match(amount!)
             .with('small', () => 3.32 / 100)
             .with('medium', () => 4.27 / 100)
             .with('large', () => 4.75 / 100)
@@ -709,7 +712,8 @@ function buff(
           };
         })
         .with('Sp.DEF', () => {
-          const skillRate = match(amount)
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          const skillRate = match(amount!)
             .with('small', () => 3.32 / 100)
             .with('medium', () => 4.27 / 100)
             .with('large', () => 4.75 / 100)
@@ -728,7 +732,8 @@ function buff(
         .with(
           P.union('Fire ATK', 'Water ATK', 'Wind ATK', 'Light ATK', 'Dark ATK'),
           () => {
-            const skillRate = match(amount)
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            const skillRate = match(amount!)
               .with('small', () => 3.25 / 100)
               .with('medium', () => 4.0 / 100)
               .with('large', () => 4.89 / 100)
@@ -752,7 +757,8 @@ function buff(
         .with(
           P.union('Fire DEF', 'Water DEF', 'Wind DEF', 'Light DEF', 'Dark DEF'),
           () => {
-            const skillRate = match(amount)
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            const skillRate = match(amount!)
               .with('small', () => 4.74 / 100)
               .with('medium', () => 5.65 / 100)
               .with('large', () => 6.11 / 100)
@@ -982,7 +988,8 @@ function debuff(
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return match(status!)
         .with('ATK', () => {
-          const skillRate = match(amount)
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          const skillRate = match(amount!)
             .with('small', () => 2.5 / 100)
             .with('medium', () => 3.34 / 100)
             .with('large', () => 4.18 / 100)
@@ -999,7 +1006,8 @@ function debuff(
           };
         })
         .with('Sp.ATK', () => {
-          const skillRate = match(amount)
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          const skillRate = match(amount!)
             .with('small', () => 2.5 / 100)
             .with('medium', () => 3.34 / 100)
             .with('large', () => 4.18 / 100)
@@ -1016,7 +1024,8 @@ function debuff(
           };
         })
         .with('DEF', () => {
-          const skillRate = match(amount)
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          const skillRate = match(amount!)
             .with('small', () => 3.65 / 100)
             .with('medium', () => 4.71 / 100)
             .with('large', () => 5.23 / 100)
@@ -1033,7 +1042,8 @@ function debuff(
           };
         })
         .with('Sp.DEF', () => {
-          const skillRate = match(amount)
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          const skillRate = match(amount!)
             .with('small', () => 3.65 / 100)
             .with('medium', () => 4.71 / 100)
             .with('large', () => 5.23 / 100)
@@ -1052,7 +1062,8 @@ function debuff(
         .with(
           P.union('Fire ATK', 'Water ATK', 'Wind ATK', 'Light ATK', 'Dark ATK'),
           () => {
-            const skillRate = match(amount)
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            const skillRate = match(amount!)
               .with('small', () => 3.25 / 100)
               .with('medium', () => 4.0 / 100)
               .with('large', () => 4.89 / 100)
@@ -1076,7 +1087,8 @@ function debuff(
         .with(
           P.union('Fire DEF', 'Water DEF', 'Wind DEF', 'Light DEF', 'Dark DEF'),
           () => {
-            const skillRate = match(amount)
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            const skillRate = match(amount!)
               .with('small', () => 4.74 / 100)
               .with('medium', () => 5.65 / 100)
               .with('large', () => 6.11 / 100)

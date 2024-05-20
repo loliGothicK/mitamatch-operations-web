@@ -44,11 +44,15 @@ export type Amount =
   | 'super-large';
 export type SkillKind = Elemental | 'charge' | 'counter' | 'heal';
 
+export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;
+export type StackEffect = (typeof stackEffect)[number];
+
 export type SkillEffect = {
-  type: 'damage' | 'heal' | 'buff' | 'debuff';
-  range: [number, number];
-  amount: Amount;
+  type: 'damage' | 'heal' | 'buff' | 'debuff' | 'stack';
+  range?: [number, number];
+  amount?: Amount;
   status?: StatusKind;
+  stack?: StackEffect;
 };
 
 export type Skill = {
@@ -375,6 +379,23 @@ function parseHeal(description: string): SkillEffect[] {
   );
 }
 
+function parseStack(name: string): SkillEffect[] {
+  return [
+    {
+      type: 'stack',
+      stack: name.includes('アニマ')
+        ? 'ANiMA'
+        : name.includes('バリア')
+          ? 'Barrier'
+          : name.includes('エデン')
+            ? 'Eden'
+            : name.includes('メテオ')
+              ? 'Meteor'
+              : undefined,
+    },
+  ];
+}
+
 export function parseSkill(name: string, description: string): Skill {
   const elemental = match<string, Option<SkillKind>>(name)
     .when(
@@ -476,6 +497,7 @@ export function parseSkill(name: string, description: string): Skill {
       ...parseBuff(description),
       ...parseDebuff(description),
       ...parseHeal(description),
+      ...parseStack(name),
     ],
     kinds: [elemental, counter, charge, heal]
       .filter(option.isSome)
