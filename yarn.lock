@@ -3957,10 +3957,10 @@ jest@29.7.0:
     import-local "^3.0.2"
     jest-cli "^29.7.0"
 
-jotai@2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.8.1.tgz#796713545a4da9593fe4243845c0f1111a6a0968"
-  integrity sha512-Gmk5Y3yJL/vN5S0rQ6AaWpXH5Q+HBGHThMHXfylVzXGVuO8YxPRtZf8Y9XYvl+h7ZMQXoHNdFi37vNsJFsiszQ==
+jotai@2.8.2:
+  version "2.8.2"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.8.2.tgz#daa4333716868675c95c3b0b90d587768717ff31"
+  integrity sha512-AU+EU82YqP94izfbGYQQL3oa/06gmn+Ijf/CKx0QybAURtbqh2e4N6zA2fxeIh0JEUgASF6z5IhagJ8NicR95A==
 
 js-cookie@3.0.5:
   version "3.0.5"
