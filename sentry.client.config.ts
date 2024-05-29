@@ -23,8 +23,6 @@ init({
 
   replaysSessionSampleRate: 0.1,
 
-  instrumenter: 'otel',
-
   tracePropagationTargets: [
     /^https:\/\/mitama\.io\/.*/,
     /^https:\/\/mitamatch-operations-web.vercel.app\/.*/,
