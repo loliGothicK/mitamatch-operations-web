@@ -780,7 +780,11 @@ function buff(
           },
         )
         .with('Life', () => {
-          const skillRate = 0.45 / 100;
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          const skillRate = match(amount!)
+            .with('medium', () => 0.45 / 100)
+            .with('large', () => 0.7 / 100) // TODO: Identify the skill rate
+            .run();
           const memoriaRate = skillRate * skillLevel;
           return {
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
