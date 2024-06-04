@@ -790,11 +790,7 @@ function buff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              Math.floor((def + spDef) / 2) *
-                memoriaRate *
-                finalCalibration *
-                support *
-                range,
+              (def + spDef) * memoriaRate * finalCalibration * support * range,
             ),
           };
         })
