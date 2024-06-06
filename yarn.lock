@@ -1149,10 +1149,10 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-"@mui/x-charts@7.6.1":
-  version "7.6.1"
-  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.6.1.tgz#0c18f36d72ad585dc82e122ac81712b69ed5de3d"
-  integrity sha512-LuAVQX4lzhmsqk2NRdWCP+aQZ8kRwG7KOy8ulf8hR5NI5J1VsiOtH41J+qgV3uAC6hDMWL7fTgffrRDFTMci/g==
+"@mui/x-charts@7.6.2":
+  version "7.6.2"
+  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.6.2.tgz#2611c0c4a4ab86663573e46de47af078107964ec"
+  integrity sha512-oG22NRno1+HSLV/9jVLThnHAKN4g+MXOO6GqaQxN9LM0hjt1tgRsrNAlfcJndmj/dVwqFtynkFB5qWnTEBZs7Q==
   dependencies:
     "@babel/runtime" "^7.24.6"
     "@mui/base" "^5.0.0-beta.40"
