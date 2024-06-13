@@ -416,10 +416,10 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@babel/runtime@^7.24.6":
-  version "7.24.6"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.24.6.tgz#5b76eb89ad45e2e4a0a8db54c456251469a3358e"
-  integrity sha512-Ja18XcETdEl5mzzACGd+DKgaGJzPTCow7EglgwTmHdwokzDFYh/MHua6lU6DV/hjF2IaOJ4oX2nqnjG7RElKOw==
+"@babel/runtime@^7.24.7":
+  version "7.24.7"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.24.7.tgz#f4f0d5530e8dbdf59b3451b9b3e594b6ba082e12"
+  integrity sha512-UwgBRMjJP+xv857DCngvqXI3Iq6J4v0wXmwc6sapg+zyhbwmQX67LUEFrkK5tbyJ30jGuG3ZvWpBiB9LCy1kWw==
   dependencies:
     regenerator-runtime "^0.14.0"
 
@@ -1182,12 +1182,12 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-"@mui/x-charts@7.6.2":
-  version "7.6.2"
-  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.6.2.tgz#2611c0c4a4ab86663573e46de47af078107964ec"
-  integrity sha512-oG22NRno1+HSLV/9jVLThnHAKN4g+MXOO6GqaQxN9LM0hjt1tgRsrNAlfcJndmj/dVwqFtynkFB5qWnTEBZs7Q==
+"@mui/x-charts@7.7.0":
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.7.0.tgz#bb4304969714602d60cec30909ac25f3f0be8847"
+  integrity sha512-HkJ6RGEjCyyPuZ79I+b0mo7B4B/w9iciJKpkNJ4HM5Wu3/vsVIsq6CdYYq83hk2Mtp+G9SIUeT/17CQ/9vxs/w==
   dependencies:
-    "@babel/runtime" "^7.24.6"
+    "@babel/runtime" "^7.24.7"
     "@mui/base" "^5.0.0-beta.40"
     "@mui/system" "^5.15.15"
     "@mui/utils" "^5.15.14"
