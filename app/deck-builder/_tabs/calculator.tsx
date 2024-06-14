@@ -190,7 +190,7 @@ export function Calculator() {
           return (
             costume.ex?.description.includes(option) ||
             costume.adx
-              ?.flatMap(ad => ad)
+              ?.flat()
               .some(({ name }) => name.includes(`${option}属性効果増加`))
           );
         }

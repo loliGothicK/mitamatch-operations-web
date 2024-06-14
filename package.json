@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "NODE_OPTIONS='--require @newrelic/next' next start",
     "lint": "yarn biome lint .",
-    "lint:fix": "yarn biome lint --apply-unsafe .",
+    "lint:fix": "yarn biome lint --unsafe .",
     "fmt": "yarn biome format --write .",
     "fmt:check": "yarn biome format .",
     "test": "jest"
@@ -58,7 +58,7 @@
     "unist-util-visit": "5.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.7.3",
+    "@biomejs/biome": "1.8.1",
     "@testing-library/jest-dom": "6.4.6",
     "@testing-library/react": "15.0.7",
     "@types/jest": "29.5.12",
