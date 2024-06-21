@@ -1194,15 +1194,15 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-"@mui/x-charts@7.7.0":
-  version "7.7.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.7.0.tgz#bb4304969714602d60cec30909ac25f3f0be8847"
-  integrity sha512-HkJ6RGEjCyyPuZ79I+b0mo7B4B/w9iciJKpkNJ4HM5Wu3/vsVIsq6CdYYq83hk2Mtp+G9SIUeT/17CQ/9vxs/w==
+"@mui/x-charts@7.7.1":
+  version "7.7.1"
+  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.7.1.tgz#968eb4a52eb9f53e11e36c21ff0cea88eded8269"
+  integrity sha512-qUvkGGxBukHXLUqoTUs2rJZz1t+gK0P+bZzQWFbxN93XQyAhrjrOU8VN0x+G7nO3qcXrC2P6s0nevms7ZRSDrA==
   dependencies:
     "@babel/runtime" "^7.24.7"
     "@mui/base" "^5.0.0-beta.40"
-    "@mui/system" "^5.15.15"
-    "@mui/utils" "^5.15.14"
+    "@mui/system" "^5.15.20"
+    "@mui/utils" "^5.15.20"
     "@react-spring/rafz" "^9.7.3"
     "@react-spring/web" "^9.7.3"
     clsx "^2.1.1"
