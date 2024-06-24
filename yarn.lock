@@ -3005,10 +3005,10 @@
   dependencies:
     server-only "^0.0.1"
 
-"@vercel/otel@1.8.4":
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/@vercel/otel/-/otel-1.8.4.tgz#d23e2acef9e531cce15057d1ee6d1291ba4d7fb4"
-  integrity sha512-vORAljRdxcQZ2KwBJGFip6yUuPwlHoirYOYZ3bBkqS0yT2spornZa/XzmdS+4+edmXZ1gy7bRPAbPRqTiNjIEw==
+"@vercel/otel@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@vercel/otel/-/otel-1.9.0.tgz#742be9e81e56c2c230cf2d6a0c03480722ef163f"
+  integrity sha512-5SUa755SNntjZOJhO8iqGjUMumTPErJ7Pl9SngtanyL4gL47fLZYk5PYEFqRhLp32syvRbIiIGatnS1n5fU14g==
 
 "@vercel/speed-insights@1.0.12":
   version "1.0.12"
