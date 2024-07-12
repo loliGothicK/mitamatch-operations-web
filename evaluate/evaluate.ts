@@ -192,7 +192,7 @@ export function evaluate(
         .reduce(
           (acc: number, cur: number) =>
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
-            acc * (1.0 - cur * rateAdx.get(memoria.element)!),
+            acc * (1.0 - cur - rateAdx.get(memoria.element)!),
           1.0,
         );
 
