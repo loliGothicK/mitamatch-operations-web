@@ -103,6 +103,7 @@ function parseAmount(amount: string): Amount {
     .with('大アップ', () => 'large')
     .with('特大アップ', () => 'extra-large')
     .with('超特大アップ', () => 'super-large')
+    .with('極大アップ', () => 'ultra-large')
     .run();
 }
 
