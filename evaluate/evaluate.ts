@@ -5,6 +5,12 @@ import { type StatusKind, parseSkill } from '@/parser/skill';
 import { parseSupport } from '@/parser/support';
 import { P, match } from 'ts-pattern';
 
+const NotApplicable = Number.NaN;
+
+function ToBeDefined(): never {
+  throw new Error('Not implemented');
+}
+
 function parseAbility(description?: string): Map<string, number> {
   const result = new Map<string, number>([
     ['火', 1.0],
@@ -406,11 +412,12 @@ function damage(
         return 0;
       }
       const level = match(up.amount)
-        .with('small', () => 1 / 100)
-        .with('medium', () => 15 / 100)
-        .with('large', () => 18 / 100)
-        .with('extra-large', () => 21 / 100)
-        .with('super-large', () => 24 / 100)
+        .with('small', () => 0)
+        .with('medium', () => 10 / 100)
+        .with('large', () => 15 / 100)
+        .with('extra-large', () => 18 / 100)
+        .with('super-large', () => 21 / 100)
+        .with('ultra-large', () => 24 / 100)
         .exhaustive();
       const probability = match(support.probability)
         .with('small', () => {
@@ -603,11 +610,12 @@ function buff(
               return 0;
             }
             const level = match(up.amount)
-              .with('small', () => 1 / 100)
-              .with('medium', () => 15 / 100)
-              .with('large', () => 18 / 100)
-              .with('extra-large', () => 21 / 100)
-              .with('super-large', () => 24 / 100)
+              .with('small', () => 0)
+              .with('medium', () => 10 / 100)
+              .with('large', () => 15 / 100)
+              .with('extra-large', () => 18 / 100)
+              .with('super-large', () => 21 / 100)
+              .with('ultra-large', () => 24 / 100)
               .exhaustive();
             const probability = match(support.probability)
               .with('small', () => {
@@ -660,11 +668,12 @@ function buff(
         .with('ATK', () => {
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
           const skillRate = match(amount!)
-            .with('small', () => 2.28 / 100)
-            .with('medium', () => 3.04 / 100)
-            .with('large', () => 3.8 / 100)
-            .with('extra-large', () => 4.27 / 100)
-            .with('super-large', () => 4.74 / 100) // 現状存在しない
+            .with('small', () => NotApplicable) // ない
+            .with('medium', () => 2.28 / 100)
+            .with('large', () => 3.04 / 100)
+            .with('extra-large', () => 3.8 / 100)
+            .with('super-large', () => 4.27 / 100)
+            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -678,11 +687,12 @@ function buff(
         .with('Sp.ATK', () => {
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
           const skillRate = match(amount!)
-            .with('small', () => 2.28 / 100)
-            .with('medium', () => 3.04 / 100)
-            .with('large', () => 3.8 / 100)
-            .with('extra-large', () => 4.27 / 100)
-            .with('super-large', () => 4.75 / 100) // 現状存在しない
+            .with('small', () => NotApplicable) // ない
+            .with('medium', () => 2.28 / 100)
+            .with('large', () => 3.04 / 100)
+            .with('extra-large', () => 3.8 / 100)
+            .with('super-large', () => 4.27 / 100)
+            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -700,7 +710,8 @@ function buff(
             .with('medium', () => 4.27 / 100)
             .with('large', () => 4.75 / 100)
             .with('extra-large', () => 5.22 / 100)
-            .with('super-large', () => 5.69 / 100) // 現状存在しない
+            .with('super-large', () => ToBeDefined()) // TBD
+            .with('ultra-large', () => ToBeDefined()) // TBD
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -718,7 +729,8 @@ function buff(
             .with('medium', () => 4.27 / 100)
             .with('large', () => 4.75 / 100)
             .with('extra-large', () => 5.22 / 100)
-            .with('super-large', () => 5.69 / 100) // 現状存在しない
+            .with('super-large', () => ToBeDefined()) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -737,8 +749,9 @@ function buff(
               .with('small', () => 3.25 / 100)
               .with('medium', () => 4.0 / 100)
               .with('large', () => 4.89 / 100)
-              .with('extra-large', () => 5.78 / 100) // 現状存在しない
-              .with('super-large', () => 6.67 / 100) // 現状存在しない
+              .with('extra-large', () => ToBeDefined()) // 現状存在しない
+              .with('super-large', () => ToBeDefined()) // 現状存在しない
+              .with('ultra-large', () => ToBeDefined()) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
@@ -762,8 +775,9 @@ function buff(
               .with('small', () => 4.74 / 100)
               .with('medium', () => 5.65 / 100)
               .with('large', () => 6.11 / 100)
-              .with('extra-large', () => 6.57 / 100) // 現状存在しない
-              .with('super-large', () => 7.03 / 100) // 現状存在しない
+              .with('extra-large', () => ToBeDefined()) // 現状存在しない
+              .with('super-large', () => ToBeDefined()) // 現状存在しない
+              .with('ultra-large', () => ToBeDefined()) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
@@ -933,11 +947,12 @@ function debuff(
               return 0;
             }
             const level = match(up.amount)
-              .with('small', () => 1 / 100)
-              .with('medium', () => 15 / 100)
-              .with('large', () => 18 / 100)
-              .with('extra-large', () => 21 / 100)
-              .with('super-large', () => 24 / 100)
+              .with('small', () => NotApplicable)
+              .with('medium', () => 10 / 100)
+              .with('large', () => 15 / 100)
+              .with('extra-large', () => 18 / 100)
+              .with('super-large', () => 21 / 100)
+              .with('ultra-large', () => 24 / 100)
               .exhaustive();
             const probability = match(support.probability)
               .with('small', () => {
@@ -994,7 +1009,8 @@ function debuff(
             .with('medium', () => 3.34 / 100)
             .with('large', () => 4.18 / 100)
             .with('extra-large', () => 4.71 / 100)
-            .with('super-large', () => 5.24 / 100) // 現状存在しない
+            .with('super-large', () => ToBeDefined()) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1012,7 +1028,8 @@ function debuff(
             .with('medium', () => 3.34 / 100)
             .with('large', () => 4.18 / 100)
             .with('extra-large', () => 4.71 / 100)
-            .with('super-large', () => 5.24 / 100) // 現状存在しない
+            .with('super-large', () => ToBeDefined()) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1030,7 +1047,8 @@ function debuff(
             .with('medium', () => 4.71 / 100)
             .with('large', () => 5.23 / 100)
             .with('extra-large', () => 5.75 / 100)
-            .with('super-large', () => 6.27 / 100) // 現状存在しない
+            .with('super-large', () => ToBeDefined()) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1048,7 +1066,8 @@ function debuff(
             .with('medium', () => 4.71 / 100)
             .with('large', () => 5.23 / 100)
             .with('extra-large', () => 5.75 / 100)
-            .with('super-large', () => 6.27 / 100) // 現状存在しない
+            .with('super-large', () => ToBeDefined()) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1067,8 +1086,9 @@ function debuff(
               .with('small', () => 3.25 / 100)
               .with('medium', () => 4.0 / 100)
               .with('large', () => 4.89 / 100)
-              .with('extra-large', () => 5.78 / 100) // 現状存在しない
-              .with('super-large', () => 6.67 / 100) // 現状存在しない
+              .with('extra-large', () => ToBeDefined()) // 現状存在しない
+              .with('super-large', () => ToBeDefined()) // 現状存在しない
+              .with('ultra-large', () => ToBeDefined()) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
@@ -1092,8 +1112,9 @@ function debuff(
               .with('small', () => 4.74 / 100)
               .with('medium', () => 5.65 / 100)
               .with('large', () => 6.11 / 100)
-              .with('extra-large', () => 6.57 / 100) // 現状存在しない
-              .with('super-large', () => 7.03 / 100) // 現状存在しない
+              .with('extra-large', () => ToBeDefined()) // 現状存在しない
+              .with('super-large', () => ToBeDefined()) // 現状存在しない
+              .with('ultra-large', () => ToBeDefined()) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
@@ -1191,11 +1212,12 @@ function recovery(
         return 0;
       }
       const level = match(up.amount)
-        .with('small', () => 1 / 100)
-        .with('medium', () => 15 / 100)
-        .with('large', () => 18 / 100)
-        .with('extra-large', () => 21 / 100)
-        .with('super-large', () => 24 / 100)
+        .with('small', () => NotApplicable)
+        .with('medium', () => 10 / 100)
+        .with('large', () => 15 / 100)
+        .with('extra-large', () => 18 / 100)
+        .with('super-large', () => 21 / 100)
+        .with('ultra-large', () => 24 / 100)
         .exhaustive();
       const probability = match(support.probability)
         .with('small', () => {

@@ -41,7 +41,8 @@ export type Amount =
   | 'medium'
   | 'large'
   | 'extra-large'
-  | 'super-large';
+  | 'super-large'
+  | 'ultra-large';
 export type SkillKind = Elemental | 'charge' | 'counter' | 'heal';
 
 export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;
@@ -83,6 +84,7 @@ function parseDamage(description: string): SkillEffect[] {
     .with('大ダメージ', () => 'large')
     .with('特大ダメージ', () => 'extra-large')
     .with('超特大ダメージ', () => 'super-large')
+    .with('極大ダメージ', () => 'ultra-large')
     .run();
 
   result.push({ type: 'damage', range, amount });
@@ -123,18 +125,19 @@ function parseDamage(description: string): SkillEffect[] {
         .run();
     });
 
-    const debuffAmount = match<string, Amount>(buffMatch[2])
+    const buffAmount = match<string, Amount>(buffMatch[2])
       .with('小アップ', () => 'small')
       .with('アップ', () => 'medium')
       .with('大アップ', () => 'large')
       .with('特大アップ', () => 'extra-large')
+      .with('超特大アップ', () => 'ultra-large')
       .run();
 
     for (const status of statuses) {
       result.push({
         type: 'buff',
         range,
-        amount: debuffAmount,
+        amount: buffAmount,
         status,
       });
     }
@@ -178,6 +181,8 @@ function parseDamage(description: string): SkillEffect[] {
       .with('ダウン', () => 'medium')
       .with('大ダウン', () => 'large')
       .with('特大ダウン', () => 'extra-large')
+      .with('超特大ダウン', () => 'super-large')
+      .with('極大ダウン', () => 'ultra-large')
       .run();
 
     for (const status of statuses) {
@@ -381,20 +386,25 @@ function parseHeal(description: string): SkillEffect[] {
 }
 
 function parseStack(name: string): SkillEffect[] {
-  return [
-    {
-      type: 'stack',
-      stack: name.includes('アニマ')
-        ? 'ANiMA'
-        : name.includes('バリア')
-          ? 'Barrier'
-          : name.includes('エデン')
-            ? 'Eden'
-            : name.includes('メテオ')
-              ? 'Meteor'
-              : undefined,
-    },
-  ];
+  const effect = match<string, StackEffect | null>(name)
+    .when(
+      n => n.includes('メテオ'),
+      () => 'Meteor',
+    )
+    .when(
+      n => n.includes('バリア'),
+      () => 'Barrier',
+    )
+    .when(
+      n => n.includes('エデン'),
+      () => 'Eden',
+    )
+    .when(
+      n => n.includes('アニマ'),
+      () => 'ANiMA',
+    )
+    .otherwise(() => null);
+  return effect ? [{ type: 'stack', stack: effect }] : [];
 }
 
 export function parseSkill(name: string, description: string): Skill {

@@ -25,7 +25,10 @@ export type SupportKind = {
 
 type Support = {
   trigger: Trigger;
-  probability: Exclude<Amount, 'large' | 'extra-large' | 'super-large'>;
+  probability: Exclude<
+    Amount,
+    'large' | 'extra-large' | 'super-large' | 'ultra-large'
+  >;
   effects: SupportKind[];
 };
 
@@ -150,6 +153,7 @@ function parseMatchPt(description: string): SupportKind[] {
     .with('大アップ', () => 'large')
     .with('特大アップ', () => 'extra-large')
     .with('超特大アップ', () => 'super-large')
+    .with('極大アップ', () => 'ultra-large')
     .run();
 
   return [{ type: 'MatchPtUp', amount }];
@@ -201,7 +205,7 @@ export function parseSupport(name: string, description: string): Support {
     trigger,
     probability: match<
       string,
-      Exclude<Amount, 'large' | 'extra-large' | 'super-large'>
+      Exclude<Amount, 'large' | 'extra-large' | 'super-large' | 'ultra-large'>
     >(description)
       .when(
         sentence => sentence.includes('一定確率'),
