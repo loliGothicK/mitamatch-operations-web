@@ -420,7 +420,7 @@ function damage(
         .with('ultra-large', () => 24 / 100)
         .exhaustive();
       const probability = match(support.probability)
-        .with('small', () => {
+        .with('low', () => {
           if (concentration === 0) {
             return 0.12;
           }
@@ -618,7 +618,7 @@ function buff(
               .with('ultra-large', () => 24 / 100)
               .exhaustive();
             const probability = match(support.probability)
-              .with('small', () => {
+              .with('low', () => {
                 if (concentration === 0) {
                   return 0.12;
                 }
@@ -955,7 +955,7 @@ function debuff(
               .with('ultra-large', () => 24 / 100)
               .exhaustive();
             const probability = match(support.probability)
-              .with('small', () => {
+              .with('low', () => {
                 if (concentration === 0) {
                   return 0.12;
                 }
@@ -1220,7 +1220,7 @@ function recovery(
         .with('ultra-large', () => 24 / 100)
         .exhaustive();
       const probability = match(support.probability)
-        .with('small', () => {
+        .with('low', () => {
           if (concentration === 0) {
             return 0.12;
           }

@@ -43,6 +43,7 @@ export type Amount =
   | 'extra-large'
   | 'super-large'
   | 'ultra-large';
+export type Probability = 'low' | 'medium';
 export type SkillKind = Elemental | 'charge' | 'counter' | 'heal';
 
 export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;

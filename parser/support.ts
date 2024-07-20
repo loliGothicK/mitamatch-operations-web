@@ -1,4 +1,4 @@
-import type { Amount, StatusKind } from '@/parser/skill';
+import type { Amount, Probability, StatusKind } from '@/parser/skill';
 
 import { match } from 'ts-pattern';
 
@@ -25,10 +25,7 @@ export type SupportKind = {
 
 type Support = {
   trigger: Trigger;
-  probability: Exclude<
-    Amount,
-    'large' | 'extra-large' | 'super-large' | 'ultra-large'
-  >;
+  probability: Probability;
   effects: SupportKind[];
 };
 
@@ -204,13 +201,10 @@ export function parseSupport(name: string, description: string): Support {
 
   return {
     trigger,
-    probability: match<
-      string,
-      Exclude<Amount, 'large' | 'extra-large' | 'super-large' | 'ultra-large'>
-    >(description)
+    probability: match<string, Probability>(description)
       .when(
         sentence => sentence.includes('一定確率'),
-        () => 'small',
+        () => 'low',
       )
       .when(
         sentence => sentence.includes('中確率'),
