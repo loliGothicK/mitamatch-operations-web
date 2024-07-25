@@ -1160,15 +1160,6 @@
     react-is "^18.3.1"
     react-transition-group "^4.4.5"
 
-"@mui/private-theming@^5.16.4":
-  version "5.16.4"
-  resolved "https://registry.yarnpkg.com/@mui/private-theming/-/private-theming-5.16.4.tgz#0118f137975b35dc4774c6d593b8fcf86594c3fc"
-  integrity sha512-ZsAm8cq31SJ37SVWLRlu02v9SRthxnfQofaiv14L5Bht51B0dz6yQEoVU/V8UduZDCCIrWkBHuReVfKhE/UuXA==
-  dependencies:
-    "@babel/runtime" "^7.23.9"
-    "@mui/utils" "^5.16.4"
-    prop-types "^15.8.1"
-
 "@mui/private-theming@^5.16.5":
   version "5.16.5"
   resolved "https://registry.yarnpkg.com/@mui/private-theming/-/private-theming-5.16.5.tgz#b90afcfa76ea50778453c633656ff59cb1b5494d"
@@ -1185,20 +1176,6 @@
   dependencies:
     "@babel/runtime" "^7.23.9"
     "@emotion/cache" "^11.11.0"
-    csstype "^3.1.3"
-    prop-types "^15.8.1"
-
-"@mui/system@^5.16.2":
-  version "5.16.4"
-  resolved "https://registry.yarnpkg.com/@mui/system/-/system-5.16.4.tgz#c03f971ed273f0ad06c69c949c05e866ad211407"
-  integrity sha512-ET1Ujl2/8hbsD611/mqUuNArMCGv/fIWO/f8B3ZqF5iyPHM2aS74vhTNyjytncc4i6dYwGxNk+tLa7GwjNS0/w==
-  dependencies:
-    "@babel/runtime" "^7.23.9"
-    "@mui/private-theming" "^5.16.4"
-    "@mui/styled-engine" "^5.16.4"
-    "@mui/types" "^7.2.15"
-    "@mui/utils" "^5.16.4"
-    clsx "^2.1.0"
     csstype "^3.1.3"
     prop-types "^15.8.1"
 
@@ -1236,17 +1213,6 @@
     prop-types "^15.8.1"
     react-is "^18.2.0"
 
-"@mui/utils@^5.16.2", "@mui/utils@^5.16.4":
-  version "5.16.4"
-  resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.16.4.tgz#8e50e27a630e3d8eeb3e9d3bc31cbb0e4956f5fd"
-  integrity sha512-nlppYwq10TBIFqp7qxY0SvbACOXeOjeVL3pOcDsK0FT8XjrEXh9/+lkg8AEIzD16z7YfiJDQjaJG2OLkE7BxNg==
-  dependencies:
-    "@babel/runtime" "^7.23.9"
-    "@types/prop-types" "^15.7.12"
-    clsx "^2.1.1"
-    prop-types "^15.8.1"
-    react-is "^18.3.1"
-
 "@mui/utils@^5.16.5":
   version "5.16.5"
   resolved "https://registry.yarnpkg.com/@mui/utils/-/utils-5.16.5.tgz#3a16877a80166a7f8b58c893d08e0993040fc49e"
@@ -1259,15 +1225,15 @@
     prop-types "^15.8.1"
     react-is "^18.3.1"
 
-"@mui/x-charts@7.11.0":
-  version "7.11.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.11.0.tgz#6d2efcd5c5593e47d94598a99ca3277f8c41e27b"
-  integrity sha512-qNmrXk2eKoXOuxyLX6Vg4paWPcRttnIQx8hxuHc/avvGzX55kS4s69G8NIG0mtqygtDMcYJPDGNCJOlmkp1uAg==
+"@mui/x-charts@7.11.1":
+  version "7.11.1"
+  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.11.1.tgz#c22d0b430540294ff8967962f2082f72e9e070ad"
+  integrity sha512-csD2wEgC6fjOAdnhyw6AN5xDxhXQ2C3NvwGQyAN9LpwuJ71COOhPOmfs06i8xR5d+tt82QCw29xeSPFf49iKaw==
   dependencies:
     "@babel/runtime" "^7.24.8"
     "@mui/base" "^5.0.0-beta.40"
-    "@mui/system" "^5.16.2"
-    "@mui/utils" "^5.16.2"
+    "@mui/system" "^5.16.5"
+    "@mui/utils" "^5.16.5"
     "@react-spring/rafz" "^9.7.3"
     "@react-spring/web" "^9.7.3"
     clsx "^2.1.1"
