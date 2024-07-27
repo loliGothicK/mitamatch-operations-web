@@ -297,12 +297,12 @@ function parseDebuff(description: string): SkillEffect[] {
   });
 
   const amount = match<string, Amount>(_match[3])
-    .with('小アップ', () => 'small')
-    .with('アップ', () => 'medium')
-    .with('大アップ', () => 'large')
-    .with('特大アップ', () => 'extra-large')
-    .with('超特大アップ', () => 'super-large')
-    .with('極大アップ', () => 'ultra-large')
+    .with('小ダウン', () => 'small')
+    .with('ダウン', () => 'medium')
+    .with('大ダウン', () => 'large')
+    .with('特大ダウン', () => 'extra-large')
+    .with('超特大ダウン', () => 'super-large')
+    .with('極大ダウン', () => 'ultra-large')
     .run();
 
   return status.map(s => {
