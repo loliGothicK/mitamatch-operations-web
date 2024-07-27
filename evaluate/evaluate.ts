@@ -1086,7 +1086,7 @@ function debuff(
               .with('small', () => 3.25 / 100)
               .with('medium', () => 4.0 / 100)
               .with('large', () => 4.89 / 100)
-              .with('extra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+              .with('extra-large', () => 5.49 / 100)
               .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
               .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
               .exhaustive();
