@@ -7,8 +7,8 @@ import { P, match } from 'ts-pattern';
 
 const NotApplicable = Number.NaN;
 
-function ToBeDefined(): never {
-  throw new Error('Not implemented');
+function ToBeDefined(hint: string): never {
+  throw new Error(`Not implemented: ${hint}`);
 }
 
 function parseAbility(description?: string): Map<string, number> {
@@ -673,7 +673,7 @@ function buff(
             .with('large', () => 3.04 / 100)
             .with('extra-large', () => 3.8 / 100)
             .with('super-large', () => 4.27 / 100)
-            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -692,7 +692,7 @@ function buff(
             .with('large', () => 3.04 / 100)
             .with('extra-large', () => 3.8 / 100)
             .with('super-large', () => 4.27 / 100)
-            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -710,8 +710,8 @@ function buff(
             .with('medium', () => 4.27 / 100)
             .with('large', () => 4.75 / 100)
             .with('extra-large', () => 5.22 / 100)
-            .with('super-large', () => ToBeDefined()) // TBD
-            .with('ultra-large', () => ToBeDefined()) // TBD
+            .with('super-large', () => ToBeDefined(memoria.name)) // TBD
+            .with('ultra-large', () => ToBeDefined(memoria.name)) // TBD
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -729,8 +729,8 @@ function buff(
             .with('medium', () => 4.27 / 100)
             .with('large', () => 4.75 / 100)
             .with('extra-large', () => 5.22 / 100)
-            .with('super-large', () => ToBeDefined()) // 現状存在しない
-            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+            .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -749,9 +749,9 @@ function buff(
               .with('small', () => 3.25 / 100)
               .with('medium', () => 4.0 / 100)
               .with('large', () => 4.89 / 100)
-              .with('extra-large', () => ToBeDefined()) // 現状存在しない
-              .with('super-large', () => ToBeDefined()) // 現状存在しない
-              .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+              .with('extra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+              .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+              .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
@@ -775,9 +775,9 @@ function buff(
               .with('small', () => 4.74 / 100)
               .with('medium', () => 5.65 / 100)
               .with('large', () => 6.11 / 100)
-              .with('extra-large', () => ToBeDefined()) // 現状存在しない
-              .with('super-large', () => ToBeDefined()) // 現状存在しない
-              .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+              .with('extra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+              .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+              .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
@@ -1009,8 +1009,8 @@ function debuff(
             .with('medium', () => 3.34 / 100)
             .with('large', () => 4.18 / 100)
             .with('extra-large', () => 4.71 / 100)
-            .with('super-large', () => ToBeDefined()) // 現状存在しない
-            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+            .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1028,8 +1028,8 @@ function debuff(
             .with('medium', () => 3.34 / 100)
             .with('large', () => 4.18 / 100)
             .with('extra-large', () => 4.71 / 100)
-            .with('super-large', () => ToBeDefined()) // 現状存在しない
-            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+            .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1047,8 +1047,8 @@ function debuff(
             .with('medium', () => 4.71 / 100)
             .with('large', () => 5.23 / 100)
             .with('extra-large', () => 5.75 / 100)
-            .with('super-large', () => ToBeDefined()) // 現状存在しない
-            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+            .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1066,8 +1066,8 @@ function debuff(
             .with('medium', () => 4.71 / 100)
             .with('large', () => 5.23 / 100)
             .with('extra-large', () => 5.75 / 100)
-            .with('super-large', () => ToBeDefined()) // 現状存在しない
-            .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+            .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+            .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1086,9 +1086,9 @@ function debuff(
               .with('small', () => 3.25 / 100)
               .with('medium', () => 4.0 / 100)
               .with('large', () => 4.89 / 100)
-              .with('extra-large', () => ToBeDefined()) // 現状存在しない
-              .with('super-large', () => ToBeDefined()) // 現状存在しない
-              .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+              .with('extra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+              .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+              .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
@@ -1112,9 +1112,9 @@ function debuff(
               .with('small', () => 4.74 / 100)
               .with('medium', () => 5.65 / 100)
               .with('large', () => 6.11 / 100)
-              .with('extra-large', () => ToBeDefined()) // 現状存在しない
-              .with('super-large', () => ToBeDefined()) // 現状存在しない
-              .with('ultra-large', () => ToBeDefined()) // 現状存在しない
+              .with('extra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+              .with('super-large', () => ToBeDefined(memoria.name)) // 現状存在しない
+              .with('ultra-large', () => ToBeDefined(memoria.name)) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
