@@ -4828,10 +4828,10 @@ jest@29.7.0:
     import-local "^3.0.2"
     jest-cli "^29.7.0"
 
-jotai@2.9.1:
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.9.1.tgz#f32dd16fc16b7b32d940a3a8d452eddfcb16218c"
-  integrity sha512-t4Q7FIqQB3N/1art4OcqdlEtPmQ2h4DNIzTFhvt06WE0kCpQ1QoG+1A1IGTaQBi2KdDRsnywj+ojmHHKgw6PDA==
+jotai@2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.9.2.tgz#0b1036bc1672d02ea7cf73c6b01728de461d6ecf"
+  integrity sha512-jIBXEadOHCziOuMY6HAy2KQcHipGhnsbF+twqh8Lcmcz/Yei0gdBtW5mOYdKmbQxGqkvfvXM3w/oHtJ2WNGSFg==
 
 js-cookie@3.0.5:
   version "3.0.5"
