@@ -39,7 +39,7 @@
     "@vercel/otel": "1.9.1",
     "@vercel/speed-insights": "1.0.12",
     "fp-ts": "2.16.9",
-    "jotai": "2.9.2",
+    "jotai": "2.9.3",
     "js-cookie": "3.0.5",
     "material-ui-popup-state": "5.1.2",
     "monocle-ts": "2.3.13",
