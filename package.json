@@ -52,7 +52,7 @@
     "remark-gfm": "4.0.0",
     "remark-slug": "7.0.1",
     "tocbot": "4.29.0",
-    "ts-essentials": "10.0.1",
+    "ts-essentials": "10.0.2",
     "ts-node": "10.9.2",
     "ts-pattern": "5.3.1",
     "unist-util-visit": "5.0.0"
