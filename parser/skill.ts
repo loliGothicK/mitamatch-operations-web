@@ -2,6 +2,7 @@ import { option } from 'fp-ts';
 import type { Option } from 'fp-ts/Option';
 import { match } from 'ts-pattern';
 
+//#region Type Def
 export const statusKind = [
   'ATK',
   'DEF',
@@ -44,7 +45,7 @@ export type Amount =
   | 'super-large'
   | 'ultra-large';
 export type Probability = 'low' | 'medium';
-export type SkillKind = Elemental | 'charge' | 'counter' | 'heal';
+export type SkillKind = Elemental | 'charge' | 'counter' | 's-counter' | 'heal';
 
 export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;
 export type StackEffect = (typeof stackEffect)[number];
@@ -62,7 +63,9 @@ export type Skill = {
   effects: SkillEffect[];
   kinds?: SkillKind[];
 };
+//#endregion
 
+//#region parseDamage
 function parseDamage(description: string): SkillEffect[] {
   const result: SkillEffect[] = [];
   const damage = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
@@ -199,7 +202,9 @@ function parseDamage(description: string): SkillEffect[] {
 
   return result;
 }
+//#endregion
 
+//#region parseBuff
 function parseBuff(description: string): SkillEffect[] {
   const buff = /味方(.+)体の(.+)を(.*?アップ)させる/;
   const _match = description.match(buff);
@@ -253,7 +258,9 @@ function parseBuff(description: string): SkillEffect[] {
     return { type: 'buff', range, amount, status: s };
   });
 }
+//#endregion
 
+//#region parseDebuff
 function parseDebuff(description: string): SkillEffect[] {
   const debuff = /敵(.+)体の(.+)を(.*?ダウン)させる/;
   const _match = description.match(debuff);
@@ -309,7 +316,9 @@ function parseDebuff(description: string): SkillEffect[] {
     return { type: 'debuff', range, amount, status: s };
   });
 }
+//#endregion
 
+//#region parseHeal
 function parseHeal(description: string): SkillEffect[] {
   const result: SkillEffect[] = [];
   const heal = /味方(.+)体のHPを(.*?回復)/;
@@ -387,7 +396,9 @@ function parseHeal(description: string): SkillEffect[] {
     }),
   );
 }
+//#endregion
 
+//#region parseStack
 function parseStack(name: string): SkillEffect[] {
   const effect = match<string, StackEffect | null>(name)
     .when(
@@ -409,7 +420,9 @@ function parseStack(name: string): SkillEffect[] {
     .otherwise(() => null);
   return effect ? [{ type: 'stack', stack: effect }] : [];
 }
+//#endregion
 
+//#region parseSkill
 export function parseSkill(name: string, description: string): Skill {
   const elemental = match<string, Option<SkillKind>>(name)
     .when(
@@ -495,7 +508,9 @@ export function parseSkill(name: string, description: string): Skill {
     .otherwise(() => option.none);
 
   const counter = name.includes('カウンター')
-    ? option.of('counter' as SkillKind)
+    ? name.includes('Sカウンター')
+      ? option.of('s-counter' as SkillKind)
+      : option.of('counter' as SkillKind)
     : option.none;
   const charge = name.includes('チャージ')
     ? option.of('charge' as SkillKind)
@@ -518,3 +533,4 @@ export function parseSkill(name: string, description: string): Skill {
       .map(o => o.value),
   } satisfies Skill;
 }
+//#endregion
