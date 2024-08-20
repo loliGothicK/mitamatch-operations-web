@@ -2908,10 +2908,10 @@
   dependencies:
     server-only "^0.0.1"
 
-"@vercel/otel@1.9.2":
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/@vercel/otel/-/otel-1.9.2.tgz#114de477f9688c011e0b384e8bee397998f99719"
-  integrity sha512-Xb+zgeA0T6MfrjVGkyUSGQiNMiBYlWnRzMsOsFdDnfR0vfcUTqkRj/Dka/G7bwDixcRQtzWDXJVynO8+Gdsbfg==
+"@vercel/otel@1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@vercel/otel/-/otel-1.10.0.tgz#b5e46c1a902b9cc06f3ba677b9a71729d6a6184d"
+  integrity sha512-bv1FXbFZlFbB89vyA2P9/kr6eZ42bMtXgqBJpgi+8yOrZU8rkg9wMi0TL//AgAf/qKtaryDm1sbCnkLHgCI3PQ==
 
 "@vercel/speed-insights@1.0.12":
   version "1.0.12"
