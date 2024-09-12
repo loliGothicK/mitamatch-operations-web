@@ -62,7 +62,7 @@
     "@testing-library/jest-dom": "6.5.0",
     "@testing-library/react": "16.0.1",
     "@testing-library/dom": "10.4.0",
-    "@types/jest": "29.5.12",
+    "@types/jest": "29.5.13",
     "@types/js-cookie": "3.0.6",
     "@types/jsonwebtoken": "9.0.6",
     "@types/mdx": "2.0.13",
