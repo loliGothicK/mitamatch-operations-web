@@ -24,7 +24,7 @@
     "@mui/icons-material": "6.1.2",
     "@mui/lab": "5.0.0-alpha.173",
     "@mui/material": "6.1.2",
-    "@mui/x-charts": "7.18.0",
+    "@mui/x-charts": "7.19.0",
     "@next/mdx": "14.2.14",
     "@next/third-parties": "14.2.14",
     "@opentelemetry/api": "1.9.0",
