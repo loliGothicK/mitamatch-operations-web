@@ -484,9 +484,9 @@ function Unit() {
 
   return (
     <>
-      <Deck />
-      <Divider sx={{ margin: 2 }} />
       <LegendaryDeck />
+      <Divider sx={{ margin: 2 }} />
+      <Deck />
     </>
   );
 }
