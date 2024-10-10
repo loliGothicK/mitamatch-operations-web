@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 
 import { CheckBoxItem } from '@/components/deck-builder/CheckBoxItem';
 import {
@@ -136,7 +136,7 @@ function ElementCheckbox() {
 export default function Filter() {
   return (
     <Grid container columns={3}>
-      <Grid item>
+      <Grid>
         <RoleCheckbox />
         <ElementCheckbox />
       </Grid>

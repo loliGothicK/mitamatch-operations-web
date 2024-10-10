@@ -1,4 +1,4 @@
-import { Divider, Grid, Paper, Typography } from '@mui/material';
+import { Divider, Grid2 as Grid, Paper, Typography } from '@mui/material';
 
 import { UpdateListItems } from '@/components/home/listItems';
 import Link from 'next/link';
@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Grid container spacing={3}>
-        <Grid item xs={6}>
+        <Grid size={{ xs: 6 }}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
             <Typography variant='h6' gutterBottom component='div'>
               ようこそ Mitamatch Operations へ!
@@ -19,7 +19,7 @@ export default function Home() {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={6}>
+        <Grid size={{ xs: 6 }}>
           <Paper
             sx={{
               p: 2,
@@ -38,7 +38,7 @@ export default function Home() {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
             <Typography variant='h6' gutterBottom component='div'>
               Recent Updates

@@ -28,7 +28,7 @@ import {
   DialogContent,
   Divider,
   FormControlLabel,
-  Grid,
+  Grid2 as Grid,
   IconButton,
   ImageListItem,
   ImageListItemBar,
@@ -268,7 +268,7 @@ function MemoriaItem({
   };
 
   return (
-    <Grid item key={id} ref={setNodeRef} style={style}>
+    <Grid key={id} ref={setNodeRef} style={style}>
       {!isLoaded && <Skeleton variant='rectangular' width={100} height={100} />}
       <Box
         sx={
@@ -486,18 +486,18 @@ function Compare() {
       alignItems='center'
       justifyContent='space-between'
     >
-      <Grid container item>
-        <Grid item xs={5}>
+      <Grid container>
+        <Grid size={{ xs: 5 }}>
           <Stack direction={'row'}>
             <Grid container alignItems={'center'} justifyContent={'center'}>
-              <Grid item>
+              <Grid>
                 <MemoriaItem
                   memoria={compare}
                   onConcentrationChange={false}
                   onContextMenu={false}
                 />
               </Grid>
-              <Grid item>
+              <Grid>
                 <Stack direction={'column'} paddingLeft={5}>
                   <Typography variant='body2'>{`${compare?.name}`}</Typography>
                   <Typography variant='body2'>{`${compare.skill.name}`}</Typography>
@@ -507,13 +507,13 @@ function Compare() {
             </Grid>
           </Stack>
         </Grid>
-        <Grid item xs={2} paddingTop={4}>
+        <Grid size={{ xs: 2 }} paddingTop={4}>
           <ArrowRightAlt fontSize={'large'} />
         </Grid>
-        <Grid item xs={5}>
+        <Grid size={{ xs: 5 }}>
           <Stack direction={'row'}>
             <Grid container alignItems={'center'} justifyContent={'center'}>
-              <Grid item>
+              <Grid>
                 <MemoriaItem
                   memoria={candidate}
                   onConcentrationChange={value => {
@@ -522,7 +522,7 @@ function Compare() {
                   onContextMenu={false}
                 />
               </Grid>
-              <Grid item>
+              <Grid>
                 <Stack direction={'column'} paddingLeft={5}>
                   <Typography variant='body2'>{`${candidate?.name}`}</Typography>
                   <Typography variant='body2'>{`${candidate.skill.name}`}</Typography>
@@ -538,7 +538,7 @@ function Compare() {
           ? 'ダメージ'
           : '回復'}
       </Divider>
-      <Grid item>
+      <Grid>
         <dl style={style}>
           {/* damage */}
           {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0 &&
@@ -551,7 +551,7 @@ function Compare() {
       <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
         {'バフ'}
       </Divider>
-      <Grid item>
+      <Grid>
         <dl style={style}>
           {[...diff.expectedTotalBuff.entries()]
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
@@ -561,7 +561,7 @@ function Compare() {
       <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
         {'デバフ'}
       </Divider>
-      <Grid item>
+      <Grid>
         <dl style={style}>
           {[...diff.expectedTotalDebuff.entries()]
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
@@ -1008,19 +1008,19 @@ export function DeckBuilder() {
     <Grid container direction={'row'} alignItems={'right'}>
       <Grid
         container
-        item
-        spacing={2}
-        xs={12}
+        size={{ xs: 12 }}
         direction={'row'}
         alignItems={'left'}
         flexShrink={2}
       >
-        <Grid item xs={12} md={4} lg={2}>
-          <Grid container direction={'column'} alignItems={'center'}>
-            <Details />
-          </Grid>
+        <Grid
+          size={{ xs: 12, md: 4, lg: 2 }}
+          direction={'column'}
+          alignItems={'center'}
+        >
+          <Details />
         </Grid>
-        <Grid item xs={12} md={8} lg={6} alignItems={'center'}>
+        <Grid size={{ xs: 12, md: 8, lg: 6 }} alignItems={'center'}>
           <Tooltip title='clear all' placement={'top'}>
             <Button
               onClick={() => {
@@ -1060,7 +1060,7 @@ export function DeckBuilder() {
             <Deck />
           </Container>
         </Grid>
-        <Grid item xs={12} md={12} lg={4}>
+        <Grid size={{ xs: 12, md: 12, lg: 4 }}>
           <Source />
         </Grid>
       </Grid>

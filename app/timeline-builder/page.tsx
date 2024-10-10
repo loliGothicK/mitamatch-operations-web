@@ -23,7 +23,7 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
-  Grid,
+  Grid2 as Grid,
   IconButton,
   List,
   ListItem,
@@ -532,14 +532,13 @@ function TimelineBuilder() {
     <Grid container direction={'row'} alignItems={'right'}>
       <Grid
         container
-        item
         spacing={2}
-        xs={12}
+        size={{ xs: 12 }}
         direction={'row'}
         alignItems={'left'}
         flexShrink={1}
       >
-        <Grid item xs={12} md={6} lg={6} alignItems={'center'}>
+        <Grid size={{ xs: 12, md: 6, lg: 6 }} alignItems={'center'}>
           <Link
             href={`/timeline-builder?timeline=${encodeTimeline(timeline)}`}
             onClick={shareHandler}
@@ -562,7 +561,7 @@ function TimelineBuilder() {
             <Timeline />
           </Container>
         </Grid>
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid size={{ xs: 12, md: 6, lg: 6 }}>
           <Box
             flexDirection='row'
             justifyContent='flex-end'

@@ -3,13 +3,12 @@
 import { useAtom } from 'jotai';
 
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 
 import type { Memoria } from '@/domain/memoria/memoria';
 import { rwDeckAtom, rwLegendaryDeckAtom } from '@/jotai/memoriaAtoms';
 import {
-  type StackEffect,
   type StatusKind,
   parseSkill,
   stackEffect,
@@ -58,7 +57,9 @@ export function statusPatternToJapanese(pattern: StatusPattern): string {
     .exhaustive();
 }
 
-export function stackPatternToJapanese(pattern: StackEffect): string {
+export function stackPatternToJapanese(
+  pattern: (typeof stackEffect)[number],
+): string {
   return match(pattern)
     .with('Eden', () => 'エデン')
     .with('Barrier', () => 'バリア')
@@ -212,27 +213,27 @@ export default function Details() {
     kindAggregate.set(kind, (kindAggregate.get(kind) || 0) + 1);
   }
 
-  const stackAggregate = new Map<StackEffect, number>();
+  const stackAggregate = new Map<(typeof stackEffect)[number], number>();
   for (const pattern of skills.flatMap(skill => {
     return skill.effects
       .map(eff => eff.stack)
       .filter(stack => stack !== undefined);
   })) {
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
-    stackAggregate.set(pattern!, (stackAggregate.get(pattern!) || 0) + 1);
+    const { type, times } = pattern;
+    stackAggregate.set(type, (stackAggregate.get(type) || 0) + times);
   }
 
   return (
     <Grid
       container
-      spacing={2}
+      spacing={1}
       alignItems={'left'}
       direction={'column'}
       sx={{ marginTop: 5 }}
     >
       <Typography variant='body1'>スキル</Typography>
-      <Divider sx={{ margin: 2 }} />
-      <Grid container spacing={1}>
+      <Divider />
+      <Grid container>
         {skillAggregate.size === 0 ? (
           <></>
         ) : (
@@ -241,7 +242,7 @@ export default function Details() {
               .filter(pattern => skillAggregate.get(pattern) !== undefined)
               .map(pattern => {
                 return (
-                  <Grid item xs={4} key={pattern}>
+                  <Grid size={{ xs: 4 }} key={pattern}>
                     <Typography fontSize={10}>
                       {statusPatternToJapanese(pattern)} :{' '}
                       {skillAggregate.get(pattern)}
@@ -249,25 +250,36 @@ export default function Details() {
                   </Grid>
                 );
               })}
-            {stackEffect
-              .filter(pattern => stackAggregate.get(pattern) !== undefined)
-              .map(pattern => {
-                return (
-                  <Grid item xs={4} key={pattern}>
-                    <Typography fontSize={10}>
-                      {stackPatternToJapanese(pattern)} :{' '}
-                      {stackAggregate.get(pattern)}
-                    </Typography>
-                  </Grid>
-                );
-              })}
           </>
         )}
       </Grid>
-      <Typography variant='body1' marginTop={5}>
+      <Typography variant='body1' marginTop={2}>
+        スタック
+      </Typography>
+      <Divider />
+      <Grid container spacing={1}>
+        {supportAggregate.size === 0 ? (
+          <></>
+        ) : (
+          stackEffect
+            .filter(pattern => stackAggregate.get(pattern) !== undefined)
+            .map(pattern => {
+              return (
+                <Grid size={{ xs: 4 }} key={pattern}>
+                  <Typography fontSize={10}>
+                    {stackPatternToJapanese(pattern)} :{' '}
+                    {stackAggregate.get(pattern)}
+                  </Typography>
+                </Grid>
+              );
+            })
+        )}
+      </Grid>
+
+      <Typography variant='body1' marginTop={2}>
         補助スキル
       </Typography>
-      <Divider sx={{ margin: 2 }} />
+      <Divider />
       <Grid container spacing={1}>
         {supportAggregate.size === 0 ? (
           <></>
@@ -276,7 +288,7 @@ export default function Details() {
             .filter(pattern => supportAggregate.get(pattern) !== undefined)
             .map(pattern => {
               return (
-                <Grid item xs={4} key={pattern}>
+                <Grid size={{ xs: 4 }} key={pattern}>
                   <Typography fontSize={10}>
                     {supportPatternToJapanese(pattern)} :{' '}
                     {supportAggregate.get(pattern)}
@@ -286,10 +298,10 @@ export default function Details() {
             })
         )}
       </Grid>
-      <Typography variant='body1' marginTop={5}>
+      <Typography variant='body1' marginTop={2}>
         属性
       </Typography>
-      <Divider sx={{ margin: 2 }} />
+      <Divider />
       <Grid container spacing={1}>
         {elementAggregate.size === 0 ? (
           <></>
@@ -299,7 +311,7 @@ export default function Details() {
             .filter(kind => elementAggregate.get(kind) !== undefined)
             .map(kind => {
               return (
-                <Grid item xs={4} key={kind}>
+                <Grid size={{ xs: 4 }} key={kind}>
                   <Typography fontSize={10}>
                     {kind} : {elementAggregate.get(kind)}
                   </Typography>
@@ -308,10 +320,10 @@ export default function Details() {
             })
         )}
       </Grid>
-      <Typography variant='body1' marginTop={5}>
+      <Typography variant='body1' marginTop={2}>
         内訳
       </Typography>
-      <Divider sx={{ margin: 2 }} />
+      <Divider />
       <Grid container spacing={1}>
         {kindAggregate.size === 0 ? (
           <></>
@@ -328,7 +340,7 @@ export default function Details() {
             .filter(kind => kindAggregate.get(kind) !== undefined)
             .map(kind => {
               return (
-                <Grid item xs={4} key={kind}>
+                <Grid size={{ xs: 4 }} key={kind}>
                   <Typography fontSize={10}>
                     {kind} : {kindAggregate.get(kind)}
                   </Typography>

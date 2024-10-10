@@ -32,7 +32,7 @@ import {
 import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
 import { useAtom } from 'jotai';
@@ -205,7 +205,7 @@ export function Calculator() {
   return (
     <Container>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <FormGroup sx={{ flexDirection: 'row', height: 56 }}>
             <FormControlLabel
               control={<Checkbox defaultChecked={false} />}
@@ -267,7 +267,7 @@ export function Calculator() {
             sx={{ marginTop: 2 }}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Autocomplete
             renderInput={params => <TextField {...params} label='衣装検索' />}
             options={costumeFilterOptions}
@@ -280,12 +280,11 @@ export function Calculator() {
           />
           <Grid
             container
-            item
             direction={'row'}
             justifyContent={'center'}
             alignItems={'center'}
           >
-            <Grid item xs={costume.adx ? 9 : 12}>
+            <Grid size={{ xs: costume.adx ? 9 : 12 }}>
               <Autocomplete
                 disablePortal
                 defaultValue={
@@ -327,7 +326,7 @@ export function Calculator() {
               />
             </Grid>
             {costume?.adx && (
-              <Grid item xs={3} sx={{ marginTop: 2 }}>
+              <Grid size={{ xs: 3 }} sx={{ marginTop: 2 }}>
                 <NumberInput
                   defaultValue={adLevel}
                   min={0}
@@ -338,7 +337,7 @@ export function Calculator() {
             )}
           </Grid>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Stack direction={'row'} spacing={2}>
             <Stack>
               <TextField
@@ -408,7 +407,7 @@ export function Calculator() {
         </Grid>
         {sw === 'sword' && (
           <>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <Stack direction={'row'} spacing={2}>
                 <TextField
                   label="Opponent's DEF"
@@ -434,30 +433,30 @@ export function Calculator() {
       <Divider sx={{ margin: 2 }}>{'期待値'}</Divider>
       <Grid container spacing={2} direction={'row'}>
         {sw === 'sword' ? (
-          <Grid item xs={12}>
+          <Grid size={{ xs: 12 }}>
             <Typography variant='body1'>{`ダメージ量: ${expectedToalDamage}`}</Typography>
           </Grid>
         ) : (
           <>
-            <Grid item xs={6}>
+            <Grid size={{ xs: 6 }}>
               <Typography variant='body1'>{`総合回復量: ${expectedTotalRecovery}`}</Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={{ xs: 6 }}>
               <Typography variant='body1'>{`平均回復量: ${Math.floor(
                 expectedTotalRecovery / [...deck, ...legendaryDeck].length,
               )}`}</Typography>
             </Grid>
           </>
         )}
-        <Grid container item xs={12} spacing={2}>
-          <Grid item key={'buff'}>
+        <Grid container size={{ xs: 12 }} spacing={2}>
+          <Grid key={'buff'}>
             <Typography>{'バフ量:'}</Typography>
           </Grid>
           {statusKind
             .filter(kind => expectedTotalBuff.get(kind) !== undefined)
             .map(kind => {
               return (
-                <Grid item key={kind}>
+                <Grid key={kind}>
                   <Typography
                     variant='body1'
                     color={theme.palette.mode === 'light' ? 'darkred' : 'pink'}
@@ -471,15 +470,15 @@ export function Calculator() {
               );
             })}
         </Grid>
-        <Grid container item xs={12} spacing={2}>
-          <Grid item key={'debuff'}>
+        <Grid container size={{ xs: 12 }} spacing={2}>
+          <Grid key={'debuff'}>
             <Typography>{'デバフ量:'}</Typography>
           </Grid>
           {statusKind
             .filter(kind => expectedTotalDebuff.get(kind) !== undefined)
             .map(kind => {
               return (
-                <Grid item key={kind}>
+                <Grid key={kind}>
                   <Typography
                     variant='body1'
                     color={
@@ -500,7 +499,7 @@ export function Calculator() {
       <Grid container spacing={2}>
         {skill.map(({ memoria, expected }) => {
           return (
-            <Grid item key={memoria.id} xs={12} md={6}>
+            <Grid key={memoria.id} size={{ xs: 12, md: 6 }}>
               <Card sx={{ display: 'flex' }}>
                 <CardMedia
                   component='img'

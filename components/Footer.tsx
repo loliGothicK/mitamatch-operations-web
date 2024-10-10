@@ -1,6 +1,6 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { Container, Divider, Grid, Stack } from '@mui/material';
+import { Container, Divider, Grid2 as Grid, Stack } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
@@ -38,7 +38,7 @@ export default function Footer({ ...props }) {
     >
       <footer>
         <Grid container direction={'row'} alignItems={'center'}>
-          <Grid item xs={12} md={4}>
+          <Grid size={{ xs: 12, md: 4 }}>
             <Image
               src={
                 theme.palette.mode === 'dark' ? '/MO_DARK.png' : '/MO_LIGHT.png'
@@ -59,7 +59,6 @@ export default function Footer({ ...props }) {
           >
             <Grid
               container
-              item
               direction={'column'}
               justifyContent={'space-around'}
               alignItems={'flex-start'}
@@ -80,7 +79,6 @@ export default function Footer({ ...props }) {
             </Grid>
             <Grid
               container
-              item
               direction={'column'}
               justifyContent={'space-around'}
               alignItems={'flex-start'}
@@ -144,7 +142,7 @@ export default function Footer({ ...props }) {
         </Grid>
         <Divider sx={{ margin: 2, width: '100%' }} />
         <Grid container direction={'row'} sx={{ paddingBottom: 10 }}>
-          <Grid item flexGrow={0.9}>
+          <Grid flexGrow={0.9}>
             <Typography
               color={theme.palette.text.secondary}
               component='p'
@@ -163,7 +161,7 @@ export default function Footer({ ...props }) {
               owned by ©AZONE INTERNATIONAL and acus/アサルトリリィプロジェクト.
             </Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <IconButton
               aria-label='Twitter'
               sx={{ color: theme.palette.text.secondary }}

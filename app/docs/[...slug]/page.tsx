@@ -3,7 +3,7 @@
 import { Layout } from '@/components/Layout';
 import { Documents } from '@/components/docs/Documents';
 import '@/styles/markdown.css';
-import { Breadcrumbs, Grid } from '@mui/material';
+import { Breadcrumbs, Grid2 as Grid } from '@mui/material';
 import Link from '@mui/material/Link';
 import { takeLeft } from 'fp-ts/Array';
 import { Suspense, lazy, useEffect } from 'react';
@@ -49,14 +49,13 @@ export default function Page({ params }: { params: { slug: string[] } }) {
         <Suspense>
           <Grid container direction={'row-reverse'}>
             <Grid
-              item
-              md={3}
               minHeight={'100vh'}
+              size={{ md: 3 }}
               sx={{ display: { xs: 'none', lg: 'block' } }}
             >
               <Toc />
             </Grid>
-            <Grid item xs={12} md={9}>
+            <Grid size={{ xs: 12, md: 9 }}>
               <Breadcrumbs separator={'›'} aria-label='breadcrumb'>
                 <Link href='/docs'>Docs</Link>
                 {params.slug.length > 1 ? (

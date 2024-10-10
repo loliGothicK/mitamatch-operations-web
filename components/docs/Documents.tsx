@@ -6,7 +6,7 @@ import {
   Box,
   Button,
   Divider,
-  Grid,
+  Grid2 as Grid,
   List,
   ListItemText,
   Stack,
@@ -158,7 +158,7 @@ const rows = [
 export function Documents({ children }: PropsWithChildren) {
   return (
     <Grid container direction={'row'} style={{ minHeight: '100vh' }}>
-      <Grid item xs={12} lg={3}>
+      <Grid size={{ xs: 12, lg: 3 }}>
         <List
           style={{
             position: 'sticky',
@@ -171,9 +171,7 @@ export function Documents({ children }: PropsWithChildren) {
           ))}
         </List>
       </Grid>
-      <Grid item xs={12} lg={9}>
-        {children}
-      </Grid>
+      <Grid size={{ xs: 12, lg: 9 }}>{children}</Grid>
     </Grid>
   );
 }

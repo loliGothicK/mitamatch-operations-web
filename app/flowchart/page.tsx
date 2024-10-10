@@ -9,7 +9,7 @@ import { Add } from '@mui/icons-material';
 import { Autocomplete, Button, Modal, Stack, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { useAtom } from 'jotai';

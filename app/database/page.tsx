@@ -12,7 +12,7 @@ import {
   DialogTitle,
   Divider,
   FormControl,
-  Grid,
+  Grid2 as Grid,
   InputLabel,
   MenuItem,
   Select,
@@ -115,10 +115,7 @@ function HealDataset() {
       <Grid
         container
         direction={'column'}
-        xs={12}
-        md={6}
-        lg={4}
-        item
+        size={{ xs: 12, md: 6, lg: 4 }}
         bgcolor={
           theme.palette.mode === 'dark'
             ? 'rgba(255,255,255, 0.1)'
@@ -307,10 +304,7 @@ function AssistDataset() {
       <Grid
         container
         direction={'column'}
-        xs={12}
-        md={6}
-        lg={4}
-        item
+        size={{ xs: 12, md: 6, lg: 4 }}
         bgcolor={
           theme.palette.mode === 'dark'
             ? 'rgba(255,255,255, 0.1)'
@@ -499,10 +493,7 @@ function InterferenceDataset() {
       <Grid
         container
         direction={'column'}
-        xs={12}
-        md={6}
-        lg={4}
-        item
+        size={{ xs: 12, md: 6, lg: 4 }}
         bgcolor={
           theme.palette.mode === 'dark'
             ? 'rgba(255,255,255, 0.1)'
@@ -685,10 +676,7 @@ function AttackDataset() {
       <Grid
         container
         direction={'column'}
-        xs={12}
-        md={6}
-        lg={4}
-        item
+        size={{ xs: 12, md: 6, lg: 4 }}
         bgcolor={
           theme.palette.mode === 'dark'
             ? 'rgba(255,255,255, 0.1)'
@@ -869,10 +857,7 @@ function DefenseDataset() {
       <Grid
         container
         direction={'column'}
-        xs={12}
-        md={6}
-        lg={4}
-        item
+        size={{ xs: 12, md: 6, lg: 4 }}
         bgcolor={
           theme.palette.mode === 'dark'
             ? 'rgba(255,255,255, 0.1)'
@@ -1058,10 +1043,7 @@ function CounterDataset() {
       <Grid
         container
         direction={'column'}
-        xs={12}
-        md={6}
-        lg={4}
-        item
+        size={{ xs: 12, md: 6, lg: 4 }}
         bgcolor={
           theme.palette.mode === 'dark'
             ? 'rgba(255,255,255, 0.1)'

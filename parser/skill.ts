@@ -48,7 +48,7 @@ export type Probability = 'low' | 'medium';
 export type SkillKind = Elemental | 'charge' | 'counter' | 's-counter' | 'heal';
 
 export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;
-export type StackEffect = (typeof stackEffect)[number];
+export type StackEffect = { type: (typeof stackEffect)[number]; times: number };
 
 export type SkillEffect = {
   type: 'damage' | 'heal' | 'buff' | 'debuff' | 'stack';
@@ -400,35 +400,100 @@ function parseHeal(description: string): SkillEffect[] {
 //#endregion
 
 //#region parseStack
-function parseStack(name: string): SkillEffect[] {
+function parseStack(name: string, description: string): SkillEffect[] {
+  const meteor = /「次の攻撃時にダメージが\d+%アップするスタック」を(\d)回蓄積/;
+  const barrier =
+    /「次の被ダメージ時に被ダメージを\d+%ダウンさせるスタック」を(\d)回蓄積/;
+  const eden = /「次の回復時に回復効果が\d+%アップするスタック」を(\d)回蓄積/;
+  const anima =
+    /「次の支援\/妨害時に支援\/妨害効果が\d+%アップするスタック」を(\d)回蓄積/;
+  const comet =
+    /「次の攻撃時にダメージが\d+%アップするスタック」と「次の被ダメージ時に被ダメージを\d+%ダウンさせるスタック」を(\d)回蓄積/;
   return match<string, StackEffect[]>(name)
     .when(
       n => n.includes('メテオ'),
-      () => ['Meteor'],
+      () => [
+        {
+          type: 'Meteor',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(meteor)![1]),
+        },
+      ],
     )
     .when(
       n => n.includes('バリア'),
-      () => ['Barrier'],
+      () => [
+        {
+          type: 'Barrier',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(barrier)![1]),
+        },
+      ],
     )
     .when(
       n => n.includes('エデン'),
-      () => ['Eden'],
+      () => [
+        {
+          type: 'Eden',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(eden)![1]),
+        },
+      ],
     )
     .when(
       n => n.includes('アニマ'),
-      () => ['ANiMA'],
+      () => [
+        {
+          type: 'ANiMA',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(anima)![1]),
+        },
+      ],
     )
     .when(
       n => n.includes('グロリア'),
-      () => ['Barrier', 'Eden'],
+      () => [
+        {
+          type: 'Barrier',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(barrier)![1]),
+        },
+        {
+          type: 'Eden',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(eden)![1]),
+        },
+      ],
     )
     .when(
       n => n.includes('エーテル'),
-      () => ['ANiMA', 'Meteor'],
+      () => [
+        {
+          type: 'ANiMA',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(anima)![1]),
+        },
+        {
+          type: 'Meteor',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(meteor)![1]),
+        },
+      ],
     )
     .when(
       n => n.includes('コメット'),
-      () => ['Meteor', 'Barrier'],
+      () => [
+        {
+          type: 'Meteor',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(comet)![1]),
+        },
+        {
+          type: 'Barrier',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(comet)![1]),
+        },
+      ],
     )
     .otherwise(() => [])
     .map(eff => ({ type: 'stack', stack: eff }));
@@ -539,7 +604,7 @@ export function parseSkill(name: string, description: string): Skill {
       ...parseBuff(description),
       ...parseDebuff(description),
       ...parseHeal(description),
-      ...parseStack(name),
+      ...parseStack(name, description),
     ],
     kinds: [elemental, counter, charge, heal]
       .filter(option.isSome)
