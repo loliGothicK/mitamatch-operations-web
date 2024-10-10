@@ -5,6 +5,7 @@ import {
   type StackEffect,
   elementalKind,
   elements,
+  stackEffect,
 } from '@/parser/skill';
 import { match } from 'ts-pattern';
 
@@ -54,7 +55,7 @@ export type OtherSkillSearch =
   | 'counter'
   | 'heal'
   | Elemental
-  | StackEffect;
+  | (typeof stackEffect)[number];
 export type ElementalSkillPattern =
   `${Elemental['element']}/${Elemental['kind']}`;
 export function intoElementalSkillPattern({

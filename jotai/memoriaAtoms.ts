@@ -190,7 +190,7 @@ export const filteredMemoriaAtom = atom(get => {
           filter === 'Barrier' ||
           filter === 'Eden'
         ) {
-          return skill.effects.some(x => x.stack === filter);
+          return skill.effects.some(x => x.stack?.type === filter);
         }
         return skill.kinds?.some(x => {
           return typeof x === 'string' && typeof filter === 'string'

@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { type FormEvent, useEffect, useState } from 'react';
+import { type FormEvent, Suspense, useEffect, useState } from 'react';
 
 import {
   Add,
@@ -300,6 +300,19 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
 
 function Timeline() {
   const [timeline, setTimeline] = useAtom(timelineAtom);
+  const params = useSearchParams();
+
+  useEffect(() => {
+    const value = params.get('timeline');
+    if (value) {
+      setTimeline(decodeTimeline(value));
+    } else {
+      const cookie = Cookies.get('timeline');
+      if (cookie) {
+        setTimeline(decodeTimeline(cookie));
+      }
+    }
+  }, [setTimeline, params.get]);
 
   const reducer = (
     value: number,
@@ -501,9 +514,8 @@ function TimelineBuilder() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('lg'));
   const pathname = usePathname();
-  const [timeline, setTimeline] = useAtom(timelineAtom);
+  const [timeline] = useAtom(timelineAtom);
   const [, setPayed] = useAtom(payedAtom);
-  const params = useSearchParams();
 
   const shareHandler = async () => {
     try {
@@ -515,18 +527,6 @@ function TimelineBuilder() {
       alert('失敗しました。');
     }
   };
-
-  useEffect(() => {
-    const value = params.get('timeline');
-    if (value) {
-      setTimeline(decodeTimeline(value));
-    } else {
-      const cookie = Cookies.get('timeline');
-      if (cookie) {
-        setTimeline(decodeTimeline(cookie));
-      }
-    }
-  }, [setTimeline, params.get]);
 
   return (
     <Grid container direction={'row'} alignItems={'right'}>
@@ -558,7 +558,9 @@ function TimelineBuilder() {
               maxWidth: matches ? '25vw' : '100%',
             }}
           >
-            <Timeline />
+            <Suspense>
+              <Timeline />
+            </Suspense>
           </Container>
         </Grid>
         <Grid size={{ xs: 12, md: 6, lg: 6 }}>

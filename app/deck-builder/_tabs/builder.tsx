@@ -5,7 +5,7 @@ import { atomWithStorage } from 'jotai/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { type MouseEvent, useEffect, useState } from 'react';
+import { type MouseEvent, Suspense, useEffect, useState } from 'react';
 
 import {
   Add,
@@ -418,6 +418,76 @@ function LegendaryDeck() {
         })}
       </Grid>
     </Sortable>
+  );
+}
+
+function Unit() {
+  const params = useSearchParams();
+  const [, setDeck] = useAtom(rwDeckAtom);
+  const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
+  const [, setSw] = useAtom(swAtom);
+  const [, setRoleFilter] = useAtom(roleFilterAtom);
+  const [fst, setFst] = useAtom(fstAtom);
+  const [, setCompare] = useAtom(compareModeAtom);
+
+  useEffect(() => {
+    if (fst) {
+      setFst(false);
+      const value = params.get('deck');
+      if (value) {
+        const { sw, deck, legendaryDeck } = decodeDeck(value);
+        setSw(sw);
+        setRoleFilter(
+          sw === 'shield'
+            ? ['support', 'interference', 'recovery']
+            : [
+                'normal_single',
+                'normal_range',
+                'special_single',
+                'special_range',
+              ],
+        );
+        setDeck(deck);
+        setLegendaryDeck(legendaryDeck);
+        setCompare(undefined);
+      } else {
+        const cookie = Cookies.get('deck');
+        if (cookie) {
+          const { sw, deck, legendaryDeck } = decodeDeck(cookie);
+          setSw(sw);
+          setRoleFilter(
+            sw === 'shield'
+              ? ['support', 'interference', 'recovery']
+              : [
+                  'normal_single',
+                  'normal_range',
+                  'special_single',
+                  'special_range',
+                ],
+          );
+          setDeck(deck);
+          setLegendaryDeck(legendaryDeck);
+          setCompare(undefined);
+        }
+      }
+    }
+  }, [
+    setDeck,
+    setLegendaryDeck,
+    setRoleFilter,
+    setSw,
+    fst,
+    setFst,
+    params.get,
+    setCompare,
+  ]);
+
+  return (
+    <>
+      <Deck />
+      <Divider sx={{ margin: 2 }} />
+      <LegendaryDeck />
+    </>
   );
 }
 
@@ -927,14 +997,11 @@ function SearchModal() {
 const fstAtom = atomWithStorage('fst', true);
 
 export function DeckBuilder() {
-  const params = useSearchParams();
   const theme = useTheme();
   const [deck, setDeck] = useAtom(rwDeckAtom);
   const [legendaryDeck, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
-  const [sw, setSw] = useAtom(swAtom);
-  const [, setRoleFilter] = useAtom(roleFilterAtom);
+  const [sw] = useAtom(swAtom);
   const pathname = usePathname();
-  const [fst, setFst] = useAtom(fstAtom);
   const [, setCompare] = useAtom(compareModeAtom);
 
   const shareHandler = async () => {
@@ -951,58 +1018,6 @@ export function DeckBuilder() {
       alert('失敗しました。');
     }
   };
-
-  useEffect(() => {
-    if (fst) {
-      setFst(false);
-      const value = params.get('deck');
-      if (value) {
-        const { sw, deck, legendaryDeck } = decodeDeck(value);
-        setSw(sw);
-        setRoleFilter(
-          sw === 'shield'
-            ? ['support', 'interference', 'recovery']
-            : [
-                'normal_single',
-                'normal_range',
-                'special_single',
-                'special_range',
-              ],
-        );
-        setDeck(deck);
-        setLegendaryDeck(legendaryDeck);
-        setCompare(undefined);
-      } else {
-        const cookie = Cookies.get('deck');
-        if (cookie) {
-          const { sw, deck, legendaryDeck } = decodeDeck(cookie);
-          setSw(sw);
-          setRoleFilter(
-            sw === 'shield'
-              ? ['support', 'interference', 'recovery']
-              : [
-                  'normal_single',
-                  'normal_range',
-                  'special_single',
-                  'special_range',
-                ],
-          );
-          setDeck(deck);
-          setLegendaryDeck(legendaryDeck);
-          setCompare(undefined);
-        }
-      }
-    }
-  }, [
-    setDeck,
-    setLegendaryDeck,
-    setRoleFilter,
-    setSw,
-    fst,
-    setFst,
-    params.get,
-    setCompare,
-  ]);
 
   return (
     <Grid container direction={'row'} alignItems={'right'}>
@@ -1055,9 +1070,9 @@ export function DeckBuilder() {
               paddingBottom: 2,
             }}
           >
-            <LegendaryDeck />
-            <Divider sx={{ margin: 2 }} />
-            <Deck />
+            <Suspense>
+              <Unit />
+            </Suspense>
           </Container>
         </Grid>
         <Grid size={{ xs: 12, md: 12, lg: 4 }}>
