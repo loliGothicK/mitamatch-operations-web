@@ -167,6 +167,7 @@ function parseDamage(description: string): SkillEffect[] {
         .with('風属性防御力', () => ['Wind DEF'])
         .with('光属性防御力', () => ['Light DEF'])
         .with('闇属性防御力', () => ['Dark DEF'])
+        .with('火属性攻撃力・風属性攻撃力', () => ['Fire ATK', 'Wind ATK'])
         .with('火属性防御力・風属性防御力', () => ['Fire DEF', 'Wind DEF'])
         .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
           'Fire ATK',
@@ -400,25 +401,37 @@ function parseHeal(description: string): SkillEffect[] {
 
 //#region parseStack
 function parseStack(name: string): SkillEffect[] {
-  const effect = match<string, StackEffect | null>(name)
+  return match<string, StackEffect[]>(name)
     .when(
       n => n.includes('メテオ'),
-      () => 'Meteor',
+      () => ['Meteor'],
     )
     .when(
       n => n.includes('バリア'),
-      () => 'Barrier',
+      () => ['Barrier'],
     )
     .when(
       n => n.includes('エデン'),
-      () => 'Eden',
+      () => ['Eden'],
     )
     .when(
       n => n.includes('アニマ'),
-      () => 'ANiMA',
+      () => ['ANiMA'],
     )
-    .otherwise(() => null);
-  return effect ? [{ type: 'stack', stack: effect }] : [];
+    .when(
+      n => n.includes('グロリア'),
+      () => ['Barrier', 'Eden'],
+    )
+    .when(
+      n => n.includes('エーテル'),
+      () => ['ANiMA', 'Meteor'],
+    )
+    .when(
+      n => n.includes('コメット'),
+      () => ['Meteor', 'Barrier'],
+    )
+    .otherwise(() => [])
+    .map(eff => ({ type: 'stack', stack: eff }));
 }
 //#endregion
 
