@@ -20,7 +20,7 @@
       "description": "風属性のメモリアのスキル効果が超特大増加する。",
       "prepare_time": 20,
       "active_time": 130,
-      "payed": true,
+      "payed": false,
       "kind": "Elemental/Wind",
       "usually": true
     },
