@@ -19,13 +19,20 @@ import {
 import { type StatusKind, statusKind } from '@/parser/skill';
 import {
   Autocomplete,
+  Button,
   Card,
   CardContent,
   CardMedia,
+  Dialog,
+  DialogActions,
+  DialogContent,
   FormControlLabel,
   FormGroup,
+  IconButton,
   Stack,
   TextField,
+  Toolbar,
+  Tooltip,
   darken,
   lighten,
 } from '@mui/material';
@@ -37,6 +44,8 @@ import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
+import { Settings } from '@mui/icons-material';
+import { useState } from 'react';
 
 const charmFilterAtom = atomWithStorage<('火' | '水' | '風')[]>(
   'charmFilter',
@@ -61,6 +70,71 @@ const costumeFilterAtom = atomWithStorage<
   (typeof costumeFilterOptions)[number][]
 >('costumeFilter', []);
 
+type AdvancedSettings = {
+  enableCounter: boolean;
+  enableStack: boolean;
+};
+
+const advancedSettings = atomWithStorage<AdvancedSettings>('advancedSettings', {
+  enableCounter: false,
+  enableStack: false,
+});
+
+function AdvancedSettingsModal() {
+  const [settings, setSettings] = useAtom(advancedSettings);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Tooltip title={'Advanced Settings'} placement={'top'}>
+        <Button onClick={handleOpen}>
+          <Settings />
+        </Button>
+      </Tooltip>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
+            Experimental
+          </Typography>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  defaultChecked={settings.enableCounter}
+                  onChange={(_, checked) =>
+                    setSettings(set => ({ ...set, enableCounter: checked }))
+                  }
+                />
+              }
+              label='カウンターを適用する'
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  defaultChecked={settings.enableStack}
+                  onChange={(_, checked) =>
+                    setSettings(set => ({ ...set, enableStack: checked }))
+                  }
+                />
+              }
+              label='スタック効果を適用する'
+            />
+          </FormGroup>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+}
+
 export function Calculator() {
   const theme = useTheme();
   const [deck] = useAtom(rwDeckAtom);
@@ -74,6 +148,7 @@ export function Calculator() {
   const [charmFilter, setCharmFilter] = useAtom(charmFilterAtom);
   const [costumeFilter, setCostumeFilter] = useAtom(costumeFilterAtom);
   const [adLevel, setAdLevel] = useAtom(adLevelAtom);
+  const [settings] = useAtom(advancedSettings);
 
   const finalStatus = calcFinalStatus(
     [...deck, ...legendaryDeck],
@@ -89,6 +164,7 @@ export function Calculator() {
     charm,
     costume,
     adLevel,
+    settings,
   );
 
   const expectedToalDamage = skill
@@ -203,7 +279,11 @@ export function Calculator() {
     }));
 
   return (
-    <Container>
+    <Grid>
+      <Toolbar>
+        <Divider sx={{ flexGrow: 1 }}>設定</Divider>
+        <AdvancedSettingsModal />
+      </Toolbar>
       <Grid container spacing={2}>
         <Grid size={{ xs: 12, md: 6 }}>
           <FormGroup sx={{ flexDirection: 'row', height: 56 }}>
@@ -570,7 +650,7 @@ export function Calculator() {
           );
         })}
       </Grid>
-    </Container>
+    </Grid>
   );
 }
 

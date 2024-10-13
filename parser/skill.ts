@@ -48,7 +48,11 @@ export type Probability = 'low' | 'medium';
 export type SkillKind = Elemental | 'charge' | 'counter' | 's-counter' | 'heal';
 
 export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;
-export type StackEffect = { type: (typeof stackEffect)[number]; times: number };
+export type StackEffect = {
+  type: (typeof stackEffect)[number];
+  rate: number;
+  times: number;
+};
 
 export type SkillEffect = {
   type: 'damage' | 'heal' | 'buff' | 'debuff' | 'stack';
@@ -401,14 +405,15 @@ function parseHeal(description: string): SkillEffect[] {
 
 //#region parseStack
 function parseStack(name: string, description: string): SkillEffect[] {
-  const meteor = /「次の攻撃時にダメージが\d+%アップするスタック」を(\d)回蓄積/;
+  const meteor =
+    /「次の攻撃時にダメージが(\d+)%アップするスタック」を(\d)回蓄積/;
   const barrier =
-    /「次の被ダメージ時に被ダメージを\d+%ダウンさせるスタック」を(\d)回蓄積/;
-  const eden = /「次の回復時に回復効果が\d+%アップするスタック」を(\d)回蓄積/;
+    /「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
+  const eden = /「次の回復時に回復効果が(\d+)%アップするスタック」を(\d)回蓄積/;
   const anima =
-    /「次の支援\/妨害時に支援\/妨害効果が\d+%アップするスタック」を(\d)回蓄積/;
+    /「次の支援\/妨害時に支援\/妨害効果が(\d+)%アップするスタック」を(\d)回蓄積/;
   const comet =
-    /「次の攻撃時にダメージが\d+%アップするスタック」と「次の被ダメージ時に被ダメージを\d+%ダウンさせるスタック」を(\d)回蓄積/;
+    /「次の攻撃時にダメージが(\d+)%アップするスタック」と「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
   return match<string, StackEffect[]>(name)
     .when(
       n => n.includes('メテオ'),
@@ -416,7 +421,9 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Meteor',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(meteor)![1]),
+          rate: 1.0 + Number.parseInt(description.match(meteor)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(meteor)![2]),
         },
       ],
     )
@@ -426,7 +433,9 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Barrier',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(barrier)![1]),
+          rate: 1.0 + Number.parseInt(description.match(barrier)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(barrier)![2]),
         },
       ],
     )
@@ -436,7 +445,9 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Eden',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(eden)![1]),
+          rate: 1.0 + Number.parseInt(description.match(eden)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(eden)![2]),
         },
       ],
     )
@@ -446,7 +457,9 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'ANiMA',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(anima)![1]),
+          rate: 1.0 + Number.parseInt(description.match(anima)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(anima)![2]),
         },
       ],
     )
@@ -456,12 +469,16 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Barrier',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(barrier)![1]),
+          rate: 1.0 + Number.parseInt(description.match(barrier)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(barrier)![2]),
         },
         {
           type: 'Eden',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(eden)![1]),
+          rate: 1.0 + Number.parseInt(description.match(eden)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(eden)![2]),
         },
       ],
     )
@@ -471,12 +488,16 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'ANiMA',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(anima)![1]),
+          rate: 1.0 + Number.parseInt(description.match(anima)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(anima)![2]),
         },
         {
           type: 'Meteor',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(meteor)![1]),
+          rate: 1.0 + Number.parseInt(description.match(meteor)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(meteor)![2]),
         },
       ],
     )
@@ -486,12 +507,16 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Meteor',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(comet)![1]),
+          rate: 1.0 + Number.parseInt(description.match(comet)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(comet)![3]),
         },
         {
           type: 'Barrier',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(comet)![1]),
+          rate: 1.0 + Number.parseInt(description.match(comet)![2]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(comet)![3]),
         },
       ],
     )

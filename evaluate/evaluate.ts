@@ -102,6 +102,11 @@ function parseAdx(
   return [effUp, rateUp];
 }
 
+export type EvaluateOptions = {
+  enableCounter?: boolean;
+  enableStack?: boolean;
+};
+
 export function evaluate(
   deck: MemoriaWithConcentration[],
   [atk, spAtk, def, spDef]: [number, number, number, number],
@@ -109,6 +114,7 @@ export function evaluate(
   charm: Charm,
   costume: Costume,
   adxLevel: number,
+  options: EvaluateOptions = {},
 ): {
   skill: {
     memoria: MemoriaWithConcentration;
@@ -227,6 +233,7 @@ export function evaluate(
           memoria,
           deck,
           rateAdx,
+          options,
         ),
         buff: buff(
           [atk, spAtk, def, spDef],
@@ -236,6 +243,7 @@ export function evaluate(
           memoria,
           deck,
           rateAdx,
+          options,
         ),
         debuff: debuff(
           [atk, spAtk, def, spDef],
@@ -245,6 +253,7 @@ export function evaluate(
           memoria,
           deck,
           rateAdx,
+          options,
         ),
         recovery: recovery(
           def + spDef,
@@ -254,6 +263,7 @@ export function evaluate(
           memoria,
           deck,
           rateAdx,
+          options,
         ),
       },
     };
@@ -275,6 +285,7 @@ function damage(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
   adx: Map<string, number>,
+  { enableCounter, enableStack }: EvaluateOptions,
 ): number | undefined {
   const skill = parseSkill(memoria.skill.name, memoria.skill.description);
   if (!skill.effects.some(effect => effect.type === 'damage')) {
@@ -470,7 +481,8 @@ function damage(
       memoriaRate *
       finalCalibration *
       support *
-      range,
+      range *
+      (enableCounter && memoria.skill.name.includes('カウンター') ? 1.5 : 1.0),
   );
 }
 
@@ -482,6 +494,7 @@ function buff(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
   adx: Map<string, number>,
+  { enableCounter, enableStack }: EvaluateOptions,
 ):
   | {
       type: StatusKind;
@@ -680,7 +693,14 @@ function buff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              atk * memoriaRate * finalCalibration * support * range,
+              atk *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                (enableCounter && memoria.skill.name.includes('カウンター')
+                  ? 1.5
+                  : 1.0),
             ),
           };
         })
@@ -699,7 +719,14 @@ function buff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              spAtk * memoriaRate * finalCalibration * support * range,
+              spAtk *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                (enableCounter && memoria.skill.name.includes('カウンター')
+                  ? 1.5
+                  : 1.0),
             ),
           };
         })
@@ -718,7 +745,14 @@ function buff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              def * memoriaRate * finalCalibration * support * range,
+              def *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                (enableCounter && memoria.skill.name.includes('カウンター')
+                  ? 1.5
+                  : 1.0),
             ),
           };
         })
@@ -737,7 +771,14 @@ function buff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              spDef * memoriaRate * finalCalibration * support * range,
+              spDef *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                (enableCounter && memoria.skill.name.includes('カウンター')
+                  ? 1.5
+                  : 1.0),
             ),
           };
         })
@@ -762,7 +803,10 @@ function buff(
                   memoriaRate *
                   finalCalibration *
                   support *
-                  range,
+                  range *
+                  (enableCounter && memoria.skill.name.includes('カウンター')
+                    ? 1.5
+                    : 1.0),
               ),
             };
           },
@@ -788,7 +832,10 @@ function buff(
                   memoriaRate *
                   finalCalibration *
                   support *
-                  range,
+                  range *
+                  (enableCounter && memoria.skill.name.includes('カウンター')
+                    ? 1.5
+                    : 1.0),
               ),
             };
           },
@@ -804,7 +851,14 @@ function buff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              (def + spDef) * memoriaRate * finalCalibration * support * range,
+              (def + spDef) *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                (enableCounter && memoria.skill.name.includes('カウンター')
+                  ? 1.5
+                  : 1.0),
             ),
           };
         })
@@ -820,6 +874,7 @@ function debuff(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
   adx: Map<string, number>,
+  { enableCounter, enableStack }: EvaluateOptions,
 ):
   | {
       type: StatusKind;
@@ -1017,7 +1072,14 @@ function debuff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              atk * memoriaRate * finalCalibration * support * range,
+              atk *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                (enableCounter && memoria.skill.name.includes('カウンター')
+                  ? 1.5
+                  : 1.0),
             ),
           };
         })
@@ -1036,7 +1098,14 @@ function debuff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              spAtk * memoriaRate * finalCalibration * support * range,
+              spAtk *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                (enableCounter && memoria.skill.name.includes('カウンター')
+                  ? 1.5
+                  : 1.0),
             ),
           };
         })
@@ -1055,7 +1124,14 @@ function debuff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              def * memoriaRate * finalCalibration * support * range,
+              def *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                (enableCounter && memoria.skill.name.includes('カウンター')
+                  ? 1.5
+                  : 1.0),
             ),
           };
         })
@@ -1074,7 +1150,14 @@ function debuff(
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             type: status!,
             amount: Math.floor(
-              spDef * memoriaRate * finalCalibration * support * range,
+              spDef *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                (enableCounter && memoria.skill.name.includes('カウンター')
+                  ? 1.5
+                  : 1.0),
             ),
           };
         })
@@ -1099,7 +1182,10 @@ function debuff(
                   memoriaRate *
                   finalCalibration *
                   support *
-                  range,
+                  range *
+                  (enableCounter && memoria.skill.name.includes('カウンター')
+                    ? 1.5
+                    : 1.0),
               ),
             };
           },
@@ -1125,7 +1211,10 @@ function debuff(
                   memoriaRate *
                   finalCalibration *
                   support *
-                  range,
+                  range *
+                  (enableCounter && memoria.skill.name.includes('カウンター')
+                    ? 1.5
+                    : 1.0),
               ),
             };
           },
@@ -1147,6 +1236,7 @@ function recovery(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
   adx: Map<string, number>,
+  { enableCounter, enableStack }: EvaluateOptions,
 ): number | undefined {
   if (memoria.kind !== '回復') {
     return undefined;
@@ -1269,7 +1359,8 @@ function recovery(
       calibration *
       legendary[memoria.element] *
       support *
-      range,
+      range *
+      (enableCounter && memoria.skill.name.includes('カウンター') ? 1.5 : 1.0),
   );
 }
 

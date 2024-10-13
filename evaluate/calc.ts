@@ -1,6 +1,6 @@
 import type { Charm } from '@/domain/charm/charm';
 import type { Costume } from '@/domain/costume/costume';
-import { evaluate } from '@/evaluate/evaluate';
+import { evaluate, EvaluateOptions } from '@/evaluate/evaluate';
 import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
 import { type StatusKind, statusKind } from '@/parser/skill';
 
@@ -41,6 +41,7 @@ export function calcDiff(
   charm: Charm,
   costume: Costume,
   adLevel: number,
+  options: EvaluateOptions,
 ) {
   const deckBefore = [...legendaryDeck, ...deck];
   const deckAfter = [...legendaryDeck, ...deck].map(m =>
@@ -56,6 +57,7 @@ export function calcDiff(
     charm,
     costume,
     adLevel,
+    options,
   );
   const resultAfter = evaluate(
     deckAfter,
@@ -64,6 +66,7 @@ export function calcDiff(
     charm,
     costume,
     adLevel,
+    options,
   );
 
   const expectedToalDamageBefore = resultBefore.skill

@@ -11,10 +11,18 @@ import {
   Add,
   ArrowRightAlt,
   ClearAll,
+  Favorite,
+  FavoriteBorder,
   FilterAlt,
   Launch,
+  Layers,
+  LayersOutlined,
   LinkSharp,
   Remove,
+  Replay,
+  ReplayOutlined,
+  Reply,
+  ReplyOutlined,
   SearchOutlined,
 } from '@mui/icons-material';
 import {
@@ -22,6 +30,7 @@ import {
   Avatar,
   Box,
   Button,
+  Checkbox,
   Container,
   Dialog,
   DialogActions,
@@ -491,7 +500,7 @@ function Unit() {
   );
 }
 
-function Compare() {
+function Compare({ counter, stack }: { counter: boolean; stack: boolean }) {
   const theme = useTheme();
   const [compare] = useAtom(compareModeAtom);
   const [candidate, setCandidate] = useAtom(candidateAtom);
@@ -518,6 +527,7 @@ function Compare() {
     charm,
     costume,
     adLevel,
+    { enableCounter: counter, enableStack: stack },
   );
 
   const style = {
@@ -544,7 +554,7 @@ function Compare() {
           }}
         >{`${type}:`}</dt>
         <dd style={color}>{`${sign ? '+' : ''}${after - before}`}</dd>
-        <dd>{`(${before} => ${before})`}</dd>
+        <dd>{`(${before} => ${after})`}</dd>
       </>
     );
   };
@@ -604,6 +614,41 @@ function Compare() {
         </Grid>
       </Grid>
       <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
+        ステータス
+      </Divider>
+      <Grid>
+        <dl style={style}>
+          {intoRow([
+            'ATK',
+            [
+              compare.status[compare.concentration][0],
+              candidate.status[compare.concentration][0],
+            ],
+          ])}
+          {intoRow([
+            'Sp.ATK',
+            [
+              compare.status[compare.concentration][1],
+              candidate.status[compare.concentration][1],
+            ],
+          ])}
+          {intoRow([
+            'DEF',
+            [
+              compare.status[compare.concentration][2],
+              candidate.status[compare.concentration][2],
+            ],
+          ])}
+          {intoRow([
+            'Sp.DEF',
+            [
+              compare.status[compare.concentration][3],
+              candidate.status[compare.concentration][3],
+            ],
+          ])}
+        </dl>
+      </Grid>
+      <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
         {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0
           ? 'ダメージ'
           : '回復'}
@@ -651,6 +696,8 @@ function VirtualizedList() {
   const [open, setOpen] = useState(false);
   const [compare, setCompare] = useAtom(compareModeAtom);
   const [candidate, setCandidate] = useAtom(candidateAtom);
+  const [counter, setCounter] = useState(false);
+  const [stack, setStack] = useState(false);
 
   const addMemoria = (
     prev: MemoriaWithConcentration[],
@@ -793,6 +840,27 @@ function VirtualizedList() {
             <Typography sx={{ ml: 2, flex: 1 }} variant='h6' component='div'>
               期待値比較
             </Typography>
+            <Tooltip title='カウンター' placement='left'>
+              <Checkbox
+                disabled={
+                  !compare?.skill.name.includes('カウンター') &&
+                  !candidate?.skill.name.includes('カウンター')
+                }
+                icon={<ReplyOutlined style={{ transform: 'rotate(90deg)' }} />}
+                checkedIcon={<Reply style={{ transform: 'rotate(90deg)' }} />}
+                onChange={(_, checked) => setCounter(() => checked)}
+              />
+            </Tooltip>
+            <Tooltip title='スタック' placement='left'>
+                <Checkbox
+                  disabled={
+                    !compare?.skill.description.includes('スタック') &&
+                    !candidate?.skill.description.includes('スタック')
+                  }
+                  icon={<LayersOutlined />}
+                  checkedIcon={<Layers />}
+                />
+            </Tooltip>
             <Button
               autoFocus
               color='inherit'
@@ -830,7 +898,7 @@ function VirtualizedList() {
           {compare?.labels.includes('legendary') ===
           candidate?.labels.includes('legendary') ? (
             <DialogContent>
-              <Compare />
+              <Compare counter={counter} stack={stack} />
             </DialogContent>
           ) : (
             <DialogContent>
