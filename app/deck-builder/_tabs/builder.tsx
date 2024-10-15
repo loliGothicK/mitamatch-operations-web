@@ -11,16 +11,12 @@ import {
   Add,
   ArrowRightAlt,
   ClearAll,
-  Favorite,
-  FavoriteBorder,
   FilterAlt,
   Launch,
   Layers,
   LayersOutlined,
   LinkSharp,
   Remove,
-  Replay,
-  ReplayOutlined,
   Reply,
   ReplyOutlined,
   SearchOutlined,
@@ -36,15 +32,19 @@ import {
   DialogActions,
   DialogContent,
   Divider,
+  FormControl,
   FormControlLabel,
   Grid2 as Grid,
   IconButton,
   ImageListItem,
   ImageListItemBar,
+  InputLabel,
   ListItemIcon,
   ListItemText,
   Menu,
   MenuItem,
+  OutlinedInput,
+  Select,
   Skeleton,
   Stack,
   Switch,
@@ -52,6 +52,7 @@ import {
   Typography,
   alpha,
 } from '@mui/material';
+import type { SelectChangeEvent, Theme } from '@mui/material';
 import { blue, green, purple, red, yellow } from '@mui/material/colors';
 
 import { decodeDeck, encodeDeck } from '@/actions/serde';
@@ -90,6 +91,10 @@ import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/interna
 import { AutoSizer, List } from 'react-virtualized';
 import 'react-virtualized/styles.css';
 import { match } from 'ts-pattern';
+import { parseSkill } from '@/parser/skill';
+
+const targetBeforeAtom = atomWithStorage<Memoria['id'][]>('targets-before', []);
+const targetAfterAtom = atomWithStorage<Memoria['id'][]>('targets-after', []);
 
 function Icon({
   kind,
@@ -500,10 +505,103 @@ function Unit() {
   );
 }
 
-function Compare({ counter, stack }: { counter: boolean; stack: boolean }) {
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  // biome-ignore lint/style/useNamingConvention: <explanation>
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+function getStyles(name: string, personName: string[], theme: Theme) {
+  return {
+    fontWeight: personName.includes(name)
+      ? theme.typography.fontWeightMedium
+      : theme.typography.fontWeightRegular,
+  };
+}
+
+export default function MultipleSelect({
+  times,
+  kind,
+  targets,
+}: {
+  kind: 'before' | 'after';
+  times: number;
+  targets: MemoriaWithConcentration[];
+}) {
+  const theme = useTheme();
+  const [personName, setPersonName] = useState<string[]>([]);
+  const [, setStackBeforeTargets] = useAtom(targetBeforeAtom);
+  const [, setStackAfterTargets] = useAtom(targetAfterAtom);
+  const [deck] = useAtom(rwDeckAtom);
+  const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
+  const unit = legendaryDeck.concat(deck);
+
+  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    const {
+      target: { value },
+    } = event;
+    (kind === 'before' ? setStackBeforeTargets : setStackAfterTargets)(
+      typeof value === 'string'
+        ? value
+            .split(',')
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            .map(name => unit.find(memoria => memoria.name === name)!.id)
+        : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          value.map(name => unit.find(memoria => memoria.name === name)!.id),
+    );
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
+  return (
+    <div>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id='targets'>スタック適用対象</InputLabel>
+        <Select
+          multiple
+          value={personName}
+          onChange={handleChange}
+          input={<OutlinedInput label='Target' />}
+          MenuProps={MenuProps}
+        >
+          {targets.map(memoria => (
+            <MenuItem
+              key={memoria.name}
+              value={memoria.name}
+              disabled={
+                !(
+                  personName.length < times || personName.includes(memoria.name)
+                )
+              }
+              style={getStyles(memoria.name, personName, theme)}
+            >
+              {memoria.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </div>
+  );
+}
+
+function Compare({
+  counter,
+  stack,
+}: {
+  counter?: boolean;
+  stack?: boolean;
+}) {
   const theme = useTheme();
   const [compare] = useAtom(compareModeAtom);
-  const [candidate, setCandidate] = useAtom(candidateAtom);
+  const [candidate] = useAtom(candidateAtom);
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [selfStatus] = useAtom(statusAtom);
@@ -512,10 +610,54 @@ function Compare({ counter, stack }: { counter: boolean; stack: boolean }) {
   const [charm] = useAtom(charmAtom);
   const [costume] = useAtom(costumeAtom);
   const [adLevel] = useAtom(adLevelAtom);
+  const [targetBefore] = useAtom(targetBeforeAtom);
+  const [targetAfter] = useAtom(targetAfterAtom);
+  const [sw] = useAtom(swAtom);
 
   if (candidate === undefined || compare === undefined) {
     return <Typography>error!</Typography>;
   }
+
+  const [stackRateBefore, stackTimesBefore] = match(sw)
+    .with('sword', () => {
+      const stack = parseSkill(
+        compare.skill.name,
+        compare.skill.description,
+      ).effects.find(eff => eff.stack?.type === 'Meteor')?.stack;
+
+      return [stack?.rate, stack?.times];
+    })
+    .with('shield', () => {
+      const stack = parseSkill(
+        compare.skill.name,
+        compare.skill.description,
+      ).effects.find(
+        eff => eff.stack?.type === 'Eden' || eff.stack?.type === 'ANiMA',
+      )?.stack;
+
+      return [stack?.rate, stack?.times];
+    })
+    .exhaustive();
+  const [stackRateAfter, stackTimesAfter] = match(sw)
+    .with('sword', () => {
+      const stack = parseSkill(
+        candidate.skill.name,
+        candidate.skill.description,
+      ).effects.find(eff => eff.stack?.type === 'Meteor')?.stack;
+
+      return [stack?.rate, stack?.times];
+    })
+    .with('shield', () => {
+      const stack = parseSkill(
+        candidate.skill.name,
+        candidate.skill.description,
+      ).effects.find(
+        eff => eff.stack?.type === 'Eden' || eff.stack?.type === 'ANiMA',
+      )?.stack;
+
+      return [stack?.rate, stack?.times];
+    })
+    .exhaustive();
 
   const diff = calcDiff(
     candidate,
@@ -527,7 +669,23 @@ function Compare({ counter, stack }: { counter: boolean; stack: boolean }) {
     charm,
     costume,
     adLevel,
-    { enableCounter: counter, enableStack: stack },
+    {
+      counter,
+      stack: stack
+        ? {
+            before: {
+              // biome-ignore lint/style/noNonNullAssertion: <explanation>
+              rate: stackRateBefore!,
+              targets: targetBefore,
+            },
+            after: {
+              // biome-ignore lint/style/noNonNullAssertion: <explanation>
+              rate: stackRateAfter!,
+              targets: targetAfter,
+            },
+          }
+        : undefined,
+    },
   );
 
   const style = {
@@ -568,8 +726,8 @@ function Compare({ counter, stack }: { counter: boolean; stack: boolean }) {
     >
       <Grid container>
         <Grid size={{ xs: 5 }}>
-          <Stack direction={'row'}>
-            <Grid container alignItems={'center'} justifyContent={'center'}>
+          <Stack direction={'column'}>
+            <Stack direction={'row'}>
               <Grid>
                 <MemoriaItem
                   memoria={compare}
@@ -577,39 +735,57 @@ function Compare({ counter, stack }: { counter: boolean; stack: boolean }) {
                   onContextMenu={false}
                 />
               </Grid>
-              <Grid>
-                <Stack direction={'column'} paddingLeft={5}>
-                  <Typography variant='body2'>{`${compare?.name}`}</Typography>
-                  <Typography variant='body2'>{`${compare.skill.name}`}</Typography>
-                  <Typography variant='body2'>{`${compare.support.name}`}</Typography>
-                </Stack>
-              </Grid>
-            </Grid>
+              <Stack direction={'column'} paddingLeft={5}>
+                <Typography variant='body2'>{`${compare?.name}`}</Typography>
+                <Typography variant='body2'>{`${compare.skill.name}`}</Typography>
+                <Typography variant='body2'>{`${compare.support.name}`}</Typography>
+              </Stack>
+            </Stack>
+            {compare.skill.description.includes('スタック') ? (
+              <MultipleSelect
+                // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                times={stackTimesBefore!}
+                kind={'before'}
+                targets={legendaryDeck
+                  .concat(deck)
+                  .filter(m => ![compare.id, candidate.id].includes(m.id))}
+              />
+            ) : (
+              <></>
+            )}
           </Stack>
         </Grid>
         <Grid size={{ xs: 2 }} paddingTop={4}>
           <ArrowRightAlt fontSize={'large'} />
         </Grid>
         <Grid size={{ xs: 5 }}>
-          <Stack direction={'row'}>
-            <Grid container alignItems={'center'} justifyContent={'center'}>
+          <Stack direction={'column'}>
+            <Stack direction={'row'}>
               <Grid>
                 <MemoriaItem
                   memoria={candidate}
-                  onConcentrationChange={value => {
-                    setCandidate({ ...candidate, concentration: value });
-                  }}
+                  onConcentrationChange={false}
                   onContextMenu={false}
                 />
               </Grid>
-              <Grid>
-                <Stack direction={'column'} paddingLeft={5}>
-                  <Typography variant='body2'>{`${candidate?.name}`}</Typography>
-                  <Typography variant='body2'>{`${candidate.skill.name}`}</Typography>
-                  <Typography variant='body2'>{`${candidate.support.name}`}</Typography>
-                </Stack>
-              </Grid>
-            </Grid>
+              <Stack direction={'column'} paddingLeft={5}>
+                <Typography variant='body2'>{`${candidate?.name}`}</Typography>
+                <Typography variant='body2'>{`${candidate.skill.name}`}</Typography>
+                <Typography variant='body2'>{`${candidate.support.name}`}</Typography>
+              </Stack>
+            </Stack>
+            {candidate.skill.description.includes('スタック') ? (
+              <MultipleSelect
+                // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                times={stackTimesAfter!}
+                kind={'after'}
+                targets={legendaryDeck
+                  .concat(deck)
+                  .filter(m => ![compare.id, candidate.id].includes(m.id))}
+              />
+            ) : (
+              <></>
+            )}
           </Stack>
         </Grid>
       </Grid>
@@ -698,12 +874,20 @@ function VirtualizedList() {
   const [candidate, setCandidate] = useAtom(candidateAtom);
   const [counter, setCounter] = useState(false);
   const [stack, setStack] = useState(false);
+  const [, setTargetBefore] = useAtom(targetBeforeAtom);
+  const [, setTargetAfter] = useAtom(targetAfterAtom);
 
   const addMemoria = (
     prev: MemoriaWithConcentration[],
     newMemoria: Memoria,
   ) => {
     return [...prev, { ...newMemoria, concentration: 4 }];
+  };
+
+  const onDialogClose = () => {
+    setTargetBefore([]);
+    setTargetAfter([]);
+    setOpen(false);
   };
 
   return (
@@ -825,13 +1009,13 @@ function VirtualizedList() {
           />
         )}
       </AutoSizer>
-      <Dialog fullScreen open={open} onClose={() => setOpen(false)}>
+      <Dialog fullScreen open={open} onClose={onDialogClose}>
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
             <IconButton
               edge='start'
               color='inherit'
-              onClick={() => setOpen(false)}
+              onClick={onDialogClose}
               aria-label='close'
             >
               <CloseIcon />
@@ -843,8 +1027,9 @@ function VirtualizedList() {
             <Tooltip title='カウンター' placement='left'>
               <Checkbox
                 disabled={
-                  !compare?.skill.name.includes('カウンター') &&
-                  !candidate?.skill.name.includes('カウンター')
+                  ![compare, candidate].some(m =>
+                    m?.skill.description.includes('スタック'),
+                  )
                 }
                 icon={<ReplyOutlined style={{ transform: 'rotate(90deg)' }} />}
                 checkedIcon={<Reply style={{ transform: 'rotate(90deg)' }} />}
@@ -852,14 +1037,16 @@ function VirtualizedList() {
               />
             </Tooltip>
             <Tooltip title='スタック' placement='left'>
-                <Checkbox
-                  disabled={
-                    !compare?.skill.description.includes('スタック') &&
-                    !candidate?.skill.description.includes('スタック')
-                  }
-                  icon={<LayersOutlined />}
-                  checkedIcon={<Layers />}
-                />
+              <Checkbox
+                disabled={
+                  ![compare, candidate].some(m =>
+                    m?.skill.description.includes('スタック'),
+                  )
+                }
+                icon={<LayersOutlined />}
+                checkedIcon={<Layers />}
+                onChange={(_, checked) => setStack(() => checked)}
+              />
             </Tooltip>
             <Button
               autoFocus

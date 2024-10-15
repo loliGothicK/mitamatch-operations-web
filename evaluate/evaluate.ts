@@ -1,5 +1,6 @@
 import type { Charm } from '@/domain/charm/charm';
 import type { Costume } from '@/domain/costume/costume';
+import type { Memoria } from '@/domain/memoria/memoria';
 import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
 import { type StatusKind, parseSkill } from '@/parser/skill';
 import { parseSupport } from '@/parser/support';
@@ -102,9 +103,14 @@ function parseAdx(
   return [effUp, rateUp];
 }
 
+export type StackOption = {
+  rate: number;
+  targets: Memoria['id'][];
+};
+
 export type EvaluateOptions = {
-  enableCounter?: boolean;
-  enableStack?: boolean;
+  counter?: boolean;
+  stack?: StackOption;
 };
 
 export function evaluate(
@@ -285,7 +291,7 @@ function damage(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
   adx: Map<string, number>,
-  { enableCounter, enableStack }: EvaluateOptions,
+  { counter: enableCounter, stack }: EvaluateOptions,
 ): number | undefined {
   const skill = parseSkill(memoria.skill.name, memoria.skill.description);
   if (!skill.effects.some(effect => effect.type === 'damage')) {
@@ -474,6 +480,10 @@ function damage(
     .reduce((acc, cur) => acc + cur, 1);
 
   const memoriaRate = skillRate * skillLevel;
+  const counter =
+    enableCounter && memoria.skill.name.includes('カウンター') ? 1.5 : 1.0;
+  const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
+
   return Math.floor(
     (memoria.kind.includes('通常')
       ? atk - (2 / 3) * opDef
@@ -482,7 +492,8 @@ function damage(
       finalCalibration *
       support *
       range *
-      (enableCounter && memoria.skill.name.includes('カウンター') ? 1.5 : 1.0),
+      counter *
+      stackRate,
   );
 }
 
@@ -494,7 +505,7 @@ function buff(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
   adx: Map<string, number>,
-  { enableCounter, enableStack }: EvaluateOptions,
+  { counter: enableCounter, stack }: EvaluateOptions,
 ):
   | {
       type: StatusKind;
@@ -676,6 +687,9 @@ function buff(
   return skill.effects
     .filter(effect => effect.type === 'buff')
     .map(({ amount, status }) => {
+      const counter =
+        enableCounter && memoria.skill.name.includes('カウンター') ? 1.5 : 1.0;
+      const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return match(status!)
         .with('ATK', () => {
@@ -698,9 +712,8 @@ function buff(
                 finalCalibration *
                 support *
                 range *
-                (enableCounter && memoria.skill.name.includes('カウンター')
-                  ? 1.5
-                  : 1.0),
+                counter *
+                stackRate,
             ),
           };
         })
@@ -724,9 +737,8 @@ function buff(
                 finalCalibration *
                 support *
                 range *
-                (enableCounter && memoria.skill.name.includes('カウンター')
-                  ? 1.5
-                  : 1.0),
+                counter *
+                stackRate,
             ),
           };
         })
@@ -750,9 +762,8 @@ function buff(
                 finalCalibration *
                 support *
                 range *
-                (enableCounter && memoria.skill.name.includes('カウンター')
-                  ? 1.5
-                  : 1.0),
+                counter *
+                stackRate,
             ),
           };
         })
@@ -776,9 +787,8 @@ function buff(
                 finalCalibration *
                 support *
                 range *
-                (enableCounter && memoria.skill.name.includes('カウンター')
-                  ? 1.5
-                  : 1.0),
+                counter *
+                stackRate,
             ),
           };
         })
@@ -804,9 +814,8 @@ function buff(
                   finalCalibration *
                   support *
                   range *
-                  (enableCounter && memoria.skill.name.includes('カウンター')
-                    ? 1.5
-                    : 1.0),
+                  counter *
+                  stackRate,
               ),
             };
           },
@@ -833,9 +842,8 @@ function buff(
                   finalCalibration *
                   support *
                   range *
-                  (enableCounter && memoria.skill.name.includes('カウンター')
-                    ? 1.5
-                    : 1.0),
+                  counter *
+                  stackRate,
               ),
             };
           },
@@ -856,9 +864,8 @@ function buff(
                 finalCalibration *
                 support *
                 range *
-                (enableCounter && memoria.skill.name.includes('カウンター')
-                  ? 1.5
-                  : 1.0),
+                counter *
+                stackRate,
             ),
           };
         })
@@ -874,7 +881,7 @@ function debuff(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
   adx: Map<string, number>,
-  { enableCounter, enableStack }: EvaluateOptions,
+  { counter: enableCounter, stack }: EvaluateOptions,
 ):
   | {
       type: StatusKind;
@@ -1055,6 +1062,9 @@ function debuff(
   return skill.effects
     .filter(effect => effect.type === 'debuff')
     .map(({ amount, status }) => {
+      const counter =
+        enableCounter && memoria.skill.name.includes('カウンター') ? 1.5 : 1.0;
+      const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return match(status!)
         .with('ATK', () => {
@@ -1103,9 +1113,8 @@ function debuff(
                 finalCalibration *
                 support *
                 range *
-                (enableCounter && memoria.skill.name.includes('カウンター')
-                  ? 1.5
-                  : 1.0),
+                counter *
+                stackRate,
             ),
           };
         })
@@ -1129,9 +1138,8 @@ function debuff(
                 finalCalibration *
                 support *
                 range *
-                (enableCounter && memoria.skill.name.includes('カウンター')
-                  ? 1.5
-                  : 1.0),
+                counter *
+                stackRate,
             ),
           };
         })
@@ -1155,9 +1163,8 @@ function debuff(
                 finalCalibration *
                 support *
                 range *
-                (enableCounter && memoria.skill.name.includes('カウンター')
-                  ? 1.5
-                  : 1.0),
+                counter *
+                stackRate,
             ),
           };
         })
@@ -1183,9 +1190,8 @@ function debuff(
                   finalCalibration *
                   support *
                   range *
-                  (enableCounter && memoria.skill.name.includes('カウンター')
-                    ? 1.5
-                    : 1.0),
+                  counter *
+                  stackRate,
               ),
             };
           },
@@ -1212,9 +1218,8 @@ function debuff(
                   finalCalibration *
                   support *
                   range *
-                  (enableCounter && memoria.skill.name.includes('カウンター')
-                    ? 1.5
-                    : 1.0),
+                  counter *
+                  stackRate,
               ),
             };
           },
@@ -1236,7 +1241,7 @@ function recovery(
   memoria: MemoriaWithConcentration,
   deck: MemoriaWithConcentration[],
   adx: Map<string, number>,
-  { enableCounter, enableStack }: EvaluateOptions,
+  { counter: enableCounter, stack }: EvaluateOptions,
 ): number | undefined {
   if (memoria.kind !== '回復') {
     return undefined;
@@ -1353,6 +1358,10 @@ function recovery(
     .reduce((acc, cur) => acc + cur, 1);
 
   const memoriaRate = skillRate * skillLevel;
+  const counter =
+    enableCounter && memoria.skill.name.includes('カウンター') ? 1.5 : 1.0;
+  const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
+
   return Math.floor(
     dsd *
       memoriaRate *
@@ -1360,7 +1369,8 @@ function recovery(
       legendary[memoria.element] *
       support *
       range *
-      (enableCounter && memoria.skill.name.includes('カウンター') ? 1.5 : 1.0),
+      counter *
+      stackRate,
   );
 }
 

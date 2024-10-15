@@ -2,10 +2,9 @@ import {
   type Elemental,
   type ElementalKind,
   type Elements,
-  type StackEffect,
   elementalKind,
   elements,
-  stackEffect,
+  type stackEffect,
 } from '@/parser/skill';
 import { match } from 'ts-pattern';
 

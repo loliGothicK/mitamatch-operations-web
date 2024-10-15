@@ -4,7 +4,7 @@ import NumberInput from '@/components/common/NumberInput';
 import { charmList } from '@/domain/charm/charm';
 import { costumeList } from '@/domain/costume/costume';
 import { calcFinalStatus } from '@/evaluate/calc';
-import { evaluate } from '@/evaluate/evaluate';
+import { evaluate, type StackOption } from '@/evaluate/evaluate';
 import {
   adLevelAtom,
   charmAtom,
@@ -28,7 +28,6 @@ import {
   DialogContent,
   FormControlLabel,
   FormGroup,
-  IconButton,
   Stack,
   TextField,
   Toolbar,
@@ -37,7 +36,6 @@ import {
   lighten,
 } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
-import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
 import { Grid2 as Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -71,13 +69,13 @@ const costumeFilterAtom = atomWithStorage<
 >('costumeFilter', []);
 
 type AdvancedSettings = {
-  enableCounter: boolean;
-  enableStack: boolean;
+  counter: boolean;
+  stack?: StackOption;
 };
 
 const advancedSettings = atomWithStorage<AdvancedSettings>('advancedSettings', {
-  enableCounter: false,
-  enableStack: false,
+  counter: false,
+  stack: undefined,
 });
 
 function AdvancedSettingsModal() {
@@ -106,24 +104,13 @@ function AdvancedSettingsModal() {
             <FormControlLabel
               control={
                 <Checkbox
-                  defaultChecked={settings.enableCounter}
+                  defaultChecked={settings.counter}
                   onChange={(_, checked) =>
-                    setSettings(set => ({ ...set, enableCounter: checked }))
+                    setSettings(set => ({ ...set, counter: checked }))
                   }
                 />
               }
               label='カウンターを適用する'
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  defaultChecked={settings.enableStack}
-                  onChange={(_, checked) =>
-                    setSettings(set => ({ ...set, enableStack: checked }))
-                  }
-                />
-              }
-              label='スタック効果を適用する'
             />
           </FormGroup>
         </DialogContent>
