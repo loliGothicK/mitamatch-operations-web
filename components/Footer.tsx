@@ -97,7 +97,7 @@ export default function Footer({ ...props }) {
                 target='_blank'
               >
                 <span
-                  className='Button-content'
+                  class='Button-content'
                   style={{
                     alignItems: 'center',
                     display: 'grid',
@@ -128,7 +128,7 @@ export default function Footer({ ...props }) {
                     </svg>
                   </span>
                   <span
-                    className='Button-label'
+                    class='Button-label'
                     style={{
                       color: theme.palette.text.secondary,
                     }}

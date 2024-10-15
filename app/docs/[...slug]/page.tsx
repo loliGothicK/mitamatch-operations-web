@@ -25,7 +25,7 @@ const Toc = () => {
 
   return (
     <nav
-      className='toc'
+      class='toc'
       style={{
         position: 'sticky',
         top: 70,
@@ -77,7 +77,7 @@ export default function Page({ params }: { params: { slug: string[] } }) {
                   <> {params.slug[0]}</>
                 )}
               </Breadcrumbs>
-              <article className='mitamatch-markdown'>
+              <article class='mitamatch-markdown'>
                 <DocComponent />
               </article>
             </Grid>

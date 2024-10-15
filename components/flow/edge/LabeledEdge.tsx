@@ -53,7 +53,7 @@ export default function LabeledEdge({
     <>
       <path
         d={edgePath}
-        className='react-flow__edge-path'
+        class='react-flow__edge-path'
         style={{
           ...style,
           stroke: 'transparent',
@@ -66,7 +66,7 @@ export default function LabeledEdge({
       <path // 実際の線
         id={id}
         d={edgePath}
-        className='react-flow__edge-path'
+        class='react-flow__edge-path'
         markerEnd={markerEnd}
         style={{ ...style, stroke: 'dimgrey' }}
       />

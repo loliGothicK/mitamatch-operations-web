@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <Layout>
       <Documents>
-        <article className={'mitamatch-markdown'}>
+        <article class={'mitamatch-markdown'}>
           <Intro />
         </article>
       </Documents>

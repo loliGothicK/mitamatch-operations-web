@@ -69,11 +69,14 @@ export type Skill = {
 };
 //#endregion
 
+const VANGUARD_DAMAGE = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
+const VANGUARD_BUFF = /自身の(.*?)を(.*?アップ)させる/;
+const VANGUARD_DEBUFF = /敵の(.*?)を(.*?ダウン)させる/;
+
 //#region parseDamage
 function parseDamage(description: string): SkillEffect[] {
   const result: SkillEffect[] = [];
-  const damage = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
-  const _match = description.match(damage);
+  const _match = description.match(VANGUARD_DAMAGE);
 
   if (!_match) {
     return result;
@@ -97,10 +100,7 @@ function parseDamage(description: string): SkillEffect[] {
 
   result.push({ type: 'damage', range, amount });
 
-  const buff = /自身の(.*?)を(.*?アップ)させる/;
-  const debuff = /敵の(.*?)を(.*?ダウン)させる/;
-
-  const buffMatch = description.match(buff);
+  const buffMatch = description.match(VANGUARD_BUFF);
 
   if (buffMatch) {
     const statuses = buffMatch[1].split('と').flatMap(s => {
@@ -152,7 +152,7 @@ function parseDamage(description: string): SkillEffect[] {
     }
   }
 
-  const debuffMatch = description.match(debuff);
+  const debuffMatch = description.match(VANGUARD_DEBUFF);
 
   if (debuffMatch) {
     const statuses = debuffMatch[1].split('と').flatMap(s => {
@@ -209,10 +209,12 @@ function parseDamage(description: string): SkillEffect[] {
 }
 //#endregion
 
+const REARGUARD_BUFF = /味方(.+)体の(.+)を(.*?アップ)させる/;
+const REARGUARD_DEBUFF = /敵(.+)体の(.+)を(.*?ダウン)させる/;
+
 //#region parseBuff
 function parseBuff(description: string): SkillEffect[] {
-  const buff = /味方(.+)体の(.+)を(.*?アップ)させる/;
-  const _match = description.match(buff);
+  const _match = description.match(REARGUARD_BUFF);
 
   if (!_match) {
     return [];
@@ -267,8 +269,7 @@ function parseBuff(description: string): SkillEffect[] {
 
 //#region parseDebuff
 function parseDebuff(description: string): SkillEffect[] {
-  const debuff = /敵(.+)体の(.+)を(.*?ダウン)させる/;
-  const _match = description.match(debuff);
+  const _match = description.match(REARGUARD_DEBUFF);
 
   if (!_match) {
     return [];
@@ -323,11 +324,13 @@ function parseDebuff(description: string): SkillEffect[] {
 }
 //#endregion
 
+const RECOVERY = /味方(.+)体のHPを(.*?回復)/;
+const RECOVERY_BUFF = /(ATK.*?|Sp\.ATK.*?|DEF.*?|Sp\.DEF.*?)を(.*?アップ)/;
+
 //#region parseHeal
 function parseHeal(description: string): SkillEffect[] {
   const result: SkillEffect[] = [];
-  const heal = /味方(.+)体のHPを(.*?回復)/;
-  const _match = description.match(heal);
+  const _match = description.match(RECOVERY);
 
   if (!_match) {
     return [];
@@ -349,9 +352,7 @@ function parseHeal(description: string): SkillEffect[] {
 
   result.push({ type: 'heal', range, amount: healAmount });
 
-  const buff = /(ATK.*?|Sp\.ATK.*?|DEF.*?|Sp\.DEF.*?)を(.*?アップ)/;
-
-  const __match = description.match(buff);
+  const __match = description.match(RECOVERY_BUFF);
 
   if (!__match) {
     return result;
@@ -403,17 +404,17 @@ function parseHeal(description: string): SkillEffect[] {
 }
 //#endregion
 
+const METEOR = /「次の攻撃時にダメージが(\d+)%アップするスタック」を(\d)回蓄積/;
+const BARRIER =
+  /「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
+const EDEN = /「次の回復時に回復効果が(\d+)%アップするスタック」を(\d)回蓄積/;
+const ANIMA =
+  /「次の支援\/妨害時に支援\/妨害効果が(\d+)%アップするスタック」を(\d)回蓄積/;
+const COMET =
+  /「次の攻撃時にダメージが(\d+)%アップするスタック」と「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
+
 //#region parseStack
 function parseStack(name: string, description: string): SkillEffect[] {
-  const meteor =
-    /「次の攻撃時にダメージが(\d+)%アップするスタック」を(\d)回蓄積/;
-  const barrier =
-    /「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
-  const eden = /「次の回復時に回復効果が(\d+)%アップするスタック」を(\d)回蓄積/;
-  const anima =
-    /「次の支援\/妨害時に支援\/妨害効果が(\d+)%アップするスタック」を(\d)回蓄積/;
-  const comet =
-    /「次の攻撃時にダメージが(\d+)%アップするスタック」と「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
   return match<string, StackEffect[]>(name)
     .when(
       n => n.includes('メテオ'),
@@ -421,9 +422,9 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Meteor',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(meteor)![1]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(METEOR)![1]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(meteor)![2]),
+          times: Number.parseInt(description.match(METEOR)![2]),
         },
       ],
     )
@@ -433,9 +434,9 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Barrier',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(barrier)![1]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(BARRIER)![1]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(barrier)![2]),
+          times: Number.parseInt(description.match(BARRIER)![2]),
         },
       ],
     )
@@ -445,9 +446,9 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Eden',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(eden)![1]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(EDEN)![1]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(eden)![2]),
+          times: Number.parseInt(description.match(EDEN)![2]),
         },
       ],
     )
@@ -457,9 +458,9 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'ANiMA',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(anima)![1]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(ANIMA)![1]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(anima)![2]),
+          times: Number.parseInt(description.match(ANIMA)![2]),
         },
       ],
     )
@@ -469,16 +470,16 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Barrier',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(barrier)![1]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(BARRIER)![1]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(barrier)![2]),
+          times: Number.parseInt(description.match(BARRIER)![2]),
         },
         {
           type: 'Eden',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(eden)![1]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(EDEN)![1]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(eden)![2]),
+          times: Number.parseInt(description.match(EDEN)![2]),
         },
       ],
     )
@@ -488,16 +489,16 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'ANiMA',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(anima)![1]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(ANIMA)![1]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(anima)![2]),
+          times: Number.parseInt(description.match(ANIMA)![2]),
         },
         {
           type: 'Meteor',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(meteor)![1]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(METEOR)![1]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(meteor)![2]),
+          times: Number.parseInt(description.match(METEOR)![2]),
         },
       ],
     )
@@ -507,16 +508,16 @@ function parseStack(name: string, description: string): SkillEffect[] {
         {
           type: 'Meteor',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(comet)![1]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(COMET)![1]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(comet)![3]),
+          times: Number.parseInt(description.match(COMET)![3]),
         },
         {
           type: 'Barrier',
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(comet)![2]) / 100,
+          rate: 1.0 + Number.parseInt(description.match(COMET)![2]) / 100,
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(comet)![3]),
+          times: Number.parseInt(description.match(COMET)![3]),
         },
       ],
     )

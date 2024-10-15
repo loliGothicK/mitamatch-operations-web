@@ -60,10 +60,11 @@ export const costumeList: Costume[] = costumeData.data.map(costume => {
   };
 });
 
+const STATUS = /^(.+)\+(\d+)$/;
+
 function skillsToStatus(skills: string[]): [number, number, number, number] {
   const status = [0, 0, 0, 0] as [number, number, number, number];
   const regex = /(ATK|Sp\.ATK|DEF|Sp\.DEF)\+\d+/g;
-  const statRegex = /^(.+)\+(\d+)$/;
 
   for (const [, stat, value] of skills
     .filter(skill => skill.startsWith('固有'))
@@ -72,7 +73,7 @@ function skillsToStatus(skills: string[]): [number, number, number, number] {
       return match === null ? [] : match;
     })
     // biome-ignore lint/style/noNonNullAssertion: <explanation>
-    .map(skill => skill.match(statRegex)!)) {
+    .map(skill => skill.match(STATUS)!)) {
     switch (stat) {
       case 'ATK': {
         status[0] += Number.parseInt(value);
@@ -90,6 +91,7 @@ function skillsToStatus(skills: string[]): [number, number, number, number] {
         status[3] += Number.parseInt(value);
         break;
       }
+      default:
     }
   }
   return status;

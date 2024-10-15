@@ -73,7 +73,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
 
   return (
     <Box onContextMenu={handleContextMenu}>
-      <div className='order-node' style={{ padding: 0 }}>
+      <div class='order-node' style={{ padding: 0 }}>
         <Handle
           type='target'
           position={Position.Top}
