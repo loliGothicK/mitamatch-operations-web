@@ -91,7 +91,8 @@ function skillsToStatus(skills: string[]): [number, number, number, number] {
         status[3] += Number.parseInt(value);
         break;
       }
-      default: break;
+      default:
+        break;
     }
   }
   return status;

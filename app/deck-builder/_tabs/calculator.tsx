@@ -473,26 +473,26 @@ export function Calculator() {
           </Stack>
         </Grid>
         {sw === 'sword' && (
-            <Grid size={{ xs: 12 }}>
-              <Stack direction={'row'} spacing={2}>
-                <TextField
-                  label="Opponent's DEF"
-                  defaultValue={def}
-                  variant='standard'
-                  onChange={e => {
-                    setDef(Number.parseInt(e.target.value));
-                  }}
-                />
-                <TextField
-                  label="Opponent's Sp.DEF"
-                  defaultValue={spDef}
-                  variant='standard'
-                  onChange={e => {
-                    setSpDef(Number.parseInt(e.target.value));
-                  }}
-                />
-              </Stack>
-            </Grid>
+          <Grid size={{ xs: 12 }}>
+            <Stack direction={'row'} spacing={2}>
+              <TextField
+                label="Opponent's DEF"
+                defaultValue={def}
+                variant='standard'
+                onChange={e => {
+                  setDef(Number.parseInt(e.target.value));
+                }}
+              />
+              <TextField
+                label="Opponent's Sp.DEF"
+                defaultValue={spDef}
+                variant='standard'
+                onChange={e => {
+                  setSpDef(Number.parseInt(e.target.value));
+                }}
+              />
+            </Stack>
+          </Grid>
         )}
       </Grid>
       <Divider sx={{ margin: 2 }}>{'期待値'}</Divider>
