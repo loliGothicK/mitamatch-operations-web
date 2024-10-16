@@ -97,7 +97,6 @@ export default function Footer({ ...props }) {
                 target='_blank'
               >
                 <span
-                  // biome-ignore lint/suspicious/noReactSpecificProps: <explanation>
                   className='Button-content'
                   style={{
                     alignItems: 'center',
@@ -129,7 +128,6 @@ export default function Footer({ ...props }) {
                     </svg>
                   </span>
                   <span
-                    // biome-ignore lint/suspicious/noReactSpecificProps: <explanation>
                     className='Button-label'
                     style={{
                       color: theme.palette.text.secondary,

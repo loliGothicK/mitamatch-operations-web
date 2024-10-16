@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "NODE_OPTIONS='--require @newrelic/next' next start",
     "lint": "yarn biome lint .",
-    "lint:fix": "yarn biome lint --unsafe .",
+    "lint:fix": "yarn biome lint --fix --unsafe .",
     "fmt": "yarn biome format --write .",
     "fmt:check": "yarn biome format .",
     "test": "jest"

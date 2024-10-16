@@ -473,7 +473,6 @@ export function Calculator() {
           </Stack>
         </Grid>
         {sw === 'sword' && (
-          <>
             <Grid size={{ xs: 12 }}>
               <Stack direction={'row'} spacing={2}>
                 <TextField
@@ -494,7 +493,6 @@ export function Calculator() {
                 />
               </Stack>
             </Grid>
-          </>
         )}
       </Grid>
       <Divider sx={{ margin: 2 }}>{'期待値'}</Divider>
