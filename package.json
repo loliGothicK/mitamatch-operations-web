@@ -61,7 +61,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
     "@testing-library/dom": "10.4.0",
-    "@testing-library/jest-dom": "6.6.0",
+    "@testing-library/jest-dom": "6.6.1",
     "@testing-library/react": "16.0.1",
     "@types/jest": "29.5.13",
     "@types/js-cookie": "3.0.6",
