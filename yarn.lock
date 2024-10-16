@@ -6912,10 +6912,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-tocbot@4.30.0:
-  version "4.30.0"
-  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.30.0.tgz#0730d02b41284cc25ba4fbc0f1a38858464df21a"
-  integrity sha512-c0ucneDHP5zqsbczYxjRj1SWD+6EeD1mUbQPTdVJzNe0aAZH4NyeZt4cQQBjWU4v8tTlJtzDzEgD03sCc5nL1w==
+tocbot@4.31.0:
+  version "4.31.0"
+  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.31.0.tgz#6ea23f225f4af6231882a36aba0442109e94e826"
+  integrity sha512-Zd9tt6EQn2bvLSHIcug/Z1Sukyn/XJ62dMK9SjIbtHSDkI+Du40CmBvds6BedzXZe1sS1iPGl4Wup/k4cJkVhQ==
 
 tough-cookie@^4.1.2:
   version "4.1.3"
