@@ -1,7 +1,7 @@
 import createMdx from '@next/mdx';
 import { withSentryConfig } from '@sentry/nextjs';
 import remarkGfm from 'remark-gfm';
-import remarkSlug from 'remark-slug';
+import rehypeSlug from 'rehype-slug';
 import rehypeImageSize from './plugin/rehype-image-size.mjs';
 
 /** @types {import('next').NextConfig} */
@@ -35,8 +35,8 @@ const nextConfig = {
 
 const withMdx = createMdx({
   options: {
-    remarkPlugins: [remarkGfm, remarkSlug],
-    rehypePlugins: [rehypeImageSize],
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [rehypeImageSize, rehypeSlug],
   },
 });
 
