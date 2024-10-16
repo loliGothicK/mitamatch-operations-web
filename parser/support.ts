@@ -29,6 +29,9 @@ type Support = {
   effects: SupportKind[];
 };
 
+const STATUS =
+  /(ATK.*?|DEF.*?|Sp\.ATK.*?|Sp\.DEF.*?|火属性.*?|水属性.*?|風属性.*?)を.*?(アップ|ダウン)/;
+
 function parseStatus(description: string): SupportKind[] {
   const global =
     /(ATK|DEF|Sp\.ATK|Sp\.DEF|火属性|水属性|風属性).*?を.*?(アップ|ダウン)/g;
@@ -39,9 +42,7 @@ function parseStatus(description: string): SupportKind[] {
   }
 
   return globalMatch.flatMap(sentence => {
-    const regExp =
-      /(ATK.*?|DEF.*?|Sp\.ATK.*?|Sp\.DEF.*?|火属性.*?|水属性.*?|風属性.*?)を.*?(アップ|ダウン)/;
-    const _match = sentence.match(regExp);
+    const _match = sentence.match(STATUS);
     if (_match) {
       const statuses = _match[1].split('と').flatMap(status => {
         return match<string, PossibleStatus[]>(status)
@@ -104,9 +105,10 @@ function parseAmount(amount: string): Amount {
     .run();
 }
 
+const DAMAGE = /攻撃ダメージを(.*アップ)させる/;
+
 function parseDamage(description: string): SupportKind[] {
-  const damage = /攻撃ダメージを(.*アップ)させる/;
-  const _match = description.match(damage);
+  const _match = description.match(DAMAGE);
 
   if (!_match) {
     return [];
@@ -115,9 +117,10 @@ function parseDamage(description: string): SupportKind[] {
   return [{ type: 'DamageUp', amount: parseAmount(_match[1]) }];
 }
 
+const ASSIST = /支援\/妨害効果を(.*アップ)/;
+
 function parseAssist(description: string): SupportKind[] {
-  const assist = /支援\/妨害効果を(.*アップ)/;
-  const _match = description.match(assist);
+  const _match = description.match(ASSIST);
 
   if (!_match) {
     return [];
@@ -126,9 +129,10 @@ function parseAssist(description: string): SupportKind[] {
   return [{ type: 'SupportUp', amount: parseAmount(_match[1]) }];
 }
 
+const RECOVERY = /HPの回復量を(.*アップ)/;
+
 function parseRecovery(description: string): SupportKind[] {
-  const recovery = /HPの回復量を(.*アップ)/;
-  const _match = description.match(recovery);
+  const _match = description.match(RECOVERY);
 
   if (!_match) {
     return [];
@@ -137,9 +141,10 @@ function parseRecovery(description: string): SupportKind[] {
   return [{ type: 'RecoveryUp', amount: parseAmount(_match[1]) }];
 }
 
+const MATCH_PT = /自身のマッチPtの獲得量が(.*アップ)する/;
+
 function parseMatchPt(description: string): SupportKind[] {
-  const matchPt = /自身のマッチPtの獲得量が(.*アップ)する/;
-  const _match = description.match(matchPt);
+  const _match = description.match(MATCH_PT);
 
   if (!_match) {
     return [];
@@ -157,9 +162,10 @@ function parseMatchPt(description: string): SupportKind[] {
   return [{ type: 'MatchPtUp', amount }];
 }
 
+const COST_DOWN = /一定確率でMP消費を抑える/;
+
 function parseMpCost(description: string): SupportKind[] {
-  const mpCost = /一定確率でMP消費を抑える/;
-  const _match = description.match(mpCost);
+  const _match = description.match(COST_DOWN);
 
   if (!_match) {
     return [];
@@ -168,9 +174,10 @@ function parseMpCost(description: string): SupportKind[] {
   return [{ type: 'MpCostDown', amount: 'medium' }];
 }
 
+const RANGE = /効果対象範囲が(.+)される/;
+
 function parseRange(description: string): SupportKind[] {
-  const range = /効果対象範囲が(.+)される/;
-  const _match = description.match(range);
+  const _match = description.match(RANGE);
 
   if (!_match) {
     return [];

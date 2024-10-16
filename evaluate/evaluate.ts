@@ -12,6 +12,9 @@ function ToBeDefined(hint: string): never {
   throw new Error(`Not implemented: ${hint}`);
 }
 
+const ABILITY =
+  /メモリア使用時、それが(.+)属性メモリアの場合、さらにメモリアスキル効果UP\+(\d+)%/;
+
 function parseAbility(description?: string): Map<string, number> {
   const result = new Map<string, number>([
     ['火', 1.0],
@@ -23,9 +26,7 @@ function parseAbility(description?: string): Map<string, number> {
   if (!description) {
     return result;
   }
-  const ability =
-    /メモリア使用時、それが(.+)属性メモリアの場合、さらにメモリアスキル効果UP\+(\d+)%/;
-  const _match = description.match(ability);
+  const _match = description.match(ABILITY);
   if (!_match) {
     return result;
   }
@@ -34,6 +35,10 @@ function parseAbility(description?: string): Map<string, number> {
   }
   return result;
 }
+
+const EFFECT_UP = /自身が使用する(.+)属性メモリアのスキル効果(\d+)%UP/;
+const TRIGGER_RATE_UP =
+  /自身が使用する(.+?)属性メモリアの補助スキル発動確率が(\d+)％UP/;
 
 function parseEx(description?: string): Map<string, number> {
   const result = new Map<string, number>([
@@ -46,8 +51,7 @@ function parseEx(description?: string): Map<string, number> {
   if (!description) {
     return result;
   }
-  const costume = /自身が使用する(.+)属性メモリアのスキル効果(\d+)%UP/;
-  const _match = description.match(costume);
+  const _match = description.match(EFFECT_UP);
   if (!_match) {
     return result;
   }
@@ -77,27 +81,20 @@ function parseAdx(
     return [effUp, rateUp];
   }
 
-  {
-    const regExp = /自身が使用する(.+)属性メモリアのスキル効果(\d+)%UP/;
-    for (const skill of adx[adxLevel]) {
-      const _match = skill.description.match(regExp);
-      if (!_match) {
-        continue;
-      }
-      effUp.set(_match[1], 1.0 + Number(_match[2]) / 100);
+  for (const skill of adx[adxLevel]) {
+    const _match = skill.description.match(EFFECT_UP);
+    if (!_match) {
+      continue;
     }
+    effUp.set(_match[1], 1.0 + Number(_match[2]) / 100);
   }
 
-  {
-    const regExp =
-      /自身が使用する(.+?)属性メモリアの補助スキル発動確率が(\d+)％UP/;
-    for (const skill of adx[adxLevel]) {
-      const _match = skill.description.match(regExp);
-      if (!_match) {
-        continue;
-      }
-      rateUp.set(_match[1], Number(_match[2]) / 100);
+  for (const skill of adx[adxLevel]) {
+    const _match = skill.description.match(TRIGGER_RATE_UP);
+    if (!_match) {
+      continue;
     }
+    rateUp.set(_match[1], Number(_match[2]) / 100);
   }
 
   return [effUp, rateUp];

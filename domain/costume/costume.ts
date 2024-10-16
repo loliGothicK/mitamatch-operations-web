@@ -63,6 +63,7 @@ export const costumeList: Costume[] = costumeData.data.map(costume => {
 function skillsToStatus(skills: string[]): [number, number, number, number] {
   const status = [0, 0, 0, 0] as [number, number, number, number];
   const regex = /(ATK|Sp\.ATK|DEF|Sp\.DEF)\+\d+/g;
+  // biome-ignore lint/performance/useTopLevelRegex: ???
   const statRegex = /^(.+)\+(\d+)$/;
 
   for (const [, stat, value] of skills
@@ -90,6 +91,7 @@ function skillsToStatus(skills: string[]): [number, number, number, number] {
         status[3] += Number.parseInt(value);
         break;
       }
+      default: break;
     }
   }
   return status;
