@@ -496,59 +496,59 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@biomejs/biome@1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@biomejs/biome/-/biome-1.9.3.tgz#5362fc390ac00c82e3698824490e3801d012c1b0"
-  integrity sha512-POjAPz0APAmX33WOQFGQrwLvlu7WLV4CFJMlB12b6ZSg+2q6fYu9kZwLCOA+x83zXfcPd1RpuWOKJW0GbBwLIQ==
+"@biomejs/biome@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@biomejs/biome/-/biome-1.9.4.tgz#89766281cbc3a0aae865a7ff13d6aaffea2842bf"
+  integrity sha512-1rkd7G70+o9KkTn5KLmDYXihGoTaIGO9PIIN2ZB7UJxFrWw04CZHPYiMRjYsaDvVV7hP1dYNRLxSANLaBFGpog==
   optionalDependencies:
-    "@biomejs/cli-darwin-arm64" "1.9.3"
-    "@biomejs/cli-darwin-x64" "1.9.3"
-    "@biomejs/cli-linux-arm64" "1.9.3"
-    "@biomejs/cli-linux-arm64-musl" "1.9.3"
-    "@biomejs/cli-linux-x64" "1.9.3"
-    "@biomejs/cli-linux-x64-musl" "1.9.3"
-    "@biomejs/cli-win32-arm64" "1.9.3"
-    "@biomejs/cli-win32-x64" "1.9.3"
+    "@biomejs/cli-darwin-arm64" "1.9.4"
+    "@biomejs/cli-darwin-x64" "1.9.4"
+    "@biomejs/cli-linux-arm64" "1.9.4"
+    "@biomejs/cli-linux-arm64-musl" "1.9.4"
+    "@biomejs/cli-linux-x64" "1.9.4"
+    "@biomejs/cli-linux-x64-musl" "1.9.4"
+    "@biomejs/cli-win32-arm64" "1.9.4"
+    "@biomejs/cli-win32-x64" "1.9.4"
 
-"@biomejs/cli-darwin-arm64@1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@biomejs/cli-darwin-arm64/-/cli-darwin-arm64-1.9.3.tgz#3a981835a7a891589b356bbdb4e50157e494aa7d"
-  integrity sha512-QZzD2XrjJDUyIZK+aR2i5DDxCJfdwiYbUKu9GzkCUJpL78uSelAHAPy7m0GuPMVtF/Uo+OKv97W3P9nuWZangQ==
+"@biomejs/cli-darwin-arm64@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-darwin-arm64/-/cli-darwin-arm64-1.9.4.tgz#dfa376d23a54a2d8f17133c92f23c1bf2e62509f"
+  integrity sha512-bFBsPWrNvkdKrNCYeAp+xo2HecOGPAy9WyNyB/jKnnedgzl4W4Hb9ZMzYNbf8dMCGmUdSavlYHiR01QaYR58cw==
 
-"@biomejs/cli-darwin-x64@1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@biomejs/cli-darwin-x64/-/cli-darwin-x64-1.9.3.tgz#0e33284e5def9cbc17705b6a9acbc22b161accb1"
-  integrity sha512-vSCoIBJE0BN3SWDFuAY/tRavpUtNoqiceJ5PrU3xDfsLcm/U6N93JSM0M9OAiC/X7mPPfejtr6Yc9vSgWlEgVw==
+"@biomejs/cli-darwin-x64@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-darwin-x64/-/cli-darwin-x64-1.9.4.tgz#eafc2ce3849d385fc02238aad1ca4a73395a64d9"
+  integrity sha512-ngYBh/+bEedqkSevPVhLP4QfVPCpb+4BBe2p7Xs32dBgs7rh9nY2AIYUL6BgLw1JVXV8GlpKmb/hNiuIxfPfZg==
 
-"@biomejs/cli-linux-arm64-musl@1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-arm64-musl/-/cli-linux-arm64-musl-1.9.3.tgz#b68e2fe56381cbf71770b6c785215448c47595fd"
-  integrity sha512-VBzyhaqqqwP3bAkkBrhVq50i3Uj9+RWuj+pYmXrMDgjS5+SKYGE56BwNw4l8hR3SmYbLSbEo15GcV043CDSk+Q==
+"@biomejs/cli-linux-arm64-musl@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-arm64-musl/-/cli-linux-arm64-musl-1.9.4.tgz#d780c3e01758fc90f3268357e3f19163d1f84fca"
+  integrity sha512-v665Ct9WCRjGa8+kTr0CzApU0+XXtRgwmzIf1SeKSGAv+2scAlW6JR5PMFo6FzqqZ64Po79cKODKf3/AAmECqA==
 
-"@biomejs/cli-linux-arm64@1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-arm64/-/cli-linux-arm64-1.9.3.tgz#bb8186f000bd7366c3a1822a4a505e374905c462"
-  integrity sha512-vJkAimD2+sVviNTbaWOGqEBy31cW0ZB52KtpVIbkuma7PlfII3tsLhFa+cwbRAcRBkobBBhqZ06hXoZAN8NODQ==
+"@biomejs/cli-linux-arm64@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-arm64/-/cli-linux-arm64-1.9.4.tgz#8ed1dd0e89419a4b66a47f95aefb8c46ae6041c9"
+  integrity sha512-fJIW0+LYujdjUgJJuwesP4EjIBl/N/TcOX3IvIHJQNsAqvV2CHIogsmA94BPG6jZATS4Hi+xv4SkBBQSt1N4/g==
 
-"@biomejs/cli-linux-x64-musl@1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-x64-musl/-/cli-linux-x64-musl-1.9.3.tgz#01ccee0db2ca2ec9fb51fa69b2fc9e96434b5b32"
-  integrity sha512-TJmnOG2+NOGM72mlczEsNki9UT+XAsMFAOo8J0me/N47EJ/vkLXxf481evfHLlxMejTY6IN8SdRSiPVLv6AHlA==
+"@biomejs/cli-linux-x64-musl@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-x64-musl/-/cli-linux-x64-musl-1.9.4.tgz#f36982b966bd671a36671e1de4417963d7db15fb"
+  integrity sha512-gEhi/jSBhZ2m6wjV530Yy8+fNqG8PAinM3oV7CyO+6c3CEh16Eizm21uHVsyVBEB6RIM8JHIl6AGYCv6Q6Q9Tg==
 
-"@biomejs/cli-linux-x64@1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-x64/-/cli-linux-x64-1.9.3.tgz#82d6fb824dd2c76142ab8625e202eb63a34e14f1"
-  integrity sha512-x220V4c+romd26Mu1ptU+EudMXVS4xmzKxPVb9mgnfYlN4Yx9vD5NZraSx/onJnd3Gh/y8iPUdU5CDZJKg9COA==
+"@biomejs/cli-linux-x64@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-linux-x64/-/cli-linux-x64-1.9.4.tgz#a0a7f56680c76b8034ddc149dbf398bdd3a462e8"
+  integrity sha512-lRCJv/Vi3Vlwmbd6K+oQ0KhLHMAysN8lXoCI7XeHlxaajk06u7G+UsFSO01NAs5iYuWKmVZjmiOzJ0OJmGsMwg==
 
-"@biomejs/cli-win32-arm64@1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@biomejs/cli-win32-arm64/-/cli-win32-arm64-1.9.3.tgz#7fac607ade8e204eecae09e127713f000da0ccf2"
-  integrity sha512-lg/yZis2HdQGsycUvHWSzo9kOvnGgvtrYRgoCEwPBwwAL8/6crOp3+f47tPwI/LI1dZrhSji7PNsGKGHbwyAhw==
+"@biomejs/cli-win32-arm64@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-win32-arm64/-/cli-win32-arm64-1.9.4.tgz#e2ef4e0084e76b7e26f0fc887c5ef1265ea56200"
+  integrity sha512-tlbhLk+WXZmgwoIKwHIHEBZUwxml7bRJgk0X2sPyNR3S93cdRq6XulAZRQJ17FYGGzWne0fgrXBKpl7l4M87Hg==
 
-"@biomejs/cli-win32-x64@1.9.3":
-  version "1.9.3"
-  resolved "https://registry.yarnpkg.com/@biomejs/cli-win32-x64/-/cli-win32-x64-1.9.3.tgz#1cbc269dcd5f29b034cb7f5982353c1cc3629318"
-  integrity sha512-cQMy2zanBkVLpmmxXdK6YePzmZx0s5Z7KEnwmrW54rcXK3myCNbQa09SwGZ8i/8sLw0H9F3X7K4rxVNGU8/D4Q==
+"@biomejs/cli-win32-x64@1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@biomejs/cli-win32-x64/-/cli-win32-x64-1.9.4.tgz#4c7afa90e3970213599b4095e62f87e5972b2340"
+  integrity sha512-8Y5wMhVIPaWe6jw2H+KlEm4wP/f7EW3810ZLmDlrEEy5KvBsb9ECEfu/kMWD484ijfQ8+nIi0giMgu9g1UAuuA==
 
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
@@ -1245,24 +1245,24 @@
     delaunator "^5.0.1"
     robust-predicates "^3.0.2"
 
-"@mui/x-charts@7.20.0":
-  version "7.20.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.20.0.tgz#869c0b53ee60e6da886c227e214fc6face8b6841"
-  integrity sha512-mm3ERanuxWWc16dYLC54jqQp1CrHFSvWYvaXvhaXhWZdNrSIWNEY4inCbrDuGvl+i7/uNJgxeINw4SOtQ/BOFA==
+"@mui/x-charts@7.21.0":
+  version "7.21.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.21.0.tgz#97ddd4b93f29574bd7808bae14fae2a7eea6001b"
+  integrity sha512-Qv7U1Koo7hxinn1ncbn+Yfcwd8h3bSJDVCpjyKKgO0247kGIAK4ecrBlFHwVLol4bNTY36Ir1prEaA0G1MmUrg==
   dependencies:
     "@babel/runtime" "^7.25.7"
     "@mui/utils" "^5.16.6 || ^6.0.0"
     "@mui/x-charts-vendor" "7.20.0"
-    "@mui/x-internals" "7.20.0"
-    "@react-spring/rafz" "^9.7.4"
-    "@react-spring/web" "^9.7.4"
+    "@mui/x-internals" "7.21.0"
+    "@react-spring/rafz" "^9.7.5"
+    "@react-spring/web" "^9.7.5"
     clsx "^2.1.1"
     prop-types "^15.8.1"
 
-"@mui/x-internals@7.20.0":
-  version "7.20.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.20.0.tgz#f10af34416ba1f7fdb6fe0e9c8065920ae2cb4c0"
-  integrity sha512-ScXdEwtnxmBEq9umeusnotfeVQnnhjOZcM2ddXyIupmzeGmgDDtEcXGyTgrS/GOc91J74g81s6eJ4UCrlYZ2sg==
+"@mui/x-internals@7.21.0":
+  version "7.21.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.21.0.tgz#daca984059015b27efdb47bb44dc7ff4a6816673"
+  integrity sha512-94YNyZ0BhK5Z+Tkr90RKf47IVCW8R/1MvdUhh6MCQg6sZa74jsX+x+gEZ4kzuCqOsuyTyxikeQ8vVuCIQiP7UQ==
   dependencies:
     "@babel/runtime" "^7.25.7"
     "@mui/utils" "^5.16.6 || ^6.0.0"
@@ -1917,50 +1917,50 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
-"@react-spring/animated@~9.7.4":
-  version "9.7.4"
-  resolved "https://registry.yarnpkg.com/@react-spring/animated/-/animated-9.7.4.tgz#c712b2d3dc9312ef41aa8886818b539151bda062"
-  integrity sha512-7As+8Pty2QlemJ9O5ecsuPKjmO0NKvmVkRR1n6mEotFgWar8FKuQt2xgxz3RTgxcccghpx1YdS1FCdElQNexmQ==
+"@react-spring/animated@~9.7.5":
+  version "9.7.5"
+  resolved "https://registry.yarnpkg.com/@react-spring/animated/-/animated-9.7.5.tgz#eb0373aaf99b879736b380c2829312dae3b05f28"
+  integrity sha512-Tqrwz7pIlsSDITzxoLS3n/v/YCUHQdOIKtOJf4yL6kYVSDTSmVK1LI1Q3M/uu2Sx4X3pIWF3xLUhlsA6SPNTNg==
   dependencies:
-    "@react-spring/shared" "~9.7.4"
-    "@react-spring/types" "~9.7.4"
+    "@react-spring/shared" "~9.7.5"
+    "@react-spring/types" "~9.7.5"
 
-"@react-spring/core@~9.7.4":
-  version "9.7.4"
-  resolved "https://registry.yarnpkg.com/@react-spring/core/-/core-9.7.4.tgz#0eaa0b5da3d18036d87a571f23079819d45a9f46"
-  integrity sha512-GzjA44niEJBFUe9jN3zubRDDDP2E4tBlhNlSIkTChiNf9p4ZQlgXBg50qbXfSXHQPHak/ExYxwhipKVsQ/sUTw==
+"@react-spring/core@~9.7.5":
+  version "9.7.5"
+  resolved "https://registry.yarnpkg.com/@react-spring/core/-/core-9.7.5.tgz#72159079f52c1c12813d78b52d4f17c0bf6411f7"
+  integrity sha512-rmEqcxRcu7dWh7MnCcMXLvrf6/SDlSokLaLTxiPlAYi11nN3B5oiCUAblO72o+9z/87j2uzxa2Inm8UbLjXA+w==
   dependencies:
-    "@react-spring/animated" "~9.7.4"
-    "@react-spring/shared" "~9.7.4"
-    "@react-spring/types" "~9.7.4"
+    "@react-spring/animated" "~9.7.5"
+    "@react-spring/shared" "~9.7.5"
+    "@react-spring/types" "~9.7.5"
 
-"@react-spring/rafz@^9.7.4", "@react-spring/rafz@~9.7.4":
-  version "9.7.4"
-  resolved "https://registry.yarnpkg.com/@react-spring/rafz/-/rafz-9.7.4.tgz#d53aa45a8cb116b81b27ba29e0cc15470ccfd449"
-  integrity sha512-mqDI6rW0Ca8IdryOMiXRhMtVGiEGLIO89vIOyFQXRIwwIMX30HLya24g9z4olDvFyeDW3+kibiKwtZnA4xhldA==
+"@react-spring/rafz@^9.7.5", "@react-spring/rafz@~9.7.5":
+  version "9.7.5"
+  resolved "https://registry.yarnpkg.com/@react-spring/rafz/-/rafz-9.7.5.tgz#ee7959676e7b5d6a3813e8c17d5e50df98b95df9"
+  integrity sha512-5ZenDQMC48wjUzPAm1EtwQ5Ot3bLIAwwqP2w2owG5KoNdNHpEJV263nGhCeKKmuA3vG2zLLOdu3or6kuDjA6Aw==
 
-"@react-spring/shared@~9.7.4":
-  version "9.7.4"
-  resolved "https://registry.yarnpkg.com/@react-spring/shared/-/shared-9.7.4.tgz#8ac57505072c2aee33d77c47c4269347061a3377"
-  integrity sha512-bEPI7cQp94dOtCFSEYpxvLxj0+xQfB5r9Ru1h8OMycsIq7zFZon1G0sHrBLaLQIWeMCllc4tVDYRTLIRv70C8w==
+"@react-spring/shared@~9.7.5":
+  version "9.7.5"
+  resolved "https://registry.yarnpkg.com/@react-spring/shared/-/shared-9.7.5.tgz#6d513622df6ad750bbbd4dedb4ca0a653ec92073"
+  integrity sha512-wdtoJrhUeeyD/PP/zo+np2s1Z820Ohr/BbuVYv+3dVLW7WctoiN7std8rISoYoHpUXtbkpesSKuPIw/6U1w1Pw==
   dependencies:
-    "@react-spring/rafz" "~9.7.4"
-    "@react-spring/types" "~9.7.4"
+    "@react-spring/rafz" "~9.7.5"
+    "@react-spring/types" "~9.7.5"
 
-"@react-spring/types@~9.7.4":
-  version "9.7.4"
-  resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.7.4.tgz#c849a7f062b5163d078e5e75f28c8f6acf91792e"
-  integrity sha512-iQVztO09ZVfsletMiY+DpT/JRiBntdsdJ4uqk3UJFhrhS8mIC9ZOZbmfGSRs/kdbNPQkVyzucceDicQ/3Mlj9g==
+"@react-spring/types@~9.7.5":
+  version "9.7.5"
+  resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.7.5.tgz#e5dd180f3ed985b44fd2cd2f32aa9203752ef3e8"
+  integrity sha512-HVj7LrZ4ReHWBimBvu2SKND3cDVUPWKLqRTmWe/fNY6o1owGOX0cAHbdPDTMelgBlVbrTKrre6lFkhqGZErK/g==
 
-"@react-spring/web@^9.7.4":
-  version "9.7.4"
-  resolved "https://registry.yarnpkg.com/@react-spring/web/-/web-9.7.4.tgz#0086ab5dcf17e6a8f3d7e7f8041ccb4cc2fa10dc"
-  integrity sha512-UMvCZp7I5HCVIleSa4BwbNxynqvj+mJjG2m20VO2yPoi2pnCYANy58flvz9v/YcXTAvsmL655FV3pm5fbr6akA==
+"@react-spring/web@^9.7.5":
+  version "9.7.5"
+  resolved "https://registry.yarnpkg.com/@react-spring/web/-/web-9.7.5.tgz#7d7782560b3a6fb9066b52824690da738605de80"
+  integrity sha512-lmvqGwpe+CSttsWNZVr+Dg62adtKhauGwLyGE/RRyZ8AAMLgb9x3NDMA5RMElXo+IMyTkPp7nxTB8ZQlmhb6JQ==
   dependencies:
-    "@react-spring/animated" "~9.7.4"
-    "@react-spring/core" "~9.7.4"
-    "@react-spring/shared" "~9.7.4"
-    "@react-spring/types" "~9.7.4"
+    "@react-spring/animated" "~9.7.5"
+    "@react-spring/core" "~9.7.5"
+    "@react-spring/shared" "~9.7.5"
+    "@react-spring/types" "~9.7.5"
 
 "@reactflow/background@11.3.14":
   version "11.3.14"
@@ -2381,10 +2381,10 @@
     lz-string "^1.5.0"
     pretty-format "^27.0.2"
 
-"@testing-library/jest-dom@6.6.1":
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-6.6.1.tgz#835612c9d8c529c835b15bbc1d1a924310c6c73c"
-  integrity sha512-mNYIiAuP4yJwV2zBRQCV7PHoQwbb6/8TfMpPcwSUzcSVDJHWOXt6hjNtIN1v5knDmimYnjJxKhsoVd4LVGIO+w==
+"@testing-library/jest-dom@6.6.2":
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-6.6.2.tgz#8186aa9a07263adef9cc5a59a4772db8c31f4a5b"
+  integrity sha512-P6GJD4yqc9jZLbe98j/EkyQDTPgqftohZF5FBkHY5BUERZmcf4HeO2k0XaefEg329ux2p21i1A1DmyQ1kKw2Jw==
   dependencies:
     "@adobe/css-tools" "^4.4.0"
     aria-query "^5.0.0"
