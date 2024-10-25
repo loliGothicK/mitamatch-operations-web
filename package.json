@@ -25,7 +25,7 @@
     "@mui/lab": "6.0.0-beta.13",
     "@mui/material": "6.1.5",
     "@mui/system": "^6.1.4",
-    "@mui/x-charts": "7.21.0",
+    "@mui/x-charts": "7.22.0",
     "@next/mdx": "14.2.16",
     "@next/third-parties": "14.2.16",
     "@opentelemetry/api": "1.9.0",
