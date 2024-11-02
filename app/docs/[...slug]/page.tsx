@@ -36,11 +36,14 @@ const Toc = () => {
   );
 };
 
-export default function Page({ params }: { params: { slug: string[] } }) {
+export default async function Page({
+  params,
+}: { params: Promise<{ slug: string[] }> }) {
+  const { slug } = await params;
   const DocComponent = lazy(() => {
-    return params.slug.length === 1
-      ? import(`@/docs/${params.slug[0]}/index.mdx`)
-      : import(`@/docs/${params.slug.join('/')}.mdx`);
+    return slug.length === 1
+      ? import(`@/docs/${slug[0]}/index.mdx`)
+      : import(`@/docs/${slug.join('/')}.mdx`);
   });
 
   return (
@@ -58,23 +61,21 @@ export default function Page({ params }: { params: { slug: string[] } }) {
             <Grid size={{ xs: 12, md: 9 }}>
               <Breadcrumbs separator={'›'} aria-label='breadcrumb'>
                 <Link href='/docs'>Docs</Link>
-                {params.slug.length > 1 ? (
-                  params.slug
-                    .slice(0, params.slug.length - 1)
-                    .map((slug, index) => (
+                {slug.length > 1 ? (
+                  slug
+                    .slice(0, slug.length - 1)
+                    .map((title, index) => (
                       <Link
-                        key={slug}
-                        href={`/docs/${takeLeft(index + 1)(params.slug).join(
-                          '/',
-                        )}`}
+                        key={title}
+                        href={`/docs/${takeLeft(index + 1)(slug).join('/')}`}
                       >
-                        {slug}
+                        {title}
                       </Link>
                     ))
                     // biome-ignore lint/complexity/noUselessFragments: <explanation>
-                    .concat(<>{params.slug[params.slug.length - 1]}</>)
+                    .concat(<>{slug[slug.length - 1]}</>)
                 ) : (
-                  <> {params.slug[0]}</>
+                  <> {slug[0]}</>
                 )}
               </Breadcrumbs>
               <article className='mitamatch-markdown'>

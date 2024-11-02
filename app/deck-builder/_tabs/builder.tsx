@@ -1,7 +1,6 @@
 'use client';
 
 import { useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -39,8 +38,6 @@ import {
   ImageListItem,
   ImageListItemBar,
   InputLabel,
-  ListItemIcon,
-  ListItemText,
   Menu,
   MenuItem,
   OutlinedInput,
@@ -51,6 +48,9 @@ import {
   Tooltip,
   Typography,
   alpha,
+  Card,
+  CardMedia,
+  CardContent,
 } from '@mui/material';
 import type { SelectChangeEvent, Theme } from '@mui/material';
 import { blue, green, purple, red, yellow } from '@mui/material/colors';
@@ -78,6 +78,8 @@ import {
   spDefAtom,
   statusAtom,
   swAtom,
+  targetBeforeAtom,
+  targetAfterAtom,
 } from '@/jotai/memoriaAtoms';
 
 import { calcDiff } from '@/evaluate/calc';
@@ -88,13 +90,9 @@ import { useTheme } from '@mui/material/styles';
 import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon';
-import { AutoSizer, List } from 'react-virtualized';
-import 'react-virtualized/styles.css';
+import { Virtuoso } from 'react-virtuoso';
 import { match } from 'ts-pattern';
 import { parseSkill } from '@/parser/skill';
-
-const targetBeforeAtom = atomWithStorage<Memoria['id'][]>('targets-before', []);
-const targetAfterAtom = atomWithStorage<Memoria['id'][]>('targets-after', []);
 
 function Icon({
   kind,
@@ -441,15 +439,30 @@ function Unit() {
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setSw] = useAtom(swAtom);
   const [, setRoleFilter] = useAtom(roleFilterAtom);
-  const [fst, setFst] = useAtom(fstAtom);
   const [, setCompare] = useAtom(compareModeAtom);
 
   useEffect(() => {
-    if (fst) {
-      setFst(false);
-      const value = params.get('deck');
-      if (value) {
-        const { sw, deck, legendaryDeck } = decodeDeck(value);
+    const value = params.get('deck');
+    if (value) {
+      const { sw, deck, legendaryDeck } = decodeDeck(value);
+      setSw(sw);
+      setRoleFilter(
+        sw === 'shield'
+          ? ['support', 'interference', 'recovery']
+          : [
+              'normal_single',
+              'normal_range',
+              'special_single',
+              'special_range',
+            ],
+      );
+      setDeck(deck);
+      setLegendaryDeck(legendaryDeck);
+      setCompare(undefined);
+    } else {
+      const cookie = Cookies.get('deck');
+      if (cookie) {
+        const { sw, deck, legendaryDeck } = decodeDeck(cookie);
         setSw(sw);
         setRoleFilter(
           sw === 'shield'
@@ -464,37 +477,9 @@ function Unit() {
         setDeck(deck);
         setLegendaryDeck(legendaryDeck);
         setCompare(undefined);
-      } else {
-        const cookie = Cookies.get('deck');
-        if (cookie) {
-          const { sw, deck, legendaryDeck } = decodeDeck(cookie);
-          setSw(sw);
-          setRoleFilter(
-            sw === 'shield'
-              ? ['support', 'interference', 'recovery']
-              : [
-                  'normal_single',
-                  'normal_range',
-                  'special_single',
-                  'special_range',
-                ],
-          );
-          setDeck(deck);
-          setLegendaryDeck(legendaryDeck);
-          setCompare(undefined);
-        }
       }
     }
-  }, [
-    setDeck,
-    setLegendaryDeck,
-    setRoleFilter,
-    setSw,
-    fst,
-    setFst,
-    params.get,
-    setCompare,
-  ]);
+  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, params.get, setCompare]);
 
   return (
     <>
@@ -556,7 +541,7 @@ export default function MultipleSelect({
           value.map(name => unit.find(memoria => memoria.name === name)!.id),
     );
     setPersonName(
-      // On autofill we get a stringified value.
+      // On autofill, we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
   };
@@ -571,6 +556,7 @@ export default function MultipleSelect({
           onChange={handleChange}
           input={<OutlinedInput label='Target' />}
           MenuProps={MenuProps}
+          variant={'outlined'}
         >
           {targets.map(memoria => (
             <MenuItem
@@ -705,6 +691,7 @@ function Compare({
     return (
       <>
         <dt
+          key={type}
           style={{
             paddingRight: '1em',
             textAlignLast: 'justify',
@@ -868,7 +855,6 @@ function VirtualizedList() {
   const [memoria] = useAtom(filteredMemoriaAtom);
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [open, setOpen] = useState(false);
   const [compare, setCompare] = useAtom(compareModeAtom);
   const [candidate, setCandidate] = useAtom(candidateAtom);
@@ -892,123 +878,90 @@ function VirtualizedList() {
 
   return (
     <>
-      <AutoSizer>
-        {({ height, width }) => (
-          <List
-            height={height}
-            width={width}
-            rowCount={memoria.length}
-            rowHeight={100}
-            rowRenderer={({ key, index, style }) => {
-              return (
-                <Stack
-                  direction={'row'}
-                  key={key}
-                  style={style}
-                  bgcolor={
-                    theme.palette.mode === 'dark'
-                      ? 'rgba(255, 255, 255, 0.1)'
-                      : alpha(theme.palette.primary.main, 0.2)
+      <Virtuoso
+        style={{ height: '60vh' }}
+        totalCount={memoria.length}
+        itemContent={index => {
+          return (
+            <Card
+              sx={{
+                display: 'flex',
+                bgcolor:
+                  theme.palette.mode === 'dark'
+                    ? 'rgba(255, 255, 255, 0.1)'
+                    : alpha(theme.palette.primary.main, 0.2),
+              }}
+              key={index}
+            >
+              <IconButton
+                sx={{
+                  position: 'absolute',
+                  left: 0,
+                  bgcolor: 'rgba(0, 0, 0, 0.2)',
+                }}
+                aria-label='add'
+                onClick={() => {
+                  if (compare !== undefined) {
+                    setOpen(true);
+                    setCandidate({
+                      ...memoria[index],
+                      concentration: 4,
+                    });
+                    return;
                   }
-                >
-                  <Stack direction={'row'} alignItems={'center'}>
-                    <ListItemIcon>
-                      <Icon
-                        kind={memoria[index].kind}
-                        element={memoria[index].element}
-                        position={70}
-                      />
-                      {!isLoaded && (
-                        <Skeleton
-                          variant='rectangular'
-                          width={100}
-                          height={100}
-                        />
-                      )}
-                      <IconButton
-                        edge='start'
-                        aria-label='comments'
-                        sx={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 10,
-                          bgcolor: 'rgba(0, 0, 0, 0.2)',
-                        }}
-                        onClick={() => {
-                          if (compare !== undefined) {
-                            setOpen(true);
-                            setCandidate({
-                              ...memoria[index],
-                              concentration: 4,
-                            });
-                            return;
-                          }
-                          if (memoria[index].labels.includes('legendary')) {
-                            setLegendaryDeck(prev =>
-                              addMemoria(prev, memoria[index]),
-                            );
-                          } else {
-                            setDeck(prev => addMemoria(prev, memoria[index]));
-                          }
-                        }}
-                      >
-                        <Add color={'warning'} />
-                      </IconButton>
-                      <Tooltip title={memoria[index].name} placement={'top'}>
-                        <Image
-                          src={`/memoria/${memoria[index].name}.png`}
-                          alt={memoria[index].name}
-                          width={100}
-                          height={100}
-                          onLoad={() => {
-                            setIsLoaded(true);
-                          }}
-                        />
-                      </Tooltip>
-                    </ListItemIcon>
-                    <ListItemText
-                      secondary={
-                        <>
-                          <Typography
-                            component='span'
-                            fontWeight='bold'
-                            fontSize={12}
-                            sx={{ display: 'block' }}
-                            color='text.primary'
-                          >
-                            {memoria[index].skill.name}
-                          </Typography>
-                          <Divider sx={{ margin: 1 }} />
-                          <Typography
-                            component='span'
-                            fontWeight='bold'
-                            fontSize={12}
-                            sx={{ display: 'block' }}
-                            color='text.primary'
-                          >
-                            {memoria[index].support.name}
-                          </Typography>
-                        </>
-                      }
-                      sx={{
-                        marginLeft: 2,
-                      }}
-                    />
-                  </Stack>
-                  <IconButton sx={{ position: 'absolute', right: 0 }}>
-                    <Link
-                      href={`https://allb.game-db.tw/memoria/${memoria[index].link}`}
-                      target={'_blank'}
-                    >
-                      <Launch />
-                    </Link>
-                  </IconButton>
+                  if (memoria[index].labels.includes('legendary')) {
+                    setLegendaryDeck(prev => addMemoria(prev, memoria[index]));
+                  } else {
+                    setDeck(prev => addMemoria(prev, memoria[index]));
+                  }
+                }}
+              >
+                <Add color={'warning'} />
+              </IconButton>
+              <Tooltip title={memoria[index].name} placement={'top'}>
+                <CardMedia
+                  component='img'
+                  sx={{ width: 100, height: 100 }}
+                  image={`/memoria/${memoria[index].name}.png`}
+                  alt={memoria[index].name}
+                />
+              </Tooltip>
+              <CardContent>
+                <Stack direction={'column'} sx={{ paddingLeft: 2 }}>
+                  <Typography
+                    component='span'
+                    fontWeight='bold'
+                    fontSize={12}
+                    sx={{ display: 'block' }}
+                    color='text.primary'
+                  >
+                    {memoria[index].skill.name}
+                  </Typography>
+                  <Divider sx={{ margin: 1 }} />
+                  <Typography
+                    component='span'
+                    fontWeight='bold'
+                    fontSize={12}
+                    sx={{ display: 'block' }}
+                    color='text.primary'
+                  >
+                    {memoria[index].support.name}
+                  </Typography>
                 </Stack>
-              );
-            }}
-          />
-        )}
-      </AutoSizer>
+              </CardContent>
+
+              <IconButton sx={{ position: 'absolute', right: 0 }}>
+                <Link
+                  href={`https://allb.game-db.tw/memoria/${memoria[index].link}`}
+                  target={'_blank'}
+                >
+                  <Launch />
+                </Link>
+              </IconButton>
+            </Card>
+          );
+        }}
+      />
       <Dialog fullScreen open={open} onClose={onDialogClose}>
         <AppBar sx={{ position: 'relative' }}>
           <Toolbar>
@@ -1248,8 +1201,6 @@ function SearchModal() {
     </>
   );
 }
-
-const fstAtom = atomWithStorage('fst', true);
 
 export function DeckBuilder() {
   const theme = useTheme();

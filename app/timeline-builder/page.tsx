@@ -37,6 +37,7 @@ import {
   TextField,
   Typography,
   alpha,
+  Card,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/system';
@@ -57,7 +58,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { takeLeft } from 'fp-ts/Array';
 import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
-import { AutoSizer, List as VirtulizedList } from 'react-virtualized';
+import { Virtuoso } from 'react-virtuoso';
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -370,6 +371,7 @@ function Source() {
   const [orders] = useAtom(filteredOrderAtom);
   const [timeline, setSelectedOrder] = useAtom(timelineAtom);
   const [open, setOpen] = useState(false);
+  const theme = useTheme();
 
   const handleClose = () => {
     setOpen(false);
@@ -377,83 +379,71 @@ function Source() {
 
   return (
     <>
-      <AutoSizer>
-        {({ height, width }) => (
-          <VirtulizedList
-            height={height}
-            width={width}
-            rowCount={orders.length}
-            rowHeight={100}
-            rowRenderer={({ key, index, style }) => {
-              return (
-                <Stack
-                  key={key}
-                  style={style}
-                  direction={'row'}
-                  alignItems={'center'}
+      <Virtuoso
+        style={{ height: '70vh', width: '100%', padding: 0 }}
+        totalCount={orders.length}
+        itemContent={index => {
+          return (
+            <Card
+              sx={{
+                display: 'flex',
+                bgcolor:
+                  theme.palette.mode === 'dark'
+                    ? 'rgba(255, 255, 255, 0.1)'
+                    : alpha(theme.palette.primary.main, 0.2),
+              }}
+              key={index}
+            >
+              <IconButton
+                sx={{
+                  position: 'absolute',
+                  left: 0,
+                  bgcolor: 'rgba(0, 0, 0, 0.2)',
+                }}
+                onClick={() => {
+                  if (
+                    orders[index].kind.includes('Elemental') &&
+                    timeline.some(order => {
+                      return order.kind === orders[index].kind;
+                    })
+                  ) {
+                    setOpen(true);
+                    return;
+                  }
+                  setSelectedOrder(prev => {
+                    const delay = prev.length === 0 ? undefined : 5;
+                    Cookies.set(
+                      'timeline',
+                      encodeTimeline([...prev, { ...orders[index], delay }]),
+                    );
+                    return [...prev, { ...orders[index], delay }];
+                  });
+                }}
+              >
+                <Add color={'warning'} />
+              </IconButton>
+              <Image
+                src={`/order/${orders[index].name}.png`}
+                alt={orders[index].name}
+                width={100}
+                height={100}
+              />
+              <Stack marginLeft={2}>
+                <Typography variant='body1'>{orders[index].name}</Typography>
+                <Divider />
+                <Typography variant='body2'>{orders[index].effect}</Typography>
+                <Typography
+                  variant='body2'
+                  fontSize={10}
+                  sx={{ display: { xs: 'none', md: 'none', lg: 'block' } }}
                 >
-                  <IconButton
-                    edge='start'
-                    aria-label='comments'
-                    sx={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 10,
-                      bgcolor: 'rgba(0, 0, 0, 0.2)',
-                    }}
-                    onClick={() => {
-                      if (
-                        orders[index].kind.includes('Elemental') &&
-                        timeline.some(order => {
-                          return order.kind === orders[index].kind;
-                        })
-                      ) {
-                        setOpen(true);
-                        return;
-                      }
-                      setSelectedOrder(prev => {
-                        const delay = prev.length === 0 ? undefined : 5;
-                        Cookies.set(
-                          'timeline',
-                          encodeTimeline([
-                            ...prev,
-                            { ...orders[index], delay },
-                          ]),
-                        );
-                        return [...prev, { ...orders[index], delay }];
-                      });
-                    }}
-                  >
-                    <Add color={'warning'} />
-                  </IconButton>
-                  <Image
-                    src={`/order/${orders[index].name}.png`}
-                    alt={orders[index].name}
-                    width={100}
-                    height={100}
-                  />
-                  <Stack marginLeft={2}>
-                    <Typography variant='body1'>
-                      {orders[index].name}
-                    </Typography>
-                    <Divider />
-                    <Typography variant='body2'>
-                      {orders[index].effect}
-                    </Typography>
-                    <Typography
-                      variant='body2'
-                      fontSize={10}
-                      sx={{ display: { xs: 'none', md: 'none', lg: 'block' } }}
-                    >
-                      {orders[index].description}
-                    </Typography>
-                  </Stack>
-                </Stack>
-              );
-            }}
-          />
-        )}
-      </AutoSizer>
+                  {orders[index].description}
+                </Typography>
+              </Stack>
+            </Card>
+          );
+        }}
+      />
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={open}

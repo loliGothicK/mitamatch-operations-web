@@ -163,8 +163,7 @@ export default function Details() {
     'support',
     'description',
   ]);
-
-  const skills = [...deck, ...legendaryDeck].map(memoria => {
+  const skills = deck.concat(legendaryDeck).map(memoria => {
     return parseSkill(skillName.get(memoria), skillDescription.get(memoria));
   });
 
