@@ -38,13 +38,15 @@ export type Elemental = {
   kind: ElementalKind;
 };
 export type Amount =
-  | 'small'
-  | 'medium'
-  | 'large'
-  | 'extra-large'
-  | 'super-large'
-  | 'ultra-large';
-export type Probability = 'low' | 'medium';
+  | 'small' // 小アップ
+  | 'medium' // アップ
+  | 'large' // 大アップ
+  | 'extra-large' // 特大アップ
+  | 'super-large' // 超特大アップ
+  | 'ultra-large'; // 極大アップ
+export type Probability =
+  | 'low' // 一定確率で
+  | 'medium'; // 中確率で
 export type SkillKind = Elemental | 'charge' | 'counter' | 's-counter' | 'heal';
 
 export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;

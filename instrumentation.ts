@@ -1,12 +1,11 @@
-import {registerOTel} from "@vercel/otel";
+import { registerOTel } from '@vercel/otel';
 
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
     await import('./instrumentation.node.js');
-  }
-  else {
+  } else {
     registerOTel({
-      serviceName: "mitamatch-operations",
+      serviceName: 'mitamatch-operations',
     });
   }
 }
