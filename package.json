@@ -37,7 +37,7 @@
     "@sentry/profiling-node": "8.36.0",
     "@vercel/analytics": "1.4.1",
     "@vercel/otel": "1.10.0",
-    "@vercel/speed-insights": "1.0.14",
+    "@vercel/speed-insights": "1.1.0",
     "fp-ts": "2.16.9",
     "jotai": "2.10.3",
     "js-cookie": "3.0.5",
