@@ -36,11 +36,13 @@ const Toc = () => {
   );
 };
 
-export default async function Page({
+export default function Page({
   params,
 }: { params: Promise<{ slug: string[] }> }) {
-  const { slug } = await params;
-  const DocComponent = lazy(() => {
+  let slug: string[] = [];
+
+  const DocComponent = lazy(async () => {
+    slug = (await params).slug;
     return slug.length === 1
       ? import(`@/docs/${slug[0]}/index.mdx`)
       : import(`@/docs/${slug.join('/')}.mdx`);
