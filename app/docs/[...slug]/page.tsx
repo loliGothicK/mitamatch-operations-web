@@ -7,7 +7,7 @@ import { Breadcrumbs, Grid2 as Grid } from '@mui/material';
 import { takeLeft } from 'fp-ts/Array';
 import { Suspense, lazy, useEffect } from 'react';
 import { destroy, init } from 'tocbot';
-import Link from "@/components/link";
+import Link from '@/components/link';
 
 const Toc = () => {
   useEffect(() => {
@@ -62,7 +62,9 @@ export default function Page({
             </Grid>
             <Grid size={{ xs: 12, md: 9 }}>
               <Breadcrumbs separator={'›'} aria-label='breadcrumb'>
-                <Link prefetch={true} href='/docs'>Docs</Link>
+                <Link prefetch={true} href='/docs'>
+                  Docs
+                </Link>
                 {slug.length > 1 ? (
                   slug
                     .slice(0, slug.length - 1)
