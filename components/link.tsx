@@ -1,6 +1,6 @@
 import NextLink from 'next/link';
 import { Link as MuiLink } from '@mui/material';
-import { ComponentProps, PropsWithChildren } from 'react';
+import type { ComponentProps, PropsWithChildren } from 'react';
 
 type Props = ComponentProps<typeof MuiLink> & ComponentProps<typeof NextLink>;
 
