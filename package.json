@@ -46,7 +46,7 @@
     "next": "15.0.3",
     "react": "19.0.0-rc-fb9a90fa48-20240614",
     "react-dom": "19.0.0-rc-fb9a90fa48-20240614",
-    "react-virtuoso": "4.12.2",
+    "react-virtuoso": "4.12.3",
     "reactflow": "11.11.4",
     "rehype-slug": "6.0.0",
     "remark-gfm": "4.0.0",
