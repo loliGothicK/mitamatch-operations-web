@@ -41,7 +41,7 @@
     "fp-ts": "2.16.9",
     "jotai": "2.10.4",
     "js-cookie": "3.0.5",
-    "material-ui-popup-state": "5.3.1",
+    "material-ui-popup-state": "5.3.3",
     "monocle-ts": "2.3.13",
     "next": "15.1.0",
     "react": "19.0.0",
