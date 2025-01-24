@@ -1321,24 +1321,24 @@
     delaunator "^5.0.1"
     robust-predicates "^3.0.2"
 
-"@mui/x-charts@7.24.0":
-  version "7.24.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.24.0.tgz#1269177a31e937989059341d3edb1923df300766"
-  integrity sha512-X/zN0GxPHJC24QckFrtEbIK0HYoGwZgpNC5CV9cvRGvHphDFuNZk9xg9fJwIg1i3PPZHXRO3E+L/ee6fJ9ufhw==
+"@mui/x-charts@7.24.1":
+  version "7.24.1"
+  resolved "https://registry.yarnpkg.com/@mui/x-charts/-/x-charts-7.24.1.tgz#8dd0e4a91e9e33d14593b770d8c87d6c07941e8b"
+  integrity sha512-OdTS/nXaANPe4AoUFIDD4LlID8kK/00q+uqVOCkVClEvFQeAkj3pBaghdS4hY7rVqsCgsm+yOStQVJa9G2MR+Q==
   dependencies:
     "@babel/runtime" "^7.25.7"
     "@mui/utils" "^5.16.6 || ^6.0.0"
     "@mui/x-charts-vendor" "7.20.0"
-    "@mui/x-internals" "7.24.0"
+    "@mui/x-internals" "7.24.1"
     "@react-spring/rafz" "^9.7.5"
     "@react-spring/web" "^9.7.5"
     clsx "^2.1.1"
     prop-types "^15.8.1"
 
-"@mui/x-internals@7.24.0":
-  version "7.24.0"
-  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.24.0.tgz#5d09d3d5d113e2be6ec2af49192024859951d348"
-  integrity sha512-lYa/XLltxNMY8YAFDopIHrXda2EAoqMCilyGMuPMz+WTG+b+StlUKqtj8cgFPQ/sa5dQ2fR7R3KJdjLREKUrlQ==
+"@mui/x-internals@7.24.1":
+  version "7.24.1"
+  resolved "https://registry.yarnpkg.com/@mui/x-internals/-/x-internals-7.24.1.tgz#34d63f13db0ac4c24033735a11efabe0b9f0fb73"
+  integrity sha512-9BvJzpLJnS9BDphvkiv6v0QOLxbnu8jhwcexFjtCQ2ZyxtVuVsWzGZ2npT9sGOil7+eaFDmWnJtea/tgrPvSwQ==
   dependencies:
     "@babel/runtime" "^7.25.7"
     "@mui/utils" "^5.16.6 || ^6.0.0"
