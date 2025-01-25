@@ -3041,10 +3041,10 @@
   resolved "https://registry.yarnpkg.com/@vercel/analytics/-/analytics-1.4.1.tgz#a28a93133d68b6e3d86884a52fa7893f5ecaa381"
   integrity sha512-ekpL4ReX2TH3LnrRZTUKjHHNpNy9S1I7QmS+g/RQXoSUQ8ienzosuX7T9djZ/s8zPhBx1mpHP/Rw5875N+zQIQ==
 
-"@vercel/otel@1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@vercel/otel/-/otel-1.10.0.tgz#b5e46c1a902b9cc06f3ba677b9a71729d6a6184d"
-  integrity sha512-bv1FXbFZlFbB89vyA2P9/kr6eZ42bMtXgqBJpgi+8yOrZU8rkg9wMi0TL//AgAf/qKtaryDm1sbCnkLHgCI3PQ==
+"@vercel/otel@1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@vercel/otel/-/otel-1.10.1.tgz#c9f46b549f2cb23ae27cb6f57b652c0996ec26e5"
+  integrity sha512-jZrHSAP03WVUfu1yid4AkYAZ/pwde/txVBSovk5kxQ99Bmb8sqMmQ9RJCSbWuV1EvbTimrVotAP0Devi/qHXgw==
 
 "@vercel/speed-insights@1.1.0":
   version "1.1.0"
