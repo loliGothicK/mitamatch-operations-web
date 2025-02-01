@@ -6668,10 +6668,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-tocbot@4.32.2:
-  version "4.32.2"
-  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.32.2.tgz#24d178e5f13b8fea7aeb5393522b67d718e5083c"
-  integrity sha512-UbVZNXX79LUqMzsnSTwE/YF/PYc2pg3G77D/jcolHd6lmw+oklzfcLtHSsmWBhOf1wfWD1HfYzdjGQef1VcQgg==
+tocbot@4.33.0:
+  version "4.33.0"
+  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.33.0.tgz#6d6b5e85682ee3117174195813fca8fe60a1ffcf"
+  integrity sha512-mwTJXunwTyic/22uyLeBGXeX/c6jLcfrF8ONVJmwSg5tieW6kYGSfSSJQEOQXStbutv7WS7QdZ+gk4vQIQ23nA==
 
 tough-cookie@^4.1.2:
   version "4.1.4"
