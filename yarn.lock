@@ -6632,10 +6632,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-tocbot@4.34.0:
-  version "4.34.0"
-  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.34.0.tgz#05959173fbfec6ac052e762787ee0b7ebeb41b12"
-  integrity sha512-l1x9aH5rQcOPjdhj2SPinbH3qg4Mqx8qPA7xMdLlVcZ7IbUaNfN2vRmdUFOFsS15+818rgqR8s1t1wlFbE8ciA==
+tocbot@4.35.0:
+  version "4.35.0"
+  resolved "https://registry.yarnpkg.com/tocbot/-/tocbot-4.35.0.tgz#add9c1e2d2dbd5e9ba157683cca2bb5f84c8a48e"
+  integrity sha512-i8FoSaP3u60D94e/dtzCk23PIEBnc/l8XqvlK4g8gUCa9XFY4RmyMLYP6X+yN+ljcEijFbmCtNHtBoeTsQkCPg==
 
 tough-cookie@^4.1.2:
   version "4.1.4"
