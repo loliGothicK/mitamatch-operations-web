@@ -44,7 +44,6 @@ import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { Settings } from '@mui/icons-material';
 import { useState } from 'react';
-
 const charmFilterAtom = atomWithStorage<('火' | '水' | '風')[]>(
   'charmFilter',
   [],
@@ -398,7 +397,7 @@ export function Calculator() {
                   defaultValue={adLevel}
                   min={0}
                   max={3}
-                  onChange={(_, val) => setAdLevel(val || 0)}
+                  onChange={(value, _) => setAdLevel(value || 0)}
                 />
               </Grid>
             )}

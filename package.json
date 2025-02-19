@@ -13,6 +13,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@base-ui-components/react": "1.0.0-alpha.6",
     "@dnd-kit/core": "6.3.1",
     "@dnd-kit/sortable": "10.0.0",
     "@dnd-kit/utilities": "3.2.2",
@@ -64,6 +65,7 @@
     "@tsconfig/strictest": "2.0.5",
     "@types/jest": "29.5.14",
     "@types/js-cookie": "3.0.6",
+    "@types/mdx": "2.0.13",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
     "jest": "29.7.0",
