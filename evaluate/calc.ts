@@ -16,10 +16,10 @@ export function calcFinalStatus(
       memoria,
     ): [number, number, number, number] => {
       return [
-        prev[0] + memoria.status[memoria.concentration][0],
-        prev[1] + memoria.status[memoria.concentration][1],
-        prev[2] + memoria.status[memoria.concentration][2],
-        prev[3] + memoria.status[memoria.concentration][3],
+        prev[0] + memoria.status[memoria.concentration]?.[0],
+        prev[1] + memoria.status[memoria.concentration]?.[1],
+        prev[2] + memoria.status[memoria.concentration]?.[2],
+        prev[3] + memoria.status[memoria.concentration]?.[3],
       ];
     },
     [

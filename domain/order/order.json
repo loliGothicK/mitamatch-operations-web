@@ -1,10 +1,34 @@
 {
   "data": [
     {
+      "id": 168,
+      "name": "天翔翼の御盾",
+      "status": [1890, 1869, 2683, 2707],
+      "effect": "風属性効果減少Lv.4",
+      "description": "敵の使用した風属性のスキル効果が超特大減少。",
+      "prepare_time": 15,
+      "active_time": 105,
+      "payed": true,
+      "kind": "Shield",
+      "usually": true
+    },
+    {
+      "id": 167,
+      "name": "凶風の盾",
+      "status": [1579, 1562, 2266, 2256],
+      "effect": "風属性効果減少Lv.4",
+      "description": "敵の使用した風属性のスキル効果が超特大減少。",
+      "prepare_time": 15,
+      "active_time": 105,
+      "payed": false,
+      "kind": "Shield",
+      "usually": true
+    },
+    {
       "id": 166,
       "name": "鳳凰の御盾",
       "status": [1875, 1869, 2670, 2678],
-      "effect": "火属性効果減少Lv.4MP：0",
+      "effect": "火属性効果減少Lv.4",
       "description": "敵の使用した火属性のスキル効果が超特大減少。",
       "prepare_time": 15,
       "active_time": 105,
@@ -16,7 +40,7 @@
       "id": 165,
       "name": "業炎の盾",
       "status": [1569, 1540, 2274, 2271],
-      "effect": "火属性効果減少Lv.4MP：200",
+      "effect": "火属性効果減少Lv.4",
       "description": "敵の使用した火属性のスキル効果が超特大減少。",
       "prepare_time": 15,
       "active_time": 105,

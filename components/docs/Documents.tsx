@@ -11,7 +11,6 @@ import {
   ListItemText,
   Stack,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 import { useAtom } from 'jotai';
 import Link from 'next/link';
 import type { PropsWithChildren } from 'react';
@@ -66,7 +65,6 @@ function createData({ name, slug, children }: TocItem): TocItem {
  * @returns The rendered row component.
  */
 function Row(props: { row: ReturnType<typeof createData> }) {
-  const _theme = useTheme();
   const { row } = props;
   const [toc, setToc] = useAtom(tocAtom);
 

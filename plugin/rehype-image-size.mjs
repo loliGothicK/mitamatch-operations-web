@@ -6,7 +6,7 @@ import { visit } from 'unist-util-visit';
  * Supports both markdown-style images and MDX <Image /> components.
  */
 export const rehypeImageSize = () => {
-  return tree => {
+  return (/** @type {any} */ tree) => {
     // This matches all images that use the markdown standard format ![label](path).
     visit(tree, { type: 'element', tagName: 'img' }, node => {
       node.properties.width = '100%';
