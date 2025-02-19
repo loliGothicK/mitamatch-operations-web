@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "yarn biome lint .",
-    "lint:fix": "yarn biome lint --fix --unsafe .",
-    "fmt": "yarn biome format --write .",
-    "fmt:check": "yarn biome format .",
+    "lint": "pnpm dlx biome lint .",
+    "lint:fix": "pnpm dlx biome lint --fix --unsafe .",
+    "fmt": "pnpm dlx biome format --write .",
+    "fmt:check": "pnpm dlx biome format .",
     "test": "jest"
   },
   "dependencies": {
