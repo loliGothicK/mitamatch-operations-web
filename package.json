@@ -6,10 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "pnpm dlx biome lint .",
-    "lint:fix": "pnpm dlx biome lint --fix --unsafe .",
-    "fmt": "pnpm dlx biome format --write .",
-    "fmt:check": "pnpm dlx biome format .",
+    "lint": "npx biome lint .",
+    "lint:fix": "npx biome lint --fix --unsafe .",
+    "fmt": "npx biome format --write .",
+    "fmt:check": "npx biome format .",
     "test": "jest"
   },
   "dependencies": {

@@ -46,7 +46,8 @@ export type Amount =
   | 'ultra-large'; // 極大アップ
 export type Probability =
   | 'low' // 一定確率で
-  | 'medium'; // 中確率で
+  | 'medium' // 中確率で
+  | 'high'; // 高確率で
 export type SkillKind = Elemental | 'charge' | 'counter' | 's-counter' | 'heal';
 
 export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;
@@ -54,6 +55,7 @@ export type StackEffect = {
   type: (typeof stackEffect)[number];
   rate: number;
   times: number;
+  targets?: number;
 };
 
 export type SkillEffect = {
@@ -213,7 +215,7 @@ function parseDamage(description: string): SkillEffect[] {
 }
 //#endregion
 
-const ASSIST_BUFF = /味方(.+)体の(.+)を(.*?アップ)させる/;
+const ASSIST_BUFF = /味方(\d)体の(.+?)を(.*?アップ)させる/;
 
 //#region parseBuff
 function parseBuff(description: string): SkillEffect[] {
@@ -271,7 +273,7 @@ function parseBuff(description: string): SkillEffect[] {
 }
 //#endregion
 
-const INTERFRRENCE_DEBUFF = /敵(.+)体の(.+)を(.*?ダウン)させる/;
+const INTERFRRENCE_DEBUFF = /敵(\d)体の(.+?)を(.*?ダウン)させる/;
 
 //#region parseDebuff
 function parseDebuff(description: string): SkillEffect[] {
@@ -421,6 +423,8 @@ const ANIMA =
   /「次の支援\/妨害時に支援\/妨害効果が(\d+)%アップするスタック」を(\d)回蓄積/;
 const COMET =
   /「次の攻撃時にダメージが(\d+)%アップするスタック」と「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
+const LUMINOUS =
+  /「次の支援\/妨害時に支援\/妨害効果が(\d+)%アップするスタック」を(\d)回蓄積し、味方(\d)体に「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
 
 //#region parseStack
 function parseStack(name: string, description: string): SkillEffect[] {
@@ -529,6 +533,27 @@ function parseStack(name: string, description: string): SkillEffect[] {
           times: Number.parseInt(description.match(COMET)![3]),
         },
       ],
+    )
+    .when(
+      n => n.includes('ルミナス'),
+      () => [
+        {
+          type: 'ANiMA',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          rate: 1.0 + Number.parseInt(description.match(LUMINOUS)![1]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(LUMINOUS)![2]),
+        },
+        {
+          type: 'Barrier',
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          targets: Number.parseInt(description.match(LUMINOUS)![1]),
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          rate: 1.0 + Number.parseInt(description.match(LUMINOUS)![2]) / 100,
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          times: Number.parseInt(description.match(LUMINOUS)![3]),
+        },
+      ]
     )
     .otherwise(() => [])
     .map(eff => ({ type: 'stack', stack: eff }));

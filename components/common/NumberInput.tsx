@@ -9,10 +9,22 @@ interface Props {
   onChange?: (value: number | null, event: Event | undefined) => void;
 }
 
-export default function NumberInput({ defaultValue, min, max, onChange }: Props): React.ReactElement {
+export default function NumberInput({
+  defaultValue,
+  min,
+  max,
+  onChange,
+}: Props): React.ReactElement {
   const id = React.useId();
   return (
-    <NumberField.Root id={id} defaultValue={defaultValue} className={styles.Field} min={min} max={max} onValueChange={onChange}>
+    <NumberField.Root
+      id={id}
+      defaultValue={defaultValue}
+      className={styles.Field}
+      min={min}
+      max={max}
+      onValueChange={onChange}
+    >
       <NumberField.Group className={styles.Group}>
         <NumberField.Decrement className={styles.Decrement}>
           <MinusIcon />
@@ -29,16 +41,16 @@ export default function NumberInput({ defaultValue, min, max, onChange }: Props)
 function PlusIcon(props: React.ComponentProps<'svg'>) {
   return (
     <svg
-      width="10"
-      height="10"
-      viewBox="0 0 10 10"
-      fill="none"
-      stroke="currentcolor"
-      strokeWidth="1.6"
-      xmlns="http://www.w3.org/2000/svg"
+      width='10'
+      height='10'
+      viewBox='0 0 10 10'
+      fill='none'
+      stroke='currentcolor'
+      strokeWidth='1.6'
+      xmlns='http://www.w3.org/2000/svg'
       {...props}
     >
-      <path d="M0 5H5M10 5H5M5 5V0M5 5V10" />
+      <path d='M0 5H5M10 5H5M5 5V0M5 5V10' />
     </svg>
   );
 }
@@ -46,16 +58,16 @@ function PlusIcon(props: React.ComponentProps<'svg'>) {
 function MinusIcon(props: React.ComponentProps<'svg'>) {
   return (
     <svg
-      width="10"
-      height="10"
-      viewBox="0 0 10 10"
-      fill="none"
-      stroke="currentcolor"
-      strokeWidth="1.6"
-      xmlns="http://www.w3.org/2000/svg"
+      width='10'
+      height='10'
+      viewBox='0 0 10 10'
+      fill='none'
+      stroke='currentcolor'
+      strokeWidth='1.6'
+      xmlns='http://www.w3.org/2000/svg'
       {...props}
     >
-      <path d="M0 5H10" />
+      <path d='M0 5H10' />
     </svg>
   );
 }

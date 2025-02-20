@@ -217,6 +217,10 @@ export function parseSupport(name: string, description: string): Support {
         sentence => sentence.includes('中確率'),
         () => 'medium',
       )
+      .when(
+        sentence => sentence.includes('高確率'),
+        () => 'high',
+      )
       .run(),
     effects: description.split('。').flatMap(sentence => {
       return [

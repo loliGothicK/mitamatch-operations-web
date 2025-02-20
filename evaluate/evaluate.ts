@@ -2,7 +2,7 @@ import type { Charm } from '@/domain/charm/charm';
 import type { Costume } from '@/domain/costume/costume';
 import type { Memoria } from '@/domain/memoria/memoria';
 import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
-import { type StatusKind, parseSkill } from '@/parser/skill';
+import {type StatusKind, parseSkill, Probability, Amount} from '@/parser/skill';
 import { parseSupport } from '@/parser/support';
 import { P, match } from 'ts-pattern';
 
@@ -60,7 +60,7 @@ function parseEx(description?: string): Map<string, number> {
 }
 
 function parseAdx(
-  adx: { name: string; description: string }[][] | undefined | null,
+  adx: { name?: string; description?: string }[][] | null | undefined,
   adxLevel: number,
 ): [Map<string, number>, Map<string, number>] {
   const effUp = new Map<string, number>([
@@ -82,7 +82,7 @@ function parseAdx(
   }
 
   for (const skill of adx[adxLevel]) {
-    const _match = skill.description.match(EFFECT_UP);
+    const _match = skill.description?.match(EFFECT_UP);
     if (!_match) {
       continue;
     }
@@ -90,7 +90,7 @@ function parseAdx(
   }
 
   for (const skill of adx[adxLevel]) {
-    const _match = skill.description.match(TRIGGER_RATE_UP);
+    const _match = skill.description?.match(TRIGGER_RATE_UP);
     if (!_match) {
       continue;
     }
@@ -109,6 +109,81 @@ export type EvaluateOptions = {
   counter?: boolean;
   stack?: StackOption;
 };
+
+function _level(
+  amount: Amount,
+): number {
+  return match(amount)
+    .with('small', () => NotApplicable)
+    .with('medium', () => 10 / 100)
+    .with('large', () => 15 / 100)
+    .with('extra-large', () => 18 / 100)
+    .with('super-large', () => 21 / 100)
+    .with('ultra-large', () => 24 / 100)
+    .exhaustive();
+}
+
+function _probability(
+  probability: Probability,
+  concentration: number,
+): number {
+  return match(probability)
+    .with('low', () => {
+      if (concentration === 0) {
+        return 0.12;
+      }
+      if (concentration === 1) {
+        return 0.125;
+      }
+      if (concentration === 2) {
+        return 0.13;
+      }
+      if (concentration === 3) {
+        return 0.135;
+      }
+      if (concentration === 4) {
+        return 0.15;
+      }
+      throw new Error('Invalid concentration');
+    })
+    .with('medium', () => {
+      if (concentration === 0) {
+        return 0.18;
+      }
+      if (concentration === 1) {
+        return 0.1875;
+      }
+      if (concentration === 2) {
+        return 0.195;
+      }
+      if (concentration === 3) {
+        return 0.2025;
+      }
+      if (concentration === 4) {
+        return 0.225;
+      }
+      throw new Error('Invalid concentration');
+    })
+    .with('high', () => {
+      if (concentration === 0) {
+        return 0.24;
+      }
+      if (concentration === 1) {
+        return 0.25;
+      }
+      if (concentration === 2) {
+        return 0.26;
+      }
+      if (concentration === 3) {
+        return 0.27;
+      }
+      if (concentration === 4) {
+        return 0.3;
+      }
+      throw new Error('Invalid concentration');
+    })
+    .exhaustive();
+}
 
 export function evaluate(
   deck: MemoriaWithConcentration[],
@@ -425,52 +500,8 @@ function damage(
       if (!up) {
         return 0;
       }
-      const level = match(up.amount)
-        .with('small', () => 0)
-        .with('medium', () => 10 / 100)
-        .with('large', () => 15 / 100)
-        .with('extra-large', () => 18 / 100)
-        .with('super-large', () => 21 / 100)
-        .with('ultra-large', () => 24 / 100)
-        .exhaustive();
-      const probability = match(support.probability)
-        .with('low', () => {
-          if (concentration === 0) {
-            return 0.12;
-          }
-          if (concentration === 1) {
-            return 0.125;
-          }
-          if (concentration === 2) {
-            return 0.13;
-          }
-          if (concentration === 3) {
-            return 0.135;
-          }
-          if (concentration === 4) {
-            return 0.15;
-          }
-          throw new Error('Invalid concentration');
-        })
-        .with('medium', () => {
-          if (concentration === 0) {
-            return 0.18;
-          }
-          if (concentration === 1) {
-            return 0.1875;
-          }
-          if (concentration === 2) {
-            return 0.195;
-          }
-          if (concentration === 3) {
-            return 0.2025;
-          }
-          if (concentration === 4) {
-            return 0.225;
-          }
-          throw new Error('Invalid concentration');
-        })
-        .exhaustive();
+      const level = _level(up.amount);
+      const probability = _probability(support.probability, concentration);
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return level * (probability + adx.get(memoria.element)!);
     })
@@ -630,52 +661,8 @@ function buff(
             if (!up) {
               return 0;
             }
-            const level = match(up.amount)
-              .with('small', () => 0)
-              .with('medium', () => 10 / 100)
-              .with('large', () => 15 / 100)
-              .with('extra-large', () => 18 / 100)
-              .with('super-large', () => 21 / 100)
-              .with('ultra-large', () => 24 / 100)
-              .exhaustive();
-            const probability = match(support.probability)
-              .with('low', () => {
-                if (concentration === 0) {
-                  return 0.12;
-                }
-                if (concentration === 1) {
-                  return 0.125;
-                }
-                if (concentration === 2) {
-                  return 0.13;
-                }
-                if (concentration === 3) {
-                  return 0.135;
-                }
-                if (concentration === 4) {
-                  return 0.15;
-                }
-                throw new Error('Invalid concentration');
-              })
-              .with('medium', () => {
-                if (concentration === 0) {
-                  return 0.18;
-                }
-                if (concentration === 1) {
-                  return 0.1875;
-                }
-                if (concentration === 2) {
-                  return 0.195;
-                }
-                if (concentration === 3) {
-                  return 0.2025;
-                }
-                if (concentration === 4) {
-                  return 0.225;
-                }
-                throw new Error('Invalid concentration');
-              })
-              .exhaustive();
+            const level = _level(up.amount);
+            const probability = _probability(support.probability, concentration);
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             return level * (probability + adx.get(memoria.element)!);
           })
@@ -1005,52 +992,8 @@ function debuff(
             if (!up) {
               return 0;
             }
-            const level = match(up.amount)
-              .with('small', () => NotApplicable)
-              .with('medium', () => 10 / 100)
-              .with('large', () => 15 / 100)
-              .with('extra-large', () => 18 / 100)
-              .with('super-large', () => 21 / 100)
-              .with('ultra-large', () => 24 / 100)
-              .exhaustive();
-            const probability = match(support.probability)
-              .with('low', () => {
-                if (concentration === 0) {
-                  return 0.12;
-                }
-                if (concentration === 1) {
-                  return 0.125;
-                }
-                if (concentration === 2) {
-                  return 0.13;
-                }
-                if (concentration === 3) {
-                  return 0.135;
-                }
-                if (concentration === 4) {
-                  return 0.15;
-                }
-                throw new Error('Invalid concentration');
-              })
-              .with('medium', () => {
-                if (concentration === 0) {
-                  return 0.18;
-                }
-                if (concentration === 1) {
-                  return 0.1875;
-                }
-                if (concentration === 2) {
-                  return 0.195;
-                }
-                if (concentration === 3) {
-                  return 0.2025;
-                }
-                if (concentration === 4) {
-                  return 0.225;
-                }
-                throw new Error('Invalid concentration');
-              })
-              .exhaustive();
+            const level = _level(up.amount);
+            const probability = _probability(support.probability, concentration);
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             return level * (probability + adx.get(memoria.element)!);
           })
@@ -1303,52 +1246,8 @@ function recovery(
       if (!up) {
         return 0;
       }
-      const level = match(up.amount)
-        .with('small', () => NotApplicable)
-        .with('medium', () => 10 / 100)
-        .with('large', () => 15 / 100)
-        .with('extra-large', () => 18 / 100)
-        .with('super-large', () => 21 / 100)
-        .with('ultra-large', () => 24 / 100)
-        .exhaustive();
-      const probability = match(support.probability)
-        .with('low', () => {
-          if (concentration === 0) {
-            return 0.12;
-          }
-          if (concentration === 1) {
-            return 0.125;
-          }
-          if (concentration === 2) {
-            return 0.13;
-          }
-          if (concentration === 3) {
-            return 0.135;
-          }
-          if (concentration === 4) {
-            return 0.15;
-          }
-          throw new Error('Invalid concentration');
-        })
-        .with('medium', () => {
-          if (concentration === 0) {
-            return 0.18;
-          }
-          if (concentration === 1) {
-            return 0.1875;
-          }
-          if (concentration === 2) {
-            return 0.195;
-          }
-          if (concentration === 3) {
-            return 0.2025;
-          }
-          if (concentration === 4) {
-            return 0.225;
-          }
-          throw new Error('Invalid concentration');
-        })
-        .exhaustive();
+      const level = _level(up.amount);
+      const probability = _probability(support.probability, concentration);
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return level * (probability + adx.get(memoria.element)!);
     })
