@@ -128,7 +128,7 @@ function _probability(
   concentration: number,
 ): number {
   return match(probability)
-    .with('low', () => {
+    .with('certain', () => {
       if (concentration === 0) {
         return 0.12;
       }
@@ -166,16 +166,16 @@ function _probability(
     })
     .with('high', () => {
       if (concentration === 0) {
-        return 0.24;
+        return 0.24; // ???
       }
       if (concentration === 1) {
-        return 0.25;
+        return 0.25; // ???
       }
       if (concentration === 2) {
-        return 0.26;
+        return 0.26; // ???
       }
       if (concentration === 3) {
-        return 0.27;
+        return 0.27; // ???
       }
       if (concentration === 4) {
         return 0.3;

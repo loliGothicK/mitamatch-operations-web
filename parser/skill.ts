@@ -45,7 +45,7 @@ export type Amount =
   | 'super-large' // 超特大アップ
   | 'ultra-large'; // 極大アップ
 export type Probability =
-  | 'low' // 一定確率で
+  | 'certain' // 一定確率で
   | 'medium' // 中確率で
   | 'high'; // 高確率で
 export type SkillKind = Elemental | 'charge' | 'counter' | 's-counter' | 'heal';

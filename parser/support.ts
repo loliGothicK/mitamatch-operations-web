@@ -211,7 +211,7 @@ export function parseSupport(name: string, description: string): Support {
     probability: match<string, Probability>(description)
       .when(
         sentence => sentence.includes('一定確率'),
-        () => 'low',
+        () => 'certain',
       )
       .when(
         sentence => sentence.includes('中確率'),
