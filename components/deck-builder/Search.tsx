@@ -36,6 +36,7 @@ import {
   otherSupportSearch,
 } from '@/types/searchType';
 import { type SyntheticEvent, useState } from 'react';
+import { match } from 'ts-pattern';
 
 function LabelCheckbox() {
   const [filter, setFilter] = useAtom(labelFilterAtom);
@@ -141,23 +142,15 @@ function OtherSkillCheckbox() {
           return (
             <CheckBoxItem
               key={flag}
-              name={
-                flag === 'charge'
-                  ? 'チャージ'
-                  : flag === 'counter'
-                    ? 'カウンター'
-                    : flag === 'heal'
-                      ? 'ヒール'
-                      : flag === 'Meteor'
-                        ? 'メテオ'
-                        : flag === 'Eden'
-                          ? 'エデン'
-                          : flag === 'Barrier'
-                            ? 'バリア'
-                            : flag === 'ANiMA'
-                              ? 'アニマ'
-                              : '???'
-              }
+              name={match(flag)
+                .with('heal', () => 'ヒール')
+                .with('counter', () => 'カウンター')
+                .with('charge', () => 'チャージ')
+                .with('Meteor', () => 'メテオ')
+                .with('Barrier', () => 'バリア')
+                .with('ANiMA', () => 'アニマ')
+                .with('Eden', () => 'エデン')
+                .exhaustive()}
               checked={filter.includes(flag)}
               handleChange={() => {
                 setFilter(prev => {

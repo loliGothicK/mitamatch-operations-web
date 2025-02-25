@@ -3,22 +3,26 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { type MouseEvent, Suspense, useEffect, useState } from 'react';
+import DifferenceIcon from '@mui/icons-material/Difference';
+import type { Unit } from '@/domain/types';
+import { generateShortLink } from '@/app/actions';
 
 import {
   Add,
   ArrowRightAlt,
+  Assignment,
   ClearAll,
   FilterAlt,
   Launch,
   Layers,
   LayersOutlined,
-  LinkSharp,
   Remove,
   Reply,
   ReplyOutlined,
   SearchOutlined,
+  Share,
 } from '@mui/icons-material';
 import {
   AppBar,
@@ -51,6 +55,8 @@ import {
   Card,
   CardMedia,
   CardContent,
+  TextField,
+  InputAdornment,
 } from '@mui/material';
 import type { SelectChangeEvent, Theme } from '@mui/material';
 import { blue, green, purple, red, yellow } from '@mui/material/colors';
@@ -155,11 +161,12 @@ function Concentration({
   handleConcentration,
 }: {
   concentration: number;
-  handleConcentration: (() => void) | false;
+  handleConcentration: (() => void) | true;
 }) {
   return (
     <IconButton
-      onClick={handleConcentration === false ? undefined : handleConcentration}
+      disabled={handleConcentration === true}
+      onClick={handleConcentration === true ? undefined : handleConcentration}
       sx={{
         top: 25,
         left: 60,
@@ -202,11 +209,15 @@ function MemoriaItem({
   remove,
   onConcentrationChange,
   onContextMenu,
+  disable,
+  priority,
 }: {
-  memoria: MemoriaWithConcentration;
-  remove?: false;
-  onConcentrationChange?: ((value: number) => void) | false;
-  onContextMenu?: false;
+  readonly memoria: MemoriaWithConcentration;
+  readonly remove?: false;
+  readonly onConcentrationChange?: ((value: number) => void) | false;
+  readonly onContextMenu?: false;
+  readonly disable?: true;
+  readonly priority?: boolean;
 }) {
   const { name, id, skill, support, concentration } = memoria;
   const [, setDeck] = useAtom(rwDeckAtom);
@@ -296,7 +307,7 @@ function MemoriaItem({
             <Icon kind={memoria.kind} element={memoria.element} position={70} />
             <Concentration
               concentration={concentrationValue}
-              handleConcentration={handleConcentration}
+              handleConcentration={disable || handleConcentration}
             />
           </Box>
           <div {...attributes} {...listeners} style={{ touchAction: 'none' }}>
@@ -320,6 +331,7 @@ function MemoriaItem({
                   setIsLoaded(true);
                 }}
                 onContextMenu={onContextMenu ? undefined : handleContextMenu}
+                priority={priority}
               />
             </Tooltip>
           </div>
@@ -329,33 +341,35 @@ function MemoriaItem({
             actionPosition={'right'}
           />
           <Box>
-            <ImageListItemBar
-              sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
-              position={'top'}
-              actionPosition={'left'}
-              actionIcon={
-                remove === undefined && (
-                  <IconButton
-                    sx={{
-                      color: 'rgba(255, 50, 50, 0.9)',
-                      bgcolor: 'rgba(0, 0, 0, 0.2)',
-                      zIndex: Number.POSITIVE_INFINITY,
-                    }}
-                    aria-label={`remove ${name}`}
-                    onClick={() => {
-                      setDeck(prev =>
-                        prev.filter(memoria => memoria.name !== name),
-                      );
-                      setLegendaryDeck(prev =>
-                        prev.filter(memoria => memoria.name !== name),
-                      );
-                    }}
-                  >
-                    <Remove />
-                  </IconButton>
-                )
-              }
-            />
+            {!disable && (
+              <ImageListItemBar
+                sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
+                position={'top'}
+                actionPosition={'left'}
+                actionIcon={
+                  remove === undefined && (
+                    <IconButton
+                      sx={{
+                        color: 'rgba(255, 50, 50, 0.9)',
+                        bgcolor: 'rgba(0, 0, 0, 0.2)',
+                        zIndex: Number.POSITIVE_INFINITY,
+                      }}
+                      aria-label={`remove ${name}`}
+                      onClick={() => {
+                        setDeck(prev =>
+                          prev.filter(memoria => memoria.name !== name),
+                        );
+                        setLegendaryDeck(prev =>
+                          prev.filter(memoria => memoria.name !== name),
+                        );
+                      }}
+                    >
+                      <Remove />
+                    </IconButton>
+                  )
+                }
+              />
+            )}
           </Box>
         </ImageListItem>
       </Box>
@@ -406,7 +420,9 @@ function Deck() {
         sx={{ maxWidth: 600, minHeight: 100 }}
       >
         {deck.map(memoria => {
-          return <MemoriaItem memoria={memoria} key={memoria.id} />;
+          return (
+            <MemoriaItem memoria={memoria} key={memoria.id} priority={true} />
+          );
         })}
       </Grid>
     </Sortable>
@@ -426,14 +442,16 @@ function LegendaryDeck() {
         sx={{ maxWidth: 600, minHeight: 100 }}
       >
         {deck.map(memoria => {
-          return <MemoriaItem memoria={memoria} key={memoria.id} />;
+          return (
+            <MemoriaItem memoria={memoria} key={memoria.id} priority={true} />
+          );
         })}
       </Grid>
     </Sortable>
   );
 }
 
-function Unit() {
+function UnitComponent() {
   const params = useSearchParams();
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
@@ -443,7 +461,24 @@ function Unit() {
 
   useEffect(() => {
     const value = params.get('deck');
-    if (value) {
+    const cookie = Cookies.get('deck');
+    if (cookie) {
+      const { sw, deck, legendaryDeck } = decodeDeck(cookie);
+      setSw(sw);
+      setRoleFilter(
+        sw === 'shield'
+          ? ['support', 'interference', 'recovery']
+          : [
+              'normal_single',
+              'normal_range',
+              'special_single',
+              'special_range',
+            ],
+      );
+      setDeck(deck);
+      setLegendaryDeck(legendaryDeck);
+      setCompare(undefined);
+    } else if (value) {
       const { sw, deck, legendaryDeck } = decodeDeck(value);
       setSw(sw);
       setRoleFilter(
@@ -459,25 +494,6 @@ function Unit() {
       setDeck(deck);
       setLegendaryDeck(legendaryDeck);
       setCompare(undefined);
-    } else {
-      const cookie = Cookies.get('deck');
-      if (cookie) {
-        const { sw, deck, legendaryDeck } = decodeDeck(cookie);
-        setSw(sw);
-        setRoleFilter(
-          sw === 'shield'
-            ? ['support', 'interference', 'recovery']
-            : [
-                'normal_single',
-                'normal_range',
-                'special_single',
-                'special_range',
-              ],
-        );
-        setDeck(deck);
-        setLegendaryDeck(legendaryDeck);
-        setCompare(undefined);
-      }
     }
   }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, params.get, setCompare]);
 
@@ -918,6 +934,11 @@ function VirtualizedList() {
               >
                 <Add color={'warning'} />
               </IconButton>
+              <Icon
+                kind={memoria[index].kind}
+                element={memoria[index].element}
+                position={70}
+              />
               <Tooltip title={memoria[index].name} placement={'top'}>
                 <CardMedia
                   component='img'
@@ -1202,28 +1223,227 @@ function SearchModal() {
   );
 }
 
+function Diff(props: { origin: Unit; current: Unit }) {
+  const { origin, current } = props;
+  const originUnit = origin.deck.concat(origin.legendaryDeck);
+  const currentUnit = current.deck.concat(current.legendaryDeck);
+
+  const incoming = currentUnit.filter(
+    memoria => !originUnit.map(memoria => memoria.id).includes(memoria.id),
+  );
+  const outgoing = originUnit.filter(
+    memoria => !currentUnit.map(memoria => memoria.id).includes(memoria.id),
+  );
+
+  if (incoming.length > 0 || outgoing.length > 0) {
+    return (
+      <>
+        <Typography>追加</Typography>
+        <Grid
+          container
+          direction={'row'}
+          alignItems={'left'}
+          spacing={2}
+          sx={{ maxWidth: 600, minHeight: 100 }}
+        >
+          {incoming.map(memoria => {
+            return (
+              <MemoriaItem memoria={memoria} key={memoria.id} disable={true} />
+            );
+          })}
+        </Grid>
+        <Typography>削除</Typography>
+        <Grid
+          container
+          direction={'row'}
+          alignItems={'left'}
+          spacing={2}
+          sx={{ maxWidth: 600, minHeight: 100 }}
+        >
+          {outgoing.map(memoria => {
+            return (
+              <MemoriaItem memoria={memoria} key={memoria.id} disable={true} />
+            );
+          })}
+        </Grid>
+      </>
+    );
+  }
+    return <Typography>変更はありません</Typography>;
+}
+
+function DiffModal() {
+  const [open, setOpen] = useState(false);
+  const [source, setSource] = useState<Unit | undefined>(undefined);
+  const [sw] = useAtom(swAtom);
+  const [deck] = useAtom(rwDeckAtom);
+  const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
+  const current = {
+    sw,
+    deck,
+    legendaryDeck,
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Tooltip title={'diff'} placement={'top'}>
+        <Button onClick={handleOpen}>
+          <DifferenceIcon />
+        </Button>
+      </Tooltip>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
+            Diff
+          </Typography>
+          <Divider />
+          <TextField
+            label='original'
+            id='original-url'
+            sx={{ m: 1, width: '50ch' }}
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position='start'>
+                    https://mitama.io/deck-builder?deck=
+                  </InputAdornment>
+                ),
+              },
+            }}
+            onChange={event => setSource(decodeDeck(event.target.value))}
+            variant='standard'
+          />
+          <Divider />
+          {source &&
+            (source.sw !== current.sw ? (
+              <Typography>前衛と後衛を比較することはできません</Typography>
+            ) : (
+              <Diff origin={source} current={current} />
+            ))}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+}
+
+function ShareMenu() {
+  const [sw] = useAtom(swAtom);
+  const [deck] = useAtom(rwDeckAtom);
+  const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
+  const [modalOpen, setModalOpen] = useState<'short' | 'full' | false>(false);
+  const [openTip, setOpenTip] = useState<boolean>(false);
+  const [url, setUrl] = useState<string>('');
+
+  const handleClick = (mode: 'short' | 'full') => {
+    setModalOpen(mode);
+  };
+  const handleClose = () => {
+    setModalOpen(false);
+    setOpenTip(false);
+  };
+  const handleCloseTip = (): void => {
+    setOpenTip(false);
+  };
+  const handleClickButton = async (): Promise<void> => {
+    setOpenTip(true);
+    await navigator.clipboard.writeText(url);
+  };
+
+  const base64 = encodeDeck(sw, deck, legendaryDeck);
+
+  return (
+    <PopupState
+      variant='popover'
+      popupId='demo-popup-menu'
+      disableAutoFocus={false}
+      parentPopupState={null}
+    >
+      {popupState => (
+        <>
+          <Button {...bindTrigger(popupState)}>
+            <Share />
+          </Button>
+          <Menu {...bindMenu(popupState)}>
+            <MenuItem
+              onClick={async () => {
+                popupState.close();
+                handleClick('short');
+                const hash = await generateShortLink({ base64 });
+                setUrl(`https://mitama.io/deck-builder?deck=${hash}`);
+              }}
+            >
+              {'short link'}
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                popupState.close();
+                handleClick('full');
+                setUrl(`https://mitama.io/deck-builder?deck=${base64}`);
+              }}
+            >
+              {'full link'}
+            </MenuItem>
+          </Menu>
+          <Dialog
+            open={modalOpen !== false}
+            onClose={handleClose}
+            aria-labelledby='form-dialog-title'
+            fullWidth={true}
+          >
+            <DialogContent>
+              <FormControl
+                variant='outlined'
+                fullWidth={true}
+                onClick={e => e.stopPropagation()}
+              >
+                <OutlinedInput
+                  type='text'
+                  value={url}
+                  fullWidth={true}
+                  endAdornment={
+                    <InputAdornment position='end'>
+                      <Tooltip
+                        arrow
+                        open={openTip}
+                        onClose={handleCloseTip}
+                        disableHoverListener
+                        placement='top'
+                        title='Copied!'
+                      >
+                        <IconButton onClick={handleClickButton}>
+                          <Assignment />
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Close</Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      )}
+    </PopupState>
+  );
+}
+
 export function DeckBuilder() {
   const theme = useTheme();
-  const [deck, setDeck] = useAtom(rwDeckAtom);
-  const [legendaryDeck, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
-  const [sw] = useAtom(swAtom);
-  const pathname = usePathname();
+  const [, setDeck] = useAtom(rwDeckAtom);
+  const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setCompare] = useAtom(compareModeAtom);
-
-  const shareHandler = async () => {
-    try {
-      await navigator.clipboard.writeText(
-        `https://mitama.io/${pathname}?deck=${encodeDeck(
-          sw,
-          deck,
-          legendaryDeck,
-        )}`,
-      );
-      alert('クリップボードに保存しました。');
-    } catch (_error) {
-      alert('失敗しました。');
-    }
-  };
 
   return (
     <Grid container direction={'row'} alignItems={'right'}>
@@ -1253,16 +1473,8 @@ export function DeckBuilder() {
               <ClearAll />
             </Button>
           </Tooltip>
-          <Tooltip title={'generate share link'} placement={'top'}>
-            <Link
-              href={`/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`}
-              onClick={shareHandler}
-            >
-              <IconButton aria-label='share'>
-                <LinkSharp />
-              </IconButton>
-            </Link>
-          </Tooltip>
+          <DiffModal />
+          <ShareMenu />
           <Container
             maxWidth={false}
             sx={{
@@ -1277,7 +1489,7 @@ export function DeckBuilder() {
             }}
           >
             <Suspense>
-              <Unit />
+              <UnitComponent />
             </Suspense>
           </Container>
         </Grid>

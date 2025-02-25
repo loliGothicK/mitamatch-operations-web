@@ -2,6 +2,7 @@ import { memoriaList } from '@/domain/memoria/memoria';
 import { orderList } from '@/domain/order/order';
 import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
 import type { OrderWithPic } from '@/jotai/orderAtoms';
+import type { Unit } from '@/domain/types';
 
 export function encodeDeck(
   sw: 'sword' | 'shield',
@@ -22,11 +23,7 @@ export function encodeDeck(
   );
 }
 
-export function decodeDeck(encoded: string): {
-  sw: 'sword' | 'shield';
-  deck: MemoriaWithConcentration[];
-  legendaryDeck: MemoriaWithConcentration[];
-} {
+export function decodeDeck(encoded: string): Unit {
   const { sw, deck, legendaryDeck } = JSON.parse(atob(encoded));
   const deckMap = new Map(memoriaList.map(memoria => [memoria.id, memoria]));
   return {

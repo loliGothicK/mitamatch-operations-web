@@ -11,7 +11,7 @@
       "**/*.mjs",
       "**/*.json"
     ],
-    "ignore": [".next", "node_modules"],
+    "ignore": [".next", "node_modules", "coverage"],
     "maxSize": 20000000
   },
   "organizeImports": {
@@ -62,5 +62,10 @@
         "noUndeclaredDependencies": "off"
       }
     }
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "defaultBranch": "main"
   }
 }

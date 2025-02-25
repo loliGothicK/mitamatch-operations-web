@@ -553,7 +553,7 @@ function parseStack(name: string, description: string): SkillEffect[] {
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
           times: Number.parseInt(description.match(LUMINOUS)![3]),
         },
-      ]
+      ],
     )
     .otherwise(() => [])
     .map(eff => ({ type: 'stack', stack: eff }));

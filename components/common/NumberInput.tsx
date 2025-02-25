@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { NumberField } from '@base-ui-components/react/number-field';
 import styles from './number.module.css';
+import {type ComponentProps, type ReactElement, useId} from "react";
 
 interface Props {
   defaultValue?: number;
@@ -14,8 +14,8 @@ export default function NumberInput({
   min,
   max,
   onChange,
-}: Props): React.ReactElement {
-  const id = React.useId();
+}: Props): ReactElement {
+  const id = useId();
   return (
     <NumberField.Root
       id={id}
@@ -38,9 +38,11 @@ export default function NumberInput({
   );
 }
 
-function PlusIcon(props: React.ComponentProps<'svg'>) {
+function PlusIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
+      role={'img'}
+      aria-label={'Increment value'}
       width='10'
       height='10'
       viewBox='0 0 10 10'
@@ -55,9 +57,11 @@ function PlusIcon(props: React.ComponentProps<'svg'>) {
   );
 }
 
-function MinusIcon(props: React.ComponentProps<'svg'>) {
+function MinusIcon(props: ComponentProps<'svg'>) {
   return (
     <svg
+      role={'img'}
+      aria-label={'Increment value'}
       width='10'
       height='10'
       viewBox='0 0 10 10'
