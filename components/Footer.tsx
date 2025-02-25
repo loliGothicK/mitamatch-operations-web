@@ -67,7 +67,7 @@ export default function Footer({ ...props }) {
               {content.tools.map(link => {
                 return (
                   <Link
-                    href={`${link.href}`}
+                    href={link.href}
                     variant='body1'
                     color={theme.palette.text.secondary}
                     key={link.content}

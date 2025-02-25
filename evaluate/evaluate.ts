@@ -2,7 +2,12 @@ import type { Charm } from '@/domain/charm/charm';
 import type { Costume } from '@/domain/costume/costume';
 import type { Memoria } from '@/domain/memoria/memoria';
 import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
-import {type StatusKind, parseSkill, Probability, Amount} from '@/parser/skill';
+import {
+  type StatusKind,
+  parseSkill,
+  type Probability,
+  type Amount,
+} from '@/parser/skill';
 import { parseSupport } from '@/parser/support';
 import { P, match } from 'ts-pattern';
 
@@ -110,9 +115,7 @@ export type EvaluateOptions = {
   stack?: StackOption;
 };
 
-function _level(
-  amount: Amount,
-): number {
+function _level(amount: Amount): number {
   return match(amount)
     .with('small', () => NotApplicable)
     .with('medium', () => 10 / 100)
@@ -123,10 +126,7 @@ function _level(
     .exhaustive();
 }
 
-function _probability(
-  probability: Probability,
-  concentration: number,
-): number {
+function _probability(probability: Probability, concentration: number): number {
   return match(probability)
     .with('certain', () => {
       if (concentration === 0) {
@@ -662,7 +662,10 @@ function buff(
               return 0;
             }
             const level = _level(up.amount);
-            const probability = _probability(support.probability, concentration);
+            const probability = _probability(
+              support.probability,
+              concentration,
+            );
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             return level * (probability + adx.get(memoria.element)!);
           })
@@ -993,7 +996,10 @@ function debuff(
               return 0;
             }
             const level = _level(up.amount);
-            const probability = _probability(support.probability, concentration);
+            const probability = _probability(
+              support.probability,
+              concentration,
+            );
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
             return level * (probability + adx.get(memoria.element)!);
           })
