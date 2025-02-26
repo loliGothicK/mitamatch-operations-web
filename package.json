@@ -51,6 +51,7 @@
     "js-cookie": "3.0.5",
     "material-ui-popup-state": "5.3.3",
     "monocle-ts": "2.3.13",
+    "neverthrow": "8.2.0",
     "next": "15.1.7",
     "pg": "8.13.3",
     "react": "19.0.0",
@@ -90,7 +91,7 @@
   "volta": {
     "node": "22.14.0"
   },
-  "packageManager": "pnpm@10.4.1",
+  "packageManager": "pnpm@10.5.1",
   "pnpm": {
     "ignoredBuiltDependencies": [
       "@biomejs/biome",

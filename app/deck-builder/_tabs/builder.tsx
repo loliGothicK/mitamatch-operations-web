@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { type MouseEvent, Suspense, useEffect, useState } from 'react';
 import DifferenceIcon from '@mui/icons-material/Difference';
 import type { Unit } from '@/domain/types';
-import { generateShortLink } from '@/app/actions';
+import { generateShortLink, getShortLink } from '@/app/actions';
 
 import {
   Add,
@@ -460,41 +460,51 @@ function UnitComponent() {
   const [, setCompare] = useAtom(compareModeAtom);
 
   useEffect(() => {
-    const value = params.get('deck');
-    const cookie = Cookies.get('deck');
-    if (cookie) {
-      const { sw, deck, legendaryDeck } = decodeDeck(cookie);
-      setSw(sw);
-      setRoleFilter(
-        sw === 'shield'
-          ? ['support', 'interference', 'recovery']
-          : [
-              'normal_single',
-              'normal_range',
-              'special_single',
-              'special_range',
-            ],
-      );
-      setDeck(deck);
-      setLegendaryDeck(legendaryDeck);
-      setCompare(undefined);
-    } else if (value) {
-      const { sw, deck, legendaryDeck } = decodeDeck(value);
-      setSw(sw);
-      setRoleFilter(
-        sw === 'shield'
-          ? ['support', 'interference', 'recovery']
-          : [
-              'normal_single',
-              'normal_range',
-              'special_single',
-              'special_range',
-            ],
-      );
-      setDeck(deck);
-      setLegendaryDeck(legendaryDeck);
-      setCompare(undefined);
-    }
+    (async () => {
+      const value = params.get('deck');
+      const cookie = Cookies.get('deck');
+      if (cookie) {
+        const decodeResult = decodeDeck(cookie);
+        if (decodeResult.isOk()) {
+          const { sw, deck, legendaryDeck } = decodeResult.value;
+          setSw(sw);
+          setRoleFilter(
+            sw === 'shield'
+              ? ['support', 'interference', 'recovery']
+              : [
+                  'normal_single',
+                  'normal_range',
+                  'special_single',
+                  'special_range',
+                ],
+          );
+          setDeck(deck);
+          setLegendaryDeck(legendaryDeck);
+          setCompare(undefined);
+        }
+      } else if (value) {
+        const base64 =
+          value.length === 32 ? await getShortLink({ shortUrl: value }) : value;
+        const decodeResult = decodeDeck(base64);
+        if (decodeResult.isOk()) {
+          const { sw, deck, legendaryDeck } = decodeResult.value;
+          setSw(sw);
+          setRoleFilter(
+            sw === 'shield'
+              ? ['support', 'interference', 'recovery']
+              : [
+                  'normal_single',
+                  'normal_range',
+                  'special_single',
+                  'special_range',
+                ],
+          );
+          setDeck(deck);
+          setLegendaryDeck(legendaryDeck);
+          setCompare(undefined);
+        }
+      }
+    })();
   }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, params.get, setCompare]);
 
   return (
@@ -1269,7 +1279,7 @@ function Diff(props: { origin: Unit; current: Unit }) {
       </>
     );
   }
-    return <Typography>変更はありません</Typography>;
+  return <Typography>変更はありません</Typography>;
 }
 
 function DiffModal() {
@@ -1317,7 +1327,12 @@ function DiffModal() {
                 ),
               },
             }}
-            onChange={event => setSource(decodeDeck(event.target.value))}
+            onChange={event => {
+              const decodeResult = decodeDeck(event.target.value);
+              if (decodeResult.isOk()) {
+                setSource(decodeResult.value);
+              }
+            }}
             variant='standard'
           />
           <Divider />

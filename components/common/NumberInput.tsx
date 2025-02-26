@@ -1,6 +1,6 @@
 import { NumberField } from '@base-ui-components/react/number-field';
 import styles from './number.module.css';
-import {type ComponentProps, type ReactElement, useId} from "react";
+import { type ComponentProps, type ReactElement, useId } from 'react';
 
 interface Props {
   defaultValue?: number;

@@ -38,12 +38,16 @@ export async function generateShortLink(data: { base64: string }) {
   return hash;
 }
 
-export async function getShortLink(data: { shortUrl: string }) {
+export async function getShortLink(data: {
+  shortUrl: string;
+}): Promise<string> {
   const found = await prisma.shortUrl.findUnique({
     where: {
       shortUrl: data.shortUrl,
     },
   });
-
-  return found?.url;
+  if (found === null) {
+    throw new Error('Unable to find shortUrl');
+  }
+  return found.url;
 }
