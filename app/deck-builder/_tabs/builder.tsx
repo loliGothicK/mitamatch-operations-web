@@ -1351,7 +1351,7 @@ function DiffModal() {
   );
 }
 
-function ShareMenu() {
+function ShareButton() {
   const [sw] = useAtom(swAtom);
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
@@ -1489,7 +1489,7 @@ export function DeckBuilder() {
             </Button>
           </Tooltip>
           <DiffModal />
-          <ShareMenu />
+          <ShareButton />
           <Container
             maxWidth={false}
             sx={{

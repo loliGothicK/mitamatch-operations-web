@@ -1,5 +1,5 @@
 import { type Memoria, memoriaList } from '@/domain/memoria/memoria';
-import { orderList } from '@/domain/order/order';
+import { orderList, type Order } from '@/domain/order/order';
 import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
 import type { OrderWithPic } from '@/jotai/orderAtoms';
 import type { Unit } from '@/domain/types';
@@ -7,6 +7,7 @@ import { type Result, fromThrowable, ok, err } from 'neverthrow';
 import { z } from 'zod';
 import { pipe } from 'fp-ts/function';
 import { partition } from 'fp-ts/Array';
+import { outdent } from 'outdent';
 
 export function encodeDeck(
   sw: 'sword' | 'shield',
@@ -39,11 +40,19 @@ type EncodedUnit = z.infer<typeof encodedUnit>;
 const atobSafe = fromThrowable(atob, e => `Error in \`atob\`: \n\n${e}`);
 const jsonParseSafe = fromThrowable(
   JSON.parse,
-  e => `Error in \`JSON.parse\`: \n\n${e}`,
+  e => outdent`
+    Error in \`JSON.parse\`:
+
+    ${e}
+  `,
 );
 const unitParseSafe = fromThrowable(
   encodedUnit.parse,
-  e => `Error in \`encodedUnit.parse\`: \n\n${e}`,
+  e => outdent`
+    Error in \`JSON.parse\`:
+
+    ${e}
+  `,
 );
 
 const deckMap = new Map(memoriaList.map(memoria => [memoria.id, memoria]));
@@ -106,18 +115,60 @@ export function encodeTimeline(timeline: OrderWithPic[]) {
   return btoa(JSON.stringify({ timeline: timelineInfo }));
 }
 
-export function decodeTimeline(encoded: string): OrderWithPic[] {
-  const orderMap = new Map(orderList.map(order => [order.id, order]));
-  const { timeline } = JSON.parse(atob(encoded));
+const timelineItemSchema = z.object({
+  id: z.number(),
+  delay: z.number().optional(),
+  pic: z.string().optional(),
+  sub: z.string().optional(),
+});
 
-  return timeline.map(
-    (item: { id: number; delay?: number; pic?: string; sub?: string }) => {
-      return {
-        ...orderMap.get(item.id),
-        delay: item.delay,
-        pic: item.pic ? decodeURIComponent(item.pic) : undefined,
-        sub: item.sub ? decodeURIComponent(item.sub) : undefined,
-      };
-    },
+const timelineSchema = z.array(timelineItemSchema);
+
+type TimelineItem = z.infer<typeof timelineItemSchema>;
+type Timeline = TimelineItem[];
+
+const timelineParseSafe = fromThrowable(
+  timelineSchema.parse,
+  e => outdent`
+    Error in \`timelineSchema.parse\`:
+
+    ${e}
+  `,
+);
+
+const orderMap = new Map(orderList.map(order => [order.id, order] as const));
+
+const restoreTimeline = (data: Timeline): Result<OrderWithPic[], string> => {
+  const cov = data.map(({ id, ...xs }) => {
+    return { id, order: orderMap.get(id), xs };
+  });
+  const { left, right } = pipe(
+    cov,
+    partition(
+      (
+        item,
+      ): item is {
+        id: number;
+        order: Order;
+        xs: Exclude<TimelineItem, 'order'>;
+      } => item.order !== undefined,
+    ),
   );
+  return left.length > 0
+    ? err(`${left.map(({ id }) => id)} are not found in order.json`)
+    : ok(
+        right.map(({ order, xs }) => ({
+          ...order,
+          ...xs,
+        })),
+      );
+};
+
+export function decodeTimeline(
+  encoded: string,
+): Result<OrderWithPic[], string> {
+  return atobSafe(encoded)
+    .andThen(jsonParseSafe)
+    .andThen(timelineParseSafe)
+    .andThen(restoreTimeline);
 }

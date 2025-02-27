@@ -2,16 +2,16 @@
 
 import { useAtom } from 'jotai';
 import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { type FormEvent, Suspense, useEffect, useState } from 'react';
 
 import {
   Add,
+  Assignment,
   DragIndicator,
   Edit,
-  LinkSharp,
   Remove,
+  Share,
 } from '@mui/icons-material';
 import {
   Avatar,
@@ -38,6 +38,10 @@ import {
   Typography,
   alpha,
   Card,
+  FormControl,
+  OutlinedInput,
+  InputAdornment,
+  Tooltip,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/system';
@@ -59,6 +63,7 @@ import { takeLeft } from 'fp-ts/Array';
 import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Virtuoso } from 'react-virtuoso';
+import { generateShortLink, getShortLink } from '@/app/actions';
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -234,25 +239,27 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
       <Dialog
         open={open}
         onClose={handleClose}
-        PaperProps={{
-          component: 'form',
-          onSubmit: (event: FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            setTimeline(prev =>
-              prev.map(o =>
-                o.id === order.id
-                  ? {
-                      ...o,
-                      delay: Number.parseInt(formJson.delay as string),
-                      pic: formJson.pic as string,
-                      sub: formJson.sub as string,
-                    }
-                  : o,
-              ),
-            );
-            handleClose();
+        slotProps={{
+          paper: {
+            component: 'form',
+            onSubmit: (event: FormEvent<HTMLFormElement>) => {
+              event.preventDefault();
+              const formData = new FormData(event.currentTarget);
+              const formJson = Object.fromEntries(formData.entries());
+              setTimeline(prev =>
+                prev.map(o =>
+                  o.id === order.id
+                    ? {
+                        ...o,
+                        delay: Number.parseInt(formJson.delay as string),
+                        pic: formJson.pic as string,
+                        sub: formJson.sub as string,
+                      }
+                    : o,
+                ),
+              );
+              handleClose();
+            },
           },
         }}
       >
@@ -304,15 +311,23 @@ function Timeline() {
   const params = useSearchParams();
 
   useEffect(() => {
-    const value = params.get('timeline');
-    if (value) {
-      setTimeline(decodeTimeline(value));
-    } else {
+    (async () => {
+      const value = params.get('timeline');
       const cookie = Cookies.get('timeline');
       if (cookie) {
-        setTimeline(decodeTimeline(cookie));
+        const decodeResult = decodeTimeline(cookie);
+        if (decodeResult.isOk()) {
+          setTimeline(decodeResult.value);
+        }
+      } else if (value) {
+        const base64 =
+          value.length === 32 ? await getShortLink({ shortUrl: value }) : value;
+        const decodeResult = decodeTimeline(base64);
+        if (decodeResult.isOk()) {
+          setTimeline(decodeResult.value);
+        }
       }
-    }
+    })();
   }, [setTimeline, params.get]);
 
   const reducer = (
@@ -500,23 +515,111 @@ function FilterMenu() {
   );
 }
 
+function ShareButton() {
+  const [timeline] = useAtom(timelineAtom);
+  const [modalOpen, setModalOpen] = useState<'short' | 'full' | false>(false);
+  const [openTip, setOpenTip] = useState<boolean>(false);
+  const [url, setUrl] = useState<string>('');
+
+  const handleClick = (mode: 'short' | 'full') => {
+    setModalOpen(mode);
+  };
+  const handleClose = () => {
+    setModalOpen(false);
+    setOpenTip(false);
+  };
+  const handleCloseTip = (): void => {
+    setOpenTip(false);
+  };
+  const handleClickButton = async (): Promise<void> => {
+    setOpenTip(true);
+    await navigator.clipboard.writeText(url);
+  };
+
+  const base64 = encodeTimeline(timeline);
+
+  return (
+    <PopupState
+      variant='popover'
+      popupId='demo-popup-menu'
+      disableAutoFocus={false}
+      parentPopupState={null}
+    >
+      {popupState => (
+        <>
+          <Button {...bindTrigger(popupState)}>
+            <Share />
+          </Button>
+          <Menu {...bindMenu(popupState)}>
+            <MenuItem
+              onClick={async () => {
+                popupState.close();
+                handleClick('short');
+                const hash = await generateShortLink({ base64 });
+                setUrl(`https://mitama.io/timeline-builder?timeline=${hash}`);
+              }}
+            >
+              {'short link'}
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                popupState.close();
+                handleClick('full');
+                setUrl(`https://mitama.io/timeline-builder?timeline=${base64}`);
+              }}
+            >
+              {'full link'}
+            </MenuItem>
+          </Menu>
+          <Dialog
+            open={modalOpen !== false}
+            onClose={handleClose}
+            aria-labelledby='form-dialog-title'
+            fullWidth={true}
+          >
+            <DialogContent>
+              <FormControl
+                variant='outlined'
+                fullWidth={true}
+                onClick={e => e.stopPropagation()}
+              >
+                <OutlinedInput
+                  type='text'
+                  value={url}
+                  fullWidth={true}
+                  endAdornment={
+                    <InputAdornment position='end'>
+                      <Tooltip
+                        arrow
+                        open={openTip}
+                        onClose={handleCloseTip}
+                        disableHoverListener
+                        placement='top'
+                        title='Copied!'
+                      >
+                        <IconButton onClick={handleClickButton}>
+                          <Assignment />
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Close</Button>
+            </DialogActions>
+          </Dialog>
+        </>
+      )}
+    </PopupState>
+  );
+}
+
 function TimelineBuilder() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('lg'));
-  const pathname = usePathname();
-  const [timeline] = useAtom(timelineAtom);
   const [, setPayed] = useAtom(payedAtom);
-
-  const shareHandler = async () => {
-    try {
-      await navigator.clipboard.writeText(
-        `https://mitama.io/${pathname}?timeline=${encodeTimeline(timeline)}`,
-      );
-      alert('クリップボードに保存しました。');
-    } catch (_error) {
-      alert('失敗しました。');
-    }
-  };
 
   return (
     <Grid container direction={'row'} alignItems={'right'}>
@@ -529,14 +632,7 @@ function TimelineBuilder() {
         flexShrink={1}
       >
         <Grid size={{ xs: 12, md: 6, lg: 6 }} alignItems={'center'}>
-          <Link
-            href={`/timeline-builder?timeline=${encodeTimeline(timeline)}`}
-            onClick={shareHandler}
-          >
-            <IconButton aria-label='share'>
-              <LinkSharp />
-            </IconButton>
-          </Link>
+          <ShareButton />
           <Container
             maxWidth={false}
             sx={{

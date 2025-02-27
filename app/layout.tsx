@@ -8,7 +8,8 @@ import type { ReactNode } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 const siteName = 'Mitamatch Operations for Web';
-const description = 'Mitamatch Operations の機能の一部がブラウザで使えます';
+const description =
+  'デッキビルダーやオーダータイムラインビルダーなどラスバレを便利にするツールが使えます';
 const url = 'https://mitama.io';
 
 export const metadata = {

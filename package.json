@@ -53,6 +53,7 @@
     "monocle-ts": "2.3.13",
     "neverthrow": "8.2.0",
     "next": "15.1.7",
+    "outdent": "0.8.0",
     "pg": "8.13.3",
     "react": "19.0.0",
     "react-dom": "19.0.0",
