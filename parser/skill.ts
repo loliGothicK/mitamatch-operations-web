@@ -34,8 +34,8 @@ export const elementalKind = [
 export type ElementalKind = (typeof elementalKind)[number];
 
 export type Elemental = {
-  element: Elements;
-  kind: ElementalKind;
+  readonly element: Elements;
+  readonly kind: ElementalKind;
 };
 export type Amount =
   | 'small' // 小アップ
@@ -52,24 +52,24 @@ export type SkillKind = Elemental | 'charge' | 'counter' | 's-counter' | 'heal';
 
 export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;
 export type StackEffect = {
-  type: (typeof stackEffect)[number];
-  rate: number;
-  times: number;
-  targets?: number;
+  readonly type: (typeof stackEffect)[number];
+  readonly rate: number;
+  readonly times: number;
+  readonly targets?: number;
 };
 
 export type SkillEffect = {
-  type: 'damage' | 'heal' | 'buff' | 'debuff' | 'stack';
-  range?: [number, number];
-  amount?: Amount;
-  status?: StatusKind;
-  stack?: StackEffect;
+  readonly type: 'damage' | 'heal' | 'buff' | 'debuff' | 'stack';
+  readonly range?: readonly [number, number];
+  readonly amount?: Amount;
+  readonly status?: StatusKind;
+  readonly stack?: StackEffect;
 };
 
 export type Skill = {
-  raw: { name: string; description: string };
-  effects: SkillEffect[];
-  kinds?: SkillKind[];
+  readonly raw: { readonly name: string; readonly description: string };
+  readonly effects: SkillEffect[];
+  readonly kinds?: SkillKind[];
 };
 //#endregion
 
@@ -88,9 +88,9 @@ function parseDamage(description: string): SkillEffect[] {
 
   const range = (r => {
     if (r.length === 1) {
-      return [r[0], r[0]] as [number, number];
+      return [r[0], r[0]] as const;
     }
-    return [r[0], r[1]] as [number, number];
+    return [r[0], r[1]] as const;
   })(_match[1].split('～').map(n => Number.parseInt(n)));
 
   const amount = match<string, Amount>(_match[3])
@@ -227,9 +227,9 @@ function parseBuff(description: string): SkillEffect[] {
 
   const range = (r => {
     if (r.length === 1) {
-      return [r[0], r[0]] as [number, number];
+      return [r[0], r[0]] as const;
     }
-    return [r[0], r[1]] as [number, number];
+    return [r[0], r[1]] as const;
   })(_match[1].split('～').map(n => Number.parseInt(n)));
 
   const status = _match[2].split('と').flatMap(s => {

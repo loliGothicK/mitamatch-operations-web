@@ -4,33 +4,37 @@ import { z } from 'zod';
 import costumeData from './costume.json';
 
 const costumeSchema = z.object({
-  id: z.number(),
-  lily: z.string(),
-  name: z.string(),
-  type: z.string(),
-  rare: z.object({
-    name: z.string(),
-    description: z.string(),
-  }),
+  id: z.number().readonly(),
+  lily: z.string().readonly(),
+  name: z.string().readonly(),
+  type: z.string().readonly(),
+  rare: z
+    .object({
+      name: z.string().readonly(),
+      description: z.string().readonly(),
+    })
+    .readonly(),
   ex: z
     .object({
-      name: z.string(),
-      description: z.string(),
+      name: z.string().readonly(),
+      description: z.string().readonly(),
     })
     .optional()
-    .nullable(),
+    .nullable()
+    .readonly(),
   adx: z
     .array(
       z.array(
         z.object({
-          name: z.string(),
-          description: z.string(),
+          name: z.string().readonly(),
+          description: z.string().readonly(),
         }),
       ),
     )
     .optional()
-    .nullable(),
-  skills: z.array(z.string()),
+    .nullable()
+    .readonly(),
+  skills: z.array(z.string()).readonly(),
 });
 
 /**
@@ -49,7 +53,7 @@ export type Costume = OmitProperties<
   z.infer<typeof costumeSchema>,
   'skills'
 > & {
-  status: [number, number, number, number];
+  readonly status: readonly [number, number, number, number];
 };
 
 export const costumeList: Costume[] = costumeData.data.map(costume => {
@@ -60,7 +64,9 @@ export const costumeList: Costume[] = costumeData.data.map(costume => {
   };
 });
 
-function skillsToStatus(skills: string[]): [number, number, number, number] {
+function skillsToStatus(
+  skills: readonly string[],
+): readonly [number, number, number, number] {
   const status = [0, 0, 0, 0] as [number, number, number, number];
   const regex = /(ATK|Sp\.ATK|DEF|Sp\.DEF)\+\d+/g;
   // biome-ignore lint/performance/useTopLevelRegex: ???

@@ -129,7 +129,7 @@ importers:
         specifier: 15.1.7
         version: 15.1.7(@babel/core@7.26.9)(@opentelemetry/api@1.9.0)(babel-plugin-macros@3.1.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       outdent:
-        specifier: ^0.8.0
+        specifier: 0.8.0
         version: 0.8.0
       pg:
         specifier: 8.13.3

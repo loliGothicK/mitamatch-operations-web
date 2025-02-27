@@ -65,9 +65,9 @@ function parseEx(description?: string): Map<string, number> {
 }
 
 function parseAdx(
-  adx: { name?: string; description?: string }[][] | null | undefined,
+  adx: Costume['adx'],
   adxLevel: number,
-): [Map<string, number>, Map<string, number>] {
+): readonly [Map<string, number>, Map<string, number>] {
   const effUp = new Map<string, number>([
     ['火', 1.0],
     ['水', 1.0],
@@ -102,7 +102,7 @@ function parseAdx(
     rateUp.set(_match[1], Number(_match[2]) / 100);
   }
 
-  return [effUp, rateUp];
+  return [effUp, rateUp] as const;
 }
 
 export type StackOption = {
@@ -185,6 +185,38 @@ function _probability(probability: Probability, concentration: number): number {
     .exhaustive();
 }
 
+type EvaluateResult = {
+  readonly skill: {
+    readonly memoria: MemoriaWithConcentration;
+    readonly expected: {
+      readonly damage?: number;
+      readonly buff?: {
+        readonly type: StatusKind;
+        readonly amount: number;
+      }[];
+      readonly debuff?: {
+        readonly type: StatusKind;
+        readonly amount: number;
+      }[];
+      readonly recovery?: number;
+    };
+  }[];
+  readonly supportBuff: Record<
+    Exclude<
+      StatusKind,
+      'Light ATK' | 'Dark ATK' | 'Light DEF' | 'Dark DEF' | 'Life'
+    >,
+    number
+  >;
+  readonly supportDebuff: Record<
+    Exclude<
+      StatusKind,
+      'Light ATK' | 'Dark ATK' | 'Light DEF' | 'Dark DEF' | 'Life'
+    >,
+    number
+  >;
+};
+
 export function evaluate(
   deck: MemoriaWithConcentration[],
   [atk, spAtk, def, spDef]: [number, number, number, number],
@@ -193,37 +225,7 @@ export function evaluate(
   costume: Costume,
   adxLevel: number,
   options: EvaluateOptions = {},
-): {
-  skill: {
-    memoria: MemoriaWithConcentration;
-    expected: {
-      damage?: number;
-      buff?: {
-        type: StatusKind;
-        amount: number;
-      }[];
-      debuff?: {
-        type: StatusKind;
-        amount: number;
-      }[];
-      recovery?: number;
-    };
-  }[];
-  supportBuff: Record<
-    Exclude<
-      StatusKind,
-      'Light ATK' | 'Dark ATK' | 'Light DEF' | 'Dark DEF' | 'Life'
-    >,
-    number
-  >;
-  supportDebuff: Record<
-    Exclude<
-      StatusKind,
-      'Light ATK' | 'Dark ATK' | 'Light DEF' | 'Dark DEF' | 'Life'
-    >,
-    number
-  >;
-} {
+): EvaluateResult {
   const themeRate = new Map<string, number>([
     ['火', 1.1],
     ['水', 1.1],

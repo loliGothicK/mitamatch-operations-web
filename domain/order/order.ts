@@ -22,18 +22,18 @@ export const orderKind = [
 export type OrderKind = (typeof orderKind)[number];
 
 const orderSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  status: z.array(z.number()),
-  effect: z.string(),
-  description: z.string(),
+  id: z.number().readonly(),
+  name: z.string().readonly(),
+  status: z.array(z.number()).readonly(),
+  effect: z.string().readonly(),
+  description: z.string().readonly(),
   // biome-ignore lint/style/useNamingConvention: <explanation>
-  prepare_time: z.number(),
+  prepare_time: z.number().readonly(),
   // biome-ignore lint/style/useNamingConvention: <explanation>
-  active_time: z.number(),
-  payed: z.boolean(),
-  kind: z.enum(orderKind),
-  usually: z.boolean(),
+  active_time: z.number().readonly(),
+  payed: z.boolean().readonly(),
+  kind: z.enum(orderKind).readonly(),
+  usually: z.boolean().readonly(),
 });
 
 /**

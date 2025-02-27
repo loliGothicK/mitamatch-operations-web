@@ -3,11 +3,11 @@ import { z } from 'zod';
 import charmData from './charm.json';
 
 const charmSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  ability: z.string(),
-  status: z.tuple([z.number(), z.number(), z.number(), z.number()]),
-  date: z.coerce.date(),
+  id: z.number().readonly(),
+  name: z.string().readonly(),
+  ability: z.string().readonly(),
+  status: z.tuple([z.number(), z.number(), z.number(), z.number()]).readonly(),
+  date: z.coerce.date().readonly(),
 });
 
 /**

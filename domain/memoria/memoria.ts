@@ -5,39 +5,47 @@ import memoriaData from './memoria.json';
 const statusSchema = z.tuple([z.number(), z.number(), z.number(), z.number()]);
 
 const memoriaSchema = z.object({
-  id: z.number(),
-  link: z.string(),
-  name: z.string(),
+  id: z.number().readonly(),
+  link: z.string().readonly(),
+  name: z.string().readonly(),
   // biome-ignore lint/style/useNamingConvention: <explanation>
-  full_name: z.string(),
-  kind: z.enum([
-    '通常単体',
-    '通常範囲',
-    '特殊単体',
-    '特殊範囲',
-    '支援',
-    '妨害',
-    '回復',
-  ]),
-  element: z.enum(['火', '水', '風', '光', '闇']),
-  status: z.tuple([
-    statusSchema,
-    statusSchema,
-    statusSchema,
-    statusSchema,
-    statusSchema,
-  ]),
-  cost: z.number(),
-  skill: z.object({
-    name: z.string(),
-    description: z.string(),
-  }),
-  support: z.object({
-    name: z.string(),
-    description: z.string(),
-  }),
-  legendary: z.string().optional(),
-  labels: z.array(z.string()),
+  full_name: z.string().readonly(),
+  kind: z
+    .enum([
+      '通常単体',
+      '通常範囲',
+      '特殊単体',
+      '特殊範囲',
+      '支援',
+      '妨害',
+      '回復',
+    ])
+    .readonly(),
+  element: z.enum(['火', '水', '風', '光', '闇']).readonly(),
+  status: z
+    .tuple([
+      statusSchema,
+      statusSchema,
+      statusSchema,
+      statusSchema,
+      statusSchema,
+    ])
+    .readonly(),
+  cost: z.number().readonly(),
+  skill: z
+    .object({
+      name: z.string().readonly(),
+      description: z.string().readonly(),
+    })
+    .readonly(),
+  support: z
+    .object({
+      name: z.string().readonly(),
+      description: z.string().readonly(),
+    })
+    .readonly(),
+  legendary: z.string().optional().readonly(),
+  labels: z.array(z.string()).readonly(),
 });
 
 /**
