@@ -23,6 +23,7 @@ import {
   ReplyOutlined,
   SearchOutlined,
   Share,
+  Close
 } from '@mui/icons-material';
 import {
   AppBar,
@@ -95,7 +96,6 @@ import Toolbar from '@mui/material/Toolbar';
 import { useTheme } from '@mui/material/styles';
 import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
-import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon';
 import { Virtuoso } from 'react-virtuoso';
 import { match } from 'ts-pattern';
 import { parseSkill } from '@/parser/skill';
@@ -1002,7 +1002,7 @@ function VirtualizedList() {
               onClick={onDialogClose}
               aria-label='close'
             >
-              <CloseIcon />
+              <Close />
             </IconButton>
 
             <Typography sx={{ ml: 2, flex: 1 }} variant='h6' component='div'>
