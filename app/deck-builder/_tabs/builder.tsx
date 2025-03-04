@@ -37,7 +37,6 @@ import {
   DialogContent,
   Divider,
   FormControl,
-  FormControlLabel,
   Grid2 as Grid,
   IconButton,
   ImageListItem,
@@ -49,7 +48,6 @@ import {
   Select,
   Skeleton,
   Stack,
-  Switch,
   Tooltip,
   Typography,
   alpha,
@@ -1151,27 +1149,23 @@ function ToggleButtons() {
   const [, setCompare] = useAtom(compareModeAtom);
 
   return (
-    <FormControlLabel
-      control={<Switch checked={sw === 'shield'} />}
-      label='前衛 <=> 後衛'
-      onChange={() => {
-        if (sw === 'shield') {
-          setSw('sword');
-          setRoleFilter([
-            'normal_single',
-            'normal_range',
-            'special_single',
-            'special_range',
-          ]);
-        } else {
-          setSw('shield');
-          setRoleFilter(['support', 'interference', 'recovery']);
-        }
-        setDeck([]);
-        setLegendaryDeck([]);
-        setCompare(undefined);
-      }}
-    />
+    <Button onClick={() => {
+      if (sw === 'shield') {
+        setSw('sword');
+        setRoleFilter([
+          'normal_single',
+          'normal_range',
+          'special_single',
+          'special_range',
+        ]);
+      } else {
+        setSw('shield');
+        setRoleFilter(['support', 'interference', 'recovery']);
+      }
+      setDeck([]);
+      setLegendaryDeck([]);
+      setCompare(undefined);
+    }}>{sw === 'shield' ? '後衛' : '前衛'}</Button>
   );
 }
 
