@@ -60,13 +60,13 @@ importers:
         specifier: 1.9.0
         version: 1.9.0
       '@opentelemetry/api-logs':
-        specifier: ^0.57.2
+        specifier: 0.57.2
         version: 0.57.2
       '@opentelemetry/resources':
         specifier: 1.30.1
         version: 1.30.1(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-logs':
-        specifier: ^0.57.2
+        specifier: 0.57.2
         version: 0.57.2(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-node':
         specifier: 0.57.2
@@ -161,9 +161,6 @@ importers:
       ts-pattern:
         specifier: 5.6.2
         version: 5.6.2
-      unindent:
-        specifier: ^2.0.0
-        version: 2.0.0
       unist-util-visit:
         specifier: 5.0.0
         version: 5.0.0
@@ -187,10 +184,10 @@ importers:
         specifier: 16.2.0
         version: 16.2.0(@testing-library/dom@10.4.0)(@types/react-dom@19.0.4(@types/react@19.0.10))(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tsconfig/node22':
-        specifier: ^22.0.0
+        specifier: 22.0.0
         version: 22.0.0
       '@tsconfig/recommended':
-        specifier: ^1.0.8
+        specifier: 1.0.8
         version: 1.0.8
       '@tsconfig/strictest':
         specifier: 2.0.5
@@ -4423,9 +4420,6 @@ packages:
 
   unified@11.0.5:
     resolution: {integrity: sha512-xKvGhPWw3k84Qjh8bI3ZeJjqnyadK+GEFtazSfZv/rKeTkTjOJho6mFqh2SM96iIcZokxiOpg78GazTSg8+KHA==}
-
-  unindent@2.0.0:
-    resolution: {integrity: sha512-Mo5gKmshwTR3b2BwCSMish/UuwTqP5W7TIRa88HQTydH+07HhkOCE1P6HZ4lSxJS5klEqXFnhlZSxkxbBOMk4Q==}
 
   unist-util-is@6.0.0:
     resolution: {integrity: sha512-2qCTHimwdxLfz+YzdGfkqNlH0tLi9xjTnHddPmJwtIG9MGsdbutfTc4P+haPD7l7Cjxf/WZj+we5qfVPvvxfYw==}
@@ -9723,8 +9717,6 @@ snapshots:
       is-plain-obj: 4.1.0
       trough: 2.2.0
       vfile: 6.0.3
-
-  unindent@2.0.0: {}
 
   unist-util-is@6.0.0:
     dependencies:
