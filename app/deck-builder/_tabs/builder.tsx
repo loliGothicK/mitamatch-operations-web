@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { type MouseEvent, Suspense, useEffect, useState } from 'react';
 import DifferenceIcon from '@mui/icons-material/Difference';
 import type { Unit } from '@/domain/types';
-import { generateShortLink, getShortLink } from '@/app/actions';
+import {generateShortLink, getShortLink, saveShortLink} from '@/app/actions';
 
 import {
   Add,
@@ -1393,6 +1393,7 @@ function ShareButton() {
                 handleClick('short');
                 const hash = await generateShortLink({ base64 });
                 setUrl(`https://mitama.io/deck-builder?deck=${hash}`);
+                await saveShortLink({ base64, hash });
               }}
             >
               {'short link'}

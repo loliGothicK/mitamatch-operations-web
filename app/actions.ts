@@ -16,8 +16,10 @@ const adapter = new PrismaNeon(pool);
 const prisma = new PrismaClient({ adapter });
 
 export async function generateShortLink(data: { base64: string }) {
-  const hash = crypto.createHash('md5').update(data.base64).digest('hex');
+  return crypto.createHash('md5').update(data.base64).digest('hex');
+}
 
+export async function saveShortLink({ base64, hash }: { base64: string; hash: string; }) {
   const found = await prisma.shortUrl.findUnique({
     where: {
       shortUrl: hash,
@@ -28,14 +30,12 @@ export async function generateShortLink(data: { base64: string }) {
     return found.shortUrl;
   }
 
-  await prisma.shortUrl.create({
+  return await prisma.shortUrl.create({
     data: {
-      url: data.base64,
+      url: base64,
       shortUrl: hash,
     },
   });
-
-  return hash;
 }
 
 export async function getShortLink(data: {
