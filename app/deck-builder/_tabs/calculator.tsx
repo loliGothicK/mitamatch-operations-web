@@ -16,7 +16,6 @@ import {
   statusAtom,
   swAtom,
 } from '@/jotai/memoriaAtoms';
-import { type StatusKind, statusKind } from '@/parser/skill';
 import {
   Autocomplete,
   Button,
@@ -44,6 +43,7 @@ import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { Settings } from '@mui/icons-material';
 import { useState } from 'react';
+import { statusKind, type StatusKind } from '@/parser/common';
 const charmFilterAtom = atomWithStorage<('火' | '水' | '風')[]>(
   'charmFilter',
   [],
@@ -568,8 +568,8 @@ export function Calculator() {
                 <CardMedia
                   component='img'
                   sx={{ width: 100, height: 100 }}
-                  image={`/memoria/${memoria.name}.png`}
-                  alt={memoria.name}
+                  image={`/memoria/${memoria.name.short}.png`}
+                  alt={memoria.name.short}
                 />
                 <CardContent
                   sx={{

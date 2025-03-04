@@ -37,7 +37,14 @@ const encodedUnit = z.object({
 
 type EncodedUnit = z.infer<typeof encodedUnit>;
 
-const atobSafe = fromThrowable(atob, e => `Error in \`atob\`: \n\n${e}`);
+const atobSafe = fromThrowable(
+  atob,
+  e => outdent`
+    Error in \`atob\`:
+    
+    ${e}
+  `,
+);
 const jsonParseSafe = fromThrowable(
   JSON.parse,
   e => outdent`

@@ -145,11 +145,12 @@ function OtherSkillCheckbox() {
               name={match(flag)
                 .with('heal', () => 'ヒール')
                 .with('counter', () => 'カウンター')
+                .with('s-counter', () => 'Sカウンター')
                 .with('charge', () => 'チャージ')
-                .with('Meteor', () => 'メテオ')
-                .with('Barrier', () => 'バリア')
-                .with('ANiMA', () => 'アニマ')
-                .with('Eden', () => 'エデン')
+                .with('meteor', () => 'メテオ')
+                .with('barrier', () => 'バリア')
+                .with('anima', () => 'アニマ')
+                .with('eden', () => 'エデン')
                 .exhaustive()}
               checked={filter.includes(flag)}
               handleChange={() => {

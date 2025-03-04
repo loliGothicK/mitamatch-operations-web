@@ -2,7 +2,7 @@ import type { Charm } from '@/domain/charm/charm';
 import type { Costume } from '@/domain/costume/costume';
 import { evaluate, type StackOption } from '@/evaluate/evaluate';
 import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
-import { type StatusKind, statusKind } from '@/parser/skill';
+import { statusKind, type StatusKind } from '@/parser/common';
 
 export function calcFinalStatus(
   deck: MemoriaWithConcentration[],

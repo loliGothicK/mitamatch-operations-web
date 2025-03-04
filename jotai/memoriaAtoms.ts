@@ -1,8 +1,7 @@
 import { atom } from 'jotai';
 
-import { type Memoria, memoriaList } from '@/domain/memoria/memoria';
-import { parseSkill } from '@/parser/skill';
-import { parseSupport } from '@/parser/support';
+import type { Memoria, MemoriaId } from '@/domain/memoria/memoria';
+import { memoriaList } from '@/domain/memoria/memoria';
 import {
   type ElementFilterType,
   type RoleFilterType,
@@ -25,10 +24,12 @@ import { encodeDeck } from '@/actions/serde';
 import { charmList } from '@/domain/charm/charm';
 import { costumeList } from '@/domain/costume/costume';
 import Cookies from 'js-cookie';
-import { match } from 'ts-pattern';
+import { match, P } from 'ts-pattern';
+import { Lenz } from '@/domain/memoria/lens';
+import { isStackEffect } from '@/parser/skill';
 
-export const targetBeforeAtom = atom<Memoria['id'][]>([]);
-export const targetAfterAtom = atom<Memoria['id'][]>([]);
+export const targetBeforeAtom = atom<MemoriaId[]>([]);
+export const targetAfterAtom = atom<MemoriaId[]>([]);
 export const compareModeAtom = atom<MemoriaWithConcentration | undefined>(
   undefined,
 );
@@ -40,8 +41,7 @@ export const charmAtom = atom(charmList.reverse()[0]);
 export const costumeAtom = atom(costumeList.reverse()[0]);
 export const defAtom = atom(400_000);
 export const spDefAtom = atom(400_000);
-/// [230_148, 243_832, 231_548, 236_140]
-export const statusAtom = atom([163_172, 177_032, 178_994, 183_643] as [
+export const statusAtom = atom([200_000, 200_000, 200_000, 200_000] as [
   number,
   number,
   number,
@@ -165,78 +165,80 @@ export const filteredMemoriaAtom = atom(get => {
         return memoria.labels.includes(filter);
       });
 
-      const skill = parseSkill(memoria.skill.name, memoria.skill.description);
-
       const basicStatus = get(basicStatusFilterAtom).every(filter => {
-        return skill.effects.some(x => {
-          return (
-            x.status === filter.status &&
-            (filter.upDown === 'UP' ? x.type === 'buff' : x.type === 'debuff')
-          );
-        });
+        return Lenz.skill.effects.get(memoria).some(eff =>
+          match(eff)
+            .with({ status: filter.status }, ({ type }) =>
+              match(filter.upDown)
+                .with('UP', () => type === 'buff')
+                .with('DOWN', () => type === 'debuff')
+                .exhaustive(),
+            )
+            .otherwise(() => false),
+        );
       });
 
       const elementStatus = get(elementStatusFilterAtom).every(filter => {
-        return skill.effects.some(x => {
-          return (
-            x.status === filter.status &&
-            (filter.upDown === 'UP' ? x.type === 'buff' : x.type === 'debuff')
-          );
-        });
+        return Lenz.skill.effects.get(memoria).some(eff =>
+          match(eff)
+            .with({ status: filter.status }, ({ type }) =>
+              match(filter.upDown)
+                .with('UP', () => type === 'buff')
+                .with('DOWN', () => type === 'debuff')
+                .exhaustive(),
+            )
+            .otherwise(() => false),
+        );
       });
 
       const otherSkill = get(otherSkillFilterAtom).every(filter => {
-        if (
-          filter === 'Meteor' ||
-          filter === 'ANiMA' ||
-          filter === 'Barrier' ||
-          filter === 'Eden'
-        ) {
-          return skill.effects.some(x => x.stack?.type === filter);
-        }
-        return skill.kinds?.some(x => {
-          return typeof x === 'string' && typeof filter === 'string'
-            ? x === filter
-            : typeof x !== 'string' && typeof filter !== 'string'
-              ? x.element === filter.element && x.kind === filter.kind
-              : false;
-        });
+        return match(filter)
+          .with(P.union('anima', 'barrier', 'meteor', 'eden'), filter =>
+            Lenz.skill.effects.get(memoria).some(isStackEffect(filter)),
+          )
+          .with(
+            P.union('heal', 'charge', 'counter', 's-counter'),
+            filter =>
+              !!Lenz.skill.kinds.get(memoria)?.some(kind => kind === filter),
+          )
+          .otherwise(({ element, kind }) =>
+            Lenz.skill.kinds.get(memoria)?.some(k =>
+              match(k)
+                .with({ element, kind }, () => true)
+                .otherwise(() => false),
+            ),
+          );
       });
-
-      const support = parseSupport(
-        memoria.support.name,
-        memoria.support.description,
-      );
 
       const vanguardSupport = get(vanguardSupportFilterAtom).every(filter => {
         if (typeof filter === 'string') {
-          return support.effects.some(x => x.type === filter);
+          return Lenz.support.effects.get(memoria).some(x => x.type === filter);
         }
-        return support.effects.some(x => {
+        return Lenz.support.effects.get(memoria).some(x => {
           return x.status === filter.status && x.type === filter.upDown;
         });
       });
 
       const assistSupport = get(assistSupportFilterAtom).every(filter => {
         if (typeof filter === 'string') {
-          return support.effects.some(x => x.type === filter);
+          return Lenz.support.effects.get(memoria).some(x => x.type === filter);
         }
-        return support.effects.some(x => {
+        return Lenz.support.effects.get(memoria).some(x => {
           return x.status === filter.status && x.type === filter.upDown;
         });
       });
 
       const recoverySupport = get(recoverySupportFilterAtom).every(filter => {
         if (typeof filter === 'string') {
-          return support.effects.some(x => x.type === filter);
+          return Lenz.support.effects.get(memoria).some(x => x.type === filter);
         }
-        return support.effects.some(x => {
+        return Lenz.support.effects.get(memoria).some(x => {
           return x.status === filter.status && x.type === filter.upDown;
         });
       });
 
       const otherSupport = get(otherSupportFilterAtom).every(filter => {
-        return support.effects.some(x => {
+        return Lenz.support.effects.get(memoria).some(x => {
           return x.type === filter;
         });
       });
@@ -253,14 +255,14 @@ export const filteredMemoriaAtom = atom(get => {
         assistSupport &&
         recoverySupport &&
         otherSupport &&
-        !get(rwDeckAtom).some(({ name }) => memoria.name === name) &&
-        !get(rwLegendaryDeckAtom).some(({ name }) => memoria.name === name)
+        !get(rwDeckAtom).some(({ name }) => Lenz.memoria.shortName.get(memoria) === name.short) &&
+        !get(rwLegendaryDeckAtom).some(({ name }) => Lenz.memoria.shortName.get(memoria) === name.short)
       );
     })
     .sort((a, b) => {
       return match(get(sortKindAtom))
         .with('ID', () => b.id - a.id)
-        .with('NAME', () => a.name.localeCompare(b.name))
+        .with('NAME', () => a.name.short.localeCompare(b.name.short))
         .with('ATK', () => b.status[4][0] - a.status[4][0])
         .with('Sp.ATK', () => b.status[4][1] - a.status[4][1])
         .with('DEF', () => b.status[4][2] - b.status[4][1])

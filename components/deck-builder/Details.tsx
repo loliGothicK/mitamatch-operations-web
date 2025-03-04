@@ -6,19 +6,18 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid2';
 import Typography from '@mui/material/Typography';
 
-import type { Memoria } from '@/domain/memoria/memoria';
 import { rwDeckAtom, rwLegendaryDeckAtom } from '@/jotai/memoriaAtoms';
 import {
-  type StatusKind,
-  parseSkill,
-  stackEffect,
-  statusKind,
+  isBuffEffect,
+  isDebuffEffect,
+  isStackEffect,
+  stackKinds,
 } from '@/parser/skill';
-import { type SupportKind, parseSupport } from '@/parser/support';
+import type { SupportKind } from '@/parser/support';
 import { elementFilter, elementFilterMap } from '@/types/filterType';
 
-import { Lens } from 'monocle-ts';
 import { match } from 'ts-pattern';
+import { statusKind, type StatusKind } from '@/parser/common';
 
 type UpDown = 'UP' | 'DOWN';
 type StatusPattern = `${StatusKind}/${UpDown}`;
@@ -58,13 +57,13 @@ export function statusPatternToJapanese(pattern: StatusPattern): string {
 }
 
 export function stackPatternToJapanese(
-  pattern: (typeof stackEffect)[number],
+  pattern: (typeof stackKinds)[number],
 ): string {
   return match(pattern)
-    .with('Eden', () => 'エデン')
-    .with('Barrier', () => 'バリア')
-    .with('ANiMA', () => 'アニマ')
-    .with('Meteor', () => 'メテオ')
+    .with('eden', () => 'エデン')
+    .with('barrier', () => 'バリア')
+    .with('anima', () => 'アニマ')
+    .with('meteor', () => 'メテオ')
     .exhaustive();
 }
 
@@ -156,25 +155,17 @@ export default function Details() {
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
 
-  const skillName = Lens.fromPath<Memoria>()(['skill', 'name']);
-  const skillDescription = Lens.fromPath<Memoria>()(['skill', 'description']);
-  const supportName = Lens.fromPath<Memoria>()(['support', 'name']);
-  const supportDescription = Lens.fromPath<Memoria>()([
-    'support',
-    'description',
-  ]);
-  const skills = deck.concat(legendaryDeck).map(memoria => {
-    return parseSkill(skillName.get(memoria), skillDescription.get(memoria));
-  });
+  const skills = deck
+    .concat(legendaryDeck)
+    .map(memoria => memoria.skills.skill);
 
   const skillAggregate = new Map<StatusPattern, number>();
   for (const pattern of skills.flatMap(skill => {
     return skill.effects
-      .filter(eff => eff.status !== undefined)
+      .filter(eff => isBuffEffect(eff) || isDebuffEffect(eff))
       .map(eff => {
         return intoStatusPattern({
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          status: eff.status!,
+          status: eff.status,
           upDown: eff.type === 'buff' ? 'UP' : 'DOWN',
         });
       });
@@ -182,12 +173,9 @@ export default function Details() {
     skillAggregate.set(pattern, (skillAggregate.get(pattern) || 0) + 1);
   }
 
-  const supports = [...deck, ...legendaryDeck].map(memoria => {
-    return parseSupport(
-      supportName.get(memoria),
-      supportDescription.get(memoria),
-    );
-  });
+  const supports = [...deck, ...legendaryDeck].map(
+    memoria => memoria.skills.support,
+  );
 
   const supportAggregate = new Map<SupportPattern, number>();
   for (const pattern of supports.flatMap(support => {
@@ -212,14 +200,12 @@ export default function Details() {
     kindAggregate.set(kind, (kindAggregate.get(kind) || 0) + 1);
   }
 
-  const stackAggregate = new Map<(typeof stackEffect)[number], number>();
-  for (const pattern of skills.flatMap(skill => {
-    return skill.effects
-      .map(eff => eff.stack)
-      .filter(stack => stack !== undefined);
-  })) {
-    const { type, times } = pattern;
-    stackAggregate.set(type, (stackAggregate.get(type) || 0) + times);
+  const stackAggregate = new Map<(typeof stackKinds)[number], number>();
+  for (const pattern of skills.flatMap(skill =>
+    skill.effects.filter(isStackEffect()),
+  )) {
+    const { kind, times } = pattern;
+    stackAggregate.set(kind, (stackAggregate.get(kind) || 0) + times);
   }
 
   return (
@@ -260,7 +246,7 @@ export default function Details() {
         {supportAggregate.size === 0 ? (
           <></>
         ) : (
-          stackEffect
+          stackKinds
             .filter(pattern => stackAggregate.get(pattern) !== undefined)
             .map(pattern => {
               return (

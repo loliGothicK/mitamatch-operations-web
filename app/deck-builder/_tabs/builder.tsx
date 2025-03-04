@@ -23,7 +23,7 @@ import {
   ReplyOutlined,
   SearchOutlined,
   Share,
-  Close
+  Close,
 } from '@mui/icons-material';
 import {
   AppBar,
@@ -98,7 +98,8 @@ import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Virtuoso } from 'react-virtuoso';
 import { match } from 'ts-pattern';
-import { parseSkill } from '@/parser/skill';
+import { Lenz } from '@/domain/memoria/lens';
+import { isStackEffect } from '@/parser/skill';
 
 function Icon({
   kind,
@@ -219,7 +220,7 @@ function MemoriaItem({
   readonly disable?: true;
   readonly priority?: boolean;
 }) {
-  const { name, id, skill, support, concentration } = memoria;
+  const { name, id, concentration } = memoria;
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [concentrationValue, setConcentration] = useState(concentration);
@@ -258,7 +259,7 @@ function MemoriaItem({
 
   const changeValue = (prev: MemoriaWithConcentration[]) => {
     return prev.map(memoria => {
-      if (memoria.name === name) {
+      if (memoria.name.short === name.short) {
         return {
           ...memoria,
           concentration: concentrationValue > 0 ? concentrationValue - 1 : 4,
@@ -314,17 +315,21 @@ function MemoriaItem({
             <Tooltip
               title={
                 <Stack>
-                  <Typography variant='h6'>{name}</Typography>
-                  <Typography variant='body2'>{skill.name}</Typography>
-                  <Typography variant='body2'>{support.name}</Typography>
+                  <Typography variant='h6'>{name.short}</Typography>
+                  <Typography variant='body2'>
+                    {Lenz.skill.name.get(memoria)}
+                  </Typography>
+                  <Typography variant='body2'>
+                    {Lenz.support.name.get(memoria)}
+                  </Typography>
                 </Stack>
               }
               placement={'top'}
               arrow
             >
               <Image
-                src={`/memoria/${name}.png`}
-                alt={name}
+                src={`/memoria/${name.short}.png`}
+                alt={name.short}
                 width={100}
                 height={100}
                 onLoad={() => {
@@ -357,10 +362,14 @@ function MemoriaItem({
                       aria-label={`remove ${name}`}
                       onClick={() => {
                         setDeck(prev =>
-                          prev.filter(memoria => memoria.name !== name),
+                          prev.filter(
+                            memoria => memoria.name.short !== name.short,
+                          ),
                         );
                         setLegendaryDeck(prev =>
-                          prev.filter(memoria => memoria.name !== name),
+                          prev.filter(
+                            memoria => memoria.name.short !== name.short,
+                          ),
                         );
                       }}
                     >
@@ -562,9 +571,11 @@ export default function MultipleSelect({
         ? value
             .split(',')
             // biome-ignore lint/style/noNonNullAssertion: <explanation>
-            .map(name => unit.find(memoria => memoria.name === name)!.id)
-        : // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          value.map(name => unit.find(memoria => memoria.name === name)!.id),
+            .map(name => unit.find(memoria => memoria.name.short === name)!.id)
+        : value.map(
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            name => unit.find(memoria => memoria.name.short === name)!.id,
+          ),
     );
     setPersonName(
       // On autofill, we get a stringified value.
@@ -586,16 +597,17 @@ export default function MultipleSelect({
         >
           {targets.map(memoria => (
             <MenuItem
-              key={memoria.name}
-              value={memoria.name}
+              key={memoria.name.short}
+              value={memoria.name.short}
               disabled={
                 !(
-                  personName.length < times || personName.includes(memoria.name)
+                  personName.length < times ||
+                  personName.includes(memoria.name.short)
                 )
               }
-              style={getStyles(memoria.name, personName, theme)}
+              style={getStyles(memoria.name.short, personName, theme)}
             >
-              {memoria.name}
+              {memoria.name.short}
             </MenuItem>
           ))}
         </Select>
@@ -632,40 +644,32 @@ function Compare({
 
   const [stackRateBefore, stackTimesBefore] = match(sw)
     .with('sword', () => {
-      const stack = parseSkill(
-        compare.skill.name,
-        compare.skill.description,
-      ).effects.find(eff => eff.stack?.type === 'Meteor')?.stack;
+      const stack = Lenz.skill.effects
+        .get(compare)
+        .find(isStackEffect('meteor'));
 
       return [stack?.rate, stack?.times];
     })
     .with('shield', () => {
-      const stack = parseSkill(
-        compare.skill.name,
-        compare.skill.description,
-      ).effects.find(
-        eff => eff.stack?.type === 'Eden' || eff.stack?.type === 'ANiMA',
-      )?.stack;
+      const stack = Lenz.skill.effects
+        .get(compare)
+        .find(eff => isStackEffect('eden')(eff) || isStackEffect('anima')(eff));
 
       return [stack?.rate, stack?.times];
     })
     .exhaustive();
   const [stackRateAfter, stackTimesAfter] = match(sw)
     .with('sword', () => {
-      const stack = parseSkill(
-        candidate.skill.name,
-        candidate.skill.description,
-      ).effects.find(eff => eff.stack?.type === 'Meteor')?.stack;
+      const stack = Lenz.skill.effects
+        .get(compare)
+        .find(isStackEffect('meteor'));
 
       return [stack?.rate, stack?.times];
     })
     .with('shield', () => {
-      const stack = parseSkill(
-        candidate.skill.name,
-        candidate.skill.description,
-      ).effects.find(
-        eff => eff.stack?.type === 'Eden' || eff.stack?.type === 'ANiMA',
-      )?.stack;
+      const stack = Lenz.skill.effects
+        .get(compare)
+        .find(eff => isStackEffect('eden')(eff) || isStackEffect('anima')(eff));
 
       return [stack?.rate, stack?.times];
     })
@@ -749,12 +753,12 @@ function Compare({
                 />
               </Grid>
               <Stack direction={'column'} paddingLeft={5}>
-                <Typography variant='body2'>{`${compare?.name}`}</Typography>
-                <Typography variant='body2'>{`${compare.skill.name}`}</Typography>
-                <Typography variant='body2'>{`${compare.support.name}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.memoria.shortName.get(compare)}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.skill.name.get(compare)}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.support.name.get(compare)}`}</Typography>
               </Stack>
             </Stack>
-            {compare.skill.description.includes('スタック') ? (
+            {Lenz.skill.description.get(compare).includes('スタック') ? (
               <MultipleSelect
                 // biome-ignore lint/style/noNonNullAssertion: <explanation>
                 times={stackTimesBefore!}
@@ -782,12 +786,12 @@ function Compare({
                 />
               </Grid>
               <Stack direction={'column'} paddingLeft={5}>
-                <Typography variant='body2'>{`${candidate?.name}`}</Typography>
-                <Typography variant='body2'>{`${candidate.skill.name}`}</Typography>
-                <Typography variant='body2'>{`${candidate.support.name}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.memoria.shortName.get(candidate)}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.skill.name.get(candidate)}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.support.name.get(candidate)}`}</Typography>
               </Stack>
             </Stack>
-            {candidate.skill.description.includes('スタック') ? (
+            {Lenz.skill.description.get(candidate).includes('スタック') ? (
               <MultipleSelect
                 // biome-ignore lint/style/noNonNullAssertion: <explanation>
                 times={stackTimesAfter!}
@@ -949,12 +953,12 @@ function VirtualizedList() {
                 element={memoria[index].element}
                 position={70}
               />
-              <Tooltip title={memoria[index].name} placement={'top'}>
+              <Tooltip title={memoria[index].name.short} placement={'top'}>
                 <CardMedia
                   component='img'
                   sx={{ width: 100, height: 100 }}
-                  image={`/memoria/${memoria[index].name}.png`}
-                  alt={memoria[index].name}
+                  image={`/memoria/${memoria[index].name.short}.png`}
+                  alt={memoria[index].name.short}
                 />
               </Tooltip>
               <CardContent>
@@ -966,7 +970,7 @@ function VirtualizedList() {
                     sx={{ display: 'block' }}
                     color='text.primary'
                   >
-                    {memoria[index].skill.name}
+                    {Lenz.skill.name.get(memoria[index])}
                   </Typography>
                   <Divider sx={{ margin: 1 }} />
                   <Typography
@@ -976,14 +980,14 @@ function VirtualizedList() {
                     sx={{ display: 'block' }}
                     color='text.primary'
                   >
-                    {memoria[index].support.name}
+                    {Lenz.support.name.get(memoria[index])}
                   </Typography>
                 </Stack>
               </CardContent>
 
               <IconButton sx={{ position: 'absolute', right: 0 }}>
                 <Link
-                  href={`https://allb.game-db.tw/memoria/${memoria[index].link}`}
+                  href={`https://allb.game-db.tw/memoria/${memoria[index].name.link}`}
                   target={'_blank'}
                 >
                   <Launch />
@@ -1012,7 +1016,7 @@ function VirtualizedList() {
               <Checkbox
                 disabled={
                   ![compare, candidate].some(m =>
-                    m?.skill.description.includes('スタック'),
+                    m?.skills.skill.raw.description.includes('スタック'),
                   )
                 }
                 icon={<ReplyOutlined style={{ transform: 'rotate(90deg)' }} />}
@@ -1024,7 +1028,7 @@ function VirtualizedList() {
               <Checkbox
                 disabled={
                   ![compare, candidate].some(m =>
-                    m?.skill.description.includes('スタック'),
+                    m?.skills.skill.raw.description.includes('スタック'),
                   )
                 }
                 icon={<LayersOutlined />}

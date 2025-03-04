@@ -1,8 +1,8 @@
 'use client';
 
 import { Layout } from '@/components/Layout';
-import type { Memoria } from '@/domain/memoria/memoria';
-import { costAtom, memoriaDataAtom } from '@/jotai/dataAtoms';
+import { type Memoria, memoriaList } from '@/domain/memoria/memoria';
+import { costAtom } from '@/jotai/dataAtoms';
 import {
   Box,
   Button,
@@ -27,6 +27,8 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import { useState } from 'react';
+import { Lenz } from '@/domain/memoria/lens';
+import { isBuffEffect, isDebuffEffect } from '@/parser/skill';
 
 const chartSetting = {
   width: 500,
@@ -39,61 +41,78 @@ const chartSetting = {
 const valueFormatter = (value: number | null) => `${value}枚`;
 
 function HealDataset() {
-  const [memoriaData] = useAtom(memoriaDataAtom);
   const [data, setData] = useState<[Memoria[], Memoria[]]>([[], []]);
   const map = ['Fire DEF', 'Water DEF', 'Wind DEF'];
   const healDataset = [
     {
       id: 'fireHeal',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '回復' &&
-          m.skillData.effects.some(eff => eff.type === 'heal') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'DEF'),
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Fire DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'DEF'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '回復' &&
-          m.skillData.effects.some(eff => eff.type === 'heal') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Fire DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Sp.DEF'),
       ).length,
       month: '火防',
     },
     {
       id: 'waterHeal',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '回復' &&
-          m.skillData.effects.some(eff => eff.type === 'heal') &&
-          m.skillData.effects.some(eff => eff.status === 'Water DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'DEF'),
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Water DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'DEF'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '回復' &&
-          m.skillData.effects.some(eff => eff.type === 'heal') &&
-          m.skillData.effects.some(eff => eff.status === 'Water DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Water DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Sp.DEF'),
       ).length,
       month: '水防',
     },
     {
       id: 'windHeal',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '回復' &&
-          m.skillData.effects.some(eff => eff.type === 'heal') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'DEF'),
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Wind DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'DEF'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '回復' &&
-          m.skillData.effects.some(eff => eff.type === 'heal') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Wind DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Sp.DEF'),
       ).length,
       month: '風防',
     },
@@ -132,23 +151,33 @@ function HealDataset() {
           ]}
           {...chartSetting}
           onItemClick={(_, id) => {
-            const normal = memoriaData.filter(
+            const normal = memoriaList.filter(
               m =>
                 m.kind === '回復' &&
-                m.skillData.effects.some(eff => eff.type === 'heal') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'DEF'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'heal') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isBuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isBuffEffect(eff) && eff.status === 'DEF'),
             );
-            const special = memoriaData.filter(
+            const special = memoriaList.filter(
               m =>
                 m.kind === '回復' &&
-                m.skillData.effects.some(eff => eff.type === 'heal') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'heal') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isBuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isBuffEffect(eff) && eff.status === 'Sp.DEF'),
             );
             setData([normal, special]);
             handleClickOpen();
@@ -169,23 +198,29 @@ function HealDataset() {
             <Grid>
               {data[0].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
-                    key={m.name}
+                    key={Lenz.memoria.shortName.get(m)}
                   />
                 </Tooltip>
               ))}
@@ -197,20 +232,26 @@ function HealDataset() {
             <Grid>
               {data[1].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
                   />
@@ -228,61 +269,84 @@ function HealDataset() {
 }
 
 function AssistDataset() {
-  const [memoriaData] = useAtom(memoriaDataAtom);
   const [data, setData] = useState<[Memoria[], Memoria[]]>([[], []]);
   const map = ['Fire ATK', 'Water ATK', 'Wind ATK'];
   const assistDataset = [
     {
       id: 'fireAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '支援' &&
-          m.skillData.effects.some(eff => eff.type === 'buff') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'buff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Fire ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'ATK'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '支援' &&
-          m.skillData.effects.some(eff => eff.type === 'buff') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'buff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Fire ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Sp.ATK'),
       ).length,
       month: '火攻',
     },
     {
       id: 'waterAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '支援' &&
-          m.skillData.effects.some(eff => eff.type === 'buff') &&
-          m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'buff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Water ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'ATK'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '支援' &&
-          m.skillData.effects.some(eff => eff.type === 'buff') &&
-          m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'buff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Water ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Sp.ATK'),
       ).length,
       month: '水攻',
     },
     {
       id: 'windAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '支援' &&
-          m.skillData.effects.some(eff => eff.type === 'buff') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'buff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Wind ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'ATK'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '支援' &&
-          m.skillData.effects.some(eff => eff.type === 'buff') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'buff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Wind ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Sp.ATK'),
       ).length,
       month: '風攻',
     },
@@ -321,23 +385,33 @@ function AssistDataset() {
           ]}
           {...chartSetting}
           onItemClick={(_, id) => {
-            const normal = memoriaData.filter(
+            const normal = memoriaList.filter(
               m =>
                 m.kind === '支援' &&
-                m.skillData.effects.some(eff => eff.type === 'buff') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'ATK'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'buff') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isBuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isBuffEffect(eff) && eff.status === 'ATK'),
             );
-            const special = memoriaData.filter(
+            const special = memoriaList.filter(
               m =>
                 m.kind === '支援' &&
-                m.skillData.effects.some(eff => eff.type === 'buff') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'buff') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isBuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isBuffEffect(eff) && eff.status === 'Sp.ATK'),
             );
             setData([normal, special]);
             handleClickOpen();
@@ -358,23 +432,29 @@ function AssistDataset() {
             <Grid>
               {data[0].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
-                    key={m.name}
+                    key={Lenz.memoria.shortName.get(m)}
                   />
                 </Tooltip>
               ))}
@@ -386,20 +466,26 @@ function AssistDataset() {
             <Grid>
               {data[1].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
                   />
@@ -417,61 +503,84 @@ function AssistDataset() {
 }
 
 function InterferenceDataset() {
-  const [memoriaData] = useAtom(memoriaDataAtom);
   const [data, setData] = useState<[Memoria[], Memoria[]]>([[], []]);
   const map = ['Fire ATK', 'Water ATK', 'Wind ATK'];
-  const assistDataset = [
+  const interferebceDataset = [
     {
-      id: 'fireAssist',
-      normal: memoriaData.filter(
+      id: 'fireInterference',
+      normal: memoriaList.filter(
         m =>
           m.kind === '妨害' &&
-          m.skillData.effects.some(eff => eff.type === 'debuff') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'debuff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Fire ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'ATK'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '妨害' &&
-          m.skillData.effects.some(eff => eff.type === 'debuff') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'debuff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Fire ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Sp.ATK'),
       ).length,
       month: '火攻',
     },
     {
       id: 'waterAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '妨害' &&
-          m.skillData.effects.some(eff => eff.type === 'debuff') &&
-          m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'debuff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Water ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'ATK'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '妨害' &&
-          m.skillData.effects.some(eff => eff.type === 'debuff') &&
-          m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'debuff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Water ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Sp.ATK'),
       ).length,
       month: '水攻',
     },
     {
       id: 'windAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '妨害' &&
-          m.skillData.effects.some(eff => eff.type === 'debuff') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'debuff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Wind ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'ATK'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '妨害' &&
-          m.skillData.effects.some(eff => eff.type === 'debuff') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'debuff') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Wind ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Sp.ATK'),
       ).length,
       month: '風攻',
     },
@@ -502,7 +611,7 @@ function InterferenceDataset() {
       >
         <Typography>{'属攻妨害'}</Typography>
         <BarChart
-          dataset={assistDataset}
+          dataset={interferebceDataset}
           xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
           series={[
             { dataKey: 'normal', label: '通常', valueFormatter },
@@ -510,23 +619,33 @@ function InterferenceDataset() {
           ]}
           {...chartSetting}
           onItemClick={(_, id) => {
-            const normal = memoriaData.filter(
+            const normal = memoriaList.filter(
               m =>
                 m.kind === '妨害' &&
-                m.skillData.effects.some(eff => eff.type === 'debuff') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'ATK'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'debuff') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isDebuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isDebuffEffect(eff) && eff.status === 'ATK'),
             );
-            const special = memoriaData.filter(
+            const special = memoriaList.filter(
               m =>
                 m.kind === '妨害' &&
-                m.skillData.effects.some(eff => eff.type === 'debuff') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'debuff') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isDebuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isDebuffEffect(eff) && eff.status === 'Sp.ATK'),
             );
             setData([normal, special]);
             handleClickOpen();
@@ -547,23 +666,29 @@ function InterferenceDataset() {
             <Grid>
               {data[0].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
-                    key={m.name}
+                    key={Lenz.memoria.shortName.get(m)}
                   />
                 </Tooltip>
               ))}
@@ -575,20 +700,26 @@ function InterferenceDataset() {
             <Grid>
               {data[1].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
                   />
@@ -606,55 +737,78 @@ function InterferenceDataset() {
 }
 
 function AttackDataset() {
-  const [memoriaData] = useAtom(memoriaDataAtom);
   const [data, setData] = useState<[Memoria[], Memoria[]]>([[], []]);
   const map = ['Fire ATK', 'Water ATK', 'Wind ATK'];
   const vanguardDataset = [
     {
       id: 'fireAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Fire ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'ATK'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Fire ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Sp.ATK'),
       ).length,
       month: '火攻',
     },
     {
       id: 'waterAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Water ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'ATK'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Water ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Water ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Sp.ATK'),
       ).length,
       month: '水攻',
     },
     {
       id: 'windAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Wind ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'ATK'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind ATK') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Wind ATK') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isBuffEffect(eff) && eff.status === 'Sp.ATK'),
       ).length,
       month: '風攻',
     },
@@ -693,21 +847,31 @@ function AttackDataset() {
           ]}
           {...chartSetting}
           onItemClick={(_, id) => {
-            const normal = memoriaData.filter(
+            const normal = memoriaList.filter(
               m =>
-                m.skillData.effects.some(eff => eff.type === 'damage') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'ATK'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isBuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isBuffEffect(eff) && eff.status === 'ATK'),
             );
-            const special = memoriaData.filter(
+            const special = memoriaList.filter(
               m =>
-                m.skillData.effects.some(eff => eff.type === 'damage') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'Sp.ATK'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isBuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isBuffEffect(eff) && eff.status === 'Sp.ATK'),
             );
             setData([normal, special]);
             handleClickOpen();
@@ -728,23 +892,29 @@ function AttackDataset() {
             <Grid>
               {data[0].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
-                    key={m.name}
+                    key={Lenz.memoria.shortName.get(m)}
                   />
                 </Tooltip>
               ))}
@@ -756,20 +926,26 @@ function AttackDataset() {
             <Grid>
               {data[1].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
                   />
@@ -787,55 +963,78 @@ function AttackDataset() {
 }
 
 function DefenseDataset() {
-  const [memoriaData] = useAtom(memoriaDataAtom);
   const [data, setData] = useState<[Memoria[], Memoria[]]>([[], []]);
   const map = ['Fire DEF', 'Water DEF', 'Wind DEF'];
-  const assistDataset = [
+  const interferenceDataset = [
     {
       id: 'fireAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'DEF'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Fire DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'DEF'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Fire DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Fire DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Sp.DEF'),
       ).length,
       month: '火防',
     },
     {
       id: 'waterAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Water DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'DEF'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Water DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'DEF'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Water DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Water DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Sp.DEF'),
       ).length,
       month: '水防',
     },
     {
       id: 'windAssist',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'DEF'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Wind DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'DEF'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.effects.some(eff => eff.status === 'Wind DEF') &&
-          m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Wind DEF') &&
+          Lenz.skill.effects
+            .get(m)
+            .some(eff => isDebuffEffect(eff) && eff.status === 'Sp.DEF'),
       ).length,
       month: '風防',
     },
@@ -866,7 +1065,7 @@ function DefenseDataset() {
       >
         <Typography>{'属防デバ'}</Typography>
         <BarChart
-          dataset={assistDataset}
+          dataset={interferenceDataset}
           xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
           series={[
             { dataKey: 'normal', label: '通常', valueFormatter },
@@ -874,21 +1073,31 @@ function DefenseDataset() {
           ]}
           {...chartSetting}
           onItemClick={(_, id) => {
-            const normal = memoriaData.filter(
+            const normal = memoriaList.filter(
               m =>
-                m.skillData.effects.some(eff => eff.type === 'damage') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'DEF'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isDebuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isDebuffEffect(eff) && eff.status === 'DEF'),
             );
-            const special = memoriaData.filter(
+            const special = memoriaList.filter(
               m =>
-                m.skillData.effects.some(eff => eff.type === 'damage') &&
-                m.skillData.effects.some(
-                  eff => eff.status === map[id.dataIndex],
-                ) &&
-                m.skillData.effects.some(eff => eff.status === 'Sp.DEF'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(
+                    eff =>
+                      isDebuffEffect(eff) && eff.status === map[id.dataIndex],
+                  ) &&
+                Lenz.skill.effects
+                  .get(m)
+                  .some(eff => isDebuffEffect(eff) && eff.status === 'Sp.DEF'),
             );
             setData([normal, special]);
             handleClickOpen();
@@ -909,20 +1118,26 @@ function DefenseDataset() {
             <Grid>
               {data[0].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
                   />
@@ -936,20 +1151,26 @@ function DefenseDataset() {
             <Grid>
               {data[1].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
                   />
@@ -967,61 +1188,60 @@ function DefenseDataset() {
 }
 
 function CounterDataset() {
-  const [memoriaData] = useAtom(memoriaDataAtom);
   const [data, setData] = useState<[Memoria[], Memoria[]]>([[], []]);
   const map = ['火', '水', '風'];
   const dataset = [
     {
       id: 'fireCounter',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '通常範囲' &&
           m.element === '火' &&
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.kinds?.some(k => k === 'counter'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '特殊範囲' &&
           m.element === '火' &&
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.kinds?.some(k => k === 'counter'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
       month: '火',
     },
     {
       id: 'waterCounter',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '通常範囲' &&
           m.element === '水' &&
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.kinds?.some(k => k === 'counter'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '特殊範囲' &&
           m.element === '水' &&
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.kinds?.some(k => k === 'counter'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
       month: '水',
     },
     {
       id: 'windCounter',
-      normal: memoriaData.filter(
+      normal: memoriaList.filter(
         m =>
           m.kind === '通常範囲' &&
           m.element === '風' &&
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.kinds?.some(k => k === 'counter'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
-      special: memoriaData.filter(
+      special: memoriaList.filter(
         m =>
           m.kind === '特殊範囲' &&
           m.element === '風' &&
-          m.skillData.effects.some(eff => eff.type === 'damage') &&
-          m.skillData.kinds?.some(k => k === 'counter'),
+          Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+          Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
       month: '風',
     },
@@ -1060,19 +1280,19 @@ function CounterDataset() {
           ]}
           {...chartSetting}
           onItemClick={(_, id) => {
-            const normal = memoriaData.filter(
+            const normal = memoriaList.filter(
               m =>
                 m.kind === '通常範囲' &&
                 m.element === map[id.dataIndex] &&
-                m.skillData.effects.some(eff => eff.type === 'damage') &&
-                m.skillData.kinds?.some(k => k === 'counter'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+                Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
             );
-            const special = memoriaData.filter(
+            const special = memoriaList.filter(
               m =>
                 m.kind === '特殊範囲' &&
                 m.element === map[id.dataIndex] &&
-                m.skillData.effects.some(eff => eff.type === 'damage') &&
-                m.skillData.kinds?.some(k => k === 'counter'),
+                Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
+                Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
             );
             setData([normal, special]);
             handleClickOpen();
@@ -1093,20 +1313,26 @@ function CounterDataset() {
             <Grid>
               {data[0].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
                   />
@@ -1120,20 +1346,26 @@ function CounterDataset() {
             <Grid>
               {data[1].map(m => (
                 <Tooltip
-                  key={m.name}
+                  key={Lenz.memoria.shortName.get(m)}
                   title={
                     <Stack>
-                      <Typography variant='h6'>{m.name}</Typography>
-                      <Typography variant='body2'>{m.skill.name}</Typography>
-                      <Typography variant='body2'>{m.support.name}</Typography>
+                      <Typography variant='h6'>
+                        {Lenz.memoria.shortName.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.skill.name.get(m)}
+                      </Typography>
+                      <Typography variant='body2'>
+                        {Lenz.support.name.get(m)}
+                      </Typography>
                     </Stack>
                   }
                   placement={'top'}
                   arrow
                 >
                   <Image
-                    src={`/memoria/${m.name}.png`}
-                    alt={m.name}
+                    src={`/memoria/${Lenz.memoria.shortName.get(m)}.png`}
+                    alt={Lenz.memoria.shortName.get(m)}
                     width={100}
                     height={100}
                   />

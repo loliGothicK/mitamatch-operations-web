@@ -1,8 +1,23 @@
-import type { Amount, Probability, StatusKind } from '@/parser/skill';
+import type { Amount, StatusKind } from '@/parser/common';
 
 import { match } from 'ts-pattern';
+import { parseAmount } from '@/parser/common';
+import { type Either, right, getApplicativeValidation } from 'fp-ts/Either';
+import { anyhow, type ParserError, CallPath } from '@/parser/error';
+import { pipe } from 'fp-ts/function';
+import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
+import { getSemigroup } from 'fp-ts/Array';
+import { sequenceS } from 'fp-ts/Apply';
+import { fromNullable, type Option } from 'fp-ts/Option';
+import { option, either } from 'fp-ts';
+import { separator, transpose } from '@/fp-ts-ext/function';
 
-type Trigger = 'Attack' | 'Assist' | 'Recovery' | 'Command';
+export type Probability =
+  | 'certain' // 一定確率で
+  | 'medium' // 中確率で
+  | 'high'; // 高確率で
+
+export type Trigger = 'Attack' | 'Assist' | 'Recovery' | 'Command';
 
 type PossibleStatus = Exclude<
   StatusKind,
@@ -23,215 +38,297 @@ export type SupportKind = {
   status?: PossibleStatus;
 };
 
-type Support = {
+export type Support = {
+  raw: {
+    name: string;
+    description: string;
+  };
   trigger: Trigger;
   probability: Probability;
-  effects: SupportKind[];
+  effects: readonly SupportKind[];
 };
+
+const ap = getApplicativeValidation(getSemigroup<ParserError>());
+
+const parseProbability = (
+  description: string,
+  path: CallPath = new CallPath(),
+): Either<ParserError, Probability> =>
+  match<string, Either<ParserError, Probability>>(description)
+    .when(
+      sentence => sentence.includes('一定確率'),
+      () => right('certain'),
+    )
+    .when(
+      sentence => sentence.includes('中確率'),
+      () => right('medium'),
+    )
+    .when(
+      sentence => sentence.includes('高確率'),
+      () => right('high'),
+    )
+    .otherwise(() =>
+      anyhow(
+        path.join('parseProbability'),
+        description,
+        `given text doesn't include any probability`,
+      ),
+    );
 
 const STATUS =
   /(ATK.*?|DEF.*?|Sp\.ATK.*?|Sp\.DEF.*?|火属性.*?|水属性.*?|風属性.*?)を.*?(アップ|ダウン)/;
 
-function parseStatus(description: string): SupportKind[] {
+const parseSingleStatus = (
+  status: string,
+  path: CallPath = CallPath.empty,
+): Validated<ParserError, PossibleStatus[]> =>
+  separator(
+    status.split('と').map(stat =>
+      match<string, Either<ParserError, PossibleStatus[]>>(stat)
+        .with('ATK', () => right(['ATK']))
+        .with('DEF', () => right(['DEF']))
+        .with('Sp.ATK', () => right(['Sp.ATK']))
+        .with('Sp.DEF', () => right(['Sp.DEF']))
+        .with('火属性攻撃力', () => right(['Fire ATK']))
+        .with('水属性攻撃力', () => right(['Water ATK']))
+        .with('風属性攻撃力', () => right(['Wind ATK']))
+        .with('火属性防御力', () => right(['Fire DEF']))
+        .with('水属性防御力', () => right(['Water DEF']))
+        .with('風属性防御力', () => right(['Wind DEF']))
+        .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () =>
+          right(['Fire ATK', 'Water ATK', 'Wind ATK']),
+        )
+        .with('火属性防御力・水属性防御力・風属性防御力', () =>
+          right(['Fire DEF', 'Water DEF', 'Wind DEF']),
+        )
+        .otherwise(target =>
+          anyhow(
+            path.join('parseSingleStatus'),
+            target,
+            `given text doesn't match any status`,
+          ),
+        ),
+    ),
+  );
+
+const parseUpDown = (upOrDown: string, path: CallPath = CallPath.empty) =>
+  match<string, Either<ParserError, 'UP' | 'DOWN'>>(upOrDown)
+    .when(
+      text => text.includes('アップ'),
+      () => right('UP' as const),
+    )
+    .when(
+      text => text.includes('ダウン'),
+      () => right('DOWN' as const),
+    )
+    .otherwise(target =>
+      anyhow(
+        path.join('parseUpDown'),
+        target,
+        `given text doesn't include UP or DOWN`,
+      ),
+    );
+
+function parseStatus(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Option<Validated<ParserError, SupportKind[]>> {
   const global =
     /(ATK|DEF|Sp\.ATK|Sp\.DEF|火属性|水属性|風属性).*?を.*?(アップ|ダウン)/g;
-  const globalMatch = description.match(global);
+  const joined = () => path.join('parseStatus');
 
-  if (!globalMatch) {
-    return [];
-  }
-
-  return globalMatch.flatMap(sentence => {
-    const _match = sentence.match(STATUS);
-    if (_match) {
-      const statuses = _match[1].split('と').flatMap(status => {
-        return match<string, PossibleStatus[]>(status)
-          .with('ATK', () => ['ATK'])
-          .with('DEF', () => ['DEF'])
-          .with('Sp.ATK', () => ['Sp.ATK'])
-          .with('Sp.DEF', () => ['Sp.DEF'])
-          .with('火属性攻撃力', () => ['Fire ATK'])
-          .with('水属性攻撃力', () => ['Water ATK'])
-          .with('風属性攻撃力', () => ['Wind ATK'])
-          .with('火属性防御力', () => ['Fire DEF'])
-          .with('水属性防御力', () => ['Water DEF'])
-          .with('風属性防御力', () => ['Wind DEF'])
-          .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
-            'Fire ATK',
-            'Water ATK',
-            'Wind ATK',
-          ])
-          .with('火属性防御力・水属性防御力・風属性防御力', () => [
-            'Fire DEF',
-            'Water DEF',
-            'Wind DEF',
-          ])
-          .run();
-      });
-
-      const [amount, type] = match<string, [Amount, 'UP' | 'DOWN']>(_match[2])
-        .with('小アップ', () => ['small', 'UP'])
-        .with('アップ', () => ['medium', 'UP'])
-        .with('大アップ', () => ['large', 'UP'])
-        .with('特大アップ', () => ['extra-large', 'UP'])
-        .with('超特大アップ', () => ['super-large', 'UP'])
-        .with('小ダウン', () => ['small', 'DOWN'])
-        .with('ダウン', () => ['medium', 'DOWN'])
-        .with('大ダウン', () => ['large', 'DOWN'])
-        .with('特大ダウン', () => ['extra-large', 'DOWN'])
-        .with('超特大ダウン', () => ['super-large', 'DOWN'])
-        .run();
-
-      return statuses.map(status => {
-        return {
-          type,
-          status,
-          amount,
-        };
-      });
-    }
-    return [];
-  });
-}
-
-function parseAmount(amount: string): Amount {
-  return match<string, Amount>(amount)
-    .with('小アップ', () => 'small')
-    .with('アップ', () => 'medium')
-    .with('大アップ', () => 'large')
-    .with('特大アップ', () => 'extra-large')
-    .with('超特大アップ', () => 'super-large')
-    .with('極大アップ', () => 'ultra-large')
-    .run();
+  return pipe(
+    fromNullable(description.match(global)),
+    option.flatMap(gmatch =>
+      pipe(
+        gmatch.map(status =>
+          pipe(
+            fromNullable(status.match(STATUS)),
+            option.map(([, stat, upOrDown]) =>
+              pipe(
+                parseSingleStatus(stat, joined()),
+                either.flatMap(stats =>
+                  separator(
+                    stats.map(stat =>
+                      sequenceS(ap)({
+                        type: toValidated(parseUpDown(upOrDown, joined())),
+                        amount: toValidated(parseAmount(upOrDown, joined())),
+                        status: right(stat),
+                      }),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        transpose,
+        option.map(separator),
+      ),
+    ),
+  );
 }
 
 const DAMAGE = /攻撃ダメージを(.*アップ)させる/;
 
-function parseDamage(description: string): SupportKind[] {
-  const _match = description.match(DAMAGE);
-
-  if (!_match) {
-    return [];
-  }
-
-  return [{ type: 'DamageUp', amount: parseAmount(_match[1]) }];
+function parseDamage(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Option<Validated<ParserError, SupportKind[]>> {
+  return pipe(
+    fromNullable(description.match(DAMAGE)),
+    option.map(([, up]) =>
+      pipe(
+        sequenceS(ap)({
+          type: right('DamageUp' as const),
+          amount: toValidated(parseAmount(up, path.join('parseDamage'))),
+        }),
+        either.map(effect => [effect]),
+      ),
+    ),
+  );
 }
 
 const ASSIST = /支援\/妨害効果を(.*アップ)/;
 
-function parseAssist(description: string): SupportKind[] {
-  const _match = description.match(ASSIST);
-
-  if (!_match) {
-    return [];
-  }
-
-  return [{ type: 'SupportUp', amount: parseAmount(_match[1]) }];
+export function parseAssit(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Option<Validated<ParserError, SupportKind[]>> {
+  return pipe(
+    fromNullable(description.match(ASSIST)),
+    option.map(([, up]) =>
+      pipe(
+        sequenceS(ap)({
+          type: right('SupportUp' as const),
+          amount: toValidated(parseAmount(up, path.join('parseAssit'))),
+        }),
+        either.map(effect => [effect]),
+      ),
+    ),
+  );
 }
 
-const RECOVERY = /HPの回復量を(.*アップ)/;
+const RECOVERY = /HPの回復量を(.*?アップ)/;
 
-function parseRecovery(description: string): SupportKind[] {
-  const _match = description.match(RECOVERY);
-
-  if (!_match) {
-    return [];
-  }
-
-  return [{ type: 'RecoveryUp', amount: parseAmount(_match[1]) }];
+function parseRecovery(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Option<Validated<ParserError, SupportKind[]>> {
+  return pipe(
+    fromNullable(description.match(RECOVERY)),
+    option.map(([, up]) =>
+      pipe(
+        sequenceS(ap)({
+          type: right('RecoveryUp' as const),
+          amount: toValidated(parseAmount(up, path.join('parseRecovery'))),
+        }),
+        either.map(effect => [effect]),
+      ),
+    ),
+  );
 }
 
 const MATCH_PT = /自身のマッチPtの獲得量が(.*アップ)する/;
 
-function parseMatchPt(description: string): SupportKind[] {
-  const _match = description.match(MATCH_PT);
-
-  if (!_match) {
-    return [];
-  }
-
-  const amount = match<string, Amount>(_match[1])
-    .with('小アップ', () => 'small')
-    .with('アップ', () => 'medium')
-    .with('大アップ', () => 'large')
-    .with('特大アップ', () => 'extra-large')
-    .with('超特大アップ', () => 'super-large')
-    .with('極大アップ', () => 'ultra-large')
-    .run();
-
-  return [{ type: 'MatchPtUp', amount }];
+function parseMatchPt(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Option<Validated<ParserError, SupportKind[]>> {
+  return pipe(
+    fromNullable(description.match(MATCH_PT)),
+    option.map(([, up]) =>
+      pipe(
+        sequenceS(ap)({
+          type: right('MatchPtUp' as const),
+          amount: toValidated(parseAmount(up, path.join('parseMatchPt'))),
+        }),
+        either.map(effect => [effect]),
+      ),
+    ),
+  );
 }
 
 const COST_DOWN = /一定確率でMP消費を抑える/;
 
-function parseMpCost(description: string): SupportKind[] {
-  const _match = description.match(COST_DOWN);
-
-  if (!_match) {
-    return [];
-  }
-
-  return [{ type: 'MpCostDown', amount: 'medium' }];
+function parseMpCost(
+  description: string,
+): Option<Validated<ParserError, SupportKind[]>> {
+  return pipe(
+    fromNullable(description.match(COST_DOWN)),
+    option.map(() => right([{ type: 'MpCostDown', amount: 'medium' }])),
+  );
 }
 
 const RANGE = /効果対象範囲が(.+)される/;
 
-function parseRange(description: string): SupportKind[] {
-  const _match = description.match(RANGE);
-
-  if (!_match) {
-    return [];
-  }
-
-  return [{ type: 'RangeUp', amount: 'medium' }];
+function parseRange(
+  description: string,
+): Option<Validated<ParserError, SupportKind[]>> {
+  return pipe(
+    fromNullable(description.match(RANGE)),
+    option.map(() => right([{ type: 'RangeUp', amount: 'medium' }])),
+  );
 }
 
-export function parseSupport(name: string, description: string): Support {
-  const trigger = match<string, Trigger>(name)
+const parseTrigger = (
+  name: string,
+  path: CallPath = CallPath.empty,
+): Either<ParserError, Trigger> =>
+  match<string, Either<ParserError, Trigger>>(name)
     .when(
       name => name.startsWith('攻:'),
-      () => 'Attack',
+      () => right('Attack'),
     )
     .when(
       name => name.startsWith('援:'),
-      () => 'Assist',
+      () => right('Assist'),
     )
     .when(
       name => name.startsWith('回:'),
-      () => 'Recovery',
+      () => right('Recovery'),
     )
     .when(
       name => name.startsWith('コ:'),
-      () => 'Command',
+      () => right('Command'),
     )
-    .run();
+    .otherwise(() =>
+      anyhow(path.join('parseTrigger'), name, 'no match trigger found'),
+    );
 
-  return {
-    trigger,
-    probability: match<string, Probability>(description)
-      .when(
-        sentence => sentence.includes('一定確率'),
-        () => 'certain',
-      )
-      .when(
-        sentence => sentence.includes('中確率'),
-        () => 'medium',
-      )
-      .when(
-        sentence => sentence.includes('高確率'),
-        () => 'high',
-      )
-      .run(),
-    effects: description.split('。').flatMap(sentence => {
-      return [
-        ...parseDamage(sentence),
-        ...parseAssist(sentence),
-        ...parseRecovery(sentence),
-        ...parseMatchPt(sentence),
-        ...parseMpCost(sentence),
-        ...parseRange(sentence),
-        ...parseStatus(sentence),
-      ];
-    }),
-  };
+const parseEffects = (
+  description: string,
+  path: CallPath = CallPath.empty,
+): Validated<ParserError, readonly SupportKind[]> => {
+  const joined = () => path.join('parseEffects');
+  const effects = [
+    parseRange(description),
+    parseStatus(description, joined()),
+    parseDamage(description, joined()),
+    parseAssit(description, joined()),
+    parseRecovery(description, joined()),
+    parseMatchPt(description, joined()),
+    parseMpCost(description),
+  ];
+  return pipe(
+    transpose(effects),
+    option.map(separator),
+    option.getOrElse(() =>
+      toValidated(anyhow(path, description, 'No match support effects found')),
+    ),
+  );
+};
+
+export function parseSupport({
+  name,
+  description,
+}: { name: string; description: string }): Validated<ParserError, Support> {
+  return sequenceS(ap)({
+    raw: right({ name, description }),
+    trigger: toValidated(parseTrigger(name, new CallPath(['parseSupport']))),
+    probability: toValidated(
+      parseProbability(description, new CallPath(['parseSupport'])),
+    ),
+    effects: parseEffects(description, new CallPath(['parseSupport'])),
+  });
 }

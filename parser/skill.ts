@@ -1,26 +1,20 @@
-import { option } from 'fp-ts';
-import type { Option } from 'fp-ts/Option';
-import { match } from 'ts-pattern';
-
-//#region Type Def
-export const statusKind = [
-  'ATK',
-  'DEF',
-  'Sp.ATK',
-  'Sp.DEF',
-  'Life',
-  'Fire ATK',
-  'Fire DEF',
-  'Water ATK',
-  'Water DEF',
-  'Wind ATK',
-  'Wind DEF',
-  'Light ATK',
-  'Light DEF',
-  'Dark ATK',
-  'Dark DEF',
-] as const;
-export type StatusKind = (typeof statusKind)[number];
+import { either, option } from 'fp-ts';
+import { fromNullable, type Option } from 'fp-ts/Option';
+import { match, P } from 'ts-pattern';
+import {
+  parseAmount,
+  parseStatus,
+  type StatusKind,
+  parseIntSafe,
+} from '@/parser/common';
+import type { Amount } from '@/parser/common';
+import { pipe } from 'fp-ts/function';
+import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
+import { anyhow, type ParserError, CallPath } from '@/parser/error';
+import { bind, Do, getApplicativeValidation, right } from 'fp-ts/Either';
+import { getSemigroup } from 'fp-ts/Array';
+import { sequenceS } from 'fp-ts/Apply';
+import { separator, transpose } from '@/fp-ts-ext/function';
 
 export const elements = ['Fire', 'Water', 'Wind', 'Light', 'Dark'] as const;
 export type Elements = (typeof elements)[number];
@@ -37,531 +31,443 @@ export type Elemental = {
   readonly element: Elements;
   readonly kind: ElementalKind;
 };
-export type Amount =
-  | 'small' // 小アップ
-  | 'medium' // アップ
-  | 'large' // 大アップ
-  | 'extra-large' // 特大アップ
-  | 'super-large' // 超特大アップ
-  | 'ultra-large'; // 極大アップ
-export type Probability =
-  | 'certain' // 一定確率で
-  | 'medium' // 中確率で
-  | 'high'; // 高確率で
+
 export type SkillKind = Elemental | 'charge' | 'counter' | 's-counter' | 'heal';
 
-export const stackEffect = ['Meteor', 'Barrier', 'Eden', 'ANiMA'] as const;
+export const stackKinds = ['meteor', 'barrier', 'eden', 'anima'] as const;
+
+export type DamageEffect = {
+  readonly type: 'damage';
+  readonly range: readonly [number, number];
+  readonly amount: Amount;
+};
+export type BuffEffect = {
+  readonly type: 'buff';
+  readonly range: readonly [number, number];
+  readonly amount: Amount;
+  readonly status: StatusKind;
+};
+export type DebuffEffect = {
+  readonly type: 'debuff';
+  readonly range: readonly [number, number];
+  readonly amount: Amount;
+  readonly status: StatusKind;
+};
+export type HealEffect = {
+  readonly type: 'heal';
+  readonly range: readonly [number, number];
+  readonly amount: Amount;
+};
 export type StackEffect = {
-  readonly type: (typeof stackEffect)[number];
+  readonly type: 'stack';
+  readonly kind: (typeof stackKinds)[number];
   readonly rate: number;
   readonly times: number;
-  readonly targets?: number;
 };
 
-export type SkillEffect = {
-  readonly type: 'damage' | 'heal' | 'buff' | 'debuff' | 'stack';
-  readonly range?: readonly [number, number];
-  readonly amount?: Amount;
-  readonly status?: StatusKind;
-  readonly stack?: StackEffect;
+export type SkillEffect =
+  | DamageEffect
+  | BuffEffect
+  | DebuffEffect
+  | HealEffect
+  | StackEffect;
+
+export const isDamageEffect = (effect: SkillEffect): effect is DamageEffect =>
+  effect.type === 'damage';
+export const isBuffEffect = (effect: SkillEffect): effect is BuffEffect =>
+  effect.type === 'buff';
+export const isDebuffEffect = (effect: SkillEffect): effect is DebuffEffect =>
+  effect.type === 'debuff';
+export const isHealEffect = (effect: SkillEffect): effect is HealEffect =>
+  effect.type === 'heal';
+export const isStackEffect =
+  (kind?: (typeof stackKinds)[number]) =>
+  (effect: SkillEffect): effect is StackEffect => {
+    return (
+      effect.type === 'stack' && (kind === undefined || effect.kind === kind)
+    );
+  };
+export const isNotStackEffect = (
+  effect: SkillEffect,
+): effect is Exclude<SkillEffect, StackEffect> => {
+  return effect.type !== 'stack';
 };
 
 export type Skill = {
   readonly raw: { readonly name: string; readonly description: string };
-  readonly effects: SkillEffect[];
-  readonly kinds?: SkillKind[];
+  readonly effects: readonly SkillEffect[];
+  readonly kinds?: readonly SkillKind[];
 };
-//#endregion
+
+const ap = getApplicativeValidation(getSemigroup<ParserError>());
+
+function parseRange(
+  num: string,
+  path: CallPath = CallPath.empty,
+): Validated<ParserError, readonly [number, number]> {
+  return pipe(
+    separator(
+      num.split('～').map(n => parseIntSafe(n, path.join('parseRange'))),
+    ),
+    either.flatMap(range =>
+      match(range)
+        .when(
+          r => r.length === 1,
+          () => right([range[0], range[0]] as const),
+        )
+        .when(
+          r => r.length === 2,
+          () => right([range[0], range[1]] as const),
+        )
+        .otherwise(() =>
+          toValidated(anyhow(path, num, "given text doesn't match range")),
+        ),
+    ),
+  );
+}
 
 const ATK_DAMAGE = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
 const ATK_BUFF = /自身の(.*?)を(.*?アップ)させる/;
 const ATK_DEBUFF = /敵の(.*?)を(.*?ダウン)させる/;
 
-//#region parseDamage
-function parseDamage(description: string): SkillEffect[] {
-  const result: SkillEffect[] = [];
-  const _match = description.match(ATK_DAMAGE);
+function parseDamage(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Validated<ParserError, readonly SkillEffect[]> {
+  const joined = () => path.join('parseDamage');
 
-  if (!_match) {
-    return result;
-  }
+  const statChanges = (
+    type: 'buff' | 'debuff',
+    range: readonly [number, number],
+    description: string,
+  ): Option<Validated<ParserError, SkillEffect[]>> =>
+    pipe(
+      fromNullable(
+        description.match(
+          match(type)
+            .with('buff', () => ATK_BUFF)
+            .with('debuff', () => ATK_DEBUFF)
+            .exhaustive(),
+        ),
+      ),
+      option.map(([, status, buff]) =>
+        pipe(
+          Do,
+          bind('status', () =>
+            separator(status.split('と').map(s => parseStatus(s, joined()))),
+          ),
+          either.flatMap(({ status }) =>
+            separator(
+              status.map(stat =>
+                sequenceS(ap)({
+                  type: right(type),
+                  amount: toValidated(parseAmount(buff, joined())),
+                  status: right(stat),
+                  range: right(range),
+                }),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
 
-  const range = (r => {
-    if (r.length === 1) {
-      return [r[0], r[0]] as const;
-    }
-    return [r[0], r[1]] as const;
-  })(_match[1].split('～').map(n => Number.parseInt(n)));
-
-  const amount = match<string, Amount>(_match[3])
-    .with('小ダメージ', () => 'small')
-    .with('ダメージ', () => 'medium')
-    .with('大ダメージ', () => 'large')
-    .with('特大ダメージ', () => 'extra-large')
-    .with('超特大ダメージ', () => 'super-large')
-    .with('極大ダメージ', () => 'ultra-large')
-    .run();
-
-  result.push({ type: 'damage', range, amount });
-
-  const buffMatch = description.match(ATK_BUFF);
-
-  if (buffMatch) {
-    const statuses = buffMatch[1].split('と').flatMap(s => {
-      return match<string, StatusKind[]>(s)
-        .with('ATK', () => ['ATK'])
-        .with('Sp.ATK', () => ['Sp.ATK'])
-        .with('DEF', () => ['DEF'])
-        .with('Sp.DEF', () => ['Sp.DEF'])
-        .with('火属性攻撃力', () => ['Fire ATK'])
-        .with('水属性攻撃力', () => ['Water ATK'])
-        .with('風属性攻撃力', () => ['Wind ATK'])
-        .with('光属性攻撃力', () => ['Light ATK'])
-        .with('闇属性攻撃力', () => ['Dark ATK'])
-        .with('火属性防御力', () => ['Fire DEF'])
-        .with('水属性防御力', () => ['Water DEF'])
-        .with('風属性防御力', () => ['Wind DEF'])
-        .with('光属性防御力', () => ['Light DEF'])
-        .with('闇属性防御力', () => ['Dark DEF'])
-        .with('火属性攻撃力・風属性攻撃力', () => ['Fire ATK', 'Wind ATK'])
-        .with('水属性攻撃力・風属性攻撃力', () => ['Water ATK', 'Wind ATK'])
-        .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
-          'Fire ATK',
-          'Water ATK',
-          'Wind ATK',
-        ])
-        .with('火属性防御力・水属性防御力・風属性防御力', () => [
-          'Fire DEF',
-          'Water DEF',
-          'Wind DEF',
-        ])
-        .run();
-    });
-
-    const buffAmount = match<string, Amount>(buffMatch[2])
-      .with('小アップ', () => 'small')
-      .with('アップ', () => 'medium')
-      .with('大アップ', () => 'large')
-      .with('特大アップ', () => 'extra-large')
-      .with('超特大アップ', () => 'super-large')
-      .with('極大アップ', () => 'ultra-large')
-      .run();
-
-    for (const status of statuses) {
-      result.push({
-        type: 'buff',
-        range,
-        amount: buffAmount,
-        status,
-      });
-    }
-  }
-
-  const debuffMatch = description.match(ATK_DEBUFF);
-
-  if (debuffMatch) {
-    const statuses = debuffMatch[1].split('と').flatMap(s => {
-      return match<string, StatusKind[]>(s)
-        .with('ATK', () => ['ATK'])
-        .with('Sp.ATK', () => ['Sp.ATK'])
-        .with('DEF', () => ['DEF'])
-        .with('Sp.DEF', () => ['Sp.DEF'])
-        .with('火属性攻撃力', () => ['Fire ATK'])
-        .with('水属性攻撃力', () => ['Water ATK'])
-        .with('風属性攻撃力', () => ['Wind ATK'])
-        .with('光属性攻撃力', () => ['Light ATK'])
-        .with('闇属性攻撃力', () => ['Dark ATK'])
-        .with('火属性防御力', () => ['Fire DEF'])
-        .with('水属性防御力', () => ['Water DEF'])
-        .with('風属性防御力', () => ['Wind DEF'])
-        .with('光属性防御力', () => ['Light DEF'])
-        .with('闇属性防御力', () => ['Dark DEF'])
-        .with('火属性攻撃力・風属性攻撃力', () => ['Fire ATK', 'Wind ATK'])
-        .with('火属性防御力・風属性防御力', () => ['Fire DEF', 'Wind DEF'])
-        .with('水属性攻撃力・風属性攻撃力', () => ['Water ATK', 'Wind ATK'])
-        .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
-          'Fire ATK',
-          'Water ATK',
-          'Wind ATK',
-        ])
-        .with('火属性防御力・水属性防御力・風属性防御力', () => [
-          'Fire DEF',
-          'Water DEF',
-          'Wind DEF',
-        ])
-        .run();
-    });
-
-    const debuffAmount = match<string, Amount>(debuffMatch[2])
-      .with('小ダウン', () => 'small')
-      .with('ダウン', () => 'medium')
-      .with('大ダウン', () => 'large')
-      .with('特大ダウン', () => 'extra-large')
-      .with('超特大ダウン', () => 'super-large')
-      .with('極大ダウン', () => 'ultra-large')
-      .run();
-
-    for (const status of statuses) {
-      result.push({
-        type: 'debuff',
-        range,
-        amount: debuffAmount,
-        status,
-      });
-    }
-  }
-
-  return result;
+  return pipe(
+    Do,
+    bind('damage', () =>
+      pipe(
+        fromNullable(description.match(ATK_DAMAGE)),
+        option.map(([, range, , damage]) =>
+          sequenceS(ap)({
+            type: right('damage' as const),
+            range: parseRange(range, path),
+            amount: toValidated(parseAmount(damage, path)),
+          }),
+        ),
+        option.getOrElse(() =>
+          toValidated(
+            anyhow(path, description, "given text doesn't match ATK_DAMAGE"),
+          ),
+        ),
+      ),
+    ),
+    either.flatMap(({ damage }) =>
+      pipe(
+        transpose([
+          statChanges('buff', damage.range, description),
+          statChanges('debuff', damage.range, description),
+        ]),
+        option.map(seq =>
+          pipe(
+            separator(seq),
+            either.map(effects => [damage as SkillEffect, ...effects]),
+          ),
+        ),
+        option.getOrElse(
+          (): Validated<ParserError, SkillEffect[]> => right([]),
+        ),
+      ),
+    ),
+  );
 }
-//#endregion
 
-const ASSIST_BUFF = /味方(\d)体の(.+?)を(.*?アップ)させる/;
+const ASSIST_BUFF = /味方(.+?)体の(.+?)を(.*?アップ)させる/;
 
-//#region parseBuff
-function parseBuff(description: string): SkillEffect[] {
-  const _match = description.match(ASSIST_BUFF);
-
-  if (!_match) {
-    return [];
-  }
-
-  const range = (r => {
-    if (r.length === 1) {
-      return [r[0], r[0]] as const;
-    }
-    return [r[0], r[1]] as const;
-  })(_match[1].split('～').map(n => Number.parseInt(n)));
-
-  const status = _match[2].split('と').flatMap(s => {
-    return match<string, StatusKind[]>(s)
-      .with('ATK', () => ['ATK'])
-      .with('DEF', () => ['DEF'])
-      .with('Sp.ATK', () => ['Sp.ATK'])
-      .with('Sp.DEF', () => ['Sp.DEF'])
-      .with('最大HP', () => ['Life'])
-      .with('火属性攻撃力', () => ['Fire ATK'])
-      .with('水属性攻撃力', () => ['Water ATK'])
-      .with('風属性攻撃力', () => ['Wind ATK'])
-      .with('光属性攻撃力', () => ['Light ATK'])
-      .with('闇属性攻撃力', () => ['Dark ATK'])
-      .with('火属性防御力', () => ['Fire DEF'])
-      .with('水属性防御力', () => ['Water DEF'])
-      .with('風属性防御力', () => ['Wind DEF'])
-      .with('光属性防御力', () => ['Light DEF'])
-      .with('闇属性防御力', () => ['Dark DEF'])
-      .with('火属性攻撃力・風属性攻撃力', () => ['Fire ATK', 'Wind ATK'])
-      .with('水属性攻撃力・風属性攻撃力', () => ['Water ATK', 'Wind ATK'])
-      .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
-        'Fire ATK',
-        'Water ATK',
-        'Wind ATK',
-      ])
-      .run();
-  });
-
-  const amount = match<string, Amount>(_match[3])
-    .with('小アップ', () => 'small')
-    .with('アップ', () => 'medium')
-    .with('大アップ', () => 'large')
-    .with('特大アップ', () => 'extra-large')
-    .with('超特大アップ', () => 'super-large')
-    .run();
-
-  return status.map(s => {
-    return { type: 'buff', range, amount, status: s };
-  });
+function parseBuff(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Validated<ParserError, SkillEffect[]> {
+  const joined = () => path.join('parseBuff');
+  return pipe(
+    fromNullable(description.match(ASSIST_BUFF)),
+    option.map(([, range, status, buff]) =>
+      pipe(
+        pipe(
+          status.split('と').map(s => parseStatus(s, joined())),
+          separator,
+        ),
+        either.flatMap(stats =>
+          separator(
+            stats.map(stat =>
+              sequenceS(ap)({
+                type: right('buff' as const),
+                range: parseRange(range, joined()),
+                amount: toValidated(parseAmount(buff, joined())),
+                status: right(stat),
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+    option.getOrElse(() =>
+      toValidated(
+        anyhow(joined(), description, "given text doesn't match ASSIST_BUFF"),
+      ),
+    ),
+  );
 }
-//#endregion
 
-const INTERFRRENCE_DEBUFF = /敵(\d)体の(.+?)を(.*?ダウン)させる/;
+const INTERFRRENCE_DEBUFF = /敵(.+?)体の(.+?)を(.*?ダウン)させる/;
 
-//#region parseDebuff
-function parseDebuff(description: string): SkillEffect[] {
-  const _match = description.match(INTERFRRENCE_DEBUFF);
-
-  if (!_match) {
-    return [];
-  }
-
-  const range = (r => {
-    if (r.length === 1) {
-      return [r[0], r[0]] as [number, number];
-    }
-    return [r[0], r[1]] as [number, number];
-  })(_match[1].split('～').map(n => Number.parseInt(n)));
-
-  const status = _match[2].split('と').flatMap(s => {
-    return match<string, StatusKind[]>(s)
-      .with('ATK', () => ['ATK'])
-      .with('DEF', () => ['DEF'])
-      .with('Sp.ATK', () => ['Sp.ATK'])
-      .with('Sp.DEF', () => ['Sp.DEF'])
-      .with('最大HP', () => ['Life'])
-      .with('火属性攻撃力', () => ['Fire ATK'])
-      .with('水属性攻撃力', () => ['Water ATK'])
-      .with('風属性攻撃力', () => ['Wind ATK'])
-      .with('光属性攻撃力', () => ['Light ATK'])
-      .with('闇属性攻撃力', () => ['Dark ATK'])
-      .with('火属性防御力', () => ['Fire DEF'])
-      .with('水属性防御力', () => ['Water DEF'])
-      .with('風属性防御力', () => ['Wind DEF'])
-      .with('光属性防御力', () => ['Light DEF'])
-      .with('闇属性防御力', () => ['Dark DEF'])
-      .with('火属性防御力・風属性防御力', () => ['Fire DEF', 'Wind DEF'])
-      .with('火属性攻撃力・風属性攻撃力', () => ['Fire ATK', 'Wind ATK'])
-      .with('水属性攻撃力・風属性攻撃力', () => ['Water ATK', 'Wind ATK'])
-      .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
-        'Fire ATK',
-        'Water ATK',
-        'Wind ATK',
-      ])
-      .run();
-  });
-
-  const amount = match<string, Amount>(_match[3])
-    .with('小ダウン', () => 'small')
-    .with('ダウン', () => 'medium')
-    .with('大ダウン', () => 'large')
-    .with('特大ダウン', () => 'extra-large')
-    .with('超特大ダウン', () => 'super-large')
-    .with('極大ダウン', () => 'ultra-large')
-    .run();
-
-  return status.map(s => {
-    return { type: 'debuff', range, amount, status: s };
-  });
+function parseDebuff(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Validated<ParserError, SkillEffect[]> {
+  const joined = () => path.join('parseDebuff');
+  return pipe(
+    fromNullable(description.match(INTERFRRENCE_DEBUFF)),
+    option.map(([, range, status, debuff]) =>
+      pipe(
+        Do,
+        bind('status', () =>
+          separator(status.split('と').map(s => parseStatus(s, joined()))),
+        ),
+        either.flatMap(
+          ({ status }): Validated<ParserError, SkillEffect[]> =>
+            pipe(
+              status.flat().map(stat =>
+                sequenceS(ap)({
+                  type: right('debuff' as const),
+                  range: parseRange(range),
+                  amount: toValidated(parseAmount(debuff, joined())),
+                  status: right(stat),
+                }),
+              ),
+              separator,
+            ),
+        ),
+      ),
+    ),
+    option.getOrElse(() =>
+      toValidated(
+        anyhow(
+          joined(),
+          description,
+          "given text doesn't match INTERFRRENCE_DEBUFF",
+        ),
+      ),
+    ),
+  );
 }
-//#endregion
 
 const RECOVERY = /味方(.+)体のHPを(.*?回復)/;
 const RECOVERY_BUFF = /(ATK.*?|Sp\.ATK.*?|DEF.*?|Sp\.DEF.*?)を(.*?アップ)/;
 
-//#region parseHeal
-function parseHeal(description: string): SkillEffect[] {
-  const result: SkillEffect[] = [];
-  const _match = description.match(RECOVERY);
-
-  if (!_match) {
-    return [];
-  }
-
-  const range = (r => {
-    if (r.length === 1) {
-      return [r[0], r[0]] as [number, number];
-    }
-    return [r[0], r[1]] as [number, number];
-  })(_match[1].split('～').map(n => Number.parseInt(n)));
-
-  const healAmount = match<string, Amount>(_match[2])
-    .with('小回復', () => 'small')
-    .with('回復', () => 'medium')
-    .with('大回復', () => 'large')
-    .with('特大回復', () => 'extra-large')
-    .run();
-
-  result.push({ type: 'heal', range, amount: healAmount });
-
-  const __match = description.match(RECOVERY_BUFF);
-
-  if (!__match) {
-    return result;
-  }
-
-  const status = __match[1].split('と').flatMap(s => {
-    return match<string, StatusKind[]>(s)
-      .with('ATK', () => ['ATK'])
-      .with('DEF', () => ['DEF'])
-      .with('Sp.ATK', () => ['Sp.ATK'])
-      .with('Sp.DEF', () => ['Sp.DEF'])
-      .with('最大HP', () => ['Life'])
-      .with('火属性攻撃力', () => ['Fire ATK'])
-      .with('水属性攻撃力', () => ['Water ATK'])
-      .with('風属性攻撃力', () => ['Wind ATK'])
-      .with('光属性攻撃力', () => ['Light ATK'])
-      .with('闇属性攻撃力', () => ['Dark ATK'])
-      .with('火属性防御力', () => ['Fire DEF'])
-      .with('水属性防御力', () => ['Water DEF'])
-      .with('風属性防御力', () => ['Wind DEF'])
-      .with('光属性防御力', () => ['Light DEF'])
-      .with('闇属性防御力', () => ['Dark DEF'])
-      .with('火属性防御力・風属性防御力', () => ['Fire DEF', 'Wind DEF'])
-      .with('水属性防御力・風属性防御力', () => ['Water DEF', 'Wind DEF'])
-      .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () => [
-        'Fire ATK',
-        'Water ATK',
-        'Wind ATK',
-      ])
-      .with('火属性防御力・水属性防御力・風属性防御力', () => [
-        'Fire DEF',
-        'Water DEF',
-        'Wind DEF',
-      ])
-      .run();
-  });
-
-  const buffAmount = match<string, Amount>(__match[2])
-    .with('小アップ', () => 'small')
-    .with('アップ', () => 'medium')
-    .with('大アップ', () => 'large')
-    .with('特大アップ', () => 'extra-large')
-    .run();
-
-  return result.concat(
-    status.map(stat => {
-      return { type: 'buff', range, amount: buffAmount, status: stat };
-    }),
+const parseRecoveryBuff = (
+  range: readonly [number, number],
+  description: string,
+  path: CallPath = CallPath.empty,
+) => {
+  const joined = () => path.join('parseRecoveryBuff');
+  return pipe(
+    fromNullable(description.match(RECOVERY_BUFF)),
+    option.map(([, status, up]) =>
+      pipe(
+        status.split('と').map(s => parseStatus(s, joined())),
+        separator,
+        either.flatMap(
+          (statuses): Validated<ParserError, SkillEffect[]> =>
+            pipe(
+              statuses.map(stat =>
+                sequenceS(ap)({
+                  type: right('buff' as const),
+                  range: right(range),
+                  amount: toValidated(parseAmount(up, joined())),
+                  status: right(stat),
+                }),
+              ),
+              separator,
+            ),
+        ),
+      ),
+    ),
+    option.getOrElse((): Validated<ParserError, SkillEffect[]> => right([])),
   );
+};
+
+const parseHeal = (description: string, path: CallPath = CallPath.empty) => {
+  const joined = () => path.join('parseHeal');
+  return pipe(
+    fromNullable(description.match(RECOVERY)),
+    option.map(([, range, heal]) =>
+      pipe(
+        Do,
+        bind('range', () => parseRange(range, joined())),
+        bind('buff', ({ range }) =>
+          parseRecoveryBuff(range, description, joined()),
+        ),
+        bind(
+          'recovery',
+          ({ range }): Validated<ParserError, SkillEffect> =>
+            sequenceS(ap)({
+              type: right('heal' as const),
+              range: right(range),
+              amount: toValidated(parseAmount(heal, joined())),
+            }),
+        ),
+        either.map(({ recovery, buff }) => [recovery, ...buff]),
+      ),
+    ),
+    option.getOrElse(() =>
+      toValidated(
+        anyhow(joined(), description, "given text doesn't match RECOVERY"),
+      ),
+    ),
+  );
+};
+
+const STACK_TYPE = {
+  meteor: /「次の攻撃時にダメージが(?<rate>\d+)%アップするスタック」/,
+  barrier:
+    /「次の被ダメージ時に被ダメージを(?<rate>\d+)%ダウンさせるスタック」/,
+  eden: /「次の回復時に回復効果が(?<rate>\d+)%アップするスタック」/,
+  anima:
+    /「次の支援\/妨害時に支援\/妨害効果が(?<rate>\d+)%アップするスタック」/,
+};
+const NUMBER_OF_STACK = /を(?<numberOf>\d)回蓄積/;
+
+const parseStackEffect =
+  (types: readonly (keyof typeof STACK_TYPE)[]) =>
+  (
+    description: string,
+    path: CallPath = CallPath.empty,
+  ): Validated<ParserError, SkillEffect[]> => {
+    const joined = () => path.join('parseStackEffect');
+    const err = (msg: string): ParserError => ({
+      path: joined().toString(),
+      target: description,
+      msg,
+    });
+    return pipe(
+      types.map(type =>
+        pipe(
+          description.match(STACK_TYPE[type]),
+          either.fromNullable(err(`given text doesn't match ${type}`)),
+          either.flatMap(match =>
+            sequenceS(ap)({
+              kind: right(type),
+              rate: toValidated(
+                pipe(
+                  match?.groups?.rate,
+                  either.fromNullable(err('`groups.rate` does not exists')),
+                  either.flatMap(rate => parseIntSafe(rate, joined())),
+                ),
+              ),
+              times: toValidated(
+                pipe(
+                  description.match(NUMBER_OF_STACK),
+                  either.fromNullable(
+                    err(`given text doesn't match ${NUMBER_OF_STACK}`),
+                  ),
+                  either.flatMap(match =>
+                    pipe(
+                      match?.groups?.numberOf,
+                      either.fromNullable(
+                        err('`groups.numberOf` does not exists'),
+                      ),
+                      either.flatMap(numberOf =>
+                        parseIntSafe(numberOf, joined()),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            }),
+          ),
+        ),
+      ),
+      separator,
+      either.map(effects =>
+        effects.map(eff => ({
+          type: 'stack',
+          ...eff,
+        })),
+      ),
+    );
+  };
+
+function parseStack(
+  { name, description }: { name: string; description: string },
+  path: CallPath = CallPath.empty,
+): Validated<ParserError, SkillEffect[]> {
+  const branch = (when: string) => path.join(`parseStack[${when}]`);
+  return match(name)
+    .when(
+      name => name.includes('メテオ'),
+      () => parseStackEffect(['meteor'])(description, branch('meteor')),
+    )
+    .when(
+      name => name.includes('バリア'),
+      () => parseStackEffect(['barrier'])(description, branch('barrier')),
+    )
+    .when(
+      name => name.includes('エデン'),
+      () => parseStackEffect(['eden'])(description, branch('eden')),
+    )
+    .when(
+      name => name.includes('アニマ'),
+      () => parseStackEffect(['anima'])(description, branch('anima')),
+    )
+    .when(
+      name => name.includes('コメット'),
+      () =>
+        parseStackEffect(['meteor', 'barrier'])(description, branch('Comet')),
+    )
+    .when(
+      name => name.includes('エーテル'),
+      () =>
+        parseStackEffect(['anima', 'meteor'])(description, branch('Ether')),
+    )
+    .when(
+      name => name.includes('ルミナス'),
+      () =>
+        parseStackEffect(['anima', 'barrier'])(description, branch('Luminous')),
+    )
+    .otherwise(() => right([]));
 }
-//#endregion
 
-const METEMOR =
-  /「次の攻撃時にダメージが(\d+)%アップするスタック」を(\d)回蓄積/;
-const BARRIER =
-  /「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
-const EDEN = /「次の回復時に回復効果が(\d+)%アップするスタック」を(\d)回蓄積/;
-const ANIMA =
-  /「次の支援\/妨害時に支援\/妨害効果が(\d+)%アップするスタック」を(\d)回蓄積/;
-const COMET =
-  /「次の攻撃時にダメージが(\d+)%アップするスタック」と「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
-const LUMINOUS =
-  /「次の支援\/妨害時に支援\/妨害効果が(\d+)%アップするスタック」を(\d)回蓄積し、味方(\d)体に「次の被ダメージ時に被ダメージを(\d+)%ダウンさせるスタック」を(\d)回蓄積/;
-
-//#region parseStack
-function parseStack(name: string, description: string): SkillEffect[] {
-  return match<string, StackEffect[]>(name)
-    .when(
-      n => n.includes('メテオ'),
-      () => [
-        {
-          type: 'Meteor',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(METEMOR)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(METEMOR)![2]),
-        },
-      ],
-    )
-    .when(
-      n => n.includes('バリア'),
-      () => [
-        {
-          type: 'Barrier',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(BARRIER)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(BARRIER)![2]),
-        },
-      ],
-    )
-    .when(
-      n => n.includes('エデン'),
-      () => [
-        {
-          type: 'Eden',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(EDEN)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(EDEN)![2]),
-        },
-      ],
-    )
-    .when(
-      n => n.includes('アニマ'),
-      () => [
-        {
-          type: 'ANiMA',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(ANIMA)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(ANIMA)![2]),
-        },
-      ],
-    )
-    .when(
-      n => n.includes('グロリア'),
-      () => [
-        {
-          type: 'Barrier',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(BARRIER)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(BARRIER)![2]),
-        },
-        {
-          type: 'Eden',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(EDEN)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(EDEN)![2]),
-        },
-      ],
-    )
-    .when(
-      n => n.includes('エーテル'),
-      () => [
-        {
-          type: 'ANiMA',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(ANIMA)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(ANIMA)![2]),
-        },
-        {
-          type: 'Meteor',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(METEMOR)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(METEMOR)![2]),
-        },
-      ],
-    )
-    .when(
-      n => n.includes('コメット'),
-      () => [
-        {
-          type: 'Meteor',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(COMET)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(COMET)![3]),
-        },
-        {
-          type: 'Barrier',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(COMET)![2]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(COMET)![3]),
-        },
-      ],
-    )
-    .when(
-      n => n.includes('ルミナス'),
-      () => [
-        {
-          type: 'ANiMA',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(LUMINOUS)![1]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(LUMINOUS)![2]),
-        },
-        {
-          type: 'Barrier',
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          targets: Number.parseInt(description.match(LUMINOUS)![1]),
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          rate: 1.0 + Number.parseInt(description.match(LUMINOUS)![2]) / 100,
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
-          times: Number.parseInt(description.match(LUMINOUS)![3]),
-        },
-      ],
-    )
-    .otherwise(() => [])
-    .map(eff => ({ type: 'stack', stack: eff }));
-}
-//#endregion
-
-//#region parseSkill
-export function parseSkill(name: string, description: string): Skill {
+const parseKinds = (name: string): Option<readonly SkillKind[]> => {
   const elemental = match<string, Option<SkillKind>>(name)
     .when(
       name => name.startsWith('火：'),
@@ -645,11 +551,17 @@ export function parseSkill(name: string, description: string): Skill {
     )
     .otherwise(() => option.none);
 
-  const counter = name.includes('カウンター')
-    ? name.includes('Sカウンター')
-      ? option.of('s-counter' as SkillKind)
-      : option.of('counter' as SkillKind)
-    : option.none;
+  const counter = match<string, Option<SkillKind>>(name)
+    .when(
+      name => name.includes('カウンター'),
+      () => option.of('counter'),
+    )
+    .when(
+      name => name.includes('Sカウンター'),
+      () => option.of('s-counter'),
+    )
+    .otherwise(() => option.none);
+
   const charge = name.includes('チャージ')
     ? option.of('charge' as SkillKind)
     : option.none;
@@ -657,18 +569,48 @@ export function parseSkill(name: string, description: string): Skill {
     ? option.of('heal' as SkillKind)
     : option.none;
 
-  return {
-    raw: { name, description },
-    effects: [
-      ...parseDamage(description),
-      ...parseBuff(description),
-      ...parseDebuff(description),
-      ...parseHeal(description),
-      ...parseStack(name, description),
-    ],
-    kinds: [elemental, counter, charge, heal]
-      .filter(option.isSome)
-      .map(o => o.value),
-  } satisfies Skill;
-}
-//#endregion
+  return transpose([elemental, counter, charge, heal]);
+};
+
+export const parseSkill = ({
+  kind,
+  skill,
+}: {
+  kind:
+    | '通常単体'
+    | '通常範囲'
+    | '特殊単体'
+    | '特殊範囲'
+    | '支援'
+    | '妨害'
+    | '回復';
+  skill: { name: string; description: string };
+}): Validated<ParserError, Skill> =>
+  sequenceS(ap)({
+    raw: right(skill),
+    effects: pipe(
+      match(kind)
+        .with(P.union('通常単体', '通常範囲', '特殊単体', '特殊範囲'), () =>
+          parseDamage(skill.description, new CallPath(['parseSkill'])),
+        )
+        .with('支援', () =>
+          parseBuff(skill.description, new CallPath(['parseSkill'])),
+        )
+        .with('妨害', () =>
+          parseDebuff(skill.description, new CallPath(['parseSkill'])),
+        )
+        .with('回復', () =>
+          parseHeal(skill.description, new CallPath(['parseSkill'])),
+        )
+        .exhaustive(),
+      either.flatMap(effects =>
+        pipe(
+          parseStack(skill),
+          either.map(stack => effects.concat(stack)),
+        ),
+      ),
+    ),
+    kinds: right(
+      option.getOrElse((): readonly SkillKind[] => [])(parseKinds(skill.name)),
+    ),
+  });
