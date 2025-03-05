@@ -1,6 +1,30 @@
 {
   "data": [
     {
+      "id": 170,
+      "name": "蒼海神威",
+      "status": [1884, 2724, 1869, 2669],
+      "effect": "水属性効果増加Lv.4",
+      "description": "水属性のメモリアのスキル効果が超特大増加する。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": true,
+      "kind": "Elemental/Water",
+      "usually": true
+    },
+    {
+      "id": 169,
+      "name": "深淵の波動",
+      "status": [1545, 2262, 1563, 2251],
+      "effect": "水属性効果増加Lv.4",
+      "description": "水属性のメモリアのスキル効果が超特大増加する。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": false,
+      "kind": "Elemental/Water",
+      "usually": true
+    },
+    {
       "id": 168,
       "name": "天翔翼の御盾",
       "status": [1890, 1869, 2683, 2707],
@@ -1234,7 +1258,7 @@
       "active_time": 100,
       "payed": true,
       "kind": "Shield",
-      "usually": true
+      "usually": false
     },
     {
       "id": 65,
@@ -1258,7 +1282,7 @@
       "active_time": 100,
       "payed": true,
       "kind": "Shield",
-      "usually": true
+      "usually": false
     },
     {
       "id": 63,
@@ -1270,7 +1294,7 @@
       "active_time": 100,
       "payed": false,
       "kind": "Shield",
-      "usually": true
+      "usually": false
     },
     {
       "id": 62,
@@ -1294,7 +1318,7 @@
       "active_time": 100,
       "payed": false,
       "kind": "Shield",
-      "usually": true
+      "usually": false
     },
     {
       "id": 60,
@@ -1330,7 +1354,7 @@
       "active_time": 120,
       "payed": true,
       "kind": "Elemental/Wind",
-      "usually": true
+      "usually": false
     },
     {
       "id": 57,
@@ -1354,7 +1378,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Wind",
-      "usually": true
+      "usually": false
     },
     {
       "id": 55,
@@ -1378,7 +1402,7 @@
       "active_time": 120,
       "payed": true,
       "kind": "Elemental/Water",
-      "usually": true
+      "usually": false
     },
     {
       "id": 53,
@@ -1390,7 +1414,7 @@
       "active_time": 120,
       "payed": true,
       "kind": "Elemental/Wind",
-      "usually": true
+      "usually": false
     },
     {
       "id": 52,
@@ -1402,7 +1426,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Water",
-      "usually": true
+      "usually": false
     },
     {
       "id": 51,
@@ -1414,7 +1438,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Wind",
-      "usually": true
+      "usually": false
     },
     {
       "id": 50,
@@ -1510,7 +1534,7 @@
       "active_time": 120,
       "payed": true,
       "kind": "Elemental/Water",
-      "usually": true
+      "usually": false
     },
     {
       "id": 42,
@@ -1558,7 +1582,7 @@
       "active_time": 120,
       "payed": false,
       "kind": "Elemental/Water",
-      "usually": true
+      "usually": false
     },
     {
       "id": 38,
