@@ -1,7 +1,10 @@
 import type { Charm } from '@/domain/charm/charm';
 import type { Costume } from '@/domain/costume/costume';
 import type { MemoriaId } from '@/domain/memoria/memoria';
-import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
+import type {
+  Concentration,
+  MemoriaWithConcentration,
+} from '@/jotai/memoriaAtoms';
 import type { Amount, StatusKind } from '@/parser/common';
 import type { Probability } from '@/parser/support';
 import { P, match } from 'ts-pattern';
@@ -123,62 +126,38 @@ function _level(amount: Amount): number {
     .exhaustive();
 }
 
-function _probability(probability: Probability, concentration: number): number {
+function _probability(
+  probability: Probability,
+  concentration: Concentration,
+): number {
   return match(probability)
-    .with('certain', () => {
-      if (concentration === 0) {
-        return 0.12;
-      }
-      if (concentration === 1) {
-        return 0.125;
-      }
-      if (concentration === 2) {
-        return 0.13;
-      }
-      if (concentration === 3) {
-        return 0.135;
-      }
-      if (concentration === 4) {
-        return 0.15;
-      }
-      throw new Error('Invalid concentration');
-    })
-    .with('medium', () => {
-      if (concentration === 0) {
-        return 0.18;
-      }
-      if (concentration === 1) {
-        return 0.1875;
-      }
-      if (concentration === 2) {
-        return 0.195;
-      }
-      if (concentration === 3) {
-        return 0.2025;
-      }
-      if (concentration === 4) {
-        return 0.225;
-      }
-      throw new Error('Invalid concentration');
-    })
-    .with('high', () => {
-      if (concentration === 0) {
-        return 0.24; // ???
-      }
-      if (concentration === 1) {
-        return 0.25; // ???
-      }
-      if (concentration === 2) {
-        return 0.26; // ???
-      }
-      if (concentration === 3) {
-        return 0.27; // ???
-      }
-      if (concentration === 4) {
-        return 0.3;
-      }
-      throw new Error('Invalid concentration');
-    })
+    .with('certain', () =>
+      match(concentration)
+        .with(0, () => 0.12)
+        .with(1, () => 0.125)
+        .with(2, () => 0.13)
+        .with(3, () => 0.135)
+        .with(4, () => 0.15)
+        .exhaustive(),
+    )
+    .with('medium', () =>
+      match(concentration)
+        .with(0, () => 0.18)
+        .with(1, () => 0.1875)
+        .with(2, () => 0.195)
+        .with(3, () => 0.2025)
+        .with(4, () => 0.225)
+        .exhaustive(),
+    )
+    .with('high', () =>
+      match(concentration)
+        .with(0, () => 0.24) // ???
+        .with(1, () => 0.25) // ???
+        .with(2, () => 0.26) // ???
+        .with(3, () => 0.27) // ???
+        .with(4, () => 0.3)
+        .exhaustive(),
+    )
     .exhaustive();
 }
 
@@ -234,7 +213,7 @@ export function evaluate(
   const charmRate = 1.1;
   const charmEx = parseAbility(charm?.ability);
   const costumeRate = 1.15;
-  const costumeEx = parseEx(costume?.ex?.description);
+  const costumeEx = parseEx(costume?.ex?.up.description);
   const [costumeAdx, rateAdx] = parseAdx(costume?.adx, adxLevel);
 
   const skill = deck.map(memoria => {
@@ -244,16 +223,12 @@ export function evaluate(
       .with(2, () => 1.4)
       .with(3, () => 1.425)
       .with(4, () => 1.5)
-      .otherwise(() => 1.5);
+      .exhaustive();
 
     const range = match(
       Lenz.skill.effects.get(memoria).find(isNotStackEffect)?.range,
     )
-      .with([1, 1], () => 1)
-      .with([1, 2], () => 1.5)
-      .with([1, 3], () => 2)
-      .with([2, 2], () => 2)
-      .with([2, 3], () => 2.5)
+      .with([P._, P._], ([a, b]) => (a + b) / 2)
       .run();
 
     const rangePlus =
@@ -274,7 +249,7 @@ export function evaluate(
             .with(2, () => 0.13)
             .with(3, () => 0.135)
             .with(4, () => 0.15)
-            .otherwise(() => 0.15);
+            .exhaustive();
         })
         .reduce(
           (acc: number, cur: number) =>
@@ -369,18 +344,18 @@ function damage(
   }
 
   const normalLegendary = {
-    火: 1,
-    水: 1,
-    風: 1,
-    光: 1,
-    闇: 1,
+    Fire: 1,
+    Water: 1,
+    Wind: 1,
+    Light: 1,
+    Dark: 1,
   };
   const specialLegendary = {
-    火: 1,
-    水: 1,
-    風: 1,
-    光: 1,
-    闇: 1,
+    Fire: 1,
+    Water: 1,
+    Wind: 1,
+    Light: 1,
+    Dark: 1,
   };
 
   for (const memoria of deck.filter(
@@ -390,42 +365,42 @@ function damage(
       .when(
         legendary => legendary?.raw.name.includes('火通'),
         () => {
-          normalLegendary.火 +=
+          normalLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('水通'),
         () => {
-          normalLegendary.水 +=
+          normalLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('風通'),
         () => {
-          normalLegendary.風 +=
+          normalLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('火特'),
         () => {
-          specialLegendary.火 +=
+          specialLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('水特'),
         () => {
-          specialLegendary.水 +=
+          specialLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('風特'),
         () => {
-          specialLegendary.風 +=
+          specialLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
@@ -550,25 +525,25 @@ function buff(
   }
 
   const supportLegendary = {
-    火: 1,
-    水: 1,
-    風: 1,
-    光: 1,
-    闇: 1,
+    Fire: 1,
+    Water: 1,
+    Wind: 1,
+    Light: 1,
+    Dark: 1,
   };
   const normalLegendary = {
-    火: 1,
-    水: 1,
-    風: 1,
-    光: 1,
-    闇: 1,
+    Fire: 1,
+    Water: 1,
+    Wind: 1,
+    Light: 1,
+    Dark: 1,
   };
   const specialLegendary = {
-    火: 1,
-    水: 1,
-    風: 1,
-    光: 1,
-    闇: 1,
+    Fire: 1,
+    Water: 1,
+    Wind: 1,
+    Light: 1,
+    Dark: 1,
   };
 
   for (const memoria of deck.filter(
@@ -578,63 +553,63 @@ function buff(
       .when(
         legendary => legendary?.raw.name.includes('火援'),
         () => {
-          supportLegendary.火 +=
+          supportLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('水援'),
         () => {
-          supportLegendary.水 +=
+          supportLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('風援'),
         () => {
-          supportLegendary.風 +=
+          supportLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('火通'),
         () => {
-          normalLegendary.火 +=
+          normalLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('水通'),
         () => {
-          normalLegendary.水 +=
+          normalLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('風通'),
         () => {
-          normalLegendary.風 +=
+          normalLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('火特'),
         () => {
-          specialLegendary.火 +=
+          specialLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('水特'),
         () => {
-          specialLegendary.水 +=
+          specialLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('風特'),
         () => {
-          specialLegendary.風 +=
+          specialLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
@@ -922,25 +897,25 @@ function debuff(
   }
 
   const supportLegendary = {
-    火: 1,
-    水: 1,
-    風: 1,
-    光: 1,
-    闇: 1,
+    Fire: 1,
+    Water: 1,
+    Wind: 1,
+    Light: 1,
+    Dark: 1,
   };
   const normalLegendary = {
-    火: 1,
-    水: 1,
-    風: 1,
-    光: 1,
-    闇: 1,
+    Fire: 1,
+    Water: 1,
+    Wind: 1,
+    Light: 1,
+    Dark: 1,
   };
   const specialLegendary = {
-    火: 1,
-    水: 1,
-    風: 1,
-    光: 1,
-    闇: 1,
+    Fire: 1,
+    Water: 1,
+    Wind: 1,
+    Light: 1,
+    Dark: 1,
   };
   for (const memoria of deck.filter(
     memoria => memoria.skills.legendary !== undefined,
@@ -949,63 +924,63 @@ function debuff(
       .when(
         legendary => legendary?.raw.name.includes('火援'),
         () => {
-          supportLegendary.火 +=
+          supportLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('水援'),
         () => {
-          supportLegendary.水 +=
+          supportLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('風援'),
         () => {
-          supportLegendary.風 +=
+          supportLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('火通'),
         () => {
-          normalLegendary.火 +=
+          normalLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('水通'),
         () => {
-          normalLegendary.水 +=
+          normalLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('風通'),
         () => {
-          normalLegendary.風 +=
+          normalLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('火特'),
         () => {
-          specialLegendary.火 +=
+          specialLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('水特'),
         () => {
-          specialLegendary.水 +=
+          specialLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('風特'),
         () => {
-          specialLegendary.風 +=
+          specialLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
@@ -1275,11 +1250,11 @@ function recovery(
     return undefined;
   }
   const legendary = {
-    火: 1,
-    水: 1,
-    風: 1,
-    光: 1,
-    闇: 1,
+    Fire: 1,
+    Water: 1,
+    Wind: 1,
+    Light: 1,
+    Dark: 1,
   };
   for (const memoria of deck.filter(
     memoria =>
@@ -1289,21 +1264,21 @@ function recovery(
       .when(
         legendary => legendary?.raw.name.includes('火回'),
         () => {
-          legendary.火 +=
+          legendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('水回'),
         () => {
-          legendary.水 +=
+          legendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         legendary => legendary?.raw.name.includes('風回'),
         () => {
-          legendary.風 +=
+          legendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )

@@ -1,11 +1,24 @@
 import { match, P } from 'ts-pattern';
-import { type Either, fromPredicate, right } from 'fp-ts/Either';
-import { anyhow, type ParserError, CallPath } from '@/parser/error';
+import { Applicative, type Either, fromPredicate, right } from 'fp-ts/Either';
+import { anyhow, type MitamaError, CallPath } from '@/error/error';
+import { Elements } from '@/parser/skill';
+import { traverseWithIndex } from 'fp-ts/Array';
+import { toValidated, Validated } from '@/fp-ts-ext/Validated';
+
+export const parseSequence =
+  <T>(
+    parser: (s: string, path: CallPath) => Either<MitamaError, T>,
+    delimiter: string,
+  ) =>
+  (seq: string, path: CallPath = CallPath.empty): Validated<MitamaError, T[]> =>
+    traverseWithIndex(Applicative)((index: number, s: string) =>
+      toValidated(parser(s, path.join(`parseSeq.${index}`))),
+    )(seq.split(delimiter));
 
 export const parseIntSafe = (
   num: string,
   path: CallPath = CallPath.empty,
-): Either<ParserError, number> => {
+): Either<MitamaError, number> => {
   return fromPredicate(
     (int: number) => !Number.isNaN(int),
     () => ({
@@ -19,7 +32,7 @@ export const parseIntSafe = (
 export const parseFloatSafe = (
   num: string,
   path: CallPath = CallPath.empty,
-): Either<ParserError, number> => {
+): Either<MitamaError, number> => {
   return fromPredicate(
     (int: number) => !Number.isNaN(int),
     () => ({
@@ -30,6 +43,24 @@ export const parseFloatSafe = (
   )(Number.parseFloat(num));
 };
 
+export const parseElement = (
+  element: string,
+  path: CallPath = CallPath.empty,
+): Either<MitamaError, Elements> =>
+  match<string, Either<MitamaError, Elements>>(element)
+    .with('火', () => right('Fire'))
+    .with('水', () => right('Water'))
+    .with('風', () => right('Wind'))
+    .with('光', () => right('Light'))
+    .with('闇', () => right('Dark'))
+    .otherwise(src =>
+      anyhow(
+        path.join('parseElement'),
+        src,
+        "given text doesn't match any element",
+      ),
+    );
+
 export type Amount =
   | 'small' // 小アップ
   | 'medium' // アップ
@@ -39,7 +70,7 @@ export type Amount =
   | 'ultra-large'; // 極大アップ
 
 export const parseAmount = (amount: string, path: CallPath = CallPath.empty) =>
-  match<string, Either<ParserError, Amount>>(amount)
+  match<string, Either<MitamaError, Amount>>(amount)
     .with(P.union('小アップ', '小ダウン', '小ダメージ', '小回復'), () =>
       right('small'),
     )
@@ -88,7 +119,7 @@ export const statusKind = [
 export type StatusKind = (typeof statusKind)[number];
 
 export const parseStatus = (status: string, path: CallPath = CallPath.empty) =>
-  match<string, Either<ParserError, StatusKind[]>>(status)
+  match<string, Either<MitamaError, StatusKind[]>>(status)
     .with('ATK', () => right(['ATK']))
     .with('DEF', () => right(['DEF']))
     .with('Sp.ATK', () => right(['Sp.ATK']))

@@ -19,7 +19,10 @@ export async function generateShortLink(data: { base64: string }) {
   return crypto.createHash('md5').update(data.base64).digest('hex');
 }
 
-export async function saveShortLink({ base64, hash }: { base64: string; hash: string; }) {
+export async function saveShortLink({
+  base64,
+  hash,
+}: { base64: string; hash: string }) {
   const found = await prisma.shortUrl.findUnique({
     where: {
       shortUrl: hash,

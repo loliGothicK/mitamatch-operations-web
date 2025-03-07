@@ -3,6 +3,9 @@ import { z } from 'zod';
 
 import costumeData from './costume.json';
 
+const atomicAdxSchema = z.object({ name: z.string(), description: z.string() });
+const adxSchema = z.tuple([atomicAdxSchema, atomicAdxSchema, atomicAdxSchema]);
+
 const costumeSchema = z.object({
   id: z.number().readonly(),
   lily: z.string().readonly(),
@@ -16,21 +19,26 @@ const costumeSchema = z.object({
     .readonly(),
   ex: z
     .object({
-      name: z.string().readonly(),
-      description: z.string().readonly(),
+      up: z
+        .object({
+          name: z.string().readonly(),
+          description: z.string().readonly(),
+        })
+        .readonly(),
+      down: z
+        .object({
+          name: z.string().readonly(),
+          description: z.string().readonly(),
+        })
+        .optional()
+        .nullable()
+        .readonly(),
     })
     .optional()
     .nullable()
     .readonly(),
   adx: z
-    .array(
-      z.array(
-        z.object({
-          name: z.string().readonly(),
-          description: z.string().readonly(),
-        }),
-      ),
-    )
+    .tuple([adxSchema, adxSchema, adxSchema, adxSchema])
     .optional()
     .nullable()
     .readonly(),

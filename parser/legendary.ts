@@ -1,7 +1,7 @@
 import type { Elements } from '@/parser/skill';
 import type { Trigger } from '@/parser/support';
 import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
-import { anyhow, type ParserError, CallPath } from '@/parser/error';
+import { anyhow, type MitamaError, CallPath } from '@/error/error';
 import { pipe } from 'fp-ts/function';
 import { either } from 'fp-ts';
 import { separator } from '@/fp-ts-ext/function';
@@ -27,7 +27,7 @@ export type Legendary = {
 const LEGENDAEY_SKILL = /(.+?)属性の(.+?時)に.+?を(\d+?.*?\d*?)%アップさせる。/;
 
 const parseElement = (element: string, path: CallPath = CallPath.empty) =>
-  match<string, Validated<ParserError, Elements>>(element)
+  match<string, Validated<MitamaError, Elements>>(element)
     .with('火', () => right('Fire'))
     .with('水', () => right('Water'))
     .with('風', () => right('Wind'))
@@ -42,7 +42,7 @@ const parseElement = (element: string, path: CallPath = CallPath.empty) =>
     );
 
 const parseTrigger = (trigger: string, path: CallPath = CallPath.empty) =>
-  match<string, Validated<ParserError, Trigger>>(trigger)
+  match<string, Validated<MitamaError, Trigger>>(trigger)
     .with(P.union('通常攻撃時', '特殊攻撃時'), () => right('Attack'))
     .with('支援/妨害メモリア使用時', () => right('Assist'))
     .with('回復メモリア使用時', () => right('Recovery'))
@@ -62,11 +62,11 @@ export function parseLegendary({
 }: {
   readonly name: string;
   readonly description: readonly [string, string, string, string, string];
-}): Validated<ParserError, Legendary> {
-  const ap = getApplicativeValidation(getSemigroup<ParserError>());
+}): Validated<MitamaError, Legendary> {
+  const ap = getApplicativeValidation(getSemigroup<MitamaError>());
   const path = new CallPath(['parseLegendary']);
   const toEither = (target: string) =>
-    either.fromNullable<ParserError>({
+    either.fromNullable<MitamaError>({
       path: path.toString(),
       target,
       msg: 'given text does not match LEGENDAEY_SKILL',

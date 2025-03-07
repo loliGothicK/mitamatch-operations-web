@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { type MouseEvent, Suspense, useEffect, useState } from 'react';
 import DifferenceIcon from '@mui/icons-material/Difference';
 import type { Unit } from '@/domain/types';
-import {generateShortLink, getShortLink, saveShortLink} from '@/app/actions';
+import { generateShortLink, getShortLink, saveShortLink } from '@/app/actions';
 
 import {
   Add,
@@ -1149,23 +1149,27 @@ function ToggleButtons() {
   const [, setCompare] = useAtom(compareModeAtom);
 
   return (
-    <Button onClick={() => {
-      if (sw === 'shield') {
-        setSw('sword');
-        setRoleFilter([
-          'normal_single',
-          'normal_range',
-          'special_single',
-          'special_range',
-        ]);
-      } else {
-        setSw('shield');
-        setRoleFilter(['support', 'interference', 'recovery']);
-      }
-      setDeck([]);
-      setLegendaryDeck([]);
-      setCompare(undefined);
-    }}>{sw === 'shield' ? '後衛' : '前衛'}</Button>
+    <Button
+      onClick={() => {
+        if (sw === 'shield') {
+          setSw('sword');
+          setRoleFilter([
+            'normal_single',
+            'normal_range',
+            'special_single',
+            'special_range',
+          ]);
+        } else {
+          setSw('shield');
+          setRoleFilter(['support', 'interference', 'recovery']);
+        }
+        setDeck([]);
+        setLegendaryDeck([]);
+        setCompare(undefined);
+      }}
+    >
+      {sw === 'shield' ? '後衛' : '前衛'}
+    </Button>
   );
 }
 

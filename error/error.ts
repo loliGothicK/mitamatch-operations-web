@@ -1,12 +1,12 @@
 import { left } from 'fp-ts/Either';
 
-export type ParserError = {
+export type MitamaError = {
   path: string;
   target: string;
   msg: string;
 };
 
-export const fmtErr = (errors: ParserError[]): string => {
+export const fmtErr = (errors: MitamaError[]): string => {
   return JSON.stringify(errors, null, 2);
 };
 
@@ -33,7 +33,7 @@ export const anyhow = <T = never>(
   target: string,
   msg: string,
 ) => {
-  return left<ParserError, T>({
+  return left<MitamaError, T>({
     path: path.toString(),
     target,
     msg,

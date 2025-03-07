@@ -47,7 +47,10 @@ export const statusAtom = atom([200_000, 200_000, 200_000, 200_000] as [
   number,
   number,
 ]);
-export type MemoriaWithConcentration = Memoria & { concentration: number };
+export type Concentration = 0 | 1 | 2 | 3 | 4;
+export type MemoriaWithConcentration = Memoria & {
+  concentration: Concentration;
+};
 
 export const sortKind = [
   'ID',
@@ -255,8 +258,12 @@ export const filteredMemoriaAtom = atom(get => {
         assistSupport &&
         recoverySupport &&
         otherSupport &&
-        !get(rwDeckAtom).some(({ name }) => Lenz.memoria.shortName.get(memoria) === name.short) &&
-        !get(rwLegendaryDeckAtom).some(({ name }) => Lenz.memoria.shortName.get(memoria) === name.short)
+        !get(rwDeckAtom).some(
+          ({ name }) => Lenz.memoria.shortName.get(memoria) === name.short,
+        ) &&
+        !get(rwLegendaryDeckAtom).some(
+          ({ name }) => Lenz.memoria.shortName.get(memoria) === name.short,
+        )
       );
     })
     .sort((a, b) => {

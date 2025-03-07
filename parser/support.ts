@@ -3,14 +3,14 @@ import type { Amount, StatusKind } from '@/parser/common';
 import { match } from 'ts-pattern';
 import { parseAmount } from '@/parser/common';
 import { type Either, right, getApplicativeValidation } from 'fp-ts/Either';
-import { anyhow, type ParserError, CallPath } from '@/parser/error';
+import { anyhow, type MitamaError, CallPath } from '@/error/error';
 import { pipe } from 'fp-ts/function';
 import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
 import { getSemigroup } from 'fp-ts/Array';
 import { sequenceS } from 'fp-ts/Apply';
-import { fromNullable, type Option } from 'fp-ts/Option';
+import { fromNullable, type Option, sequenceArray } from 'fp-ts/Option';
 import { option, either } from 'fp-ts';
-import { separator, transpose } from '@/fp-ts-ext/function';
+import { separator } from '@/fp-ts-ext/function';
 
 export type Probability =
   | 'certain' // 一定確率で
@@ -48,13 +48,13 @@ export type Support = {
   effects: readonly SupportKind[];
 };
 
-const ap = getApplicativeValidation(getSemigroup<ParserError>());
+const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 const parseProbability = (
   description: string,
   path: CallPath = new CallPath(),
-): Either<ParserError, Probability> =>
-  match<string, Either<ParserError, Probability>>(description)
+): Either<MitamaError, Probability> =>
+  match<string, Either<MitamaError, Probability>>(description)
     .when(
       sentence => sentence.includes('一定確率'),
       () => right('certain'),
@@ -81,10 +81,10 @@ const STATUS =
 const parseSingleStatus = (
   status: string,
   path: CallPath = CallPath.empty,
-): Validated<ParserError, PossibleStatus[]> =>
+): Validated<MitamaError, PossibleStatus[]> =>
   separator(
     status.split('と').map(stat =>
-      match<string, Either<ParserError, PossibleStatus[]>>(stat)
+      match<string, Either<MitamaError, PossibleStatus[]>>(stat)
         .with('ATK', () => right(['ATK']))
         .with('DEF', () => right(['DEF']))
         .with('Sp.ATK', () => right(['Sp.ATK']))
@@ -112,7 +112,7 @@ const parseSingleStatus = (
   );
 
 const parseUpDown = (upOrDown: string, path: CallPath = CallPath.empty) =>
-  match<string, Either<ParserError, 'UP' | 'DOWN'>>(upOrDown)
+  match<string, Either<MitamaError, 'UP' | 'DOWN'>>(upOrDown)
     .when(
       text => text.includes('アップ'),
       () => right('UP' as const),
@@ -132,7 +132,7 @@ const parseUpDown = (upOrDown: string, path: CallPath = CallPath.empty) =>
 function parseStatus(
   description: string,
   path: CallPath = CallPath.empty,
-): Option<Validated<ParserError, SupportKind[]>> {
+): Option<Validated<MitamaError, SupportKind[]>> {
   const global =
     /(ATK|DEF|Sp\.ATK|Sp\.DEF|火属性|水属性|風属性).*?を.*?(アップ|ダウン)/g;
   const joined = () => path.join('parseStatus');
@@ -162,7 +162,7 @@ function parseStatus(
             ),
           ),
         ),
-        transpose,
+        sequenceArray,
         option.map(separator),
       ),
     ),
@@ -174,7 +174,7 @@ const DAMAGE = /攻撃ダメージを(.*アップ)させる/;
 function parseDamage(
   description: string,
   path: CallPath = CallPath.empty,
-): Option<Validated<ParserError, SupportKind[]>> {
+): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
     fromNullable(description.match(DAMAGE)),
     option.map(([, up]) =>
@@ -194,7 +194,7 @@ const ASSIST = /支援\/妨害効果を(.*アップ)/;
 export function parseAssit(
   description: string,
   path: CallPath = CallPath.empty,
-): Option<Validated<ParserError, SupportKind[]>> {
+): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
     fromNullable(description.match(ASSIST)),
     option.map(([, up]) =>
@@ -214,7 +214,7 @@ const RECOVERY = /HPの回復量を(.*?アップ)/;
 function parseRecovery(
   description: string,
   path: CallPath = CallPath.empty,
-): Option<Validated<ParserError, SupportKind[]>> {
+): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
     fromNullable(description.match(RECOVERY)),
     option.map(([, up]) =>
@@ -234,7 +234,7 @@ const MATCH_PT = /自身のマッチPtの獲得量が(.*アップ)する/;
 function parseMatchPt(
   description: string,
   path: CallPath = CallPath.empty,
-): Option<Validated<ParserError, SupportKind[]>> {
+): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
     fromNullable(description.match(MATCH_PT)),
     option.map(([, up]) =>
@@ -253,7 +253,7 @@ const COST_DOWN = /一定確率でMP消費を抑える/;
 
 function parseMpCost(
   description: string,
-): Option<Validated<ParserError, SupportKind[]>> {
+): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
     fromNullable(description.match(COST_DOWN)),
     option.map(() => right([{ type: 'MpCostDown', amount: 'medium' }])),
@@ -264,7 +264,7 @@ const RANGE = /効果対象範囲が(.+)される/;
 
 function parseRange(
   description: string,
-): Option<Validated<ParserError, SupportKind[]>> {
+): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
     fromNullable(description.match(RANGE)),
     option.map(() => right([{ type: 'RangeUp', amount: 'medium' }])),
@@ -274,8 +274,8 @@ function parseRange(
 const parseTrigger = (
   name: string,
   path: CallPath = CallPath.empty,
-): Either<ParserError, Trigger> =>
-  match<string, Either<ParserError, Trigger>>(name)
+): Either<MitamaError, Trigger> =>
+  match<string, Either<MitamaError, Trigger>>(name)
     .when(
       name => name.startsWith('攻:'),
       () => right('Attack'),
@@ -299,19 +299,19 @@ const parseTrigger = (
 const parseEffects = (
   description: string,
   path: CallPath = CallPath.empty,
-): Validated<ParserError, readonly SupportKind[]> => {
-  const joined = () => path.join('parseEffects');
+): Validated<MitamaError, readonly SupportKind[]> => {
+  const joined = path.join('parseEffects');
   const effects = [
     parseRange(description),
-    parseStatus(description, joined()),
-    parseDamage(description, joined()),
-    parseAssit(description, joined()),
-    parseRecovery(description, joined()),
-    parseMatchPt(description, joined()),
+    parseStatus(description, joined),
+    parseDamage(description, joined),
+    parseAssit(description, joined),
+    parseRecovery(description, joined),
+    parseMatchPt(description, joined),
     parseMpCost(description),
   ];
   return pipe(
-    transpose(effects),
+    sequenceArray(effects),
     option.map(separator),
     option.getOrElse(() =>
       toValidated(anyhow(path, description, 'No match support effects found')),
@@ -322,7 +322,7 @@ const parseEffects = (
 export function parseSupport({
   name,
   description,
-}: { name: string; description: string }): Validated<ParserError, Support> {
+}: { name: string; description: string }): Validated<MitamaError, Support> {
   return sequenceS(ap)({
     raw: right({ name, description }),
     trigger: toValidated(parseTrigger(name, new CallPath(['parseSupport']))),

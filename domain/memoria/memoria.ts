@@ -6,10 +6,11 @@ import { parseSupport, type Support } from '@/parser/support';
 import { fromThrowable } from 'neverthrow';
 import { getApplicativeValidation, isLeft, right } from 'fp-ts/Either';
 import { getSemigroup } from 'fp-ts/Array';
-import { fmtErr, type ParserError } from '@/parser/error';
+import { fmtErr, type MitamaError } from '@/error/error';
 import { sequenceS } from 'fp-ts/Apply';
 import { type Legendary, parseLegendary } from '@/parser/legendary';
 import { outdent } from 'outdent';
+import { match } from 'ts-pattern';
 
 const statusSchema = z.tuple([z.number(), z.number(), z.number(), z.number()]);
 
@@ -30,7 +31,18 @@ const memoriaSchema = z.object({
       '回復',
     ])
     .readonly(),
-  element: z.enum(['火', '水', '風', '光', '闇']).readonly(),
+  element: z
+    .enum(['火', '水', '風', '光', '闇'])
+    .transform(element =>
+      match(element)
+        .with('火', () => 'Fire' as const)
+        .with('水', () => 'Water' as const)
+        .with('風', () => 'Wind' as const)
+        .with('光', () => 'Light' as const)
+        .with('闇', () => 'Dark' as const)
+        .exhaustive(),
+    )
+    .readonly(),
   status: z
     .tuple([
       statusSchema,
@@ -93,7 +105,6 @@ export type Memoria = Omit<
     short: string;
     full: string;
   };
-} & {
   skills: {
     skill: Skill;
     support: Support;
@@ -101,8 +112,6 @@ export type Memoria = Omit<
   };
 };
 export type MemoriaId = Memoria['id'];
-export type MemoriaKind = Memoria['kind'];
-export type MemoriaElement = Memoria['element'];
 export type MemoriaStatus = Memoria['status'];
 export type MemoriaCost = Memoria['cost'];
 export type MemoriaLabels = Memoria['labels'];
@@ -111,7 +120,7 @@ export const isLegendary = (memoria: Memoria): boolean =>
   memoria.labels.includes('legendary');
 
 export const memoriaList: Memoria[] = memoriaData.data.map(memoria => {
-  const ap = getApplicativeValidation(getSemigroup<ParserError>());
+  const ap = getApplicativeValidation(getSemigroup<MitamaError>());
   const zodResult = fromThrowable(memoriaSchema.parse)(memoria);
   if (zodResult.isErr()) {
     throw new Error(outdent`
@@ -120,23 +129,23 @@ export const memoriaList: Memoria[] = memoriaData.data.map(memoria => {
         error => ${zodResult.error}
     `);
   }
-  const { skill, support, legendary_skill, name, full_name, link, ...zod } =
+  const { skill, support, legendary_skill, name, full_name, link, ...raw } =
     zodResult.value;
-  const parseResult = sequenceS(ap)({
-    skill: parseSkill({ kind: zod.kind, skill }),
+  const parseSkillsResult = sequenceS(ap)({
+    skill: parseSkill({ kind: raw.kind, skill }),
     support: parseSupport(memoria.support),
     legendary: legendary_skill
       ? parseLegendary(legendary_skill)
       : right(undefined),
   });
-  if (isLeft(parseResult)) {
+  if (isLeft(parseSkillsResult)) {
     throw new Error(
-      `Memoria skill or support skill parse failed: ${fmtErr(parseResult.left)}`,
+      `Memoria skill or support skill parse failed: ${fmtErr(parseSkillsResult.left)}`,
     );
   }
   return {
-    ...zod,
-    skills: { ...parseResult.right },
+    ...raw,
+    skills: { ...parseSkillsResult.right },
     name: { link, short: name, full: full_name },
   };
 });

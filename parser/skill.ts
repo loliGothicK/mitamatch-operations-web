@@ -1,5 +1,5 @@
 import { either, option } from 'fp-ts';
-import { fromNullable, type Option } from 'fp-ts/Option';
+import { fromNullable, type Option, sequenceArray } from 'fp-ts/Option';
 import { match, P } from 'ts-pattern';
 import {
   parseAmount,
@@ -10,11 +10,11 @@ import {
 import type { Amount } from '@/parser/common';
 import { pipe } from 'fp-ts/function';
 import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
-import { anyhow, type ParserError, CallPath } from '@/parser/error';
+import { anyhow, type MitamaError, CallPath } from '@/error/error';
 import { bind, Do, getApplicativeValidation, right } from 'fp-ts/Either';
 import { getSemigroup } from 'fp-ts/Array';
 import { sequenceS } from 'fp-ts/Apply';
-import { separator, transpose } from '@/fp-ts-ext/function';
+import { separator } from '@/fp-ts-ext/function';
 
 export const elements = ['Fire', 'Water', 'Wind', 'Light', 'Dark'] as const;
 export type Elements = (typeof elements)[number];
@@ -99,12 +99,12 @@ export type Skill = {
   readonly kinds?: readonly SkillKind[];
 };
 
-const ap = getApplicativeValidation(getSemigroup<ParserError>());
+const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 function parseRange(
   num: string,
   path: CallPath = CallPath.empty,
-): Validated<ParserError, readonly [number, number]> {
+): Validated<MitamaError, readonly [number, number]> {
   return pipe(
     separator(
       num.split('～').map(n => parseIntSafe(n, path.join('parseRange'))),
@@ -133,14 +133,14 @@ const ATK_DEBUFF = /敵の(.*?)を(.*?ダウン)させる/;
 function parseDamage(
   description: string,
   path: CallPath = CallPath.empty,
-): Validated<ParserError, readonly SkillEffect[]> {
+): Validated<MitamaError, readonly SkillEffect[]> {
   const joined = () => path.join('parseDamage');
 
   const statChanges = (
     type: 'buff' | 'debuff',
     range: readonly [number, number],
     description: string,
-  ): Option<Validated<ParserError, SkillEffect[]>> =>
+  ): Option<Validated<MitamaError, SkillEffect[]>> =>
     pipe(
       fromNullable(
         description.match(
@@ -193,7 +193,7 @@ function parseDamage(
     ),
     either.flatMap(({ damage }) =>
       pipe(
-        transpose([
+        sequenceArray([
           statChanges('buff', damage.range, description),
           statChanges('debuff', damage.range, description),
         ]),
@@ -204,7 +204,7 @@ function parseDamage(
           ),
         ),
         option.getOrElse(
-          (): Validated<ParserError, SkillEffect[]> => right([]),
+          (): Validated<MitamaError, SkillEffect[]> => right([]),
         ),
       ),
     ),
@@ -216,7 +216,7 @@ const ASSIST_BUFF = /味方(.+?)体の(.+?)を(.*?アップ)させる/;
 function parseBuff(
   description: string,
   path: CallPath = CallPath.empty,
-): Validated<ParserError, SkillEffect[]> {
+): Validated<MitamaError, SkillEffect[]> {
   const joined = () => path.join('parseBuff');
   return pipe(
     fromNullable(description.match(ASSIST_BUFF)),
@@ -253,7 +253,7 @@ const INTERFRRENCE_DEBUFF = /敵(.+?)体の(.+?)を(.*?ダウン)させる/;
 function parseDebuff(
   description: string,
   path: CallPath = CallPath.empty,
-): Validated<ParserError, SkillEffect[]> {
+): Validated<MitamaError, SkillEffect[]> {
   const joined = () => path.join('parseDebuff');
   return pipe(
     fromNullable(description.match(INTERFRRENCE_DEBUFF)),
@@ -264,7 +264,7 @@ function parseDebuff(
           separator(status.split('と').map(s => parseStatus(s, joined()))),
         ),
         either.flatMap(
-          ({ status }): Validated<ParserError, SkillEffect[]> =>
+          ({ status }): Validated<MitamaError, SkillEffect[]> =>
             pipe(
               status.flat().map(stat =>
                 sequenceS(ap)({
@@ -307,7 +307,7 @@ const parseRecoveryBuff = (
         status.split('と').map(s => parseStatus(s, joined())),
         separator,
         either.flatMap(
-          (statuses): Validated<ParserError, SkillEffect[]> =>
+          (statuses): Validated<MitamaError, SkillEffect[]> =>
             pipe(
               statuses.map(stat =>
                 sequenceS(ap)({
@@ -322,7 +322,7 @@ const parseRecoveryBuff = (
         ),
       ),
     ),
-    option.getOrElse((): Validated<ParserError, SkillEffect[]> => right([])),
+    option.getOrElse((): Validated<MitamaError, SkillEffect[]> => right([])),
   );
 };
 
@@ -339,7 +339,7 @@ const parseHeal = (description: string, path: CallPath = CallPath.empty) => {
         ),
         bind(
           'recovery',
-          ({ range }): Validated<ParserError, SkillEffect> =>
+          ({ range }): Validated<MitamaError, SkillEffect> =>
             sequenceS(ap)({
               type: right('heal' as const),
               range: right(range),
@@ -372,9 +372,9 @@ const parseStackEffect =
   (
     description: string,
     path: CallPath = CallPath.empty,
-  ): Validated<ParserError, SkillEffect[]> => {
+  ): Validated<MitamaError, SkillEffect[]> => {
     const joined = () => path.join('parseStackEffect');
-    const err = (msg: string): ParserError => ({
+    const err = (msg: string): MitamaError => ({
       path: joined().toString(),
       target: description,
       msg,
@@ -430,7 +430,7 @@ const parseStackEffect =
 function parseStack(
   { name, description }: { name: string; description: string },
   path: CallPath = CallPath.empty,
-): Validated<ParserError, SkillEffect[]> {
+): Validated<MitamaError, SkillEffect[]> {
   const branch = (when: string) => path.join(`parseStack[${when}]`);
   return match(name)
     .when(
@@ -456,8 +456,7 @@ function parseStack(
     )
     .when(
       name => name.includes('エーテル'),
-      () =>
-        parseStackEffect(['anima', 'meteor'])(description, branch('Ether')),
+      () => parseStackEffect(['anima', 'meteor'])(description, branch('Ether')),
     )
     .when(
       name => name.includes('ルミナス'),
@@ -569,7 +568,7 @@ const parseKinds = (name: string): Option<readonly SkillKind[]> => {
     ? option.of('heal' as SkillKind)
     : option.none;
 
-  return transpose([elemental, counter, charge, heal]);
+  return sequenceArray([elemental, counter, charge, heal]);
 };
 
 export const parseSkill = ({
@@ -585,7 +584,7 @@ export const parseSkill = ({
     | '妨害'
     | '回復';
   skill: { name: string; description: string };
-}): Validated<ParserError, Skill> =>
+}): Validated<MitamaError, Skill> =>
   sequenceS(ap)({
     raw: right(skill),
     effects: pipe(
