@@ -14,9 +14,9 @@ import {
 import {
   type FilterType,
   elementFilter,
-  elementFilterMap,
   roleFilterMap,
 } from '@/types/filterType';
+import {elementFilterMap} from "@/components/deck-builder/Details";
 
 function RoleCheckbox() {
   const [filter, setFilter] = useAtom(roleFilterAtom);

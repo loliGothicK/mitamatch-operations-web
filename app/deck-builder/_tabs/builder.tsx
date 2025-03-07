@@ -84,7 +84,7 @@ import {
   statusAtom,
   swAtom,
   targetBeforeAtom,
-  targetAfterAtom,
+  targetAfterAtom, type Concentration,
 } from '@/jotai/memoriaAtoms';
 
 import { calcDiff } from '@/evaluate/calc';
@@ -260,7 +260,7 @@ function MemoriaItem({
       if (memoria.name.short === name.short) {
         return {
           ...memoria,
-          concentration: concentrationValue > 0 ? concentrationValue - 1 : 4,
+          concentration: (concentrationValue > 0 ? concentrationValue - 1 : 4) as Concentration,
         };
       }
       return memoria;
@@ -269,7 +269,7 @@ function MemoriaItem({
 
   const handleConcentration = () => {
     if (concentrationValue > 0) {
-      setConcentration(concentrationValue - 1);
+      setConcentration(concentrationValue - 1 as Concentration);
     } else {
       setConcentration(4);
     }
@@ -895,7 +895,7 @@ function VirtualizedList() {
     prev: MemoriaWithConcentration[],
     newMemoria: Memoria,
   ) => {
-    return [...prev, { ...newMemoria, concentration: 4 }];
+    return [...prev, { ...newMemoria, concentration: 4 as Concentration}];
   };
 
   const onDialogClose = () => {
@@ -933,7 +933,7 @@ function VirtualizedList() {
                     setOpen(true);
                     setCandidate({
                       ...memoria[index],
-                      concentration: 4,
+                      concentration: 4 as Concentration,
                     });
                     return;
                   }

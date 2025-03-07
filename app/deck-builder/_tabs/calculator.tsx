@@ -250,7 +250,7 @@ export function Calculator() {
         }
         if (option === '火' || option === '水' || option === '風') {
           return (
-            costume.ex?.description.includes(option) ||
+            costume.ex?.up.description.includes(option) ||
             costume.adx
               ?.flat()
               .some(({ name }) => name.includes(`${option}属性効果増加`))
@@ -261,7 +261,7 @@ export function Calculator() {
     })
     .map(costume => ({
       title: `${costume.lily}/${costume.name}`,
-      ex: costume.ex || costume.adx?.[3][0],
+      desc: costume.ex?.up.name || costume.adx?.[3][0].description,
     }));
 
   return (
@@ -357,16 +357,16 @@ export function Calculator() {
                   costume
                     ? {
                         title: `${costume.lily}/${costume.name}`,
-                        ex: costume.ex || costume.adx?.[3][0],
+                        desc: costume.ex?.up.name || costume.adx?.[3][0].description,
                       }
                     : null
                 }
                 options={costumeOptions.sort((a, b) =>
-                  a.ex?.name && b.ex?.name
-                    ? a.ex.name.localeCompare(b.ex.name)
+                  a.desc && b.desc
+                    ? a.desc.localeCompare(b.desc)
                     : a.title.localeCompare(b.title),
                 )}
-                groupBy={option => option.ex?.name || 'その他'}
+                groupBy={option => option.desc || 'その他'}
                 getOptionLabel={option => option.title}
                 renderInput={params => (
                   <TextField {...params} label='costume' />

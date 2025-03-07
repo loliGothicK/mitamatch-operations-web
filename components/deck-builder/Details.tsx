@@ -14,7 +14,7 @@ import {
   stackKinds,
 } from '@/parser/skill';
 import type { SupportKind } from '@/parser/support';
-import { elementFilter, elementFilterMap } from '@/types/filterType';
+import { elementFilter } from '@/types/filterType';
 
 import { match } from 'ts-pattern';
 import { statusKind, type StatusKind } from '@/parser/common';
@@ -24,6 +24,13 @@ type StatusPattern = `${StatusKind}/${UpDown}`;
 const statusPattern: StatusPattern[] = statusKind.flatMap(s => {
   return [`${s}/UP`, `${s}/DOWN`] as StatusPattern[];
 });
+export const elementFilterMap = {
+  Fire: '火',
+  Water: '水',
+  Wind: '風',
+  Light: '光',
+  Dark: '闇',
+}
 
 export function intoStatusPattern({
   status,

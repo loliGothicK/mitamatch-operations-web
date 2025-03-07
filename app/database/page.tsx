@@ -1196,14 +1196,14 @@ function CounterDataset() {
       normal: memoriaList.filter(
         m =>
           m.kind === '通常範囲' &&
-          m.element === '火' &&
+          m.element === 'Fire' &&
           Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
           Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
       special: memoriaList.filter(
         m =>
           m.kind === '特殊範囲' &&
-          m.element === '火' &&
+          m.element === 'Fire' &&
           Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
           Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
@@ -1214,14 +1214,14 @@ function CounterDataset() {
       normal: memoriaList.filter(
         m =>
           m.kind === '通常範囲' &&
-          m.element === '水' &&
+          m.element === 'Water' &&
           Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
           Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
       special: memoriaList.filter(
         m =>
           m.kind === '特殊範囲' &&
-          m.element === '水' &&
+          m.element === 'Water' &&
           Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
           Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
@@ -1232,14 +1232,14 @@ function CounterDataset() {
       normal: memoriaList.filter(
         m =>
           m.kind === '通常範囲' &&
-          m.element === '風' &&
+          m.element === 'Wind' &&
           Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
           Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,
       special: memoriaList.filter(
         m =>
           m.kind === '特殊範囲' &&
-          m.element === '風' &&
+          m.element === 'Wind' &&
           Lenz.skill.effects.get(m).some(eff => eff.type === 'damage') &&
           Lenz.skill.kinds.get(m)?.some(k => k === 'counter'),
       ).length,

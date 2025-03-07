@@ -1,5 +1,5 @@
 import { either, option } from 'fp-ts';
-import { fromNullable, type Option, sequenceArray } from 'fp-ts/Option';
+import { fromNullable, type Option } from 'fp-ts/Option';
 import { match, P } from 'ts-pattern';
 import {
   parseAmount,
@@ -14,7 +14,7 @@ import { anyhow, type MitamaError, CallPath } from '@/error/error';
 import { bind, Do, getApplicativeValidation, right } from 'fp-ts/Either';
 import { getSemigroup } from 'fp-ts/Array';
 import { sequenceS } from 'fp-ts/Apply';
-import { separator } from '@/fp-ts-ext/function';
+import {separator, transposeArray} from '@/fp-ts-ext/function';
 
 export const elements = ['Fire', 'Water', 'Wind', 'Light', 'Dark'] as const;
 export type Elements = (typeof elements)[number];
@@ -193,7 +193,7 @@ function parseDamage(
     ),
     either.flatMap(({ damage }) =>
       pipe(
-        sequenceArray([
+        transposeArray([
           statChanges('buff', damage.range, description),
           statChanges('debuff', damage.range, description),
         ]),
@@ -568,7 +568,7 @@ const parseKinds = (name: string): Option<readonly SkillKind[]> => {
     ? option.of('heal' as SkillKind)
     : option.none;
 
-  return sequenceArray([elemental, counter, charge, heal]);
+  return transposeArray([elemental, counter, charge, heal]);
 };
 
 export const parseSkill = ({

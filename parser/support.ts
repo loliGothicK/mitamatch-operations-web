@@ -8,9 +8,9 @@ import { pipe } from 'fp-ts/function';
 import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
 import { getSemigroup } from 'fp-ts/Array';
 import { sequenceS } from 'fp-ts/Apply';
-import { fromNullable, type Option, sequenceArray } from 'fp-ts/Option';
+import { fromNullable, type Option } from 'fp-ts/Option';
 import { option, either } from 'fp-ts';
-import { separator } from '@/fp-ts-ext/function';
+import {separator, transposeArray} from '@/fp-ts-ext/function';
 
 export type Probability =
   | 'certain' // 一定確率で
@@ -162,7 +162,7 @@ function parseStatus(
             ),
           ),
         ),
-        sequenceArray,
+        transposeArray,
         option.map(separator),
       ),
     ),
@@ -311,7 +311,7 @@ const parseEffects = (
     parseMpCost(description),
   ];
   return pipe(
-    sequenceArray(effects),
+    transposeArray(effects),
     option.map(separator),
     option.getOrElse(() =>
       toValidated(anyhow(path, description, 'No match support effects found')),

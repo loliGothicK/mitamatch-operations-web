@@ -1,18 +1,10 @@
 export const elementFilter = [
-  'fire',
-  'water',
-  'wind',
-  'light',
-  'dark',
+  'Fire',
+  'Water',
+  'Wind',
+  'Light',
+  'Dark',
 ] as const;
-
-export const elementFilterMap = {
-  fire: '火',
-  water: '水',
-  wind: '風',
-  light: '光',
-  dark: '闇',
-} as const;
 
 export const roleFilter = [
   'normal_single',

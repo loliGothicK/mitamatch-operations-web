@@ -1,6 +1,6 @@
 import { type Either, isLeft } from 'fp-ts/Either';
 import { either, option } from 'fp-ts';
-import { Option } from 'fp-ts/Option';
+import {isSome, Option} from 'fp-ts/Option';
 import { match } from 'ts-pattern';
 
 export type Flatten<T> = T extends unknown[] ? T : T[];
@@ -14,6 +14,13 @@ export const separator = <E, T>(
     ? either.right(right.flat() as Flatten<T>)
     : either.left(left.flat() as Flatten<E>);
 };
+
+export function transposeArray<T>(seq: Option<T>[]): Option<T[]> {
+  const some = seq.filter(isSome);
+  return some.length === 0
+    ? option.none
+    : option.of([...some.map(s => s.value)]);
+}
 
 const isEither = <T, E>(
   m: Option<Either<E, T>> | Either<E, Option<T>>,

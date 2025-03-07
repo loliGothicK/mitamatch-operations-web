@@ -6,7 +6,6 @@ import {
   type ElementFilterType,
   type RoleFilterType,
   elementFilter,
-  elementFilterMap,
   roleFilterMap,
 } from '@/types/filterType';
 import type {
@@ -161,7 +160,7 @@ export const filteredMemoriaAtom = atom(get => {
       });
 
       const element = get(elementFilterAtom).some(filter => {
-        return memoria.element === elementFilterMap[filter];
+        return memoria.element === filter;
       });
 
       const label = get(labelFilterAtom).every(filter => {
