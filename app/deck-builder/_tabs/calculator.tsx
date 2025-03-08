@@ -357,7 +357,9 @@ export function Calculator() {
                   costume
                     ? {
                         title: `${costume.lily}/${costume.name}`,
-                        desc: costume.ex?.up.name || costume.adx?.[3][0].description,
+                        desc:
+                          costume.ex?.up.name ||
+                          costume.adx?.[3][0].description,
                       }
                     : null
                 }

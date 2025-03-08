@@ -10,7 +10,7 @@ import { getSemigroup } from 'fp-ts/Array';
 import { sequenceS } from 'fp-ts/Apply';
 import { fromNullable, type Option } from 'fp-ts/Option';
 import { option, either } from 'fp-ts';
-import {separator, transposeArray} from '@/fp-ts-ext/function';
+import { separator, transposeArray } from '@/fp-ts-ext/function';
 
 export type Probability =
   | 'certain' // 一定確率で

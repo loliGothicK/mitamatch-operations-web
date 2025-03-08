@@ -18,13 +18,12 @@ export const roleFilter = [
 
 // map role filter to japanese
 export const roleFilterMap = {
-  // biome-ignore lint/style/useNamingConvention: <explanation>
   normal_single: '通常単体',
-  // biome-ignore lint/style/useNamingConvention: <explanation>
+
   normal_range: '通常範囲',
-  // biome-ignore lint/style/useNamingConvention: <explanation>
+
   special_single: '特殊単体',
-  // biome-ignore lint/style/useNamingConvention: <explanation>
+
   special_range: '特殊範囲',
   support: '支援',
   interference: '妨害',

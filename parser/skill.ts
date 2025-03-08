@@ -14,7 +14,7 @@ import { anyhow, type MitamaError, CallPath } from '@/error/error';
 import { bind, Do, getApplicativeValidation, right } from 'fp-ts/Either';
 import { getSemigroup } from 'fp-ts/Array';
 import { sequenceS } from 'fp-ts/Apply';
-import {separator, transposeArray} from '@/fp-ts-ext/function';
+import { separator, transposeArray } from '@/fp-ts-ext/function';
 
 export const elements = ['Fire', 'Water', 'Wind', 'Light', 'Dark'] as const;
 export type Elements = (typeof elements)[number];

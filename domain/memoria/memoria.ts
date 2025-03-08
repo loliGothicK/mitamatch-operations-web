@@ -18,7 +18,6 @@ const memoriaSchema = z.object({
   id: z.number().readonly(),
   link: z.string().readonly(),
   name: z.string().readonly(),
-  // biome-ignore lint/style/useNamingConvention: from the original JSON definition
   full_name: z.string().readonly(),
   kind: z
     .enum([
@@ -65,7 +64,6 @@ const memoriaSchema = z.object({
       description: z.string().readonly(),
     })
     .readonly(),
-  // biome-ignore lint/style/useNamingConvention: from the original JSON definition
   legendary_skill: z
     .object({
       name: z.string().readonly(),
@@ -112,9 +110,6 @@ export type Memoria = Omit<
   };
 };
 export type MemoriaId = Memoria['id'];
-export type MemoriaStatus = Memoria['status'];
-export type MemoriaCost = Memoria['cost'];
-export type MemoriaLabels = Memoria['labels'];
 
 export const isLegendary = (memoria: Memoria): boolean =>
   memoria.labels.includes('legendary');

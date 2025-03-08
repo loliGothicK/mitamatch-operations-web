@@ -27,9 +27,9 @@ const orderSchema = z.object({
   status: z.array(z.number()).readonly(),
   effect: z.string().readonly(),
   description: z.string().readonly(),
-  // biome-ignore lint/style/useNamingConvention: <explanation>
+
   prepare_time: z.number().readonly(),
-  // biome-ignore lint/style/useNamingConvention: <explanation>
+
   active_time: z.number().readonly(),
   payed: z.boolean().readonly(),
   kind: z.enum(orderKind).readonly(),

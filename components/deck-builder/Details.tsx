@@ -30,7 +30,7 @@ export const elementFilterMap = {
   Wind: '風',
   Light: '光',
   Dark: '闇',
-}
+};
 
 export function intoStatusPattern({
   status,

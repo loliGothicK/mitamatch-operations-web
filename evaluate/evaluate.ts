@@ -5,12 +5,12 @@ import type {
   Concentration,
   MemoriaWithConcentration,
 } from '@/jotai/memoriaAtoms';
-import {Amount, parseElement, StatusKind} from '@/parser/common';
+import { type Amount, parseElement, type StatusKind } from '@/parser/common';
 import type { Probability } from '@/parser/support';
 import { P, match } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
-import {Elements, isNotStackEffect} from '@/parser/skill';
-import {either} from "fp-ts";
+import { type Elements, isNotStackEffect } from '@/parser/skill';
+import { either } from 'fp-ts';
 
 const NotApplicable = Number.NaN;
 
@@ -65,24 +65,21 @@ function parseEx(description?: string): Map<string, number> {
   return result;
 }
 
-function parseAdx(
-  adx: Costume['adx'],
-  adxLevel: number,
-) {
+function parseAdx(adx: Costume['adx'], adxLevel: number) {
   const effUp = {
     Fire: 1.0,
     Water: 1.0,
     Wind: 1.0,
     Light: 1.0,
     Dark: 1.0,
-  }
+  };
   const rateUp = {
     Fire: 1.0,
     Water: 1.0,
     Wind: 1.0,
     Light: 1.0,
     Dark: 1.0,
-  }
+  };
   if (!adx) {
     return [effUp, rateUp];
   }
@@ -217,7 +214,7 @@ export function evaluate(
     Wind: 1.1,
     Light: 1.0,
     Dark: 1.0,
-  }
+  };
   const graceRate = 1.1;
   const charmRate = 1.1;
   const charmEx = parseAbility(charm?.ability);
@@ -275,7 +272,6 @@ export function evaluate(
       costumeEx.get(memoria.element)! *
       graceRate *
       themeRate[memoria.element] *
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       costumeAdx[memoria.element];
 
     const config = {
@@ -285,31 +281,14 @@ export function evaluate(
       memoria,
       deck,
       adx,
-    }
+    };
     return {
       memoria,
       expected: {
-        damage: damage(
-          [atk, spAtk],
-          [opDef, opSpDef],
-          config,
-          options,
-        ),
-        buff: buff(
-          [atk, spAtk, def, spDef],
-          config,
-          options,
-        ),
-        debuff: debuff(
-          [atk, spAtk, def, spDef],
-          config,
-          options,
-        ),
-        recovery: recovery(
-          def + spDef,
-          config,
-          options,
-        ),
+        damage: damage([atk, spAtk], [opDef, opSpDef], config, options),
+        buff: buff([atk, spAtk, def, spDef], config, options),
+        debuff: debuff([atk, spAtk, def, spDef], config, options),
+        recovery: recovery(def + spDef, config, options),
       },
     };
   });
@@ -322,13 +301,13 @@ export function evaluate(
 }
 
 type Config = {
-  calibration: number,
-  skillLevel: number,
-  range: number,
-  memoria: MemoriaWithConcentration,
-  deck: MemoriaWithConcentration[],
-  adx: { [key in Elements]: number },
-}
+  calibration: number;
+  skillLevel: number;
+  range: number;
+  memoria: MemoriaWithConcentration;
+  deck: MemoriaWithConcentration[];
+  adx: { [key in Elements]: number };
+};
 
 function damage(
   [atk, spAtk]: [number, number],
@@ -479,7 +458,6 @@ function damage(
       }
       const level = _level(up.amount);
       const probability = _probability(support.probability, concentration);
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       return level * (probability + adx[memoria.element]);
     })
     .reduce((acc, cur) => acc + cur, 1);
@@ -1336,10 +1314,8 @@ function support(
     >,
     number
   > = {
-    // biome-ignore lint/style/useNamingConvention: <explanation>
     ATK: 0,
     'Sp.ATK': 0,
-    // biome-ignore lint/style/useNamingConvention: <explanation>
     DEF: 0,
     'Sp.DEF': 0,
     'Fire ATK': 0,

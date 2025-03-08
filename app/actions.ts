@@ -16,7 +16,8 @@ const adapter = new PrismaNeon(pool);
 const prisma = new PrismaClient({ adapter });
 
 export async function generateShortLink(data: { base64: string }) {
-  return crypto.createHash('md5').update(data.base64).digest('hex');
+  return await (async () =>
+    crypto.createHash('md5').update(data.base64).digest('hex'))();
 }
 
 export async function saveShortLink({

@@ -79,7 +79,7 @@ const restore = (
     : ok(
         right.map(([memoria, concentration]) => ({
           ...memoria,
-          concentration: concentration as (0 | 1 | 2 | 3 | 4),
+          concentration: concentration as 0 | 1 | 2 | 3 | 4,
         })),
       );
 };

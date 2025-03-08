@@ -1,9 +1,9 @@
 import { match, P } from 'ts-pattern';
 import { Applicative, type Either, fromPredicate, right } from 'fp-ts/Either';
 import { anyhow, type MitamaError, CallPath } from '@/error/error';
-import { Elements } from '@/parser/skill';
+import type { Elements } from '@/parser/skill';
 import { traverseWithIndex } from 'fp-ts/Array';
-import { toValidated, Validated } from '@/fp-ts-ext/Validated';
+import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
 
 export const parseSequence =
   <T>(

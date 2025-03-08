@@ -1,6 +1,6 @@
 import { type Either, isLeft } from 'fp-ts/Either';
 import { either, option } from 'fp-ts';
-import {isSome, Option} from 'fp-ts/Option';
+import { isSome, type Option } from 'fp-ts/Option';
 import { match } from 'ts-pattern';
 
 export type Flatten<T> = T extends unknown[] ? T : T[];

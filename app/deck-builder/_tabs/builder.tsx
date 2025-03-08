@@ -84,7 +84,8 @@ import {
   statusAtom,
   swAtom,
   targetBeforeAtom,
-  targetAfterAtom, type Concentration,
+  targetAfterAtom,
+  type Concentration,
 } from '@/jotai/memoriaAtoms';
 
 import { calcDiff } from '@/evaluate/calc';
@@ -155,7 +156,7 @@ function Icon({
     .run();
 }
 
-function Concentration({
+function ConcentrationIcon({
   concentration,
   handleConcentration,
 }: {
@@ -260,7 +261,9 @@ function MemoriaItem({
       if (memoria.name.short === name.short) {
         return {
           ...memoria,
-          concentration: (concentrationValue > 0 ? concentrationValue - 1 : 4) as Concentration,
+          concentration: (concentrationValue > 0
+            ? concentrationValue - 1
+            : 4) as Concentration,
         };
       }
       return memoria;
@@ -269,7 +272,7 @@ function MemoriaItem({
 
   const handleConcentration = () => {
     if (concentrationValue > 0) {
-      setConcentration(concentrationValue - 1 as Concentration);
+      setConcentration((concentrationValue - 1) as Concentration);
     } else {
       setConcentration(4);
     }
@@ -304,7 +307,7 @@ function MemoriaItem({
         <ImageListItem>
           <Box>
             <Icon kind={memoria.kind} element={memoria.element} position={70} />
-            <Concentration
+            <ConcentrationIcon
               concentration={concentrationValue}
               handleConcentration={disable || handleConcentration}
             />
@@ -526,7 +529,6 @@ function UnitComponent() {
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
-  // biome-ignore lint/style/useNamingConvention: <explanation>
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
@@ -895,7 +897,7 @@ function VirtualizedList() {
     prev: MemoriaWithConcentration[],
     newMemoria: Memoria,
   ) => {
-    return [...prev, { ...newMemoria, concentration: 4 as Concentration}];
+    return [...prev, { ...newMemoria, concentration: 4 as Concentration }];
   };
 
   const onDialogClose = () => {
