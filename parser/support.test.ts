@@ -1,7 +1,5 @@
 import { data } from '@/domain/memoria/memoria.json';
 
-import { test } from '@jest/globals';
-
 import { parseSupport } from './support';
 import { right } from 'fp-ts/Either';
 
