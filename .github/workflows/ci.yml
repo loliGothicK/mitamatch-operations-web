@@ -49,3 +49,6 @@ jobs:
       - name: Show coverage
         if: github.event_name == 'pull_request'
         uses: davelosert/vitest-coverage-report-action@v2.8.0
+
+      - name: Build
+        run: pnpm build
