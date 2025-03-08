@@ -218,7 +218,7 @@ importers:
         version: 8.5.14
       jest:
         specifier: 29.7.0
-        version: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3))
+        version: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3))
       jest-environment-jsdom:
         specifier: 29.7.0
         version: 29.7.0
@@ -226,8 +226,8 @@ importers:
         specifier: 6.4.1
         version: 6.4.1(typescript@5.7.3)
       ts-node:
-        specifier: github:TypeStrong/ts-node#main
-        version: https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3)
+        specifier: 11.0.0-beta.1
+        version: 11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3)
       typescript:
         specifier: 5.7.3
         version: 5.7.3
@@ -882,7 +882,6 @@ packages:
 
   '@jest/core@29.7.0':
     resolution: {integrity: sha512-n7aeXWKMnGtDA48y8TLWJPJmLmmZ642Ceo78cYWEpiD7FzDgmNDV/GCVRorPABdXLJZ/9wzzgZAlHjXjxDHGsg==}
-    version: 29.7.0
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     peerDependencies:
       node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
@@ -2620,7 +2619,6 @@ packages:
 
   create-jest@29.7.0:
     resolution: {integrity: sha512-Adz2bdH0Vq3F53KEMJOoftQFutWCukm6J24wbPWRO4k1kMY7gS7ds/uoJkNuV8wDCtWWnuwGcJwpWcih+zEW1Q==}
-    version: 29.7.0
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
 
@@ -3242,7 +3240,6 @@ packages:
 
   jest-cli@29.7.0:
     resolution: {integrity: sha512-OVVobw2IubN/GSYsxETi+gOe7Ka59EFMR/twOU3Jb2GnKKeMGJB5SGUUrEz3SFVmJASUdZUzy83sLNNQ2gZslg==}
-    version: 29.7.0
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
     peerDependencies:
@@ -3253,7 +3250,6 @@ packages:
 
   jest-config@29.7.0:
     resolution: {integrity: sha512-uXbpfeQ7R6TZBqI3/TxCU4q4ttk3u0PJeC+E0zbfSoSjq6bJ7buBPxzQPL0ifrkY4DNu4JUdk0ImlBUYi840eQ==}
-    version: 29.7.0
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     peerDependencies:
       '@types/node': '*'
@@ -3368,7 +3364,6 @@ packages:
 
   jest@29.7.0:
     resolution: {integrity: sha512-NIy3oAFp9shda19hy4HK0HRTWKtPJmGdnvywu01nOqNC2vZg+Z+fvJDxpMQA88eb2I9EcafcdjYgsDthnYTvGw==}
-    version: 29.7.0
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     hasBin: true
     peerDependencies:
@@ -4377,9 +4372,8 @@ packages:
       typescript:
         optional: true
 
-  ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a:
-    resolution: {tarball: https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a}
-    version: 11.0.0-beta.1
+  ts-node@11.0.0-beta.1:
+    resolution: {integrity: sha512-WMSROP+1pU22Q/Tm40mjfRg130yD8i0g6ROST04ZpocfH8sl1zD75ON4XQMcBEVViXMVemJBH0alflE7xePdRA==}
     hasBin: true
     peerDependencies:
       '@swc/core': '>=1.3.85'
@@ -5224,7 +5218,7 @@ snapshots:
       jest-util: 29.7.0
       slash: 3.0.0
 
-  '@jest/core@29.7.0(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3))':
+  '@jest/core@29.7.0(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3))':
     dependencies:
       '@jest/console': 29.7.0
       '@jest/reporters': 29.7.0
@@ -5238,7 +5232,7 @@ snapshots:
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
-      jest-config: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3))
+      jest-config: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3))
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -7400,13 +7394,13 @@ snapshots:
       path-type: 4.0.0
       yaml: 1.10.2
 
-  create-jest@29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3)):
+  create-jest@29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3)):
     dependencies:
       '@jest/types': 29.6.3
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.11
-      jest-config: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3))
+      jest-config: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3))
       jest-util: 29.7.0
       prompts: 2.4.2
     transitivePeerDependencies:
@@ -8101,16 +8095,16 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  jest-cli@29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3)):
+  jest-cli@29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3)):
     dependencies:
-      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3))
+      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3))
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
       chalk: 4.1.2
-      create-jest: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3))
+      create-jest: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3))
       exit: 0.1.2
       import-local: 3.2.0
-      jest-config: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3))
+      jest-config: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3))
       jest-util: 29.7.0
       jest-validate: 29.7.0
       yargs: 17.7.2
@@ -8120,7 +8114,7 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-config@29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3)):
+  jest-config@29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3)):
     dependencies:
       '@babel/core': 7.26.9
       '@jest/test-sequencer': 29.7.0
@@ -8146,7 +8140,7 @@ snapshots:
       strip-json-comments: 3.1.1
     optionalDependencies:
       '@types/node': 22.13.4
-      ts-node: https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3)
+      ts-node: 11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3)
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -8387,12 +8381,12 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3)):
+  jest@29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3)):
     dependencies:
-      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3))
+      '@jest/core': 29.7.0(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3))
       '@jest/types': 29.6.3
       import-local: 3.2.0
-      jest-cli: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3))
+      jest-cli: 29.7.0(@types/node@22.13.4)(babel-plugin-macros@3.1.0)(ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3))
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -9678,7 +9672,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.7.3
 
-  ts-node@https://codeload.github.com/TypeStrong/ts-node/tar.gz/ddb05ef23be92a90c3ecac5a0220435c65ebbd2a(@types/node@22.13.4)(typescript@5.7.3):
+  ts-node@11.0.0-beta.1(@types/node@22.13.4)(typescript@5.7.3):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node14': 1.0.3
