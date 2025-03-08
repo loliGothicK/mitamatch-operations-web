@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { type MouseEvent, Suspense, useEffect, useState } from 'react';
 import DifferenceIcon from '@mui/icons-material/Difference';
 import type { Unit } from '@/domain/types';
-import { generateShortLink, getShortLink, saveShortLink } from '@/app/actions';
+import { generateShortLink, restore, saveShortLink } from '@/actions';
 
 import {
   Add,
@@ -491,28 +491,28 @@ function UnitComponent() {
           setDeck(deck);
           setLegendaryDeck(legendaryDeck);
           setCompare(undefined);
+        } else {
+          throw new Error(`Failed to restore deck: \n${decodeResult.error}`);
         }
       } else if (value) {
-        const base64 =
-          value.length === 32 ? await getShortLink({ shortUrl: value }) : value;
-        const decodeResult = decodeDeck(base64);
-        if (decodeResult.isOk()) {
-          const { sw, deck, legendaryDeck } = decodeResult.value;
-          setSw(sw);
-          setRoleFilter(
-            sw === 'shield'
-              ? ['support', 'interference', 'recovery']
-              : [
-                  'normal_single',
-                  'normal_range',
-                  'special_single',
-                  'special_range',
-                ],
-          );
-          setDeck(deck);
-          setLegendaryDeck(legendaryDeck);
-          setCompare(undefined);
-        }
+        const { sw, deck, legendaryDeck } = await restore({
+          target: 'deck',
+          short: value,
+        });
+        setSw(sw);
+        setRoleFilter(
+          sw === 'shield'
+            ? ['support', 'interference', 'recovery']
+            : [
+                'normal_single',
+                'normal_range',
+                'special_single',
+                'special_range',
+              ],
+        );
+        setDeck(deck);
+        setLegendaryDeck(legendaryDeck);
+        setCompare(undefined);
       }
     })();
   }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, params.get, setCompare]);
@@ -1378,7 +1378,7 @@ function ShareButton() {
     await navigator.clipboard.writeText(url);
   };
 
-  const base64 = encodeDeck(sw, deck, legendaryDeck);
+  const full = encodeDeck(sw, deck, legendaryDeck);
 
   return (
     <PopupState
@@ -1397,9 +1397,9 @@ function ShareButton() {
               onClick={async () => {
                 popupState.close();
                 handleClick('short');
-                const hash = await generateShortLink({ base64 });
-                setUrl(`https://mitama.io/deck-builder?deck=${hash}`);
-                await saveShortLink({ base64, hash });
+                const short = await generateShortLink({ full });
+                setUrl(`https://mitama.io/deck-builder?deck=${short}`);
+                await saveShortLink({ target: 'deck', full, short });
               }}
             >
               {'short link'}
@@ -1408,7 +1408,7 @@ function ShareButton() {
               onClick={() => {
                 popupState.close();
                 handleClick('full');
-                setUrl(`https://mitama.io/deck-builder?deck=${base64}`);
+                setUrl(`https://mitama.io/deck-builder?deck=${full}`);
               }}
             >
               {'full link'}

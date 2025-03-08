@@ -63,7 +63,7 @@ import { takeLeft } from 'fp-ts/Array';
 import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Virtuoso } from 'react-virtuoso';
-import { generateShortLink, getShortLink } from '@/app/actions';
+import { generateShortLink, restore, saveShortLink } from '@/actions';
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -320,12 +320,8 @@ function Timeline() {
           setTimeline(decodeResult.value);
         }
       } else if (value) {
-        const base64 =
-          value.length === 32 ? await getShortLink({ shortUrl: value }) : value;
-        const decodeResult = decodeTimeline(base64);
-        if (decodeResult.isOk()) {
-          setTimeline(decodeResult.value);
-        }
+        const timeline = await restore({ target: 'timeline', short: value });
+        setTimeline(timeline);
       }
     })();
   }, [setTimeline, params.get]);
@@ -536,7 +532,7 @@ function ShareButton() {
     await navigator.clipboard.writeText(url);
   };
 
-  const base64 = encodeTimeline(timeline);
+  const full = encodeTimeline(timeline);
 
   return (
     <PopupState
@@ -555,8 +551,9 @@ function ShareButton() {
               onClick={async () => {
                 popupState.close();
                 handleClick('short');
-                const hash = await generateShortLink({ base64 });
-                setUrl(`https://mitama.io/timeline-builder?timeline=${hash}`);
+                const short = await generateShortLink({ full });
+                setUrl(`https://mitama.io/timeline-builder?timeline=${short}`);
+                await saveShortLink({ target: 'deck', full, short });
               }}
             >
               {'short link'}
@@ -565,7 +562,7 @@ function ShareButton() {
               onClick={() => {
                 popupState.close();
                 handleClick('full');
-                setUrl(`https://mitama.io/timeline-builder?timeline=${base64}`);
+                setUrl(`https://mitama.io/timeline-builder?timeline=${full}`);
               }}
             >
               {'full link'}

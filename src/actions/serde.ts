@@ -27,7 +27,13 @@ export function encodeDeck(
   );
 }
 
-const Concentration = z.number().int().min(0).max(4);
+const Concentration = z.union([
+  z.literal(0),
+  z.literal(1),
+  z.literal(2),
+  z.literal(3),
+  z.literal(4),
+]);
 
 const encodedUnit = z.object({
   sw: z.union([z.literal('sword'), z.literal('shield')]),
@@ -71,7 +77,10 @@ const restore = (
   const { left, right } = pipe(
     cov,
     partition(
-      (item): item is [Memoria, number, number] => item[0] !== undefined,
+      (
+        item,
+      ): item is [Memoria, MemoriaWithConcentration['concentration'], number] =>
+        item[0] !== undefined,
     ),
   );
   return left.length > 0
@@ -79,7 +88,7 @@ const restore = (
     : ok(
         right.map(([memoria, concentration]) => ({
           ...memoria,
-          concentration: concentration as 0 | 1 | 2 | 3 | 4,
+          concentration,
         })),
       );
 };

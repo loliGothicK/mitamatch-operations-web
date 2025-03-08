@@ -2,7 +2,7 @@
 
 import { Layout } from '@/components/Layout';
 import { Documents } from '@/components/docs/Documents';
-import Intro from '@/docs/index.mdx';
+import Intro from '@/mdx/index.mdx';
 import '@/styles/markdown.css';
 
 export default function Page() {
