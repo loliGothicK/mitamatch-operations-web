@@ -43,7 +43,7 @@
     "@sentry/opentelemetry-node": "7.120.3",
     "@sentry/profiling-node": "9.2.0",
     "@vercel/analytics": "1.5.0",
-    "@vercel/otel": "1.10.1",
+    "@vercel/otel": "1.10.2",
     "@vercel/speed-insights": "1.2.0",
     "dotenv": "16.4.7",
     "fp-ts": "2.16.9",
