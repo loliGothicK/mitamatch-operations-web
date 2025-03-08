@@ -105,8 +105,8 @@ function Icon({
   element,
   position,
 }: {
-  kind: string;
-  element: string;
+  kind: Memoria['kind'];
+  element: Memoria['element'];
   position?: number;
 }) {
   const kindImage = match(kind)
@@ -131,7 +131,7 @@ function Icon({
     .with('回復', () => (
       <Image src={'/Recovery.png'} alt={'kind'} width={25} height={25} />
     ))
-    .run();
+    .exhaustive();
 
   const avatar = (color: string) => (
     <Avatar
@@ -148,12 +148,12 @@ function Icon({
   );
 
   return match(element)
-    .with('火', () => avatar(red[500]))
-    .with('水', () => avatar(blue[500]))
-    .with('風', () => avatar(green[500]))
-    .with('光', () => avatar(yellow[500]))
-    .with('闇', () => avatar(purple[500]))
-    .run();
+    .with('Fire', () => avatar(red[500]))
+    .with('Water', () => avatar(blue[500]))
+    .with('Wind', () => avatar(green[500]))
+    .with('Light', () => avatar(yellow[500]))
+    .with('Dark', () => avatar(purple[500]))
+    .exhaustive();
 }
 
 function ConcentrationIcon({
