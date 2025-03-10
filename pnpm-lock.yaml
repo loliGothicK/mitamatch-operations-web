@@ -205,8 +205,8 @@ importers:
         specifier: 19.0.4
         version: 19.0.4(@types/react@19.0.10)
       '@types/ws':
-        specifier: 8.5.14
-        version: 8.5.14
+        specifier: 8.18.0
+        version: 8.18.0
       '@vitejs/plugin-react':
         specifier: 4.3.4
         version: 4.3.4(vite@6.2.1(@types/node@22.13.4)(terser@5.39.0)(tsx@4.19.3))
@@ -2572,8 +2572,8 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@types/ws@8.5.14':
-    resolution: {integrity: sha512-bd/YFLW+URhBzMXurx7lWByOu+xzU9+kb3RboOteXYDfW+tr+JZa99OyNmPINEGB/ahzKrEuc8rcv4gnpJmxTw==}
+  '@types/ws@8.18.0':
+    resolution: {integrity: sha512-8svvI3hMyvN0kKCJMvTJP/x6Y/EoQbepff882wL+Sn5QsXb3etnamgrJq4isrBxSJj5L2AuXcI0+bgkoAXGUJw==}
 
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
@@ -7632,7 +7632,7 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@types/ws@8.5.14':
+  '@types/ws@8.18.0':
     dependencies:
       '@types/node': 22.13.4
 
