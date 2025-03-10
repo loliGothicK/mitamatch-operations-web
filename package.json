@@ -40,7 +40,7 @@
     "@sentry/opentelemetry-node": "7.120.3",
     "@sentry/profiling-node": "9.5.0",
     "@vercel/analytics": "1.5.0",
-    "@vercel/otel": "1.10.2",
+    "@vercel/otel": "1.10.3",
     "@vercel/speed-insights": "1.2.0",
     "drizzle-cuid2": "2.0.0",
     "drizzle-orm": "0.40.0",
