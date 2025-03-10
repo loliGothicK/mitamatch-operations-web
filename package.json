@@ -45,7 +45,7 @@
     "drizzle-cuid2": "2.0.0",
     "drizzle-orm": "0.40.0",
     "fp-ts": "2.16.9",
-    "jotai": "2.12.1",
+    "jotai": "2.12.2",
     "js-cookie": "3.0.5",
     "material-ui-popup-state": "5.3.3",
     "monocle-ts": "2.3.13",

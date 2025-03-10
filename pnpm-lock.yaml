@@ -105,8 +105,8 @@ importers:
         specifier: 2.16.9
         version: 2.16.9
       jotai:
-        specifier: 2.12.1
-        version: 2.12.1(@types/react@19.0.10)(react@19.0.0)
+        specifier: 2.12.2
+        version: 2.12.2(@types/react@19.0.10)(react@19.0.0)
       js-cookie:
         specifier: 3.0.5
         version: 3.0.5
@@ -3594,8 +3594,8 @@ packages:
     resolution: {integrity: sha512-eIz2msL/EzL9UFTFFx7jBTkeZfku0yUAyZZZmJ93H2TYEiroIx2PQjEXcwYtYl8zXCxb+PAmA2hLIt/6ZEkPHw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  jotai@2.12.1:
-    resolution: {integrity: sha512-VUW0nMPYIru5g89tdxwr9ftiVdc/nGV9jvHISN8Ucx+m1vI9dBeHemfqYzEuw5XSkmYjD/MEyApN9k6yrATsZQ==}
+  jotai@2.12.2:
+    resolution: {integrity: sha512-oN8715y7MkjXlSrpyjlR887TOuc/NLZMs9gvgtfWH/JP47ChwO0lR2ijSwBvPMYyXRAPT+liIAhuBavluKGgtA==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@types/react': '>=17.0.0'
@@ -8478,7 +8478,7 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jotai@2.12.1(@types/react@19.0.10)(react@19.0.0):
+  jotai@2.12.2(@types/react@19.0.10)(react@19.0.0):
     optionalDependencies:
       '@types/react': 19.0.10
       react: 19.0.0
