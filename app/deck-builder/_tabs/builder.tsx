@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { type MouseEvent, Suspense, useEffect, useState } from 'react';
 import DifferenceIcon from '@mui/icons-material/Difference';
 import type { Unit } from '@/domain/types';
-import { generateShortLink, restore, saveShortLink } from '@/actions';
+import { generateShortLink, restore, saveShortLink } from '@/actions/serde';
 
 import {
   Add,
@@ -60,7 +60,7 @@ import {
 import type { SelectChangeEvent, Theme } from '@mui/material';
 import { blue, green, purple, red, yellow } from '@mui/material/colors';
 
-import { decodeDeck, encodeDeck } from '@/actions/serde';
+import { decodeDeck, encodeDeck } from '@/encode_decode/serde';
 import Details from '@/components/deck-builder/Details';
 import Filter from '@/components/deck-builder/Filter';
 import Search from '@/components/deck-builder/Search';

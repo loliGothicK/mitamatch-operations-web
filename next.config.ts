@@ -7,6 +7,17 @@ import rehypeImageSize from './plugin/rehype-image-size.mjs';
 /** @types {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https' as const,
+        hostname: 'cdn.discordapp.com',
+        port: '',
+        pathname: '/**',
+        search: '',
+      },
+    ],
+  },
   // biome-ignore lint/suspicious/useAwait: <explanation>
   headers: async () => {
     return [

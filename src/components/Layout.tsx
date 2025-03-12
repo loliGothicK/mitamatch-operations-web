@@ -1,7 +1,7 @@
 import Footer from '@/components/Footer';
 import { mainListItems } from '@/components/home/listItems';
 import { themeOptions } from '@/theme/theme';
-import { DarkMode, LightMode } from '@mui/icons-material';
+import { DarkMode, LightMode, Person } from '@mui/icons-material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import MenuIcon from '@mui/icons-material/Menu';
 import MuiAppBar, {
@@ -31,6 +31,9 @@ import {
   useMemo,
   useState,
 } from 'react';
+import { redirect } from 'next/navigation';
+import { defaultSession, SessionData } from '@/session/sessionData';
+import Image from 'next/image';
 const drawerWidth: number = 240;
 
 interface AppBarProps extends MuiAppBarProps {
@@ -85,12 +88,30 @@ const Drawer = styled(MuiDrawer, {
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function BasicLayout({ children }: { children: ReactNode }) {
+  const [session, setSession] = useState<SessionData>(defaultSession);
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  useEffect(() => {
+    (async () => {
+      fetch('http://localhost:3000/api/session', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then(session => {
+          if (session.isLoggedIn) {
+            setSession(session);
+          }
+        });
+    })();
+  }, []);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -125,6 +146,20 @@ function BasicLayout({ children }: { children: ReactNode }) {
             color='inherit'
           >
             {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
+          </IconButton>
+          <IconButton
+            onClick={() => redirect('http://localhost:3000/api/auth/discord')}
+          >
+            {(session.userId !== '' && session.avatar) ? (
+              <Image
+                src={`https://cdn.discordapp.com/avatars/${session.userId}/${session.avatar}.png`}
+                alt={'avatar'}
+                width={20}
+                height={20}
+              />
+            ) : (
+              <Person sx={{ flexGrow: 0.05 }} />
+            )}
           </IconButton>
         </Toolbar>
       </AppBar>

@@ -19,7 +19,7 @@ import type {
   VanguardSupportSearch,
 } from '@/types/searchType';
 
-import { encodeDeck } from '@/actions/serde';
+import { encodeDeck } from '@/encode_decode/serde';
 import { charmList } from '@/domain/charm/charm';
 import { costumeList } from '@/domain/costume/costume';
 import Cookies from 'js-cookie';

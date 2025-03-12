@@ -3,9 +3,9 @@
 import crypto from 'node:crypto';
 
 import { drizzle } from 'drizzle-orm/neon-http';
-import { decksTable, timelinesTable } from '@/db/schema';
+import { decks, timelines } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import { decodeDeck, decodeTimeline } from '@/actions/serde';
+import { decodeDeck, decodeTimeline } from '@/encode_decode/serde';
 import type { Unit } from '@/domain/types';
 import type { OrderWithPic } from '@/jotai/orderAtoms';
 import { match } from 'ts-pattern';
@@ -25,17 +25,17 @@ export async function saveShortLink({
   short,
 }: { target: 'deck' | 'timeline'; full: string; short: string }) {
   if (target === 'deck') {
-    const deck: typeof decksTable.$inferInsert = {
+    const deck: typeof decks.$inferInsert = {
       full,
       short,
     };
-    return db.insert(decksTable).values(deck);
+    return db.insert(decks).values(deck);
   }
-  const timeline: typeof timelinesTable.$inferInsert = {
+  const timeline: typeof timelines.$inferInsert = {
     full,
     short,
   };
-  return db.insert(timelinesTable).values(timeline);
+  return db.insert(timelines).values(timeline);
 }
 export async function restore(_: {
   target: 'deck';
@@ -56,25 +56,26 @@ export async function restore({
     if (target === 'deck') {
       const deck = await db
         .select({
-          full: decksTable.full,
+          full: decks.full,
         })
-        .from(decksTable)
-        .where(eq(decksTable.short, short));
-      if (deck) {
+        .from(decks)
+        .where(eq(decks.short, short));
+      if (deck.length === 1) {
         return deck[0].full;
       }
+      return short;
     } else {
       const timeline = await db
         .select({
-          full: decksTable.full,
+          full: timelines.full,
         })
-        .from(timelinesTable)
-        .where(eq(timelinesTable.short, short));
-      if (timeline) {
+        .from(timelines)
+        .where(eq(timelines.short, short));
+      if (timeline.length === 1) {
         return timeline[0].full;
       }
+      return short;
     }
-    return short;
   })();
   return match(target)
     .with('deck', () => decodeDeck(base64)._unsafeUnwrap())
