@@ -2,8 +2,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import {decrypt, encrypt} from '@/lib/session';
-import {cookies} from "next/headers";
+import { decrypt, encrypt } from '@/lib/session';
+import { cookies } from 'next/headers';
 
 export async function GET(request: NextRequest) {
   const cookie = request.cookies.get('session')?.value;

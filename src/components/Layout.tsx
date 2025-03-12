@@ -1,21 +1,26 @@
 import Footer from '@/components/Footer';
 import { mainListItems } from '@/components/home/listItems';
 import { themeOptions } from '@/theme/theme';
-import { DarkMode, LightMode, Person } from '@mui/icons-material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import MenuIcon from '@mui/icons-material/Menu';
-import MuiAppBar, {
+import {
+  DarkMode,
+  LightMode,
+  Person,
+  ChevronLeft,
+  Menu,
+} from '@mui/icons-material';
+import {
+  AppBar as MuiAppBar,
   type AppBarProps as MuiAppBarProps,
-} from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import MuiDrawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+  Box,
+  Container,
+  CssBaseline,
+  Divider,
+  Drawer as MuiDrawer,
+  IconButton,
+  List,
+  Toolbar,
+  Typography,
+} from '@mui/material';
 import {
   ThemeProvider,
   createTheme,
@@ -128,7 +133,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
               ...(open && { display: 'none' }),
             }}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <Typography
             component='h1'
@@ -150,7 +155,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
           <IconButton
             onClick={() => redirect('http://localhost:3000/api/auth/discord')}
           >
-            {(session.userId !== '' && session.avatar) ? (
+            {session.userId !== '' && session.avatar ? (
               <Image
                 src={`https://cdn.discordapp.com/avatars/${session.userId}/${session.avatar}.png`}
                 alt={'avatar'}
@@ -158,7 +163,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
                 height={20}
               />
             ) : (
-              <Person sx={{ flexGrow: 0.05 }} />
+              <Person sx={{ flexGrow: 0.05 }} width={20} height={20} />
             )}
           </IconButton>
         </Toolbar>
@@ -173,7 +178,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
           }}
         >
           <IconButton onClick={toggleDrawer}>
-            <ChevronLeftIcon />
+            <ChevronLeft />
           </IconButton>
         </Toolbar>
         <Divider />

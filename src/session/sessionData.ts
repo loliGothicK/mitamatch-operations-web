@@ -3,7 +3,7 @@ export interface SessionData {
   userName: string;
   userEmail: string;
   isLoggedIn: boolean;
-  avatar?: string;
+  avatar?: string | null;
   expires: number;
 }
 
