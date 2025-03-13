@@ -103,7 +103,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     (async () => {
-      fetch('http://localhost:3000/api/session', {
+      fetch(`${process.env.MITAMATCH_HOST}/api/session`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
             {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
           </IconButton>
           <IconButton
-            onClick={() => redirect('http://localhost:3000/api/auth/discord')}
+            onClick={() => redirect(`${process.env.MITAMATCH_HOST}/api/auth/discord`)}
           >
             {session.userId !== '' && session.avatar ? (
               <Image

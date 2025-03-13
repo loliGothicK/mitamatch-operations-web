@@ -11,7 +11,7 @@ const discordTokenSchema = z.object({
 
 const OAUTH_QUERY = new URLSearchParams({
   client_id: process.env.DISCORD_CLIENT_ID!,
-  redirect_uri: 'http://localhost:3000/api/auth/discord',
+  redirect_uri: `${process.env.MITAMATCH_HOST}/api/auth/discord`,
   response_type: 'code',
   scope: 'identify email',
 }).toString();
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
     client_id: process.env.DISCORD_CLIENT_ID!,
     client_secret: process.env.DISCORD_CLIENT_SECRET!,
     grant_type: 'authorization_code',
-    redirect_uri: 'http://localhost:3000/api/auth/discord',
+    redirect_uri: `${process.env.MITAMATCH_HOST}/api/auth/discord`,
     code,
   }).toString();
 
@@ -55,7 +55,7 @@ export async function GET(req: NextRequest) {
 
   const user = await discordOauth2.getUser(token.data.access_token);
 
-  const saved = await fetch('http://localhost:3000/api/session', {
+  const saved = await fetch(`${process.env.MITAMATCH_HOST}/api/session`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
