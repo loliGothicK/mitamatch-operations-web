@@ -1,3 +1,5 @@
+'use client';
+
 import Footer from '@/components/Footer';
 import { mainListItems } from '@/components/home/listItems';
 import { themeOptions } from '@/theme/theme';
@@ -37,8 +39,9 @@ import {
   useState,
 } from 'react';
 import { redirect } from 'next/navigation';
-import { defaultSession, SessionData } from '@/session/sessionData';
+import { defaultSession, type SessionData } from '@/session/sessionData';
 import Image from 'next/image';
+import { getUser } from '@/actions/auth';
 const drawerWidth: number = 240;
 
 interface AppBarProps extends MuiAppBarProps {
@@ -93,7 +96,8 @@ const Drawer = styled(MuiDrawer, {
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function BasicLayout({ children }: { children: ReactNode }) {
-  const [session, setSession] = useState<SessionData>(defaultSession);
+  const [user, setUser] =
+    useState<Omit<SessionData, 'expires'>>(defaultSession);
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -103,110 +107,114 @@ function BasicLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     (async () => {
-      fetch(`${process.env.MITAMATCH_HOST}/api/session`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(res => res.json())
-        .then(session => {
-          if (session.isLoggedIn) {
-            setSession(session);
-          }
+      const user = await getUser();
+      if (user) {
+        setUser({
+          ...user,
+          isLoggedIn: true,
         });
+      }
     })();
   }, []);
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position='absolute' open={open}>
-        <Toolbar>
-          <IconButton
-            edge='start'
-            color='inherit'
-            aria-label='open drawer'
-            onClick={toggleDrawer}
+    <>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position='absolute' open={open}>
+          <Toolbar>
+            <IconButton
+              edge='start'
+              color='inherit'
+              aria-label='open drawer'
+              onClick={toggleDrawer}
+              sx={{
+                marginRight: '36px',
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <Menu />
+            </IconButton>
+            <Typography
+              component='h1'
+              variant='h6'
+              color='inherit'
+              noWrap
+              sx={{ flexGrow: 1 }}
+            >
+              Mitamatch Operations for Web
+            </Typography>
+
+            <IconButton
+              sx={{ ml: 1 }}
+              onClick={colorMode.toggleColorMode}
+              color='inherit'
+            >
+              {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
+            </IconButton>
+            <IconButton onClick={() => redirect('/api/auth/discord')}>
+              {user.isLoggedIn ? (
+                user.userAvatar !== 'default' ? (
+                  <Image
+                    src={`https://cdn.discordapp.com/avatars/${user.userId}/${user.userAvatar}.png`}
+                    alt={'avatar'}
+                    width={20}
+                    height={20}
+                  />
+                ) : (
+                  <Image
+                    src={'https://cdn.discordapp.com/embed/avatars/0.png'}
+                    alt={'avatar'}
+                    width={20}
+                    height={20}
+                  />
+                )
+              ) : (
+                <Person sx={{ flexGrow: 0.05 }} width={20} height={20} />
+              )}
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant='permanent' open={open}>
+          <Toolbar
             sx={{
-              marginRight: '36px',
-              ...(open && { display: 'none' }),
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              px: [1],
             }}
           >
-            <Menu />
-          </IconButton>
-          <Typography
-            component='h1'
-            variant='h6'
-            color='inherit'
-            noWrap
-            sx={{ flexGrow: 1 }}
-          >
-            Mitamatch Operations for Web
-          </Typography>
-
-          <IconButton
-            sx={{ ml: 1 }}
-            onClick={colorMode.toggleColorMode}
-            color='inherit'
-          >
-            {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
-          </IconButton>
-          <IconButton
-            onClick={() => redirect(`${process.env.MITAMATCH_HOST}/api/auth/discord`)}
-          >
-            {session.userId !== '' && session.avatar ? (
-              <Image
-                src={`https://cdn.discordapp.com/avatars/${session.userId}/${session.avatar}.png`}
-                alt={'avatar'}
-                width={20}
-                height={20}
-              />
-            ) : (
-              <Person sx={{ flexGrow: 0.05 }} width={20} height={20} />
-            )}
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant='permanent' open={open}>
-        <Toolbar
+            <IconButton onClick={toggleDrawer}>
+              <ChevronLeft />
+            </IconButton>
+          </Toolbar>
+          <Divider />
+          <List component='nav'>{mainListItems}</List>
+        </Drawer>
+        <Box
+          component='main'
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            px: [1],
+            flexGrow: 1,
+            height: '100vh',
+            overflow: 'auto',
+            scrollPaddingTop: '100px',
           }}
         >
-          <IconButton onClick={toggleDrawer}>
-            <ChevronLeft />
-          </IconButton>
-        </Toolbar>
-        <Divider />
-        <List component='nav'>{mainListItems}</List>
-      </Drawer>
-      <Box
-        component='main'
-        sx={{
-          flexGrow: 1,
-          height: '100vh',
-          overflow: 'auto',
-          scrollPaddingTop: '100px',
-        }}
-      >
-        <Toolbar />
-        <Container sx={{ mt: 4, mb: 4, minHeight: '75vh', minWidth: '80vw' }}>
-          {/* Main Contents */}
-          {children}
-        </Container>
-        <Footer
-          sx={{
-            position: 'absolute',
-            bottom: 0,
-            width: '25vh',
-          }}
-        />
+          <Toolbar />
+          <Container sx={{ mt: 4, mb: 4, minHeight: '75vh', minWidth: '80vw' }}>
+            {/* Main Contents */}
+            {children}
+          </Container>
+          <Footer
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              width: '25vh',
+            }}
+          />
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }
 

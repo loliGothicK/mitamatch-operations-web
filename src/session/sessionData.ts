@@ -3,7 +3,7 @@ export interface SessionData {
   userName: string;
   userEmail: string;
   isLoggedIn: boolean;
-  avatar?: string | null;
+  userAvatar: string;
   expires: number;
 }
 
@@ -11,6 +11,7 @@ export const defaultSession: SessionData = {
   userId: '',
   userName: '',
   userEmail: '',
+  userAvatar: 'default',
   isLoggedIn: false,
   expires: 0,
 };

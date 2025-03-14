@@ -64,18 +64,17 @@ export async function restore({
         return deck[0].full;
       }
       return short;
-    } else {
-      const timeline = await db
-        .select({
-          full: timelines.full,
-        })
-        .from(timelines)
-        .where(eq(timelines.short, short));
-      if (timeline.length === 1) {
-        return timeline[0].full;
-      }
-      return short;
     }
+    const timeline = await db
+      .select({
+        full: timelines.full,
+      })
+      .from(timelines)
+      .where(eq(timelines.short, short));
+    if (timeline.length === 1) {
+      return timeline[0].full;
+    }
+    return short;
   })();
   return match(target)
     .with('deck', () => decodeDeck(base64)._unsafeUnwrap())
