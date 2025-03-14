@@ -14,3 +14,14 @@ export const timelines = pgTable('timelines', {
   short: text().unique().notNull(),
   createdAt: date().defaultNow(),
 });
+
+export const users = pgTable('users', {
+  id: cuid2().defaultRandom().primaryKey(),
+  discordId: text().unique().notNull(),
+  name: text().notNull(),
+  email: text().unique().notNull(),
+  avatar: text().notNull().default('default'),
+  accessToken: text().notNull(),
+  refreshToken: text().notNull(),
+  createdAt: date().defaultNow(),
+});
