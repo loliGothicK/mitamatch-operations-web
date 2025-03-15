@@ -1,8 +1,14 @@
 import type { Unit } from '@/domain/types';
-import type { OrderWithPic } from '@/jotai/orderAtoms';
 import { match } from 'ts-pattern';
 import { decodeDeck, decodeTimeline } from '@/encode_decode/serde';
 import prisma from '@/database/client';
+import type { Order } from '@/domain/order/order';
+
+type OrderWithPic = Order & {
+  delay?: number;
+  pic?: string;
+  sub?: string;
+};
 
 export async function restore(_: {
   target: 'deck';

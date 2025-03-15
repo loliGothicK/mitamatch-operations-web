@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { restore } from '@/actions/restore';
+import type { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
@@ -9,10 +9,14 @@ export const size = {
 };
 export const contentType = 'image/png';
 
-export default async function Image({
-  params: { deck, title },
-}: { params: { deck: string; title: string } }) {
-  const unit = await restore({ target: 'deck', param: deck });
+export default async function Image(request: NextRequest) {
+  const deck = request.nextUrl.searchParams.get('deck');
+  const title = request.nextUrl.searchParams.get('title');
+  const deckJson = deck
+    ? ((await fetch(new URL(`/api/deck?deck=${deck}`, request.nextUrl)).then(
+        res => res.json(),
+      )) as { deck: string[] })
+    : null;
 
   return new ImageResponse(
     <div
@@ -26,24 +30,27 @@ export default async function Image({
         justifyContent: 'center',
       }}
     >
-      {unit.deck.map(memoria => {
-        return (
-          <img
-            key={memoria.id}
-            alt={'memoria'}
-            src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${memoria.name}.png`}
-            width={50}
-            height={50}
-          />
-        );
-      })}
+      {deckJson?.deck.map(name => {
+          return (
+            <img
+              src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
+              key={name}
+              alt={'memoria'}
+              style={{
+                width: 50,
+                height: 50,
+                objectFit: 'contain',
+              }}
+            />
+          );
+        })}
       <p
         style={{
           fontSize: 32,
           marginTop: 24,
         }}
       >
-        {title}
+        {title || 'Deck'}
       </p>
     </div>,
     {
