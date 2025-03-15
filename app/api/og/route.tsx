@@ -1,13 +1,12 @@
 import { ImageResponse } from 'next/og';
-import {NextRequest} from "next/server";
+import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
-export const size = {
+const size = {
   width: 500,
   height: 500,
 };
-export const contentType = 'image/png';
 
 export async function GET(reqest: NextRequest) {
   const param = reqest.nextUrl.searchParams.get('deck');
@@ -17,9 +16,9 @@ export async function GET(reqest: NextRequest) {
     });
   }
   try {
-    const { legendary, deck } = await fetch(new URL(`/api/deck?deck=${param}`, reqest.nextUrl)).then(
-        res => res.json(),
-      ) as { legendary: string[], deck: string[] };
+    const { legendary, deck } = (await fetch(
+      new URL(`/api/deck?deck=${param}`, reqest.nextUrl),
+    ).then(res => res.json())) as { legendary: string[]; deck: string[] };
 
     return new ImageResponse(
       <div
@@ -69,8 +68,7 @@ export async function GET(reqest: NextRequest) {
         ...size,
       },
     );
-  }
-  catch (error: any) {
+  } catch (error: any) {
     console.log(`${error.message}`);
     return new Response(`Failed to generate the image`, {
       status: 500,

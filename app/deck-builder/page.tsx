@@ -1,89 +1,40 @@
-'use client';
+import { DeckBuilderPage } from '@/deck-builder/_builder';
+import { Metadata, ResolvingMetadata } from 'next';
+import { metadata as defaultMetadata } from '@/layout';
 
-import { DeckBuilder } from '@/deck-builder/_tabs/builder';
-import { Calculator } from '@/deck-builder/_tabs/calculator';
-import { Layout } from '@/components/Layout';
-import { Box, Tab, Tabs } from '@mui/material';
-import { type ReactNode, type SyntheticEvent, useState } from 'react';
-import {NextRequest} from "next/server";
-import {metadata} from "@/layout";
-
-interface TabPanelProps {
-  children?: ReactNode;
-  index: number;
-  value: number;
+export default function Page() {
+  return <DeckBuilderPage />;
 }
 
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+type Props = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
-  return (
-    <div
-      role='tabpanel'
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
+export async function generateMetadata(
+  { searchParams }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const params = await searchParams;
+  const deck = params['deck'];
+  const metadata = await parent;
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+  const get =
+    (p: { [key: string]: string | string[] | undefined }) => (key: string) =>
+      typeof p[key] === 'string' ? p[key] : undefined;
 
-export default function DeckBuilderPage() {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (_: SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  return (
-    <Layout>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label='basic tabs example'
-        >
-          <Tab label={'Builder'} {...a11yProps(0)} />
-          <Tab
-            label={'Calculator'}
-            {...a11yProps(1)}
-            sx={{ paddingRight: 5 }}
-          />
-        </Tabs>
-      </Box>
-      <CustomTabPanel value={value} index={0}>
-        <DeckBuilder />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        <Calculator />
-      </CustomTabPanel>
-    </Layout>
-  );
-}
-
-export function generateMetadata(request: NextRequest) {
-  const deck = request.nextUrl.searchParams.get('deck');
-  return deck === null ? metadata : {
-    ...metadata,
-    openGraph: {
-      url: request.nextUrl.origin,
-      title: request.nextUrl.searchParams.get('title') || 'Deck Builder',
-      siteName: 'Mitamatch Operations',
-      type: 'article',
-      images: {
-        url: `${request.nextUrl.origin}/api/og/${deck}`,
-        width: 500,
-        height: 500,
-      },
-    },
-  };
+  return typeof deck === 'string'
+    ? {
+        openGraph: {
+          title: get(params)('title') || 'Deck Builder',
+          images: {
+            url: new URL(
+              `/api/og?deck=${deck}`,
+              metadata.metadataBase || 'https://mitama.io',
+            ),
+            width: 500,
+            height: 500,
+          },
+        },
+      }
+    : defaultMetadata;
 }
