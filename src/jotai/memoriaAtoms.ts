@@ -100,6 +100,7 @@ export const rwLegendaryDeckAtom = atom(
   },
 );
 
+export const unitTitleAtom = atom('No Title');
 export const swAtom = atom<'sword' | 'shield'>('shield');
 export const roleFilterAtom = atom<RoleFilterType[]>([
   'support',

@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const siteName = 'Mitamatch Operations for Web';
+const siteName = 'Mitamatch Operations';
 const description =
   'デッキビルダーやオーダータイムラインビルダーなどラスバレを便利にするツールが使えます';
 const url = 'https://mitama.io';

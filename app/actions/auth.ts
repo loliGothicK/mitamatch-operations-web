@@ -1,7 +1,7 @@
 'use server';
 
 import type { SessionData } from '@/session/sessionData';
-import { decrypt } from '@/lib/session';
+import { decrypt } from '@/lib/crypt';
 import { cookies } from 'next/headers';
 
 export async function getUser(): Promise<Omit<

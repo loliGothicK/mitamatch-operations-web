@@ -55,6 +55,7 @@ import {
   filteredOrderAtom,
   payedAtom,
   timelineAtom,
+  timelineTitleAtom,
 } from '@/jotai/orderAtoms';
 
 import { useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
@@ -63,7 +64,8 @@ import { takeLeft } from 'fp-ts/Array';
 import Cookies from 'js-cookie';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { Virtuoso } from 'react-virtuoso';
-import { generateShortLink, restore, saveShortLink } from '@/actions/serde';
+import { generateShortLink, saveShortLink } from '@/actions/permlink';
+import { restore } from '@/actions/restore';
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -307,12 +309,15 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
 }
 
 function Timeline() {
+  const [, setTitle] = useAtom(timelineTitleAtom);
   const [timeline, setTimeline] = useAtom(timelineAtom);
   const params = useSearchParams();
 
   useEffect(() => {
     (async () => {
       const value = params.get('timeline');
+      const title = params.get('title');
+      setTitle(title ? decodeURI(title) : 'No Title');
       const cookie = Cookies.get('timeline');
       if (cookie) {
         const decodeResult = decodeTimeline(cookie);
@@ -320,11 +325,11 @@ function Timeline() {
           setTimeline(decodeResult.value);
         }
       } else if (value) {
-        const timeline = await restore({ target: 'timeline', short: value });
+        const timeline = await restore({ target: 'timeline', param: value });
         setTimeline(timeline);
       }
     })();
-  }, [setTimeline, params.get]);
+  }, [setTitle, setTimeline, params.get]);
 
   const reducer = (
     value: number,
@@ -512,6 +517,7 @@ function FilterMenu() {
 }
 
 function ShareButton() {
+  const [title] = useAtom(timelineTitleAtom);
   const [timeline] = useAtom(timelineAtom);
   const [modalOpen, setModalOpen] = useState<'short' | 'full' | false>(false);
   const [openTip, setOpenTip] = useState<boolean>(false);
@@ -552,7 +558,9 @@ function ShareButton() {
                 popupState.close();
                 handleClick('short');
                 const short = await generateShortLink({ full });
-                setUrl(`https://mitama.io/timeline-builder?timeline=${short}`);
+                setUrl(
+                  `https://mitama.io/timeline-builder?timeline=${short}?title=${encodeURI(title)}`,
+                );
                 await saveShortLink({ target: 'deck', full, short });
               }}
             >

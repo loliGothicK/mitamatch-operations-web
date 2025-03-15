@@ -8,6 +8,7 @@ export type OrderWithPic = Order & {
   sub?: string;
 };
 
+export const timelineTitleAtom = atom('No Title');
 export const timelineAtom = atom<OrderWithPic[]>([]);
 
 export const payedAtom = atom(true);

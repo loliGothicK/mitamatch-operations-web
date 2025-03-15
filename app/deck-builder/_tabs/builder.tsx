@@ -7,7 +7,8 @@ import { useSearchParams } from 'next/navigation';
 import { type MouseEvent, Suspense, useEffect, useState } from 'react';
 import DifferenceIcon from '@mui/icons-material/Difference';
 import type { Unit } from '@/domain/types';
-import { generateShortLink, restore, saveShortLink } from '@/actions/serde';
+import { generateShortLink, saveShortLink } from '@/actions/permlink';
+import { restore } from '@/actions/restore';
 
 import {
   Add,
@@ -86,6 +87,7 @@ import {
   targetBeforeAtom,
   targetAfterAtom,
   type Concentration,
+  unitTitleAtom,
 } from '@/jotai/memoriaAtoms';
 
 import { calcDiff } from '@/evaluate/calc';
@@ -463,6 +465,7 @@ function LegendaryDeck() {
 
 function UnitComponent() {
   const params = useSearchParams();
+  const [, setTitle] = useAtom(unitTitleAtom);
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setSw] = useAtom(swAtom);
@@ -472,6 +475,8 @@ function UnitComponent() {
   useEffect(() => {
     (async () => {
       const value = params.get('deck');
+      const title = params.get('title');
+      setTitle(title ? decodeURI(title) : 'No Title');
       const cookie = Cookies.get('deck');
       if (cookie) {
         const decodeResult = decodeDeck(cookie);
@@ -497,7 +502,7 @@ function UnitComponent() {
       } else if (value) {
         const { sw, deck, legendaryDeck } = await restore({
           target: 'deck',
-          short: value,
+          param: value,
         });
         setSw(sw);
         setRoleFilter(
@@ -515,7 +520,15 @@ function UnitComponent() {
         setCompare(undefined);
       }
     })();
-  }, [setDeck, setLegendaryDeck, setRoleFilter, setSw, params.get, setCompare]);
+  }, [
+    setTitle,
+    setDeck,
+    setLegendaryDeck,
+    setRoleFilter,
+    setSw,
+    params.get,
+    setCompare,
+  ]);
 
   return (
     <>
@@ -1356,6 +1369,7 @@ function DiffModal() {
 }
 
 function ShareButton() {
+  const [title] = useAtom(unitTitleAtom);
   const [sw] = useAtom(swAtom);
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
@@ -1398,7 +1412,9 @@ function ShareButton() {
                 popupState.close();
                 handleClick('short');
                 const short = await generateShortLink({ full });
-                setUrl(`https://mitama.io/deck-builder?deck=${short}`);
+                setUrl(
+                  `https://mitama.io/deck-builder?deck=${short}?title=${encodeURI(title)}`,
+                );
                 await saveShortLink({ target: 'deck', full, short });
               }}
             >
