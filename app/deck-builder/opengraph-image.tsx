@@ -10,10 +10,11 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image(request: NextRequest) {
-  const deck = request.nextUrl.searchParams.get('deck');
-  const title = request.nextUrl.searchParams.get('title');
+  const { origin, searchParams } = new URL(request.url);
+  const title = searchParams.get('title') || 'Deck';
+  const deck = searchParams.get('deck');
   const deckJson = deck
-    ? ((await fetch(new URL(`/api/deck?deck=${deck}`, request.nextUrl)).then(
+    ? ((await fetch(new URL(`/api/deck?deck=${deck}`, origin)).then(
         res => res.json(),
       )) as { deck: string[] })
     : null;
@@ -50,7 +51,7 @@ export default async function Image(request: NextRequest) {
           marginTop: 24,
         }}
       >
-        {title || 'Deck'}
+        {title}
       </p>
     </div>,
     {
