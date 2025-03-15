@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import type { NextRequest } from 'next/server';
+import {NextRequest} from 'next/server';
 
 export const runtime = 'edge';
 
@@ -10,28 +10,29 @@ export const size = {
 export const contentType = 'image/png';
 
 export default async function Image(request: NextRequest) {
-  const { origin, searchParams } = new URL(request.url);
-  const title = searchParams.get('title') || 'Deck';
-  const deck = searchParams.get('deck');
-  const deckJson = deck
-    ? ((await fetch(new URL(`/api/deck?deck=${deck}`, origin)).then(
+  try {
+    const {origin, searchParams} = new URL(request.url);
+    const title = searchParams.get('title') || 'Deck';
+    const deck = searchParams.get('deck');
+    const deckJson = deck
+      ? ((await fetch(new URL(`/api/deck?deck=${deck}`, origin)).then(
         res => res.json(),
       )) as { deck: string[] })
-    : null;
+      : null;
 
-  return new ImageResponse(
-    <div
-      style={{
-        background: '#8bd0dd',
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-    >
-      {deckJson?.deck.map(name => {
+    return new ImageResponse(
+      <div
+        style={{
+          background: '#8bd0dd',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {deckJson?.deck.map(name => {
           return (
             <img
               src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
@@ -45,17 +46,24 @@ export default async function Image(request: NextRequest) {
             />
           );
         })}
-      <p
-        style={{
-          fontSize: 32,
-          marginTop: 24,
-        }}
-      >
-        {title}
-      </p>
-    </div>,
-    {
-      ...size,
-    },
-  );
+        <p
+          style={{
+            fontSize: 32,
+            marginTop: 24,
+          }}
+        >
+          {title}
+        </p>
+      </div>,
+      {
+        ...size,
+      },
+    );
+  }
+  catch (error: any) {
+    console.log(`${error.message}`);
+    return new Response(`Failed to generate the image`, {
+      status: 500,
+    });
+  }
 }
