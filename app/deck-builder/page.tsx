@@ -5,6 +5,8 @@ import { Calculator } from '@/deck-builder/_tabs/calculator';
 import { Layout } from '@/components/Layout';
 import { Box, Tab, Tabs } from '@mui/material';
 import { type ReactNode, type SyntheticEvent, useState } from 'react';
+import {NextRequest} from "next/server";
+import {metadata} from "@/layout";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -35,7 +37,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
+export default function DeckBuilderPage() {
   const [value, setValue] = useState(0);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
@@ -66,4 +68,22 @@ export default function BasicTabs() {
       </CustomTabPanel>
     </Layout>
   );
+}
+
+export function generateMetadata(request: NextRequest) {
+  const deck = request.nextUrl.searchParams.get('deck');
+  return deck === null ? metadata : {
+    ...metadata,
+    openGraph: {
+      url: request.nextUrl.origin,
+      title: request.nextUrl.searchParams.get('title') || 'Deck Builder',
+      siteName: 'Mitamatch Operations',
+      type: 'article',
+      images: {
+        url: `${request.nextUrl.origin}/api/og/${deck}`,
+        width: 500,
+        height: 500,
+      },
+    },
+  };
 }

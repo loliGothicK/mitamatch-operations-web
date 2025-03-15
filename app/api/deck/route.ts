@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
   }
   const unit = await restore({ target: 'deck', param });
   return NextResponse.json({
-    deck: unit.deck.map(memoria => memoria.name),
+    legendary: unit.legendaryDeck.map(memoria => memoria.name.short),
+    deck: unit.deck.map(memoria => memoria.name.short),
   });
 }
