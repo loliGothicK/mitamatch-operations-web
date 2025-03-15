@@ -36,5 +36,11 @@ export async function generateMetadata(
           },
         },
       }
-    : defaultMetadata;
+    : {
+        ...defaultMetadata,
+        openGraph: {
+          title: 'Deck Builder',
+          description: '豊富な検索オプションを使って、最強のデッキを最速で作成！',
+        },
+    };
 }
