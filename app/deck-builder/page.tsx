@@ -29,6 +29,7 @@ export async function generateMetadata(
         Meta.openGraph.modify(openGraph => ({
           ...openGraph,
           title: title(params),
+          description: '豊富な絞り込み機能で最高のデッキを作成しよう',
           images: {
             url: new URL(
               `/api/og?deck=${deck}`,
@@ -40,6 +41,7 @@ export async function generateMetadata(
         })),
         Meta.twitter.modify(twitter => ({
           ...twitter,
+          description: '豊富な絞り込み機能で最高のデッキを作成しよう',
           card: 'summary',
         })),
       )
@@ -48,9 +50,11 @@ export async function generateMetadata(
         Meta.openGraph.modify(openGraph => ({
           ...openGraph,
           title: 'Deck Builder',
+          description: '豊富な絞り込み機能で最高のデッキを作成しよう',
         })),
         Meta.twitter.modify(twitter => ({
           ...twitter,
+          description: '豊富な絞り込み機能で最高のデッキを作成しよう',
           card: 'summary',
         })),
       );
