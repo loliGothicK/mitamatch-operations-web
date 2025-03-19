@@ -1,6 +1,8 @@
 import { DeckBuilderPage } from '@/deck-builder/_builder';
-import { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata, ResolvingMetadata } from 'next';
 import { metadata as defaultMetadata } from '@/layout';
+import { pipe } from 'fp-ts/function';
+import { Meta } from '@/metadata/lens';
 
 export default function Page() {
   return <DeckBuilderPage />;
@@ -15,17 +17,18 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const params = await searchParams;
-  const deck = params['deck'];
+  const deck = params.deck;
   const metadata = await parent;
 
-  const get =
-    (p: { [key: string]: string | string[] | undefined }) => (key: string) =>
-      typeof p[key] === 'string' ? p[key] : undefined;
+  const title = (p: { [key: string]: string | string[] | undefined }) =>
+    typeof p.title === 'string' ? p.title : 'Deck Builder';
 
   return typeof deck === 'string'
-    ? {
-        openGraph: {
-          title: get(params)('title') || 'Deck Builder',
+    ? pipe(
+        defaultMetadata,
+        Meta.openGraph.modify(openGraph => ({
+          ...openGraph,
+          title: title(params),
           images: {
             url: new URL(
               `/api/og?deck=${deck}`,
@@ -34,13 +37,21 @@ export async function generateMetadata(
             width: 500,
             height: 500,
           },
-        },
-      }
-    : {
-        ...defaultMetadata,
-        openGraph: {
+        })),
+        Meta.twitter.modify(twitter => ({
+          ...twitter,
+          card: 'summary',
+        })),
+      )
+    : pipe(
+        defaultMetadata,
+        Meta.openGraph.modify(openGraph => ({
+          ...openGraph,
           title: 'Deck Builder',
-          description: '豊富な検索オプションを使って、最強のデッキを最速で作成！',
-        },
-    };
+        })),
+        Meta.twitter.modify(twitter => ({
+          ...twitter,
+          card: 'summary',
+        })),
+      );
 }

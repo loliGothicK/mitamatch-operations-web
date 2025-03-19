@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og';
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
@@ -68,9 +68,8 @@ export async function GET(reqest: NextRequest) {
         ...size,
       },
     );
-  } catch (error: any) {
-    console.log(`${error.message}`);
-    return new Response(`Failed to generate the image`, {
+  } catch (_) {
+    return new Response('Failed to generate the image', {
       status: 500,
     });
   }

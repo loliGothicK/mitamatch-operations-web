@@ -4,6 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Provider } from 'jotai';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -12,7 +13,7 @@ const description =
   'デッキビルダーやオーダータイムラインビルダーなどラスバレを便利にするツールが使えます';
 const url = 'https://mitama.io';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: siteName,
     /** `next-seo`の`titleTemplate`に相当する機能 */
