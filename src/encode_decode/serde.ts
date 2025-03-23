@@ -133,15 +133,17 @@ export function encodeTimeline(timeline: OrderWithPic[]) {
 
 const timelineItemSchema = z.object({
   id: z.number(),
-  delay: z.number().optional(),
-  pic: z.string().optional(),
-  sub: z.string().optional(),
+  delay: z.number().optional().nullable(),
+  pic: z.string().optional().nullable(),
+  sub: z.string().optional().nullable(),
 });
 
-const timelineSchema = z.array(timelineItemSchema);
+const timelineSchema = z.object({
+  timeline: z.array(timelineItemSchema),
+});
 
 type TimelineItem = z.infer<typeof timelineItemSchema>;
-type Timeline = TimelineItem[];
+type Timeline = z.infer<typeof timelineSchema>;
 
 const timelineParseSafe = fromThrowable(
   timelineSchema.parse,
@@ -155,7 +157,7 @@ const timelineParseSafe = fromThrowable(
 const orderMap = new Map(orderList.map(order => [order.id, order] as const));
 
 const restoreTimeline = (data: Timeline): Result<OrderWithPic[], string> => {
-  const cov = data.map(({ id, ...xs }) => {
+  const cov = data.timeline.map(({ id, ...xs }) => {
     return { id, order: orderMap.get(id), xs };
   });
   const { left, right } = pipe(
@@ -173,9 +175,11 @@ const restoreTimeline = (data: Timeline): Result<OrderWithPic[], string> => {
   return left.length > 0
     ? err(`${left.map(({ id }) => id)} are not found in order.json`)
     : ok(
-        right.map(({ order, xs }) => ({
+        right.map(({ order, xs: { pic, sub, delay } }) => ({
           ...order,
-          ...xs,
+          pic: pic ? decodeURIComponent(pic) : undefined,
+          sub: sub ? decodeURIComponent(sub) : undefined,
+          delay: delay ? delay : undefined,
         })),
       );
 };

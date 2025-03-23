@@ -1,3 +1,4 @@
+'use server';
 import type { Unit } from '@/domain/types';
 import { match } from 'ts-pattern';
 import { decodeDeck, decodeTimeline } from '@/encode_decode/serde';

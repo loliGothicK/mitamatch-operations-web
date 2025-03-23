@@ -29,6 +29,7 @@ export async function saveShortLink({
   full: string;
   short: string;
 }) {
+  'use server';
   const session = await getUser();
   const user =
     session !== null
