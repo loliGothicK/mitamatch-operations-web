@@ -1,8 +1,19 @@
 'use server';
 // biome-ignore lint/correctness/noNodejsModules: This is a Next.js API route, so we need to use the default Node.js import syntax
 import crypto from 'node:crypto';
-import { getClient } from '@/database/client';
 import { getUser } from '@/actions/auth';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { PrismaClient } from '@prisma/client';
+import ws from 'ws';
+
+neonConfig.webSocketConstructor = ws;
+neonConfig.poolQueryViaFetch = true;
+
+const connectionString = `${process.env.DATABASE_URL}`;
+const pool = new Pool({ connectionString });
+const adapter = new PrismaNeon(pool);
+const prisma = new PrismaClient({ adapter });
 
 export async function generateShortLink(data: { full: string }) {
   return await (async () =>
@@ -18,7 +29,6 @@ export async function saveShortLink({
   full: string;
   short: string;
 }) {
-  const prisma = await getClient();
   const session = await getUser();
   const user =
     session !== null

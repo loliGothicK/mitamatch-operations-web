@@ -1,8 +1,19 @@
 import type { Unit } from '@/domain/types';
 import { match } from 'ts-pattern';
 import { decodeDeck, decodeTimeline } from '@/encode_decode/serde';
-import { getClient } from '@/database/client';
 import type { Order } from '@/domain/order/order';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { PrismaClient } from '@prisma/client';
+import ws from 'ws';
+
+neonConfig.webSocketConstructor = ws;
+neonConfig.poolQueryViaFetch = true;
+
+const connectionString = `${process.env.DATABASE_URL}`;
+const pool = new Pool({ connectionString });
+const adapter = new PrismaNeon(pool);
+const prisma = new PrismaClient({ adapter });
 
 type OrderWithPic = Order & {
   delay?: number;
@@ -25,7 +36,6 @@ export async function restore({
   target: 'deck' | 'timeline';
   param: string;
 }): Promise<Unit | OrderWithPic[]> {
-  const prisma = await getClient();
   const { full } = await match(target)
     .with('deck', async () => {
       return (

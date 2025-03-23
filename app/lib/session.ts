@@ -2,7 +2,18 @@ import 'server-only';
 import { cookies } from 'next/headers';
 import { discordOauth2 } from '@/discord/oauth2';
 import { decrypt, encrypt } from '@/lib/crypt';
-import { getClient } from '@/database/client';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { PrismaClient } from '@prisma/client';
+import ws from 'ws';
+
+neonConfig.webSocketConstructor = ws;
+neonConfig.poolQueryViaFetch = true;
+
+const connectionString = `${process.env.DATABASE_URL}`;
+const pool = new Pool({ connectionString });
+const adapter = new PrismaNeon(pool);
+const prisma = new PrismaClient({ adapter });
 
 export async function createSession(json: {
   userId: string;
@@ -27,8 +38,6 @@ export async function createSession(json: {
     sameSite: 'lax',
     path: '/',
   });
-
-  const prisma = await getClient();
 
   prisma.user.upsert({
     where: { discordId: json.userId },
@@ -71,8 +80,6 @@ export async function updateSession(session: string) {
     expires,
     sameSite: 'lax',
   });
-
-  const prisma = await getClient();
 
   prisma.user.update({
     where: { discordId: payload.userId as string },
