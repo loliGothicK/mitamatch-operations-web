@@ -1,7 +1,7 @@
 import type { Unit } from '@/domain/types';
 import { match } from 'ts-pattern';
 import { decodeDeck, decodeTimeline } from '@/encode_decode/serde';
-import prisma from '@/database/client';
+import { prisma } from '@/database/client';
 import type { Order } from '@/domain/order/order';
 
 type OrderWithPic = Order & {

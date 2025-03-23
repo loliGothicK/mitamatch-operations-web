@@ -2,7 +2,7 @@ import 'server-only';
 import { cookies } from 'next/headers';
 import { discordOauth2 } from '@/discord/oauth2';
 import { decrypt, encrypt } from '@/lib/crypt';
-import prisma from '@/database/client';
+import { prisma } from '@/database/client';
 
 export async function createSession(json: {
   userId: string;
