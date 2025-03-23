@@ -1,7 +1,7 @@
 'use server';
 // biome-ignore lint/correctness/noNodejsModules: This is a Next.js API route, so we need to use the default Node.js import syntax
 import crypto from 'node:crypto';
-import { prisma } from '@/database/client';
+import { getClient } from '@/database/client';
 import { getUser } from '@/actions/auth';
 
 export async function generateShortLink(data: { full: string }) {
@@ -18,6 +18,7 @@ export async function saveShortLink({
   full: string;
   short: string;
 }) {
+  const prisma = await getClient();
   const session = await getUser();
   const user =
     session !== null

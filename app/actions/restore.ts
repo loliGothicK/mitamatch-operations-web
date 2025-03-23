@@ -1,7 +1,7 @@
 import type { Unit } from '@/domain/types';
 import { match } from 'ts-pattern';
 import { decodeDeck, decodeTimeline } from '@/encode_decode/serde';
-import { prisma } from '@/database/client';
+import { getClient } from '@/database/client';
 import type { Order } from '@/domain/order/order';
 
 type OrderWithPic = Order & {
@@ -25,6 +25,7 @@ export async function restore({
   target: 'deck' | 'timeline';
   param: string;
 }): Promise<Unit | OrderWithPic[]> {
+  const prisma = await getClient();
   const { full } = await match(target)
     .with('deck', async () => {
       return (
