@@ -36,7 +36,7 @@ export async function restore({
     })
     .with('timeline', async () => {
       return (
-        (await prisma.deck.findUnique({
+        (await prisma.timeline.findUnique({
           where: { short: param },
           select: { full: true },
         })) || { full: param }
