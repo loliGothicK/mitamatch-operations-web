@@ -2,16 +2,25 @@
 
 import Footer from '@/components/Footer';
 import { mainListItems } from '@/components/home/listItems';
-import { DarkMode, LightMode, Person, Menu } from '@mui/icons-material';
+import {
+  DarkMode,
+  LightMode,
+  Person,
+  Menu as MenuIcon,
+} from '@mui/icons-material';
 import {
   AppBar as MuiAppBar,
   Box,
+  Button,
   CssBaseline,
   Divider,
   Drawer as MuiDrawer,
   IconButton,
   List,
+  MenuItem,
+  Stack,
   Toolbar,
+  Menu,
   Typography,
 } from '@mui/material';
 import { createTheme, styled, useTheme } from '@mui/material/styles';
@@ -33,6 +42,7 @@ import { match } from 'ts-pattern';
 import { darkTheme, lightTheme } from '@/theme/theme';
 import Grid from '@mui/material/Grid2';
 import Link from '@/components/link';
+import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -104,7 +114,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
               marginRight: '36px',
             }}
           >
-            <Menu />
+            <MenuIcon />
           </IconButton>
           <Link href='/' sx={{ pr: 2 }}>
             <Image
@@ -121,7 +131,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
             color='inherit'
             noWrap
             sx={{
-              flexGrow: 1,
+              flexGrow: 0.5,
               fontSize: '2rem',
               fontWeight: 500,
               backgroundColor: `linear-gradient(to right, ${theme.palette.action.active}, ${theme.palette.action.disabled})`,
@@ -131,6 +141,40 @@ function BasicLayout({ children }: { children: ReactNode }) {
           >
             Mitamatch Ops
           </Typography>
+          <Stack>
+            <PopupState
+              variant='popover'
+              popupId='demo-popup-menu'
+              disableAutoFocus={false}
+              parentPopupState={null}
+            >
+              {popupState => (
+                <>
+                  <Button {...bindTrigger(popupState)}>{'Docs'}</Button>
+                  <Menu {...bindMenu(popupState)}>
+                    {(
+                      ['Deck Builder', 'Timeline Builder', 'Flowchart'] as const
+                    ).map(kind => {
+                      return (
+                        <MenuItem
+                          key={kind}
+                          onClick={() => {
+                            popupState.close();
+                            redirect(
+                              `/docs/${kind.toLowerCase().split(' ').join('-')}`,
+                            );
+                          }}
+                        >
+                          {kind}
+                        </MenuItem>
+                      );
+                    })}
+                  </Menu>
+                </>
+              )}
+            </PopupState>
+          </Stack>
+          <Box flexGrow={0.5} />
           <IconButton
             sx={{ ml: 1 }}
             onClick={colorMode.toggleColorMode}
