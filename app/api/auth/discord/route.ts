@@ -8,13 +8,14 @@ import { createSession } from '@/lib/session';
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const code = searchParams.get('code');
+  const redirectUri = new URL('/api/auth/discord', req.nextUrl.basePath).toString();
 
   if (code === null) {
     const authUrl = discordOauth2.generateAuthUrl({
       // biome-ignore lint/style/noNonNullAssertion: <explanation>
       clientId: process.env.DISCORD_CLIENT_ID!,
       responseType: 'code',
-      redirectUri: new URL('/api/auth/discord', req.nextUrl).toString(),
+      redirectUri,
       scope: ['identify', 'email'],
     });
     return NextResponse.redirect(authUrl);
@@ -24,7 +25,7 @@ export async function GET(req: NextRequest) {
     code,
     scope: ['identify', 'email'],
     grantType: 'authorization_code',
-    redirectUri: new URL('/api/auth/discord', req.nextUrl).toString(),
+    redirectUri,
   });
 
   const user = await discordOauth2.getUser(token.access_token);
