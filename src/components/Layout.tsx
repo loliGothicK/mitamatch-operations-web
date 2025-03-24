@@ -7,6 +7,7 @@ import {
   LightMode,
   Person,
   Menu as MenuIcon,
+  Folder,
 } from '@mui/icons-material';
 import {
   AppBar as MuiAppBar,
@@ -22,6 +23,10 @@ import {
   Toolbar,
   Menu,
   Typography,
+  Tooltip,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
 } from '@mui/material';
 import { createTheme, styled, useTheme } from '@mui/material/styles';
 import { ThemeProvider, useMediaQuery } from '@mui/system';
@@ -43,6 +48,8 @@ import { darkTheme, lightTheme } from '@/theme/theme';
 import Grid from '@mui/material/Grid2';
 import Link from '@/components/link';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
+import { useAtom } from 'jotai';
+import { projectOpenAtom } from '@/jotai/projectAtoms';
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -72,6 +79,7 @@ const ColorModeContext = createContext({ toggleColorMode: () => {} });
 function BasicLayout({ children }: { children: ReactNode }) {
   const [user, setUser] =
     useState<Omit<SessionData, 'expires'>>(defaultSession);
+  const [, setProjectOpen] = useAtom(projectOpenAtom);
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
 
@@ -83,9 +91,11 @@ function BasicLayout({ children }: { children: ReactNode }) {
           ...user,
           isLoggedIn: true,
         });
+      } else {
+        setProjectOpen(false);
       }
     })();
-  }, []);
+  }, [setProjectOpen]);
 
   // biome-ignore lint/suspicious/noEmptyBlockStatements: TODO: Implement menuDropdown
   const menuDropdown = () => {};
@@ -206,7 +216,24 @@ function BasicLayout({ children }: { children: ReactNode }) {
         </Toolbar>
       </AppBar>
       <MenuIcons variant='permanent' sx={{ gridArea: 'navigation' }}>
-        <List component='nav'>{mainListItems}</List>
+        <List component='nav'>
+          {user.isLoggedIn && (
+            <Tooltip
+              title={'Project'}
+              key={'Project'}
+              arrow
+              placement={'right-end'}
+            >
+              <ListItemButton onClick={() => setProjectOpen(true)}>
+                <ListItemIcon>
+                  <Folder />
+                </ListItemIcon>
+                <ListItemText primary={'Project'} />
+              </ListItemButton>
+            </Tooltip>
+          )}
+          {mainListItems}
+        </List>
         <Divider />
       </MenuIcons>
       <ProjectTreeView sx={{ gridArea: 'project' }} />

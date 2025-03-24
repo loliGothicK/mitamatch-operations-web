@@ -2,7 +2,6 @@ import Link from 'next/link';
 
 import {
   Assignment,
-  Home,
   Schema,
   ViewCompact,
   ViewTimeline,
@@ -16,11 +15,6 @@ import {
 import { useTheme } from '@mui/material/styles';
 
 const links = [
-  {
-    title: 'Home',
-    href: '/',
-    icon: <Home />,
-  },
   {
     title: 'Deck Builder',
     href: '/deck-builder',

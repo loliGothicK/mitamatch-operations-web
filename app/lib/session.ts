@@ -28,7 +28,7 @@ export async function createSession(json: {
     path: '/',
   });
 
-  prisma.user.upsert({
+  await prisma.user.upsert({
     where: { discordId: json.userId },
     update: {
       name: json.userName,

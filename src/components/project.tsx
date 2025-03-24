@@ -31,6 +31,8 @@ import {
   Minimize,
   NearMe as OrderIcon,
 } from '@mui/icons-material';
+import { projectOpenAtom } from '@/jotai/projectAtoms';
+import { useAtom } from 'jotai';
 
 declare module 'react' {
   interface CSSProperties {
@@ -154,8 +156,9 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
 });
 
 export default function ProjectTreeView(props: { sx: { gridArea: string } }) {
+  const [projectOpen, setProjectOpen] = useAtom(projectOpenAtom);
   const theme = useTheme();
-  return (
+  return projectOpen ? (
     <Box
       sx={{
         ...props.sx,
@@ -173,7 +176,10 @@ export default function ProjectTreeView(props: { sx: { gridArea: string } }) {
         </Typography>
         <Tooltip title={'Hide'}>
           <IconButton style={{ borderRadius: 4 }} size={'small'}>
-            <Minimize sx={{ '&.MuiSvgIcon-root': { paddingBottom: '6px' } }} />
+            <Minimize
+              sx={{ '&.MuiSvgIcon-root': { paddingBottom: '6px' } }}
+              onClick={() => setProjectOpen(false)}
+            />
           </IconButton>
         </Tooltip>
       </Stack>
@@ -192,5 +198,7 @@ export default function ProjectTreeView(props: { sx: { gridArea: string } }) {
         </CustomTreeItem>
       </SimpleTreeView>
     </Box>
+  ) : (
+    <Box sx={props.sx}> </Box>
   );
 }
