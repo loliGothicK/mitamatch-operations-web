@@ -4,11 +4,13 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { discordOauth2 } from '@/discord/oauth2';
 import { createSession } from '@/lib/session';
+import {headers} from "next/headers";
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
+  const basePath = (await headers()).get("x-base-path") || 'www.mitama.io';
   const code = searchParams.get('code');
-  const redirectUri = new URL('/api/auth/discord', req.nextUrl.basePath).toString();
+  const redirectUri = new URL('/api/auth/discord', basePath).toString();
 
   if (code === null) {
     const authUrl = discordOauth2.generateAuthUrl({

@@ -5,6 +5,9 @@ import { getUser } from '@/actions/auth';
 const protectedRoutes = ['/dashboard', '/user'];
 
 export default async function middleware(req: NextRequest) {
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set('x-base-path', req.nextUrl.basePath);
+
   // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.some(route =>
@@ -30,7 +33,11 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(`/user/@${user.userId}`, req.nextUrl));
   }
 
-  return NextResponse.next();
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    }
+  });
 }
 
 // Routes Middleware should not run on
