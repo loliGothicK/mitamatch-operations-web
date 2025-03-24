@@ -478,28 +478,7 @@ function UnitComponent() {
       const title = params.get('title');
       setTitle(title ? decodeURI(title) : 'No Title');
       const cookie = Cookies.get('deck');
-      if (cookie) {
-        const decodeResult = decodeDeck(cookie);
-        if (decodeResult.isOk()) {
-          const { sw, deck, legendaryDeck } = decodeResult.value;
-          setSw(sw);
-          setRoleFilter(
-            sw === 'shield'
-              ? ['support', 'interference', 'recovery']
-              : [
-                  'normal_single',
-                  'normal_range',
-                  'special_single',
-                  'special_range',
-                ],
-          );
-          setDeck(deck);
-          setLegendaryDeck(legendaryDeck);
-          setCompare(undefined);
-        } else {
-          throw new Error(`Failed to restore deck: \n${decodeResult.error}`);
-        }
-      } else if (value) {
+      if (value) {
         const { sw, deck, legendaryDeck } = await restore({
           target: 'deck',
           param: value,
@@ -518,6 +497,27 @@ function UnitComponent() {
         setDeck(deck);
         setLegendaryDeck(legendaryDeck);
         setCompare(undefined);
+      } else if (cookie) {
+        const decodeResult = decodeDeck(cookie);
+        if (decodeResult.isOk()) {
+          const { sw, deck, legendaryDeck } = decodeResult.value;
+          setSw(sw);
+          setRoleFilter(
+            sw === 'shield'
+              ? ['support', 'interference', 'recovery']
+              : [
+                'normal_single',
+                'normal_range',
+                'special_single',
+                'special_range',
+              ],
+          );
+          setDeck(deck);
+          setLegendaryDeck(legendaryDeck);
+          setCompare(undefined);
+        } else {
+          throw new Error(`Failed to restore deck: \n${decodeResult.error}`);
+        }
       }
     })();
   }, [

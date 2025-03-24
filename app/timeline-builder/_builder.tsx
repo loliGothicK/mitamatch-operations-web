@@ -319,14 +319,14 @@ function Timeline() {
       const title = params.get('title');
       setTitle(title ? decodeURI(title) : 'No Title');
       const cookie = Cookies.get('timeline');
-      if (cookie) {
+      if (value) {
+        const timeline = await restore({ target: 'timeline', param: value });
+        setTimeline(timeline);
+      } else if (cookie) {
         const decodeResult = decodeTimeline(cookie);
         if (decodeResult.isOk()) {
           setTimeline(decodeResult.value);
         }
-      } else if (value) {
-        const timeline = await restore({ target: 'timeline', param: value });
-        setTimeline(timeline);
       }
     })();
   }, [setTitle, setTimeline, params.get]);
