@@ -136,7 +136,7 @@ const rows = [
   }),
   createData({
     name: 'Flow Chart',
-    slug: 'flow-chart',
+    slug: 'flowchart',
     children: [{ name: 'How to use', slug: 'how-to-use' }],
   }),
 ];
