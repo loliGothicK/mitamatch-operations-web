@@ -23,11 +23,11 @@ const ABILITY =
 
 function parseAbility(description?: string): Map<string, number> {
   const result = new Map<string, number>([
-    ['火', 1.0],
-    ['水', 1.0],
-    ['風', 1.0],
-    ['光', 1.0],
-    ['闇', 1.0],
+    ['Fire', 1.0],
+    ['Water', 1.0],
+    ['Wind', 1.0],
+    ['Light', 1.0],
+    ['Dark', 1.0],
   ]);
   if (!description) {
     return result;
@@ -48,11 +48,11 @@ const TRIGGER_RATE_UP =
 
 function parseEx(description?: string): Map<string, number> {
   const result = new Map<string, number>([
-    ['火', 1.0],
-    ['水', 1.0],
-    ['風', 1.0],
-    ['光', 1.0],
-    ['闇', 1.0],
+    ['Fire', 1.0],
+    ['Water', 1.0],
+    ['Wind', 1.0],
+    ['Light', 1.0],
+    ['Dark', 1.0],
   ]);
   if (!description) {
     return result;

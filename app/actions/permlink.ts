@@ -2,18 +2,7 @@
 // biome-ignore lint/correctness/noNodejsModules: This is a Next.js API route, so we need to use the default Node.js import syntax
 import crypto from 'node:crypto';
 import { getUser } from '@/actions/auth';
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
-import ws from 'ws';
-
-neonConfig.webSocketConstructor = ws;
-neonConfig.poolQueryViaFetch = true;
-
-const connectionString = `${process.env.POSTGRES_URL}`;
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool);
-const prisma = new PrismaClient({ adapter });
+import { prisma } from '@/database/prismaClient';
 
 export async function generateShortLink(data: { full: string }) {
   return await (async () =>
@@ -39,24 +28,36 @@ export async function saveShortLink({
         })
       : null;
   if (target === 'deck') {
-    await prisma.deck.upsert({
-      where: { short },
-      update: {},
-      create: {
+    await prisma.deck.save({
+      where: {
         short,
-        full,
-        user: { connect: { id: user?.id } },
       },
+      create: user?.id
+        ? {
+            short,
+            full,
+            user: { connect: { id: user?.id } },
+          }
+        : {
+            short,
+            full,
+          },
     });
   } else {
-    await prisma.timeline.upsert({
-      where: { short },
-      update: {},
-      create: {
+    await prisma.timeline.save({
+      where: {
         short,
-        full,
-        user: { connect: { id: user?.id } },
       },
+      create: user?.id
+        ? {
+            short,
+            full,
+            user: { connect: { id: user?.id } },
+          }
+        : {
+            short,
+            full,
+          },
     });
   }
 }

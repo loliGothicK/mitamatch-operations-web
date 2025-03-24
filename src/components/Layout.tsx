@@ -2,19 +2,10 @@
 
 import Footer from '@/components/Footer';
 import { mainListItems } from '@/components/home/listItems';
-import { themeOptions } from '@/theme/theme';
-import {
-  DarkMode,
-  LightMode,
-  Person,
-  ChevronLeft,
-  Menu,
-} from '@mui/icons-material';
+import { DarkMode, LightMode, Person, Menu } from '@mui/icons-material';
 import {
   AppBar as MuiAppBar,
-  type AppBarProps as MuiAppBarProps,
   Box,
-  Container,
   CssBaseline,
   Divider,
   Drawer as MuiDrawer,
@@ -23,13 +14,8 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import {
-  ThemeProvider,
-  createTheme,
-  styled,
-  useTheme,
-} from '@mui/material/styles';
-import { useMediaQuery } from '@mui/system';
+import { createTheme, styled, useTheme } from '@mui/material/styles';
+import { ThemeProvider, useMediaQuery } from '@mui/system';
 import {
   type ReactNode,
   createContext,
@@ -42,53 +28,31 @@ import { redirect } from 'next/navigation';
 import { defaultSession, type SessionData } from '@/session/sessionData';
 import Image from 'next/image';
 import { getUser } from '@/actions/auth';
-const drawerWidth: number = 240;
+import ProjectTreeView from '@/components/project';
+import { match } from 'ts-pattern';
+import { darkTheme, lightTheme } from '@/theme/theme';
+import Grid from '@mui/material/Grid2';
+import Link from '@/components/link';
 
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: prop => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
+const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
+  position: 'relative',
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
 }));
 
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: prop => prop !== 'open',
-})(({ theme, open }) => ({
+const MenuIcons = styled(MuiDrawer)(({ theme }) => ({
   '& .MuiDrawer-paper': {
     position: 'relative',
     whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
     boxSizing: 'border-box',
-    ...(!open && {
-      overflowX: 'hidden',
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
+    overflowX: 'hidden',
+    width: theme.spacing(7),
+    [theme.breakpoints.up('sm')]: {
       width: theme.spacing(7),
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9),
-      },
-    }),
+    },
   },
 }));
 
@@ -100,10 +64,6 @@ function BasicLayout({ children }: { children: ReactNode }) {
     useState<Omit<SessionData, 'expires'>>(defaultSession);
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
 
   useEffect(() => {
     (async () => {
@@ -117,104 +77,111 @@ function BasicLayout({ children }: { children: ReactNode }) {
     })();
   }, []);
 
-  return (
-    <>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <AppBar position='absolute' open={open}>
-          <Toolbar>
-            <IconButton
-              edge='start'
-              color='inherit'
-              aria-label='open drawer'
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: '36px',
-                ...(open && { display: 'none' }),
-              }}
-            >
-              <Menu />
-            </IconButton>
-            <Typography
-              component='h1'
-              variant='h6'
-              color='inherit'
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Mitamatch Operations for Web
-            </Typography>
+  // biome-ignore lint/suspicious/noEmptyBlockStatements: TODO: Implement menuDropdown
+  const menuDropdown = () => {};
 
-            <IconButton
-              sx={{ ml: 1 }}
-              onClick={colorMode.toggleColorMode}
-              color='inherit'
-            >
-              {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
-            </IconButton>
-            <IconButton onClick={() => redirect('/api/auth/discord')}>
-              {user.isLoggedIn ? (
-                user.userAvatar !== 'default' ? (
-                  <Image
-                    src={`https://cdn.discordapp.com/avatars/${user.userId}/${user.userAvatar}.png`}
-                    alt={'avatar'}
-                    width={20}
-                    height={20}
-                  />
-                ) : (
-                  <Image
-                    src={'https://cdn.discordapp.com/embed/avatars/0.png'}
-                    alt={'avatar'}
-                    width={20}
-                    height={20}
-                  />
-                )
-              ) : (
-                <Person sx={{ flexGrow: 0.05 }} width={20} height={20} />
-              )}
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer variant='permanent' open={open}>
-          <Toolbar
+  return (
+    <Box
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: '50px auto 1fr',
+        gridTemplateRows: 'auto 1fr auto',
+        gridTemplateAreas: `
+        "header header header"
+        "navigation project content"
+        "footer footer footer"
+      `,
+      }}
+    >
+      <AppBar position='absolute' sx={{ gridArea: 'header' }}>
+        <Toolbar>
+          <IconButton
+            edge='start'
+            color='inherit'
+            aria-label='open drawer'
+            onClick={menuDropdown}
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              px: [1],
+              marginRight: '36px',
             }}
           >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeft />
-            </IconButton>
-          </Toolbar>
-          <Divider />
-          <List component='nav'>{mainListItems}</List>
-        </Drawer>
-        <Box
-          component='main'
-          sx={{
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
-            scrollPaddingTop: '100px',
-          }}
-        >
-          <Toolbar />
-          <Container sx={{ mt: 4, mb: 4, minHeight: '75vh', minWidth: '80vw' }}>
-            {/* Main Contents */}
-            {children}
-          </Container>
-          <Footer
+            <Menu />
+          </IconButton>
+          <Link href='/' sx={{ pr: 2 }}>
+            <Image
+              src='/MitamaLabLogo.png'
+              alt='logo'
+              width={40}
+              height={40}
+              priority={true}
+            />
+          </Link>
+          <Typography
+            component='h1'
+            variant='h6'
+            color='inherit'
+            noWrap
             sx={{
-              position: 'absolute',
-              bottom: 0,
-              width: '25vh',
+              flexGrow: 1,
+              fontSize: '2rem',
+              fontWeight: 500,
+              backgroundColor: `linear-gradient(to right, ${theme.palette.action.active}, ${theme.palette.action.disabled})`,
+              letterSpacing: '-0.5px',
+              fontFamily: 'Copperplate Gothic, sans-serif',
             }}
-          />
-        </Box>
-      </Box>
-    </>
+          >
+            Mitamatch Ops
+          </Typography>
+          <IconButton
+            sx={{ ml: 1 }}
+            onClick={colorMode.toggleColorMode}
+            color='inherit'
+          >
+            {theme.palette.mode === 'dark' ? <DarkMode /> : <LightMode />}
+          </IconButton>
+          <IconButton onClick={() => redirect('/api/auth/discord')}>
+            {user.isLoggedIn ? (
+              user.userAvatar !== 'default' ? (
+                <Image
+                  src={`https://cdn.discordapp.com/avatars/${user.userId}/${user.userAvatar}.png`}
+                  alt={'avatar'}
+                  width={20}
+                  height={20}
+                />
+              ) : (
+                <Image
+                  src={'https://cdn.discordapp.com/embed/avatars/0.png'}
+                  alt={'avatar'}
+                  width={20}
+                  height={20}
+                />
+              )
+            ) : (
+              <Person sx={{ flexGrow: 0.05 }} width={20} height={20} />
+            )}
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <MenuIcons variant='permanent' sx={{ gridArea: 'navigation' }}>
+        <List component='nav'>{mainListItems}</List>
+        <Divider />
+      </MenuIcons>
+      <ProjectTreeView sx={{ gridArea: 'project' }} />
+      <Grid
+        container
+        component='main'
+        sx={{
+          flexGrow: 1,
+          height: '100vh',
+          margin: 0,
+          padding: 0,
+          gridArea: 'content',
+          overflow: 'auto',
+        }}
+      >
+        {children}
+      </Grid>
+      <Footer sx={{ gridArea: 'footer' }} />
+    </Box>
   );
 }
 
@@ -253,7 +220,10 @@ export function Layout({ children }: { children: ReactNode }) {
   const theme = useMemo(
     () =>
       createTheme({
-        palette: { mode, ...themeOptions.palette },
+        palette: match(mode)
+          .with('light', () => lightTheme.palette)
+          .with('dark', () => darkTheme.palette)
+          .exhaustive(),
       }),
     [mode],
   );
@@ -261,6 +231,7 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <BasicLayout>{children}</BasicLayout>
       </ThemeProvider>
     </ColorModeContext.Provider>

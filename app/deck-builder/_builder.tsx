@@ -44,26 +44,33 @@ export function DeckBuilderPage() {
 
   return (
     <Layout>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label='basic tabs example'
-        >
-          <Tab label={'Builder'} {...a11yProps(0)} />
-          <Tab
-            label={'Calculator'}
-            {...a11yProps(1)}
-            sx={{ paddingRight: 5 }}
-          />
-        </Tabs>
+      <Box
+        sx={{
+          width: '100%',
+          boxSizing: 'border-box',
+        }}
+      >
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label='basic tabs example'
+          >
+            <Tab label={'Builder'} {...a11yProps(0)} />
+            <Tab
+              label={'Calculator'}
+              {...a11yProps(1)}
+              sx={{ paddingRight: 5 }}
+            />
+          </Tabs>
+        </Box>
+        <CustomTabPanel value={value} index={0}>
+          <DeckBuilder />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={1}>
+          <Calculator />
+        </CustomTabPanel>
       </Box>
-      <CustomTabPanel value={value} index={0}>
-        <DeckBuilder />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
-        <Calculator />
-      </CustomTabPanel>
     </Layout>
   );
 }

@@ -443,6 +443,7 @@ function Source() {
                 alt={orders[index].name}
                 width={100}
                 height={100}
+                priority={index < 8}
               />
               <Stack marginLeft={2}>
                 <Typography variant='body1'>{orders[index].name}</Typography>
@@ -561,7 +562,7 @@ function ShareButton() {
                 setUrl(
                   `https://mitama.io/timeline-builder?timeline=${short}?title=${encodeURI(title)}`,
                 );
-                await saveShortLink({ target: 'deck', full, short });
+                await saveShortLink({ target: 'timeline', full, short });
               }}
             >
               {'short link'}
@@ -627,61 +628,59 @@ function TimelineBuilder() {
   const [, setPayed] = useAtom(payedAtom);
 
   return (
-    <Grid container direction={'row'} alignItems={'right'}>
-      <Grid
-        container
-        spacing={2}
-        size={{ xs: 12 }}
-        direction={'row'}
-        alignItems={'left'}
-        flexShrink={1}
-      >
-        <Grid size={{ xs: 12, md: 6, lg: 6 }} alignItems={'center'}>
+    <Grid
+      container
+      spacing={2}
+      size={{ xs: 12 }}
+      direction={'row'}
+      alignItems={'left'}
+      margin={2}
+    >
+      <Grid size={{ xs: 12, md: 6, lg: 6 }} alignItems={'center'} mt={5}>
+        <Container
+          maxWidth={false}
+          sx={{
+            bgcolor:
+              theme.palette.mode === 'dark'
+                ? 'rgba(255,255,255, 0.1)'
+                : alpha(theme.palette.primary.main, 0.2),
+            minHeight: '70vh',
+            maxWidth: matches ? '25vw' : '100%',
+          }}
+        >
+          <Suspense>
+            <Timeline />
+          </Suspense>
+        </Container>
+      </Grid>
+      <Grid size={{ xs: 12, md: 6, lg: 6 }}>
+        <Box
+          flexDirection='row'
+          justifyContent='flex-end'
+          display='flex'
+          alignItems={'center'}
+          paddingRight={20}
+        >
           <ShareButton />
-          <Container
-            maxWidth={false}
-            sx={{
-              bgcolor:
-                theme.palette.mode === 'dark'
-                  ? 'rgba(255,255,255, 0.1)'
-                  : alpha(theme.palette.primary.main, 0.2),
-              minHeight: '70vh',
-              maxWidth: matches ? '25vw' : '100%',
-            }}
-          >
-            <Suspense>
-              <Timeline />
-            </Suspense>
-          </Container>
-        </Grid>
-        <Grid size={{ xs: 12, md: 6, lg: 6 }}>
-          <Box
-            flexDirection='row'
-            justifyContent='flex-end'
-            display='flex'
-            alignItems={'center'}
-            paddingRight={20}
-          >
-            <FilterMenu />
-            <Divider orientation='vertical' flexItem sx={{ margin: 1 }} />
-            <Typography>無課金</Typography>
-            <Switch defaultChecked onChange={() => setPayed(prev => !prev)} />
-            <Typography>課金</Typography>
-          </Box>
-          <Container
-            maxWidth={false}
-            sx={{
-              bgcolor:
-                theme.palette.mode === 'dark'
-                  ? 'rgba(255,255,255, 0.1)'
-                  : alpha(theme.palette.primary.main, 0.2),
-              minHeight: '70vh',
-              maxWidth: matches ? '25vw' : '100%',
-            }}
-          >
-            <Source />
-          </Container>
-        </Grid>
+          <FilterMenu />
+          <Divider orientation='vertical' flexItem sx={{ margin: 1 }} />
+          <Typography>無課金</Typography>
+          <Switch defaultChecked onChange={() => setPayed(prev => !prev)} />
+          <Typography>課金</Typography>
+        </Box>
+        <Container
+          maxWidth={false}
+          sx={{
+            bgcolor:
+              theme.palette.mode === 'dark'
+                ? 'rgba(255,255,255, 0.1)'
+                : alpha(theme.palette.primary.main, 0.2),
+            minHeight: '70vh',
+            maxWidth: matches ? '25vw' : '100%',
+          }}
+        >
+          <Source />
+        </Container>
       </Grid>
     </Grid>
   );

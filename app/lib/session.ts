@@ -2,18 +2,7 @@ import 'server-only';
 import { cookies } from 'next/headers';
 import { discordOauth2 } from '@/discord/oauth2';
 import { decrypt, encrypt } from '@/lib/crypt';
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
-import ws from 'ws';
-
-neonConfig.webSocketConstructor = ws;
-neonConfig.poolQueryViaFetch = true;
-
-const connectionString = `${process.env.POSTGRES_URL}`;
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool);
-const prisma = new PrismaClient({ adapter });
+import { prisma } from '@/database/prismaClient';
 
 export async function createSession(json: {
   userId: string;

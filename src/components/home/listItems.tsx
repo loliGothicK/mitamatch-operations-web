@@ -2,18 +2,16 @@ import Link from 'next/link';
 
 import {
   Assignment,
-  DataObject,
   Home,
   Schema,
   ViewCompact,
   ViewTimeline,
 } from '@mui/icons-material';
 import {
-  Badge,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  ListSubheader,
+  Tooltip,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
@@ -36,36 +34,22 @@ const links = [
   {
     title: 'Flow Chart',
     href: '/flowchart',
-    icon: (
-      <Badge badgeContent={'preview'} color='primary'>
-        <Schema />
-      </Badge>
-    ),
-  },
-  {
-    title: 'Database',
-    href: '/database',
-    icon: (
-      <Badge badgeContent={'preview'} color='primary'>
-        <DataObject />
-      </Badge>
-    ),
+    icon: <Schema />,
   },
 ];
 
 export const mainListItems = (
   <>
-    <ListSubheader component='div' inset>
-      Menu
-    </ListSubheader>
     {links.map(({ title, href, icon }) => {
       return (
-        <Link href={href} key={title}>
-          <ListItemButton>
-            <ListItemIcon>{icon}</ListItemIcon>
-            <ListItemText primary={title} />
-          </ListItemButton>
-        </Link>
+        <Tooltip title={title} key={title} arrow placement={'right-end'}>
+          <Link href={href}>
+            <ListItemButton>
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={title} />
+            </ListItemButton>
+          </Link>
+        </Tooltip>
       );
     })}
   </>
@@ -84,14 +68,6 @@ const updates = [
     name: 'light/dark mode is now available',
     description: ['You can toggle the color mode between light and dark.'],
     link: '/',
-  },
-  {
-    name: 'Calculator in Deck Builder is now available for preview',
-    description: [
-      'You can calculate your deck total damage or recovery, and buff/debuff.',
-      'This feature is still in preview.',
-    ],
-    link: '/deck-builder',
   },
   {
     name: 'Flow Chart is now available for preview',

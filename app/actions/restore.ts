@@ -3,18 +3,7 @@ import type { Unit } from '@/domain/types';
 import { match } from 'ts-pattern';
 import { decodeDeck, decodeTimeline } from '@/encode_decode/serde';
 import type { Order } from '@/domain/order/order';
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
-import ws from 'ws';
-
-neonConfig.webSocketConstructor = ws;
-neonConfig.poolQueryViaFetch = true;
-
-const connectionString = `${process.env.POSTGRES_URL}`;
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool);
-const prisma = new PrismaClient({ adapter });
+import { prisma } from '@/database/prismaClient';
 
 type OrderWithPic = Order & {
   delay?: number;
@@ -37,26 +26,34 @@ export async function restore({
   target: 'deck' | 'timeline';
   param: string;
 }): Promise<Unit | OrderWithPic[]> {
-  const { full } = await match(target)
-    .with('deck', async () => {
-      return (
-        (await prisma.deck.findUnique({
-          where: { short: param },
-          select: { full: true },
-        })) || { full: param }
-      );
-    })
-    .with('timeline', async () => {
-      return (
-        (await prisma.timeline.findUnique({
-          where: { short: param },
-          select: { full: true },
-        })) || { full: param }
-      );
-    })
+  const parseResult = match(target)
+    .with('deck', () => decodeDeck(param))
+    .with('timeline', () => decodeTimeline(param))
     .exhaustive();
-  return match(target)
-    .with('deck', () => decodeDeck(full)._unsafeUnwrap())
-    .with('timeline', () => decodeTimeline(full)._unsafeUnwrap())
-    .exhaustive();
+
+  if (parseResult.isOk()) {
+    return parseResult.value;
+  }
+    const { full } = await match(target)
+      .with('deck', async () => {
+        return (
+          (await prisma.deck.findFirst({
+            where: { short: param },
+            select: { full: true },
+          })) || { full: param }
+        );
+      })
+      .with('timeline', async () => {
+        return (
+          (await prisma.timeline.findFirst({
+            where: { short: param },
+            select: { full: true },
+          })) || { full: param }
+        );
+      })
+      .exhaustive();
+    return match(target)
+      .with('deck', () => decodeDeck(full)._unsafeUnwrap())
+      .with('timeline', () => decodeTimeline(full)._unsafeUnwrap())
+      .exhaustive();
 }

@@ -32,7 +32,6 @@ import {
   Box,
   Button,
   Checkbox,
-  Container,
   Dialog,
   DialogActions,
   DialogContent,
@@ -465,6 +464,7 @@ function LegendaryDeck() {
 
 function UnitComponent() {
   const params = useSearchParams();
+  const theme = useTheme();
   const [, setTitle] = useAtom(unitTitleAtom);
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
@@ -531,11 +531,18 @@ function UnitComponent() {
   ]);
 
   return (
-    <>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.paper,
+        minHeight: '60vh',
+        maxWidth: '600px',
+        padding: 2,
+      }}
+    >
       <LegendaryDeck />
       <Divider sx={{ margin: 2 }} />
       <Deck />
-    </>
+    </Box>
   );
 }
 
@@ -1476,62 +1483,46 @@ function ShareButton() {
 }
 
 export function DeckBuilder() {
-  const theme = useTheme();
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setCompare] = useAtom(compareModeAtom);
 
   return (
-    <Grid container direction={'row'} alignItems={'right'}>
+    <Grid
+      container
+      direction={'row'}
+      sx={{
+        width: '100%',
+        boxSizing: 'border-box',
+      }}
+    >
       <Grid
-        container
-        size={{ xs: 12 }}
-        direction={'row'}
-        alignItems={'left'}
-        flexShrink={2}
+        size={{ xs: 12, md: 4, lg: 3 }}
+        direction={'column'}
+        alignItems={'center'}
       >
-        <Grid
-          size={{ xs: 12, md: 4, lg: 2 }}
-          direction={'column'}
-          alignItems={'center'}
-        >
-          <Details />
-        </Grid>
-        <Grid size={{ xs: 12, md: 8, lg: 6 }} alignItems={'center'}>
-          <Tooltip title='clear all' placement={'top'}>
-            <Button
-              onClick={() => {
-                setDeck([]);
-                setLegendaryDeck([]);
-                setCompare(undefined);
-              }}
-            >
-              <ClearAll />
-            </Button>
-          </Tooltip>
-          <DiffModal />
-          <ShareButton />
-          <Container
-            maxWidth={false}
-            sx={{
-              bgcolor:
-                theme.palette.mode === 'dark'
-                  ? 'rgba(255, 255, 255, 0.1)'
-                  : alpha(theme.palette.primary.main, 0.2),
-              minHeight: '60vh',
-              maxWidth: 620,
-              paddingTop: 2,
-              paddingBottom: 2,
+        <Details />
+      </Grid>
+      <Grid size={{ xs: 12, md: 8, lg: 5 }} alignItems={'center'}>
+        <Tooltip title='clear all' placement={'top'}>
+          <Button
+            onClick={() => {
+              setDeck([]);
+              setLegendaryDeck([]);
+              setCompare(undefined);
             }}
           >
-            <Suspense>
-              <UnitComponent />
-            </Suspense>
-          </Container>
-        </Grid>
-        <Grid size={{ xs: 12, md: 12, lg: 4 }}>
-          <Source />
-        </Grid>
+            <ClearAll />
+          </Button>
+        </Tooltip>
+        <DiffModal />
+        <ShareButton />
+        <Suspense>
+          <UnitComponent />
+        </Suspense>
+      </Grid>
+      <Grid size={{ xs: 12, md: 12, lg: 4 }} py={2}>
+        <Source />
       </Grid>
     </Grid>
   );

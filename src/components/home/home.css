@@ -1,0 +1,93 @@
+.hero-image {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.animated-graphic {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 1rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 30, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Animation circles */
+.animation-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+.circle-1 {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(to right, #2563eb, #8b5cf6);
+    top: 40px;
+    left: 100px;
+    animation: float 10s ease-in infinite;
+}
+
+.circle-2 {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(to right, #10b981, #8b5cf6);
+    bottom: 70px;
+    right: 130px;
+    animation: float 7s ease-in-out infinite reverse;
+}
+
+.circle-3 {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(to right, #2563eb, #f59e0b);
+    bottom: 110px;
+    left: 120px;
+    animation: float 5s ease-in-out infinite;
+}
+
+.circle-4 {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(to right, #10b981, #f59e0b);
+    top: 80px;
+    right: 100px;
+    animation: float 4s ease-in-out infinite reverse;
+}
+
+.circle-5 {
+    width: 140px;
+    height: 140px;
+    background: linear-gradient(to right, #2563eb, #f59e0b);
+    top: 120px;
+    left: 80px;
+    animation: bubble 6s ease-in infinite;
+}
+
+@keyframes bubble {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateX(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
