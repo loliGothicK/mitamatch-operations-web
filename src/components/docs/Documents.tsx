@@ -100,8 +100,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          bgcolor: 'background.paper',
-          color: 'text.secondary',
         }}
       >
         {toc === row.name && (
@@ -141,11 +139,6 @@ const rows = [
     slug: 'flow-chart',
     children: [{ name: 'How to use', slug: 'how-to-use' }],
   }),
-  createData({
-    name: 'Database',
-    slug: 'database',
-    children: [{ name: 'How to use', slug: 'how-to-use' }],
-  }),
 ];
 
 /**
@@ -155,7 +148,12 @@ const rows = [
  */
 export function Documents({ children }: PropsWithChildren) {
   return (
-    <Grid container direction={'row'} style={{ minHeight: '100vh' }}>
+    <Grid
+      container
+      direction={'row'}
+      style={{ minHeight: '100vh' }}
+      sx={{ my: 10 }}
+    >
       <Grid size={{ xs: 12, lg: 3 }}>
         <List
           style={{

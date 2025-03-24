@@ -1,6 +1,6 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import { Container, Divider, Grid2 as Grid, Stack } from '@mui/material';
+import { Box, Container, Divider, Grid2 as Grid, Stack } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
@@ -24,10 +24,6 @@ export default function Footer({ ...props }) {
         content: 'flowchart',
         href: '/flowchart',
       },
-      {
-        content: 'database',
-        href: '/database',
-      },
     ],
     ...props,
   };
@@ -37,32 +33,55 @@ export default function Footer({ ...props }) {
       sx={{ bgcolor: theme.palette.background.paper, minWidth: '100vw' }}
     >
       <footer>
-        <Grid container direction={'row'} alignItems={'center'}>
-          <Grid size={{ xs: 12, md: 4 }}>
-            <Image
-              src={
-                theme.palette.mode === 'dark' ? '/MO_DARK.png' : '/MO_LIGHT.png'
-              }
-              alt={'mode'}
-              width={300}
-              height={100}
-            />
-            <Typography>
-              {'一瞬でレギオンマッチを改善。驚きの速さで。'}
-            </Typography>
-          </Grid>
-          <Stack
-            py={6}
-            direction={'row'}
-            justifyContent={'space-around'}
-            flexGrow={0.7}
-          >
-            <Grid
-              container
-              direction={'column'}
-              justifyContent={'space-around'}
-              alignItems={'flex-start'}
-            >
+        <Box
+          sx={{
+            display: 'grid',
+            gap: 10,
+            margin: 4,
+            justifyContent: 'center',
+            alignItems: 'center',
+            GridTemplateColumns: '1fr 1fr',
+            GridTemplateRows: '1fr 1fr',
+            GridTemplateAreas: `
+            "logo tools"
+            "donate docs"
+          `,
+          }}
+        >
+          <Box sx={{ GridArea: 'logo' }}>
+            <Stack justifyContent='center' alignItems='center'>
+              <Image
+                src={
+                  theme.palette.mode === 'dark'
+                    ? '/MO_DARK.png'
+                    : '/MO_LIGHT.png'
+                }
+                alt={'mode'}
+                width={300}
+                height={100}
+              />
+              <Typography>
+                {'一瞬でレギオンマッチを改善。驚きの速さで。'}
+              </Typography>
+            </Stack>
+          </Box>
+          <Box sx={{ gridArea: 'docs' }}>
+            <Stack justifyContent='center' alignItems='center'>
+              <Typography>{'Docs'}</Typography>
+              {['deck-builder', 'timeline-builder', 'flowchart'].map(link => (
+                <Link
+                  href={`/docs/${link}`}
+                  variant='body1'
+                  color={theme.palette.text.secondary}
+                  key={link}
+                >
+                  {link}
+                </Link>
+              ))}
+            </Stack>
+          </Box>
+          <Box sx={{ GridArea: 'tools' }}>
+            <Stack justifyContent='center' alignItems='center'>
               <Typography>{'Tools'}</Typography>
               {content.tools.map(link => {
                 return (
@@ -76,13 +95,10 @@ export default function Footer({ ...props }) {
                   </Link>
                 );
               })}
-            </Grid>
-            <Grid
-              container
-              direction={'column'}
-              justifyContent={'space-around'}
-              alignItems={'flex-start'}
-            >
+            </Stack>
+          </Box>
+          <Box sx={{ GridArea: 'donate' }}>
+            <Stack justifyContent='center' alignItems='center'>
               <Typography>{'Donate'}</Typography>
               <Link
                 href={'https://www.paypal.me/loligothick'}
@@ -137,9 +153,9 @@ export default function Footer({ ...props }) {
                   </span>
                 </span>
               </Link>
-            </Grid>
-          </Stack>
-        </Grid>
+            </Stack>
+          </Box>
+        </Box>
         <Divider sx={{ margin: 2, width: '100%' }} />
         <Grid container direction={'row'} sx={{ paddingBottom: 10 }}>
           <Grid flexGrow={0.9}>

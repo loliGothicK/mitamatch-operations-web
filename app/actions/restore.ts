@@ -34,26 +34,26 @@ export async function restore({
   if (parseResult.isOk()) {
     return parseResult.value;
   }
-    const { full } = await match(target)
-      .with('deck', async () => {
-        return (
-          (await prisma.deck.findFirst({
-            where: { short: param },
-            select: { full: true },
-          })) || { full: param }
-        );
-      })
-      .with('timeline', async () => {
-        return (
-          (await prisma.timeline.findFirst({
-            where: { short: param },
-            select: { full: true },
-          })) || { full: param }
-        );
-      })
-      .exhaustive();
-    return match(target)
-      .with('deck', () => decodeDeck(full)._unsafeUnwrap())
-      .with('timeline', () => decodeTimeline(full)._unsafeUnwrap())
-      .exhaustive();
+  const { full } = await match(target)
+    .with('deck', async () => {
+      return (
+        (await prisma.deck.findFirst({
+          where: { short: param },
+          select: { full: true },
+        })) || { full: param }
+      );
+    })
+    .with('timeline', async () => {
+      return (
+        (await prisma.timeline.findFirst({
+          where: { short: param },
+          select: { full: true },
+        })) || { full: param }
+      );
+    })
+    .exhaustive();
+  return match(target)
+    .with('deck', () => decodeDeck(full)._unsafeUnwrap())
+    .with('timeline', () => decodeTimeline(full)._unsafeUnwrap())
+    .exhaustive();
 }

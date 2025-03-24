@@ -18,7 +18,12 @@ import {
 import { TreeItem2Provider } from '@mui/x-tree-view/TreeItem2Provider';
 import { TreeItem2Icon } from '@mui/x-tree-view/TreeItem2Icon';
 import clsx from 'clsx';
-import { type ElementType, forwardRef, type HTMLAttributes, type Ref } from 'react';
+import {
+  type ElementType,
+  forwardRef,
+  type HTMLAttributes,
+  type Ref,
+} from 'react';
 import { IconButton, Stack, Tooltip } from '@mui/material';
 import {
   Folder,

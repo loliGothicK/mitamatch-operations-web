@@ -44,8 +44,8 @@ export default function Page({
   const DocComponent = lazy(async () => {
     slug = (await params).slug;
     return slug.length === 1
-      ? import(`@/docs/${slug[0]}/index.mdx`)
-      : import(`@/docs/${slug.join('/')}.mdx`);
+      ? import(`@/mdx/${slug[0]}/index.mdx`)
+      : import(`@/mdx/${slug.join('/')}.mdx`);
   });
 
   return (
@@ -61,27 +61,29 @@ export default function Page({
               <Toc />
             </Grid>
             <Grid size={{ xs: 12, md: 9 }}>
-              <Breadcrumbs separator={'›'} aria-label='breadcrumb'>
-                <Link prefetch={true} href='/docs'>
-                  Docs
-                </Link>
-                {slug.length > 1 ? (
-                  slug
-                    .slice(0, slug.length - 1)
-                    .map((title, index) => (
-                      <Link
-                        key={title}
-                        href={`/docs/${takeLeft(index + 1)(slug).join('/')}`}
-                      >
-                        {title}
-                      </Link>
-                    ))
-                    // biome-ignore lint/complexity/noUselessFragments: <explanation>
-                    .concat(<>{slug[slug.length - 1]}</>)
-                ) : (
-                  <> {slug[0]}</>
-                )}
-              </Breadcrumbs>
+              <Link prefetch={true} href='/docs'>
+                Docs
+              </Link>
+              {slug.length > 0 && (
+                <Breadcrumbs separator={'›'} aria-label='breadcrumb'>
+                  {slug.length > 1 ? (
+                    slug
+                      .slice(0, slug.length - 1)
+                      .map((title, index) => (
+                        <Link
+                          key={title}
+                          href={`/docs/${takeLeft(index + 1)(slug).join('/')}`}
+                        >
+                          {title}
+                        </Link>
+                      ))
+                      // biome-ignore lint/complexity/noUselessFragments: <explanation>
+                      .concat(<>{slug[slug.length - 1]}</>)
+                  ) : (
+                    <> {slug[0]}</>
+                  )}
+                </Breadcrumbs>
+              )}
               <article className='mitamatch-markdown'>
                 <DocComponent />
               </article>
