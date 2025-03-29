@@ -63,7 +63,7 @@
     "prisma": "6.5.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-virtuoso": "4.12.5",
+    "react-virtuoso": "4.12.6",
     "reactflow": "11.11.4",
     "rehype-slug": "6.0.0",
     "remark-gfm": "4.0.1",
