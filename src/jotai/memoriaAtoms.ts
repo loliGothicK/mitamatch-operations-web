@@ -1,4 +1,4 @@
-import { atom } from 'jotai';
+import { atom, getDefaultStore } from 'jotai';
 
 import type { Memoria, MemoriaId } from '@/domain/memoria/memoria';
 import { memoriaList } from '@/domain/memoria/memoria';
@@ -26,6 +26,7 @@ import Cookies from 'js-cookie';
 import { match, P } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
 import { isStackEffect } from '@/parser/skill';
+import { activeProjectAtom } from '@/jotai/projectAtoms';
 
 export const targetBeforeAtom = atom<MemoriaId[]>([]);
 export const targetAfterAtom = atom<MemoriaId[]>([]);
@@ -75,8 +76,9 @@ export const rwDeckAtom = atom(
   ) => {
     const newValue =
       typeof update === 'function' ? update(get(deckAtom)) : update;
+    const index = getDefaultStore().get(activeProjectAtom);
     Cookies.set(
-      'deck',
+      `deck-${index === false ? 0 : index}`,
       encodeDeck(get(swAtom), newValue, get(rwLegendaryDeckAtom)),
     );
     set(deckAtom, newValue);
@@ -95,7 +97,11 @@ export const rwLegendaryDeckAtom = atom(
   ) => {
     const newValue =
       typeof update === 'function' ? update(get(legendaryDeckAtom)) : update;
-    Cookies.set('deck', encodeDeck(get(swAtom), get(rwDeckAtom), newValue));
+    const index = getDefaultStore().get(activeProjectAtom);
+    Cookies.set(
+      `deck-${index === false ? 0 : index}`,
+      encodeDeck(get(swAtom), get(rwDeckAtom), newValue),
+    );
     set(legendaryDeckAtom, newValue);
   },
 );

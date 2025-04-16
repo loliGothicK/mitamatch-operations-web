@@ -7,7 +7,11 @@ import { createSession } from '@/lib/session';
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
-  const basePath = req.headers.get('x-base-path') || 'https://www.mitama.io';
+  const basePath =
+    req.headers.get('x-base-path') ||
+    (process.env.NODE_ENV === 'production'
+      ? 'https://mitama.io'
+      : 'http://localhost:3000');
   const code = searchParams.get('code');
   const redirectUri = new URL('/api/auth/discord', basePath).toString();
 

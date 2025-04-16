@@ -31,8 +31,12 @@ import {
   Minimize,
   NearMe as OrderIcon,
 } from '@mui/icons-material';
-import { projectOpenAtom } from '@/jotai/projectAtoms';
-import { useAtom } from 'jotai';
+import {
+  projectOpenAtom,
+  openProjectListAtom,
+  activeProjectAtom,
+} from '@/jotai/projectAtoms';
+import { useAtomDefault } from '@/jotai/default';
 
 declare module 'react' {
   interface CSSProperties {
@@ -85,10 +89,16 @@ const CustomTreeItemGroupTransition = styled(TreeItem2GroupTransition)(
 );
 
 const CustomTreeItem = forwardRef(function CustomTreeItem(
-  props: StyledTreeItemProps,
+  props: Omit<StyledTreeItemProps, 'label' | 'itemId'> & {
+    label: string;
+    itemId: number;
+  },
   ref: Ref<HTMLLIElement>,
 ) {
   const theme = useTheme();
+  const [, setOpenProjectList] = useAtomDefault(openProjectListAtom);
+  const [, setValue] = useAtomDefault(activeProjectAtom);
+
   const {
     id,
     itemId,
@@ -106,7 +116,14 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
     getLabelProps,
     getGroupTransitionProps,
     status,
-  } = useTreeItem2({ id, itemId, children, label, disabled, rootRef: ref });
+  } = useTreeItem2({
+    id,
+    itemId: `${itemId}`,
+    children,
+    label,
+    disabled,
+    rootRef: ref,
+  });
 
   const style = {
     '--tree-view-color': theme.palette.action.active,
@@ -114,8 +131,18 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
   };
 
   return (
-    <TreeItem2Provider itemId={itemId}>
-      <CustomTreeItemRoot {...getRootProps({ ...other, style })}>
+    <TreeItem2Provider itemId={`${itemId}`}>
+      <CustomTreeItemRoot
+        {...getRootProps({ ...other, style })}
+        onDoubleClick={() => {
+          if (!children) {
+            setValue(itemId);
+            setOpenProjectList(prev => {
+              return new Map(prev.set(label, itemId));
+            });
+          }
+        }}
+      >
         <CustomTreeItemContent
           {...getContentProps({
             className: clsx('content', {
@@ -156,7 +183,7 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
 });
 
 export default function ProjectTreeView(props: { sx: { gridArea: string } }) {
-  const [projectOpen, setProjectOpen] = useAtom(projectOpenAtom);
+  const [projectOpen, setProjectOpen] = useAtomDefault(projectOpenAtom);
   const theme = useTheme();
   return projectOpen ? (
     <Box
@@ -184,7 +211,7 @@ export default function ProjectTreeView(props: { sx: { gridArea: string } }) {
         </Tooltip>
       </Stack>
       <SimpleTreeView
-        defaultExpandedItems={['3']}
+        defaultExpandedItems={['1']}
         defaultSelectedItems='5'
         slots={{
           expandIcon: ArrowRightIcon,
@@ -192,9 +219,9 @@ export default function ProjectTreeView(props: { sx: { gridArea: string } }) {
         }}
         sx={{ px: 3 }}
       >
-        <CustomTreeItem itemId='3' label='Categories' labelIcon={Folder}>
-          <CustomTreeItem itemId='5' label='Units' labelIcon={UnitIcon} />
-          <CustomTreeItem itemId='6' label='Order' labelIcon={OrderIcon} />
+        <CustomTreeItem itemId={1} label='Categories' labelIcon={Folder}>
+          <CustomTreeItem itemId={2} label='Units' labelIcon={UnitIcon} />
+          <CustomTreeItem itemId={3} label='Order' labelIcon={OrderIcon} />
         </CustomTreeItem>
       </SimpleTreeView>
     </Box>

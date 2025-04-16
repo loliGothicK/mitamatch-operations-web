@@ -309,9 +309,6 @@ export function Calculator() {
           </FormGroup>
           <Autocomplete
             disablePortal
-            defaultValue={
-              charm ? { title: charm.name, ability: charm.ability } : null
-            }
             options={charmOptions.sort((a, b) =>
               a.ability.localeCompare(b.ability),
             )}
@@ -353,16 +350,6 @@ export function Calculator() {
             <Grid size={{ xs: costume.adx ? 9 : 12 }}>
               <Autocomplete
                 disablePortal
-                defaultValue={
-                  costume
-                    ? {
-                        title: `${costume.lily}/${costume.name}`,
-                        desc:
-                          costume.ex?.up.name ||
-                          costume.adx?.[3][0].description,
-                      }
-                    : null
-                }
                 options={costumeOptions.sort((a, b) =>
                   a.desc && b.desc
                     ? a.desc.localeCompare(b.desc)

@@ -1,7 +1,6 @@
 import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Provider } from 'jotai';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
@@ -54,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang='ja'>
       <body className={inter.className}>
-        <Provider>{children}</Provider>
+        {children}
         <Analytics />
         <SpeedInsights />
       </body>

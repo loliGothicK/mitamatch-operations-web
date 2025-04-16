@@ -1,5 +1,6 @@
 'use client';
 
+import { Provider, getDefaultStore } from 'jotai';
 import Footer from '@/components/Footer';
 import { mainListItems } from '@/components/home/listItems';
 import {
@@ -302,9 +303,13 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <BasicLayout>{children}</BasicLayout>
+        <Provider store={defaultStore}>
+          <CssBaseline />
+          <BasicLayout>{children}</BasicLayout>
+        </Provider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
 }
+
+const defaultStore = getDefaultStore();

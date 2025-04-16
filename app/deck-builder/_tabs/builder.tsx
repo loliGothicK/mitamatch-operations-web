@@ -25,6 +25,7 @@ import {
   SearchOutlined,
   Share,
   Close,
+  Settings,
 } from '@mui/icons-material';
 import {
   AppBar,
@@ -46,7 +47,6 @@ import {
   MenuItem,
   OutlinedInput,
   Select,
-  Skeleton,
   Stack,
   Tooltip,
   Typography,
@@ -100,6 +100,7 @@ import { Virtuoso } from 'react-virtuoso';
 import { match } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
 import { isStackEffect } from '@/parser/skill';
+import { Calculator } from '@/deck-builder/_tabs/calculator';
 
 function Icon({
   kind,
@@ -224,7 +225,6 @@ function MemoriaItem({
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [concentrationValue, setConcentration] = useState(concentration);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [compare, setCompare] = useAtom(compareModeAtom);
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
@@ -293,9 +293,35 @@ function MemoriaItem({
     zIndex: isDragging ? Number.POSITIVE_INFINITY : 'auto',
   };
 
+  const skeleton = (w: number, h: number) => `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="${w}" height="${h}">
+      <defs>
+        <linearGradient id="shimmer" x1="0" x2="${w}" y1="0" y2="0">
+          <stop offset="0%" stop-color="#f5f5f5">
+            <animate attributeName="offset" values="-2; 1" dur="2s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="50%" stop-color="#eeeeee">
+            <animate attributeName="offset" values="-1.5; 1.5" dur="2s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stop-color="#f5f5f5">
+            <animate attributeName="offset" values="-1; 2" dur="2s" repeatCount="indefinite" />
+          </stop>
+        </linearGradient>
+      </defs>
+      <rect width="${w}" height="${h}" fill="url(#shimmer)" />
+      <path d="M160 110 Q200 60 240 110 L240 200 L160 200 Z" fill="#e0e0e0" opacity="0.7" />
+      <circle cx="190" cy="90" r="15" fill="#e0e0e0" opacity="0.7" />
+    </svg>`;
+
+  const toBase64 = (str: string) => {
+    if (typeof window === 'undefined') {
+      return Buffer.from(str).toString('base64');
+    }
+    return window.btoa(str);
+  };
+
   return (
     <Grid key={id} ref={setNodeRef} style={style}>
-      {!isLoaded && <Skeleton variant='rectangular' width={100} height={100} />}
       <Box
         sx={
           compare && compare.id === memoria.id
@@ -334,9 +360,8 @@ function MemoriaItem({
                 alt={name.short}
                 width={100}
                 height={100}
-                onLoad={() => {
-                  setIsLoaded(true);
-                }}
+                placeholder={'blur'}
+                blurDataURL={toBase64(skeleton(100, 100))}
                 onContextMenu={onContextMenu ? undefined : handleContextMenu}
                 priority={priority}
               />
@@ -361,7 +386,7 @@ function MemoriaItem({
                         bgcolor: 'rgba(0, 0, 0, 0.2)',
                         zIndex: Number.POSITIVE_INFINITY,
                       }}
-                      aria-label={`remove ${name}`}
+                      aria-label={'remove'}
                       onClick={() => {
                         setDeck(prev =>
                           prev.filter(
@@ -462,7 +487,7 @@ function LegendaryDeck() {
   );
 }
 
-function UnitComponent() {
+function UnitComponent({ index }: { index: number }) {
   const params = useSearchParams();
   const theme = useTheme();
   const [, setTitle] = useAtom(unitTitleAtom);
@@ -477,7 +502,7 @@ function UnitComponent() {
       const value = params.get('deck');
       const title = params.get('title');
       setTitle(title ? decodeURI(title) : 'No Title');
-      const cookie = Cookies.get('deck');
+      const cookie = Cookies.get(`deck-${index}`);
       if (value) {
         const { sw, deck, legendaryDeck } = await restore({
           target: 'deck',
@@ -506,11 +531,11 @@ function UnitComponent() {
             sw === 'shield'
               ? ['support', 'interference', 'recovery']
               : [
-                'normal_single',
-                'normal_range',
-                'special_single',
-                'special_range',
-              ],
+                  'normal_single',
+                  'normal_range',
+                  'special_single',
+                  'special_range',
+                ],
           );
           setDeck(deck);
           setLegendaryDeck(legendaryDeck);
@@ -528,6 +553,7 @@ function UnitComponent() {
     setSw,
     params.get,
     setCompare,
+    index,
   ]);
 
   return (
@@ -739,9 +765,8 @@ function Compare({
       color: theme.palette[sign ? 'success' : 'error'][theme.palette.mode],
     };
     return (
-      <>
+      <div key={type}>
         <dt
-          key={type}
           style={{
             paddingRight: '1em',
             textAlignLast: 'justify',
@@ -750,7 +775,7 @@ function Compare({
         >{`${type}:`}</dt>
         <dd style={color}>{`${sign ? '+' : ''}${after - before}`}</dd>
         <dd>{`(${before} => ${after})`}</dd>
-      </>
+      </div>
     );
   };
 
@@ -1411,7 +1436,9 @@ function ShareButton() {
       {popupState => (
         <>
           <Button {...bindTrigger(popupState)}>
-            <Share />
+            <Tooltip title={'share'} placement={'top'}>
+              <Share />
+            </Tooltip>
           </Button>
           <Menu {...bindMenu(popupState)}>
             <MenuItem
@@ -1482,7 +1509,35 @@ function ShareButton() {
   );
 }
 
-export function DeckBuilder() {
+function CalcSettings() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Tooltip title={'calc settings'} placement={'top'}>
+        <IconButton onClick={() => setOpen(true)}>
+          <Settings />
+        </IconButton>
+      </Tooltip>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogContent>
+          <Typography id='modal-modal-title' variant='h6' component='h2'>
+            Calc Settings
+          </Typography>
+          <Stack direction={'column'}>
+            <Stack direction={'row'}>
+              <Calculator />
+            </Stack>
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+}
+
+export function DeckBuilder({ index }: { index: number }) {
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setCompare] = useAtom(compareModeAtom);
@@ -1500,6 +1555,9 @@ export function DeckBuilder() {
         size={{ xs: 12, md: 4, lg: 3 }}
         direction={'column'}
         alignItems={'center'}
+        sx={{
+          padding: 2,
+        }}
       >
         <Details />
       </Grid>
@@ -1517,8 +1575,9 @@ export function DeckBuilder() {
         </Tooltip>
         <DiffModal />
         <ShareButton />
+        <CalcSettings />
         <Suspense>
-          <UnitComponent />
+          <UnitComponent index={index} />
         </Suspense>
       </Grid>
       <Grid size={{ xs: 12, md: 12, lg: 4 }} py={2}>
