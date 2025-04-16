@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-export const projectOpenAtom = atom(true);
+export const projectOpenAtom = atom(false);
 
 export const activeProjectAtom = atom<number | false>(false);
 
