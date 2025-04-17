@@ -85,7 +85,7 @@
     "@types/jest": "29.5.14",
     "@types/js-cookie": "3.0.6",
     "@types/mdx": "2.0.13",
-    "@types/pg": "8.11.11",
+    "@types/pg": "8.11.13",
     "@types/react": "19.0.12",
     "@types/react-dom": "19.0.4",
     "@types/ws": "8.18.0",
