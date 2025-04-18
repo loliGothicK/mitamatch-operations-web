@@ -111,8 +111,8 @@ importers:
         specifier: 2.12.1
         version: 2.12.1
       fp-ts:
-        specifier: 2.16.9
-        version: 2.16.9
+        specifier: 2.16.10
+        version: 2.16.10
       iron-session:
         specifier: 8.0.4
         version: 8.0.4
@@ -130,7 +130,7 @@ importers:
         version: 5.3.5(@mui/material@6.4.11(@emotion/react@11.14.0(@types/react@19.0.12)(react@19.0.0))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@19.0.12)(react@19.0.0))(@types/react@19.0.12)(react@19.0.0))(@types/react@19.0.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@types/react@19.0.12)(react@19.0.0)
       monocle-ts:
         specifier: 2.3.13
-        version: 2.3.13(fp-ts@2.16.9)
+        version: 2.3.13(fp-ts@2.16.10)
       neverthrow:
         specifier: 8.2.0
         version: 8.2.0
@@ -2962,8 +2962,8 @@ packages:
   forwarded-parse@2.1.2:
     resolution: {integrity: sha512-alTFZZQDKMporBH77856pXgzhEzaUVmLCDk+egLgIgHst3Tpndzz8MnKe+GzRJRfvVdn69HhpW7cmXzvtLvJAw==}
 
-  fp-ts@2.16.9:
-    resolution: {integrity: sha512-+I2+FnVB+tVaxcYyQkHUq7ZdKScaBlX53A41mxQtpIccsfyv8PzdzP7fzp2AY832T4aoK6UZ5WRX/ebGd8uZuQ==}
+  fp-ts@2.16.10:
+    resolution: {integrity: sha512-vuROzbNVfCmUkZSUbnWSltR1sbheyQbTzug7LB/46fEa1c0EucLeBaCEUE0gF3ZGUGBt9lVUiziGOhhj6K1ORA==}
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
@@ -7520,7 +7520,7 @@ snapshots:
 
   forwarded-parse@2.1.2: {}
 
-  fp-ts@2.16.9: {}
+  fp-ts@2.16.10: {}
 
   fs.realpath@1.0.0: {}
 
@@ -8432,9 +8432,9 @@ snapshots:
 
   module-details-from-path@1.0.3: {}
 
-  monocle-ts@2.3.13(fp-ts@2.16.9):
+  monocle-ts@2.3.13(fp-ts@2.16.10):
     dependencies:
-      fp-ts: 2.16.9
+      fp-ts: 2.16.10
 
   ms@2.1.3: {}
 
