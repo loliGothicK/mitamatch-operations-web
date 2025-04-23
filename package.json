@@ -27,7 +27,7 @@
     "@mui/lab": "6.0.0-dev.240424162023-9968b4889d",
     "@mui/material": "6.4.11",
     "@mui/system": "6.4.11",
-    "@mui/x-tree-view": "7.29.0",
+    "@mui/x-tree-view": "7.29.1",
     "@neondatabase/serverless": "1.0.0",
     "@next/mdx": "15.3.1",
     "@next/third-parties": "15.3.1",
