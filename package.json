@@ -100,7 +100,7 @@
     "zod": "3.24.3"
   },
   "volta": {
-    "node": "22.14.0"
+    "node": "22.15.0"
   },
   "packageManager": "pnpm@10.9.0",
   "pnpm": {
