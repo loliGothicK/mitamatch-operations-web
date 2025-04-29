@@ -1,5 +1,5 @@
 import 'server-only';
-import { Pool, neonConfig } from '@neondatabase/serverless';
+import { neonConfig } from '@neondatabase/serverless';
 import { PrismaNeon } from '@prisma/adapter-neon';
 import { PrismaClient } from '@prisma/client';
 import ws from 'ws';
@@ -23,8 +23,7 @@ const hasProps =
   };
 
 const connectionString = `${process.env.POSTGRES_URL}`;
-const pool = new Pool({ connectionString });
-const adapter = new PrismaNeon(pool);
+const adapter = new PrismaNeon({ connectionString });
 export const prisma = new PrismaClient({ adapter }).$extends({
   model: {
     deck: {
@@ -40,14 +39,14 @@ export const prisma = new PrismaClient({ adapter }).$extends({
       ) {
         return await match(where)
           .when(hasProps('userId'), async ({ userId }) => {
-            return await prisma.deck.upsert({
-              where: { userId },
+            return prisma.deck.upsert({
+              where: {userId},
               update: {},
               create,
             });
           })
           .when(hasProps('short'), async () => {
-            return await prisma.deck.create({
+            return prisma.deck.create({
               data: create,
             });
           })
@@ -67,14 +66,14 @@ export const prisma = new PrismaClient({ adapter }).$extends({
       ) {
         return await match(where)
           .when(hasProps('userId'), async ({ userId }) => {
-            return await prisma.timeline.upsert({
-              where: { userId },
+            return prisma.timeline.upsert({
+              where: {userId},
               update: {},
               create,
             });
           })
           .when(hasProps('short'), async () => {
-            return await prisma.timeline.create({
+            return prisma.timeline.create({
               data: create,
             });
           })
