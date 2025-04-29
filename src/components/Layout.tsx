@@ -46,7 +46,7 @@ import { getUser } from '@/actions/auth';
 import ProjectTreeView from '@/components/project';
 import { match } from 'ts-pattern';
 import { darkTheme, lightTheme } from '@/theme/theme';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Link from '@/components/link';
 import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
 import { useAtom } from 'jotai';

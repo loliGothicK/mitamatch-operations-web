@@ -3,7 +3,7 @@
 import { useAtom } from 'jotai';
 
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 import { rwDeckAtom, rwLegendaryDeckAtom } from '@/jotai/memoriaAtoms';

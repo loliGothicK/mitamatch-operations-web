@@ -6,7 +6,7 @@ import {
   Box,
   Button,
   Divider,
-  Grid2 as Grid,
+  Grid,
   List,
   ListItemText,
   Stack,

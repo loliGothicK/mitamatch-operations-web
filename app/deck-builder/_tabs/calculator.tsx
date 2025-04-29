@@ -36,7 +36,7 @@ import {
 } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { styled, useTheme } from '@mui/material/styles';
 import { useAtom } from 'jotai';

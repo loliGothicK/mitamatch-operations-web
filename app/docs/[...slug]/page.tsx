@@ -3,7 +3,7 @@
 import { Layout } from '@/components/Layout';
 import { Documents } from '@/components/docs/Documents';
 import '@/styles/markdown.css';
-import { Breadcrumbs, Grid2 as Grid } from '@mui/material';
+import { Breadcrumbs, Grid } from '@mui/material';
 import { takeLeft } from 'fp-ts/Array';
 import { Suspense, lazy, useEffect } from 'react';
 import { destroy, init } from 'tocbot';

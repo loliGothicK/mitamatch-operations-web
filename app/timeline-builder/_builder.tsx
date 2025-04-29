@@ -23,7 +23,7 @@ import {
   DialogContent,
   DialogTitle,
   Divider,
-  Grid2 as Grid,
+  Grid,
   IconButton,
   List,
   ListItem,

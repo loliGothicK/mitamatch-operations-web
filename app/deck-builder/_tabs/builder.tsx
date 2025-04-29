@@ -38,7 +38,7 @@ import {
   DialogContent,
   Divider,
   FormControl,
-  Grid2 as Grid,
+  Grid,
   IconButton,
   ImageListItem,
   ImageListItemBar,

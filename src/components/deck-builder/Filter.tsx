@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 
 import { CheckBoxItem } from '@/components/deck-builder/CheckBoxItem';
 import {

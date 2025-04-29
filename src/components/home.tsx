@@ -9,7 +9,7 @@ import {
 import '@/components/home/home.css';
 import Image from 'next/image';
 import { useTheme } from '@mui/material/styles';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import { redirect } from 'next/navigation';
 
 export default function Home() {
