@@ -3,7 +3,7 @@ import type { Unit } from '@/domain/types';
 import { match } from 'ts-pattern';
 import { decodeDeck, decodeTimeline } from '@/encode_decode/serde';
 import type { Order } from '@/domain/order/order';
-import { prisma } from '@/database/prismaClient';
+import { getDeckFullUrl, getTimelineFullUrl } from '@/database';
 
 type OrderWithPic = Order & {
   delay?: number;
@@ -34,22 +34,12 @@ export async function restore({
   if (parseResult.isOk()) {
     return parseResult.value;
   }
-  const { full } = await match(target)
+  const full = await match(target)
     .with('deck', async () => {
-      return (
-        (await prisma.deck.findFirst({
-          where: { short: param },
-          select: { full: true },
-        })) || { full: param }
-      );
+      return (await getDeckFullUrl(param)) || param;
     })
     .with('timeline', async () => {
-      return (
-        (await prisma.timeline.findFirst({
-          where: { short: param },
-          select: { full: true },
-        })) || { full: param }
-      );
+      return (await getTimelineFullUrl(param)) || param;
     })
     .exhaustive();
   return match(target)

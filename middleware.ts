@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { getUser } from '@/actions/auth';
+import { getSession } from '@/actions/auth';
 
 // 1. Specify protected and public routes
 const protectedRoutes = ['/dashboard', '/user'];
@@ -18,7 +18,7 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const user = await getUser();
+  const user = await getSession();
 
   // 4. Redirect to /login if the user is not authenticated
   if (!user) {

@@ -1,8 +1,8 @@
 'use server';
 // biome-ignore lint/correctness/noNodejsModules: This is a Next.js API route, so we need to use the default Node.js import syntax
 import crypto from 'node:crypto';
-import { getUser } from '@/actions/auth';
-import { prisma } from '@/database/prismaClient';
+import { getSession } from '@/actions/auth';
+import { getUser, upsertDeck, upsertTimeline } from '@/database';
 
 export async function generateShortLink(data: { full: string }) {
   return await (async () =>
@@ -19,45 +19,19 @@ export async function saveShortLink({
   short: string;
 }) {
   'use server';
-  const session = await getUser();
-  const user =
-    session !== null
-      ? await prisma.user.findUnique({
-          where: { discordId: session.userId },
-          select: { id: true },
-        })
-      : null;
+  const session = await getSession();
+  const user = session !== null ? await getUser(session.userId) : null;
   if (target === 'deck') {
-    await prisma.deck.save({
-      where: {
-        short,
-      },
-      create: user?.id
-        ? {
-            short,
-            full,
-            user: { connect: { id: user?.id } },
-          }
-        : {
-            short,
-            full,
-          },
+    await upsertDeck({
+      short,
+      full,
+      userId: user?.id,
     });
   } else {
-    await prisma.timeline.save({
-      where: {
-        short,
-      },
-      create: user?.id
-        ? {
-            short,
-            full,
-            user: { connect: { id: user?.id } },
-          }
-        : {
-            short,
-            full,
-          },
+    await upsertTimeline({
+      short,
+      full,
+      userId: user?.id,
     });
   }
 }

@@ -4,7 +4,7 @@ import type { SessionData } from '@/session/sessionData';
 import { decrypt } from '@/lib/crypt';
 import { cookies } from 'next/headers';
 
-export async function getUser(): Promise<Omit<
+export async function getSession(): Promise<Omit<
   SessionData,
   'isLoggedIn' | 'expires'
 > | null> {

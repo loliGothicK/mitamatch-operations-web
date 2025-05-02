@@ -42,7 +42,7 @@ import {
 import { redirect } from 'next/navigation';
 import { defaultSession, type SessionData } from '@/session/sessionData';
 import Image from 'next/image';
-import { getUser } from '@/actions/auth';
+import { getSession } from '@/actions/auth';
 import ProjectTreeView from '@/components/project';
 import { match } from 'ts-pattern';
 import { darkTheme, lightTheme } from '@/theme/theme';
@@ -86,7 +86,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     (async () => {
-      const user = await getUser();
+      const user = await getSession();
       if (user) {
         setUser({
           ...user,

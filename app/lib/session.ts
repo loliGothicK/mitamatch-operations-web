@@ -2,7 +2,7 @@ import 'server-only';
 import { cookies } from 'next/headers';
 import { discordOauth2 } from '@/discord/oauth2';
 import { decrypt, encrypt } from '@/lib/crypt';
-import { prisma } from '@/database/prismaClient';
+import { updateToken, upsertUser } from '@/database';
 
 export async function createSession(json: {
   userId: string;
@@ -28,23 +28,13 @@ export async function createSession(json: {
     path: '/',
   });
 
-  await prisma.user.upsert({
-    where: { discordId: json.userId },
-    update: {
-      name: json.userName,
-      email: json.userEmail,
-      avatar: json.userAvatar,
-      accessToken: json.access_token,
-      refreshToken: json.refreshToken,
-    },
-    create: {
-      discordId: json.userId,
-      name: json.userName,
-      email: json.userEmail,
-      avatar: json.userAvatar,
-      accessToken: json.access_token,
-      refreshToken: json.refreshToken,
-    },
+  await upsertUser({
+    discordId: json.userId,
+    name: json.userName,
+    email: json.userEmail,
+    avatar: json.userAvatar,
+    accessToken: json.access_token,
+    refreshToken: json.refreshToken,
   });
 }
 
@@ -70,11 +60,9 @@ export async function updateSession(session: string) {
     sameSite: 'lax',
   });
 
-  prisma.user.update({
-    where: { discordId: payload.userId as string },
-    data: {
-      accessToken: token.access_token,
-      refreshToken: token.refresh_token,
-    },
+  await updateToken({
+    discordId: payload.userId as string,
+    accessToken: token.access_token,
+    refreshToken: token.refresh_token,
   });
 }
