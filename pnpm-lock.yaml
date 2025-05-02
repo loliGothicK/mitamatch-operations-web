@@ -153,8 +153,8 @@ importers:
         specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
       react-virtuoso:
-        specifier: 4.12.6
-        version: 4.12.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 4.12.7
+        version: 4.12.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       reactflow:
         specifier: 11.11.4
         version: 11.11.4(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -4323,8 +4323,8 @@ packages:
       react: '>=16.6.0'
       react-dom: '>=16.6.0'
 
-  react-virtuoso@4.12.6:
-    resolution: {integrity: sha512-bfvS6aCL1ehXmq39KRiz/vxznGUbtA27I5I24TYCe1DhMf84O3aVNCIwrSjYQjkJGJGzY46ihdN8WkYlemuhMQ==}
+  react-virtuoso@4.12.7:
+    resolution: {integrity: sha512-njJp764he6Fi1p89PUW0k2kbyWu9w/y+MwdxmwK2kvdwwzVDbz2c2wMj5xdSruBFVgFTsI7Z85hxZR7aSHBrbQ==}
     peerDependencies:
       react: '>=16 || >=17 || >= 18 || >= 19'
       react-dom: '>=16 || >=17 || >= 18 || >=19'
@@ -6713,8 +6713,8 @@ snapshots:
 
   '@prisma/config@6.5.0':
     dependencies:
-      esbuild: 0.25.1
-      esbuild-register: 3.6.0(esbuild@0.25.1)
+      esbuild: 0.25.3
+      esbuild-register: 3.6.0(esbuild@0.25.3)
     transitivePeerDependencies:
       - supports-color
     optional: true
@@ -8150,14 +8150,6 @@ snapshots:
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
 
-  esbuild-register@3.6.0(esbuild@0.25.1):
-    dependencies:
-      debug: 4.4.0
-      esbuild: 0.25.1
-    transitivePeerDependencies:
-      - supports-color
-    optional: true
-
   esbuild-register@3.6.0(esbuild@0.25.3):
     dependencies:
       debug: 4.4.0
@@ -9562,7 +9554,7 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  react-virtuoso@4.12.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  react-virtuoso@4.12.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)

@@ -63,7 +63,7 @@
     "pg": "8.15.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-virtuoso": "4.12.6",
+    "react-virtuoso": "4.12.7",
     "reactflow": "11.11.4",
     "rehype-slug": "6.0.0",
     "remark-gfm": "4.0.1",
