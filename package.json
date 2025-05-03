@@ -71,7 +71,7 @@
     "ts-essentials": "10.0.4",
     "ts-pattern": "5.7.0",
     "unist-util-visit": "5.0.0",
-    "ws": "8.18.1"
+    "ws": "8.18.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
