@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "incremental": true,
-    // following options in strictest are comletely unnecessary:
+    // the following options in strictest are completely unnecessary:
     "exactOptionalPropertyTypes": false,
     "noUncheckedIndexedAccess": false,
     "noPropertyAccessFromIndexSignature": false,

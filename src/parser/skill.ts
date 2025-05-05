@@ -32,7 +32,13 @@ export type Elemental = {
   readonly kind: ElementalKind;
 };
 
-export type SkillKind = Elemental | 'charge' | 'counter' | 's-counter' | 'heal';
+export type SkillKind =
+  | Elemental
+  | 'charge'
+  | 'counter'
+  | 's-counter'
+  | 'heal'
+  | 'recover';
 
 export const stackKinds = ['meteor', 'barrier', 'eden', 'anima'] as const;
 
@@ -127,8 +133,8 @@ function parseRange(
 }
 
 const ATK_DAMAGE = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
-const ATK_BUFF = /自身の(.*?)を(.*?アップ)させる/;
-const ATK_DEBUFF = /敵の(.*?)を(.*?ダウン)させる/;
+const ATK_EFF =
+  /(?:、自身の|、敵の|、)(.+?)[をの]((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))/;
 
 function parseDamage(
   description: string,
@@ -144,31 +150,45 @@ function parseDamage(
     pipe(
       fromNullable(
         description.match(
-          match(type)
-            .with('buff', () => ATK_BUFF)
-            .with('debuff', () => ATK_DEBUFF)
-            .exhaustive(),
+          /(?:、自身の|、敵の|、)(.+?)[をの]((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))/g,
         ),
       ),
-      option.map(([, status, buff]) =>
-        pipe(
-          Do,
-          bind('status', () =>
-            separator(status.split('と').map(s => parseStatus(s, joined()))),
-          ),
-          either.flatMap(({ status }) =>
-            separator(
-              status.map(stat =>
-                sequenceS(ap)({
-                  type: right(type),
-                  amount: toValidated(parseAmount(buff, joined())),
-                  status: right(stat),
-                  range: right(range),
-                }),
+      option.map(
+        (matches): Validated<MitamaError, SkillEffect[]> =>
+          separator(
+            matches.flatMap(eff =>
+              pipe(
+                fromNullable(eff.match(ATK_EFF)),
+                option.map(([, status, buff]) =>
+                  pipe(
+                    Do,
+                    bind('status', () =>
+                      separator(
+                        status.split('と').map(s => parseStatus(s, joined())),
+                      ),
+                    ),
+                    either.flatMap(({ status }) =>
+                      separator(
+                        status.map(stat =>
+                          sequenceS(ap)({
+                            type: right(type),
+                            amount: toValidated(parseAmount(buff, joined())),
+                            status: right(stat),
+                            range: right(range),
+                          }),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                option.getOrElse(() =>
+                  toValidated(
+                    anyhow(joined(), eff, "given text doesn't match ATK_EFF"),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
       ),
     );
 
@@ -211,84 +231,87 @@ function parseDamage(
   );
 }
 
-const ASSIST_BUFF = /味方(.+?)体の(.+?)を(.*?アップ)させる/;
+const STAT_UP_OR_DOWN =
+  /(?:味方|敵)(.+?)体の(.+?)を((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))(?:、(.+?)を((?:超特大|極大|特大|大|小)?(?:アップ|ダウン)))?させる/;
 
-function parseBuff(
+const parseStatChanges = (
+  type: 'buff' | 'debuff',
+  range: string,
+  status: string,
+  eff: string,
+  path: CallPath,
+) => {
+  return pipe(
+    pipe(
+      status
+        .split('と')
+        .map(s => parseStatus(s, path.join('parseStatChanges'))),
+      separator,
+    ),
+    either.flatMap(stats =>
+      separator(
+        stats.map(stat =>
+          sequenceS(ap)({
+            type: right(type),
+            range: parseRange(range, path.join('parseStatChanges')),
+            amount: toValidated(
+              parseAmount(eff, path.join('parseStatChanges')),
+            ),
+            status: right(stat),
+          }),
+        ),
+      ),
+    ),
+  );
+};
+
+function parseBuffAndDebuff(
+  type: 'buff' | 'debuff',
   description: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
   const joined = () => path.join('parseBuff');
-  return pipe(
-    fromNullable(description.match(ASSIST_BUFF)),
-    option.map(([, range, status, buff]) =>
-      pipe(
-        pipe(
-          status.split('と').map(s => parseStatus(s, joined())),
-          separator,
-        ),
-        either.flatMap(stats =>
-          separator(
-            stats.map(stat =>
-              sequenceS(ap)({
-                type: right('buff' as const),
-                range: parseRange(range, joined()),
-                amount: toValidated(parseAmount(buff, joined())),
-                status: right(stat),
-              }),
-            ),
-          ),
-        ),
-      ),
-    ),
-    option.getOrElse(() =>
-      toValidated(
-        anyhow(joined(), description, "given text doesn't match ASSIST_BUFF"),
-      ),
-    ),
-  );
-}
 
-const INTERFRRENCE_DEBUFF = /敵(.+?)体の(.+?)を(.*?ダウン)させる/;
-
-function parseDebuff(
-  description: string,
-  path: CallPath = CallPath.empty,
-): Validated<MitamaError, SkillEffect[]> {
-  const joined = () => path.join('parseDebuff');
   return pipe(
-    fromNullable(description.match(INTERFRRENCE_DEBUFF)),
-    option.map(([, range, status, debuff]) =>
-      pipe(
-        Do,
-        bind('status', () =>
-          separator(status.split('と').map(s => parseStatus(s, joined()))),
+    fromNullable(description.match(STAT_UP_OR_DOWN)),
+    option.map(matches =>
+      match(matches)
+        .when(
+          _ => /(?:アップ|ダウン)、/g.test(description),
+          ([, range, s1, e1, s2, e2]) =>
+            separator([
+              parseStatChanges(type, range, s1, e1, joined()),
+              parseStatChanges(type, range, s2, e2, joined()),
+            ]),
+        )
+        .otherwise(([, range, status, eff]) =>
+          parseStatChanges(type, range, status, eff, joined()),
         ),
-        either.flatMap(
-          ({ status }): Validated<MitamaError, SkillEffect[]> =>
-            pipe(
-              status.flat().map(stat =>
-                sequenceS(ap)({
-                  type: right('debuff' as const),
-                  range: parseRange(range),
-                  amount: toValidated(parseAmount(debuff, joined())),
-                  status: right(stat),
-                }),
-              ),
-              separator,
-            ),
-        ),
-      ),
     ),
     option.getOrElse(() =>
       toValidated(
         anyhow(
           joined(),
           description,
-          "given text doesn't match INTERFRRENCE_DEBUFF",
+          "given text doesn't match STAT_UP_OR_DOWN",
         ),
       ),
     ),
   );
+}
+
+function parseBuff(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Validated<MitamaError, SkillEffect[]> {
+  return parseBuffAndDebuff('buff', description, path.join('parseBuff'));
+}
+
+function parseDebuff(
+  description: string,
+  path: CallPath = CallPath.empty,
+): Validated<MitamaError, SkillEffect[]> {
+  return parseBuffAndDebuff('debuff', description, path.join('parseDebuff'));
 }
 
 const RECOVERY = /味方(.+)体のHPを(.*?回復)/;
@@ -567,8 +590,11 @@ const parseKinds = (name: string): Option<readonly SkillKind[]> => {
   const heal = name.includes('ヒール')
     ? option.of('heal' as SkillKind)
     : option.none;
+  const recover = name.includes('リカバー')
+    ? option.of('recover' as SkillKind)
+    : option.none;
 
-  return transposeArray([elemental, counter, charge, heal]);
+  return transposeArray([elemental, counter, charge, heal, recover]);
 };
 
 export const parseSkill = ({
