@@ -4,6 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -45,11 +46,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const nonce = (await headers()).get('x-nonce') || undefined;
   return (
     <html lang='ja'>
       <body className={inter.className}>
@@ -57,8 +59,8 @@ export default function RootLayout({
         <Analytics />
         <SpeedInsights />
       </body>
-      <GoogleTagManager gtmId={`${process.env.GTM}`} />
-      <GoogleAnalytics gaId={`${process.env.GTAG}`} />
+      <GoogleTagManager gtmId={`${process.env.GTM}`} nonce={nonce} />
+      <GoogleAnalytics gaId={`${process.env.GTAG}`} nonce={nonce} />
     </html>
   );
 }

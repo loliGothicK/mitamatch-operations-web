@@ -11,7 +11,13 @@ import type { Amount } from '@/parser/common';
 import { pipe } from 'fp-ts/function';
 import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
 import { anyhow, type MitamaError, CallPath } from '@/error/error';
-import { bind, Do, getApplicativeValidation, right } from 'fp-ts/Either';
+import {
+  bind,
+  Do,
+  type Either,
+  getApplicativeValidation,
+  right,
+} from 'fp-ts/Either';
 import { getSemigroup } from 'fp-ts/Array';
 import { sequenceS } from 'fp-ts/Apply';
 import { separator, transposeArray } from '@/fp-ts-ext/function';
@@ -142,8 +148,21 @@ function parseDamage(
 ): Validated<MitamaError, readonly SkillEffect[]> {
   const joined = () => path.join('parseDamage');
 
+  const toType = (buff: string): Either<MitamaError, 'buff' | 'debuff'> => {
+    if (buff.includes('アップ')) {
+      return right('buff' as const);
+    }
+    if (buff.includes('ダウン')) {
+      return right('debuff' as const);
+    }
+    return anyhow(
+      joined(),
+      buff,
+      "given text doesn't include 'buff' or 'debuff'",
+    );
+  };
+
   const statChanges = (
-    type: 'buff' | 'debuff',
     range: readonly [number, number],
     description: string,
   ): Option<Validated<MitamaError, SkillEffect[]>> =>
@@ -171,7 +190,7 @@ function parseDamage(
                       separator(
                         status.map(stat =>
                           sequenceS(ap)({
-                            type: right(type),
+                            type: toValidated(toType(buff)),
                             amount: toValidated(parseAmount(buff, joined())),
                             status: right(stat),
                             range: right(range),
@@ -213,10 +232,7 @@ function parseDamage(
     ),
     either.flatMap(({ damage }) =>
       pipe(
-        transposeArray([
-          statChanges('buff', damage.range, description),
-          statChanges('debuff', damage.range, description),
-        ]),
+        transposeArray([statChanges(damage.range, description)]),
         option.map(seq =>
           pipe(
             separator(seq),
