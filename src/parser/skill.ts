@@ -178,7 +178,7 @@ function parseDamage(
             matches.flatMap(eff =>
               pipe(
                 fromNullable(eff.match(ATK_EFF)),
-                option.map(([, status, buff]) =>
+                option.map(([, status, amount]) =>
                   pipe(
                     Do,
                     bind('status', () =>
@@ -190,8 +190,8 @@ function parseDamage(
                       separator(
                         status.map(stat =>
                           sequenceS(ap)({
-                            type: toValidated(toType(buff)),
-                            amount: toValidated(parseAmount(buff, joined())),
+                            type: toValidated(toType(amount)),
+                            amount: toValidated(parseAmount(amount, joined())),
                             status: right(stat),
                             range: right(range),
                           }),
