@@ -491,16 +491,16 @@ function parseStack(
     .when(
       name => name.includes('コメット'),
       () =>
-        parseStackEffect(['meteor', 'barrier'])(description, branch('Comet')),
+        parseStackEffect(['meteor', 'barrier'])(description, branch('comet')),
     )
     .when(
       name => name.includes('エーテル'),
-      () => parseStackEffect(['anima', 'meteor'])(description, branch('Ether')),
+      () => parseStackEffect(['anima', 'meteor'])(description, branch('ether')),
     )
     .when(
       name => name.includes('ルミナス'),
       () =>
-        parseStackEffect(['anima', 'barrier'])(description, branch('Luminous')),
+        parseStackEffect(['anima', 'barrier'])(description, branch('luminous')),
     )
     .otherwise(() => right([]));
 }
