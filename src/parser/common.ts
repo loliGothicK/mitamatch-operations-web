@@ -1,19 +1,7 @@
 import { match, P } from 'ts-pattern';
-import { Applicative, type Either, fromPredicate, right } from 'fp-ts/Either';
+import { type Either, fromPredicate, right } from 'fp-ts/Either';
 import { anyhow, type MitamaError, CallPath } from '@/error/error';
 import type { Elements } from '@/parser/skill';
-import { traverseWithIndex } from 'fp-ts/Array';
-import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
-
-export const parseSequence =
-  <T>(
-    parser: (s: string, path: CallPath) => Either<MitamaError, T>,
-    delimiter: string,
-  ) =>
-  (seq: string, path: CallPath = CallPath.empty): Validated<MitamaError, T[]> =>
-    traverseWithIndex(Applicative)((index: number, s: string) =>
-      toValidated(parser(s, path.join(`parseSeq.${index}`))),
-    )(seq.split(delimiter));
 
 export const parseIntSafe = (
   num: string,

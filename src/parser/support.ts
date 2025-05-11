@@ -323,12 +323,11 @@ export function parseSupport({
   name,
   description,
 }: { name: string; description: string }): Validated<MitamaError, Support> {
+  const path = new CallPath(['parseSupport']);
   return sequenceS(ap)({
     raw: right({ name, description }),
-    trigger: toValidated(parseTrigger(name, new CallPath(['parseSupport']))),
-    probability: toValidated(
-      parseProbability(description, new CallPath(['parseSupport'])),
-    ),
-    effects: parseEffects(description, new CallPath(['parseSupport'])),
+    trigger: toValidated(parseTrigger(name, path)),
+    probability: toValidated(parseProbability(description, path)),
+    effects: parseEffects(description, path),
   });
 }
