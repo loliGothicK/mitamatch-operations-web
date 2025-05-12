@@ -58,7 +58,7 @@
     "neverthrow": "8.2.0",
     "next": "15.3.2",
     "outdent": "0.8.0",
-    "pg": "8.15.6",
+    "pg": "8.16.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-virtuoso": "4.12.7",
