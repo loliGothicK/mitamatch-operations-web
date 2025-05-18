@@ -67,7 +67,7 @@
     "remark-gfm": "4.0.1",
     "tocbot": "4.36.3",
     "ts-essentials": "10.0.4",
-    "ts-pattern": "5.7.0",
+    "ts-pattern": "5.7.1",
     "unist-util-visit": "5.0.0",
     "ws": "8.18.2"
   },
