@@ -165,8 +165,8 @@ importers:
         specifier: 4.0.1
         version: 4.0.1
       tocbot:
-        specifier: 4.36.3
-        version: 4.36.3
+        specifier: 4.36.4
+        version: 4.36.4
       ts-essentials:
         specifier: 10.0.4
         version: 10.0.4(typescript@5.8.3)
@@ -4414,8 +4414,8 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  tocbot@4.36.3:
-    resolution: {integrity: sha512-Xe1Nn+fyRq0Spvh2hMdZxK/v0j0c/PGsE6lnZPD3zXfeCWUhhRW31i32Y8IVa1rvSytoW4qh4U8Hr8kP2+NQaA==}
+  tocbot@4.36.4:
+    resolution: {integrity: sha512-ffznkKnZ1NdghwR1y8hN6W7kjn4FwcXq32Z1mn35gA7jd8dt2cTVAwL3d0BXXZGPu0Hd0evverUvcYAb/7vn0g==}
 
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
@@ -9488,7 +9488,7 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  tocbot@4.36.3: {}
+  tocbot@4.36.4: {}
 
   tr46@0.0.3: {}
 
