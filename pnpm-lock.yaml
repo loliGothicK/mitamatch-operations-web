@@ -109,10 +109,10 @@ importers:
         version: 16.5.0
       drizzle-cuid2:
         specifier: 2.0.0
-        version: 2.0.0(drizzle-orm@0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.3)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3)))
+        version: 2.0.0(drizzle-orm@0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.4)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3)))
       drizzle-orm:
         specifier: 0.44.1
-        version: 0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.3)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3))
+        version: 0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.4)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3))
       fp-ts:
         specifier: 2.16.10
         version: 2.16.10
@@ -214,8 +214,8 @@ importers:
         specifier: 2.0.13
         version: 2.0.13
       '@types/pg':
-        specifier: 8.15.3
-        version: 8.15.3
+        specifier: 8.15.4
+        version: 8.15.4
       '@types/react':
         specifier: 19.1.6
         version: 19.1.6
@@ -2295,8 +2295,8 @@ packages:
   '@types/pg-pool@2.0.6':
     resolution: {integrity: sha512-TaAUE5rq2VQYxab5Ts7WZhKNmuN78Q6PiFonTDdpbx8a1H0M1vhy3rhiMjl+e2iHmogyMw7jZF4FrE6eJUy5HQ==}
 
-  '@types/pg@8.15.3':
-    resolution: {integrity: sha512-/566mCD6naXuDdCO9LN9IBGYuuLfmCbew3PjdDT1LTQNAWWNYk/zTSNQ4I8oq4F4tN9p4UWQieJyFmuvK98A4A==}
+  '@types/pg@8.15.4':
+    resolution: {integrity: sha512-I6UNVBAoYbvuWkkU3oosC8yxqH21f4/Jc4DK71JLG3dT2mdlGe1z+ep/LQGXaKaOgcvUrsQoPRqfgtMcvZiJhg==}
 
   '@types/pg@8.6.1':
     resolution: {integrity: sha512-1Kc4oAGzAl7uqUStZCDvaLFqZrW9qWSjXOmBfdgyBP5La7Us6Mg4GBvRlSoaZMhQF/zSj1C8CtKMBkoiT8eL8w==}
@@ -5582,7 +5582,7 @@ snapshots:
   '@neondatabase/serverless@1.0.0':
     dependencies:
       '@types/node': 22.13.10
-      '@types/pg': 8.15.3
+      '@types/pg': 8.15.4
 
   '@next/env@15.3.3': {}
 
@@ -6834,9 +6834,9 @@ snapshots:
 
   '@types/pg-pool@2.0.6':
     dependencies:
-      '@types/pg': 8.15.3
+      '@types/pg': 8.15.4
 
-  '@types/pg@8.15.3':
+  '@types/pg@8.15.4':
     dependencies:
       '@types/node': 22.13.10
       pg-protocol: 1.10.0
@@ -7389,10 +7389,10 @@ snapshots:
 
   dotenv@16.5.0: {}
 
-  drizzle-cuid2@2.0.0(drizzle-orm@0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.3)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3))):
+  drizzle-cuid2@2.0.0(drizzle-orm@0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.4)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3))):
     dependencies:
       '@paralleldrive/cuid2': 2.2.2
-      drizzle-orm: 0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.3)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3))
+      drizzle-orm: 0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.4)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3))
 
   drizzle-kit@0.31.1:
     dependencies:
@@ -7403,12 +7403,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.3)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3)):
+  drizzle-orm@0.44.1(@neondatabase/serverless@1.0.0)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.4)(pg@8.16.0)(prisma@6.5.0(typescript@5.8.3)):
     optionalDependencies:
       '@neondatabase/serverless': 1.0.0
       '@opentelemetry/api': 1.9.0
       '@prisma/client': 6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3)
-      '@types/pg': 8.15.3
+      '@types/pg': 8.15.4
       pg: 8.16.0
       prisma: 6.5.0(typescript@5.8.3)
 
