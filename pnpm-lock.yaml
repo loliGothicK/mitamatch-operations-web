@@ -253,8 +253,8 @@ importers:
         specifier: 3.2.1
         version: 3.2.1(@types/debug@4.1.12)(@types/node@22.13.10)(happy-dom@17.6.3)(terser@5.39.0)(tsx@4.19.4)
       zod:
-        specifier: 3.25.49
-        version: 3.25.49
+        specifier: 3.25.51
+        version: 3.25.51
 
 packages:
 
@@ -4629,8 +4629,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zod@3.25.49:
-    resolution: {integrity: sha512-JMMPMy9ZBk3XFEdbM3iL1brx4NUSejd6xr3ELrrGEfGb355gjhiAWtG3K5o+AViV/3ZfkIrCzXsZn6SbLwTR8Q==}
+  zod@3.25.51:
+    resolution: {integrity: sha512-TQSnBldh+XSGL+opiSIq0575wvDPqu09AqWe1F7JhUMKY+M91/aGlK4MhpVNO7MgYfHcVCB1ffwAUTJzllKJqg==}
 
   zustand@4.5.6:
     resolution: {integrity: sha512-ibr/n1hBzLLj5Y+yUcU7dYw8p6WnIVzdJbnX+1YpaScvZVF2ziugqHs+LAmHw4lWO9c/zRj+K1ncgWDQuthEdQ==}
@@ -9564,7 +9564,7 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod@3.25.49: {}
+  zod@3.25.51: {}
 
   zustand@4.5.6(@types/react@19.1.6)(react@19.1.0):
     dependencies:
