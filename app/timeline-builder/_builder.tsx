@@ -419,6 +419,7 @@ function Source() {
                 onClick={() => {
                   if (
                     orders[index].kind.includes('Elemental') &&
+                    !orders[index].kind.includes('Special') &&
                     timeline.some(order => {
                       return order.kind === orders[index].kind;
                     })
