@@ -1,6 +1,30 @@
 {
   "data": [
     {
+      "id": 172,
+      "name": "鳳蒼覇煌",
+      "status": [2706, 2679, 1883, 1875],
+      "effect": "[火水]属性効果増加Lv.4",
+      "description": "火属性と水属性のメモリアスキル効果が超特大増加する。",
+      "prepare_time": 10,
+      "active_time": 65,
+      "payed": true,
+      "kind": "Elemental/Special",
+      "usually": true
+    },
+    {
+      "id": 171,
+      "name": "深淵の波動",
+      "status": [1569, 1540, 2274, 2271],
+      "effect": "[火水]属性効果増加Lv.4",
+      "description": "火属性と水属性のメモリアスキル効果が超特大増加する。",
+      "prepare_time": 10,
+      "active_time": 65,
+      "payed": false,
+      "kind": "Elemental/Special",
+      "usually": true
+    },
+    {
       "id": 170,
       "name": "蒼海神威",
       "status": [1884, 2724, 1869, 2669],
