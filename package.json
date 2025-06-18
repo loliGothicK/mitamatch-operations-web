@@ -46,7 +46,7 @@
     "clsx": "2.1.1",
     "discord-oauth2": "2.12.1",
     "dotenv": "16.5.0",
-    "drizzle-cuid2": "2.0.0",
+    "drizzle-cuid2": "2.1.0",
     "drizzle-orm": "0.44.2",
     "fp-ts": "2.16.10",
     "iron-session": "8.0.4",
