@@ -105,8 +105,8 @@ importers:
         specifier: 2.12.1
         version: 2.12.1
       dotenv:
-        specifier: 17.0.0
-        version: 17.0.0
+        specifier: 17.0.1
+        version: 17.0.1
       drizzle-cuid2:
         specifier: 2.1.0
         version: 2.1.0(drizzle-orm@0.44.2(@neondatabase/serverless@1.0.1)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.4)(pg@8.16.3)(prisma@6.5.0(typescript@5.8.3)))
@@ -3092,8 +3092,8 @@ packages:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
     engines: {node: '>=12'}
 
-  dotenv@17.0.0:
-    resolution: {integrity: sha512-A0BJ5lrpJVSfnMMXjmeO0xUnoxqsBHWCoqqTnGwGYVdnctqXXUEhJOO7LxmgxJon9tEZFGpe0xPRX0h2v3AANQ==}
+  dotenv@17.0.1:
+    resolution: {integrity: sha512-GLjkduuAL7IMJg/ZnOPm9AnWKJ82mSE2tzXLaJ/6hD6DhwGfZaXG77oB8qbReyiczNxnbxQKyh0OE5mXq0bAHA==}
     engines: {node: '>=12'}
 
   drizzle-cuid2@2.1.0:
@@ -7844,7 +7844,7 @@ snapshots:
 
   dotenv@16.6.1: {}
 
-  dotenv@17.0.0: {}
+  dotenv@17.0.1: {}
 
   drizzle-cuid2@2.1.0(drizzle-orm@0.44.2(@neondatabase/serverless@1.0.1)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.4)(pg@8.16.3)(prisma@6.5.0(typescript@5.8.3))):
     dependencies:
