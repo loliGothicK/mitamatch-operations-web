@@ -127,6 +127,7 @@ export const parseStatus = (status: string, path: CallPath = CallPath.empty) =>
     .with('火属性防御力・風属性防御力', () => right(['Fire DEF', 'Wind DEF']))
     .with('水属性攻撃力・風属性攻撃力', () => right(['Water ATK', 'Wind ATK']))
     .with('水属性防御力・風属性防御力', () => right(['Water DEF', 'Wind DEF']))
+    .with('火属性防御力・水属性防御力', () => right(['Fire DEF', 'Wind DEF']))
     .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () =>
       right(['Fire ATK', 'Water ATK', 'Wind ATK']),
     )

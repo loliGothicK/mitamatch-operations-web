@@ -41,7 +41,7 @@ export const decks = pgTable(
   {
     id: cuid2('id').defaultRandom().primaryKey().notNull(),
     userId: text(),
-    short: text(),
+    short: text().unique(),
     full: text().notNull(),
     createdAt: timestamp({ precision: 3, mode: 'string' })
       .default(sql`CURRENT_TIMESTAMP`)
@@ -69,7 +69,7 @@ export const timelines = pgTable(
   {
     id: cuid2('id').defaultRandom().primaryKey().notNull(),
     userId: text(),
-    short: text(),
+    short: text().unique(),
     full: text().notNull(),
     createdAt: timestamp({ precision: 3, mode: 'string' })
       .default(sql`CURRENT_TIMESTAMP`)
