@@ -314,7 +314,7 @@ const parseEffects = (
     transposeArray(effects),
     option.map(separator),
     option.getOrElse(() =>
-      toValidated(anyhow(path, description, 'No match support effects found')),
+      toValidated(anyhow(joined, description, 'No match support effects found')),
     ),
   );
 };

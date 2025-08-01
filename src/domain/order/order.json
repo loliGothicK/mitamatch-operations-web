@@ -1,6 +1,54 @@
 {
   "data": [
     {
+      "id": 176,
+      "name": "蒼神封界",
+      "status": [1897, 1906, 2686, 2699],
+      "effect": "水属性効果減少Lv.5",
+      "description": "敵の使用した水属性のスキル効果が極大減少（70%）。",
+      "prepare_time": 10,
+      "active_time": 110,
+      "payed": true,
+      "kind": "Shield",
+      "usually": true
+    },
+    {
+      "id": 175,
+      "name": "深淵の聖盾",
+      "status": [1546, 1568, 2265, 2243],
+      "effect": "水属性効果減少Lv.5",
+      "description": "敵の使用した水属性のスキル効果が極大減少（70%）。",
+      "prepare_time": 10,
+      "active_time": 110,
+      "payed": false,
+      "kind": "Shield",
+      "usually": true
+    },
+    {
+      "id": 174,
+      "name": "鳳炎天舞",
+      "status": [2723, 1887, 2646, 1894],
+      "effect": "火属性効果増加Lv.5",
+      "description": "火属性のメモリアのスキル効果が極大増加する。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": true,
+      "kind": "Elemental/Fire",
+      "usually": true
+    },
+    {
+      "id": 173,
+      "name": "烈炎の灼軍",
+      "status": [2287, 1567, 2217, 1543],
+      "effect": "火属性効果増加Lv.5",
+      "description": "火属性のメモリアのスキル効果が極大増加する。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": false,
+      "kind": "Elemental/Fire",
+      "usually": true
+    },
+    {
       "id": 172,
       "name": "鳳蒼覇煌",
       "status": [2706, 2679, 1883, 1875],
@@ -154,7 +202,7 @@
       "active_time": 130,
       "payed": true,
       "kind": "Elemental/Fire",
-      "usually": true
+      "usually": false
     },
     {
       "id": 159,
@@ -166,7 +214,7 @@
       "active_time": 130,
       "payed": false,
       "kind": "Elemental/Fire",
-      "usually": true
+      "usually": false
     },
     {
       "id": 158,
@@ -1294,7 +1342,7 @@
       "active_time": 100,
       "payed": true,
       "kind": "Shield",
-      "usually": true
+      "usually": false
     },
     {
       "id": 64,
@@ -1330,7 +1378,7 @@
       "active_time": 100,
       "payed": false,
       "kind": "Shield",
-      "usually": true
+      "usually": false
     },
     {
       "id": 61,

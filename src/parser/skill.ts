@@ -5,7 +5,7 @@ import {
   parseAmount,
   parseStatus,
   type StatusKind,
-  parseIntSafe,
+  parseIntSafe, parseElement,
 } from '@/parser/common';
 import type { Amount } from '@/parser/common';
 import { pipe } from 'fp-ts/function';
@@ -76,13 +76,18 @@ export type StackEffect = {
   readonly rate: number;
   readonly times: number;
 };
+export type ResonanceEffect = {
+  readonly element: Elements;
+  readonly type: 'spread' | 'minima' | 'enhance';
+}
 
 export type SkillEffect =
   | DamageEffect
   | BuffEffect
   | DebuffEffect
   | HealEffect
-  | StackEffect;
+  | StackEffect
+  | ResonanceEffect;
 
 export const isDamageEffect = (effect: SkillEffect): effect is DamageEffect =>
   effect.type === 'damage';
@@ -505,6 +510,42 @@ function parseStack(
     .otherwise(() => right([]));
 }
 
+const RESONANCE_EFFECT = /\[([火水風])響]/;
+
+function parseResonanceEffect(
+  { name }: { name: string; description: string },
+  path: CallPath = CallPath.empty,
+): Validated<MitamaError, SkillEffect[]>
+{
+  const parseResonanceType = (name: string): Either<MitamaError, ResonanceEffect['type']> => {
+    if (name.includes('ミニマ')) {
+      return right('minima' as const);
+    }
+    if (name.includes('スプレッド')) {
+      return right('spread' as const);
+    }
+    if (name.includes('エンハンス')) {
+      return right('enhance' as const);
+    }
+    return anyhow(path.join('parseResonanceEffect.parseResonanceType'), name, "given text doesn't match resonance type");
+  }
+
+  return pipe(
+    fromNullable(name.match(RESONANCE_EFFECT)),
+    option.map(([, element]): Validated<MitamaError, SkillEffect[]> =>
+      pipe(
+        Do,
+        bind('eff', () => sequenceS(ap)({
+          element: toValidated(parseElement(element, path.join('parseResonanceEffect'))),
+          type: toValidated(parseResonanceType(name)),
+        })),
+        either.map(({ eff }) => [eff]),
+      )
+    ),
+    option.getOrElse((): Validated<MitamaError, SkillEffect[]> => right([])),
+  );
+}
+
 const parseKinds = (name: string): Option<readonly SkillKind[]> => {
   const elemental = match<string, Option<SkillKind>>(name)
     .when(
@@ -646,8 +687,10 @@ export const parseSkill = ({
         .exhaustive(),
       either.flatMap(effects =>
         pipe(
-          parseStack(skill),
-          either.map(stack => effects.concat(stack)),
+          Do,
+          either.bind("stack", () => parseStack(skill)),
+          either.bind("resonance", () => parseResonanceEffect(skill)),
+          either.map(({ stack, resonance }) => [...effects, ...stack, ...resonance]),
         ),
       ),
     ),
