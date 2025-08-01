@@ -9,7 +9,7 @@ import { type Amount, parseElement, type StatusKind } from '@/parser/common';
 import type { Probability } from '@/parser/support';
 import { P, match } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
-import { type Elements, isNotStackEffect } from '@/parser/skill';
+import { type Elements, isNotStackOrElement } from '@/parser/skill';
 import { either } from 'fp-ts';
 
 const NotApplicable = Number.NaN;
@@ -232,7 +232,7 @@ export function evaluate(
       .exhaustive();
 
     const range = match(
-      Lenz.skill.effects.get(memoria).find(isNotStackEffect)?.range,
+      Lenz.skill.effects.get(memoria).find(isNotStackOrElement)?.range,
     )
       .with([P._, P._], ([a, b]) => (a + b) / 2)
       .run();

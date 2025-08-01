@@ -77,8 +77,9 @@ export type StackEffect = {
   readonly times: number;
 };
 export type ResonanceEffect = {
+  readonly type: 'element';
   readonly element: Elements;
-  readonly type: 'spread' | 'minima' | 'enhance';
+  readonly kind: 'spread' | 'minima' | 'enhance';
 }
 
 export type SkillEffect =
@@ -104,10 +105,10 @@ export const isStackEffect =
       effect.type === 'stack' && (kind === undefined || effect.kind === kind)
     );
   };
-export const isNotStackEffect = (
+export const isNotStackOrElement = (
   effect: SkillEffect,
-): effect is Exclude<SkillEffect, StackEffect> => {
-  return effect.type !== 'stack';
+): effect is Exclude<SkillEffect, StackEffect | ResonanceEffect> => {
+  return effect.type !== 'stack' && effect.type !== 'element';
 };
 
 export type Skill = {
@@ -517,7 +518,7 @@ function parseResonanceEffect(
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]>
 {
-  const parseResonanceType = (name: string): Either<MitamaError, ResonanceEffect['type']> => {
+  const parseResonanceType = (name: string): Either<MitamaError, ResonanceEffect['kind']> => {
     if (name.includes('ミニマ')) {
       return right('minima' as const);
     }
@@ -536,8 +537,9 @@ function parseResonanceEffect(
       pipe(
         Do,
         bind('eff', () => sequenceS(ap)({
+          type: right('element' as const),
           element: toValidated(parseElement(element, path.join('parseResonanceEffect'))),
-          type: toValidated(parseResonanceType(name)),
+          kind: toValidated(parseResonanceType(name)),
         })),
         either.map(({ eff }) => [eff]),
       )
