@@ -50,7 +50,7 @@
     "drizzle-orm": "0.44.2",
     "fp-ts": "2.16.10",
     "iron-session": "8.0.4",
-    "jose": "6.0.11",
+    "jose": "6.0.12",
     "jotai": "2.12.5",
     "js-cookie": "3.0.5",
     "material-ui-popup-state": "5.3.6",
