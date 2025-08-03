@@ -47,6 +47,7 @@ export type SkillKind =
   | 'recover';
 
 export const stackKinds = ['meteor', 'barrier', 'eden', 'anima'] as const;
+export const elementEffectKinds  = ['spread', 'minima', 'enhance'] as const;
 
 export type DamageEffect = {
   readonly type: 'damage';
@@ -76,7 +77,7 @@ export type StackEffect = {
   readonly rate: number;
   readonly times: number;
 };
-export type ResonanceEffect = {
+export type ElementEffect = {
   readonly type: 'element';
   readonly element: Elements;
   readonly kind: 'spread' | 'minima' | 'enhance';
@@ -88,7 +89,7 @@ export type SkillEffect =
   | DebuffEffect
   | HealEffect
   | StackEffect
-  | ResonanceEffect;
+  | ElementEffect;
 
 export const isDamageEffect = (effect: SkillEffect): effect is DamageEffect =>
   effect.type === 'damage';
@@ -105,9 +106,16 @@ export const isStackEffect =
       effect.type === 'stack' && (kind === undefined || effect.kind === kind)
     );
   };
+export const isElementEffect =
+  (kind?: (typeof elementEffectKinds)[number]) =>
+    (effect: SkillEffect): effect is StackEffect => {
+      return (
+        effect.type === 'element' && (kind === undefined || effect.kind === kind)
+      );
+    };
 export const isNotStackOrElement = (
   effect: SkillEffect,
-): effect is Exclude<SkillEffect, StackEffect | ResonanceEffect> => {
+): effect is Exclude<SkillEffect, StackEffect | ElementEffect> => {
   return effect.type !== 'stack' && effect.type !== 'element';
 };
 
@@ -513,12 +521,12 @@ function parseStack(
 
 const RESONANCE_EFFECT = /\[([火水風])響]/;
 
-function parseResonanceEffect(
+function parseElementEffect(
   { name }: { name: string; description: string },
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]>
 {
-  const parseResonanceType = (name: string): Either<MitamaError, ResonanceEffect['kind']> => {
+  const parseResonanceType = (name: string): Either<MitamaError, ElementEffect['kind']> => {
     if (name.includes('ミニマ')) {
       return right('minima' as const);
     }
@@ -528,7 +536,7 @@ function parseResonanceEffect(
     if (name.includes('エンハンス')) {
       return right('enhance' as const);
     }
-    return anyhow(path.join('parseResonanceEffect.parseResonanceType'), name, "given text doesn't match resonance type");
+    return anyhow(path.join('parseElementEffect.parseResonanceType'), name, "given text doesn't match resonance type");
   }
 
   return pipe(
@@ -538,7 +546,7 @@ function parseResonanceEffect(
         Do,
         bind('eff', () => sequenceS(ap)({
           type: right('element' as const),
-          element: toValidated(parseElement(element, path.join('parseResonanceEffect'))),
+          element: toValidated(parseElement(element, path.join('parseElementEffect'))),
           kind: toValidated(parseResonanceType(name)),
         })),
         either.map(({ eff }) => [eff]),
@@ -691,7 +699,7 @@ export const parseSkill = ({
         pipe(
           Do,
           either.bind("stack", () => parseStack(skill)),
-          either.bind("resonance", () => parseResonanceEffect(skill)),
+          either.bind("resonance", () => parseElementEffect(skill)),
           either.map(({ stack, resonance }) => [...effects, ...stack, ...resonance]),
         ),
       ),

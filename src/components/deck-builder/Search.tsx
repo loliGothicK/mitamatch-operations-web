@@ -151,6 +151,9 @@ function OtherSkillCheckbox() {
                 .with('barrier', () => 'バリア')
                 .with('anima', () => 'アニマ')
                 .with('eden', () => 'エデン')
+                .with('spread', () => 'スプレッド')
+                .with('enhance', () => 'エンハンス')
+                .with('minima', () => 'ミニマ')
                 .exhaustive()}
               checked={filter.includes(flag)}
               handleChange={() => {
