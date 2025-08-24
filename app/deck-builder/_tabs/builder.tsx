@@ -60,7 +60,7 @@ import {
 import type { SelectChangeEvent, Theme } from '@mui/material';
 import { blue, green, purple, red, yellow } from '@mui/material/colors';
 
-import { decodeDeck, encodeDeck } from '@/encode_decode/serde';
+import { decodeDeck, encodeDeck } from '@/endec/serde';
 import Details from '@/components/deck-builder/Details';
 import Filter from '@/components/deck-builder/Filter';
 import Search from '@/components/deck-builder/Search';
@@ -1444,7 +1444,7 @@ function ShareButton() {
                 handleClick('short');
                 const short = await generateShortLink({ full });
                 setUrl(
-                  `https://mitama.io/deck-builder?deck=${short}?title=${encodeURI(title)}`,
+                  `https://mitama.io/deck-builder?deck=${short}&title=${encodeURI(title)}`,
                 );
                 await saveShortLink({ target: 'deck', full, short });
               }}

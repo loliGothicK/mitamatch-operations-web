@@ -46,7 +46,7 @@ import {
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/system';
 
-import { decodeTimeline, encodeTimeline } from '@/encode_decode/serde';
+import { decodeTimeline, encodeTimeline } from '@/endec/serde';
 import { Layout } from '@/components/Layout';
 import Sortable from '@/components/sortable/Sortable';
 import {
@@ -565,7 +565,7 @@ function ShareButton() {
                 handleClick('short');
                 const short = await generateShortLink({ full });
                 setUrl(
-                  `https://mitama.io/timeline-builder?timeline=${short}?title=${encodeURI(title)}`,
+                  `https://mitama.io/timeline-builder?timeline=${short}&title=${encodeURI(title)}`,
                 );
                 await saveShortLink({ target: 'timeline', full, short });
               }}

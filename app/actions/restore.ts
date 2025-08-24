@@ -1,7 +1,7 @@
 'use server';
 import type { Unit } from '@/domain/types';
 import { match } from 'ts-pattern';
-import { decodeDeck, decodeTimeline } from '@/encode_decode/serde';
+import { decodeDeck, decodeTimeline } from '@/endec/serde';
 import type { Order } from '@/domain/order/order';
 import { getDeckFullUrl, getTimelineFullUrl } from '@/database';
 
