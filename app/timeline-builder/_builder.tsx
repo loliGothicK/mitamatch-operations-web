@@ -54,7 +54,7 @@ import {
   filterAtom,
   filteredOrderAtom,
   payedAtom,
-  timelineAtom,
+  rwTimelineAtom,
   timelineTitleAtom,
 } from '@/jotai/orderAtoms';
 
@@ -73,7 +73,7 @@ function Info({ order }: { order: OrderWithPic }) {
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
         <Typography variant='body1'>{order.name}</Typography>
         <Typography variant='body2' fontSize={10}>
-          [ {order.pic} / {order.sub} ] (+{order.delay} sec)
+          [ {order.pic} / {order.sub} ]
         </Typography>
       </Stack>
     );
@@ -93,7 +93,7 @@ function Info({ order }: { order: OrderWithPic }) {
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
         <Typography variant='body1'>{order.name}</Typography>
         <Typography variant='body2' fontSize={10}>
-          [ {order.sub} ] (+{order.delay} sec)
+          [ {order.sub} ]
         </Typography>
       </Stack>
     );
@@ -103,7 +103,7 @@ function Info({ order }: { order: OrderWithPic }) {
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
         <Typography variant='body1'>{order.name}</Typography>
         <Typography variant='body2' fontSize={10}>
-          [ {order.pic} ] (+{order.delay} sec)
+          [ {order.pic} ]
         </Typography>
       </Stack>
     );
@@ -132,9 +132,6 @@ function Info({ order }: { order: OrderWithPic }) {
     return (
       <Stack direction={'row'} alignItems={'center'} spacing={1}>
         <Typography variant='body1'>{order.name}</Typography>
-        <Typography variant='body2' fontSize={10}>
-          (+{order.delay} sec)
-        </Typography>
       </Stack>
     );
   }
@@ -142,7 +139,7 @@ function Info({ order }: { order: OrderWithPic }) {
 }
 
 function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
-  const [, setTimeline] = useAtom(timelineAtom);
+  const [, setTimeline] = useAtom(rwTimelineAtom);
   const {
     isDragging,
     setNodeRef,
@@ -170,6 +167,11 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
     touchAction: 'none',
   };
 
+  const timeFormat = ({ delay, prepare_time, active_time }: OrderWithPic): string => {
+    const totalTime = (delay || 0) + (prepare_time || 0) + (active_time || 0);
+    return `${totalTime} (${delay ? `${delay}` : ''}${prepare_time ? `+${prepare_time}` : ''}${active_time ? `+${active_time}` : ''}) s`;
+  };
+
   return (
     <div ref={setNodeRef} style={style}>
       <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
@@ -185,6 +187,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
           <DragIndicator sx={{ color: 'dimgrey', touchAction: 'none' }} />
         </div>
         <Stack direction={'row'} padding={0} alignItems={'center'}>
+          <Tooltip title={timeFormat(order)} placement='top'>
           <ListItem key={order.id} sx={{ padding: 0 }}>
             <ListItemAvatar>
               <Avatar>
@@ -201,6 +204,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
               secondary={order.effect}
             />
           </ListItem>
+          </Tooltip>
         </Stack>
         <IconButton
           size={'small'}
@@ -310,7 +314,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
 
 function Timeline() {
   const [, setTitle] = useAtom(timelineTitleAtom);
-  const [timeline, setTimeline] = useAtom(timelineAtom);
+  const [timeline, setTimeline] = useAtom(rwTimelineAtom);
   const params = useSearchParams();
 
   useEffect(() => {
@@ -385,7 +389,7 @@ function Timeline() {
 
 function Source() {
   const [orders] = useAtom(filteredOrderAtom);
-  const [timeline, setSelectedOrder] = useAtom(timelineAtom);
+  const [timeline, setSelectedOrder] = useAtom(rwTimelineAtom);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
 
@@ -520,7 +524,7 @@ function FilterMenu() {
 
 function ShareButton() {
   const [title] = useAtom(timelineTitleAtom);
-  const [timeline] = useAtom(timelineAtom);
+  const [timeline] = useAtom(rwTimelineAtom);
   const [modalOpen, setModalOpen] = useState<'short' | 'full' | false>(false);
   const [openTip, setOpenTip] = useState<boolean>(false);
   const [url, setUrl] = useState<string>('');
@@ -637,7 +641,7 @@ function TimelineBuilder() {
       alignItems={'left'}
       margin={2}
     >
-      <Grid size={{ xs: 12, md: 6, lg: 6 }} alignItems={'center'} mt={5}>
+      <Grid size={{ xs: 12, md: 8, lg: 8 }} alignItems={'center'} mt={5}>
         <Container
           maxWidth={false}
           sx={{
@@ -645,8 +649,8 @@ function TimelineBuilder() {
               theme.palette.mode === 'dark'
                 ? 'rgba(255,255,255, 0.1)'
                 : alpha(theme.palette.primary.main, 0.2),
-            minHeight: '70vh',
-            maxWidth: matches ? '25vw' : '100%',
+            minHeight: '80vh',
+            maxWidth: matches ? '30vw' : '100%',
           }}
         >
           <Suspense>
@@ -654,7 +658,7 @@ function TimelineBuilder() {
           </Suspense>
         </Container>
       </Grid>
-      <Grid size={{ xs: 12, md: 6, lg: 6 }}>
+      <Grid size={{ xs: 12, md: 4, lg: 4 }}>
         <Box
           flexDirection='row'
           justifyContent='flex-end'
@@ -676,8 +680,9 @@ function TimelineBuilder() {
               theme.palette.mode === 'dark'
                 ? 'rgba(255,255,255, 0.1)'
                 : alpha(theme.palette.primary.main, 0.2),
-            minHeight: '70vh',
+            minHeight: '80vh',
             maxWidth: matches ? '25vw' : '100%',
+            paddingTop: 5,
           }}
         >
           <Source />
