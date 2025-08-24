@@ -4,7 +4,8 @@ import {
   type Elements,
   elementalKind,
   elements,
-  type stackKinds, elementEffectKinds,
+  type stackKinds,
+  type elementEffectKinds,
 } from '@/parser/skill';
 import { match } from 'ts-pattern';
 

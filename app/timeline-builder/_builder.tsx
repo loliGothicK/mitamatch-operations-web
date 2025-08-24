@@ -167,7 +167,11 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
     touchAction: 'none',
   };
 
-  const timeFormat = ({ delay, prepare_time, active_time }: OrderWithPic): string => {
+  const timeFormat = ({
+    delay,
+    prepare_time,
+    active_time,
+  }: OrderWithPic): string => {
     const totalTime = (delay || 0) + (prepare_time || 0) + (active_time || 0);
     return `${totalTime} (${delay ? `${delay}` : ''}${prepare_time ? `+${prepare_time}` : ''}${active_time ? `+${active_time}` : ''}) s`;
   };
@@ -188,22 +192,22 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
         </div>
         <Stack direction={'row'} padding={0} alignItems={'center'}>
           <Tooltip title={timeFormat(order)} placement='top'>
-          <ListItem key={order.id} sx={{ padding: 0 }}>
-            <ListItemAvatar>
-              <Avatar>
-                <Image
-                  src={`/order/${order.name}.png`}
-                  alt={order.name}
-                  width={50}
-                  height={50}
-                />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={<Info order={order} />}
-              secondary={order.effect}
-            />
-          </ListItem>
+            <ListItem key={order.id} sx={{ padding: 0 }}>
+              <ListItemAvatar>
+                <Avatar>
+                  <Image
+                    src={`/order/${order.name}.png`}
+                    alt={order.name}
+                    width={50}
+                    height={50}
+                  />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={<Info order={order} />}
+                secondary={order.effect}
+              />
+            </ListItem>
           </Tooltip>
         </Stack>
         <IconButton

@@ -25,7 +25,7 @@ import { costumeList } from '@/domain/costume/costume';
 import Cookies from 'js-cookie';
 import { match, P } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
-import {isElementEffect, isStackEffect} from '@/parser/skill';
+import { isElementEffect, isStackEffect } from '@/parser/skill';
 import { activeProjectAtom } from '@/jotai/projectAtoms';
 
 export const targetBeforeAtom = atom<MemoriaId[]>([]);
@@ -205,10 +205,8 @@ export const filteredMemoriaAtom = atom(get => {
           .with(P.union('anima', 'barrier', 'meteor', 'eden'), filter =>
             Lenz.skill.effects.get(memoria).some(isStackEffect(filter)),
           )
-          .with(
-            P.union('minima', 'spread', 'enhance'),
-            filter =>
-              Lenz.skill.effects.get(memoria).some(isElementEffect(filter)),
+          .with(P.union('minima', 'spread', 'enhance'), filter =>
+            Lenz.skill.effects.get(memoria).some(isElementEffect(filter)),
           )
           .with(
             P.union('heal', 'charge', 'counter', 's-counter'),
