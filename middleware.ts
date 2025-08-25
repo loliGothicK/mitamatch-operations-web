@@ -103,8 +103,8 @@ function generateCspHeader(nonce: string): string {
 }
 
 // ArrayBufferを16進数の文字列に変換する
-function bufferToHex(buffer: ArrayBuffer): string {
-  return Array.from(new Uint8Array(buffer))
+function bufferToHex(buffer: Uint8Array): string {
+  return Array.from(buffer)
     .map(byte => byte.toString(16).padStart(2, '0'))
     .join('');
 }
