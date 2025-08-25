@@ -120,8 +120,8 @@ importers:
         specifier: 8.0.4
         version: 8.0.4
       jose:
-        specifier: 6.0.11
-        version: 6.0.11
+        specifier: 6.0.13
+        version: 6.0.13
       jotai:
         specifier: 2.12.5
         version: 2.12.5(@types/react@19.1.8)(react@19.1.0)
@@ -3491,8 +3491,8 @@ packages:
     resolution: {integrity: sha512-ojRXsWzEP16NdUuBw/4H/zkZdHOa7MMYCk4E430l+8fELeLg/mqmMlRhjL7UNZvQrDmnovWZV4DxX03fZF48fQ==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  jose@6.0.11:
-    resolution: {integrity: sha512-QxG7EaliDARm1O1S8BGakqncGT9s25bKL1WSf6/oa17Tkqwi8D2ZNglqCF+DsYF88/rV66Q/Q2mFAy697E1DUg==}
+  jose@6.0.13:
+    resolution: {integrity: sha512-Yms4GpbmdANamS51kKK6w4hRlKx8KTxbWyAAKT/MhUMtqbIqh5mb2HjhTNUbk7TFL8/MBB5zWSDohL7ed4k/UA==}
 
   jotai@2.12.5:
     resolution: {integrity: sha512-G8m32HW3lSmcz/4mbqx0hgJIQ0ekndKWiYP7kWVKi0p6saLXdSoye+FZiOFyonnd7Q482LCzm8sMDl7Ar1NWDw==}
@@ -8265,7 +8265,7 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jose@6.0.11: {}
+  jose@6.0.13: {}
 
   jotai@2.12.5(@types/react@19.1.8)(react@19.1.0):
     optionalDependencies:
