@@ -48,7 +48,7 @@
     "dotenv": "17.2.1",
     "drizzle-cuid2": "2.1.0",
     "drizzle-orm": "0.44.2",
-    "fp-ts": "2.16.10",
+    "fp-ts": "2.16.11",
     "iron-session": "8.0.4",
     "jose": "6.0.11",
     "jotai": "2.12.5",

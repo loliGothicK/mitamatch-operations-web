@@ -114,8 +114,8 @@ importers:
         specifier: 0.44.2
         version: 0.44.2(@neondatabase/serverless@1.0.1)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.8.3))(typescript@5.8.3))(@types/pg@8.15.5)(pg@8.16.3)(prisma@6.5.0(typescript@5.8.3))
       fp-ts:
-        specifier: 2.16.10
-        version: 2.16.10
+        specifier: 2.16.11
+        version: 2.16.11
       iron-session:
         specifier: 8.0.4
         version: 8.0.4
@@ -133,7 +133,7 @@ importers:
         version: 5.3.6(@mui/material@7.2.0(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react@19.1.0))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react@19.1.8)(react@19.1.0)
       monocle-ts:
         specifier: 2.3.13
-        version: 2.3.13(fp-ts@2.16.10)
+        version: 2.3.13(fp-ts@2.16.11)
       neverthrow:
         specifier: 8.2.0
         version: 8.2.0
@@ -3223,8 +3223,8 @@ packages:
   forwarded-parse@2.1.2:
     resolution: {integrity: sha512-alTFZZQDKMporBH77856pXgzhEzaUVmLCDk+egLgIgHst3Tpndzz8MnKe+GzRJRfvVdn69HhpW7cmXzvtLvJAw==}
 
-  fp-ts@2.16.10:
-    resolution: {integrity: sha512-vuROzbNVfCmUkZSUbnWSltR1sbheyQbTzug7LB/46fEa1c0EucLeBaCEUE0gF3ZGUGBt9lVUiziGOhhj6K1ORA==}
+  fp-ts@2.16.11:
+    resolution: {integrity: sha512-LaI+KaX2NFkfn1ZGHoKCmcfv7yrZsC3b8NtWsTVQeHkq4F27vI5igUuO53sxqDEa2gNQMHFPmpojDw/1zmUK7w==}
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
@@ -7876,7 +7876,7 @@ snapshots:
 
   forwarded-parse@2.1.2: {}
 
-  fp-ts@2.16.10: {}
+  fp-ts@2.16.11: {}
 
   fs.realpath@1.0.0: {}
 
@@ -8826,9 +8826,9 @@ snapshots:
 
   module-details-from-path@1.0.3: {}
 
-  monocle-ts@2.3.13(fp-ts@2.16.10):
+  monocle-ts@2.3.13(fp-ts@2.16.11):
     dependencies:
-      fp-ts: 2.16.10
+      fp-ts: 2.16.11
 
   ms@2.1.3: {}
 
