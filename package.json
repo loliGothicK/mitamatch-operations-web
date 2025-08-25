@@ -93,7 +93,7 @@
     "happy-dom": "18.0.1",
     "ts-node": "11.0.0-beta.1",
     "tsx": "4.20.5",
-    "typescript": "5.8.3",
+    "typescript": "5.9.2",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4",
     "zod": "4.0.5"
