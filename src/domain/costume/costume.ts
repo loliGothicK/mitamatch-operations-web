@@ -77,7 +77,6 @@ function skillsToStatus(
 ): readonly [number, number, number, number] {
   const status = [0, 0, 0, 0] as [number, number, number, number];
   const regex = /(ATK|Sp\.ATK|DEF|Sp\.DEF)\+\d+/g;
-  // biome-ignore lint/performance/useTopLevelRegex: ???
   const statRegex = /^(.+)\+(\d+)$/;
 
   for (const [, stat, value] of skills
@@ -86,23 +85,23 @@ function skillsToStatus(
       const match = skill.match(regex);
       return match === null ? [] : match;
     })
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    // biome-ignore lint/style/noNonNullAssertion: should be fine
     .map(skill => skill.match(statRegex)!)) {
     switch (stat) {
       case 'ATK': {
-        status[0] += Number.parseInt(value);
+        status[0] += Number.parseInt(value, 10);
         break;
       }
       case 'Sp.ATK': {
-        status[1] += Number.parseInt(value);
+        status[1] += Number.parseInt(value, 10);
         break;
       }
       case 'DEF': {
-        status[2] += Number.parseInt(value);
+        status[2] += Number.parseInt(value, 10);
         break;
       }
       case 'Sp.DEF': {
-        status[3] += Number.parseInt(value);
+        status[3] += Number.parseInt(value, 10);
         break;
       }
       default:

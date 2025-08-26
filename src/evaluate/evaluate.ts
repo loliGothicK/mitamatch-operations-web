@@ -265,10 +265,10 @@ export function evaluate(
 
     const calibration =
       charmRate *
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      // biome-ignore lint/style/noNonNullAssertion: should be fine
       charmEx.get(memoria.element)! *
       costumeRate *
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      // biome-ignore lint/style/noNonNullAssertion: should be fine
       costumeEx.get(memoria.element)! *
       graceRate *
       themeRate[memoria.element] *
@@ -382,7 +382,6 @@ function damage(
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
-      // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
       .otherwise(() => {});
   }
 
@@ -585,7 +584,6 @@ function buff(
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
-      // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
       .otherwise(() => {});
   }
 
@@ -641,10 +639,10 @@ function buff(
           ? 1.5
           : 1.0;
       const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      // biome-ignore lint/style/noNonNullAssertion: should be fine
       return match(status!)
         .with('ATK', () => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with('small', () => NotApplicable) // ない
             .with('medium', () => 2.28 / 100)
@@ -657,7 +655,7 @@ function buff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               atk *
@@ -671,7 +669,7 @@ function buff(
           };
         })
         .with('Sp.ATK', () => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with('small', () => NotApplicable) // ない
             .with('medium', () => 2.28 / 100)
@@ -684,7 +682,7 @@ function buff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               spAtk *
@@ -698,7 +696,7 @@ function buff(
           };
         })
         .with('DEF', () => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with('small', () => 3.32 / 100)
             .with('medium', () => 4.27 / 100)
@@ -713,7 +711,7 @@ function buff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               def *
@@ -727,7 +725,7 @@ function buff(
           };
         })
         .with('Sp.DEF', () => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with('small', () => 3.32 / 100)
             .with('medium', () => 4.27 / 100)
@@ -742,7 +740,7 @@ function buff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               spDef *
@@ -758,7 +756,7 @@ function buff(
         .with(
           P.union('Fire ATK', 'Water ATK', 'Wind ATK', 'Light ATK', 'Dark ATK'),
           () => {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             const skillRate = match(amount!)
               .with('small', () => 3.25 / 100)
               .with('medium', () => 4.0 / 100)
@@ -773,7 +771,7 @@ function buff(
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
-              // biome-ignore lint/style/noNonNullAssertion: <explanation>
+              // biome-ignore lint/style/noNonNullAssertion: should be fine
               type: status!,
               amount: Math.floor(
                 Math.floor((atk + spAtk) / 2) *
@@ -790,7 +788,7 @@ function buff(
         .with(
           P.union('Fire DEF', 'Water DEF', 'Wind DEF', 'Light DEF', 'Dark DEF'),
           () => {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             const skillRate = match(amount!)
               .with('small', () => 4.74 / 100)
               .with('medium', () => 5.65 / 100)
@@ -807,7 +805,7 @@ function buff(
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
-              // biome-ignore lint/style/noNonNullAssertion: <explanation>
+              // biome-ignore lint/style/noNonNullAssertion: should be fine
               type: status!,
               amount: Math.floor(
                 Math.floor((def + spDef) / 2) *
@@ -822,14 +820,14 @@ function buff(
           },
         )
         .with('Life', () => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with('medium', () => 0.45 / 100)
             .with('large', () => 0.7 / 100)
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               (def + spDef) *
@@ -950,7 +948,6 @@ function debuff(
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
-      // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
       .otherwise(() => {});
   }
 
@@ -1006,10 +1003,10 @@ function debuff(
           ? 1.5
           : 1.0;
       const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      // biome-ignore lint/style/noNonNullAssertion: should be fine
       return match(status!)
         .with('ATK', () => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with('small', () => 2.5 / 100)
             .with('medium', () => 3.34 / 100)
@@ -1024,7 +1021,7 @@ function debuff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               atk *
@@ -1040,7 +1037,7 @@ function debuff(
           };
         })
         .with('Sp.ATK', () => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with('small', () => 2.5 / 100)
             .with('medium', () => 3.34 / 100)
@@ -1055,7 +1052,7 @@ function debuff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               spAtk *
@@ -1069,7 +1066,7 @@ function debuff(
           };
         })
         .with('DEF', () => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with('small', () => 3.65 / 100)
             .with('medium', () => 4.71 / 100)
@@ -1084,7 +1081,7 @@ function debuff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               def *
@@ -1098,7 +1095,7 @@ function debuff(
           };
         })
         .with('Sp.DEF', () => {
-          // biome-ignore lint/style/noNonNullAssertion: <explanation>
+          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with('small', () => 3.65 / 100)
             .with('medium', () => 4.71 / 100)
@@ -1113,7 +1110,7 @@ function debuff(
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               spDef *
@@ -1129,7 +1126,7 @@ function debuff(
         .with(
           P.union('Fire ATK', 'Water ATK', 'Wind ATK', 'Light ATK', 'Dark ATK'),
           () => {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             const skillRate = match(amount!)
               .with('small', () => 3.25 / 100)
               .with('medium', () => 4.0 / 100)
@@ -1144,7 +1141,7 @@ function debuff(
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
-              // biome-ignore lint/style/noNonNullAssertion: <explanation>
+              // biome-ignore lint/style/noNonNullAssertion: should be fine
               type: status!,
               amount: Math.floor(
                 Math.floor((atk + spAtk) / 2) *
@@ -1161,7 +1158,7 @@ function debuff(
         .with(
           P.union('Fire DEF', 'Water DEF', 'Wind DEF', 'Light DEF', 'Dark DEF'),
           () => {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             const skillRate = match(amount!)
               .with('small', () => 4.74 / 100)
               .with('medium', () => 5.65 / 100)
@@ -1178,7 +1175,7 @@ function debuff(
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
             return {
-              // biome-ignore lint/style/noNonNullAssertion: <explanation>
+              // biome-ignore lint/style/noNonNullAssertion: should be fine
               type: status!,
               amount: Math.floor(
                 Math.floor((def + spDef) / 2) *
@@ -1350,7 +1347,7 @@ function support(
         .with(3, () => 1.425)
         .with(4, () => 1.5)
         .otherwise(() => 1.5);
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      // biome-ignore lint/style/noNonNullAssertion: should be fine
       return match(status!)
         .with('ATK', () => {
           const skillRate = match(amount)
@@ -1361,7 +1358,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(atk * memoriaRate * probability),
           };
@@ -1375,7 +1372,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(spAtk * memoriaRate * probability),
           };
@@ -1389,7 +1386,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(def * memoriaRate * probability),
           };
@@ -1403,7 +1400,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(spDef * memoriaRate * probability),
           };
@@ -1416,7 +1413,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               Math.floor((atk + spAtk) / 2) * memoriaRate * probability,
@@ -1431,7 +1428,7 @@ function support(
             .run();
           const memoriaRate = skillRate * skillLevel;
           return {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             type: status!,
             amount: Math.floor(
               Math.floor((def + spDef) / 2) * memoriaRate * probability,

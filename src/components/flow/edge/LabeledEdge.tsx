@@ -1,4 +1,4 @@
-import { type FormEvent, type MouseEvent, useState } from 'react';
+import { type FormEvent, type MouseEvent, useId, useState } from 'react';
 
 import {
   Button,
@@ -33,8 +33,9 @@ export default function LabeledEdge({
     mouseX: number;
     mouseY: number;
   } | null>(null);
+  const uniqueId = useId();
 
-  const handleContextMenu = (event: MouseEvent<SVGPathElement>) => {
+  const handleContextMenu = <T,>(event: MouseEvent<T>) => {
     event.preventDefault();
     setContextMenu(
       contextMenu === null
@@ -51,6 +52,7 @@ export default function LabeledEdge({
 
   return (
     <>
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: interactive node path */}
       <path
         d={edgePath}
         className='react-flow__edge-path'
@@ -124,7 +126,7 @@ export default function LabeledEdge({
             autoFocus
             required
             margin='dense'
-            id='comment'
+            id={`comment-${uniqueId}`}
             name='comment'
             label='コメント'
             fullWidth

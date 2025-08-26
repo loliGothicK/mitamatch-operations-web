@@ -35,6 +35,7 @@ export async function GET(reqest: NextRequest) {
             <div style={style}>
               {legendary.map(name => {
                 return (
+                  // biome-ignore lint/performance/noImgElement: this function runs on the edge server
                   <img
                     src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
                     key={name}
@@ -55,6 +56,7 @@ export async function GET(reqest: NextRequest) {
               />
               {deck.map(name => {
                 return (
+                  // biome-ignore lint/performance/noImgElement: this function runs on the edge server
                   <img
                     src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
                     key={name}
@@ -82,6 +84,7 @@ export async function GET(reqest: NextRequest) {
           return new ImageResponse(
             <div style={style}>
               {timeline.map(name => (
+                // biome-ignore lint/performance/noImgElement: this function runs on the edge server
                 <img
                   src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/order/${name}.png`}
                   key={name}

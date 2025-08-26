@@ -18,7 +18,6 @@ const nextConfig = {
       },
     ],
   },
-  // biome-ignore lint/suspicious/useAwait: <explanation>
   headers: async () => {
     return [
       {

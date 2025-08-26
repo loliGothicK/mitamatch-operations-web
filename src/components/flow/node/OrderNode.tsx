@@ -1,4 +1,4 @@
-import { type FormEvent, type MouseEvent, useState } from 'react';
+import { type FormEvent, type MouseEvent, useId, useState } from 'react';
 
 import { useAtom } from 'jotai';
 
@@ -37,6 +37,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
   const [pic, setPic] = useState<string | undefined>(undefined);
   const [open, setOpen] = useState(false);
   const [order, setOrder] = useState<Order | undefined>(data.order);
+  const uniqueId = useId();
 
   const getCount = () => {
     setCount(prev => prev + 1);
@@ -77,13 +78,13 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
         <Handle
           type='target'
           position={Position.Top}
-          id='top'
+          id={`top-${uniqueId}`}
           isConnectable={isConnectable}
         />
         <Handle
           type='source'
           position={Position.Left}
-          id='left'
+          id={`left-${uniqueId}`}
           isConnectable={isConnectable}
         />
         <Card sx={{ display: 'flex', padding: 0 }}>
@@ -133,13 +134,13 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
         <Handle
           type='source'
           position={Position.Bottom}
-          id='bottom'
+          id={`bottom-${uniqueId}`}
           isConnectable={isConnectable}
         />
         <Handle
           type='source'
           position={Position.Right}
-          id='right'
+          id={`right-${uniqueId}`}
           isConnectable={isConnectable}
         />
       </div>
@@ -163,7 +164,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             const self = nodes.find(n => n.id === id)!;
             const newId = getCount().toString();
             setNodeStorage([
@@ -219,7 +220,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
                 {...params}
                 autoFocus
                 margin='dense'
-                id='order'
+                id={`order-${uniqueId}`}
                 name='order'
                 label='Order'
                 type='text'
@@ -233,7 +234,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
             autoFocus
             defaultValue={pic}
             margin='dense'
-            id='pic'
+            id={`pic-${uniqueId}`}
             name='pic'
             label='PIC'
             type='text'

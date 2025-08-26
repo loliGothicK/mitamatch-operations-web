@@ -74,7 +74,6 @@ const MenuIcons = styled(MuiDrawer)(({ theme }) => ({
   },
 }));
 
-// biome-ignore lint/suspicious/noEmptyBlockStatements: Suspicious empty block
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function BasicLayout({ children }: { children: ReactNode }) {
@@ -98,7 +97,6 @@ function BasicLayout({ children }: { children: ReactNode }) {
     })();
   }, [setProjectOpen]);
 
-  // biome-ignore lint/suspicious/noEmptyBlockStatements: TODO: Implement menuDropdown
   const menuDropdown = () => {};
 
   return (

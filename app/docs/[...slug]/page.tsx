@@ -38,7 +38,9 @@ const Toc = () => {
 
 export default function Page({
   params,
-}: { params: Promise<{ slug: string[] }> }) {
+}: {
+  params: Promise<{ slug: string[] }>;
+}) {
   let slug: string[] = [];
 
   const DocComponent = lazy(async () => {
@@ -77,7 +79,7 @@ export default function Page({
                           {title}
                         </Link>
                       ))
-                      // biome-ignore lint/complexity/noUselessFragments: <explanation>
+                      // biome-ignore lint/complexity/noUselessFragments: necessary for map
                       .concat(<>{slug[slug.length - 1]}</>)
                   ) : (
                     <> {slug[0]}</>

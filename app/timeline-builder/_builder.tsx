@@ -3,7 +3,7 @@
 import { useAtom } from 'jotai';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
-import { type FormEvent, Suspense, useEffect, useState } from 'react';
+import { type FormEvent, Suspense, useEffect, useId, useState } from 'react';
 
 import {
   Add,
@@ -151,6 +151,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
     id: order.id,
   });
   const [open, setOpen] = useState(false);
+  const uniqueId = useId();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -261,7 +262,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
                   o.id === order.id
                     ? {
                         ...o,
-                        delay: Number.parseInt(formJson.delay as string),
+                        delay: Number.parseInt(formJson.delay as string, 10),
                         pic: formJson.pic as string,
                         sub: formJson.sub as string,
                       }
@@ -279,7 +280,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
             autoFocus
             defaultValue={order.delay}
             margin='dense'
-            id='delay'
+            id={`delay-${uniqueId}`}
             name='delay'
             label='delay'
             type='number'
@@ -290,7 +291,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
             autoFocus
             defaultValue={order.pic}
             margin='dense'
-            id='pic'
+            id={`pic-${uniqueId}`}
             name='pic'
             label='PIC'
             fullWidth
@@ -300,7 +301,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
             autoFocus
             defaultValue={order.sub}
             margin='dense'
-            id='sub'
+            id={`sub-${uniqueId}`}
             name='sub'
             label='Sub PIC'
             fullWidth
@@ -355,39 +356,39 @@ function Timeline() {
     return value - prepareTime - order.active_time - delay;
   };
 
-  return timeline.length === 0 ? (
-    <></>
-  ) : (
-    <Sortable
-      items={timeline}
-      onChangeOrder={setTimeline}
-      strategy={verticalListSortingStrategy}
-    >
-      <List sx={{ width: '100%', maxWidth: '65vh', overflow: 'auto' }}>
-        {timeline.map((order, index) => (
-          <TimelineItem
-            key={order.id}
-            order={order}
-            left={takeLeft(index)(timeline).reduce(reducer, 900)}
-          />
-        ))}
-        <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
-          <Typography fontSize={10}>
-            {(() => {
-              const left = takeLeft(timeline.length)(timeline).reduce(
-                reducer,
-                900,
-              );
-              return `${left < 0 ? '-' : ''}${Math.trunc(left / 60)}:${Math.abs(
-                left % 60,
-              )
-                .toString()
-                .padStart(2, '0')}`;
-            })()}
-          </Typography>
-        </Divider>
-      </List>
-    </Sortable>
+  return (
+    timeline.length !== 0 && (
+      <Sortable
+        items={timeline}
+        onChangeOrder={setTimeline}
+        strategy={verticalListSortingStrategy}
+      >
+        <List sx={{ width: '100%', maxWidth: '65vh', overflow: 'auto' }}>
+          {timeline.map((order, index) => (
+            <TimelineItem
+              key={order.id}
+              order={order}
+              left={takeLeft(index)(timeline).reduce(reducer, 900)}
+            />
+          ))}
+          <Divider textAlign={'left'} sx={{ paddingLeft: 0 }}>
+            <Typography fontSize={10}>
+              {(() => {
+                const left = takeLeft(timeline.length)(timeline).reduce(
+                  reducer,
+                  900,
+                );
+                return `${left < 0 ? '-' : ''}${Math.trunc(left / 60)}:${Math.abs(
+                  left % 60,
+                )
+                  .toString()
+                  .padStart(2, '0')}`;
+              })()}
+            </Typography>
+          </Divider>
+        </List>
+      </Sortable>
+    )
   );
 }
 

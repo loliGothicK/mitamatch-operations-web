@@ -324,7 +324,10 @@ const parseEffects = (
 export function parseSupport({
   name,
   description,
-}: { name: string; description: string }): Validated<MitamaError, Support> {
+}: {
+  name: string;
+  description: string;
+}): Validated<MitamaError, Support> {
   const path = new CallPath(['parseSupport']);
   return sequenceS(ap)({
     raw: right({ name, description }),

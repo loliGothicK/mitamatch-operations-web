@@ -13,7 +13,7 @@ import { Grid } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { useAtom } from 'jotai';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useId, useMemo, useState } from 'react';
 import ReactFlow, {
   addEdge,
   Background,
@@ -32,6 +32,7 @@ export default function FlowChart() {
   const [nodes, setNodes, onNodesChange] = useNodesState(cachedNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(cachedEdges);
   const [modalOpen, setModalOpen] = useState(false);
+  const id = useId();
 
   useEffect(() => {
     setNodes(cachedNodes);
@@ -80,7 +81,7 @@ export default function FlowChart() {
               )}
               onChange={(_, value) => {
                 if (value) {
-                  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                  // biome-ignore lint/style/noNonNullAssertion: should be fine
                   setSelect(orderList.find(order => order.name === value)!);
                 }
               }}
@@ -178,7 +179,11 @@ export default function FlowChart() {
             p: 4,
           }}
         >
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography
+            id={`modal-modal-title-${id}`}
+            variant='h6'
+            component='h2'
+          >
             Flowchart の使い方
           </Typography>
           {[

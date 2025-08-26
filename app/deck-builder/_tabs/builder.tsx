@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { type MouseEvent, Suspense, useEffect, useState } from 'react';
+import { type MouseEvent, Suspense, useEffect, useId, useState } from 'react';
 import DifferenceIcon from '@mui/icons-material/Difference';
 import type { Unit } from '@/domain/types';
 import { generateShortLink, saveShortLink } from '@/actions/permlink';
@@ -603,6 +603,7 @@ export default function MultipleSelect({
   const [, setStackAfterTargets] = useAtom(targetAfterAtom);
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
+  const uniqueId = useId();
   const unit = legendaryDeck.concat(deck);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
@@ -613,10 +614,10 @@ export default function MultipleSelect({
       typeof value === 'string'
         ? value
             .split(',')
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             .map(name => unit.find(memoria => memoria.name.short === name)!.id)
         : value.map(
-            // biome-ignore lint/style/noNonNullAssertion: <explanation>
+            // biome-ignore lint/style/noNonNullAssertion: should be fine
             name => unit.find(memoria => memoria.name.short === name)!.id,
           ),
     );
@@ -629,7 +630,7 @@ export default function MultipleSelect({
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id='targets'>スタック適用対象</InputLabel>
+        <InputLabel id={`targets-${uniqueId}`}>スタック適用対象</InputLabel>
         <Select
           multiple
           value={personName}
@@ -659,13 +660,7 @@ export default function MultipleSelect({
   );
 }
 
-function Compare({
-  counter,
-  stack,
-}: {
-  counter?: boolean;
-  stack?: boolean;
-}) {
+function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
   const theme = useTheme();
   const [compare] = useAtom(compareModeAtom);
   const [candidate] = useAtom(candidateAtom);
@@ -733,12 +728,12 @@ function Compare({
       stack: stack
         ? {
             before: {
-              // biome-ignore lint/style/noNonNullAssertion: <explanation>
+              // biome-ignore lint/style/noNonNullAssertion: should be fine
               rate: stackRateBefore!,
               targets: targetBefore,
             },
             after: {
-              // biome-ignore lint/style/noNonNullAssertion: <explanation>
+              // biome-ignore lint/style/noNonNullAssertion: should be fine
               rate: stackRateAfter!,
               targets: targetAfter,
             },
@@ -800,17 +795,15 @@ function Compare({
                 <Typography variant='body2'>{`${Lenz.support.name.get(compare)}`}</Typography>
               </Stack>
             </Stack>
-            {Lenz.skill.description.get(compare).includes('スタック') ? (
+            {Lenz.skill.description.get(compare).includes('スタック') && (
               <MultipleSelect
-                // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                // biome-ignore lint/style/noNonNullAssertion: should be fine
                 times={stackTimesBefore!}
                 kind={'before'}
                 targets={legendaryDeck
                   .concat(deck)
                   .filter(m => ![compare.id, candidate.id].includes(m.id))}
               />
-            ) : (
-              <></>
             )}
           </Stack>
         </Grid>
@@ -833,17 +826,15 @@ function Compare({
                 <Typography variant='body2'>{`${Lenz.support.name.get(candidate)}`}</Typography>
               </Stack>
             </Stack>
-            {Lenz.skill.description.get(candidate).includes('スタック') ? (
+            {Lenz.skill.description.get(candidate).includes('スタック') && (
               <MultipleSelect
-                // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                // biome-ignore lint/style/noNonNullAssertion: should be fine
                 times={stackTimesAfter!}
                 kind={'after'}
                 targets={legendaryDeck
                   .concat(deck)
                   .filter(m => ![compare.id, candidate.id].includes(m.id))}
               />
-            ) : (
-              <></>
             )}
           </Stack>
         </Grid>
@@ -934,6 +925,7 @@ function VirtualizedList() {
   const [stack, setStack] = useState(false);
   const [, setTargetBefore] = useAtom(targetBeforeAtom);
   const [, setTargetAfter] = useAtom(targetAfterAtom);
+  const uniqueId = useId();
 
   const addMemoria = (
     prev: MemoriaWithConcentration[],
@@ -1091,7 +1083,7 @@ function VirtualizedList() {
                 } else {
                   setDeck(prev =>
                     [...prev].map(memoria =>
-                      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                      // biome-ignore lint/style/noNonNullAssertion: should be fine
                       memoria.id === compare?.id ? candidate! : memoria,
                     ),
                   );
@@ -1119,7 +1111,11 @@ function VirtualizedList() {
             </DialogContent>
           ) : (
             <DialogContent>
-              <Typography id='modal-modal-title' variant='h6' component='h2'>
+              <Typography
+                id={`modal-title-${uniqueId}`}
+                variant='h6'
+                component='h2'
+              >
                 Error
               </Typography>
               <Typography variant='body2'>
@@ -1219,6 +1215,7 @@ function ToggleButtons() {
 
 function FilterModal() {
   const [open, setOpen] = useState(false);
+  const uniqueId = useId();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -1235,7 +1232,11 @@ function FilterModal() {
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography
+            id={`modal-title-${uniqueId}`}
+            variant='h6'
+            component='h2'
+          >
             Filter
           </Typography>
           <Filter />
@@ -1250,6 +1251,7 @@ function FilterModal() {
 
 function SearchModal() {
   const [open, setOpen] = useState(false);
+  const uniqueId = useId();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -1266,7 +1268,11 @@ function SearchModal() {
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography
+            id={`modal-title-${uniqueId}`}
+            variant='h6'
+            component='h2'
+          >
             Search
           </Typography>
           <Search />
@@ -1334,6 +1340,7 @@ function DiffModal() {
   const [sw] = useAtom(swAtom);
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
+  const uniqueId = useId();
   const current = {
     sw,
     deck,
@@ -1356,13 +1363,17 @@ function DiffModal() {
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography
+            id={`modal-title-${uniqueId}`}
+            variant='h6'
+            component='h2'
+          >
             Diff
           </Typography>
           <Divider />
           <TextField
             label='original'
-            id='original-url'
+            id={`original-url-${uniqueId}`}
             sx={{ m: 1, width: '50ch' }}
             slotProps={{
               input: {
@@ -1508,6 +1519,7 @@ function ShareButton() {
 
 function CalcSettings() {
   const [open, setOpen] = useState(false);
+  const uniqueId = useId();
   return (
     <>
       <Tooltip title={'calc settings'} placement={'top'}>
@@ -1517,7 +1529,11 @@ function CalcSettings() {
       </Tooltip>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogContent>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography
+            id={`modal-title-${uniqueId}`}
+            variant='h6'
+            component='h2'
+          >
             Calc Settings
           </Typography>
           <Stack direction={'column'}>

@@ -42,7 +42,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { Settings } from '@mui/icons-material';
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { statusKind, type StatusKind } from '@/parser/common';
 const charmFilterAtom = atomWithStorage<('火' | '水' | '風')[]>(
   'charmFilter',
@@ -80,6 +80,8 @@ const advancedSettings = atomWithStorage<AdvancedSettings>('advancedSettings', {
 function AdvancedSettingsModal() {
   const [settings, setSettings] = useAtom(advancedSettings);
   const [open, setOpen] = useState(false);
+  const uniqueId = useId();
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -96,7 +98,11 @@ function AdvancedSettingsModal() {
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography
+            id={`modal-title-${uniqueId}`}
+            variant='h6'
+            component='h2'
+          >
             Experimental
           </Typography>
           <FormGroup>
@@ -323,7 +329,7 @@ export function Calculator() {
             )}
             onChange={(_, value) => {
               if (value) {
-                // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                // biome-ignore lint/style/noNonNullAssertion: should be fine
                 setCharm(charmList.find(charm => charm.name === value.title)!);
               }
             }}
@@ -369,7 +375,7 @@ export function Calculator() {
                 onChange={(_, value) => {
                   if (value) {
                     setCostume(
-                      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                      // biome-ignore lint/style/noNonNullAssertion: should be fine
                       costumeList.find(
                         costume =>
                           `${costume.lily}/${costume.name}` === value.title,
@@ -401,7 +407,7 @@ export function Calculator() {
                 variant='standard'
                 onChange={e => {
                   setSelfStatus([
-                    Number.parseInt(e.target.value),
+                    Number.parseInt(e.target.value, 10),
                     selfStatus[1],
                     selfStatus[2],
                     selfStatus[3],
@@ -418,7 +424,7 @@ export function Calculator() {
                 onChange={e => {
                   setSelfStatus([
                     selfStatus[0],
-                    Number.parseInt(e.target.value),
+                    Number.parseInt(e.target.value, 10),
                     selfStatus[2],
                     selfStatus[3],
                   ]);
@@ -435,7 +441,7 @@ export function Calculator() {
                   setSelfStatus([
                     selfStatus[0],
                     selfStatus[1],
-                    Number.parseInt(e.target.value),
+                    Number.parseInt(e.target.value, 10),
                     selfStatus[3],
                   ]);
                 }}
@@ -452,7 +458,7 @@ export function Calculator() {
                     selfStatus[0],
                     selfStatus[1],
                     selfStatus[2],
-                    Number.parseInt(e.target.value),
+                    Number.parseInt(e.target.value, 10),
                   ]);
                 }}
               />
@@ -468,7 +474,7 @@ export function Calculator() {
                 defaultValue={def}
                 variant='standard'
                 onChange={e => {
-                  setDef(Number.parseInt(e.target.value));
+                  setDef(Number.parseInt(e.target.value, 10));
                 }}
               />
               <TextField
@@ -476,7 +482,7 @@ export function Calculator() {
                 defaultValue={spDef}
                 variant='standard'
                 onChange={e => {
-                  setSpDef(Number.parseInt(e.target.value));
+                  setSpDef(Number.parseInt(e.target.value, 10));
                 }}
               />
             </Stack>
@@ -515,7 +521,7 @@ export function Calculator() {
                     color={theme.palette.mode === 'light' ? 'darkred' : 'pink'}
                   >
                     {`${kind}/UP: ${
-                      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                      // biome-ignore lint/style/noNonNullAssertion: should be fine
                       expectedTotalBuff.get(kind)!
                     }`}
                   </Typography>
@@ -539,7 +545,7 @@ export function Calculator() {
                     }
                   >
                     {`${kind}/DOWN: ${
-                      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+                      // biome-ignore lint/style/noNonNullAssertion: should be fine
                       expectedTotalDebuff.get(kind)!
                     }`}
                   </Typography>
@@ -565,58 +571,40 @@ export function Calculator() {
                     flex: '1 0 auto',
                   }}
                 >
-                  {expected.damage ? (
+                  {expected.damage && (
                     <Typography variant='body2'>{`damage: ${expected.damage}`}</Typography>
-                  ) : (
-                    <></>
                   )}
-                  {expected.recovery ? (
+                  {expected.recovery && (
                     <Typography variant='body2'>{`recovery: ${expected.recovery}`}</Typography>
-                  ) : (
-                    <></>
                   )}
-                  {expected.buff ? (
-                    <>
-                      {expected.buff.map(buff => {
-                        return (
-                          <Typography
-                            key={buff.type}
-                            variant='body2'
-                            color={
-                              theme.palette.mode === 'light'
-                                ? 'darkred'
-                                : 'pink'
-                            }
-                          >
-                            {display({ ...buff, upDown: 'UP' })}
-                          </Typography>
-                        );
-                      })}
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  {expected.debuff ? (
-                    <>
-                      {expected.debuff.map(debuff => {
-                        return (
-                          <Typography
-                            key={debuff.type}
-                            variant='body2'
-                            color={
-                              theme.palette.mode === 'light'
-                                ? 'darkblue'
-                                : 'turquoise'
-                            }
-                          >
-                            {display({ ...debuff, upDown: 'DOWN' })}
-                          </Typography>
-                        );
-                      })}
-                    </>
-                  ) : (
-                    <></>
-                  )}
+                  {expected.buff?.map(buff => {
+                    return (
+                      <Typography
+                        key={buff.type}
+                        variant='body2'
+                        color={
+                          theme.palette.mode === 'light' ? 'darkred' : 'pink'
+                        }
+                      >
+                        {display({ ...buff, upDown: 'UP' })}
+                      </Typography>
+                    );
+                  })}
+                  {expected.debuff?.map(debuff => {
+                    return (
+                      <Typography
+                        key={debuff.type}
+                        variant='body2'
+                        color={
+                          theme.palette.mode === 'light'
+                            ? 'darkblue'
+                            : 'turquoise'
+                        }
+                      >
+                        {display({ ...debuff, upDown: 'DOWN' })}
+                      </Typography>
+                    );
+                  })}
                 </CardContent>
               </Card>
             </Grid>

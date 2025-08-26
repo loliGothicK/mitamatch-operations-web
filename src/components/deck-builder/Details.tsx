@@ -148,11 +148,11 @@ export function intoSupportPattern(kind: SupportKind): SupportPattern {
     .with('MpCostDown', () => 'MpCostDown')
     .with('RangeUp', () => 'RangeUp')
     .with('UP', () =>
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      // biome-ignore lint/style/noNonNullAssertion: should be fine
       intoStatusPattern({ status: kind.status!, upDown: 'UP' }),
     )
     .with('DOWN', () =>
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      // biome-ignore lint/style/noNonNullAssertion: sould be fine
       intoStatusPattern({ status: kind.status!, upDown: 'DOWN' }),
     )
     .exhaustive() as SupportPattern;
@@ -226,33 +226,26 @@ export default function Details() {
       <Typography variant='body1'>スキル</Typography>
       <Divider />
       <Grid container>
-        {skillAggregate.size === 0 ? (
-          <></>
-        ) : (
-          <>
-            {statusPattern
-              .filter(pattern => skillAggregate.get(pattern) !== undefined)
-              .map(pattern => {
-                return (
-                  <Grid size={{ xs: 4 }} key={pattern}>
-                    <Typography fontSize={10}>
-                      {statusPatternToJapanese(pattern)} :{' '}
-                      {skillAggregate.get(pattern)}
-                    </Typography>
-                  </Grid>
-                );
-              })}
-          </>
-        )}
+        {skillAggregate.size !== 0 &&
+          statusPattern
+            .filter(pattern => skillAggregate.get(pattern) !== undefined)
+            .map(pattern => {
+              return (
+                <Grid size={{ xs: 4 }} key={pattern}>
+                  <Typography fontSize={10}>
+                    {statusPatternToJapanese(pattern)} :{' '}
+                    {skillAggregate.get(pattern)}
+                  </Typography>
+                </Grid>
+              );
+            })}
       </Grid>
       <Typography variant='body1' marginTop={2}>
         スタック
       </Typography>
       <Divider />
       <Grid container spacing={1}>
-        {supportAggregate.size === 0 ? (
-          <></>
-        ) : (
+        {supportAggregate.size !== 0 &&
           stackKinds
             .filter(pattern => stackAggregate.get(pattern) !== undefined)
             .map(pattern => {
@@ -264,8 +257,7 @@ export default function Details() {
                   </Typography>
                 </Grid>
               );
-            })
-        )}
+            })}
       </Grid>
 
       <Typography variant='body1' marginTop={2}>
@@ -273,9 +265,7 @@ export default function Details() {
       </Typography>
       <Divider />
       <Grid container spacing={1}>
-        {supportAggregate.size === 0 ? (
-          <></>
-        ) : (
+        {supportAggregate.size !== 0 &&
           supportPattern
             .filter(pattern => supportAggregate.get(pattern) !== undefined)
             .map(pattern => {
@@ -287,17 +277,14 @@ export default function Details() {
                   </Typography>
                 </Grid>
               );
-            })
-        )}
+            })}
       </Grid>
       <Typography variant='body1' marginTop={2}>
         属性
       </Typography>
       <Divider />
       <Grid container spacing={1}>
-        {elementAggregate.size === 0 ? (
-          <></>
-        ) : (
+        {elementAggregate.size !== 0 &&
           elementFilter
             .map(kind => elementFilterMap[kind])
             .filter(kind => elementAggregate.get(kind) !== undefined)
@@ -309,17 +296,14 @@ export default function Details() {
                   </Typography>
                 </Grid>
               );
-            })
-        )}
+            })}
       </Grid>
       <Typography variant='body1' marginTop={2}>
         内訳
       </Typography>
       <Divider />
       <Grid container spacing={1}>
-        {kindAggregate.size === 0 ? (
-          <></>
-        ) : (
+        {kindAggregate.size !== 0 &&
           [
             '通常単体',
             '通常範囲',
@@ -338,8 +322,7 @@ export default function Details() {
                   </Typography>
                 </Grid>
               );
-            })
-        )}
+            })}
       </Grid>
     </Grid>
   );

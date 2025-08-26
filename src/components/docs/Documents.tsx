@@ -78,9 +78,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           alignItems: 'center',
         }}
       >
-        {row.children === undefined ? (
-          <></>
-        ) : toc === row.name ? (
+        {row.children && toc === row.name ? (
           <Button onClick={() => setToc('')}>
             <KeyboardArrowDown />
           </Button>

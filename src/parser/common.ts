@@ -14,7 +14,7 @@ export const parseIntSafe = (
       target: num,
       msg: "given text doesn't match number",
     }),
-  )(Number.parseInt(num));
+  )(Number.parseInt(num, 10));
 };
 
 export const parseFloatSafe = (

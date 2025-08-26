@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
   if (code === null) {
     const authUrl = discordOauth2.generateAuthUrl({
-      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      // biome-ignore lint/style/noNonNullAssertion: should be set in env
       clientId: process.env.DISCORD_CLIENT_ID!,
       responseType: 'code',
       redirectUri,
