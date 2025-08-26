@@ -38,7 +38,7 @@
     "@opentelemetry/semantic-conventions": "1.36.0",
     "@sentry/nextjs": "10.5.0",
     "@sentry/node": "10.5.0",
-    "@sentry/opentelemetry-node": "7.120.3",
+    "@sentry/opentelemetry-node": "7.120.4",
     "@sentry/profiling-node": "10.5.0",
     "@vercel/analytics": "1.5.0",
     "@vercel/otel": "1.13.0",
@@ -96,10 +96,10 @@
     "typescript": "5.9.2",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4",
-    "zod": "4.1.1"
+    "zod": "4.1.2"
   },
   "volta": {
-    "node": "22.17.0"
+    "node": "22.18.0"
   },
   "packageManager": "pnpm@10.15.0",
   "pnpm": {
