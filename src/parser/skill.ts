@@ -78,11 +78,19 @@ export type StackEffect = {
   readonly rate: number;
   readonly times: number;
 };
-export type ElementEffect = {
-  readonly type: 'element';
-  readonly element: Elements;
-  readonly kind: 'spread' | 'minima' | 'enhance';
-};
+export type ElementEffect =
+  | {
+      readonly type: 'element';
+      readonly element: Elements;
+      readonly kind: 'spread' | 'minima';
+    }
+  | {
+      readonly type: 'element';
+      readonly element: Elements;
+      readonly kind: 'enhance';
+      // enhance only has rate
+      readonly rate: number;
+    };
 
 export type SkillEffect =
   | DamageEffect
@@ -520,23 +528,26 @@ function parseStack(
     .otherwise(() => right([]));
 }
 
-const RESONANCE_EFFECT = /\[([火水風])響]/;
+const RESONANCE_PREFIX = /\[([火水風])響]/;
 
 function parseElementEffect(
-  { name }: { name: string; description: string },
+  { name, description }: { name: string; description: string },
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
   const parseResonanceType = (
     name: string,
-  ): Either<MitamaError, ElementEffect['kind']> => {
+  ): Either<MitamaError, ElementEffect['kind'][]> => {
     if (name.includes('ミニマ')) {
-      return right('minima' as const);
+      return right(['minima' as const]);
     }
     if (name.includes('スプレッド')) {
-      return right('spread' as const);
+      return right(['spread' as const]);
     }
     if (name.includes('エンハンス')) {
-      return right('enhance' as const);
+      return right(['enhance' as const]);
+    }
+    if (name.includes('エンハンシア')) {
+      return right(['enhance' as const, 'minima' as const]);
     }
     return anyhow(
       path.join('parseElementEffect.parseResonanceType'),
@@ -544,23 +555,58 @@ function parseElementEffect(
       "given text doesn't match resonance type",
     );
   };
+  const parseRate = (description: string): Validated<MitamaError, number> => {
+    return pipe(
+      fromNullable(description.match(/スキル効果が(\d+\.\d+)倍/)),
+      option.map(([, rate]) =>
+        toValidated(
+          parseIntSafe(rate, path.join('parseElementEffect.parseRate')),
+        ),
+      ),
+      option.getOrElse(() =>
+        toValidated(
+          anyhow(
+            path.join('parseElementEffect.parseRate'),
+            description,
+            "given text doesn't match rate",
+          ),
+        ),
+      ),
+    );
+  };
 
   return pipe(
-    fromNullable(name.match(RESONANCE_EFFECT)),
+    fromNullable(name.match(RESONANCE_PREFIX)),
     option.map(
       ([, element]): Validated<MitamaError, SkillEffect[]> =>
         pipe(
-          Do,
-          bind('eff', () =>
-            sequenceS(ap)({
-              type: right('element' as const),
-              element: toValidated(
-                parseElement(element, path.join('parseElementEffect')),
+          toValidated(parseResonanceType(name)),
+          either.flatMap(kinds =>
+            separator(
+              kinds.map(kind =>
+                match(kind)
+                  .with('enhance', (): Validated<MitamaError, SkillEffect> =>
+                    sequenceS(ap)({
+                      type: right('element' as const),
+                      element: toValidated(
+                        parseElement(element, path.join('parseElementEffect')),
+                      ),
+                      kind: right('enhance' as const),
+                      rate: parseRate(description),
+                    }),
+                  )
+                  .otherwise((kind): Validated<MitamaError, SkillEffect> =>
+                    sequenceS(ap)({
+                      type: right('element' as const),
+                      element: toValidated(
+                        parseElement(element, path.join('parseElementEffect')),
+                      ),
+                      kind: right(kind),
+                    }),
+                  ),
               ),
-              kind: toValidated(parseResonanceType(name)),
-            }),
+            ),
           ),
-          either.map(({ eff }) => [eff]),
         ),
     ),
     option.getOrElse((): Validated<MitamaError, SkillEffect[]> => right([])),
