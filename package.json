@@ -10,6 +10,7 @@
     "lint:fix": "npx biome lint --fix --unsafe .",
     "fmt": "npx biome format --write .",
     "fmt:check": "npx biome format .",
+    "pretty": "npx biome format --write . && npx biome lint --fix --unsafe .",
     "test": "vitest"
   },
   "dependencies": {
