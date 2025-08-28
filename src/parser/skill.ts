@@ -449,31 +449,29 @@ const parseStackEffect =
           either.flatMap(match =>
             sequenceS(ap)({
               kind: right(type),
-              rate: toValidated(
-                pipe(
-                  match?.groups?.rate,
-                  either.fromNullable(err('`groups.rate` does not exists')),
-                  either.flatMap(rate => parseIntSafe(rate, joined())),
-                ),
+              rate: pipe(
+                match?.groups?.rate,
+                either.fromNullable(err('`groups.rate` does not exists')),
+                either.flatMap(rate => parseIntSafe(rate, joined())),
+                toValidated,
               ),
-              times: toValidated(
-                pipe(
-                  description.match(NUMBER_OF_STACK),
-                  either.fromNullable(
-                    err(`given text doesn't match ${NUMBER_OF_STACK}`),
-                  ),
-                  either.flatMap(match =>
-                    pipe(
-                      match?.groups?.numberOf,
-                      either.fromNullable(
-                        err('`groups.numberOf` does not exists'),
-                      ),
-                      either.flatMap(numberOf =>
-                        parseIntSafe(numberOf, joined()),
-                      ),
+              times: pipe(
+                description.match(NUMBER_OF_STACK),
+                either.fromNullable(
+                  err(`given text doesn't match ${NUMBER_OF_STACK}`),
+                ),
+                either.flatMap(match =>
+                  pipe(
+                    match?.groups?.numberOf,
+                    either.fromNullable(
+                      err('`groups.numberOf` does not exists'),
+                    ),
+                    either.flatMap(numberOf =>
+                      parseIntSafe(numberOf, joined()),
                     ),
                   ),
                 ),
+                toValidated,
               ),
             }),
           ),
@@ -559,19 +557,16 @@ function parseElementEffect(
     return pipe(
       fromNullable(description.match(/スキル効果が(\d+\.\d+)倍/)),
       option.map(([, rate]) =>
-        toValidated(
-          parseIntSafe(rate, path.join('parseElementEffect.parseRate')),
-        ),
+        parseIntSafe(rate, path.join('parseElementEffect.parseRate')),
       ),
       option.getOrElse(() =>
-        toValidated(
-          anyhow(
-            path.join('parseElementEffect.parseRate'),
-            description,
-            "given text doesn't match rate",
-          ),
+        anyhow(
+          path.join('parseElementEffect.parseRate'),
+          description,
+          "given text doesn't match rate",
         ),
       ),
+      toValidated,
     );
   };
 
@@ -585,24 +580,33 @@ function parseElementEffect(
             separator(
               kinds.map(kind =>
                 match(kind)
-                  .with('enhance', (): Validated<MitamaError, SkillEffect> =>
-                    sequenceS(ap)({
-                      type: right('element' as const),
-                      element: toValidated(
-                        parseElement(element, path.join('parseElementEffect')),
-                      ),
-                      kind: right('enhance' as const),
-                      rate: parseRate(description),
-                    }),
+                  .with(
+                    'enhance',
+                    (enhance): Validated<MitamaError, SkillEffect> =>
+                      sequenceS(ap)({
+                        type: right('element' as const),
+                        element: toValidated(
+                          parseElement(
+                            element,
+                            path.join('parseElementEffect'),
+                          ),
+                        ),
+                        kind: right(enhance),
+                        rate: parseRate(description),
+                      }),
                   )
-                  .otherwise((kind): Validated<MitamaError, SkillEffect> =>
-                    sequenceS(ap)({
-                      type: right('element' as const),
-                      element: toValidated(
-                        parseElement(element, path.join('parseElementEffect')),
-                      ),
-                      kind: right(kind),
-                    }),
+                  .otherwise(
+                    (kind): Validated<MitamaError, SkillEffect> =>
+                      sequenceS(ap)({
+                        type: right('element' as const),
+                        element: toValidated(
+                          parseElement(
+                            element,
+                            path.join('parseElementEffect'),
+                          ),
+                        ),
+                        kind: right(kind),
+                      }),
                   ),
               ),
             ),
