@@ -124,7 +124,7 @@ export const isElementEffect =
   };
 export const isNotStackOrElement = (
   effect: SkillEffect,
-): effect is Exclude<SkillEffect, StackEffect | ElementEffect> => {
+): effect is DamageEffect | BuffEffect | DebuffEffect | HealEffect => {
   return effect.type !== 'stack' && effect.type !== 'element';
 };
 
@@ -235,25 +235,22 @@ function parseDamage(
     );
 
   return pipe(
-    Do,
-    bind('damage', () =>
-      pipe(
-        fromNullable(description.match(ATK_DAMAGE)),
-        option.map(([, range, , damage]) =>
-          sequenceS(ap)({
-            type: right('damage' as const),
-            range: parseRange(range, path),
-            amount: toValidated(parseAmount(damage, path)),
-          }),
-        ),
-        option.getOrElse(() =>
-          toValidated(
-            anyhow(path, description, "given text doesn't match ATK_DAMAGE"),
-          ),
+    pipe(
+      fromNullable(description.match(ATK_DAMAGE)),
+      option.map(([, range, , damage]) =>
+        sequenceS(ap)({
+          type: right('damage' as const),
+          range: parseRange(range, path),
+          amount: toValidated(parseAmount(damage, path)),
+        }),
+      ),
+      option.getOrElse(() =>
+        toValidated(
+          anyhow(path, description, "given text doesn't match ATK_DAMAGE"),
         ),
       ),
     ),
-    either.flatMap(({ damage }) =>
+    either.flatMap(damage =>
       pipe(
         transposeArray([statChanges(damage.range, description)]),
         option.map(seq =>
@@ -263,7 +260,7 @@ function parseDamage(
           ),
         ),
         option.getOrElse(
-          (): Validated<MitamaError, SkillEffect[]> => right([]),
+          (): Validated<MitamaError, SkillEffect[]> => right([damage]),
         ),
       ),
     ),
@@ -332,7 +329,7 @@ function parseBuffAndDebuff(
         anyhow(
           joined(),
           description,
-          "given text doesn't match STAT_UP_OR_DOWN",
+          `given text doesn't match ${STAT_UP_OR_DOWN}`,
         ),
       ),
     ),
@@ -413,7 +410,7 @@ const parseHeal = (description: string, path: CallPath = CallPath.empty) => {
     ),
     option.getOrElse(() =>
       toValidated(
-        anyhow(joined(), description, "given text doesn't match RECOVERY"),
+        anyhow(joined(), description, `given text doesn't match ${RECOVERY}`),
       ),
     ),
   );
@@ -742,32 +739,30 @@ export const parseSkill = ({
   sequenceS(ap)({
     raw: right(skill),
     effects: pipe(
-      match(kind)
-        .with(P.union('通常単体', '通常範囲', '特殊単体', '特殊範囲'), () =>
-          parseDamage(skill.description, new CallPath(['parseSkill'])),
-        )
-        .with('支援', () =>
-          parseBuff(skill.description, new CallPath(['parseSkill'])),
-        )
-        .with('妨害', () =>
-          parseDebuff(skill.description, new CallPath(['parseSkill'])),
-        )
-        .with('回復', () =>
-          parseHeal(skill.description, new CallPath(['parseSkill'])),
-        )
-        .exhaustive(),
-      either.flatMap(effects =>
-        pipe(
-          Do,
-          either.bind('stack', () => parseStack(skill)),
-          either.bind('resonance', () => parseElementEffect(skill)),
-          either.map(({ stack, resonance }) => [
-            ...effects,
-            ...stack,
-            ...resonance,
-          ]),
-        ),
+      Do,
+      either.bind('effects', () =>
+        match(kind)
+          .with(P.union('通常単体', '通常範囲', '特殊単体', '特殊範囲'), () =>
+            parseDamage(skill.description, new CallPath(['parseSkill'])),
+          )
+          .with('支援', () =>
+            parseBuff(skill.description, new CallPath(['parseSkill'])),
+          )
+          .with('妨害', () =>
+            parseDebuff(skill.description, new CallPath(['parseSkill'])),
+          )
+          .with('回復', () =>
+            parseHeal(skill.description, new CallPath(['parseSkill'])),
+          )
+          .exhaustive(),
       ),
+      either.bind('stack', () => parseStack(skill)),
+      either.bind('elementEffect', () => parseElementEffect(skill)),
+      either.map(({ effects, stack, elementEffect }) => [
+        ...effects,
+        ...stack,
+        ...elementEffect,
+      ]),
     ),
     kinds: right(
       option.getOrElse((): readonly SkillKind[] => [])(parseKinds(skill.name)),

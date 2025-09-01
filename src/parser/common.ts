@@ -55,7 +55,8 @@ export type Amount =
   | 'large' // 大アップ
   | 'extra-large' // 特大アップ
   | 'super-large' // 超特大アップ
-  | 'ultra-large'; // 極大アップ
+  | 'ultra-large' // 極大アップ
+  | 'super-ultra-large'; // 超極大アップ
 
 export const parseAmount = (amount: string, path: CallPath = CallPath.empty) =>
   match<string, Either<MitamaError, Amount>>(amount)
@@ -77,6 +78,10 @@ export const parseAmount = (amount: string, path: CallPath = CallPath.empty) =>
     )
     .with(P.union('極大アップ', '極大ダウン', '極大ダメージ', '極大回復'), () =>
       right('ultra-large'),
+    )
+    .with(
+      P.union('超極大アップ', '超極大ダウン', '超極大ダメージ', '超極大回復'),
+      () => right('super-ultra-large'),
     )
     .otherwise(src =>
       anyhow(

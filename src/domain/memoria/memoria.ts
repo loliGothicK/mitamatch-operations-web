@@ -124,11 +124,11 @@ export const memoriaList: Memoria[] = memoriaData.data.map(memoria => {
         error => ${zodResult.error}
     `);
   }
-  const { skill, legendary_skill, name, full_name, link, ...raw } =
+  const { skill, support, legendary_skill, name, full_name, link, ...raw } =
     zodResult.value;
   const parseSkillsResult = sequenceS(ap)({
     skill: parseSkill({ kind: raw.kind, skill }),
-    support: parseSupport(memoria.support),
+    support: parseSupport(support),
     legendary: legendary_skill
       ? parseLegendary(legendary_skill)
       : right(undefined),

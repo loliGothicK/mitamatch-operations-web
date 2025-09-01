@@ -9,7 +9,7 @@ import { type Amount, parseElement, type StatusKind } from '@/parser/common';
 import type { Probability } from '@/parser/support';
 import { P, match } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
-import { type Elements, isNotStackOrElement } from '@/parser/skill';
+import {type Elements, isDamageEffect, isNotStackOrElement} from '@/parser/skill';
 import { either } from 'fp-ts';
 
 const NotApplicable = Number.NaN;
@@ -129,6 +129,7 @@ function _level(amount: Amount): number {
     .with('extra-large', () => 18 / 100)
     .with('super-large', () => 21 / 100)
     .with('ultra-large', () => 24 / 100)
+    .with('super-ultra-large', () => 27 / 100)
     .exhaustive();
 }
 
@@ -231,9 +232,8 @@ export function evaluate(
       .with(4, () => 1.5)
       .exhaustive();
 
-    const range = match(
-      Lenz.skill.effects.get(memoria).find(isNotStackOrElement)?.range,
-    )
+    const ranged = Lenz.skill.effects.get(memoria).find(isNotStackOrElement);
+    const range = match(ranged?.range)
       .with([P._, P._], ([a, b]) => (a + b) / 2)
       .run();
 
@@ -396,50 +396,63 @@ function damage(
     )
     .otherwise(() => calibration);
 
+  const amount = Lenz.skill.effects.get(memoria).find(isDamageEffect)?.amount;
+
+  if (!amount) {
+    return undefined;
+  }
+
   const skillRate = match(memoria.kind)
     .when(
       kind => kind.includes('単体'),
       () =>
-        match(Lenz.skill.description.get(memoria))
-          .when(
-            sentence => sentence.includes('超特大ダメージ'),
+        match(amount)
+          .with('ultra-large', () => 16.5 / 100)
+          .with(
+            'super-large',
             () => 15.0 / 100,
           )
-          .when(
-            sentence => sentence.includes('特大ダメージ'),
+          .with(
+            'extra-large',
             () => 13.5 / 100,
           )
-          .when(
-            sentence => sentence.includes('大ダメージ'),
+          .with(
+            'large',
             () => 11.5 / 100,
           )
-          .when(
-            sentence => sentence.includes('ダメージ'),
+          .with(
+            'medium',
             () => 10.0 / 100,
           )
-          .run(),
+          .otherwise(() => ToBeDefined(Lenz.memoria.shortName.get(memoria))),
     )
     .when(
       kind => kind.includes('範囲'),
       () =>
-        match(Lenz.skill.description.get(memoria))
-          .when(
-            sentence => sentence.includes('特大ダメージ'),
+        match(amount)
+          .with(
+            'super-large',
+            () => 12.0 / 100,
+          )
+          .with(
+            'extra-large',
             () => 11.0 / 100,
           )
-          .when(
-            sentence => sentence.includes('大ダメージ'),
+          .with(
+            'large',
             () => 10.0 / 100,
           )
-          .when(
-            sentence => sentence.includes('小ダメージ'),
-            () => 7.0 / 100,
-          )
-          .when(
-            sentence => sentence.includes('ダメージ'),
+          .with(
+            'medium',
             () => 8.5 / 100,
           )
-          .run(),
+          .with(
+            'small',
+            () => 7.0 / 100,
+          )
+          .otherwise(
+            () => ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+          ),
     )
     .otherwise(() => {
       throw new Error('Invalid kind');
@@ -652,6 +665,9 @@ function buff(
             .with('ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
+            .with('super-ultra-large', () =>
+              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+            ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -677,6 +693,9 @@ function buff(
             .with('extra-large', () => 3.8 / 100)
             .with('super-large', () => 4.27 / 100)
             .with('ultra-large', () =>
+              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+            ) // 現状存在しない
+            .with('super-ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
@@ -708,6 +727,9 @@ function buff(
             .with('ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // TBD
+            .with('super-ultra-large', () =>
+              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+            ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -735,6 +757,9 @@ function buff(
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
             .with('ultra-large', () =>
+              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+            ) // 現状存在しない
+            .with('super-ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
@@ -766,6 +791,9 @@ function buff(
                 ToBeDefined(Lenz.memoria.shortName.get(memoria)),
               ) // 現状存在しない
               .with('ultra-large', () =>
+                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ) // 現状存在しない
+              .with('super-ultra-large', () =>
                 ToBeDefined(Lenz.memoria.shortName.get(memoria)),
               ) // 現状存在しない
               .exhaustive();
@@ -800,6 +828,9 @@ function buff(
                 ToBeDefined(Lenz.memoria.shortName.get(memoria)),
               ) // 現状存在しない
               .with('ultra-large', () =>
+                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ) // 現状存在しない
+              .with('super-ultra-large', () =>
                 ToBeDefined(Lenz.memoria.shortName.get(memoria)),
               ) // 現状存在しない
               .exhaustive();
@@ -1018,6 +1049,9 @@ function debuff(
             .with('ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
+            .with('super-ultra-large', () =>
+              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+            ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1049,6 +1083,9 @@ function debuff(
             .with('ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
+            .with('super-ultra-large', () =>
+              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+            ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1078,6 +1115,9 @@ function debuff(
             .with('ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
+            .with('super-ultra-large', () =>
+              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+            ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
@@ -1101,10 +1141,11 @@ function debuff(
             .with('medium', () => 4.71 / 100)
             .with('large', () => 5.23 / 100)
             .with('extra-large', () => 5.75 / 100)
-            .with('super-large', () =>
+            .with('super-large', () => 6.22 / 100)
+            .with('ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
-            .with('ultra-large', () =>
+            .with('super-ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
@@ -1136,6 +1177,9 @@ function debuff(
                 ToBeDefined(Lenz.memoria.shortName.get(memoria)),
               ) // 現状存在しない
               .with('ultra-large', () =>
+                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ) // 現状存在しない
+              .with('super-ultra-large', () =>
                 ToBeDefined(Lenz.memoria.shortName.get(memoria)),
               ) // 現状存在しない
               .exhaustive();
@@ -1170,6 +1214,9 @@ function debuff(
                 ToBeDefined(Lenz.memoria.shortName.get(memoria)),
               ) // 現状存在しない
               .with('ultra-large', () =>
+                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ) // 現状存在しない
+              .with('super-ultra-large', () =>
                 ToBeDefined(Lenz.memoria.shortName.get(memoria)),
               ) // 現状存在しない
               .exhaustive();
@@ -1351,11 +1398,14 @@ function support(
       return match(status!)
         .with('ATK', () => {
           const skillRate = match(amount)
+            .with('small', () => NotApplicable) // ない
             .with('medium', () => 1.0 / 100)
             .with('large', () => 1.5 / 100)
             .with('extra-large', () => 1.8 / 100)
-            .with('super-large', () => 2.1 / 100) // 現状存在しない
-            .run();
+            .with('super-large', () => 2.1 / 100)
+            .with('ultra-large', () => 2.4 / 100)
+            .with('super-ultra-large', () => 2.7 / 100)
+            .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
             // biome-ignore lint/style/noNonNullAssertion: should be fine
@@ -1365,11 +1415,14 @@ function support(
         })
         .with('Sp.ATK', () => {
           const skillRate = match(amount)
+            .with('small', () => NotApplicable) // ない
             .with('medium', () => 1.0 / 100)
             .with('large', () => 1.5 / 100)
             .with('extra-large', () => 1.8 / 100)
-            .with('super-large', () => 2.1 / 100) // 現状存在しない
-            .run();
+            .with('super-large', () => 2.1 / 100)
+            .with('ultra-large', () => 2.4 / 100)
+            .with('super-ultra-large', () => 2.7 / 100)
+            .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
             // biome-ignore lint/style/noNonNullAssertion: should be fine
@@ -1379,11 +1432,14 @@ function support(
         })
         .with('DEF', () => {
           const skillRate = match(amount)
+            .with('small', () => NotApplicable) // ない
             .with('medium', () => 1.0 / 100)
             .with('large', () => 1.5 / 100)
             .with('extra-large', () => 1.8 / 100)
-            .with('super-large', () => 2.1 / 100) // 現状存在しない
-            .run();
+            .with('super-large', () => 2.1 / 100)
+            .with('ultra-large', () => 2.4 / 100)
+            .with('super-ultra-large', () => 2.7 / 100)
+            .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
             // biome-ignore lint/style/noNonNullAssertion: should be fine
@@ -1393,11 +1449,14 @@ function support(
         })
         .with('Sp.DEF', () => {
           const skillRate = match(amount)
+            .with('small', () => NotApplicable) // ない
             .with('medium', () => 1.0 / 100)
             .with('large', () => 1.5 / 100)
             .with('extra-large', () => 1.8 / 100)
-            .with('super-large', () => 2.1 / 100) // 現状存在しない
-            .run();
+            .with('super-large', () => 2.1 / 100)
+            .with('ultra-large', () => 2.4 / 100)
+            .with('super-ultra-large', () => 2.7 / 100)
+            .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
             // biome-ignore lint/style/noNonNullAssertion: should be fine
@@ -1407,10 +1466,14 @@ function support(
         })
         .with(P.union('Fire ATK', 'Water ATK', 'Wind ATK'), () => {
           const skillRate = match(amount)
-            .with('medium', () => 1.5 / 100)
-            .with('large', () => 1.8 / 100)
-            .with('extra-large', () => 2.1 / 100)
-            .run();
+            .with('small', () => NotApplicable) // ない
+            .with('medium', () => 1.0 / 100)
+            .with('large', () => 1.5 / 100)
+            .with('extra-large', () => 1.8 / 100)
+            .with('super-large', () => 2.1 / 100)
+            .with('ultra-large', () => 2.4 / 100)
+            .with('super-ultra-large', () => 2.7 / 100)
+            .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
             // biome-ignore lint/style/noNonNullAssertion: should be fine
@@ -1422,10 +1485,14 @@ function support(
         })
         .with(P.union('Fire DEF', 'Water DEF', 'Wind DEF'), () => {
           const skillRate = match(amount)
-            .with('medium', () => 1.5 / 100)
-            .with('large', () => 1.8 / 100)
-            .with('extra-large', () => 2.1 / 100)
-            .run();
+            .with('small', () => NotApplicable) // ない
+            .with('medium', () => 1.0 / 100)
+            .with('large', () => 1.5 / 100)
+            .with('extra-large', () => 1.8 / 100)
+            .with('super-large', () => 2.1 / 100)
+            .with('ultra-large', () => 2.4 / 100)
+            .with('super-ultra-large', () => 2.7 / 100)
+            .exhaustive();
           const memoriaRate = skillRate * skillLevel;
           return {
             // biome-ignore lint/style/noNonNullAssertion: should be fine
