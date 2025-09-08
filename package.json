@@ -51,7 +51,7 @@
     "fp-ts": "2.16.11",
     "iron-session": "8.0.4",
     "jose": "6.1.0",
-    "jotai": "2.13.1",
+    "jotai": "2.14.0",
     "js-cookie": "3.0.5",
     "material-ui-popup-state": "5.3.6",
     "monocle-ts": "2.3.13",
