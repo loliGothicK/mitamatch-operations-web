@@ -1,6 +1,30 @@
 {
   "data": [
     {
+      "id": 178,
+      "name": "焚天赫風",
+      "status": [2681, 2684, 1871, 1872],
+      "effect": "[火風]属性効果増加Lv.5",
+      "description": "火属性と風属性のメモリアスキル効果が極大増加する(70%）。",
+      "prepare_time": 10,
+      "active_time": 65,
+      "payed": true,
+      "kind": "Special",
+      "usually": true
+    },
+    {
+      "id": 177,
+      "name": "紅炎と烈風の絶技",
+      "status": [2241, 2237, 1563, 1580],
+      "effect": "[火風]属性効果増加Lv.5",
+      "description": "火属性と風属性のメモリアスキル効果が極大増加する(70%）。",
+      "prepare_time": 10,
+      "active_time": 65,
+      "payed": false,
+      "kind": "Special",
+      "usually": true
+    },
+    {
       "id": 176,
       "name": "蒼神封界",
       "status": [1897, 1906, 2686, 2699],

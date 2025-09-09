@@ -1,7 +1,7 @@
 import { data } from '@/domain/memoria/memoria.json';
 
-import {isDamageEffect, parseSkill} from './skill';
-import {isLeft, right} from 'fp-ts/Either';
+import { isDamageEffect, parseSkill } from './skill';
+import { isLeft, right } from 'fp-ts/Either';
 
 // integration test
 test.each(data)('.parseSkill($full_name)', memoria => {
@@ -19,7 +19,7 @@ test.each(data)('.parseSkill($full_name)', memoria => {
 
   describe('should be parsed without error', () => {
     expect(skill).toEqual(right(expect.anything()));
-  })
+  });
 
   // for refinement
   if (isLeft(skill)) {

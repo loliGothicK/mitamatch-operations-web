@@ -9,7 +9,11 @@ import { type Amount, parseElement, type StatusKind } from '@/parser/common';
 import type { Probability } from '@/parser/support';
 import { P, match } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
-import {type Elements, isDamageEffect, isNotStackOrElement} from '@/parser/skill';
+import {
+  type Elements,
+  isDamageEffect,
+  isNotStackOrElement,
+} from '@/parser/skill';
 import { either } from 'fp-ts';
 
 const NotApplicable = Number.NaN;
@@ -408,51 +412,22 @@ function damage(
       () =>
         match(amount)
           .with('ultra-large', () => 16.5 / 100)
-          .with(
-            'super-large',
-            () => 15.0 / 100,
-          )
-          .with(
-            'extra-large',
-            () => 13.5 / 100,
-          )
-          .with(
-            'large',
-            () => 11.5 / 100,
-          )
-          .with(
-            'medium',
-            () => 10.0 / 100,
-          )
+          .with('super-large', () => 15.0 / 100)
+          .with('extra-large', () => 13.5 / 100)
+          .with('large', () => 11.5 / 100)
+          .with('medium', () => 10.0 / 100)
           .otherwise(() => ToBeDefined(Lenz.memoria.shortName.get(memoria))),
     )
     .when(
       kind => kind.includes('範囲'),
       () =>
         match(amount)
-          .with(
-            'super-large',
-            () => 12.0 / 100,
-          )
-          .with(
-            'extra-large',
-            () => 11.0 / 100,
-          )
-          .with(
-            'large',
-            () => 10.0 / 100,
-          )
-          .with(
-            'medium',
-            () => 8.5 / 100,
-          )
-          .with(
-            'small',
-            () => 7.0 / 100,
-          )
-          .otherwise(
-            () => ToBeDefined(Lenz.memoria.shortName.get(memoria)),
-          ),
+          .with('super-large', () => 12.0 / 100)
+          .with('extra-large', () => 11.0 / 100)
+          .with('large', () => 10.0 / 100)
+          .with('medium', () => 8.5 / 100)
+          .with('small', () => 7.0 / 100)
+          .otherwise(() => ToBeDefined(Lenz.memoria.shortName.get(memoria))),
     )
     .otherwise(() => {
       throw new Error('Invalid kind');
