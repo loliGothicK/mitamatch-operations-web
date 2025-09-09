@@ -9,7 +9,7 @@
       "prepare_time": 10,
       "active_time": 65,
       "payed": true,
-      "kind": "Special",
+      "kind": "Elemental/Special",
       "usually": true
     },
     {
@@ -21,7 +21,7 @@
       "prepare_time": 10,
       "active_time": 65,
       "payed": false,
-      "kind": "Special",
+      "kind": "Elemental/Special",
       "usually": true
     },
     {
