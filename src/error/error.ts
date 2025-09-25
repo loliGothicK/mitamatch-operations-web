@@ -1,9 +1,12 @@
 import { left } from 'fp-ts/Either';
 
 export type MitamaError = {
-  path: string;
   target: string;
   msg: string;
+  meta?: {
+    path: string;
+    memoriaName?: string;
+  };
 };
 
 export const fmtErr = (errors: MitamaError[]): string => {
@@ -29,13 +32,16 @@ export class CallPath {
 }
 
 export const anyhow = <T = never>(
-  path: CallPath,
   target: string,
   msg: string,
+  meta?: { path: CallPath; memoriaName?: string },
 ) => {
   return left<MitamaError, T>({
-    path: path.toString(),
     target,
     msg,
+    meta: meta && {
+      path: meta.path.toString(),
+      memoriaName: meta.memoriaName,
+    },
   });
 };

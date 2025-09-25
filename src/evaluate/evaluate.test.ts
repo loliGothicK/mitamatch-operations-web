@@ -12,5 +12,5 @@ test.each(memoriaList)('.evaluate($name.full/$kind)', memoiria => {
     costumeList[0],
     3,
   );
-  expect(result).toBeDefined();
+  expect(result).toBeTruthy();
 });

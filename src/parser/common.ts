@@ -42,11 +42,9 @@ export const parseElement = (
     .with('光', () => right('Light'))
     .with('闇', () => right('Dark'))
     .otherwise(src =>
-      anyhow(
-        path.join('parseElement'),
-        src,
-        "given text doesn't match any element",
-      ),
+      anyhow(src, "given text doesn't match any element", {
+        path: path.join('parseElement'),
+      }),
     );
 
 export type Amount =
@@ -84,11 +82,9 @@ export const parseAmount = (amount: string, path: CallPath = CallPath.empty) =>
       () => right('super-ultra-large'),
     )
     .otherwise(src =>
-      anyhow(
-        path.join('parseAmount'),
-        src,
-        "given text doesn't match any amount",
-      ),
+      anyhow(src, "given text doesn't match any amount", {
+        path: path.join('parseAmount'),
+      }),
     );
 
 export const statusKind = [
@@ -140,9 +136,7 @@ export const parseStatus = (status: string, path: CallPath = CallPath.empty) =>
       right(['Fire DEF', 'Water DEF', 'Wind DEF']),
     )
     .otherwise(src =>
-      anyhow(
-        path.join('parseStatus'),
-        src,
-        "given text doesn't match any status",
-      ),
+      anyhow(src, "given text doesn't match any status", {
+        path: path.join('parseStatus'),
+      }),
     );

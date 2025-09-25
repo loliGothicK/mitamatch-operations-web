@@ -6,6 +6,7 @@ import { isLeft, right } from 'fp-ts/Either';
 // integration test
 test.each(data)('.parseSkill($full_name)', memoria => {
   const skill = parseSkill({
+    name: memoria.full_name,
     kind: memoria.kind as
       | '通常範囲'
       | '特殊範囲'
@@ -42,6 +43,7 @@ test.each(
 )('.parseSkill($full_name)/極大ダメージ', memoria => {
   expect(
     parseSkill({
+      name: memoria.full_name,
       kind: memoria.kind as
         | '通常範囲'
         | '特殊範囲'

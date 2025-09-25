@@ -138,6 +138,7 @@ const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 function parseRange(
   num: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, readonly [number, number]> {
   return pipe(
@@ -155,7 +156,12 @@ function parseRange(
           () => right([range[0], range[1]] as const),
         )
         .otherwise(() =>
-          toValidated(anyhow(path, num, "given text doesn't match range")),
+          toValidated(
+            anyhow(num, "given text doesn't match range", {
+              path,
+              memoriaName,
+            }),
+          ),
         ),
     ),
   );
@@ -167,6 +173,7 @@ const ATK_EFF =
 
 function parseDamage(
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, readonly SkillEffect[]> {
   const joined = () => path.join('parseDamage');
@@ -178,11 +185,10 @@ function parseDamage(
     if (buff.includes('ダウン')) {
       return right('debuff' as const);
     }
-    return anyhow(
-      joined(),
-      buff,
-      "given text doesn't include 'buff' or 'debuff'",
-    );
+    return anyhow(buff, "given text doesn't include 'buff' or 'debuff'", {
+      path: joined(),
+      memoriaName,
+    });
   };
 
   const statChanges = (
@@ -225,7 +231,10 @@ function parseDamage(
                 ),
                 option.getOrElse(() =>
                   toValidated(
-                    anyhow(joined(), eff, "given text doesn't match ATK_EFF"),
+                    anyhow(eff, "given text doesn't match ATK_EFF", {
+                      path: joined(),
+                      memoriaName,
+                    }),
                   ),
                 ),
               ),
@@ -240,13 +249,16 @@ function parseDamage(
       option.map(([, range, , damage]) =>
         sequenceS(ap)({
           type: right('damage' as const),
-          range: parseRange(range, path),
+          range: parseRange(range, memoriaName, path),
           amount: toValidated(parseAmount(damage, path)),
         }),
       ),
       option.getOrElse(() =>
         toValidated(
-          anyhow(path, description, "given text doesn't match ATK_DAMAGE"),
+          anyhow(description, "given text doesn't match ATK_DAMAGE", {
+            path,
+            memoriaName,
+          }),
         ),
       ),
     ),
@@ -275,6 +287,7 @@ const parseStatChanges = (
   range: string,
   status: string,
   eff: string,
+  memoriaName: string,
   path: CallPath,
 ) => {
   return pipe(
@@ -289,7 +302,11 @@ const parseStatChanges = (
         stats.map(stat =>
           sequenceS(ap)({
             type: right(type),
-            range: parseRange(range, path.join('parseStatChanges')),
+            range: parseRange(
+              range,
+              memoriaName,
+              path.join('parseStatChanges'),
+            ),
             amount: toValidated(
               parseAmount(eff, path.join('parseStatChanges')),
             ),
@@ -304,6 +321,7 @@ const parseStatChanges = (
 function parseBuffAndDebuff(
   type: 'buff' | 'debuff',
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
   const joined = () => path.join('parseBuff');
@@ -316,21 +334,20 @@ function parseBuffAndDebuff(
           _ => /(?:アップ|ダウン)、/g.test(description),
           ([, range, s1, e1, s2, e2]) =>
             separator([
-              parseStatChanges(type, range, s1, e1, joined()),
-              parseStatChanges(type, range, s2, e2, joined()),
+              parseStatChanges(type, range, s1, e1, memoriaName, joined()),
+              parseStatChanges(type, range, s2, e2, memoriaName, joined()),
             ]),
         )
         .otherwise(([, range, status, eff]) =>
-          parseStatChanges(type, range, status, eff, joined()),
+          parseStatChanges(type, range, status, eff, memoriaName, joined()),
         ),
     ),
     option.getOrElse(() =>
       toValidated(
-        anyhow(
-          joined(),
-          description,
-          `given text doesn't match ${STAT_UP_OR_DOWN}`,
-        ),
+        anyhow(description, `given text doesn't match ${STAT_UP_OR_DOWN}`, {
+          path: joined(),
+          memoriaName,
+        }),
       ),
     ),
   );
@@ -338,16 +355,28 @@ function parseBuffAndDebuff(
 
 function parseBuff(
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
-  return parseBuffAndDebuff('buff', description, path.join('parseBuff'));
+  return parseBuffAndDebuff(
+    'buff',
+    description,
+    memoriaName,
+    path.join('parseBuff'),
+  );
 }
 
 function parseDebuff(
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
-  return parseBuffAndDebuff('debuff', description, path.join('parseDebuff'));
+  return parseBuffAndDebuff(
+    'debuff',
+    description,
+    memoriaName,
+    path.join('parseDebuff'),
+  );
 }
 
 const RECOVERY = /味方(.+)体のHPを(.*?回復)/;
@@ -385,14 +414,18 @@ const parseRecoveryBuff = (
   );
 };
 
-const parseHeal = (description: string, path: CallPath = CallPath.empty) => {
+const parseHeal = (
+  description: string,
+  memoriaName: string,
+  path: CallPath = CallPath.empty,
+) => {
   const joined = () => path.join('parseHeal');
   return pipe(
     fromNullable(description.match(RECOVERY)),
     option.map(([, range, heal]) =>
       pipe(
         Do,
-        bind('range', () => parseRange(range, joined())),
+        bind('range', () => parseRange(range, memoriaName, joined())),
         bind('buff', ({ range }) =>
           parseRecoveryBuff(range, description, joined()),
         ),
@@ -410,7 +443,10 @@ const parseHeal = (description: string, path: CallPath = CallPath.empty) => {
     ),
     option.getOrElse(() =>
       toValidated(
-        anyhow(joined(), description, `given text doesn't match ${RECOVERY}`),
+        anyhow(description, `given text doesn't match ${RECOVERY}`, {
+          path: joined(),
+          memoriaName,
+        }),
       ),
     ),
   );
@@ -430,13 +466,14 @@ const parseStackEffect =
   (types: readonly (keyof typeof STACK_TYPE)[]) =>
   (
     description: string,
+    memoriaName: string,
     path: CallPath = CallPath.empty,
   ): Validated<MitamaError, SkillEffect[]> => {
     const joined = () => path.join('parseStackEffect');
     const err = (msg: string): MitamaError => ({
-      path: joined().toString(),
       target: description,
       msg,
+      meta: { path: joined().toString(), memoriaName },
     });
     return pipe(
       types.map(type =>
@@ -486,39 +523,65 @@ const parseStackEffect =
 
 function parseStack(
   { name, description }: { name: string; description: string },
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
   const branch = (when: string) => path.join(`parseStack[${when}]`);
   return match(name)
     .when(
       name => name.includes('メテオ'),
-      () => parseStackEffect(['meteor'])(description, branch('meteor')),
+      () =>
+        parseStackEffect(['meteor'])(
+          description,
+          memoriaName,
+          branch('meteor'),
+        ),
     )
     .when(
       name => name.includes('バリア'),
-      () => parseStackEffect(['barrier'])(description, branch('barrier')),
+      () =>
+        parseStackEffect(['barrier'])(
+          description,
+          memoriaName,
+          branch('barrier'),
+        ),
     )
     .when(
       name => name.includes('エデン'),
-      () => parseStackEffect(['eden'])(description, branch('eden')),
+      () =>
+        parseStackEffect(['eden'])(description, memoriaName, branch('eden')),
     )
     .when(
       name => name.includes('アニマ'),
-      () => parseStackEffect(['anima'])(description, branch('anima')),
+      () =>
+        parseStackEffect(['anima'])(description, memoriaName, branch('anima')),
     )
     .when(
       name => name.includes('コメット'),
       () =>
-        parseStackEffect(['meteor', 'barrier'])(description, branch('comet')),
+        parseStackEffect(['meteor', 'barrier'])(
+          description,
+          memoriaName,
+          branch('comet'),
+        ),
     )
     .when(
       name => name.includes('エーテル'),
-      () => parseStackEffect(['anima', 'meteor'])(description, branch('ether')),
+      () =>
+        parseStackEffect(['anima', 'meteor'])(
+          description,
+          memoriaName,
+          branch('ether'),
+        ),
     )
     .when(
       name => name.includes('ルミナス'),
       () =>
-        parseStackEffect(['anima', 'barrier'])(description, branch('luminous')),
+        parseStackEffect(['anima', 'barrier'])(
+          description,
+          memoriaName,
+          branch('luminous'),
+        ),
     )
     .otherwise(() => right([]));
 }
@@ -527,6 +590,7 @@ const RESONANCE_PREFIX = /\[([火水風])響]/;
 
 function parseElementEffect(
   { name, description }: { name: string; description: string },
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
   const parseResonanceType = (
@@ -544,11 +608,10 @@ function parseElementEffect(
     if (name.includes('エンハンシア')) {
       return right(['enhance' as const, 'minima' as const]);
     }
-    return anyhow(
-      path.join('parseElementEffect.parseResonanceType'),
-      name,
-      "given text doesn't match resonance type",
-    );
+    return anyhow(name, "given text doesn't match resonance type", {
+      path: path.join('parseElementEffect.parseResonanceType'),
+      memoriaName,
+    });
   };
   const parseRate = (description: string): Validated<MitamaError, number> => {
     return pipe(
@@ -557,11 +620,10 @@ function parseElementEffect(
         parseIntSafe(rate, path.join('parseElementEffect.parseRate')),
       ),
       option.getOrElse(() =>
-        anyhow(
-          path.join('parseElementEffect.parseRate'),
-          description,
-          "given text doesn't match rate",
-        ),
+        anyhow(description, "given text doesn't match rate", {
+          path: path.join('parseElementEffect.parseRate'),
+          memoriaName,
+        }),
       ),
       toValidated,
     );
@@ -614,8 +676,8 @@ function parseElementEffect(
   );
 }
 
-const parseKinds = (name: string): Option<readonly SkillKind[]> => {
-  const elemental = match<string, Option<SkillKind>>(name)
+const parseKinds = (skillName: string): Option<readonly SkillKind[]> => {
+  const elemental = match<string, Option<SkillKind>>(skillName)
     .when(
       name => name.startsWith('火：'),
       () => option.of({ element: 'Fire', kind: 'Stimulation' }),
@@ -698,7 +760,7 @@ const parseKinds = (name: string): Option<readonly SkillKind[]> => {
     )
     .otherwise(() => option.none);
 
-  const counter = match<string, Option<SkillKind>>(name)
+  const counter = match<string, Option<SkillKind>>(skillName)
     .when(
       name => name.includes('カウンター'),
       () => option.of('counter'),
@@ -709,13 +771,13 @@ const parseKinds = (name: string): Option<readonly SkillKind[]> => {
     )
     .otherwise(() => option.none);
 
-  const charge = name.includes('チャージ')
+  const charge = skillName.includes('チャージ')
     ? option.of('charge' as SkillKind)
     : option.none;
-  const heal = name.includes('ヒール')
+  const heal = skillName.includes('ヒール')
     ? option.of('heal' as SkillKind)
     : option.none;
-  const recover = name.includes('リカバー')
+  const recover = skillName.includes('リカバー')
     ? option.of('recover' as SkillKind)
     : option.none;
 
@@ -723,9 +785,11 @@ const parseKinds = (name: string): Option<readonly SkillKind[]> => {
 };
 
 export const parseSkill = ({
+  name,
   kind,
   skill,
 }: {
+  name: string;
   kind:
     | '通常単体'
     | '通常範囲'
@@ -743,21 +807,21 @@ export const parseSkill = ({
       either.bind('effects', () =>
         match(kind)
           .with(P.union('通常単体', '通常範囲', '特殊単体', '特殊範囲'), () =>
-            parseDamage(skill.description, new CallPath(['parseSkill'])),
+            parseDamage(skill.description, name, new CallPath(['parseSkill'])),
           )
           .with('支援', () =>
-            parseBuff(skill.description, new CallPath(['parseSkill'])),
+            parseBuff(skill.description, name, new CallPath(['parseSkill'])),
           )
           .with('妨害', () =>
-            parseDebuff(skill.description, new CallPath(['parseSkill'])),
+            parseDebuff(skill.description, name, new CallPath(['parseSkill'])),
           )
           .with('回復', () =>
-            parseHeal(skill.description, new CallPath(['parseSkill'])),
+            parseHeal(skill.description, name, new CallPath(['parseSkill'])),
           )
           .exhaustive(),
       ),
-      either.bind('stack', () => parseStack(skill)),
-      either.bind('elementEffect', () => parseElementEffect(skill)),
+      either.bind('stack', () => parseStack(skill, name)),
+      either.bind('elementEffect', () => parseElementEffect(skill, name)),
       either.map(({ effects, stack, elementEffect }) => [
         ...effects,
         ...stack,

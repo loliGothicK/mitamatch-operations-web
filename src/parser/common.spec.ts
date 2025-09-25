@@ -48,9 +48,9 @@ describe('parseAmount', () => {
   it('should return an error for invalid amount', () => {
     expect(parseAmount('invalid amount')).toEqual(
       left({
-        path: 'parseAmount',
         target: 'invalid amount',
         msg: "given text doesn't match any amount",
+        meta: { path: 'parseAmount' },
       }),
     );
   });
@@ -92,9 +92,9 @@ describe('parseStatus', () => {
   it('should return an error for invalid status', () => {
     expect(parseStatus('invalid status')).toEqual(
       left({
-        path: 'parseStatus',
         target: 'invalid status',
         msg: "given text doesn't match any status",
+        meta: { path: 'parseStatus' },
       }),
     );
   });
