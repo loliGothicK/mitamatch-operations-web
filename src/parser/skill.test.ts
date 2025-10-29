@@ -2,20 +2,24 @@ import { data } from '@/domain/memoria/memoria.json';
 
 import { isDamageEffect, parseSkill } from './skill';
 import { isLeft, right } from 'fp-ts/Either';
+import {match} from "ts-pattern";
+
+const cardType = (type: number) => match(type)
+    .with(1, () => '通常単体' as const)
+    .with(2, () => '通常範囲' as const)
+    .with(3, () => '特殊単体' as const)
+    .with(4, () => '特殊範囲' as const)
+    .with(5, () => '支援' as const)
+    .with(6, () => '妨害' as const)
+    .with(7, () => '回復' as const)
+    .run();
 
 // integration test
-test.each(data)('.parseSkill($full_name)', memoria => {
+test.each(data)('.parseSkill($name)', memoria => {
   const skill = parseSkill({
-    name: memoria.full_name,
-    kind: memoria.kind as
-      | '通常範囲'
-      | '特殊範囲'
-      | '支援'
-      | '妨害'
-      | '回復'
-      | '通常単体'
-      | '特殊単体',
-    skill: memoria.skill,
+    memoriaName: memoria.name,
+    cardType: cardType(memoria.cardType),
+    skill: memoria.gvgSkill,
   });
 
   describe('should be parsed without error', () => {
@@ -29,7 +33,7 @@ test.each(data)('.parseSkill($full_name)', memoria => {
 
   describe('damage effect should exists only one exactly', () => {
     const damageEffects = skill.right.effects.filter(isDamageEffect);
-    if (['支援', '妨害', '回復'].includes(memoria.kind)) {
+    if (['支援', '妨害', '回復'].includes(memoria.cardType)) {
       expect(damageEffects.length).toBe(0);
     } else {
       expect(damageEffects.length).toBe(1);
@@ -39,20 +43,13 @@ test.each(data)('.parseSkill($full_name)', memoria => {
 
 // test for 極大ダメージ
 test.each(
-  data.filter(({ skill }) => skill.description.includes('極大ダメージ')),
-)('.parseSkill($full_name)/極大ダメージ', memoria => {
+  data.filter(({ gvgSkill }) => gvgSkill.description.includes('極大ダメージ')),
+)('.parseSkill($name)/極大ダメージ', memoria => {
   expect(
     parseSkill({
-      name: memoria.full_name,
-      kind: memoria.kind as
-        | '通常範囲'
-        | '特殊範囲'
-        | '支援'
-        | '妨害'
-        | '回復'
-        | '通常単体'
-        | '特殊単体',
-      skill: memoria.skill,
+      memoriaName: memoria.name,
+      cardType: cardType(memoria.cardType),
+      skill: memoria.gvgSkill,
     }),
   ).toEqual(
     right(

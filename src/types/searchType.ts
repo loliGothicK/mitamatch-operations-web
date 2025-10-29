@@ -9,7 +9,7 @@ import {
 } from '@/parser/skill';
 import { match } from 'ts-pattern';
 
-export const labelSearch = ['legendary', 'ultimate'] as const;
+export const labelSearch = ['Legendary', 'Ultimate'] as const;
 export type LabelSearch = (typeof labelSearch)[number];
 export const basicStatus = ['ATK', 'DEF', 'Sp.ATK', 'Sp.DEF', 'Life'] as const;
 export type BasicStatus = (typeof basicStatus)[number];

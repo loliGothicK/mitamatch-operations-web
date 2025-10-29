@@ -6,7 +6,7 @@ import type {
   MemoriaWithConcentration,
 } from '@/jotai/memoriaAtoms';
 import { type Amount, parseElement, type StatusKind } from '@/parser/common';
-import type { Probability } from '@/parser/support';
+import type { Probability } from '@/parser/autoSkill';
 import { P, match } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
 import {
@@ -40,8 +40,8 @@ function parseAbility(description?: string): Map<string, number> {
   if (!_match) {
     return result;
   }
-  for (const element of _match[1].split('/')) {
-    result.set(element, 1.0 + Number(_match[2]) / 100);
+  for (const attribute of _match[1].split('/')) {
+    result.set(attribute, 1.0 + Number(_match[2]) / 100);
   }
   return result;
 }
@@ -93,11 +93,11 @@ function parseAdx(adx: Costume['adx'], adxLevel: number) {
     if (!_match) {
       continue;
     }
-    const element = parseElement(_match[1]);
-    if (either.isLeft(element)) {
+    const attribute = parseElement(_match[1]);
+    if (either.isLeft(attribute)) {
       continue;
     }
-    effUp[element.right] = 1.0 + Number(_match[2]) / 100;
+    effUp[attribute.right] = 1.0 + Number(_match[2]) / 100;
   }
 
   for (const skill of adx[adxLevel]) {
@@ -105,11 +105,11 @@ function parseAdx(adx: Costume['adx'], adxLevel: number) {
     if (!_match) {
       continue;
     }
-    const element = parseElement(_match[1]);
-    if (either.isLeft(element)) {
+    const attribute = parseElement(_match[1]);
+    if (either.isLeft(attribute)) {
       continue;
     }
-    rateUp[element.right] = Number(_match[2]) / 100;
+    rateUp[attribute.right] = Number(_match[2]) / 100;
   }
 
   return [effUp, rateUp] as const;
@@ -236,7 +236,7 @@ export function evaluate(
       .with(4, () => 1.5)
       .exhaustive();
 
-    const ranged = Lenz.skill.effects.get(memoria).find(isNotStackOrElement);
+    const ranged = Lenz.gvgSkill.effects.get(memoria).find(isNotStackOrElement);
     const range = match(ranged?.range)
       .with([P._, P._], ([a, b]) => (a + b) / 2)
       .run();
@@ -263,20 +263,20 @@ export function evaluate(
         })
         .reduce(
           (acc: number, cur: number) =>
-            acc * (1.0 - cur - adx[memoria.element]),
+            acc * (1.0 - cur - adx[memoria.attribute]),
           1.0,
         );
 
     const calibration =
       charmRate *
       // biome-ignore lint/style/noNonNullAssertion: should be fine
-      charmEx.get(memoria.element)! *
+      charmEx.get(memoria.attribute)! *
       costumeRate *
       // biome-ignore lint/style/noNonNullAssertion: should be fine
-      costumeEx.get(memoria.element)! *
+      costumeEx.get(memoria.attribute)! *
       graceRate *
-      themeRate[memoria.element] *
-      costumeAdx[memoria.element];
+      themeRate[memoria.attribute] *
+      costumeAdx[memoria.attribute];
 
     const config = {
       calibration,
@@ -320,7 +320,7 @@ function damage(
   { counter: enableCounter, stack }: EvaluateOptions,
 ): number | undefined {
   if (
-    !Lenz.skill.effects.get(memoria).some(effect => effect.type === 'damage')
+    !Lenz.gvgSkill.effects.get(memoria).some(effect => effect.type === 'damage')
   ) {
     return undefined;
   }
@@ -345,42 +345,54 @@ function damage(
   )) {
     match(memoria.skills.legendary)
       .when(
-        legendary => legendary?.raw.name.includes('火通'),
+        legendary =>
+          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('水通'),
+        legendary =>
+          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('風通'),
+        legendary =>
+          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('火特'),
+        legendary =>
+          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('水特'),
+        legendary =>
+          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('風特'),
+        legendary =>
+          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -389,24 +401,26 @@ function damage(
       .otherwise(() => {});
   }
 
-  const finalCalibration = match(memoria.kind)
+  const finalCalibration = match(memoria.cardType)
     .with(
       P.union('通常単体', '通常範囲'),
-      () => calibration * normalLegendary[memoria.element],
+      () => calibration * normalLegendary[memoria.attribute],
     )
     .with(
       P.union('特殊単体', '特殊範囲'),
-      () => calibration * specialLegendary[memoria.element],
+      () => calibration * specialLegendary[memoria.attribute],
     )
     .otherwise(() => calibration);
 
-  const amount = Lenz.skill.effects.get(memoria).find(isDamageEffect)?.amount;
+  const amount = Lenz.gvgSkill.effects
+    .get(memoria)
+    .find(isDamageEffect)?.amount;
 
   if (!amount) {
     return undefined;
   }
 
-  const skillRate = match(memoria.kind)
+  const skillRate = match(memoria.cardType)
     .when(
       kind => kind.includes('単体'),
       () =>
@@ -445,19 +459,19 @@ function damage(
       }
       const level = _level(up.amount);
       const probability = _probability(support.probability, concentration);
-      return level * (probability + adx[memoria.element]);
+      return level * (probability + adx[memoria.attribute]);
     })
     .reduce((acc, cur) => acc + cur, 1);
 
   const memoriaRate = skillRate * skillLevel;
   const counter =
-    enableCounter && Lenz.skill.name.get(memoria).includes('カウンター')
+    enableCounter && Lenz.gvgSkill.name.get(memoria).includes('カウンター')
       ? 1.5
       : 1.0;
   const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
 
   return Math.floor(
-    (memoria.kind.includes('通常')
+    (memoria.cardType.includes('通常')
       ? atk - (2 / 3) * opDef
       : spAtk - (2 / 3) * opSpDef) *
       memoriaRate *
@@ -479,7 +493,9 @@ function buff(
       amount: number;
     }[]
   | undefined {
-  if (!Lenz.skill.effects.get(memoria).some(effect => effect.type === 'buff')) {
+  if (
+    !Lenz.gvgSkill.effects.get(memoria).some(effect => effect.type === 'buff')
+  ) {
     return undefined;
   }
 
@@ -510,63 +526,81 @@ function buff(
   )) {
     match(memoria.skills.legendary)
       .when(
-        legendary => legendary?.raw.name.includes('火援'),
+        legendary =>
+          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('水援'),
+        legendary =>
+          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('風援'),
+        legendary =>
+          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('火通'),
+        legendary =>
+          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('水通'),
+        legendary =>
+          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('風通'),
+        legendary =>
+          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('火特'),
+        legendary =>
+          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('水特'),
+        legendary =>
+          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('風特'),
+        legendary =>
+          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -575,24 +609,24 @@ function buff(
       .otherwise(() => {});
   }
 
-  const finalCalibration = match(memoria.kind)
+  const finalCalibration = match(memoria.cardType)
     .with(
       P.union('通常単体', '通常範囲'),
-      () => calibration * normalLegendary[memoria.element],
+      () => calibration * normalLegendary[memoria.attribute],
     )
     .with(
       P.union('特殊単体', '特殊範囲'),
-      () => calibration * specialLegendary[memoria.element],
+      () => calibration * specialLegendary[memoria.attribute],
     )
     .with(
       P.union('支援', '妨害'),
-      () => calibration * supportLegendary[memoria.element],
+      () => calibration * supportLegendary[memoria.attribute],
     )
     .with('回復', () => calibration)
     .exhaustive();
 
   const support =
-    memoria.kind.includes('特殊') || memoria.kind.includes('通常')
+    memoria.cardType.includes('特殊') || memoria.cardType.includes('通常')
       ? 1.0
       : deck
           .map(
@@ -614,16 +648,16 @@ function buff(
               support.probability,
               concentration,
             );
-            return level * (probability + adx[memoria.element]);
+            return level * (probability + adx[memoria.attribute]);
           })
           .reduce((acc, cur) => acc + cur, 1);
 
-  return Lenz.skill.effects
+  return Lenz.gvgSkill.effects
     .get(memoria)
     .filter(effect => effect.type === 'buff')
     .map(({ amount, status }) => {
       const counter =
-        enableCounter && Lenz.skill.name.get(memoria).includes('カウンター')
+        enableCounter && Lenz.gvgSkill.name.get(memoria).includes('カウンター')
           ? 1.5
           : 1.0;
       const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
@@ -696,9 +730,7 @@ function buff(
             .with('medium', () => 4.27 / 100)
             .with('large', () => 4.75 / 100)
             .with('extra-large', () => 5.22 / 100)
-            .with('super-large', () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
-            ) // TBD
+            .with('super-large', () => 5.75) // TODO
             .with('ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // TBD
@@ -728,9 +760,7 @@ function buff(
             .with('medium', () => 4.27 / 100)
             .with('large', () => 4.75 / 100)
             .with('extra-large', () => 5.22 / 100)
-            .with('super-large', () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
-            ) // 現状存在しない
+            .with('super-large', () => 5.75) // TODO
             .with('ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
@@ -861,7 +891,7 @@ function debuff(
     }[]
   | undefined {
   if (
-    !Lenz.skill.effects.get(memoria).some(effect => effect.type === 'debuff')
+    !Lenz.gvgSkill.effects.get(memoria).some(effect => effect.type === 'debuff')
   ) {
     return undefined;
   }
@@ -892,63 +922,81 @@ function debuff(
   )) {
     match(memoria.skills.legendary)
       .when(
-        legendary => legendary?.raw.name.includes('火援'),
+        legendary =>
+          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('水援'),
+        legendary =>
+          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('風援'),
+        legendary =>
+          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('火通'),
+        legendary =>
+          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('水通'),
+        legendary =>
+          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('風通'),
+        legendary =>
+          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('火特'),
+        legendary =>
+          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('水特'),
+        legendary =>
+          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('風特'),
+        legendary =>
+          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -957,24 +1005,24 @@ function debuff(
       .otherwise(() => {});
   }
 
-  const finalCalibration = match(memoria.kind)
+  const finalCalibration = match(memoria.cardType)
     .with(
       P.union('通常単体', '通常範囲'),
-      () => calibration * normalLegendary[memoria.element],
+      () => calibration * normalLegendary[memoria.attribute],
     )
     .with(
       P.union('特殊単体', '特殊範囲'),
-      () => calibration * specialLegendary[memoria.element],
+      () => calibration * specialLegendary[memoria.attribute],
     )
     .with(
       P.union('支援', '妨害'),
-      () => calibration * supportLegendary[memoria.element],
+      () => calibration * supportLegendary[memoria.attribute],
     )
     .with('回復', () => calibration)
     .exhaustive();
 
   const support =
-    memoria.kind.includes('特殊') || memoria.kind.includes('通常')
+    memoria.cardType.includes('特殊') || memoria.cardType.includes('通常')
       ? 1.0
       : deck
           .map(
@@ -996,16 +1044,16 @@ function debuff(
               support.probability,
               concentration,
             );
-            return level * (probability + adx[memoria.element]);
+            return level * (probability + adx[memoria.attribute]);
           })
           .reduce((acc, cur) => acc + cur, 1);
 
-  return Lenz.skill.effects
+  return Lenz.gvgSkill.effects
     .get(memoria)
     .filter(effect => effect.type === 'debuff')
     .map(({ amount, status }) => {
       const counter =
-        enableCounter && Lenz.skill.name.get(memoria).includes('カウンター')
+        enableCounter && Lenz.gvgSkill.name.get(memoria).includes('カウンター')
           ? 1.5
           : 1.0;
       const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
@@ -1039,7 +1087,7 @@ function debuff(
                 support *
                 range *
                 (enableCounter &&
-                Lenz.skill.name.get(memoria).includes('カウンター')
+                Lenz.gvgSkill.name.get(memoria).includes('カウンター')
                   ? 1.5
                   : 1.0),
             ),
@@ -1084,9 +1132,7 @@ function debuff(
             .with('medium', () => 4.71 / 100)
             .with('large', () => 5.23 / 100)
             .with('extra-large', () => 5.75 / 100)
-            .with('super-large', () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
-            ) // 現状存在しない
+            .with('super-large', () => 6.2 / 100) // TODO
             .with('ultra-large', () =>
               ToBeDefined(Lenz.memoria.shortName.get(memoria)),
             ) // 現状存在しない
@@ -1225,7 +1271,7 @@ function recovery(
   { calibration, skillLevel, range, memoria, deck, adx }: Config,
   { counter: enableCounter, stack }: EvaluateOptions,
 ): number | undefined {
-  if (memoria.kind !== '回復') {
+  if (memoria.cardType !== '回復') {
     return undefined;
   }
   const legendary = {
@@ -1237,25 +1283,31 @@ function recovery(
   };
   for (const memoria of deck.filter(
     memoria =>
-      memoria.skills.legendary !== undefined && memoria.kind === '回復',
+      memoria.skills.legendary !== undefined && memoria.cardType === '回復',
   )) {
     match(memoria.skills.legendary)
       .when(
-        legendary => legendary?.raw.name.includes('火回'),
+        legendary =>
+          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.trigger === 'Recovery',
         () => {
           legendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('水回'),
+        legendary =>
+          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.trigger === 'Recovery',
         () => {
           legendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
-        legendary => legendary?.raw.name.includes('風回'),
+        legendary =>
+          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.trigger === 'Recovery',
         () => {
           legendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -1264,7 +1316,7 @@ function recovery(
       .run();
   }
 
-  const skillRate = match(Lenz.skill.description.get(memoria))
+  const skillRate = match(Lenz.gvgSkill.description.get(memoria))
     .when(
       sentence => sentence.includes('特大回復'),
       () => 13.2 / 100,
@@ -1291,13 +1343,13 @@ function recovery(
       }
       const level = _level(up.amount);
       const probability = _probability(support.probability, concentration);
-      return level * (probability + adx[memoria.element]);
+      return level * (probability + adx[memoria.attribute]);
     })
     .reduce((acc, cur) => acc + cur, 1);
 
   const memoriaRate = skillRate * skillLevel;
   const counter =
-    enableCounter && Lenz.skill.name.get(memoria).includes('カウンター')
+    enableCounter && Lenz.gvgSkill.name.get(memoria).includes('カウンター')
       ? 1.5
       : 1.0;
   const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
@@ -1306,7 +1358,7 @@ function recovery(
     dsd *
       memoriaRate *
       calibration *
-      legendary[memoria.element] *
+      legendary[memoria.attribute] *
       support *
       range *
       counter *
@@ -1346,14 +1398,14 @@ function support(
   };
   const map = deck
     .flatMap(memoria => {
-      return Lenz.support.effects
+      return Lenz.autoSkill.effects
         .get(memoria)
         .map(
-          effect => [memoria.concentration, memoria.element, effect] as const,
+          effect => [memoria.concentration, memoria.attribute, effect] as const,
         );
     })
     .filter(([, , effect]) => effect.type === type)
-    .map(([concentration, element, { amount, status }]) => {
+    .map(([concentration, attribute, { amount, status }]) => {
       const probability =
         match(concentration)
           .with(0, () => 0.12)
@@ -1361,7 +1413,7 @@ function support(
           .with(2, () => 0.13)
           .with(3, () => 0.135)
           .with(4, () => 0.15)
-          .run() + adx[element];
+          .run() + adx[attribute];
       const skillLevel = match(concentration)
         .with(0, () => 1.35)
         .with(1, () => 1.375)

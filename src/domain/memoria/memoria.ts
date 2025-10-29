@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import memoriaData from './memoria.json';
 import { parseSkill, type Skill } from '@/parser/skill';
-import { parseSupport, type Support } from '@/parser/support';
+import { parseAutoSkill, type AutoSkill } from '@/parser/autoSkill';
 import { fromThrowable } from 'neverthrow';
 import { getApplicativeValidation, isLeft, right } from 'fp-ts/Either';
 import { getSemigroup } from 'fp-ts/Array';
@@ -13,32 +13,51 @@ import { outdent } from 'outdent';
 import { match } from 'ts-pattern';
 
 const statusSchema = z.tuple([z.number(), z.number(), z.number(), z.number()]);
+const skillSchema = z.object({
+  name: z.string().readonly(),
+  description: z.string().readonly(),
+});
 
 const memoriaSchema = z.object({
   id: z.number().readonly(),
-  link: z.string().readonly(),
   name: z.string().readonly(),
-  full_name: z.string().readonly(),
-  kind: z
-    .enum([
-      '通常単体',
-      '通常範囲',
-      '特殊単体',
-      '特殊範囲',
-      '支援',
-      '妨害',
-      '回復',
+  cardType: z
+    .union([
+      z.literal(1),
+      z.literal(2),
+      z.literal(3),
+      z.literal(4),
+      z.literal(5),
+      z.literal(6),
+      z.literal(7),
     ])
+    .transform(type =>
+      match(type)
+        .with(1, () => '通常単体' as const)
+        .with(2, () => '通常範囲' as const)
+        .with(3, () => '特殊単体' as const)
+        .with(4, () => '特殊範囲' as const)
+        .with(5, () => '支援' as const)
+        .with(6, () => '妨害' as const)
+        .with(7, () => '回復' as const)
+        .exhaustive(),
+    )
     .readonly(),
-  element: z
-    .enum(['火', '水', '風', '光', '闇'])
+  attribute: z
+    .union([
+      z.literal(1),
+      z.literal(2),
+      z.literal(3),
+      z.literal(4),
+      z.literal(5),
+    ])
     .transform(element =>
       match(element)
-        .with('火', () => 'Fire' as const)
-        .with('水', () => 'Water' as const)
-        .with('風', () => 'Wind' as const)
-        .with('光', () => 'Light' as const)
-        .with('闇', () => 'Dark' as const)
+        .with(1, () => 'Fire' as const)
+        .with(2, () => 'Water' as const)
+        .with(3, () => 'Wind' as const)
+        .with(4, () => 'Light' as const)
+        .with(5, () => 'Dark' as const)
         .exhaustive(),
     )
     .readonly(),
@@ -52,28 +71,16 @@ const memoriaSchema = z.object({
     ])
     .readonly(),
   cost: z.number().readonly(),
-  skill: z
-    .object({
-      name: z.string().readonly(),
-      description: z.string().readonly(),
-    })
-    .readonly(),
-  support: z
-    .object({
-      name: z.string().readonly(),
-      description: z.string().readonly(),
-    })
+  questSkill: skillSchema.readonly(),
+  gvgSkill: skillSchema.readonly(),
+  autoSkill: skillSchema.readonly(),
+  labels: z
+    .array(z.enum(['Legendary', 'Ultimate', 'SuperAwakening']))
     .readonly(),
   legendary_skill: z
-    .object({
-      name: z.string().readonly(),
-      description: z
-        .tuple([z.string(), z.string(), z.string(), z.string(), z.string()])
-        .readonly(),
-    })
+    .tuple([skillSchema, skillSchema, skillSchema, skillSchema, skillSchema])
     .optional()
     .readonly(),
-  labels: z.array(z.enum(['legendary', 'ultimate'])).readonly(),
 });
 
 /**
@@ -96,23 +103,21 @@ const memoriaSchema = z.object({
 type RawMemoria = z.infer<typeof memoriaSchema>;
 export type Memoria = Omit<
   RawMemoria,
-  'name' | 'full_name' | 'link' | 'skill' | 'support' | 'legendary_skill'
+  'name' | 'questSkill' | 'gvgSkill' | 'autoSkill' | 'legendary_skill'
 > & {
   name: {
-    link: string;
     short: string;
     full: string;
   };
   skills: {
-    skill: Skill;
-    support: Support;
+    questSkill: Skill;
+    gvgSkill: Skill;
+    autoSkill: AutoSkill;
     legendary?: Legendary;
   };
 };
 export type MemoriaId = Memoria['id'];
-
-export const isLegendary = (memoria: Memoria): boolean =>
-  memoria.labels.includes('legendary');
+export type RawLegendarySkill = NonNullable<RawMemoria['legendary_skill']>;
 
 export const memoriaList: Memoria[] = memoriaData.data.map(memoria => {
   const ap = getApplicativeValidation(getSemigroup<MitamaError>());
@@ -124,11 +129,20 @@ export const memoriaList: Memoria[] = memoriaData.data.map(memoria => {
         error => ${zodResult.error}
     `);
   }
-  const { skill, support, legendary_skill, name, full_name, link, ...raw } =
+  const { questSkill, gvgSkill, autoSkill, legendary_skill, name, ...raw } =
     zodResult.value;
   const parseSkillsResult = sequenceS(ap)({
-    skill: parseSkill({ kind: raw.kind, skill, name: full_name }),
-    support: parseSupport(support),
+    questSkill: parseSkill({
+      cardType: raw.cardType,
+      skill: questSkill,
+      memoriaName: name,
+    }),
+    gvgSkill: parseSkill({
+      cardType: raw.cardType,
+      skill: gvgSkill,
+      memoriaName: name,
+    }),
+    autoSkill: parseAutoSkill({ memoriaName: name, autoSkill }),
     legendary: legendary_skill
       ? parseLegendary(legendary_skill)
       : right(undefined),
@@ -141,6 +155,6 @@ export const memoriaList: Memoria[] = memoriaData.data.map(memoria => {
   return {
     ...raw,
     skills: { ...parseSkillsResult.right },
-    name: { link, short: name, full: full_name },
+    name: { short: name, full: name },
   };
 });

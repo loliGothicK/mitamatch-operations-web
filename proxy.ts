@@ -4,7 +4,7 @@ import { getSession } from '@/actions/auth';
 // 1. Specify protected and public routes
 const protectedRoutes = ['/dashboard', '/user'];
 
-export default async function middleware(req: NextRequest) {
+export default async function proxy(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set('x-base-path', req.nextUrl.basePath);
   // Nonceの生成

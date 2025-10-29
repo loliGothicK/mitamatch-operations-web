@@ -143,7 +143,7 @@ function parseRange(
 ): Validated<MitamaError, readonly [number, number]> {
   return pipe(
     separator(
-      num.split('～').map(n => parseIntSafe(n, path.join('parseRange'))),
+      num.split('～').map(n => parseIntSafe(n, { path: path.join('parseRange'), memoriaName })),
     ),
     either.flatMap(range =>
       match(range)
@@ -212,7 +212,7 @@ function parseDamage(
                     Do,
                     bind('status', () =>
                       separator(
-                        status.split('と').map(s => parseStatus(s, joined())),
+                        status.split('と').map(s => parseStatus(s, { path: joined(), memoriaName })),
                       ),
                     ),
                     either.flatMap(({ status }) =>
@@ -220,7 +220,7 @@ function parseDamage(
                         status.map(stat =>
                           sequenceS(ap)({
                             type: toValidated(toType(amount)),
-                            amount: toValidated(parseAmount(amount, joined())),
+                            amount: toValidated(parseAmount(amount, { path: joined(), memoriaName })),
                             status: right(stat),
                             range: right(range),
                           }),
@@ -250,7 +250,7 @@ function parseDamage(
         sequenceS(ap)({
           type: right('damage' as const),
           range: parseRange(range, memoriaName, path),
-          amount: toValidated(parseAmount(damage, path)),
+          amount: toValidated(parseAmount(damage, { path, memoriaName })),
         }),
       ),
       option.getOrElse(() =>
@@ -290,11 +290,12 @@ const parseStatChanges = (
   memoriaName: string,
   path: CallPath,
 ) => {
+  const joined = path.join('parseStatChanges');
   return pipe(
     pipe(
       status
         .split('と')
-        .map(s => parseStatus(s, path.join('parseStatChanges'))),
+        .map(s => parseStatus(s, { path: joined, memoriaName })),
       separator,
     ),
     either.flatMap(stats =>
@@ -308,7 +309,7 @@ const parseStatChanges = (
               path.join('parseStatChanges'),
             ),
             amount: toValidated(
-              parseAmount(eff, path.join('parseStatChanges')),
+              parseAmount(eff, { path: joined, memoriaName }),
             ),
             status: right(stat),
           }),
@@ -385,6 +386,7 @@ const RECOVERY_BUFF = /(ATK.*?|Sp\.ATK.*?|DEF.*?|Sp\.DEF.*?)を(.*?アップ)/;
 const parseRecoveryBuff = (
   range: readonly [number, number],
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ) => {
   const joined = () => path.join('parseRecoveryBuff');
@@ -392,7 +394,7 @@ const parseRecoveryBuff = (
     fromNullable(description.match(RECOVERY_BUFF)),
     option.map(([, status, up]) =>
       pipe(
-        status.split('と').map(s => parseStatus(s, joined())),
+        status.split('と').map(s => parseStatus(s, { path: joined(), memoriaName })),
         separator,
         either.flatMap(
           (statuses): Validated<MitamaError, SkillEffect[]> =>
@@ -401,7 +403,7 @@ const parseRecoveryBuff = (
                 sequenceS(ap)({
                   type: right('buff' as const),
                   range: right(range),
-                  amount: toValidated(parseAmount(up, joined())),
+                  amount: toValidated(parseAmount(up, { path: joined(), memoriaName })),
                   status: right(stat),
                 }),
               ),
@@ -427,7 +429,7 @@ const parseHeal = (
         Do,
         bind('range', () => parseRange(range, memoriaName, joined())),
         bind('buff', ({ range }) =>
-          parseRecoveryBuff(range, description, joined()),
+          parseRecoveryBuff(range, description, memoriaName, joined()),
         ),
         bind(
           'recovery',
@@ -435,7 +437,7 @@ const parseHeal = (
             sequenceS(ap)({
               type: right('heal' as const),
               range: right(range),
-              amount: toValidated(parseAmount(heal, joined())),
+              amount: toValidated(parseAmount(heal, { path: joined(), memoriaName })),
             }),
         ),
         either.map(({ recovery, buff }) => [recovery, ...buff]),
@@ -486,7 +488,7 @@ const parseStackEffect =
               rate: pipe(
                 match?.groups?.rate,
                 either.fromNullable(err('`groups.rate` does not exists')),
-                either.flatMap(rate => parseIntSafe(rate, joined())),
+                either.flatMap(rate => parseIntSafe(rate, { path: joined(), memoriaName })),
                 toValidated,
               ),
               times: pipe(
@@ -501,7 +503,7 @@ const parseStackEffect =
                       err('`groups.numberOf` does not exists'),
                     ),
                     either.flatMap(numberOf =>
-                      parseIntSafe(numberOf, joined()),
+                      parseIntSafe(numberOf, { path: joined(), memoriaName }),
                     ),
                   ),
                 ),
@@ -596,7 +598,7 @@ function parseElementEffect(
   const parseResonanceType = (
     name: string,
   ): Either<MitamaError, ElementEffect['kind'][]> => {
-    if (name.includes('ミニマ')) {
+    if (name.includes('ミニマ') || name.includes('Mn')) {
       return right(['minima' as const]);
     }
     if (name.includes('スプレッド')) {
@@ -617,7 +619,7 @@ function parseElementEffect(
     return pipe(
       fromNullable(description.match(/スキル効果が(\d+\.\d+)倍/)),
       option.map(([, rate]) =>
-        parseIntSafe(rate, path.join('parseElementEffect.parseRate')),
+        parseIntSafe(rate, { path: path.join('parseElementEffect.parseRate'), memoriaName }),
       ),
       option.getOrElse(() =>
         anyhow(description, "given text doesn't match rate", {
@@ -647,7 +649,7 @@ function parseElementEffect(
                         element: toValidated(
                           parseElement(
                             element,
-                            path.join('parseElementEffect'),
+                            { path: path.join('parseElementEffect'), memoriaName },
                           ),
                         ),
                         kind: right(enhance),
@@ -661,7 +663,7 @@ function parseElementEffect(
                         element: toValidated(
                           parseElement(
                             element,
-                            path.join('parseElementEffect'),
+                            { path: path.join('parseElementEffect'), memoriaName },
                           ),
                         ),
                         kind: right(kind),
@@ -785,12 +787,12 @@ const parseKinds = (skillName: string): Option<readonly SkillKind[]> => {
 };
 
 export const parseSkill = ({
-  name,
-  kind,
+  memoriaName,
+  cardType,
   skill,
 }: {
-  name: string;
-  kind:
+  memoriaName: string;
+  cardType:
     | '通常単体'
     | '通常範囲'
     | '特殊単体'
@@ -799,30 +801,49 @@ export const parseSkill = ({
     | '妨害'
     | '回復';
   skill: { name: string; description: string };
-}): Validated<MitamaError, Skill> =>
-  sequenceS(ap)({
+}): Validated<MitamaError, Skill> => {
+  const path = new CallPath(['parseSkill']);
+  return sequenceS(ap)({
     raw: right(skill),
     effects: pipe(
       Do,
       either.bind('effects', () =>
-        match(kind)
+        match(cardType)
           .with(P.union('通常単体', '通常範囲', '特殊単体', '特殊範囲'), () =>
-            parseDamage(skill.description, name, new CallPath(['parseSkill'])),
+            parseDamage(
+              skill.description,
+              memoriaName,
+              path,
+            ),
           )
           .with('支援', () =>
-            parseBuff(skill.description, name, new CallPath(['parseSkill'])),
+            parseBuff(
+              skill.description,
+              memoriaName,
+              path,
+            ),
           )
           .with('妨害', () =>
-            parseDebuff(skill.description, name, new CallPath(['parseSkill'])),
+            parseDebuff(
+              skill.description,
+              memoriaName,
+              path,
+            ),
           )
           .with('回復', () =>
-            parseHeal(skill.description, name, new CallPath(['parseSkill'])),
+            parseHeal(
+              skill.description,
+              memoriaName,
+              path,
+            ),
           )
           .exhaustive(),
       ),
-      either.bind('stack', () => parseStack(skill, name)),
-      either.bind('elementEffect', () => parseElementEffect(skill, name)),
-      either.map(({ effects, stack, elementEffect }) => [
+      either.bind('stack', () => parseStack(skill, memoriaName, path)),
+      either.bind('elementEffect', () =>
+        parseElementEffect(skill, memoriaName, path),
+      ),
+      either.map(({effects, stack, elementEffect}) => [
         ...effects,
         ...stack,
         ...elementEffect,
@@ -832,3 +853,4 @@ export const parseSkill = ({
       option.getOrElse((): readonly SkillKind[] => [])(parseKinds(skill.name)),
     ),
   });
+};

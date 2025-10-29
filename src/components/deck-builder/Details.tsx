@@ -13,7 +13,7 @@ import {
   isStackEffect,
   stackKinds,
 } from '@/parser/skill';
-import type { SupportKind } from '@/parser/support';
+import type { SupportKind } from '@/parser/autoSkill';
 import { elementFilter } from '@/types/filterType';
 
 import { match } from 'ts-pattern';
@@ -164,7 +164,7 @@ export default function Details() {
 
   const skills = deck
     .concat(legendaryDeck)
-    .map(memoria => memoria.skills.skill);
+    .map(memoria => memoria.skills.gvgSkill);
 
   const skillAggregate = new Map<StatusPattern, number>();
   for (const pattern of skills.flatMap(skill => {
@@ -181,7 +181,7 @@ export default function Details() {
   }
 
   const supports = [...deck, ...legendaryDeck].map(
-    memoria => memoria.skills.support,
+    memoria => memoria.skills.autoSkill,
   );
 
   const supportAggregate = new Map<SupportPattern, number>();
@@ -195,14 +195,14 @@ export default function Details() {
 
   const elementAggregate = new Map<string, number>();
   for (const element of [...deck, ...legendaryDeck].map(memoria => {
-    return memoria.element;
+    return memoria.attribute;
   })) {
     elementAggregate.set(element, (elementAggregate.get(element) || 0) + 1);
   }
 
   const kindAggregate = new Map<string, number>();
   for (const kind of [...deck, ...legendaryDeck].map(memoria => {
-    return memoria.kind;
+    return memoria.cardType;
   })) {
     kindAggregate.set(kind, (kindAggregate.get(kind) || 0) + 1);
   }

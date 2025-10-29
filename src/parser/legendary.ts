@@ -1,5 +1,5 @@
 import type { Elements } from '@/parser/skill';
-import type { Trigger } from '@/parser/support';
+import type { Trigger } from '@/parser/autoSkill';
 import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
 import { anyhow, type MitamaError, CallPath } from '@/error/error';
 import { pipe } from 'fp-ts/function';
@@ -8,19 +8,22 @@ import { separator } from '@/fp-ts-ext/function';
 import { getApplicativeValidation, right } from 'fp-ts/Either';
 import { getSemigroup } from 'fp-ts/Array';
 import { sequenceS } from 'fp-ts/Apply';
-import { match, P } from 'ts-pattern';
+import { match } from 'ts-pattern';
 import { parseFloatSafe } from '@/parser/common';
+import type { RawLegendarySkill } from '@/domain/memoria/memoria';
+
+export type LegendarySkillTrigger =
+  | Exclude<Trigger, 'Attack'>
+  | 'Attack/Physical'
+  | 'Attack/Magical';
 
 export type LegendarySkill = {
-  readonly element: Elements;
-  readonly trigger: Trigger;
+  readonly attribute: Elements;
+  readonly trigger: LegendarySkillTrigger;
   readonly rates: readonly [number, number, number, number, number];
 };
 export type Legendary = {
-  readonly raw: {
-    readonly name: string;
-    readonly description: readonly [string, string, string, string, string];
-  };
+  readonly raw: RawLegendarySkill;
   readonly skill: LegendarySkill;
 };
 
@@ -33,53 +36,48 @@ const parseElement = (element: string, path: CallPath = CallPath.empty) =>
     .with('風', () => right('Wind'))
     .otherwise(() =>
       toValidated(
-        anyhow(
-          path.join('parseElement'),
-          element,
-          'given text does not match any element',
-        ),
+        anyhow(element, 'given text does not match any element', {
+          path: path.join('parseElement'),
+        }),
       ),
     );
 
 const parseTrigger = (trigger: string, path: CallPath = CallPath.empty) =>
-  match<string, Validated<MitamaError, Trigger>>(trigger)
-    .with(P.union('通常攻撃時', '特殊攻撃時'), () => right('Attack'))
+  match<string, Validated<MitamaError, LegendarySkillTrigger>>(trigger)
+    .with('通常攻撃時', () => right('Attack/Physical'))
+    .with('特殊攻撃時', () => right('Attack/Magical'))
     .with('支援/妨害メモリア使用時', () => right('Assist'))
     .with('回復メモリア使用時', () => right('Recovery'))
     .otherwise(() =>
       toValidated(
-        anyhow(
-          path.join('parseTrigger'),
-          trigger,
-          'given text does not match any trigger',
-        ),
+        anyhow(trigger, 'given text does not match any trigger', {
+          path: path.join('parseTrigger'),
+        }),
       ),
     );
 
-export function parseLegendary({
-  name,
-  description,
-}: {
-  readonly name: string;
-  readonly description: readonly [string, string, string, string, string];
-}): Validated<MitamaError, Legendary> {
+export function parseLegendary(
+  skills: RawLegendarySkill,
+): Validated<MitamaError, Legendary> {
   const ap = getApplicativeValidation(getSemigroup<MitamaError>());
   const path = new CallPath(['parseLegendary']);
   const toEither = (target: string) =>
     either.fromNullable<MitamaError>({
-      path: path.toString(),
       target,
       msg: 'given text does not match LEGENDAEY_SKILL',
+      meta: {
+        path: path.toString(),
+      },
     });
 
   return pipe(
-    description.map(skill =>
+    skills.map(skill =>
       pipe(
-        skill.match(LEGENDAEY_SKILL),
-        toEither(skill),
+        skill.description.match(LEGENDAEY_SKILL),
+        toEither(skill.description),
         either.flatMap(([, element, trigger, rate]) =>
           sequenceS(ap)({
-            element: parseElement(element, path),
+            attribute: parseElement(element, path),
             trigger: parseTrigger(trigger, path),
             rate: toValidated(parseFloatSafe(rate, path)),
           }),
@@ -87,15 +85,12 @@ export function parseLegendary({
       ),
     ),
     separator,
-    either.map(skills => ({
-      raw: {
-        name,
-        description,
-      },
+    either.map(parsed => ({
+      raw: skills,
       skill: {
-        element: skills[0].element,
-        trigger: skills[0].trigger,
-        rates: skills.map(skill => skill.rate) as unknown as readonly [
+        attribute: parsed[0].attribute,
+        trigger: parsed[0].trigger,
+        rates: parsed.map(skill => skill.rate) as unknown as readonly [
           number,
           number,
           number,

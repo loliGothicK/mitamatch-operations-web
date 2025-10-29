@@ -2,7 +2,6 @@
 
 import { useAtom } from 'jotai';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { type MouseEvent, Suspense, useEffect, useId, useState } from 'react';
 import DifferenceIcon from '@mui/icons-material/Difference';
@@ -16,7 +15,6 @@ import {
   Assignment,
   ClearAll,
   FilterAlt,
-  Launch,
   Layers,
   LayersOutlined,
   Remove,
@@ -102,16 +100,18 @@ import { Lenz } from '@/domain/memoria/lens';
 import { isStackEffect } from '@/parser/skill';
 import { Calculator } from '@/deck-builder/_tabs/calculator';
 
+const COMMING_SOON = 'CommingSoon.jpeg';
+
 function Icon({
-  kind,
-  element,
+  cardType,
+  attribute,
   position,
 }: {
-  kind: Memoria['kind'];
-  element: Memoria['element'];
+  cardType: Memoria['cardType'];
+  attribute: Memoria['attribute'];
   position?: number;
 }) {
-  const kindImage = match(kind)
+  const kindImage = match(cardType)
     .with('通常単体', () => (
       <Image src={'/NormalSingle.png'} alt={'kind'} width={25} height={25} />
     ))
@@ -149,7 +149,7 @@ function Icon({
     </Avatar>
   );
 
-  return match(element)
+  return match(attribute)
     .with('Fire', () => avatar(red[500]))
     .with('Water', () => avatar(blue[500]))
     .with('Wind', () => avatar(green[500]))
@@ -230,6 +230,7 @@ function MemoriaItem({
     mouseX: number;
     mouseY: number;
   } | null>(null);
+  const [imageSource, setImageSource] = useState(`/memoria/${name.short}.png`);
 
   const handleContextMenu = (event: MouseEvent<HTMLImageElement>) => {
     event.preventDefault();
@@ -330,7 +331,11 @@ function MemoriaItem({
       >
         <ImageListItem>
           <Box>
-            <Icon kind={memoria.kind} element={memoria.element} position={70} />
+            <Icon
+              cardType={memoria.cardType}
+              attribute={memoria.attribute}
+              position={70}
+            />
             <ConcentrationIcon
               concentration={concentrationValue}
               handleConcentration={disable || handleConcentration}
@@ -342,10 +347,10 @@ function MemoriaItem({
                 <Stack>
                   <Typography variant='h6'>{name.short}</Typography>
                   <Typography variant='body2'>
-                    {Lenz.skill.name.get(memoria)}
+                    {Lenz.gvgSkill.name.get(memoria)}
                   </Typography>
                   <Typography variant='body2'>
-                    {Lenz.support.name.get(memoria)}
+                    {Lenz.autoSkill.name.get(memoria)}
                   </Typography>
                 </Stack>
               }
@@ -353,7 +358,7 @@ function MemoriaItem({
               arrow
             >
               <Image
-                src={`/memoria/${name.short}.png`}
+                src={imageSource}
                 alt={name.short}
                 width={100}
                 height={100}
@@ -361,6 +366,11 @@ function MemoriaItem({
                 blurDataURL={toBase64(skeleton(100, 100))}
                 onContextMenu={onContextMenu ? undefined : handleContextMenu}
                 priority={priority}
+                onError={() => {
+                  if (imageSource !== COMMING_SOON) {
+                    setImageSource(COMMING_SOON);
+                  }
+                }}
               />
             </Tooltip>
           </div>
@@ -682,14 +692,14 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
 
   const [stackRateBefore, stackTimesBefore] = match(sw)
     .with('sword', () => {
-      const stack = Lenz.skill.effects
+      const stack = Lenz.gvgSkill.effects
         .get(compare)
         .find(isStackEffect('meteor'));
 
       return [stack?.rate, stack?.times];
     })
     .with('shield', () => {
-      const stack = Lenz.skill.effects
+      const stack = Lenz.gvgSkill.effects
         .get(compare)
         .find(eff => isStackEffect('eden')(eff) || isStackEffect('anima')(eff));
 
@@ -698,14 +708,14 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
     .exhaustive();
   const [stackRateAfter, stackTimesAfter] = match(sw)
     .with('sword', () => {
-      const stack = Lenz.skill.effects
+      const stack = Lenz.gvgSkill.effects
         .get(compare)
         .find(isStackEffect('meteor'));
 
       return [stack?.rate, stack?.times];
     })
     .with('shield', () => {
-      const stack = Lenz.skill.effects
+      const stack = Lenz.gvgSkill.effects
         .get(compare)
         .find(eff => isStackEffect('eden')(eff) || isStackEffect('anima')(eff));
 
@@ -791,11 +801,11 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
               </Grid>
               <Stack direction={'column'} paddingLeft={5}>
                 <Typography variant='body2'>{`${Lenz.memoria.shortName.get(compare)}`}</Typography>
-                <Typography variant='body2'>{`${Lenz.skill.name.get(compare)}`}</Typography>
-                <Typography variant='body2'>{`${Lenz.support.name.get(compare)}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.gvgSkill.name.get(compare)}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.autoSkill.name.get(compare)}`}</Typography>
               </Stack>
             </Stack>
-            {Lenz.skill.description.get(compare).includes('スタック') && (
+            {Lenz.gvgSkill.description.get(compare).includes('スタック') && (
               <MultipleSelect
                 // biome-ignore lint/style/noNonNullAssertion: should be fine
                 times={stackTimesBefore!}
@@ -822,11 +832,11 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
               </Grid>
               <Stack direction={'column'} paddingLeft={5}>
                 <Typography variant='body2'>{`${Lenz.memoria.shortName.get(candidate)}`}</Typography>
-                <Typography variant='body2'>{`${Lenz.skill.name.get(candidate)}`}</Typography>
-                <Typography variant='body2'>{`${Lenz.support.name.get(candidate)}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.gvgSkill.name.get(candidate)}`}</Typography>
+                <Typography variant='body2'>{`${Lenz.autoSkill.name.get(candidate)}`}</Typography>
               </Stack>
             </Stack>
-            {Lenz.skill.description.get(candidate).includes('スタック') && (
+            {Lenz.gvgSkill.description.get(candidate).includes('スタック') && (
               <MultipleSelect
                 // biome-ignore lint/style/noNonNullAssertion: should be fine
                 times={stackTimesAfter!}
@@ -973,7 +983,7 @@ function VirtualizedList() {
                     });
                     return;
                   }
-                  if (memoria[index].labels.includes('legendary')) {
+                  if (memoria[index].labels.includes('Legendary')) {
                     setLegendaryDeck(prev => addMemoria(prev, memoria[index]));
                   } else {
                     setDeck(prev => addMemoria(prev, memoria[index]));
@@ -983,8 +993,8 @@ function VirtualizedList() {
                 <Add color={'warning'} />
               </IconButton>
               <Icon
-                kind={memoria[index].kind}
-                element={memoria[index].element}
+                cardType={memoria[index].cardType}
+                attribute={memoria[index].attribute}
                 position={70}
               />
               <Tooltip title={memoria[index].name.short} placement={'top'}>
@@ -1004,7 +1014,7 @@ function VirtualizedList() {
                     sx={{ display: 'block' }}
                     color='text.primary'
                   >
-                    {Lenz.skill.name.get(memoria[index])}
+                    {Lenz.gvgSkill.name.get(memoria[index])}
                   </Typography>
                   <Divider sx={{ margin: 1 }} />
                   <Typography
@@ -1014,19 +1024,10 @@ function VirtualizedList() {
                     sx={{ display: 'block' }}
                     color='text.primary'
                   >
-                    {Lenz.support.name.get(memoria[index])}
+                    {Lenz.autoSkill.name.get(memoria[index])}
                   </Typography>
                 </Stack>
               </CardContent>
-
-              <IconButton sx={{ position: 'absolute', right: 0 }}>
-                <Link
-                  href={`https://allb.game-db.tw/memoria/${memoria[index].name.link}`}
-                  target={'_blank'}
-                >
-                  <Launch />
-                </Link>
-              </IconButton>
             </Card>
           );
         }}
@@ -1050,7 +1051,7 @@ function VirtualizedList() {
               <Checkbox
                 disabled={
                   ![compare, candidate].some(m =>
-                    m?.skills.skill.raw.description.includes('スタック'),
+                    m?.skills.gvgSkill.raw.description.includes('スタック'),
                   )
                 }
                 icon={<ReplyOutlined style={{ transform: 'rotate(90deg)' }} />}
@@ -1062,7 +1063,7 @@ function VirtualizedList() {
               <Checkbox
                 disabled={
                   ![compare, candidate].some(m =>
-                    m?.skills.skill.raw.description.includes('スタック'),
+                    m?.skills.gvgSkill.raw.description.includes('スタック'),
                   )
                 }
                 icon={<LayersOutlined />}
@@ -1074,7 +1075,7 @@ function VirtualizedList() {
               autoFocus
               color='inherit'
               onClick={() => {
-                if (candidate?.labels.includes('legendary')) {
+                if (candidate?.labels.includes('Legendary')) {
                   setLegendaryDeck(prev =>
                     [...prev].map(memoria =>
                       memoria.id === compare?.id ? candidate : memoria,
@@ -1104,8 +1105,8 @@ function VirtualizedList() {
             paddingRight: { xs: '5%', md: '10%', lg: '20%' },
           }}
         >
-          {compare?.labels.includes('legendary') ===
-          candidate?.labels.includes('legendary') ? (
+          {compare?.labels.includes('Legendary') ===
+          candidate?.labels.includes('Legendary') ? (
             <DialogContent>
               <Compare counter={counter} stack={stack} />
             </DialogContent>

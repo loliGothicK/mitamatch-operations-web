@@ -154,20 +154,22 @@ export const filteredMemoriaAtom = atom(get => {
   return memoriaList
     .filter(memoria => {
       const sw = match(get(swAtom))
-        .with('shield', () => ['支援', '妨害', '回復'].includes(memoria.kind))
+        .with('shield', () =>
+          ['支援', '妨害', '回復'].includes(memoria.cardType),
+        )
         .with('sword', () =>
           ['通常単体', '通常範囲', '特殊単体', '特殊範囲'].includes(
-            memoria.kind,
+            memoria.cardType,
           ),
         )
         .exhaustive();
 
       const role = get(roleFilterAtom).some(filter => {
-        return memoria.kind === roleFilterMap[filter];
+        return memoria.cardType === roleFilterMap[filter];
       });
 
       const element = get(elementFilterAtom).some(filter => {
-        return memoria.element === filter;
+        return memoria.attribute === filter;
       });
 
       const label = get(labelFilterAtom).every(filter => {
@@ -175,7 +177,7 @@ export const filteredMemoriaAtom = atom(get => {
       });
 
       const basicStatus = get(basicStatusFilterAtom).every(filter => {
-        return Lenz.skill.effects.get(memoria).some(eff =>
+        return Lenz.gvgSkill.effects.get(memoria).some(eff =>
           match(eff)
             .with({ status: filter.status }, ({ type }) =>
               match(filter.upDown)
@@ -188,7 +190,7 @@ export const filteredMemoriaAtom = atom(get => {
       });
 
       const elementStatus = get(elementStatusFilterAtom).every(filter => {
-        return Lenz.skill.effects.get(memoria).some(eff =>
+        return Lenz.gvgSkill.effects.get(memoria).some(eff =>
           match(eff)
             .with({ status: filter.status }, ({ type }) =>
               match(filter.upDown)
@@ -203,18 +205,18 @@ export const filteredMemoriaAtom = atom(get => {
       const otherSkill = get(otherSkillFilterAtom).every(filter => {
         return match(filter)
           .with(P.union('anima', 'barrier', 'meteor', 'eden'), filter =>
-            Lenz.skill.effects.get(memoria).some(isStackEffect(filter)),
+            Lenz.gvgSkill.effects.get(memoria).some(isStackEffect(filter)),
           )
           .with(P.union('minima', 'spread', 'enhance'), filter =>
-            Lenz.skill.effects.get(memoria).some(isElementEffect(filter)),
+            Lenz.gvgSkill.effects.get(memoria).some(isElementEffect(filter)),
           )
           .with(
             P.union('heal', 'charge', 'counter', 's-counter'),
             filter =>
-              !!Lenz.skill.kinds.get(memoria)?.some(kind => kind === filter),
+              !!Lenz.gvgSkill.kinds.get(memoria)?.some(kind => kind === filter),
           )
           .otherwise(({ element, kind }) =>
-            Lenz.skill.kinds.get(memoria)?.some(k =>
+            Lenz.gvgSkill.kinds.get(memoria)?.some(k =>
               match(k)
                 .with({ element, kind }, () => true)
                 .otherwise(() => false),
@@ -224,33 +226,39 @@ export const filteredMemoriaAtom = atom(get => {
 
       const vanguardSupport = get(vanguardSupportFilterAtom).every(filter => {
         if (typeof filter === 'string') {
-          return Lenz.support.effects.get(memoria).some(x => x.type === filter);
+          return Lenz.autoSkill.effects
+            .get(memoria)
+            .some(x => x.type === filter);
         }
-        return Lenz.support.effects.get(memoria).some(x => {
+        return Lenz.autoSkill.effects.get(memoria).some(x => {
           return x.status === filter.status && x.type === filter.upDown;
         });
       });
 
       const assistSupport = get(assistSupportFilterAtom).every(filter => {
         if (typeof filter === 'string') {
-          return Lenz.support.effects.get(memoria).some(x => x.type === filter);
+          return Lenz.autoSkill.effects
+            .get(memoria)
+            .some(x => x.type === filter);
         }
-        return Lenz.support.effects.get(memoria).some(x => {
+        return Lenz.autoSkill.effects.get(memoria).some(x => {
           return x.status === filter.status && x.type === filter.upDown;
         });
       });
 
       const recoverySupport = get(recoverySupportFilterAtom).every(filter => {
         if (typeof filter === 'string') {
-          return Lenz.support.effects.get(memoria).some(x => x.type === filter);
+          return Lenz.autoSkill.effects
+            .get(memoria)
+            .some(x => x.type === filter);
         }
-        return Lenz.support.effects.get(memoria).some(x => {
+        return Lenz.autoSkill.effects.get(memoria).some(x => {
           return x.status === filter.status && x.type === filter.upDown;
         });
       });
 
       const otherSupport = get(otherSupportFilterAtom).every(filter => {
-        return Lenz.support.effects.get(memoria).some(x => {
+        return Lenz.autoSkill.effects.get(memoria).some(x => {
           return x.type === filter;
         });
       });

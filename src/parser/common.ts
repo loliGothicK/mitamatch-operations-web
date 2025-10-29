@@ -1,39 +1,43 @@
 import { match, P } from 'ts-pattern';
-import { type Either, fromPredicate, right } from 'fp-ts/Either';
+import { type Either, right } from 'fp-ts/Either';
 import { anyhow, type MitamaError, CallPath } from '@/error/error';
 import type { Elements } from '@/parser/skill';
 
 export const parseIntSafe = (
   num: string,
-  path: CallPath = CallPath.empty,
+  meta: { path: CallPath; memoriaName?: string } = {
+    path: CallPath.empty,
+  },
 ): Either<MitamaError, number> => {
-  return fromPredicate(
-    (int: number) => !Number.isNaN(int),
-    () => ({
-      path: path.toString(),
-      target: num,
-      msg: "given text doesn't match number",
-    }),
-  )(Number.parseInt(num, 10));
+  const int = Number.parseInt(num, 10);
+  return !Number.isNaN(int)
+    ? right(int)
+    : anyhow(num, "given text doesn't match number", {
+        ...meta,
+        path: meta.path.join('parseIntSafe'),
+      });
 };
 
 export const parseFloatSafe = (
   num: string,
-  path: CallPath = CallPath.empty,
+  meta: { path: CallPath; memoriaName?: string } = {
+    path: CallPath.empty,
+  },
 ): Either<MitamaError, number> => {
-  return fromPredicate(
-    (int: number) => !Number.isNaN(int),
-    () => ({
-      path: path.join('parseFloat').toString(),
-      target: num,
-      msg: "given text doesn't match number",
-    }),
-  )(Number.parseFloat(num));
+  const float = Number.parseFloat(num);
+  return !Number.isNaN(float)
+    ? right(float)
+    : anyhow(num, "given text doesn't match number", {
+        ...meta,
+        path: meta.path.join('parseFloatSafe'),
+      });
 };
 
 export const parseElement = (
   element: string,
-  path: CallPath = CallPath.empty,
+  meta: { path: CallPath; memoriaName?: string } = {
+    path: CallPath.empty,
+  },
 ): Either<MitamaError, Elements> =>
   match<string, Either<MitamaError, Elements>>(element)
     .with('火', () => right('Fire'))
@@ -43,7 +47,8 @@ export const parseElement = (
     .with('闇', () => right('Dark'))
     .otherwise(src =>
       anyhow(src, "given text doesn't match any element", {
-        path: path.join('parseElement'),
+        ...meta,
+        path: meta.path.join('parseElement'),
       }),
     );
 
@@ -56,7 +61,12 @@ export type Amount =
   | 'ultra-large' // 極大アップ
   | 'super-ultra-large'; // 超極大アップ
 
-export const parseAmount = (amount: string, path: CallPath = CallPath.empty) =>
+export const parseAmount = (
+  amount: string,
+  meta: { path: CallPath; memoriaName?: string } = {
+    path: CallPath.empty,
+  },
+) =>
   match<string, Either<MitamaError, Amount>>(amount)
     .with(P.union('小アップ', '小ダウン', '小ダメージ', '小回復'), () =>
       right('small'),
@@ -83,7 +93,8 @@ export const parseAmount = (amount: string, path: CallPath = CallPath.empty) =>
     )
     .otherwise(src =>
       anyhow(src, "given text doesn't match any amount", {
-        path: path.join('parseAmount'),
+        ...meta,
+        path: meta.path.join('parseAmount'),
       }),
     );
 
@@ -107,7 +118,12 @@ export const statusKind = [
 
 export type StatusKind = (typeof statusKind)[number];
 
-export const parseStatus = (status: string, path: CallPath = CallPath.empty) =>
+export const parseStatus = (
+  status: string,
+  meta: { path: CallPath; memoriaName?: string } = {
+    path: CallPath.empty,
+  },
+) =>
   match<string, Either<MitamaError, StatusKind[]>>(status)
     .with('ATK', () => right(['ATK']))
     .with('DEF', () => right(['DEF']))
@@ -137,6 +153,7 @@ export const parseStatus = (status: string, path: CallPath = CallPath.empty) =>
     )
     .otherwise(src =>
       anyhow(src, "given text doesn't match any status", {
-        path: path.join('parseStatus'),
+        ...meta,
+        path: meta.path.join('parseStatus'),
       }),
     );

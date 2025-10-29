@@ -38,7 +38,7 @@ export type SupportKind = {
   status?: PossibleStatus;
 };
 
-export type Support = {
+export type AutoSkill = {
   raw: {
     name: string;
     description: string;
@@ -52,6 +52,7 @@ const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 const parseProbability = (
   description: string,
+  memoriaName: string,
   path: CallPath = new CallPath(),
 ): Either<MitamaError, Probability> =>
   match<string, Either<MitamaError, Probability>>(description)
@@ -68,11 +69,10 @@ const parseProbability = (
       () => right('high'),
     )
     .otherwise(() =>
-      anyhow(
-        path.join('parseProbability'),
-        description,
-        `given text doesn't include any probability`,
-      ),
+      anyhow(description, `given text doesn't include any probability`, {
+        path: path.join('parseProbability'),
+        memoriaName,
+      }),
     );
 
 const STATUS =
@@ -92,9 +92,11 @@ const parseSingleStatus = (
         .with('火属性攻撃力', () => right(['Fire ATK']))
         .with('水属性攻撃力', () => right(['Water ATK']))
         .with('風属性攻撃力', () => right(['Wind ATK']))
+        .with('水属性攻撃力・風属性攻撃力', () => right(['Water ATK', 'Wind ATK']))
         .with('火属性防御力', () => right(['Fire DEF']))
         .with('水属性防御力', () => right(['Water DEF']))
         .with('風属性防御力', () => right(['Wind DEF']))
+        .with('水属性防御力・風属性防御力', () => right(['Water DEF', 'Wind DEF']))
         .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () =>
           right(['Fire ATK', 'Water ATK', 'Wind ATK']),
         )
@@ -102,16 +104,14 @@ const parseSingleStatus = (
           right(['Fire DEF', 'Water DEF', 'Wind DEF']),
         )
         .otherwise(target =>
-          anyhow(
-            path.join('parseSingleStatus'),
-            target,
-            `given text doesn't match any status`,
-          ),
+          anyhow(target, `given text doesn't match any status`, {
+            path: path.join('parseSingleStatus'),
+          }),
         ),
     ),
   );
 
-const parseUpDown = (upOrDown: string, path: CallPath = CallPath.empty) =>
+const parseUpDown = (upOrDown: string, memoriaName: string, path: CallPath = CallPath.empty) =>
   match<string, Either<MitamaError, 'UP' | 'DOWN'>>(upOrDown)
     .when(
       text => text.includes('アップ'),
@@ -122,15 +122,15 @@ const parseUpDown = (upOrDown: string, path: CallPath = CallPath.empty) =>
       () => right('DOWN' as const),
     )
     .otherwise(target =>
-      anyhow(
-        path.join('parseUpDown'),
-        target,
-        `given text doesn't include UP or DOWN`,
-      ),
+      anyhow(target, `given text doesn't include UP or DOWN`, {
+        path: path.join('parseUpDown'),
+        memoriaName,
+      }),
     );
 
 function parseStatus(
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Option<Validated<MitamaError, SupportKind[]>> {
   const global =
@@ -151,8 +151,8 @@ function parseStatus(
                   separator(
                     stats.map(stat =>
                       sequenceS(ap)({
-                        type: toValidated(parseUpDown(upOrDown, joined())),
-                        amount: toValidated(parseAmount(upOrDown, joined())),
+                        type: toValidated(parseUpDown(upOrDown, memoriaName, joined())),
+                        amount: toValidated(parseAmount(upOrDown, { path: joined(), memoriaName })),
                         status: right(stat),
                       }),
                     ),
@@ -173,6 +173,7 @@ const DAMAGE = /攻撃ダメージを(.*アップ)させる/;
 
 function parseDamage(
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
@@ -181,7 +182,7 @@ function parseDamage(
       pipe(
         sequenceS(ap)({
           type: right('DamageUp' as const),
-          amount: toValidated(parseAmount(up, path.join('parseDamage'))),
+          amount: toValidated(parseAmount(up, { path: path.join('parseDamage'), memoriaName })),
         }),
         either.map(effect => [effect]),
       ),
@@ -193,6 +194,7 @@ const ASSIST = /支援\/妨害効果を(.*アップ)/;
 
 export function parseAssit(
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
@@ -201,7 +203,7 @@ export function parseAssit(
       pipe(
         sequenceS(ap)({
           type: right('SupportUp' as const),
-          amount: toValidated(parseAmount(up, path.join('parseAssit'))),
+          amount: toValidated(parseAmount(up, { path: path.join('parseAssit'), memoriaName })),
         }),
         either.map(effect => [effect]),
       ),
@@ -213,6 +215,7 @@ const RECOVERY = /HPの回復量を(.*?アップ)/;
 
 function parseRecovery(
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
@@ -221,7 +224,7 @@ function parseRecovery(
       pipe(
         sequenceS(ap)({
           type: right('RecoveryUp' as const),
-          amount: toValidated(parseAmount(up, path.join('parseRecovery'))),
+          amount: toValidated(parseAmount(up, { path: path.join('parseRecovery'), memoriaName })),
         }),
         either.map(effect => [effect]),
       ),
@@ -229,10 +232,11 @@ function parseRecovery(
   );
 }
 
-const MATCH_PT = /自身のマッチPtの獲得量が(.*アップ)する/;
+const MATCH_PT = /自身のマッチPtの獲得量が(.*?アップ)する。/;
 
 function parseMatchPt(
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
@@ -241,7 +245,7 @@ function parseMatchPt(
       pipe(
         sequenceS(ap)({
           type: right('MatchPtUp' as const),
-          amount: toValidated(parseAmount(up, path.join('parseMatchPt'))),
+          amount: toValidated(parseAmount(up, { path: path.join('parseMatchPt'), memoriaName })),
         }),
         either.map(effect => [effect]),
       ),
@@ -272,10 +276,11 @@ function parseRange(
 }
 
 const parseTrigger = (
-  name: string,
+  skillName: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Either<MitamaError, Trigger> =>
-  match<string, Either<MitamaError, Trigger>>(name)
+  match<string, Either<MitamaError, Trigger>>(skillName)
     .when(
       name => name.startsWith('攻:'),
       () => right('Attack'),
@@ -293,46 +298,58 @@ const parseTrigger = (
       () => right('Command'),
     )
     .otherwise(() =>
-      anyhow(path.join('parseTrigger'), name, 'no match trigger found'),
+      anyhow(skillName, 'no match trigger found', {
+        path: path.join('parseTrigger'),
+        memoriaName,
+      }),
     );
 
 const parseEffects = (
   description: string,
+  memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, readonly SupportKind[]> => {
   const joined = path.join('parseEffects');
   const effects = [
     parseRange(description),
-    parseStatus(description, joined),
-    parseDamage(description, joined),
-    parseAssit(description, joined),
-    parseRecovery(description, joined),
-    parseMatchPt(description, joined),
     parseMpCost(description),
+    parseStatus(description, memoriaName, joined),
+    parseDamage(description, memoriaName, joined),
+    parseAssit(description, memoriaName, joined),
+    parseRecovery(description, memoriaName, joined),
+    parseMatchPt(description, memoriaName, joined),
   ];
   return pipe(
     transposeArray(effects),
     option.map(separator),
     option.getOrElse(() =>
       toValidated(
-        anyhow(joined, description, 'No match support effects found'),
+        anyhow(description, 'No match support effects found', {
+          path: joined,
+          memoriaName,
+        }),
       ),
     ),
   );
 };
 
-export function parseSupport({
-  name,
-  description,
+export function parseAutoSkill({
+  memoriaName,
+  autoSkill,
 }: {
-  name: string;
-  description: string;
-}): Validated<MitamaError, Support> {
-  const path = new CallPath(['parseSupport']);
+  memoriaName: string;
+  autoSkill: {
+    name: string;
+    description: string;
+  };
+}): Validated<MitamaError, AutoSkill> {
+  const path = new CallPath(['parseAutoSkill']);
   return sequenceS(ap)({
-    raw: right({ name, description }),
-    trigger: toValidated(parseTrigger(name, path)),
-    probability: toValidated(parseProbability(description, path)),
-    effects: parseEffects(description, path),
+    raw: right(autoSkill),
+    trigger: toValidated(parseTrigger(autoSkill.name, memoriaName, path)),
+    probability: toValidated(
+      parseProbability(autoSkill.description, memoriaName, path),
+    ),
+    effects: parseEffects(autoSkill.description, memoriaName, path),
   });
 }
