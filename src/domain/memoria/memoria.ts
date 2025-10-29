@@ -144,7 +144,7 @@ export const memoriaList: Memoria[] = memoriaData.data.map(memoria => {
     }),
     autoSkill: parseAutoSkill({ memoriaName: name, autoSkill }),
     legendary: legendary_skill
-      ? parseLegendary(legendary_skill)
+      ? parseLegendary(legendary_skill, name)
       : right(undefined),
   });
   if (isLeft(parseSkillsResult)) {

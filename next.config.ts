@@ -1,8 +1,5 @@
 import createMdx from '@next/mdx';
 import { withSentryConfig } from '@sentry/nextjs';
-import remarkGfm from 'remark-gfm';
-import rehypeSlug from 'rehype-slug';
-import rehypeImageSize from './plugin/rehype-image-size.mjs';
 
 /** @types {import('next').NextConfig} */
 const nextConfig = {
@@ -38,10 +35,14 @@ const nextConfig = {
   ],
 };
 
+/** @type {import('remark-gfm').Options} */
+const remarkGFMOptions: import('remark-gfm').Options = {};
+
 const withMdx = createMdx({
   options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypeImageSize, rehypeSlug],
+    // @ts-ignore wrong types
+    remarkPlugins: [['remark-gfm', remarkGFMOptions]],
+    rehypePlugins: ['rehype-slug'],
   },
 });
 

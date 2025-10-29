@@ -29,7 +29,10 @@ export type Legendary = {
 
 const LEGENDAEY_SKILL = /(.+?)属性の(.+?時)に.+?を(\d+?.*?\d*?)%アップさせる。/;
 
-const parseElement = (element: string, path: CallPath = CallPath.empty) =>
+const parseElement = (element: string,   meta: { path: CallPath; memoriaName?: string } = {
+                        path: CallPath.empty,
+                      },
+) =>
   match<string, Validated<MitamaError, Elements>>(element)
     .with('火', () => right('Fire'))
     .with('水', () => right('Water'))
@@ -37,12 +40,16 @@ const parseElement = (element: string, path: CallPath = CallPath.empty) =>
     .otherwise(() =>
       toValidated(
         anyhow(element, 'given text does not match any element', {
-          path: path.join('parseElement'),
+          ...meta,
+          path: meta.path.join('parseTrigger'),
         }),
       ),
     );
 
-const parseTrigger = (trigger: string, path: CallPath = CallPath.empty) =>
+const parseTrigger = (trigger: string,   meta: { path: CallPath; memoriaName?: string } = {
+                        path: CallPath.empty,
+                      },
+) =>
   match<string, Validated<MitamaError, LegendarySkillTrigger>>(trigger)
     .with('通常攻撃時', () => right('Attack/Physical'))
     .with('特殊攻撃時', () => right('Attack/Magical'))
@@ -51,13 +58,15 @@ const parseTrigger = (trigger: string, path: CallPath = CallPath.empty) =>
     .otherwise(() =>
       toValidated(
         anyhow(trigger, 'given text does not match any trigger', {
-          path: path.join('parseTrigger'),
+          ...meta,
+          path: meta.path.join('parseTrigger'),
         }),
       ),
     );
 
 export function parseLegendary(
   skills: RawLegendarySkill,
+  memoriaName: string,
 ): Validated<MitamaError, Legendary> {
   const ap = getApplicativeValidation(getSemigroup<MitamaError>());
   const path = new CallPath(['parseLegendary']);
@@ -77,9 +86,9 @@ export function parseLegendary(
         toEither(skill.description),
         either.flatMap(([, element, trigger, rate]) =>
           sequenceS(ap)({
-            attribute: parseElement(element, path),
-            trigger: parseTrigger(trigger, path),
-            rate: toValidated(parseFloatSafe(rate, path)),
+            attribute: parseElement(element, { path, memoriaName }),
+            trigger: parseTrigger(trigger, { path, memoriaName }),
+            rate: toValidated(parseFloatSafe(rate, { path, memoriaName })),
           }),
         ),
       ),
