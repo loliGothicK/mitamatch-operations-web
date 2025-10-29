@@ -230,13 +230,13 @@ importers:
         version: 5.0.3(vite@6.2.1(@types/node@22.15.30)(terser@5.39.0)(tsx@4.20.5))
       '@vitest/coverage-v8':
         specifier: 3.2.4
-        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@18.0.1)(terser@5.39.0)(tsx@4.20.5))
+        version: 3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@20.0.10)(terser@5.39.0)(tsx@4.20.5))
       drizzle-kit:
         specifier: 0.31.4
         version: 0.31.4
       happy-dom:
-        specifier: 18.0.1
-        version: 18.0.1
+        specifier: 20.0.10
+        version: 20.0.10
       ts-node:
         specifier: 11.0.0-beta.1
         version: 11.0.0-beta.1(@types/node@22.15.30)(typescript@5.9.2)
@@ -251,7 +251,7 @@ importers:
         version: 5.1.4(typescript@5.9.2)(vite@6.2.1(@types/node@22.15.30)(terser@5.39.0)(tsx@4.20.5))
       vitest:
         specifier: 3.2.4
-        version: 3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@18.0.1)(terser@5.39.0)(tsx@4.20.5)
+        version: 3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@20.0.10)(terser@5.39.0)(tsx@4.20.5)
       zod:
         specifier: 4.1.11
         version: 4.1.11
@@ -2938,6 +2938,7 @@ packages:
 
   discord-oauth2@2.12.1:
     resolution: {integrity: sha512-/Um39bRxVjcGHUu1YaTLangZvZveXjsX4BNsa1Iyd6OQG0jL972IBQGKD0mYqQswxC3bT+hqWSouabfI2RdaZA==}
+    deprecated: This package is deprecated and no longer maintained due to better, more secure solutions being available. Users should migrate to a proper, full-featured Node.js web framework (such as Express.js, Fastify, or NestJS) to handle OAuth2 authorizations.
 
   dom-accessibility-api@0.5.16:
     resolution: {integrity: sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==}
@@ -3279,8 +3280,8 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  happy-dom@18.0.1:
-    resolution: {integrity: sha512-qn+rKOW7KWpVTtgIUi6RVmTBZJSe2k0Db0vh1f7CWrWclkkc7/Q+FrOfkZIb2eiErLyqu5AXEzE7XthO9JVxRA==}
+  happy-dom@20.0.10:
+    resolution: {integrity: sha512-6umCCHcjQrhP5oXhrHQQvLB0bwb1UzHAHdsXy+FjtKoYjUhmNZsQL8NivwM1vDvNEChJabVrUYxUnp/ZdYmy2g==}
     engines: {node: '>=20.0.0'}
 
   has-flag@4.0.0:
@@ -7162,7 +7163,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@18.0.1)(terser@5.39.0)(tsx@4.20.5))':
+  '@vitest/coverage-v8@3.2.4(vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@20.0.10)(terser@5.39.0)(tsx@4.20.5))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
@@ -7177,7 +7178,7 @@ snapshots:
       std-env: 3.9.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@18.0.1)(terser@5.39.0)(tsx@4.20.5)
+      vitest: 3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@20.0.10)(terser@5.39.0)(tsx@4.20.5)
     transitivePeerDependencies:
       - supports-color
 
@@ -7933,7 +7934,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  happy-dom@18.0.1:
+  happy-dom@20.0.10:
     dependencies:
       '@types/node': 20.19.0
       '@types/whatwg-mimetype': 3.0.2
@@ -9660,7 +9661,7 @@ snapshots:
       terser: 5.39.0
       tsx: 4.20.5
 
-  vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@18.0.1)(terser@5.39.0)(tsx@4.20.5):
+  vitest@3.2.4(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@20.0.10)(terser@5.39.0)(tsx@4.20.5):
     dependencies:
       '@types/chai': 5.2.2
       '@vitest/expect': 3.2.4
@@ -9688,7 +9689,7 @@ snapshots:
     optionalDependencies:
       '@types/debug': 4.1.12
       '@types/node': 22.15.30
-      happy-dom: 18.0.1
+      happy-dom: 20.0.10
     transitivePeerDependencies:
       - jiti
       - less
