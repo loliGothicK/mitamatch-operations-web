@@ -208,8 +208,8 @@ importers:
         specifier: 1.0.11
         version: 1.0.11
       '@tsconfig/strictest':
-        specifier: 2.0.6
-        version: 2.0.6
+        specifier: 2.0.7
+        version: 2.0.7
       '@types/jest':
         specifier: 30.0.0
         version: 30.0.0
@@ -2194,8 +2194,8 @@ packages:
   '@tsconfig/recommended@1.0.11':
     resolution: {integrity: sha512-irACIVvr9SnQK+zsrO7TkBVTq9LAafdyrjUxv6qgNh2wPi3/hFHcKEWMMlOd4HnRIDMdtI7ciVoPcZ9EuB7xMg==}
 
-  '@tsconfig/strictest@2.0.6':
-    resolution: {integrity: sha512-tPOhmDhIUcDjvpDDYyiUdssP84Eqm7n5KxJe5J3/g+s6xoDIPAf+SIn06dhw7VkhxIvLOnhDDrX7tsqMHNEhDg==}
+  '@tsconfig/strictest@2.0.7':
+    resolution: {integrity: sha512-lG1bXQloBVvQXasPBZSBaWbs7GNW4txZMYs7XMUVzM0s4seCbJACYBPFIRpGNVD3gC8gndK00AZON1uBrJt4Fw==}
 
   '@types/acorn@4.0.6':
     resolution: {integrity: sha512-veQTnWP+1D/xbxVrPC3zHnCZRjSrKfhbMUlEA43iMZLu7EsnTtkJklIuwrCPbOi8YkvDQAiW05VQQFvvz9oieQ==}
@@ -2913,6 +2913,7 @@ packages:
 
   discord-oauth2@2.12.1:
     resolution: {integrity: sha512-/Um39bRxVjcGHUu1YaTLangZvZveXjsX4BNsa1Iyd6OQG0jL972IBQGKD0mYqQswxC3bT+hqWSouabfI2RdaZA==}
+    deprecated: This package is deprecated and no longer maintained due to better, more secure solutions being available. Users should migrate to a proper, full-featured Node.js web framework (such as Express.js, Fastify, or NestJS) to handle OAuth2 authorizations.
 
   dom-accessibility-api@0.5.16:
     resolution: {integrity: sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==}
@@ -6739,7 +6740,7 @@ snapshots:
 
   '@tsconfig/recommended@1.0.11': {}
 
-  '@tsconfig/strictest@2.0.6': {}
+  '@tsconfig/strictest@2.0.7': {}
 
   '@types/acorn@4.0.6':
     dependencies:
