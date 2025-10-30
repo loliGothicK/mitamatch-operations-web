@@ -99,8 +99,10 @@ import { match } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
 import { isStackEffect } from '@/parser/skill';
 import { Calculator } from '@/deck-builder/_tabs/calculator';
+import type {ImageProps} from "next/dist/shared/lib/get-img-props";
+import {StrictOmit} from "ts-essentials";
 
-const COMMING_SOON = 'CommingSoon.jpeg';
+const COMMING_SOON = '/memoria/CommingSoon.jpeg';
 
 function Icon({
   cardType,
@@ -206,20 +208,38 @@ function ConcentrationIcon({
   );
 }
 
+function MemoriaImage({name, ...option}: { name: string; } & StrictOmit<ImageProps, 'src' | 'alt' | 'width' | 'height' | 'onError'>) {
+  const [imageSource, setImageSource] = useState(`/memoria/${name}.png`);
+
+  return <Image
+    src={imageSource}
+    alt={name}
+    width={100}
+    height={100}
+    onError={() => {
+      if (imageSource !== COMMING_SOON) {
+        setImageSource(COMMING_SOON);
+      }
+    }}
+    { ...option }
+  />
+
+}
+
 function MemoriaItem({
   memoria,
   remove,
   onConcentrationChange,
   onContextMenu,
   disable,
-  priority,
+  preload,
 }: {
   readonly memoria: MemoriaWithConcentration;
   readonly remove?: false;
   readonly onConcentrationChange?: ((value: number) => void) | false;
   readonly onContextMenu?: false;
   readonly disable?: true;
-  readonly priority?: boolean;
+  readonly preload?: boolean;
 }) {
   const { name, id, concentration } = memoria;
   const [, setDeck] = useAtom(rwDeckAtom);
@@ -230,8 +250,6 @@ function MemoriaItem({
     mouseX: number;
     mouseY: number;
   } | null>(null);
-  const [imageSource, setImageSource] = useState(`/memoria/${name.short}.png`);
-
   const handleContextMenu = (event: MouseEvent<HTMLImageElement>) => {
     event.preventDefault();
     setContextMenu(
@@ -357,20 +375,12 @@ function MemoriaItem({
               placement={'top'}
               arrow
             >
-              <Image
-                src={imageSource}
-                alt={name.short}
-                width={100}
-                height={100}
+              <MemoriaImage
+                name={memoria.name.short}
                 placeholder={'blur'}
                 blurDataURL={toBase64(skeleton(100, 100))}
                 onContextMenu={onContextMenu ? undefined : handleContextMenu}
-                priority={priority}
-                onError={() => {
-                  if (imageSource !== COMMING_SOON) {
-                    setImageSource(COMMING_SOON);
-                  }
-                }}
+                preload={preload}
               />
             </Tooltip>
           </div>
@@ -464,7 +474,7 @@ function Deck() {
       >
         {deck.map(memoria => {
           return (
-            <MemoriaItem memoria={memoria} key={memoria.id} priority={true} />
+            <MemoriaItem memoria={memoria} key={memoria.id} preload={true} />
           );
         })}
       </Grid>
@@ -486,7 +496,7 @@ function LegendaryDeck() {
       >
         {deck.map(memoria => {
           return (
-            <MemoriaItem memoria={memoria} key={memoria.id} priority={true} />
+            <MemoriaItem memoria={memoria} key={memoria.id} preload={true} />
           );
         })}
       </Grid>
@@ -999,11 +1009,10 @@ function VirtualizedList() {
               />
               <Tooltip title={memoria[index].name.short} placement={'top'}>
                 <CardMedia
-                  component='img'
                   sx={{ width: 100, height: 100 }}
-                  image={`/memoria/${memoria[index].name.short}.png`}
-                  alt={memoria[index].name.short}
-                />
+                >
+                  <MemoriaImage name={memoria[index].name.short} />
+                </CardMedia>
               </Tooltip>
               <CardContent>
                 <Stack direction={'column'} sx={{ paddingLeft: 2 }}>
