@@ -92,11 +92,15 @@ const parseSingleStatus = (
         .with('火属性攻撃力', () => right(['Fire ATK']))
         .with('水属性攻撃力', () => right(['Water ATK']))
         .with('風属性攻撃力', () => right(['Wind ATK']))
-        .with('水属性攻撃力・風属性攻撃力', () => right(['Water ATK', 'Wind ATK']))
+        .with('水属性攻撃力・風属性攻撃力', () =>
+          right(['Water ATK', 'Wind ATK']),
+        )
         .with('火属性防御力', () => right(['Fire DEF']))
         .with('水属性防御力', () => right(['Water DEF']))
         .with('風属性防御力', () => right(['Wind DEF']))
-        .with('水属性防御力・風属性防御力', () => right(['Water DEF', 'Wind DEF']))
+        .with('水属性防御力・風属性防御力', () =>
+          right(['Water DEF', 'Wind DEF']),
+        )
         .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () =>
           right(['Fire ATK', 'Water ATK', 'Wind ATK']),
         )
@@ -111,7 +115,11 @@ const parseSingleStatus = (
     ),
   );
 
-const parseUpDown = (upOrDown: string, memoriaName: string, path: CallPath = CallPath.empty) =>
+const parseUpDown = (
+  upOrDown: string,
+  memoriaName: string,
+  path: CallPath = CallPath.empty,
+) =>
   match<string, Either<MitamaError, 'UP' | 'DOWN'>>(upOrDown)
     .when(
       text => text.includes('アップ'),
@@ -151,8 +159,15 @@ function parseStatus(
                   separator(
                     stats.map(stat =>
                       sequenceS(ap)({
-                        type: toValidated(parseUpDown(upOrDown, memoriaName, joined())),
-                        amount: toValidated(parseAmount(upOrDown, { path: joined(), memoriaName })),
+                        type: toValidated(
+                          parseUpDown(upOrDown, memoriaName, joined()),
+                        ),
+                        amount: toValidated(
+                          parseAmount(upOrDown, {
+                            path: joined(),
+                            memoriaName,
+                          }),
+                        ),
                         status: right(stat),
                       }),
                     ),
@@ -182,7 +197,9 @@ function parseDamage(
       pipe(
         sequenceS(ap)({
           type: right('DamageUp' as const),
-          amount: toValidated(parseAmount(up, { path: path.join('parseDamage'), memoriaName })),
+          amount: toValidated(
+            parseAmount(up, { path: path.join('parseDamage'), memoriaName }),
+          ),
         }),
         either.map(effect => [effect]),
       ),
@@ -203,7 +220,9 @@ export function parseAssit(
       pipe(
         sequenceS(ap)({
           type: right('SupportUp' as const),
-          amount: toValidated(parseAmount(up, { path: path.join('parseAssit'), memoriaName })),
+          amount: toValidated(
+            parseAmount(up, { path: path.join('parseAssit'), memoriaName }),
+          ),
         }),
         either.map(effect => [effect]),
       ),
@@ -224,7 +243,9 @@ function parseRecovery(
       pipe(
         sequenceS(ap)({
           type: right('RecoveryUp' as const),
-          amount: toValidated(parseAmount(up, { path: path.join('parseRecovery'), memoriaName })),
+          amount: toValidated(
+            parseAmount(up, { path: path.join('parseRecovery'), memoriaName }),
+          ),
         }),
         either.map(effect => [effect]),
       ),
@@ -245,7 +266,9 @@ function parseMatchPt(
       pipe(
         sequenceS(ap)({
           type: right('MatchPtUp' as const),
-          amount: toValidated(parseAmount(up, { path: path.join('parseMatchPt'), memoriaName })),
+          amount: toValidated(
+            parseAmount(up, { path: path.join('parseMatchPt'), memoriaName }),
+          ),
         }),
         either.map(effect => [effect]),
       ),

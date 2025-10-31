@@ -77,7 +77,7 @@ const memoriaSchema = z.object({
   labels: z
     .array(z.enum(['Legendary', 'Ultimate', 'SuperAwakening']))
     .readonly(),
-  legendary_skill: z
+  legendarySkill: z
     .tuple([skillSchema, skillSchema, skillSchema, skillSchema, skillSchema])
     .optional()
     .readonly(),
@@ -117,44 +117,50 @@ export type Memoria = Omit<
   };
 };
 export type MemoriaId = Memoria['id'];
-export type RawLegendarySkill = NonNullable<RawMemoria['legendary_skill']>;
+export type RawLegendarySkill = NonNullable<RawMemoria['legendarySkill']>;
 
-export const memoriaList: Memoria[] = memoriaData.data.map(memoria => {
-  const ap = getApplicativeValidation(getSemigroup<MitamaError>());
-  const zodResult = fromThrowable(memoriaSchema.parse)(memoria);
-  if (zodResult.isErr()) {
-    throw new Error(outdent`
+export const memoriaList: Memoria[] = memoriaData.data
+  .filter(({ cost }) => cost > 18)
+  .map(memoria => {
+    const ap = getApplicativeValidation(getSemigroup<MitamaError>());
+    const zodResult = fromThrowable(memoriaSchema.parse)(memoria);
+    if (zodResult.isErr()) {
+      throw new Error(outdent`
       Memoria parse failed with:
         source => ${memoria}
         error => ${zodResult.error}
     `);
-  }
-  const { questSkill, gvgSkill, autoSkill, legendary_skill, name, ...raw } =
-    zodResult.value;
-  const parseSkillsResult = sequenceS(ap)({
-    questSkill: parseSkill({
-      cardType: raw.cardType,
-      skill: questSkill,
-      memoriaName: name,
-    }),
-    gvgSkill: parseSkill({
-      cardType: raw.cardType,
-      skill: gvgSkill,
-      memoriaName: name,
-    }),
-    autoSkill: parseAutoSkill({ memoriaName: name, autoSkill }),
-    legendary: legendary_skill
-      ? parseLegendary(legendary_skill, name)
-      : right(undefined),
+    }
+    const { questSkill, gvgSkill, autoSkill, legendarySkill, name, ...raw } =
+      zodResult.value;
+    const parseSkillsResult = sequenceS(ap)({
+      questSkill: parseSkill({
+        cardType: raw.cardType,
+        skill: questSkill,
+        memoriaName: name,
+      }),
+      gvgSkill: parseSkill({
+        cardType: raw.cardType,
+        skill: gvgSkill,
+        memoriaName: name,
+      }),
+      autoSkill: parseAutoSkill({ memoriaName: name, autoSkill }),
+      legendary: legendarySkill
+        ? parseLegendary(legendarySkill, name)
+        : right(undefined),
+    });
+    if (isLeft(parseSkillsResult)) {
+      throw new Error(`skill parse failed: ${fmtErr(parseSkillsResult.left)}`);
+    }
+    return {
+      ...raw,
+      skills: { ...parseSkillsResult.right },
+      name: {
+        short: name.replace(
+          /(?:クリエイターズコラボ|Ultimate Memoria )-(.*)-/g,
+          '$1',
+        ),
+        full: name,
+      },
+    };
   });
-  if (isLeft(parseSkillsResult)) {
-    throw new Error(
-      `Memoria skill or support skill parse failed: ${fmtErr(parseSkillsResult.left)}`,
-    );
-  }
-  return {
-    ...raw,
-    skills: { ...parseSkillsResult.right },
-    name: { short: name, full: name },
-  };
-});

@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import {
   Assignment,
+  DataArray,
   Schema,
   ViewCompact,
   ViewTimeline,
@@ -15,6 +16,11 @@ import {
 import { useTheme } from '@mui/material/styles';
 
 const links = [
+  {
+    title: 'Data',
+    href: '/data',
+    icon: <DataArray />,
+  },
   {
     title: 'Deck Builder',
     href: '/deck-builder',

@@ -40,7 +40,7 @@ const remarkGFMOptions: import('remark-gfm').Options = {};
 
 const withMdx = createMdx({
   options: {
-    // @ts-ignore wrong types
+    // @ts-expect-error wrong types
     remarkPlugins: [['remark-gfm', remarkGFMOptions]],
     rehypePlugins: ['rehype-slug'],
   },

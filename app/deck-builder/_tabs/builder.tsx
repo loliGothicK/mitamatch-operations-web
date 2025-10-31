@@ -99,8 +99,8 @@ import { match } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
 import { isStackEffect } from '@/parser/skill';
 import { Calculator } from '@/deck-builder/_tabs/calculator';
-import type {ImageProps} from "next/dist/shared/lib/get-img-props";
-import {StrictOmit} from "ts-essentials";
+import type { ImageProps } from 'next/dist/shared/lib/get-img-props';
+import type { StrictOmit } from 'ts-essentials';
 
 const COMMING_SOON = '/memoria/CommingSoon.jpeg';
 
@@ -208,22 +208,29 @@ function ConcentrationIcon({
   );
 }
 
-function MemoriaImage({name, ...option}: { name: string; } & StrictOmit<ImageProps, 'src' | 'alt' | 'width' | 'height' | 'onError'>) {
+function MemoriaImage({
+  name,
+  ...option
+}: { name: string } & StrictOmit<
+  ImageProps,
+  'src' | 'alt' | 'width' | 'height' | 'onError'
+>) {
   const [imageSource, setImageSource] = useState(`/memoria/${name}.png`);
 
-  return <Image
-    src={imageSource}
-    alt={name}
-    width={100}
-    height={100}
-    onError={() => {
-      if (imageSource !== COMMING_SOON) {
-        setImageSource(COMMING_SOON);
-      }
-    }}
-    { ...option }
-  />
-
+  return (
+    <Image
+      src={imageSource}
+      alt={name}
+      width={100}
+      height={100}
+      onError={() => {
+        if (imageSource !== COMMING_SOON) {
+          setImageSource(COMMING_SOON);
+        }
+      }}
+      {...option}
+    />
+  );
 }
 
 function MemoriaItem({
@@ -1008,9 +1015,7 @@ function VirtualizedList() {
                 position={70}
               />
               <Tooltip title={memoria[index].name.short} placement={'top'}>
-                <CardMedia
-                  sx={{ width: 100, height: 100 }}
-                >
+                <CardMedia sx={{ width: 100, height: 100 }}>
                   <MemoriaImage name={memoria[index].name.short} />
                 </CardMedia>
               </Tooltip>

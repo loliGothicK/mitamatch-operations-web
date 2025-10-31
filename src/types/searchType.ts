@@ -1,7 +1,7 @@
 import {
   type Elemental,
   type ElementalKind,
-  type Elements,
+  type Attribute,
   elementalKind,
   elements,
   type stackKinds,
@@ -70,7 +70,7 @@ export function elementalSkillPatternToJapanese(
   pattern: ElementalSkillPattern,
 ) {
   const [element, kind] = pattern.split('/');
-  const first = match(element as unknown as Elements)
+  const first = match(element as unknown as Attribute)
     .with('Fire', () => '火')
     .with('Water', () => '水')
     .with('Wind', () => '風')

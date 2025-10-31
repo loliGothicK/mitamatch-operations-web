@@ -1,7 +1,7 @@
 import { match, P } from 'ts-pattern';
 import { type Either, right } from 'fp-ts/Either';
 import { anyhow, type MitamaError, CallPath } from '@/error/error';
-import type { Elements } from '@/parser/skill';
+import type { Attribute } from '@/parser/skill';
 
 export const parseIntSafe = (
   num: string,
@@ -38,8 +38,8 @@ export const parseElement = (
   meta: { path: CallPath; memoriaName?: string } = {
     path: CallPath.empty,
   },
-): Either<MitamaError, Elements> =>
-  match<string, Either<MitamaError, Elements>>(element)
+): Either<MitamaError, Attribute> =>
+  match<string, Either<MitamaError, Attribute>>(element)
     .with('火', () => right('Fire'))
     .with('水', () => right('Water'))
     .with('風', () => right('Wind'))

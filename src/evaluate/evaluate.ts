@@ -10,7 +10,7 @@ import type { Probability } from '@/parser/autoSkill';
 import { P, match } from 'ts-pattern';
 import { Lenz } from '@/domain/memoria/lens';
 import {
-  type Elements,
+  type Attribute,
   isDamageEffect,
   isNotStackOrElement,
 } from '@/parser/skill';
@@ -40,8 +40,8 @@ function parseAbility(description?: string): Map<string, number> {
   if (!_match) {
     return result;
   }
-  for (const attribute of _match[1].split('/')) {
-    result.set(attribute, 1.0 + Number(_match[2]) / 100);
+  for (const attributes of _match[1].split('/')) {
+    result.set(attributes, 1.0 + Number(_match[2]) / 100);
   }
   return result;
 }
@@ -93,11 +93,11 @@ function parseAdx(adx: Costume['adx'], adxLevel: number) {
     if (!_match) {
       continue;
     }
-    const attribute = parseElement(_match[1]);
-    if (either.isLeft(attribute)) {
+    const attributes = parseElement(_match[1]);
+    if (either.isLeft(attributes)) {
       continue;
     }
-    effUp[attribute.right] = 1.0 + Number(_match[2]) / 100;
+    effUp[attributes.right] = 1.0 + Number(_match[2]) / 100;
   }
 
   for (const skill of adx[adxLevel]) {
@@ -105,11 +105,11 @@ function parseAdx(adx: Costume['adx'], adxLevel: number) {
     if (!_match) {
       continue;
     }
-    const attribute = parseElement(_match[1]);
-    if (either.isLeft(attribute)) {
+    const attributes = parseElement(_match[1]);
+    if (either.isLeft(attributes)) {
       continue;
     }
-    rateUp[attribute.right] = Number(_match[2]) / 100;
+    rateUp[attributes.right] = Number(_match[2]) / 100;
   }
 
   return [effUp, rateUp] as const;
@@ -310,7 +310,7 @@ type Config = {
   range: number;
   memoria: MemoriaWithConcentration;
   deck: MemoriaWithConcentration[];
-  adx: { [key in Elements]: number };
+  adx: { [key in Attribute]: number };
 };
 
 function damage(
@@ -346,7 +346,7 @@ function damage(
     match(memoria.skills.legendary)
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.attributes.includes('Fire') &&
           legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Fire +=
@@ -355,7 +355,7 @@ function damage(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.attributes.includes('Water') &&
           legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Water +=
@@ -364,7 +364,7 @@ function damage(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.attributes.includes('Wind') &&
           legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Wind +=
@@ -373,7 +373,7 @@ function damage(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.attributes.includes('Fire') &&
           legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Fire +=
@@ -382,7 +382,7 @@ function damage(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.attributes.includes('Water') &&
           legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Water +=
@@ -391,7 +391,7 @@ function damage(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.attributes.includes('Wind') &&
           legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Wind +=
@@ -527,7 +527,7 @@ function buff(
     match(memoria.skills.legendary)
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.attributes.includes('Fire') &&
           legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Fire +=
@@ -536,7 +536,7 @@ function buff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.attributes.includes('Water') &&
           legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Water +=
@@ -545,7 +545,7 @@ function buff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.attributes.includes('Wind') &&
           legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Wind +=
@@ -554,7 +554,7 @@ function buff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.attributes.includes('Fire') &&
           legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Fire +=
@@ -563,7 +563,7 @@ function buff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.attributes.includes('Water') &&
           legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Water +=
@@ -572,7 +572,7 @@ function buff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.attributes.includes('Wind') &&
           legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Wind +=
@@ -581,7 +581,7 @@ function buff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.attributes.includes('Fire') &&
           legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Fire +=
@@ -590,7 +590,7 @@ function buff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.attributes.includes('Water') &&
           legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Water +=
@@ -599,7 +599,7 @@ function buff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.attributes.includes('Wind') &&
           legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Wind +=
@@ -923,7 +923,7 @@ function debuff(
     match(memoria.skills.legendary)
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.attributes.includes('Fire') &&
           legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Fire +=
@@ -932,7 +932,7 @@ function debuff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.attributes.includes('Water') &&
           legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Water +=
@@ -941,7 +941,7 @@ function debuff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.attributes.includes('Wind') &&
           legendary?.skill.trigger === 'Assist',
         () => {
           supportLegendary.Wind +=
@@ -950,7 +950,7 @@ function debuff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.attributes.includes('Fire') &&
           legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Fire +=
@@ -959,7 +959,7 @@ function debuff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.attributes.includes('Water') &&
           legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Water +=
@@ -968,7 +968,7 @@ function debuff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.attributes.includes('Wind') &&
           legendary?.skill.trigger === 'Attack/Physical',
         () => {
           normalLegendary.Wind +=
@@ -977,7 +977,7 @@ function debuff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.attributes.includes('Fire') &&
           legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Fire +=
@@ -986,7 +986,7 @@ function debuff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.attributes.includes('Water') &&
           legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Water +=
@@ -995,7 +995,7 @@ function debuff(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.attributes.includes('Wind') &&
           legendary?.skill.trigger === 'Attack/Magical',
         () => {
           specialLegendary.Wind +=
@@ -1288,7 +1288,7 @@ function recovery(
     match(memoria.skills.legendary)
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Fire' &&
+          legendary?.skill.attributes.includes('Fire') &&
           legendary?.skill.trigger === 'Recovery',
         () => {
           legendary.Fire +=
@@ -1297,7 +1297,7 @@ function recovery(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Water' &&
+          legendary?.skill.attributes.includes('Water') &&
           legendary?.skill.trigger === 'Recovery',
         () => {
           legendary.Water +=
@@ -1306,7 +1306,7 @@ function recovery(
       )
       .when(
         legendary =>
-          legendary?.skill.attribute === 'Wind' &&
+          legendary?.skill.attributes.includes('Wind') &&
           legendary?.skill.trigger === 'Recovery',
         () => {
           legendary.Wind +=
@@ -1370,7 +1370,7 @@ function support(
   type: 'UP' | 'DOWN',
   [atk, spAtk, def, spDef]: [number, number, number, number],
   deck: MemoriaWithConcentration[],
-  adx: { [key in Elements]: number },
+  adx: { [key in Attribute]: number },
 ): Record<
   Exclude<
     StatusKind,
@@ -1405,7 +1405,7 @@ function support(
         );
     })
     .filter(([, , effect]) => effect.type === type)
-    .map(([concentration, attribute, { amount, status }]) => {
+    .map(([concentration, attributes, { amount, status }]) => {
       const probability =
         match(concentration)
           .with(0, () => 0.12)
@@ -1413,7 +1413,7 @@ function support(
           .with(2, () => 0.13)
           .with(3, () => 0.135)
           .with(4, () => 0.15)
-          .run() + adx[attribute];
+          .run() + adx[attributes];
       const skillLevel = match(concentration)
         .with(0, () => 1.35)
         .with(1, () => 1.375)

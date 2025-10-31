@@ -2,9 +2,10 @@ import { data } from '@/domain/memoria/memoria.json';
 
 import { isDamageEffect, parseSkill } from './skill';
 import { isLeft, right } from 'fp-ts/Either';
-import {match} from "ts-pattern";
+import { match } from 'ts-pattern';
 
-const cardType = (type: number) => match(type)
+const cardType = (type: number) =>
+  match(type)
     .with(1, () => '通常単体' as const)
     .with(2, () => '通常範囲' as const)
     .with(3, () => '特殊単体' as const)
