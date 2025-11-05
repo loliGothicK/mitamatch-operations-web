@@ -27,7 +27,6 @@ const memoriaSchema = z.object({
   id: z.number().readonly(),
   name: z.string().readonly(),
   cardType: z
-
     .union([
       z.literal(1),
       z.literal(2),
@@ -37,30 +36,19 @@ const memoriaSchema = z.object({
       z.literal(6),
       z.literal(7),
     ])
-
     .transform((type) =>
       match(type)
-
         .with(1, () => "通常単体" as const)
-
         .with(2, () => "通常範囲" as const)
-
         .with(3, () => "特殊単体" as const)
-
         .with(4, () => "特殊範囲" as const)
-
         .with(5, () => "支援" as const)
-
         .with(6, () => "妨害" as const)
-
         .with(7, () => "回復" as const)
-
         .exhaustive(),
     )
-
     .readonly(),
   attribute: z
-
     .union([
       z.literal(1),
       z.literal(2),
@@ -68,26 +56,17 @@ const memoriaSchema = z.object({
       z.literal(4),
       z.literal(5),
     ])
-
     .transform((element) =>
       match(element)
-
         .with(1, () => "Fire" as const)
-
         .with(2, () => "Water" as const)
-
         .with(3, () => "Wind" as const)
-
         .with(4, () => "Light" as const)
-
         .with(5, () => "Dark" as const)
-
         .exhaustive(),
     )
-
     .readonly(),
   status: z
-
     .tuple([
       statusSchema,
       statusSchema,
@@ -95,19 +74,15 @@ const memoriaSchema = z.object({
       statusSchema,
       statusSchema,
     ])
-
     .readonly(),
   cost: z.number().readonly(),
   questSkill: ActiveSkillSchema.readonly(),
   gvgSkill: ActiveSkillSchema.readonly(),
   autoSkill: PassiveSkillSchema.readonly(),
   labels: z
-
     .array(z.enum(["Legendary", "Ultimate", "SuperAwakening"]))
-
     .readonly(),
   legendarySkill: z
-
     .tuple([
       PassiveSkillSchema,
       PassiveSkillSchema,
@@ -115,9 +90,7 @@ const memoriaSchema = z.object({
       PassiveSkillSchema,
       PassiveSkillSchema,
     ])
-
     .optional()
-
     .readonly(),
 });
 
@@ -158,9 +131,7 @@ export type MemoriaId = Memoria["id"];
 export type RawLegendarySkill = NonNullable<RawMemoria["legendarySkill"]>;
 
 export const memoriaList: Memoria[] = memoriaData.data
-
   .filter(({ cost }) => cost > 18)
-
   .map((memoria) => {
     const ap = getApplicativeValidation(getSemigroup<MitamaError>());
     const zodResult = fromThrowable(memoriaSchema.parse)(memoria);

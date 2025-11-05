@@ -183,9 +183,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
         <Typography fontSize={10}>
           {`${left < 0 ? "-" : ""}${Math.trunc(left / 60)}`}:
           {Math.abs(left % 60)
-
             .toString()
-
             .padStart(2, "0")}
         </Typography>
       </Divider>
@@ -380,9 +378,7 @@ function Timeline() {
                 return `${left < 0 ? "-" : ""}${Math.trunc(left / 60)}:${Math.abs(
                   left % 60,
                 )
-
                   .toString()
-
                   .padStart(2, "0")}`;
               })()}
             </Typography>
@@ -508,21 +504,19 @@ function FilterMenu() {
                 "Stack",
                 "Other",
               ] as const
-            )
-
-              .map((kind) => {
-                return (
-                  <MenuItem
-                    key={kind}
-                    onClick={() => {
-                      popupState.close();
-                      setFilter(kind);
-                    }}
-                  >
-                    {kind}
-                  </MenuItem>
-                );
-              })}
+            ).map((kind) => {
+              return (
+                <MenuItem
+                  key={kind}
+                  onClick={() => {
+                    popupState.close();
+                    setFilter(kind);
+                  }}
+                >
+                  {kind}
+                </MenuItem>
+              );
+            })}
           </Menu>
         </>
       )}

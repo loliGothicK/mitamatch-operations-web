@@ -790,7 +790,6 @@ function buff(
         .with(
           P.union("Fire ATK", "Water ATK", "Wind ATK", "Light ATK", "Dark ATK"),
           () => {
-            // biome-ignore lint/style/noNonNullAssertion: should be fine
             const skillRate = match(amount!)
               .with("small", () => 3.25 / 100)
               .with("medium", () => 4.0 / 100)
@@ -825,7 +824,6 @@ function buff(
         .with(
           P.union("Fire DEF", "Water DEF", "Wind DEF", "Light DEF", "Dark DEF"),
           () => {
-            // biome-ignore lint/style/noNonNullAssertion: should be fine
             const skillRate = match(amount!)
               .with("small", () => 4.74 / 100)
               .with("medium", () => 5.65 / 100)
@@ -860,7 +858,6 @@ function buff(
           },
         )
         .with("Life", () => {
-          // biome-ignore lint/style/noNonNullAssertion: should be fine
           const skillRate = match(amount!)
             .with("medium", () => 0.45 / 100)
             .with("large", () => 0.7 / 100)

@@ -62,13 +62,9 @@ export default function DataPage({ dataType }: { dataType?: string }) {
 
   const [value, setValue] = useState(
     match(dataType)
-
       .with("memoria", () => 0)
-
       .with("order", () => 1)
-
       .with("costume", () => 2)
-
       .otherwise(() => 0),
   );
 

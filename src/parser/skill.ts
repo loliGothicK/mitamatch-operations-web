@@ -145,26 +145,21 @@ function parseRange(
   return pipe(
     separator(
       num
-
         .split("～")
-
         .map((n) =>
           parseIntSafe(n, { path: path.join("parseRange"), memoriaName }),
         ),
     ),
     either.flatMap((range) =>
       match(range)
-
         .when(
           (r) => r.length === 1,
           () => right([range[0], range[0]] as const),
         )
-
         .when(
           (r) => r.length === 2,
           () => right([range[0], range[1]] as const),
         )
-
         .otherwise(() =>
           toValidated(
             anyhow(num, "given text doesn't match range", {
@@ -223,9 +218,7 @@ function parseDamage(
                     bind("status", () =>
                       separator(
                         status
-
                           .split("と")
-
                           .map((s) =>
                             parseStatus(s, { path: joined(), memoriaName }),
                           ),
@@ -315,9 +308,7 @@ const parseStatChanges = (
   return pipe(
     pipe(
       status
-
         .split("と")
-
         .map((s) => parseStatus(s, { path: joined, memoriaName })),
       separator,
     ),
@@ -354,7 +345,6 @@ function parseBuffAndDebuff(
     fromNullable(description.match(STAT_UP_OR_DOWN)),
     option.map((matches) =>
       match(matches)
-
         .when(
           (_) => /(?:アップ|ダウン)、/g.test(description),
           ([, range, s1, e1, s2, e2]) =>
@@ -363,7 +353,6 @@ function parseBuffAndDebuff(
               parseStatChanges(type, range, s2, e2, memoriaName, joined()),
             ]),
         )
-
         .otherwise(([, range, status, eff]) =>
           parseStatChanges(type, range, status, eff, memoriaName, joined()),
         ),
@@ -420,9 +409,7 @@ const parseRecoveryBuff = (
     option.map(([, status, up]) =>
       pipe(
         status
-
           .split("と")
-
           .map((s) => parseStatus(s, { path: joined(), memoriaName })),
         separator,
         either.flatMap(
@@ -565,7 +552,6 @@ function parseStack(
 ): Validated<MitamaError, SkillEffect[]> {
   const branch = (when: string) => path.join(`parseStack[${when}]`);
   return match(name)
-
     .when(
       (name) => name.includes("メテオ"),
       () =>
@@ -575,7 +561,6 @@ function parseStack(
           branch("meteor"),
         ),
     )
-
     .when(
       (name) => name.includes("バリア"),
       () =>
@@ -585,19 +570,16 @@ function parseStack(
           branch("barrier"),
         ),
     )
-
     .when(
       (name) => name.includes("エデン"),
       () =>
         parseStackEffect(["eden"])(description, memoriaName, branch("eden")),
     )
-
     .when(
       (name) => name.includes("アニマ"),
       () =>
         parseStackEffect(["anima"])(description, memoriaName, branch("anima")),
     )
-
     .when(
       (name) => name.includes("コメット"),
       () =>
@@ -607,7 +589,6 @@ function parseStack(
           branch("comet"),
         ),
     )
-
     .when(
       (name) => name.includes("エーテル"),
       () =>
@@ -617,7 +598,6 @@ function parseStack(
           branch("ether"),
         ),
     )
-
     .when(
       (name) => name.includes("ルミナス"),
       () =>
@@ -627,7 +607,6 @@ function parseStack(
           branch("luminous"),
         ),
     )
-
     .otherwise(() => right([]));
 }
 
@@ -687,7 +666,6 @@ function parseElementEffect(
             separator(
               kinds.map((kind) =>
                 match(kind)
-
                   .with(
                     "enhance",
                     (enhance): Validated<MitamaError, SkillEffect> =>
@@ -703,7 +681,6 @@ function parseElementEffect(
                         rate: parseRate(description),
                       }),
                   )
-
                   .otherwise(
                     (kind): Validated<MitamaError, SkillEffect> =>
                       sequenceS(ap)({
@@ -728,121 +705,97 @@ function parseElementEffect(
 
 const parseKinds = (skillName: string): Option<readonly SkillKind[]> => {
   const elemental = match<string, Option<SkillKind>>(skillName)
-
     .when(
       (name) => name.startsWith("火："),
       () => option.of({ element: "Fire", kind: "Stimulation" }),
     )
-
     .when(
       (name) => name.startsWith("水："),
       () => option.of({ element: "Water", kind: "Stimulation" }),
     )
-
     .when(
       (name) => name.startsWith("風："),
       () => option.of({ element: "Wind", kind: "Stimulation" }),
     )
-
     .when(
       (name) => name.startsWith("光："),
       () => option.of({ element: "Light", kind: "Stimulation" }),
     )
-
     .when(
       (name) => name.startsWith("闇："),
       () => option.of({ element: "Dark", kind: "Stimulation" }),
     )
-
     .when(
       (name) => name.startsWith("火拡："),
       () => option.of({ element: "Fire", kind: "Spread" }),
     )
-
     .when(
       (name) => name.startsWith("水拡："),
       () => option.of({ element: "Water", kind: "Spread" }),
     )
-
     .when(
       (name) => name.startsWith("風拡："),
       () => option.of({ element: "Wind", kind: "Spread" }),
     )
-
     .when(
       (name) => name.startsWith("光拡："),
       () => option.of({ element: "Light", kind: "Spread" }),
     )
-
     .when(
       (name) => name.startsWith("闇拡："),
       () => option.of({ element: "Dark", kind: "Spread" }),
     )
-
     .when(
       (name) => name.startsWith("火強："),
       () => option.of({ element: "Fire", kind: "Strengthen" }),
     )
-
     .when(
       (name) => name.startsWith("水強："),
       () => option.of({ element: "Water", kind: "Strengthen" }),
     )
-
     .when(
       (name) => name.startsWith("風強："),
       () => option.of({ element: "Wind", kind: "Strengthen" }),
     )
-
     .when(
       (name) => name.startsWith("光強："),
       () => option.of({ element: "Light", kind: "Strengthen" }),
     )
-
     .when(
       (name) => name.startsWith("闇強："),
       () => option.of({ element: "Dark", kind: "Strengthen" }),
     )
-
     .when(
       (name) => name.startsWith("火弱："),
       () => option.of({ element: "Fire", kind: "Weaken" }),
     )
-
     .when(
       (name) => name.startsWith("水弱："),
       () => option.of({ element: "Water", kind: "Weaken" }),
     )
-
     .when(
       (name) => name.startsWith("風弱："),
       () => option.of({ element: "Wind", kind: "Weaken" }),
     )
-
     .when(
       (name) => name.startsWith("光弱："),
       () => option.of({ element: "Light", kind: "Weaken" }),
     )
-
     .when(
       (name) => name.startsWith("闇弱："),
       () => option.of({ element: "Dark", kind: "Weaken" }),
     )
-
     .otherwise(() => option.none);
 
   const counter = match<string, Option<SkillKind>>(skillName)
-
     .when(
       (name) => name.includes("カウンター"),
       () => option.of("counter"),
     )
-
     .when(
       (name) => name.includes("Sカウンター"),
       () => option.of("s-counter"),
     )
-
     .otherwise(() => option.none);
 
   const charge = skillName.includes("チャージ")
@@ -882,17 +835,12 @@ export const parseSkill = ({
       Do,
       either.bind("effects", () =>
         match(cardType)
-
           .with(P.union("通常単体", "通常範囲", "特殊単体", "特殊範囲"), () =>
             parseDamage(skill.description, memoriaName, path),
           )
-
           .with("支援", () => parseBuff(skill.description, memoriaName, path))
-
           .with("妨害", () => parseDebuff(skill.description, memoriaName, path))
-
           .with("回復", () => parseHeal(skill.description, memoriaName, path))
-
           .exhaustive(),
       ),
       either.bind("stack", () => parseStack(skill, memoriaName, path)),

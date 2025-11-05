@@ -23,32 +23,22 @@ export default function build<T>(
     operator: string,
   ): Either<MitamaError, (left: Lit, right: Lit) => boolean> =>
     match(operator)
-
       .with("=", () => right((left: Lit, right: Lit) => left === right))
-
       .with("!=", () => right((left: Lit, right: Lit) => left !== right))
-
       .with(">", () => right((left: Lit, right: Lit) => left > right))
-
       .with("<", () => right((left: Lit, right: Lit) => left < right))
-
       .with(">=", () => right((left: Lit, right: Lit) => left >= right))
-
       .with("<=", () => right((left: Lit, right: Lit) => left <= right))
-
       .with("AND", () =>
         right((left: Lit, right: Lit) => Boolean(left) && Boolean(right)),
       )
-
       .with("OR", () =>
         right((left: Lit, right: Lit) => Boolean(left) || Boolean(right)),
       )
-
       .otherwise(() => anyhow("operator", `Unsupported operator: ${operator}`));
 
   const cvt = (input: Input) =>
     match<Input, Validated<MitamaError, IExpression<T>>>(input)
-
       .with(
         { type: "binary_expr" },
         (binary): Validated<MitamaError, IExpression<T>> =>
@@ -63,18 +53,14 @@ export default function build<T>(
             }),
           ),
       )
-
       .when(Array.isArray, () =>
         toValidated(anyhow("expr_list", "AtomicExprList is not supported yet")),
       )
-
       .otherwise((atomic) =>
         match<typeof atomic, Validated<MitamaError, IExpression<T>>>(atomic)
-
           .with({ type: "value" }, (lit) =>
             right(new Literal(lit.value as Lit)),
           )
-
           .with({ type: "field" }, (field) => {
             if (field.value in schemaResolver) {
               return right(new Field(schemaResolver[field.value as string]));
@@ -87,7 +73,6 @@ export default function build<T>(
               );
             }
           })
-
           .exhaustive(),
       );
 
