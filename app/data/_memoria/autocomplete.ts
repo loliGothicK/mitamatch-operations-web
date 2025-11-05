@@ -65,7 +65,7 @@ export const memoriaCompletionSource: CompletionSource = (
       return {
         from: from,
         // 3. string[] から補完オプションを生成
-        options: ["'通常'", "'特殊'", "'前衛'", "'後衛'"].map((val) => ({
+        options: ["'通常' ", "'特殊' ", "'前衛' ", "'後衛' "].map((val) => ({
           label: val,
           boost: 10,
         })),
@@ -76,3 +76,27 @@ export const memoriaCompletionSource: CompletionSource = (
 
   return null;
 };
+
+export const tableCompletionSource =
+  (schema: string[]) => (context: CompletionContext) => {
+    const match = context.matchBefore(/(^|\s|[,=(])`\w*$/);
+
+    if (!match) {
+      return null;
+    }
+
+    const backtickIndex = match.text.lastIndexOf("`");
+    const partialWord = match.text.slice(backtickIndex + 1);
+
+    return {
+      from: match.from + backtickIndex + 1,
+      options: schema
+        .filter((name) => name.startsWith(partialWord)) // `` に対してはすべてのテーブル名を表示
+        .map((name) => ({
+          label: name,
+          type: "variable",
+          boost: 10,
+        })),
+      validFor: /^\w*$/, // ユーザーが単語を続けて入力している間は、この補完リストを使い続ける
+    };
+  };

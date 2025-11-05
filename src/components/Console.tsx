@@ -6,13 +6,13 @@ import {
   keywordCompletionSource,
   PostgreSQL,
   schemaCompletionSource,
-  type SQLNamespace,
 } from "@codemirror/lang-sql";
 import {
   autocompletion,
   type CompletionSource,
 } from "@codemirror/autocomplete";
 import { queryLinter } from "@/parser/query/linter";
+import { tableCompletionSource } from "@/data/_memoria/autocomplete";
 
 // サポートしているキーワードのホワイトリスト
 const keywordWhitelist = new Set([
@@ -62,14 +62,20 @@ const supportedKeywordSource: CompletionSource = async (context) => {
   };
 };
 
-export default function Console({
+export default function Console<
+  Schema extends {
+    [p: string]: string[];
+  },
+>({
+  type,
   schema,
   completion,
   initialeValue,
   execute,
   onChangeBack,
 }: {
-  schema: SQLNamespace;
+  type: keyof Schema;
+  schema: Schema;
   completion?: CompletionSource;
   initialeValue?: string;
   execute: () => void;
@@ -97,9 +103,10 @@ export default function Console({
   );
   const completions = autocompletion({
     override: [
-      ...(completion ? [completion] : []),
-      supportedKeywordSource,
+      tableCompletionSource(schema[type]),
       schemaCompletionSource({ dialect: PostgreSQL, schema }),
+      supportedKeywordSource,
+      ...(completion ? [completion] : []),
     ],
   });
   return (
