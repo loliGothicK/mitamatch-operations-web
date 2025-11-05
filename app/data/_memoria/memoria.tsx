@@ -237,7 +237,7 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
               ),
         );
         if (isSome(expr)) {
-          const pred = build<Memoria>(expr.value, resolver);
+          const pred = build(expr.value, resolver);
           if (isRight(pred)) {
             setRows(() => {
               return dataSource
