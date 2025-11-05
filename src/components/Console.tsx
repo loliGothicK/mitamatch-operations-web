@@ -13,6 +13,8 @@ import {
 } from "@codemirror/autocomplete";
 import { queryLinter } from "@/parser/query/linter";
 import { tableCompletionSource } from "@/data/_memoria/autocomplete";
+import { option } from "fp-ts";
+import { iter } from "@/fp-ts-ext/function";
 
 // サポートしているキーワードのホワイトリスト
 const keywordWhitelist = new Set([
@@ -106,7 +108,7 @@ export default function Console<
       tableCompletionSource(schema[type]),
       schemaCompletionSource({ dialect: PostgreSQL, schema }),
       supportedKeywordSource,
-      ...(completion ? [completion] : []),
+      ...iter(option.fromNullable(completion)),
     ],
   });
   return (

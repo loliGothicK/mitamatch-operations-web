@@ -2,6 +2,15 @@ import { type Either, isLeft } from "fp-ts/Either";
 import { either, option } from "fp-ts";
 import { isSome, type Option } from "fp-ts/Option";
 import { match } from "ts-pattern";
+import { pipe } from "fp-ts/function";
+import { of } from "fp-ts/Array";
+
+export const iter = <T>(a: Option<T>) =>
+  pipe(
+    a,
+    option.map(of),
+    option.getOrElse((): T[] => []),
+  );
 
 export type Flatten<T> = T extends unknown[] ? T : T[];
 
