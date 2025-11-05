@@ -1394,7 +1394,7 @@ function DiffModal() {
               input: {
                 startAdornment: (
                   <InputAdornment position='start'>
-                    https://mitama.io/deck-builder?deck=
+                    https://operations.mitama.io/deck-builder?deck=
                   </InputAdornment>
                 ),
               },
@@ -1470,7 +1470,7 @@ function ShareButton() {
                 handleClick('short');
                 const short = await generateShortLink({ full });
                 setUrl(
-                  `https://mitama.io/deck-builder?deck=${short}&title=${encodeURI(title)}`,
+                  `https://operations.mitama.io/deck-builder?deck=${short}&title=${encodeURI(title)}`,
                 );
                 await saveShortLink({ target: 'deck', full, short });
               }}
@@ -1481,7 +1481,9 @@ function ShareButton() {
               onClick={() => {
                 popupState.close();
                 handleClick('full');
-                setUrl(`https://mitama.io/deck-builder?deck=${full}`);
+                setUrl(
+                  `https://operations.mitama.io/deck-builder?deck=${full}`,
+                );
               }}
             >
               {'full link'}

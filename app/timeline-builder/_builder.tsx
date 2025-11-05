@@ -570,7 +570,7 @@ function ShareButton() {
                 handleClick('short');
                 const short = await generateShortLink({ full });
                 setUrl(
-                  `https://mitama.io/timeline-builder?timeline=${short}&title=${encodeURI(title)}`,
+                  `https://operations.mitama.io/timeline-builder?timeline=${short}&title=${encodeURI(title)}`,
                 );
                 await saveShortLink({ target: 'timeline', full, short });
               }}
@@ -581,7 +581,9 @@ function ShareButton() {
               onClick={() => {
                 popupState.close();
                 handleClick('full');
-                setUrl(`https://mitama.io/timeline-builder?timeline=${full}`);
+                setUrl(
+                  `https://operations.mitama.io/timeline-builder?timeline=${full}`,
+                );
               }}
             >
               {'full link'}

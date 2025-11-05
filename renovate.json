@@ -1,5 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
+  "ignoreDeps": ["require-in-the-middle", "import-in-the-middle"],
   "automerge": true
 }

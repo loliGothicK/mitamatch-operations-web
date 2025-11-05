@@ -33,7 +33,7 @@ export async function generateMetadata(
           images: {
             url: new URL(
               `/api/og?deck=${deck}`,
-              metadata.metadataBase || 'https://mitama.io',
+              metadata.metadataBase || 'https://operations.mitama.io',
             ),
             width: 500,
             height: 500,

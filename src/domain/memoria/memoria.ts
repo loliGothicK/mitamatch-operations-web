@@ -13,9 +13,14 @@ import { outdent } from 'outdent';
 import { match } from 'ts-pattern';
 
 const statusSchema = z.tuple([z.number(), z.number(), z.number(), z.number()]);
-const skillSchema = z.object({
+const PassiveSkillSchema = z.object({
   name: z.string().readonly(),
   description: z.string().readonly(),
+});
+const ActiveSkillSchema = z.object({
+  name: z.string().readonly(),
+  description: z.string().readonly(),
+  sp: z.number().readonly(),
 });
 
 const memoriaSchema = z.object({
@@ -71,14 +76,20 @@ const memoriaSchema = z.object({
     ])
     .readonly(),
   cost: z.number().readonly(),
-  questSkill: skillSchema.readonly(),
-  gvgSkill: skillSchema.readonly(),
-  autoSkill: skillSchema.readonly(),
+  questSkill: ActiveSkillSchema.readonly(),
+  gvgSkill: ActiveSkillSchema.readonly(),
+  autoSkill: PassiveSkillSchema.readonly(),
   labels: z
     .array(z.enum(['Legendary', 'Ultimate', 'SuperAwakening']))
     .readonly(),
   legendarySkill: z
-    .tuple([skillSchema, skillSchema, skillSchema, skillSchema, skillSchema])
+    .tuple([
+      PassiveSkillSchema,
+      PassiveSkillSchema,
+      PassiveSkillSchema,
+      PassiveSkillSchema,
+      PassiveSkillSchema,
+    ])
     .optional()
     .readonly(),
 });

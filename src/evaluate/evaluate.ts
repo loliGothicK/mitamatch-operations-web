@@ -244,7 +244,7 @@ export function evaluate(
     const rangePlus =
       1.0 -
       deck
-        .map(memoria => Lenz.memoria.support.get(memoria))
+        .map(memoria => Lenz.memoria.autoSkill.get(memoria))
         .filter(support =>
           support.effects.some(effect => effect.type === 'RangeUp'),
         )
@@ -450,7 +450,7 @@ function damage(
   const support = deck
     .map(
       memoria =>
-        [Lenz.memoria.support.get(memoria), memoria.concentration] as const,
+        [Lenz.memoria.autoSkill.get(memoria), memoria.concentration] as const,
     )
     .map(([support, concentration]) => {
       const up = support.effects.find(effect => effect.type === 'DamageUp');
@@ -632,7 +632,7 @@ function buff(
           .map(
             memoria =>
               [
-                Lenz.memoria.support.get(memoria),
+                Lenz.memoria.autoSkill.get(memoria),
                 memoria.concentration,
               ] as const,
           )
@@ -1028,7 +1028,7 @@ function debuff(
           .map(
             memoria =>
               [
-                Lenz.memoria.support.get(memoria),
+                Lenz.memoria.autoSkill.get(memoria),
                 memoria.concentration,
               ] as const,
           )
@@ -1334,7 +1334,7 @@ function recovery(
   const support = deck
     .map(
       memoria =>
-        [Lenz.memoria.support.get(memoria), memoria.concentration] as const,
+        [Lenz.memoria.autoSkill.get(memoria), memoria.concentration] as const,
     )
     .map(([support, concentration]) => {
       const up = support.effects.find(effect => effect.type === 'RecoveryUp');

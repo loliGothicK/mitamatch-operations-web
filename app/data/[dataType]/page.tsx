@@ -2,14 +2,11 @@ import type { Metadata } from 'next';
 import { metadata as defaultMetadata } from '@/layout';
 import { pipe } from 'fp-ts/function';
 import { Meta } from '@/metadata/lens';
-import DataPage from '@/data/[[...slug]]/_router';
+import DataPage from '@/data/_router';
 
-export default function Page({
-  params,
-}: {
-  params: Promise<{ slug: string | string[] | undefined }>;
-}) {
-  return <DataPage params={params} />;
+export default async function Page(props: PageProps<'/data/[dataType]'>) {
+  const { dataType } = await props.params;
+  return <DataPage dataType={dataType} />;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

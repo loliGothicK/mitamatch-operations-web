@@ -1,17 +1,16 @@
 'use client';
 
-import { use } from 'react';
-import { match, P } from 'ts-pattern';
-import NotFound from 'next/dist/client/components/builtin/not-found';
-import { MemoriaDetail, MemoriaList } from '@/data/[[...slug]]/_memoria';
+import { MemoriaList } from '@/data/_memoria/memoria';
 import { Layout } from '@/components/Layout';
-import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import { useSearchParams } from 'next/navigation';
+import { type ReactNode, type SyntheticEvent, useState } from 'react';
+import { match } from 'ts-pattern';
 
 interface TabPanelProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   index: number;
   value: number;
 }
@@ -39,53 +38,37 @@ function a11yProps(index: number) {
   };
 }
 
-export default function DataPage({
-  params,
-}: {
-  params: Promise<{ slug: string | string[] | undefined }>;
-}) {
-  const { slug } = use(params);
-
-  if (typeof slug === 'string') {
-    // list page
-    return match(slug)
-      .with('memoria', () => <MemoriaList />)
-      .otherwise(() => <NotFound />);
-  } else if (Array.isArray(slug)) {
-    // detail page
-    return match(slug)
-      .with(['memoria', P.string], ([_, name]) => <MemoriaDetail name={name} />)
-      .otherwise(() => <NotFound />);
-  } else if (slug === undefined) {
-    // top page
-    return <MainFrame />;
-  } else {
-    return <NotFound />;
-  }
-}
-
 const TABS = [
   {
     label: 'Memoria',
-    content: <MemoriaList />,
+    content: (query?: string) => <MemoriaList initialQuery={query} />,
     disabled: false,
   },
   {
     label: 'Order',
-    content: <></>,
+    content: (query?: string) => <MemoriaList initialQuery={query} />,
     disabled: true,
   },
   {
     label: 'Costume',
-    content: <></>,
+    content: (query?: string) => <MemoriaList initialQuery={query} />,
     disabled: true,
   },
 ];
 
-function MainFrame() {
-  const [value, setValue] = React.useState(0);
+export default function DataPage({ dataType }: { dataType?: string }) {
+  const searchParams = useSearchParams();
+  const query = searchParams.get('query') || undefined;
 
-  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
+  const [value, setValue] = useState(
+    match(dataType)
+      .with('memoria', () => 0)
+      .with('order', () => 1)
+      .with('costume', () => 2)
+      .otherwise(() => 0),
+  );
+
+  const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
@@ -98,19 +81,19 @@ function MainFrame() {
             onChange={handleChange}
             aria-label='basic tabs example'
           >
-            {TABS.map((tab, index) => (
+            {TABS.map((def, index) => (
               <Tab
-                key={tab.label}
-                label={tab.label}
+                key={def.label}
+                label={def.label}
                 {...a11yProps(index)}
-                disabled={tab.disabled}
+                disabled={def.disabled}
               />
             ))}
           </Tabs>
         </Box>
         {TABS.map((tab, index) => (
-          <CustomTabPanel index={index} value={index} key={tab.label}>
-            {tab.content}
+          <CustomTabPanel index={index} value={value} key={tab.label}>
+            {tab.content(query)}
           </CustomTabPanel>
         ))}
       </Box>

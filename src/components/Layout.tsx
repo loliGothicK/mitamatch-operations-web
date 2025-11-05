@@ -148,7 +148,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
               fontFamily: 'Copperplate Gothic, sans-serif',
             }}
           >
-            Mitamatch Ops
+            Mitamatch Operations
           </Typography>
           <Stack>
             <PopupState

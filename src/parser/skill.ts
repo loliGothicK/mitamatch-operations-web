@@ -130,6 +130,7 @@ export const isNotStackOrElement = (
 
 export type Skill = {
   readonly raw: { readonly name: string; readonly description: string };
+  readonly sp: number;
   readonly effects: readonly SkillEffect[];
   readonly kinds?: readonly SkillKind[];
 };
@@ -824,11 +825,12 @@ export const parseSkill = ({
     | '支援'
     | '妨害'
     | '回復';
-  skill: { name: string; description: string };
+  skill: { name: string; description: string; sp: number };
 }): Validated<MitamaError, Skill> => {
   const path = new CallPath(['parseSkill']);
   return sequenceS(ap)({
     raw: right(skill),
+    sp: right(skill.sp),
     effects: pipe(
       Do,
       either.bind('effects', () =>
