@@ -114,27 +114,35 @@ function Icon({
   position?: number;
 }) {
   const kindImage = match(cardType)
+
     .with("通常単体", () => (
       <Image src={"/NormalSingle.png"} alt={"kind"} width={25} height={25} />
     ))
+
     .with("通常範囲", () => (
       <Image src={"/NormalRange.png"} alt={"kind"} width={25} height={25} />
     ))
+
     .with("特殊単体", () => (
       <Image src={"/SpecialSingle.png"} alt={"kind"} width={25} height={25} />
     ))
+
     .with("特殊範囲", () => (
       <Image src={"/SpecialRange.png"} alt={"kind"} width={25} height={25} />
     ))
+
     .with("支援", () => (
       <Image src={"/Assist.png"} alt={"kind"} width={25} height={25} />
     ))
+
     .with("妨害", () => (
       <Image src={"/Interference.png"} alt={"kind"} width={25} height={25} />
     ))
+
     .with("回復", () => (
       <Image src={"/Recovery.png"} alt={"kind"} width={25} height={25} />
     ))
+
     .exhaustive();
 
   const avatar = (color: string) => (
@@ -152,11 +160,17 @@ function Icon({
   );
 
   return match(attribute)
+
     .with("Fire", () => avatar(red[500]))
+
     .with("Water", () => avatar(blue[500]))
+
     .with("Wind", () => avatar(green[500]))
+
     .with("Light", () => avatar(yellow[500]))
+
     .with("Dark", () => avatar(purple[500]))
+
     .exhaustive();
 }
 
@@ -640,12 +654,13 @@ export default function MultipleSelect({
     (kind === "before" ? setStackBeforeTargets : setStackAfterTargets)(
       typeof value === "string"
         ? value
+
             .split(",")
+
             .map(
               (name) => unit.find((memoria) => memoria.name.short === name)!.id,
             )
         : value.map(
-            // biome-ignore lint/style/noNonNullAssertion: should be fine
             (name) => unit.find((memoria) => memoria.name.short === name)!.id,
           ),
     );
@@ -709,38 +724,52 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
   }
 
   const [stackRateBefore, stackTimesBefore] = match(sw)
+
     .with("sword", () => {
       const stack = Lenz.gvgSkill.effects
+
         .get(compare)
+
         .find(isStackEffect("meteor"));
       return [stack?.rate, stack?.times];
     })
+
     .with("shield", () => {
       const stack = Lenz.gvgSkill.effects
+
         .get(compare)
+
         .find(
           (eff) => isStackEffect("eden")(eff) || isStackEffect("anima")(eff),
         );
 
       return [stack?.rate, stack?.times];
     })
+
     .exhaustive();
   const [stackRateAfter, stackTimesAfter] = match(sw)
+
     .with("sword", () => {
       const stack = Lenz.gvgSkill.effects
+
         .get(compare)
+
         .find(isStackEffect("meteor"));
       return [stack?.rate, stack?.times];
     })
+
     .with("shield", () => {
       const stack = Lenz.gvgSkill.effects
+
         .get(compare)
+
         .find(
           (eff) => isStackEffect("eden")(eff) || isStackEffect("anima")(eff),
         );
 
       return [stack?.rate, stack?.times];
     })
+
     .exhaustive();
 
   const diff = calcDiff(
@@ -758,12 +787,10 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
       stack: stack
         ? {
             before: {
-              // biome-ignore lint/style/noNonNullAssertion: should be fine
               rate: stackRateBefore!,
               targets: targetBefore,
             },
             after: {
-              // biome-ignore lint/style/noNonNullAssertion: should be fine
               rate: stackRateAfter!,
               targets: targetAfter,
             },
@@ -827,11 +854,12 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
             </Stack>
             {Lenz.gvgSkill.description.get(compare).includes("スタック") && (
               <MultipleSelect
-                // biome-ignore lint/style/noNonNullAssertion: should be fine
                 times={stackTimesBefore!}
                 kind={"before"}
                 targets={legendaryDeck
+
                   .concat(deck)
+
                   .filter((m) => ![compare.id, candidate.id].includes(m.id))}
               />
             )}
@@ -858,11 +886,12 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
             </Stack>
             {Lenz.gvgSkill.description.get(candidate).includes("スタック") && (
               <MultipleSelect
-                // biome-ignore lint/style/noNonNullAssertion: should be fine
                 times={stackTimesAfter!}
                 kind={"after"}
                 targets={legendaryDeck
+
                   .concat(deck)
+
                   .filter((m) => ![compare.id, candidate.id].includes(m.id))}
               />
             )}
@@ -925,7 +954,9 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
       <Grid>
         <dl style={style}>
           {[...diff.expectedTotalBuff.entries()]
+
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+
             .map(([type, value]) => intoRow([type, value]))}
         </dl>
       </Grid>
@@ -935,7 +966,9 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
       <Grid>
         <dl style={style}>
           {[...diff.expectedTotalDebuff.entries()]
+
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+
             .map(([type, value]) => intoRow([type, value]))}
         </dl>
       </Grid>
@@ -1102,7 +1135,6 @@ function VirtualizedList() {
                 } else {
                   setDeck((prev) =>
                     [...prev].map((memoria) =>
-                      // biome-ignore lint/style/noNonNullAssertion: should be fine
                       memoria.id === compare?.id ? candidate! : memoria,
                     ),
                   );

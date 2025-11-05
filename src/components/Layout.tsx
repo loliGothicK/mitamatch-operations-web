@@ -163,21 +163,23 @@ function BasicLayout({ children }: { children: ReactNode }) {
                   <Menu {...bindMenu(popupState)}>
                     {(
                       ["Deck Builder", "Timeline Builder", "Flowchart"] as const
-                    ).map((kind) => {
-                      return (
-                        <MenuItem
-                          key={kind}
-                          onClick={() => {
-                            popupState.close();
-                            redirect(
-                              `/docs/${kind.toLowerCase().split(" ").join("-")}`,
-                            );
-                          }}
-                        >
-                          {kind}
-                        </MenuItem>
-                      );
-                    })}
+                    )
+
+                      .map((kind) => {
+                        return (
+                          <MenuItem
+                            key={kind}
+                            onClick={() => {
+                              popupState.close();
+                              redirect(
+                                `/docs/${kind.toLowerCase().split(" ").join("-")}`,
+                              );
+                            }}
+                          >
+                            {kind}
+                          </MenuItem>
+                        );
+                      })}
                   </Menu>
                 </>
               )}
@@ -291,8 +293,11 @@ export function Layout({ children }: { children: ReactNode }) {
     () =>
       createTheme({
         palette: match(mode)
+
           .with("light", () => lightTheme.palette)
+
           .with("dark", () => darkTheme.palette)
+
           .exhaustive(),
       }),
     [mode],

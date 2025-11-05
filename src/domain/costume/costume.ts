@@ -85,7 +85,6 @@ function skillsToStatus(
       const match = skill.match(regex);
       return match === null ? [] : match;
     })
-    // biome-ignore lint/style/noNonNullAssertion: should be fine
     .map((skill) => skill.match(statRegex)!)) {
     switch (stat) {
       case "ATK": {

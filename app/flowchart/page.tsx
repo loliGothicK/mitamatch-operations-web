@@ -81,7 +81,6 @@ export default function FlowChart() {
               )}
               onChange={(_, value) => {
                 if (value) {
-                  // biome-ignore lint/style/noNonNullAssertion: should be fine
                   setSelect(orderList.find((order) => order.name === value)!);
                 }
               }}

@@ -43,6 +43,7 @@ export function transpose<E, T>(
   input: Option<Either<E, T>> | Either<E, Option<T>>,
 ): Either<E, Option<T>> | Option<Either<E, T>> {
   return match(input)
+
     .when(isEither<T, E>, (m): Option<Either<E, T>> => {
       return either.isLeft(m)
         ? option.of(m)
@@ -50,6 +51,7 @@ export function transpose<E, T>(
           ? option.of(either.right(m.right.value))
           : option.none;
     })
+
     .otherwise((m): Either<E, Option<T>> => {
       return option.isNone(m)
         ? either.right(option.none)

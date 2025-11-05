@@ -164,7 +164,6 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            // biome-ignore lint/style/noNonNullAssertion: should be fine
             const self = nodes.find((n) => n.id === id)!;
             const newId = getCount().toString();
             setNodeStorage([

@@ -79,7 +79,6 @@ export default function Page({
                           {title}
                         </Link>
                       ))
-                      // biome-ignore lint/complexity/noUselessFragments: necessary for map
                       .concat(<>{slug[slug.length - 1]}</>)
                   ) : (
                     <> {slug[0]}</>

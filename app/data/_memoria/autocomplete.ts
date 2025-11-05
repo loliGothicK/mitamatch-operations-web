@@ -91,6 +91,7 @@ export const tableCompletionSource =
     return {
       from: match.from + backtickIndex + 1,
       options: schema
+
         .filter((name) => name.startsWith(partialWord)) // `` に対してはすべてのテーブル名を表示
         .map((name) => ({
           label: name,

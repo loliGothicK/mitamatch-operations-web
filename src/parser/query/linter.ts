@@ -4,7 +4,9 @@ import { syntaxTree } from "@codemirror/language";
 export const queryLinter = linter((view) => {
   const diagnostics: Diagnostic[] = [];
   syntaxTree(view.state)
+
     .cursor()
+
     .iterate((node: any) => {
       if (node.name === "RegExp")
         diagnostics.push({

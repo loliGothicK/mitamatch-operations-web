@@ -329,7 +329,6 @@ export function Calculator() {
             )}
             onChange={(_, value) => {
               if (value) {
-                // biome-ignore lint/style/noNonNullAssertion: should be fine
                 setCharm(
                   charmList.find((charm) => charm.name === value.title)!,
                 );
@@ -377,7 +376,6 @@ export function Calculator() {
                 onChange={(_, value) => {
                   if (value) {
                     setCostume(
-                      // biome-ignore lint/style/noNonNullAssertion: should be fine
                       costumeList.find(
                         (costume) =>
                           `${costume.lily}/${costume.name}` === value.title,
@@ -523,7 +521,6 @@ export function Calculator() {
                     color={theme.palette.mode === "light" ? "darkred" : "pink"}
                   >
                     {`${kind}/UP: ${
-                      // biome-ignore lint/style/noNonNullAssertion: should be fine
                       expectedTotalBuff.get(kind)!
                     }`}
                   </Typography>
@@ -547,7 +544,6 @@ export function Calculator() {
                     }
                   >
                     {`${kind}/DOWN: ${
-                      // biome-ignore lint/style/noNonNullAssertion: should be fine
                       expectedTotalDebuff.get(kind)!
                     }`}
                   </Typography>

@@ -148,11 +148,9 @@ export function intoSupportPattern(kind: SupportKind): SupportPattern {
     .with("MpCostDown", () => "MpCostDown")
     .with("RangeUp", () => "RangeUp")
     .with("UP", () =>
-      // biome-ignore lint/style/noNonNullAssertion: should be fine
       intoStatusPattern({ status: kind.status!, upDown: "UP" }),
     )
     .with("DOWN", () =>
-      // biome-ignore lint/style/noNonNullAssertion: sould be fine
       intoStatusPattern({ status: kind.status!, upDown: "DOWN" }),
     )
     .exhaustive() as SupportPattern;
