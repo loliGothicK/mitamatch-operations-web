@@ -147,9 +147,7 @@ export function intoSupportPattern(kind: SupportKind): SupportPattern {
     .with("MatchPtUp", () => "MatchPtUp")
     .with("MpCostDown", () => "MpCostDown")
     .with("RangeUp", () => "RangeUp")
-    .with("UP", () =>
-      intoStatusPattern({ status: kind.status!, upDown: "UP" }),
-    )
+    .with("UP", () => intoStatusPattern({ status: kind.status!, upDown: "UP" }))
     .with("DOWN", () =>
       intoStatusPattern({ status: kind.status!, upDown: "DOWN" }),
     )

@@ -70,17 +70,11 @@ const columns: GridColDef<Memoria>[] = [
     width: 50,
     valueGetter: (value: Attribute) =>
       match(value)
-
         .with("Fire", () => "火")
-
         .with("Water", () => "水")
-
         .with("Wind", () => "風")
-
         .with("Light", () => "光")
-
         .with("Dark", () => "闇")
-
         .exhaustive(),
   },
   {
@@ -175,17 +169,11 @@ const resolver: Record<string, (memoria: Memoria) => string | number> = {
   type: (memoria: Memoria) => Lenz.memoria.cardType.get(memoria),
   attribute: (memoria: Memoria) =>
     match(Lenz.memoria.attribute.get(memoria))
-
       .with("Fire", () => "火")
-
       .with("Water", () => "水")
-
       .with("Wind", () => "風")
-
       .with("Light", () => "光")
-
       .with("Dark", () => "闇")
-
       .exhaustive(),
   cost: (memoria: Memoria) => Lenz.memoria.cost.get(memoria),
   atk: (memoria: Memoria) => Lenz.memoria.atk.get(memoria),
@@ -238,9 +226,7 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
         setVisivility(
           (prev): GridColumnVisibilityModel =>
             match(whiteList)
-
               .with(P.set("*"), () => visivilityAll)
-
               .otherwise(() =>
                 Object.fromEntries(
                   Object.entries(prev).map(([field]) => [
@@ -255,9 +241,7 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
           if (isRight(pred)) {
             setRows(() => {
               return dataSource
-
                 .toReversed()
-
                 .filter((memoria) => pred.right.apply(memoria));
             });
             setState(

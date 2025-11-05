@@ -520,9 +520,7 @@ export function Calculator() {
                     variant="body1"
                     color={theme.palette.mode === "light" ? "darkred" : "pink"}
                   >
-                    {`${kind}/UP: ${
-                      expectedTotalBuff.get(kind)!
-                    }`}
+                    {`${kind}/UP: ${expectedTotalBuff.get(kind)!}`}
                   </Typography>
                 </Grid>
               );
@@ -543,9 +541,7 @@ export function Calculator() {
                       theme.palette.mode === "light" ? "darkblue" : "turquoise"
                     }
                   >
-                    {`${kind}/DOWN: ${
-                      expectedTotalDebuff.get(kind)!
-                    }`}
+                    {`${kind}/DOWN: ${expectedTotalDebuff.get(kind)!}`}
                   </Typography>
                 </Grid>
               );

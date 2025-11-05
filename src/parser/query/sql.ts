@@ -46,7 +46,6 @@ function parseExpr(
   expr: ExpressionValue | ExprList,
 ): Validated<MitamaError, AtomicExpr | AtomicExprList | BinaryExpr> {
   return match(expr)
-
     .with(
       {
         type: P.union(
@@ -60,7 +59,6 @@ function parseExpr(
       },
       ({ type }) => toValidated(anyhow(type, "unsupported expression type")),
     )
-
     .with(
       { type: "binary_expr" },
       (binary): Validated<MitamaError, BinaryExpr> => {
@@ -78,7 +76,6 @@ function parseExpr(
         }
       },
     )
-
     .with({ type: "expr_list" }, (list) => {
       if (isExpressionValueArray(list.value)) {
         return separator(
@@ -87,12 +84,10 @@ function parseExpr(
               parseExpr(expr),
               either.flatMap((expr) =>
                 match(expr)
-
                   .when(
                     (e) => Array.isArray(e),
                     (e) => right(e),
                   )
-
                   .otherwise(() =>
                     toValidated(
                       anyhow(
@@ -109,36 +104,27 @@ function parseExpr(
         return toValidated(anyhow("expr_list", "unsupported expression list"));
       }
     })
-
     .with({ type: "expr" }, () =>
       toValidated(anyhow("expr", "unsupported expression type")),
     )
-
     .with({ type: "column_ref" }, (column) =>
       match(column)
-
         .with({ value: P._ }, ({ value }) =>
           right({ type: "field" as const, value: value }),
         )
-
         .with({ column: P._ }, ({ column }) =>
           match(column)
-
             .with({ expr: P._ }, ({ expr: { type, value } }) =>
               match(type)
-
                 .with("backticks_quote_string", () =>
                   right({ type: "field" as const, value: value as string }),
                 )
-
                 .with("string", () =>
                   right({ type: "value" as const, value: value as string }),
                 )
-
                 .with("default", () =>
                   right({ type: "field" as const, value: value as string }),
                 )
-
                 .otherwise(() =>
                   toValidated(
                     anyhow(
@@ -148,15 +134,12 @@ function parseExpr(
                   ),
                 ),
             )
-
             .otherwise((column) =>
               right({ type: "field" as const, value: column as string }),
             ),
         )
-
         .exhaustive(),
     )
-
     .otherwise(({ value }) => right({ type: "value" as const, value }));
 }
 
@@ -177,12 +160,9 @@ function parseWhere(
   where: Binary | SqlFunction | null,
 ): Validated<MitamaError, Option<BinaryExpr>> {
   return match(where)
-
     .with(null, () => right(option.none))
-
     .otherwise((where) =>
       match(where)
-
         .with({ type: "function" }, () =>
           toValidated(
             anyhow(
@@ -191,7 +171,6 @@ function parseWhere(
             ),
           ),
         )
-
         .otherwise(({ left, operator, right }) =>
           pipe(
             parseBinary(operator, left, right),
