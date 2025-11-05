@@ -1,16 +1,16 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import memoriaData from './memoria.json';
-import { parseSkill, type Skill } from '@/parser/skill';
-import { parseAutoSkill, type AutoSkill } from '@/parser/autoSkill';
-import { fromThrowable } from 'neverthrow';
-import { getApplicativeValidation, isLeft, right } from 'fp-ts/Either';
-import { getSemigroup } from 'fp-ts/Array';
-import { fmtErr, type MitamaError } from '@/error/error';
-import { sequenceS } from 'fp-ts/Apply';
-import { type Legendary, parseLegendary } from '@/parser/legendary';
-import { outdent } from 'outdent';
-import { match } from 'ts-pattern';
+import memoriaData from "./memoria.json";
+import { parseSkill, type Skill } from "@/parser/skill";
+import { parseAutoSkill, type AutoSkill } from "@/parser/autoSkill";
+import { fromThrowable } from "neverthrow";
+import { getApplicativeValidation, isLeft, right } from "fp-ts/Either";
+import { getSemigroup } from "fp-ts/Array";
+import { fmtErr, type MitamaError } from "@/error/error";
+import { sequenceS } from "fp-ts/Apply";
+import { type Legendary, parseLegendary } from "@/parser/legendary";
+import { outdent } from "outdent";
+import { match } from "ts-pattern";
 
 const statusSchema = z.tuple([z.number(), z.number(), z.number(), z.number()]);
 const PassiveSkillSchema = z.object({
@@ -27,6 +27,7 @@ const memoriaSchema = z.object({
   id: z.number().readonly(),
   name: z.string().readonly(),
   cardType: z
+
     .union([
       z.literal(1),
       z.literal(2),
@@ -36,19 +37,30 @@ const memoriaSchema = z.object({
       z.literal(6),
       z.literal(7),
     ])
-    .transform(type =>
+
+    .transform((type) =>
       match(type)
-        .with(1, () => '通常単体' as const)
-        .with(2, () => '通常範囲' as const)
-        .with(3, () => '特殊単体' as const)
-        .with(4, () => '特殊範囲' as const)
-        .with(5, () => '支援' as const)
-        .with(6, () => '妨害' as const)
-        .with(7, () => '回復' as const)
+
+        .with(1, () => "通常単体" as const)
+
+        .with(2, () => "通常範囲" as const)
+
+        .with(3, () => "特殊単体" as const)
+
+        .with(4, () => "特殊範囲" as const)
+
+        .with(5, () => "支援" as const)
+
+        .with(6, () => "妨害" as const)
+
+        .with(7, () => "回復" as const)
+
         .exhaustive(),
     )
+
     .readonly(),
   attribute: z
+
     .union([
       z.literal(1),
       z.literal(2),
@@ -56,17 +68,26 @@ const memoriaSchema = z.object({
       z.literal(4),
       z.literal(5),
     ])
-    .transform(element =>
+
+    .transform((element) =>
       match(element)
-        .with(1, () => 'Fire' as const)
-        .with(2, () => 'Water' as const)
-        .with(3, () => 'Wind' as const)
-        .with(4, () => 'Light' as const)
-        .with(5, () => 'Dark' as const)
+
+        .with(1, () => "Fire" as const)
+
+        .with(2, () => "Water" as const)
+
+        .with(3, () => "Wind" as const)
+
+        .with(4, () => "Light" as const)
+
+        .with(5, () => "Dark" as const)
+
         .exhaustive(),
     )
+
     .readonly(),
   status: z
+
     .tuple([
       statusSchema,
       statusSchema,
@@ -74,15 +95,19 @@ const memoriaSchema = z.object({
       statusSchema,
       statusSchema,
     ])
+
     .readonly(),
   cost: z.number().readonly(),
   questSkill: ActiveSkillSchema.readonly(),
   gvgSkill: ActiveSkillSchema.readonly(),
   autoSkill: PassiveSkillSchema.readonly(),
   labels: z
-    .array(z.enum(['Legendary', 'Ultimate', 'SuperAwakening']))
+
+    .array(z.enum(["Legendary", "Ultimate", "SuperAwakening"]))
+
     .readonly(),
   legendarySkill: z
+
     .tuple([
       PassiveSkillSchema,
       PassiveSkillSchema,
@@ -90,7 +115,9 @@ const memoriaSchema = z.object({
       PassiveSkillSchema,
       PassiveSkillSchema,
     ])
+
     .optional()
+
     .readonly(),
 });
 
@@ -114,7 +141,7 @@ const memoriaSchema = z.object({
 type RawMemoria = z.infer<typeof memoriaSchema>;
 export type Memoria = Omit<
   RawMemoria,
-  'name' | 'questSkill' | 'gvgSkill' | 'autoSkill' | 'legendary_skill'
+  "name" | "questSkill" | "gvgSkill" | "autoSkill" | "legendary_skill"
 > & {
   name: {
     short: string;
@@ -127,12 +154,14 @@ export type Memoria = Omit<
     legendary?: Legendary;
   };
 };
-export type MemoriaId = Memoria['id'];
-export type RawLegendarySkill = NonNullable<RawMemoria['legendarySkill']>;
+export type MemoriaId = Memoria["id"];
+export type RawLegendarySkill = NonNullable<RawMemoria["legendarySkill"]>;
 
 export const memoriaList: Memoria[] = memoriaData.data
+
   .filter(({ cost }) => cost > 18)
-  .map(memoria => {
+
+  .map((memoria) => {
     const ap = getApplicativeValidation(getSemigroup<MitamaError>());
     const zodResult = fromThrowable(memoriaSchema.parse)(memoria);
     if (zodResult.isErr()) {
@@ -169,7 +198,7 @@ export const memoriaList: Memoria[] = memoriaData.data
       name: {
         short: name.replace(
           /(?:クリエイターズコラボ|Ultimate Memoria )-(.*)-/g,
-          '$1',
+          "$1",
         ),
         full: name,
       },

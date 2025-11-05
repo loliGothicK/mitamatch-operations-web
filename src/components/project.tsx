@@ -1,9 +1,9 @@
-import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import type { SvgIconProps } from '@mui/material/SvgIcon';
+import { styled, useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import type { SvgIconProps } from "@mui/material/SvgIcon";
 import {
   SimpleTreeView,
   TreeItemContent,
@@ -14,37 +14,37 @@ import {
   TreeItemProvider,
   useTreeItem,
   type UseTreeItemParameters,
-} from '@mui/x-tree-view';
-import clsx from 'clsx';
+} from "@mui/x-tree-view";
+import clsx from "clsx";
 import {
   type ElementType,
   forwardRef,
   type HTMLAttributes,
   type Ref,
-} from 'react';
-import { IconButton, Stack, Tooltip } from '@mui/material';
+} from "react";
+import { IconButton, Stack, Tooltip } from "@mui/material";
 import {
   Folder,
   Groups as UnitIcon,
   Minimize,
   NearMe as OrderIcon,
-} from '@mui/icons-material';
+} from "@mui/icons-material";
 import {
   projectOpenAtom,
   openProjectListAtom,
   activeProjectAtom,
-} from '@/jotai/projectAtoms';
-import { useAtomDefault } from '@/jotai/default';
+} from "@/jotai/projectAtoms";
+import { useAtomDefault } from "@/jotai/default";
 
-declare module 'react' {
+declare module "react" {
   interface CSSProperties {
-    '--tree-view-color'?: string;
-    '--tree-view-bg-color'?: string;
+    "--tree-view-color"?: string;
+    "--tree-view-bg-color"?: string;
   }
 }
 
 interface StyledTreeItemProps
-  extends Omit<UseTreeItemParameters, 'rootRef'>,
+  extends Omit<UseTreeItemParameters, "rootRef">,
     HTMLAttributes<HTMLLIElement> {
   labelIcon: ElementType<SvgIconProps>;
   labelInfo?: string;
@@ -59,15 +59,15 @@ const CustomTreeItemContent = styled(TreeItemContent)(({ theme }) => ({
   color: theme.palette.text.secondary,
   borderRadius: 4,
   fontWeight: theme.typography.fontWeightMedium,
-  '&.expanded': {
+  "&.expanded": {
     fontWeight: theme.typography.fontWeightRegular,
   },
-  '&:hover': {
+  "&:hover": {
     backgroundColor: theme.palette.action.hover,
   },
-  '&.focused, &.selected, &.selected.focused': {
+  "&.focused, &.selected, &.selected.focused": {
     backgroundColor: `var(--tree-view-bg-color, ${theme.palette.action.selected})`,
-    color: 'var(--tree-view-color)',
+    color: "var(--tree-view-color)",
   },
 }));
 
@@ -80,14 +80,14 @@ const CustomTreeItemIconContainer = styled(TreeItemIconContainer)(
 const CustomTreeItemGroupTransition = styled(TreeItemGroupTransition)(
   ({ theme }) => ({
     marginLeft: 0,
-    '& .content': {
+    "& .content": {
       paddingLeft: theme.spacing(2),
     },
   }),
 );
 
 const CustomTreeItem = forwardRef(function CustomTreeItem(
-  props: Omit<StyledTreeItemProps, 'label' | 'itemId'> & {
+  props: Omit<StyledTreeItemProps, "label" | "itemId"> & {
     label: string;
     itemId: number;
   },
@@ -124,8 +124,8 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
   });
 
   const style = {
-    '--tree-view-color': theme.palette.action.active,
-    '--tree-view-bg-color': theme.palette.action.selected,
+    "--tree-view-color": theme.palette.action.active,
+    "--tree-view-bg-color": theme.palette.action.selected,
   };
 
   return (
@@ -135,7 +135,7 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
         onDoubleClick={() => {
           if (!children) {
             setValue(itemId);
-            setOpenProjectList(prev => {
+            setOpenProjectList((prev) => {
               return new Map(prev.set(label, itemId));
             });
           }
@@ -143,7 +143,7 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
       >
         <CustomTreeItemContent
           {...getContentProps({
-            className: clsx('content', {
+            className: clsx("content", {
               expanded: status.expanded,
               selected: status.selected,
               focused: status.focused,
@@ -158,16 +158,16 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
           </CustomTreeItemIconContainer>
           <Box
             sx={{
-              display: 'flex',
+              display: "flex",
               flexGrow: 1,
-              alignItems: 'center',
+              alignItems: "center",
             }}
           >
-            <Box component={LabelIcon} color='inherit' sx={{ mr: 1 }} />
+            <Box component={LabelIcon} color="inherit" sx={{ mr: 1 }} />
             <Typography
               {...getLabelProps({
-                variant: 'caption',
-                sx: { display: 'flex', fontWeight: 'inherit', flexGrow: 1 },
+                variant: "caption",
+                sx: { display: "flex", fontWeight: "inherit", flexGrow: 1 },
               })}
             />
           </Box>
@@ -191,35 +191,35 @@ export default function ProjectTreeView(props: { sx: { gridArea: string } }) {
       }}
     >
       <Stack
-        direction={'row'}
-        display={'flex'}
-        alignItems={'center'}
+        direction={"row"}
+        display={"flex"}
+        alignItems={"center"}
         sx={{ p: 2 }}
       >
-        <Typography variant='h6' sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
           Project
         </Typography>
-        <Tooltip title={'Hide'}>
-          <IconButton style={{ borderRadius: 4 }} size={'small'}>
+        <Tooltip title={"Hide"}>
+          <IconButton style={{ borderRadius: 4 }} size={"small"}>
             <Minimize
-              sx={{ '&.MuiSvgIcon-root': { paddingBottom: '6px' } }}
+              sx={{ "&.MuiSvgIcon-root": { paddingBottom: "6px" } }}
               onClick={() => setProjectOpen(false)}
             />
           </IconButton>
         </Tooltip>
       </Stack>
       <SimpleTreeView
-        defaultExpandedItems={['1']}
-        defaultSelectedItems='5'
+        defaultExpandedItems={["1"]}
+        defaultSelectedItems="5"
         slots={{
           expandIcon: ArrowRightIcon,
           collapseIcon: ArrowDropDownIcon,
         }}
         sx={{ px: 3 }}
       >
-        <CustomTreeItem itemId={1} label='Categories' labelIcon={Folder}>
-          <CustomTreeItem itemId={2} label='Units' labelIcon={UnitIcon} />
-          <CustomTreeItem itemId={3} label='Order' labelIcon={OrderIcon} />
+        <CustomTreeItem itemId={1} label="Categories" labelIcon={Folder}>
+          <CustomTreeItem itemId={2} label="Units" labelIcon={UnitIcon} />
+          <CustomTreeItem itemId={3} label="Order" labelIcon={OrderIcon} />
         </CustomTreeItem>
       </SimpleTreeView>
     </Box>

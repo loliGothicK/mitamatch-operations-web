@@ -1,8 +1,8 @@
-import type { Charm } from '@/domain/charm/charm';
-import type { Costume } from '@/domain/costume/costume';
-import { evaluate, type StackOption } from '@/evaluate/evaluate';
-import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
-import { statusKind, type StatusKind } from '@/parser/common';
+import type { Charm } from "@/domain/charm/charm";
+import type { Costume } from "@/domain/costume/costume";
+import { evaluate, type StackOption } from "@/evaluate/evaluate";
+import type { MemoriaWithConcentration } from "@/jotai/memoriaAtoms";
+import { statusKind, type StatusKind } from "@/parser/common";
 
 export function calcFinalStatus(
   deck: MemoriaWithConcentration[],
@@ -50,7 +50,7 @@ export function calcDiff(
   },
 ) {
   const deckBefore = [...legendaryDeck, ...deck];
-  const deckAfter = [...legendaryDeck, ...deck].map(m =>
+  const deckAfter = [...legendaryDeck, ...deck].map((m) =>
     m.id === compareMode?.id ? candidate : m,
   );
   const statusBefore = calcFinalStatus(deckBefore, selfStatus, charm, costume);
@@ -197,8 +197,8 @@ export function calcDiff(
       expectedTotalRecoveryBefore,
       expectedTotalRecoveryAfter,
     ] as [number, number],
-    expectedTotalBuff: new Map([
-      ...statusKind.map(type => {
+    expectedTotalBuff: new Map(
+      statusKind.map((type) => {
         return [
           type,
           [
@@ -207,9 +207,9 @@ export function calcDiff(
           ],
         ] as [StatusKind, [number, number]];
       }),
-    ]),
-    expectedTotalDebuff: new Map([
-      ...statusKind.map(type => {
+    ),
+    expectedTotalDebuff: new Map(
+      statusKind.map((type) => {
         return [
           type,
           [
@@ -218,6 +218,6 @@ export function calcDiff(
           ],
         ] as [StatusKind, [number, number]];
       }),
-    ]),
+    ),
   };
 }

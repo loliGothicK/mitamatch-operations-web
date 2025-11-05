@@ -1,25 +1,25 @@
-import { type NextRequest, NextResponse } from 'next/server';
-import { getSession } from '@/actions/auth';
+import { type NextRequest, NextResponse } from "next/server";
+import { getSession } from "@/actions/auth";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/dashboard', '/user'];
+const protectedRoutes = ["/dashboard", "/user"];
 
 export default async function proxy(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);
-  requestHeaders.set('x-base-path', req.nextUrl.basePath);
+  requestHeaders.set("x-base-path", req.nextUrl.basePath);
   // Nonceの生成
   const nonce = generateNonce();
   // CSPヘッダの生成
   const csp = generateCspHeader(nonce);
 
   // コンポーネント側で取得できるようにリクエストヘッダにも設定
-  requestHeaders.set('X-CSP-Nonce', nonce);
+  requestHeaders.set("X-CSP-Nonce", nonce);
   // Next.jsが差し込むインラインスクリプトにもNonceが設定されるようにリクエストヘッダにもCSPを設定
-  requestHeaders.set('Content-Security-Policy', csp);
+  requestHeaders.set("Content-Security-Policy", csp);
 
   // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname;
-  const isProtectedRoute = protectedRoutes.some(route =>
+  const isProtectedRoute = protectedRoutes.some((route) =>
     path.startsWith(route),
   );
 
@@ -31,14 +31,14 @@ export default async function proxy(req: NextRequest) {
 
   // 4. Redirect to /login if the user is not authenticated
   if (!user) {
-    return NextResponse.redirect(new URL('/api/auth/discord', req.nextUrl));
+    return NextResponse.redirect(new URL("/api/auth/discord", req.nextUrl));
   }
 
   // 5. Redirect to /dashboard if the user is authenticated
-  if (!req.nextUrl.pathname.startsWith('/dashboard')) {
-    return NextResponse.redirect(new URL('/dashboard', req.nextUrl));
+  if (!req.nextUrl.pathname.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
-  if (!req.nextUrl.pathname.startsWith('/user')) {
+  if (!req.nextUrl.pathname.startsWith("/user")) {
     return NextResponse.redirect(new URL(`/user/@${user.userId}`, req.nextUrl));
   }
 
@@ -52,12 +52,12 @@ export default async function proxy(req: NextRequest) {
 // Routes Middleware should not run on
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|.*\\.png$).*)',
+    "/((?!api|_next/static|_next/image|.*\\.png$).*)",
     {
-      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      source: "/((?!api|_next/static|_next/image|favicon.ico).*)",
       missing: [
-        { type: 'header', key: 'next-router-prefetch' },
-        { type: 'header', key: 'purpose', value: 'prefetch' },
+        { type: "header", key: "next-router-prefetch" },
+        { type: "header", key: "purpose", value: "prefetch" },
       ],
     },
   ],
@@ -80,14 +80,14 @@ function generateCspHeader(nonce: string): string {
   const scriptSrc = [
     "'self'",
     // 開発環境ではevalを許可
-    process.env.NODE_ENV === 'development' && "'unsafe-eval'",
+    process.env.NODE_ENV === "development" && "'unsafe-eval'",
     `'nonce-${nonce}'`,
     // Twitterの埋め込みやGoogle Tag Managerを使っている場合は適宜設定
-    'https://www.googletagmanager.com',
-    'https://platform.twitter.com',
+    "https://www.googletagmanager.com",
+    "https://platform.twitter.com",
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(" ");
 
   // CSPの設定
   // 自分のサイトの状況に応じて適宜設定
@@ -97,14 +97,14 @@ function generateCspHeader(nonce: string): string {
     "frame-src 'self' https://www.googletagmanager.com https://platform.twitter.com",
     `script-src ${scriptSrc}`,
     "style-src 'self' 'unsafe-inline'",
-    'font-src * data:',
-    'img-src * data:',
-  ].join('; ');
+    "font-src * data:",
+    "img-src * data:",
+  ].join("; ");
 }
 
 // ArrayBufferを16進数の文字列に変換する
 function bufferToHex(buffer: Uint8Array): string {
   return Array.from(buffer)
-    .map(byte => byte.toString(16).padStart(2, '0'))
-    .join('');
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
 }

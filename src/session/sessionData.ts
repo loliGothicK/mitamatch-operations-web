@@ -8,10 +8,10 @@ export interface SessionData {
 }
 
 export const defaultSession: SessionData = {
-  userId: '',
-  userName: '',
-  userEmail: '',
-  userAvatar: 'default',
+  userId: "",
+  userName: "",
+  userEmail: "",
+  userAvatar: "default",
   isLoggedIn: false,
   expires: 0,
 };

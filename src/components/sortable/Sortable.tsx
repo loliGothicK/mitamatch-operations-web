@@ -1,6 +1,6 @@
-import type React from 'react';
-import { useEffect } from 'react';
-import type { PropsWithChildren, SetStateAction } from 'react';
+import type React from "react";
+import { useEffect } from "react";
+import type { PropsWithChildren, SetStateAction } from "react";
 
 import {
   type DndContextProps,
@@ -9,7 +9,7 @@ import {
   type Sensor,
   TouchSensor,
   type UniqueIdentifier,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   DndContext,
   KeyboardSensor,
@@ -17,14 +17,14 @@ import {
   closestCenter,
   useSensor,
   useSensors,
-} from '@dnd-kit/core';
-import type { SortingStrategy } from '@dnd-kit/sortable';
+} from "@dnd-kit/core";
+import type { SortingStrategy } from "@dnd-kit/sortable";
 import {
   SortableContext,
   arrayMove,
   sortableKeyboardCoordinates,
-} from '@dnd-kit/sortable';
-import type { OmitProperties } from 'ts-essentials';
+} from "@dnd-kit/sortable";
+import type { OmitProperties } from "ts-essentials";
 
 /**
  * Props for Sortable components
@@ -64,7 +64,7 @@ export type SortableProps<T> = PropsWithChildren<{
    *
    * @see https://docs.dndkit.com/api-documentation/context-provider#props
    */
-  dnd?: OmitProperties<DndContextProps, 'onDragEnd'>;
+  dnd?: OmitProperties<DndContextProps, "onDragEnd">;
 }>;
 
 /**
@@ -98,8 +98,8 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
     const { active, over } = event;
 
     if (over !== null && active.id !== over.id) {
-      const oldIndex = items.findIndex(item => item.id === active.id);
-      const newIndex = items.findIndex(item => item.id === over.id);
+      const oldIndex = items.findIndex((item) => item.id === active.id);
+      const newIndex = items.findIndex((item) => item.id === over.id);
 
       const newItems = arrayMove(items, oldIndex, newIndex);
 
@@ -108,7 +108,7 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
   };
   let sensor: Sensor<PointerSensorOptions> = PointerSensor;
   useEffect(() => {
-    const hai = sessionStorage.getItem('isWebEntry');
+    const hai = sessionStorage.getItem("isWebEntry");
     const isWebEntry = hai === null ? false : JSON.parse(hai);
     sensor = isWebEntry ? PointerSensor : TouchSensor;
   }, [sensor]);

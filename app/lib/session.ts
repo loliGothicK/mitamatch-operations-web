@@ -1,8 +1,8 @@
-import 'server-only';
-import { cookies } from 'next/headers';
-import { discordOauth2 } from '@/discord/oauth2';
-import { decrypt, encrypt } from '@/lib/crypt';
-import { updateToken, upsertUser } from '@/database';
+import "server-only";
+import { cookies } from "next/headers";
+import { discordOauth2 } from "@/discord/oauth2";
+import { decrypt, encrypt } from "@/lib/crypt";
+import { updateToken, upsertUser } from "@/database";
 
 export async function createSession(json: {
   userId: string;
@@ -12,7 +12,7 @@ export async function createSession(json: {
   access_token: string;
   refreshToken: string;
 }) {
-  'use server';
+  "use server";
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const session = await encrypt({
     ...json,
@@ -20,12 +20,12 @@ export async function createSession(json: {
     expires,
   });
   const cookieStore = await cookies();
-  cookieStore.set('session', session, {
+  cookieStore.set("session", session, {
     httpOnly: true,
     secure: true,
     expires,
-    sameSite: 'lax',
-    path: '/',
+    sameSite: "lax",
+    path: "/",
   });
 
   await upsertUser({
@@ -43,8 +43,8 @@ export async function updateSession(session: string) {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const token = await discordOauth2.tokenRequest({
     refreshToken: payload?.refreshToken as string,
-    scope: ['identify', 'email'],
-    grantType: 'refresh_token',
+    scope: ["identify", "email"],
+    grantType: "refresh_token",
   });
   const newSession = await encrypt({
     ...payload,
@@ -53,11 +53,11 @@ export async function updateSession(session: string) {
     expires,
   });
   const cookieStore = await cookies();
-  cookieStore.set('session', newSession, {
+  cookieStore.set("session", newSession, {
     httpOnly: true,
     secure: true,
     expires,
-    sameSite: 'lax',
+    sameSite: "lax",
   });
 
   await updateToken({

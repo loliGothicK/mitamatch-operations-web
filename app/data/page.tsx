@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import { metadata as defaultMetadata } from '@/layout';
-import { pipe } from 'fp-ts/function';
-import { Meta } from '@/metadata/lens';
-import DataPage from '@/data/_router';
+import type { Metadata } from "next";
+import { metadata as defaultMetadata } from "@/layout";
+import { pipe } from "fp-ts/function";
+import { Meta } from "@/metadata/lens";
+import DataPage from "@/data/_router";
 
 export default function Page() {
   return <DataPage />;
@@ -11,15 +11,15 @@ export default function Page() {
 export async function generateMetadata(): Promise<Metadata> {
   return pipe(
     defaultMetadata,
-    Meta.openGraph.modify(openGraph => ({
+    Meta.openGraph.modify((openGraph) => ({
       ...openGraph,
-      title: 'Deck Builder',
-      description: '豊富な絞り込み機能で探していたメモリアもすぐに見つかる！',
+      title: "Deck Builder",
+      description: "豊富な絞り込み機能で探していたメモリアもすぐに見つかる！",
     })),
-    Meta.twitter.modify(twitter => ({
+    Meta.twitter.modify((twitter) => ({
       ...twitter,
-      description: '豊富な絞り込み機能で探していたメモリアもすぐに見つかる！',
-      card: 'summary',
+      description: "豊富な絞り込み機能で探していたメモリアもすぐに見つかる！",
+      card: "summary",
     })),
   );
 }

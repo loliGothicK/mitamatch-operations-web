@@ -1,22 +1,22 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import orderData from './order.json';
+import orderData from "./order.json";
 
 export const orderKind = [
-  'Elemental/Fire',
-  'Elemental/Water',
-  'Elemental/Wind',
-  'Elemental/Dark',
-  'Elemental/Light',
-  'Elemental/Special',
-  'Buff',
-  'DeBuff',
-  'Mp',
-  'TriggerRateFluctuation',
-  'Shield',
-  'Formation',
-  'Stack',
-  'Other',
+  "Elemental/Fire",
+  "Elemental/Water",
+  "Elemental/Wind",
+  "Elemental/Dark",
+  "Elemental/Light",
+  "Elemental/Special",
+  "Buff",
+  "DeBuff",
+  "Mp",
+  "TriggerRateFluctuation",
+  "Shield",
+  "Formation",
+  "Stack",
+  "Other",
 ] as const;
 
 export type OrderKind = (typeof orderKind)[number];
@@ -53,4 +53,6 @@ const orderSchema = z.object({
  */
 export type Order = z.infer<typeof orderSchema>;
 
-export const orderList = orderData.data.map(order => orderSchema.parse(order));
+export const orderList = orderData.data.map((order) =>
+  orderSchema.parse(order),
+);

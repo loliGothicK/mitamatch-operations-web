@@ -1,7 +1,7 @@
-import type { OmitProperties } from 'ts-essentials';
-import { z } from 'zod';
+import type { OmitProperties } from "ts-essentials";
+import { z } from "zod";
 
-import costumeData from './costume.json';
+import costumeData from "./costume.json";
 
 const atomicAdxSchema = z.object({ name: z.string(), description: z.string() });
 const adxSchema = z.tuple([atomicAdxSchema, atomicAdxSchema, atomicAdxSchema]);
@@ -59,12 +59,12 @@ const costumeSchema = z.object({
  */
 export type Costume = OmitProperties<
   z.infer<typeof costumeSchema>,
-  'skills'
+  "skills"
 > & {
   readonly status: readonly [number, number, number, number];
 };
 
-export const costumeList: Costume[] = costumeData.data.map(costume => {
+export const costumeList: Costume[] = costumeData.data.map((costume) => {
   const parsed = costumeSchema.parse(costume);
   return {
     ...parsed,
@@ -80,27 +80,27 @@ function skillsToStatus(
   const statRegex = /^(.+)\+(\d+)$/;
 
   for (const [, stat, value] of skills
-    .filter(skill => skill.startsWith('固有'))
-    .flatMap(skill => {
+    .filter((skill) => skill.startsWith("固有"))
+    .flatMap((skill) => {
       const match = skill.match(regex);
       return match === null ? [] : match;
     })
     // biome-ignore lint/style/noNonNullAssertion: should be fine
-    .map(skill => skill.match(statRegex)!)) {
+    .map((skill) => skill.match(statRegex)!)) {
     switch (stat) {
-      case 'ATK': {
+      case "ATK": {
         status[0] += Number.parseInt(value, 10);
         break;
       }
-      case 'Sp.ATK': {
+      case "Sp.ATK": {
         status[1] += Number.parseInt(value, 10);
         break;
       }
-      case 'DEF': {
+      case "DEF": {
         status[2] += Number.parseInt(value, 10);
         break;
       }
-      case 'Sp.DEF': {
+      case "Sp.DEF": {
         status[3] += Number.parseInt(value, 10);
         break;
       }

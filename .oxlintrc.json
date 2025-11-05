@@ -1,0 +1,7 @@
+{
+  "rules": {
+    "no-alert": "error",
+    "oxc/approx-constant": "warn"
+  },
+  "plugins": ["react", "nextjs", "jsx-a11y", "vitest"],
+}

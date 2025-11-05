@@ -1,5 +1,5 @@
-import { relations } from 'drizzle-orm/relations';
-import { users, decks, timelines } from '@/database/schema';
+import { relations } from "drizzle-orm/relations";
+import { users, decks, timelines } from "@/database/schema";
 
 export const deckRelations = relations(decks, ({ one }) => ({
   user: one(users, {

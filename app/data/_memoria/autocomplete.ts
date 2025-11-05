@@ -1,7 +1,7 @@
 import type {
   CompletionContext,
   CompletionSource,
-} from '@codemirror/autocomplete';
+} from "@codemirror/autocomplete";
 
 const enumMap: Record<string, string[]> = {
   type: [
@@ -46,7 +46,7 @@ export const memoriaCompletionSource: CompletionSource = (
   const value = valueMatch[3];
   const from = context.pos - value.length;
 
-  if (operator === '=' && columnName in enumMap) {
+  if (operator === "=" && columnName in enumMap) {
     // 2. マップから値の配列を取得
     //    この時点で optionsList は string[] 型であることが保証される
     const optionsList = enumMap[columnName];
@@ -54,18 +54,18 @@ export const memoriaCompletionSource: CompletionSource = (
     return {
       from: from,
       // 3. string[] から補完オプションを生成
-      options: optionsList.map(val => ({
+      options: optionsList.map((val) => ({
         label: val,
-        type: 'enum',
+        type: "enum",
         boost: 10,
       })),
     };
-  } else if (operator.endsWith('LIKE')) {
-    if (columnName === 'type') {
+  } else if (operator.endsWith("LIKE")) {
+    if (columnName === "type") {
       return {
         from: from,
         // 3. string[] から補完オプションを生成
-        options: ["'通常'", "'特殊'", "'前衛'", "'後衛'"].map(val => ({
+        options: ["'通常'", "'特殊'", "'前衛'", "'後衛'"].map((val) => ({
           label: val,
           boost: 10,
         })),

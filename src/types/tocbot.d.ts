@@ -1,4 +1,4 @@
-declare module 'tocbot' {
+declare module "tocbot" {
   export function destroy(): void;
   export function init(options: {
     tocSelector: string;

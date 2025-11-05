@@ -1,36 +1,36 @@
-import { either, option } from 'fp-ts';
-import { fromNullable, type Option } from 'fp-ts/Option';
-import { match, P } from 'ts-pattern';
+import { either, option } from "fp-ts";
+import { fromNullable, type Option } from "fp-ts/Option";
+import { match, P } from "ts-pattern";
 import {
   parseAmount,
   parseStatus,
   type StatusKind,
   parseIntSafe,
   parseElement,
-} from '@/parser/common';
-import type { Amount } from '@/parser/common';
-import { pipe } from 'fp-ts/function';
-import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
-import { anyhow, type MitamaError, CallPath } from '@/error/error';
+} from "@/parser/common";
+import type { Amount } from "@/parser/common";
+import { pipe } from "fp-ts/function";
+import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
+import { anyhow, type MitamaError, CallPath } from "@/error/error";
 import {
   bind,
   Do,
   type Either,
   getApplicativeValidation,
   right,
-} from 'fp-ts/Either';
-import { getSemigroup } from 'fp-ts/Array';
-import { sequenceS } from 'fp-ts/Apply';
-import { separator, transposeArray } from '@/fp-ts-ext/function';
+} from "fp-ts/Either";
+import { getSemigroup } from "fp-ts/Array";
+import { sequenceS } from "fp-ts/Apply";
+import { separator, transposeArray } from "@/fp-ts-ext/function";
 
-export const elements = ['Fire', 'Water', 'Wind', 'Light', 'Dark'] as const;
+export const elements = ["Fire", "Water", "Wind", "Light", "Dark"] as const;
 export type Attribute = (typeof elements)[number];
 
 export const elementalKind = [
-  'Stimulation',
-  'Spread',
-  'Strengthen',
-  'Weaken',
+  "Stimulation",
+  "Spread",
+  "Strengthen",
+  "Weaken",
 ] as const;
 export type ElementalKind = (typeof elementalKind)[number];
 
@@ -41,53 +41,53 @@ export type Elemental = {
 
 export type SkillKind =
   | Elemental
-  | 'charge'
-  | 'counter'
-  | 's-counter'
-  | 'heal'
-  | 'recover';
+  | "charge"
+  | "counter"
+  | "s-counter"
+  | "heal"
+  | "recover";
 
-export const stackKinds = ['meteor', 'barrier', 'eden', 'anima'] as const;
-export const elementEffectKinds = ['spread', 'minima', 'enhance'] as const;
+export const stackKinds = ["meteor", "barrier", "eden", "anima"] as const;
+export const elementEffectKinds = ["spread", "minima", "enhance"] as const;
 
 export type DamageEffect = {
-  readonly type: 'damage';
+  readonly type: "damage";
   readonly range: readonly [number, number];
   readonly amount: Amount;
 };
 export type BuffEffect = {
-  readonly type: 'buff';
+  readonly type: "buff";
   readonly range: readonly [number, number];
   readonly amount: Amount;
   readonly status: StatusKind;
 };
 export type DebuffEffect = {
-  readonly type: 'debuff';
+  readonly type: "debuff";
   readonly range: readonly [number, number];
   readonly amount: Amount;
   readonly status: StatusKind;
 };
 export type HealEffect = {
-  readonly type: 'heal';
+  readonly type: "heal";
   readonly range: readonly [number, number];
   readonly amount: Amount;
 };
 export type StackEffect = {
-  readonly type: 'stack';
+  readonly type: "stack";
   readonly kind: (typeof stackKinds)[number];
   readonly rate: number;
   readonly times: number;
 };
 export type ElementEffect =
   | {
-      readonly type: 'element';
+      readonly type: "element";
       readonly element: Attribute;
-      readonly kind: 'spread' | 'minima';
+      readonly kind: "spread" | "minima";
     }
   | {
-      readonly type: 'element';
+      readonly type: "element";
       readonly element: Attribute;
-      readonly kind: 'enhance';
+      readonly kind: "enhance";
       // enhance only has rate
       readonly rate: number;
     };
@@ -101,31 +101,31 @@ export type SkillEffect =
   | ElementEffect;
 
 export const isDamageEffect = (effect: SkillEffect): effect is DamageEffect =>
-  effect.type === 'damage';
+  effect.type === "damage";
 export const isBuffEffect = (effect: SkillEffect): effect is BuffEffect =>
-  effect.type === 'buff';
+  effect.type === "buff";
 export const isDebuffEffect = (effect: SkillEffect): effect is DebuffEffect =>
-  effect.type === 'debuff';
+  effect.type === "debuff";
 export const isHealEffect = (effect: SkillEffect): effect is HealEffect =>
-  effect.type === 'heal';
+  effect.type === "heal";
 export const isStackEffect =
   (kind?: (typeof stackKinds)[number]) =>
   (effect: SkillEffect): effect is StackEffect => {
     return (
-      effect.type === 'stack' && (kind === undefined || effect.kind === kind)
+      effect.type === "stack" && (kind === undefined || effect.kind === kind)
     );
   };
 export const isElementEffect =
   (kind?: (typeof elementEffectKinds)[number]) =>
   (effect: SkillEffect): effect is StackEffect => {
     return (
-      effect.type === 'element' && (kind === undefined || effect.kind === kind)
+      effect.type === "element" && (kind === undefined || effect.kind === kind)
     );
   };
 export const isNotStackOrElement = (
   effect: SkillEffect,
 ): effect is DamageEffect | BuffEffect | DebuffEffect | HealEffect => {
-  return effect.type !== 'stack' && effect.type !== 'element';
+  return effect.type !== "stack" && effect.type !== "element";
 };
 
 export type Skill = {
@@ -145,21 +145,26 @@ function parseRange(
   return pipe(
     separator(
       num
-        .split('～')
-        .map(n =>
-          parseIntSafe(n, { path: path.join('parseRange'), memoriaName }),
+
+        .split("～")
+
+        .map((n) =>
+          parseIntSafe(n, { path: path.join("parseRange"), memoriaName }),
         ),
     ),
-    either.flatMap(range =>
+    either.flatMap((range) =>
       match(range)
+
         .when(
-          r => r.length === 1,
+          (r) => r.length === 1,
           () => right([range[0], range[0]] as const),
         )
+
         .when(
-          r => r.length === 2,
+          (r) => r.length === 2,
           () => right([range[0], range[1]] as const),
         )
+
         .otherwise(() =>
           toValidated(
             anyhow(num, "given text doesn't match range", {
@@ -181,14 +186,14 @@ function parseDamage(
   memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, readonly SkillEffect[]> {
-  const joined = () => path.join('parseDamage');
+  const joined = () => path.join("parseDamage");
 
-  const toType = (buff: string): Either<MitamaError, 'buff' | 'debuff'> => {
-    if (buff.includes('アップ')) {
-      return right('buff' as const);
+  const toType = (buff: string): Either<MitamaError, "buff" | "debuff"> => {
+    if (buff.includes("アップ")) {
+      return right("buff" as const);
     }
-    if (buff.includes('ダウン')) {
-      return right('debuff' as const);
+    if (buff.includes("ダウン")) {
+      return right("debuff" as const);
     }
     return anyhow(buff, "given text doesn't include 'buff' or 'debuff'", {
       path: joined(),
@@ -209,24 +214,26 @@ function parseDamage(
       option.map(
         (matches): Validated<MitamaError, SkillEffect[]> =>
           separator(
-            matches.flatMap(eff =>
+            matches.flatMap((eff) =>
               pipe(
                 fromNullable(eff.match(ATK_EFF)),
                 option.map(([, status, amount]) =>
                   pipe(
                     Do,
-                    bind('status', () =>
+                    bind("status", () =>
                       separator(
                         status
-                          .split('と')
-                          .map(s =>
+
+                          .split("と")
+
+                          .map((s) =>
                             parseStatus(s, { path: joined(), memoriaName }),
                           ),
                       ),
                     ),
                     either.flatMap(({ status }) =>
                       separator(
-                        status.map(stat =>
+                        status.map((stat) =>
                           sequenceS(ap)({
                             type: toValidated(toType(amount)),
                             amount: toValidated(
@@ -262,7 +269,7 @@ function parseDamage(
       fromNullable(description.match(ATK_DAMAGE)),
       option.map(([, range, , damage]) =>
         sequenceS(ap)({
-          type: right('damage' as const),
+          type: right("damage" as const),
           range: parseRange(range, memoriaName, path),
           amount: toValidated(parseAmount(damage, { path, memoriaName })),
         }),
@@ -276,13 +283,13 @@ function parseDamage(
         ),
       ),
     ),
-    either.flatMap(damage =>
+    either.flatMap((damage) =>
       pipe(
         transposeArray([statChanges(damage.range, description)]),
-        option.map(seq =>
+        option.map((seq) =>
           pipe(
             separator(seq),
-            either.map(effects => [damage as SkillEffect, ...effects]),
+            either.map((effects) => [damage as SkillEffect, ...effects]),
           ),
         ),
         option.getOrElse(
@@ -297,30 +304,32 @@ const STAT_UP_OR_DOWN =
   /(?:味方|敵)(.+?)体の(.+?)を((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))(?:、(.+?)を((?:超特大|極大|特大|大|小)?(?:アップ|ダウン)))?させる/;
 
 const parseStatChanges = (
-  type: 'buff' | 'debuff',
+  type: "buff" | "debuff",
   range: string,
   status: string,
   eff: string,
   memoriaName: string,
   path: CallPath,
 ) => {
-  const joined = path.join('parseStatChanges');
+  const joined = path.join("parseStatChanges");
   return pipe(
     pipe(
       status
-        .split('と')
-        .map(s => parseStatus(s, { path: joined, memoriaName })),
+
+        .split("と")
+
+        .map((s) => parseStatus(s, { path: joined, memoriaName })),
       separator,
     ),
-    either.flatMap(stats =>
+    either.flatMap((stats) =>
       separator(
-        stats.map(stat =>
+        stats.map((stat) =>
           sequenceS(ap)({
             type: right(type),
             range: parseRange(
               range,
               memoriaName,
-              path.join('parseStatChanges'),
+              path.join("parseStatChanges"),
             ),
             amount: toValidated(
               parseAmount(eff, { path: joined, memoriaName }),
@@ -334,25 +343,27 @@ const parseStatChanges = (
 };
 
 function parseBuffAndDebuff(
-  type: 'buff' | 'debuff',
+  type: "buff" | "debuff",
   description: string,
   memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
-  const joined = () => path.join('parseBuff');
+  const joined = () => path.join("parseBuff");
 
   return pipe(
     fromNullable(description.match(STAT_UP_OR_DOWN)),
-    option.map(matches =>
+    option.map((matches) =>
       match(matches)
+
         .when(
-          _ => /(?:アップ|ダウン)、/g.test(description),
+          (_) => /(?:アップ|ダウン)、/g.test(description),
           ([, range, s1, e1, s2, e2]) =>
             separator([
               parseStatChanges(type, range, s1, e1, memoriaName, joined()),
               parseStatChanges(type, range, s2, e2, memoriaName, joined()),
             ]),
         )
+
         .otherwise(([, range, status, eff]) =>
           parseStatChanges(type, range, status, eff, memoriaName, joined()),
         ),
@@ -374,10 +385,10 @@ function parseBuff(
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
   return parseBuffAndDebuff(
-    'buff',
+    "buff",
     description,
     memoriaName,
-    path.join('parseBuff'),
+    path.join("parseBuff"),
   );
 }
 
@@ -387,10 +398,10 @@ function parseDebuff(
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
   return parseBuffAndDebuff(
-    'debuff',
+    "debuff",
     description,
     memoriaName,
-    path.join('parseDebuff'),
+    path.join("parseDebuff"),
   );
 }
 
@@ -403,21 +414,23 @@ const parseRecoveryBuff = (
   memoriaName: string,
   path: CallPath = CallPath.empty,
 ) => {
-  const joined = () => path.join('parseRecoveryBuff');
+  const joined = () => path.join("parseRecoveryBuff");
   return pipe(
     fromNullable(description.match(RECOVERY_BUFF)),
     option.map(([, status, up]) =>
       pipe(
         status
-          .split('と')
-          .map(s => parseStatus(s, { path: joined(), memoriaName })),
+
+          .split("と")
+
+          .map((s) => parseStatus(s, { path: joined(), memoriaName })),
         separator,
         either.flatMap(
           (statuses): Validated<MitamaError, SkillEffect[]> =>
             pipe(
-              statuses.map(stat =>
+              statuses.map((stat) =>
                 sequenceS(ap)({
-                  type: right('buff' as const),
+                  type: right("buff" as const),
                   range: right(range),
                   amount: toValidated(
                     parseAmount(up, { path: joined(), memoriaName }),
@@ -439,21 +452,21 @@ const parseHeal = (
   memoriaName: string,
   path: CallPath = CallPath.empty,
 ) => {
-  const joined = () => path.join('parseHeal');
+  const joined = () => path.join("parseHeal");
   return pipe(
     fromNullable(description.match(RECOVERY)),
     option.map(([, range, heal]) =>
       pipe(
         Do,
-        bind('range', () => parseRange(range, memoriaName, joined())),
-        bind('buff', ({ range }) =>
+        bind("range", () => parseRange(range, memoriaName, joined())),
+        bind("buff", ({ range }) =>
           parseRecoveryBuff(range, description, memoriaName, joined()),
         ),
         bind(
-          'recovery',
+          "recovery",
           ({ range }): Validated<MitamaError, SkillEffect> =>
             sequenceS(ap)({
-              type: right('heal' as const),
+              type: right("heal" as const),
               range: right(range),
               amount: toValidated(
                 parseAmount(heal, { path: joined(), memoriaName }),
@@ -491,24 +504,24 @@ const parseStackEffect =
     memoriaName: string,
     path: CallPath = CallPath.empty,
   ): Validated<MitamaError, SkillEffect[]> => {
-    const joined = () => path.join('parseStackEffect');
+    const joined = () => path.join("parseStackEffect");
     const err = (msg: string): MitamaError => ({
       target: description,
       msg,
       meta: { path: joined().toString(), memoriaName },
     });
     return pipe(
-      types.map(type =>
+      types.map((type) =>
         pipe(
           description.match(STACK_TYPE[type]),
           either.fromNullable(err(`given text doesn't match ${type}`)),
-          either.flatMap(match =>
+          either.flatMap((match) =>
             sequenceS(ap)({
               kind: right(type),
               rate: pipe(
                 match?.groups?.rate,
-                either.fromNullable(err('`groups.rate` does not exists')),
-                either.flatMap(rate =>
+                either.fromNullable(err("`groups.rate` does not exists")),
+                either.flatMap((rate) =>
                   parseIntSafe(rate, { path: joined(), memoriaName }),
                 ),
                 toValidated,
@@ -518,13 +531,13 @@ const parseStackEffect =
                 either.fromNullable(
                   err(`given text doesn't match ${NUMBER_OF_STACK}`),
                 ),
-                either.flatMap(match =>
+                either.flatMap((match) =>
                   pipe(
                     match?.groups?.numberOf,
                     either.fromNullable(
-                      err('`groups.numberOf` does not exists'),
+                      err("`groups.numberOf` does not exists"),
                     ),
-                    either.flatMap(numberOf =>
+                    either.flatMap((numberOf) =>
                       parseIntSafe(numberOf, { path: joined(), memoriaName }),
                     ),
                   ),
@@ -536,9 +549,9 @@ const parseStackEffect =
         ),
       ),
       separator,
-      either.map(effects =>
-        effects.map(eff => ({
-          type: 'stack',
+      either.map((effects) =>
+        effects.map((eff) => ({
+          type: "stack",
           ...eff,
         })),
       ),
@@ -552,61 +565,69 @@ function parseStack(
 ): Validated<MitamaError, SkillEffect[]> {
   const branch = (when: string) => path.join(`parseStack[${when}]`);
   return match(name)
+
     .when(
-      name => name.includes('メテオ'),
+      (name) => name.includes("メテオ"),
       () =>
-        parseStackEffect(['meteor'])(
+        parseStackEffect(["meteor"])(
           description,
           memoriaName,
-          branch('meteor'),
+          branch("meteor"),
         ),
     )
+
     .when(
-      name => name.includes('バリア'),
+      (name) => name.includes("バリア"),
       () =>
-        parseStackEffect(['barrier'])(
+        parseStackEffect(["barrier"])(
           description,
           memoriaName,
-          branch('barrier'),
+          branch("barrier"),
         ),
     )
+
     .when(
-      name => name.includes('エデン'),
+      (name) => name.includes("エデン"),
       () =>
-        parseStackEffect(['eden'])(description, memoriaName, branch('eden')),
+        parseStackEffect(["eden"])(description, memoriaName, branch("eden")),
     )
+
     .when(
-      name => name.includes('アニマ'),
+      (name) => name.includes("アニマ"),
       () =>
-        parseStackEffect(['anima'])(description, memoriaName, branch('anima')),
+        parseStackEffect(["anima"])(description, memoriaName, branch("anima")),
     )
+
     .when(
-      name => name.includes('コメット'),
+      (name) => name.includes("コメット"),
       () =>
-        parseStackEffect(['meteor', 'barrier'])(
+        parseStackEffect(["meteor", "barrier"])(
           description,
           memoriaName,
-          branch('comet'),
+          branch("comet"),
         ),
     )
+
     .when(
-      name => name.includes('エーテル'),
+      (name) => name.includes("エーテル"),
       () =>
-        parseStackEffect(['anima', 'meteor'])(
+        parseStackEffect(["anima", "meteor"])(
           description,
           memoriaName,
-          branch('ether'),
+          branch("ether"),
         ),
     )
+
     .when(
-      name => name.includes('ルミナス'),
+      (name) => name.includes("ルミナス"),
       () =>
-        parseStackEffect(['anima', 'barrier'])(
+        parseStackEffect(["anima", "barrier"])(
           description,
           memoriaName,
-          branch('luminous'),
+          branch("luminous"),
         ),
     )
+
     .otherwise(() => right([]));
 }
 
@@ -619,21 +640,21 @@ function parseElementEffect(
 ): Validated<MitamaError, SkillEffect[]> {
   const parseResonanceType = (
     name: string,
-  ): Either<MitamaError, ElementEffect['kind'][]> => {
-    if (name.includes('ミニマ') || name.includes('Mn')) {
-      return right(['minima' as const]);
+  ): Either<MitamaError, ElementEffect["kind"][]> => {
+    if (name.includes("ミニマ") || name.includes("Mn")) {
+      return right(["minima" as const]);
     }
-    if (name.includes('スプレッド')) {
-      return right(['spread' as const]);
+    if (name.includes("スプレッド")) {
+      return right(["spread" as const]);
     }
-    if (name.includes('エンハンス')) {
-      return right(['enhance' as const]);
+    if (name.includes("エンハンス")) {
+      return right(["enhance" as const]);
     }
-    if (name.includes('エンハンシア')) {
-      return right(['enhance' as const, 'minima' as const]);
+    if (name.includes("エンハンシア")) {
+      return right(["enhance" as const, "minima" as const]);
     }
     return anyhow(name, "given text doesn't match resonance type", {
-      path: path.join('parseElementEffect.parseResonanceType'),
+      path: path.join("parseElementEffect.parseResonanceType"),
       memoriaName,
     });
   };
@@ -642,13 +663,13 @@ function parseElementEffect(
       fromNullable(description.match(/スキル効果が(\d+\.\d+)倍/)),
       option.map(([, rate]) =>
         parseIntSafe(rate, {
-          path: path.join('parseElementEffect.parseRate'),
+          path: path.join("parseElementEffect.parseRate"),
           memoriaName,
         }),
       ),
       option.getOrElse(() =>
         anyhow(description, "given text doesn't match rate", {
-          path: path.join('parseElementEffect.parseRate'),
+          path: path.join("parseElementEffect.parseRate"),
           memoriaName,
         }),
       ),
@@ -662,18 +683,19 @@ function parseElementEffect(
       ([, element]): Validated<MitamaError, SkillEffect[]> =>
         pipe(
           toValidated(parseResonanceType(name)),
-          either.flatMap(kinds =>
+          either.flatMap((kinds) =>
             separator(
-              kinds.map(kind =>
+              kinds.map((kind) =>
                 match(kind)
+
                   .with(
-                    'enhance',
+                    "enhance",
                     (enhance): Validated<MitamaError, SkillEffect> =>
                       sequenceS(ap)({
-                        type: right('element' as const),
+                        type: right("element" as const),
                         element: toValidated(
                           parseElement(element, {
-                            path: path.join('parseElementEffect'),
+                            path: path.join("parseElementEffect"),
                             memoriaName,
                           }),
                         ),
@@ -681,13 +703,14 @@ function parseElementEffect(
                         rate: parseRate(description),
                       }),
                   )
+
                   .otherwise(
                     (kind): Validated<MitamaError, SkillEffect> =>
                       sequenceS(ap)({
-                        type: right('element' as const),
+                        type: right("element" as const),
                         element: toValidated(
                           parseElement(element, {
-                            path: path.join('parseElementEffect'),
+                            path: path.join("parseElementEffect"),
                             memoriaName,
                           }),
                         ),
@@ -705,107 +728,131 @@ function parseElementEffect(
 
 const parseKinds = (skillName: string): Option<readonly SkillKind[]> => {
   const elemental = match<string, Option<SkillKind>>(skillName)
+
     .when(
-      name => name.startsWith('火：'),
-      () => option.of({ element: 'Fire', kind: 'Stimulation' }),
+      (name) => name.startsWith("火："),
+      () => option.of({ element: "Fire", kind: "Stimulation" }),
     )
+
     .when(
-      name => name.startsWith('水：'),
-      () => option.of({ element: 'Water', kind: 'Stimulation' }),
+      (name) => name.startsWith("水："),
+      () => option.of({ element: "Water", kind: "Stimulation" }),
     )
+
     .when(
-      name => name.startsWith('風：'),
-      () => option.of({ element: 'Wind', kind: 'Stimulation' }),
+      (name) => name.startsWith("風："),
+      () => option.of({ element: "Wind", kind: "Stimulation" }),
     )
+
     .when(
-      name => name.startsWith('光：'),
-      () => option.of({ element: 'Light', kind: 'Stimulation' }),
+      (name) => name.startsWith("光："),
+      () => option.of({ element: "Light", kind: "Stimulation" }),
     )
+
     .when(
-      name => name.startsWith('闇：'),
-      () => option.of({ element: 'Dark', kind: 'Stimulation' }),
+      (name) => name.startsWith("闇："),
+      () => option.of({ element: "Dark", kind: "Stimulation" }),
     )
+
     .when(
-      name => name.startsWith('火拡：'),
-      () => option.of({ element: 'Fire', kind: 'Spread' }),
+      (name) => name.startsWith("火拡："),
+      () => option.of({ element: "Fire", kind: "Spread" }),
     )
+
     .when(
-      name => name.startsWith('水拡：'),
-      () => option.of({ element: 'Water', kind: 'Spread' }),
+      (name) => name.startsWith("水拡："),
+      () => option.of({ element: "Water", kind: "Spread" }),
     )
+
     .when(
-      name => name.startsWith('風拡：'),
-      () => option.of({ element: 'Wind', kind: 'Spread' }),
+      (name) => name.startsWith("風拡："),
+      () => option.of({ element: "Wind", kind: "Spread" }),
     )
+
     .when(
-      name => name.startsWith('光拡：'),
-      () => option.of({ element: 'Light', kind: 'Spread' }),
+      (name) => name.startsWith("光拡："),
+      () => option.of({ element: "Light", kind: "Spread" }),
     )
+
     .when(
-      name => name.startsWith('闇拡：'),
-      () => option.of({ element: 'Dark', kind: 'Spread' }),
+      (name) => name.startsWith("闇拡："),
+      () => option.of({ element: "Dark", kind: "Spread" }),
     )
+
     .when(
-      name => name.startsWith('火強：'),
-      () => option.of({ element: 'Fire', kind: 'Strengthen' }),
+      (name) => name.startsWith("火強："),
+      () => option.of({ element: "Fire", kind: "Strengthen" }),
     )
+
     .when(
-      name => name.startsWith('水強：'),
-      () => option.of({ element: 'Water', kind: 'Strengthen' }),
+      (name) => name.startsWith("水強："),
+      () => option.of({ element: "Water", kind: "Strengthen" }),
     )
+
     .when(
-      name => name.startsWith('風強：'),
-      () => option.of({ element: 'Wind', kind: 'Strengthen' }),
+      (name) => name.startsWith("風強："),
+      () => option.of({ element: "Wind", kind: "Strengthen" }),
     )
+
     .when(
-      name => name.startsWith('光強：'),
-      () => option.of({ element: 'Light', kind: 'Strengthen' }),
+      (name) => name.startsWith("光強："),
+      () => option.of({ element: "Light", kind: "Strengthen" }),
     )
+
     .when(
-      name => name.startsWith('闇強：'),
-      () => option.of({ element: 'Dark', kind: 'Strengthen' }),
+      (name) => name.startsWith("闇強："),
+      () => option.of({ element: "Dark", kind: "Strengthen" }),
     )
+
     .when(
-      name => name.startsWith('火弱：'),
-      () => option.of({ element: 'Fire', kind: 'Weaken' }),
+      (name) => name.startsWith("火弱："),
+      () => option.of({ element: "Fire", kind: "Weaken" }),
     )
+
     .when(
-      name => name.startsWith('水弱：'),
-      () => option.of({ element: 'Water', kind: 'Weaken' }),
+      (name) => name.startsWith("水弱："),
+      () => option.of({ element: "Water", kind: "Weaken" }),
     )
+
     .when(
-      name => name.startsWith('風弱：'),
-      () => option.of({ element: 'Wind', kind: 'Weaken' }),
+      (name) => name.startsWith("風弱："),
+      () => option.of({ element: "Wind", kind: "Weaken" }),
     )
+
     .when(
-      name => name.startsWith('光弱：'),
-      () => option.of({ element: 'Light', kind: 'Weaken' }),
+      (name) => name.startsWith("光弱："),
+      () => option.of({ element: "Light", kind: "Weaken" }),
     )
+
     .when(
-      name => name.startsWith('闇弱：'),
-      () => option.of({ element: 'Dark', kind: 'Weaken' }),
+      (name) => name.startsWith("闇弱："),
+      () => option.of({ element: "Dark", kind: "Weaken" }),
     )
+
     .otherwise(() => option.none);
 
   const counter = match<string, Option<SkillKind>>(skillName)
+
     .when(
-      name => name.includes('カウンター'),
-      () => option.of('counter'),
+      (name) => name.includes("カウンター"),
+      () => option.of("counter"),
     )
+
     .when(
-      name => name.includes('Sカウンター'),
-      () => option.of('s-counter'),
+      (name) => name.includes("Sカウンター"),
+      () => option.of("s-counter"),
     )
+
     .otherwise(() => option.none);
 
-  const charge = skillName.includes('チャージ')
-    ? option.of('charge' as SkillKind)
+  const charge = skillName.includes("チャージ")
+    ? option.of("charge" as SkillKind)
     : option.none;
-  const heal = skillName.includes('ヒール')
-    ? option.of('heal' as SkillKind)
+  const heal = skillName.includes("ヒール")
+    ? option.of("heal" as SkillKind)
     : option.none;
-  const recover = skillName.includes('リカバー')
-    ? option.of('recover' as SkillKind)
+  const recover = skillName.includes("リカバー")
+    ? option.of("recover" as SkillKind)
     : option.none;
 
   return transposeArray([elemental, counter, charge, heal, recover]);
@@ -818,33 +865,38 @@ export const parseSkill = ({
 }: {
   memoriaName: string;
   cardType:
-    | '通常単体'
-    | '通常範囲'
-    | '特殊単体'
-    | '特殊範囲'
-    | '支援'
-    | '妨害'
-    | '回復';
+    | "通常単体"
+    | "通常範囲"
+    | "特殊単体"
+    | "特殊範囲"
+    | "支援"
+    | "妨害"
+    | "回復";
   skill: { name: string; description: string; sp: number };
 }): Validated<MitamaError, Skill> => {
-  const path = new CallPath(['parseSkill']);
+  const path = new CallPath(["parseSkill"]);
   return sequenceS(ap)({
     raw: right(skill),
     sp: right(skill.sp),
     effects: pipe(
       Do,
-      either.bind('effects', () =>
+      either.bind("effects", () =>
         match(cardType)
-          .with(P.union('通常単体', '通常範囲', '特殊単体', '特殊範囲'), () =>
+
+          .with(P.union("通常単体", "通常範囲", "特殊単体", "特殊範囲"), () =>
             parseDamage(skill.description, memoriaName, path),
           )
-          .with('支援', () => parseBuff(skill.description, memoriaName, path))
-          .with('妨害', () => parseDebuff(skill.description, memoriaName, path))
-          .with('回復', () => parseHeal(skill.description, memoriaName, path))
+
+          .with("支援", () => parseBuff(skill.description, memoriaName, path))
+
+          .with("妨害", () => parseDebuff(skill.description, memoriaName, path))
+
+          .with("回復", () => parseHeal(skill.description, memoriaName, path))
+
           .exhaustive(),
       ),
-      either.bind('stack', () => parseStack(skill, memoriaName, path)),
-      either.bind('elementEffect', () =>
+      either.bind("stack", () => parseStack(skill, memoriaName, path)),
+      either.bind("elementEffect", () =>
         parseElementEffect(skill, memoriaName, path),
       ),
       either.map(({ effects, stack, elementEffect }) => [

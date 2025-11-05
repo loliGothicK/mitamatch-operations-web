@@ -1,17 +1,17 @@
-import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Inter } from 'next/font/google';
-import type { ReactNode } from 'react';
-import type { Metadata } from 'next';
-import { headers } from 'next/headers';
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Inter } from "next/font/google";
+import type { ReactNode } from "react";
+import type { Metadata } from "next";
+import { headers } from "next/headers";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
-const siteName = 'Mitamatch Operations';
+const siteName = "Mitamatch Operations";
 const description =
-  'デッキビルダーやオーダータイムラインビルダーなどラスバレを便利にするツールが使えます';
-const url = 'https://operations.mitama.io';
+  "デッキビルダーやオーダータイムラインビルダーなどラスバレを便利にするツールが使えます";
+const url = "https://operations.mitama.io";
 
 export const metadata: Metadata = {
   title: {
@@ -25,21 +25,21 @@ export const metadata: Metadata = {
     description,
     url,
     images: [
-      'https://raw.githubusercontent.com/loliGothicK/mitamatch-operations-web/master/public/opengraph-image.png',
+      "https://raw.githubusercontent.com/loliGothicK/mitamatch-operations-web/master/public/opengraph-image.png",
     ],
     siteName,
-    locale: 'ja_JP',
-    type: 'website',
+    locale: "ja_JP",
+    type: "website",
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: siteName,
     description,
     images: [
-      'https://raw.githubusercontent.com/loliGothicK/mitamatch-operations-web/master/public/opengraph-image.png',
+      "https://raw.githubusercontent.com/loliGothicK/mitamatch-operations-web/master/public/opengraph-image.png",
     ],
-    site: '@mitama_rs',
-    creator: '@mitama_rs',
+    site: "@mitama_rs",
+    creator: "@mitama_rs",
   },
   alternates: {
     canonical: url,
@@ -51,9 +51,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const nonce = (await headers()).get('x-nonce') || undefined;
+  const nonce = (await headers()).get("x-nonce") || undefined;
   return (
-    <html lang='ja'>
+    <html lang="ja">
       <body className={inter.className}>
         {children}
         <Analytics />

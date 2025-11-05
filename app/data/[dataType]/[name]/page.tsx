@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Layout } from '@/components/Layout';
-import { type ReactNode, type SyntheticEvent, use, useState } from 'react';
-import { type Memoria, memoriaList } from '@/domain/memoria/memoria';
-import { Box, Stack } from '@mui/system';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Image from 'next/image';
+import { Layout } from "@/components/Layout";
+import { type ReactNode, type SyntheticEvent, use, useState } from "react";
+import { type Memoria, memoriaList } from "@/domain/memoria/memoria";
+import { Box, Stack } from "@mui/system";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -20,9 +20,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from '@mui/material';
-import {AutoSkill} from "@/parser/autoSkill";
-import {Skill} from "@/parser/skill";
+} from "@mui/material";
+import { AutoSkill } from "@/parser/autoSkill";
+import { Skill } from "@/parser/skill";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -35,7 +35,7 @@ function CustomTabPanel(props: TabPanelProps) {
 
   return (
     <div
-      role='tabpanel'
+      role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
@@ -49,34 +49,34 @@ function CustomTabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
-function StatusTable({ status }: { status: Memoria['status'] }) {
+function StatusTable({ status }: { status: Memoria["status"] }) {
   return (
-    <TableContainer component={Paper} sx={{ width: '90%' }}>
-      <Table aria-label='status table' size='small'>
+    <TableContainer component={Paper} sx={{ width: "90%" }}>
+      <Table aria-label="status table" size="small">
         <TableHead>
           <TableRow>
             <TableCell>レベル</TableCell>
-            <TableCell align='right'>ATK</TableCell>
-            <TableCell align='right'>Sp.ATK</TableCell>
-            <TableCell align='right'>DEF</TableCell>
-            <TableCell align='right'>Sp.DEF</TableCell>
+            <TableCell align="right">ATK</TableCell>
+            <TableCell align="right">Sp.ATK</TableCell>
+            <TableCell align="right">DEF</TableCell>
+            <TableCell align="right">Sp.DEF</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {status.map((row, index) => (
             <TableRow
-              key={row.join(',')}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              key={row.join(",")}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component='th' scope='row'>
+              <TableCell component="th" scope="row">
                 {80 + index * 10}
               </TableCell>
-              {row.map(value => (
-                <TableCell key={value} align='right'>
+              {row.map((value) => (
+                <TableCell key={value} align="right">
                   {value}
                 </TableCell>
               ))}
@@ -88,16 +88,16 @@ function StatusTable({ status }: { status: Memoria['status'] }) {
   );
 }
 
-export default function Page(props: PageProps<'/data/[dataType]/[name]'>) {
+export default function Page(props: PageProps<"/data/[dataType]/[name]">) {
   const { name } = use(props.params);
   const query = use(props.searchParams);
   const data = memoriaList.filter(
-    memoria => memoria.name.full === decodeURI(name),
+    (memoria) => memoria.name.full === decodeURI(name),
   );
   const [value, setValue] = useState(
-    'type' in query && typeof query.type === 'string'
+    "type" in query && typeof query.type === "string"
       ? data.findIndex(
-          memoria => memoria.cardType === decodeURI(query.type as string),
+          (memoria) => memoria.cardType === decodeURI(query.type as string),
         )
       : 0,
   );
@@ -110,8 +110,8 @@ export default function Page(props: PageProps<'/data/[dataType]/[name]'>) {
     <Layout>
       <Box
         sx={{
-          width: '80%',
-          mx: 'auto',
+          width: "80%",
+          mx: "auto",
           p: 3,
           mt: 4,
           borderRadius: 1,
@@ -119,9 +119,9 @@ export default function Page(props: PageProps<'/data/[dataType]/[name]'>) {
       >
         <Box>
           <Stack
-            direction={'row'}
-            justifyContent={'left'}
-            alignItems={'center'}
+            direction={"row"}
+            justifyContent={"left"}
+            alignItems={"center"}
             gap={2}
           >
             <Image
@@ -132,18 +132,18 @@ export default function Page(props: PageProps<'/data/[dataType]/[name]'>) {
               priority={true}
             />
             <Box>
-              <Typography variant='h4' component='div'>
+              <Typography variant="h4" component="div">
                 {data[0].name.full}
               </Typography>
-              {data[0].labels.join('/')}
+              {data[0].labels.join("/")}
             </Box>
           </Stack>
         </Box>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
             onChange={handleChange}
-            aria-label='basic tabs example'
+            aria-label="basic tabs example"
           >
             {data.map((memoria, index) => (
               <Tab
@@ -157,17 +157,26 @@ export default function Page(props: PageProps<'/data/[dataType]/[name]'>) {
         {data.map((memoria, index) => (
           <CustomTabPanel index={index} value={value} key={memoria.cardType}>
             <Box
-              display={'flex'}
-              flexDirection={'column'}
-              alignItems={'center'}
+              display={"flex"}
+              flexDirection={"column"}
+              alignItems={"center"}
             >
-              <Divider flexItem={true} textAlign='left' sx={{ margin: 5 }}>
+              <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
                 ステータス
               </Divider>
               <StatusTable status={memoria.status} />
-              <SkillCard skill={memoria.skills.questSkill} title={'対ヒュージスキル'} />
-              <SkillCard skill={memoria.skills.gvgSkill} title={'レギオンマッチスキル'} />
-              <SkillCard skill={memoria.skills.autoSkill} title={'レギオンマッチ補助スキル'} />
+              <SkillCard
+                skill={memoria.skills.questSkill}
+                title={"対ヒュージスキル"}
+              />
+              <SkillCard
+                skill={memoria.skills.gvgSkill}
+                title={"レギオンマッチスキル"}
+              />
+              <SkillCard
+                skill={memoria.skills.autoSkill}
+                title={"レギオンマッチ補助スキル"}
+              />
             </Box>
           </CustomTabPanel>
         ))}
@@ -176,31 +185,37 @@ export default function Page(props: PageProps<'/data/[dataType]/[name]'>) {
   );
 }
 
-function SkillCard({ skill, title }: { skill: Skill | AutoSkill; title: string; }) {
+function SkillCard({
+  skill,
+  title,
+}: {
+  skill: Skill | AutoSkill;
+  title: string;
+}) {
   return (
     <>
-      <Divider flexItem={true} textAlign='left' sx={{ margin: 5 }}>
+      <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
         {title}
       </Divider>
-      <Card sx={{ width: '90%', margin: 'auto' }} variant='outlined' square={true}>
+      <Card
+        sx={{ width: "90%", margin: "auto" }}
+        variant="outlined"
+        square={true}
+      >
         <CardContent>
-          <Box display='flex' alignItems='flex-start'>
-            <Typography variant='h5' component='div' sx={{ margin: 2 }}>
+          <Box display="flex" alignItems="flex-start">
+            <Typography variant="h5" component="div" sx={{ margin: 2 }}>
               {skill.raw.name}
             </Typography>
-            {'sp' in skill && (
+            {"sp" in skill && (
               <Chip
                 label={`Cost ${skill.sp}`}
-                sx={{ marginLeft: 'auto', marginTop: 2 }}
+                sx={{ marginLeft: "auto", marginTop: 2 }}
               />
             )}
           </Box>
           <Divider sx={{ margin: 2 }} />
-          <Typography
-            variant='body2'
-            color='text.secondary'
-            sx={{ margin: 2 }}
-          >
+          <Typography variant="body2" color="text.secondary" sx={{ margin: 2 }}>
             {skill.raw.description}
           </Typography>
         </CardContent>

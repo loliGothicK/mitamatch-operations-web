@@ -1,40 +1,40 @@
-import CodeMirror, { keymap, Prec } from '@uiw/react-codemirror';
-import { useCallback, useState } from 'react';
-import { githubDark } from '@uiw/codemirror-theme-github';
+import CodeMirror, { keymap, Prec } from "@uiw/react-codemirror";
+import { useCallback, useState } from "react";
+import { githubDark } from "@uiw/codemirror-theme-github";
 import {
   sql,
   keywordCompletionSource,
   PostgreSQL,
   schemaCompletionSource,
   type SQLNamespace,
-} from '@codemirror/lang-sql';
+} from "@codemirror/lang-sql";
 import {
   autocompletion,
   type CompletionSource,
-} from '@codemirror/autocomplete';
-import { queryLinter } from '@/parser/query/linter';
+} from "@codemirror/autocomplete";
+import { queryLinter } from "@/parser/query/linter";
 
 // サポートしているキーワードのホワイトリスト
 const keywordWhitelist = new Set([
-  'SELECT',
-  'FROM',
-  'WHERE',
-  'AND',
-  'OR',
-  'LIKE',
-  'ILIKE',
-  'NOT',
-  '=',
-  '>',
-  '<',
-  '>=',
-  '<=',
+  "SELECT",
+  "FROM",
+  "WHERE",
+  "AND",
+  "OR",
+  "LIKE",
+  "ILIKE",
+  "NOT",
+  "=",
+  ">",
+  "<",
+  ">=",
+  "<=",
 ]);
 
 // デフォルトの SQL 補完ソースを取得
 const defaultSqlSource = keywordCompletionSource(PostgreSQL);
 
-const supportedKeywordSource: CompletionSource = async context => {
+const supportedKeywordSource: CompletionSource = async (context) => {
   // 1. まずデフォルトの補完結果（キーワード、テーブル名などすべて）を取得
   const result = await defaultSqlSource(context);
 
@@ -43,9 +43,9 @@ const supportedKeywordSource: CompletionSource = async context => {
   }
 
   // 2. 補完オプション (result.options) をフィルタリング
-  const filteredOptions = result.options.filter(completion => {
+  const filteredOptions = result.options.filter((completion) => {
     // 補完のタイプが 'keyword' の場合のみチェック
-    if (completion.type === 'keyword') {
+    if (completion.type === "keyword") {
       // ホワイトリストに存在するか確認 (大文字に変換して比較)
       return keywordWhitelist.has(completion.label.toUpperCase());
     }
@@ -75,7 +75,7 @@ export default function Console({
   execute: () => void;
   onChangeBack: (value: string) => void;
 }) {
-  const [value, setValue] = useState(initialeValue || '');
+  const [value, setValue] = useState(initialeValue || "");
   const onChange = useCallback(
     (val: string, _: unknown) => {
       onChangeBack(val);
@@ -87,7 +87,7 @@ export default function Console({
     keymap.of([
       {
         // クエリの実行ショートカットキー
-        key: 'Ctrl-Enter',
+        key: "Ctrl-Enter",
         run() {
           execute();
           return true;
@@ -105,7 +105,7 @@ export default function Console({
   return (
     <CodeMirror
       value={value}
-      height='50px'
+      height="50px"
       theme={githubDark}
       extensions={[
         sql({ dialect: PostgreSQL, schema }),

@@ -1,15 +1,15 @@
-import { type Either, isLeft } from 'fp-ts/Either';
-import { either, option } from 'fp-ts';
-import { isSome, type Option } from 'fp-ts/Option';
-import { match } from 'ts-pattern';
+import { type Either, isLeft } from "fp-ts/Either";
+import { either, option } from "fp-ts";
+import { isSome, type Option } from "fp-ts/Option";
+import { match } from "ts-pattern";
 
 export type Flatten<T> = T extends unknown[] ? T : T[];
 
 export const separator = <E, T>(
   seq: readonly Either<E, T>[],
 ): Either<Flatten<E>, Flatten<T>> => {
-  const left = seq.filter(isLeft).map(l => l.left);
-  const right = seq.filter(either.isRight).map(r => r.right);
+  const left = seq.filter(isLeft).map((l) => l.left);
+  const right = seq.filter(either.isRight).map((r) => r.right);
   return left.length === 0
     ? either.right(right.flat() as Flatten<T>)
     : either.left(left.flat() as Flatten<E>);
@@ -17,14 +17,12 @@ export const separator = <E, T>(
 
 export function transposeArray<T>(seq: Option<T>[]): Option<T[]> {
   const some = seq.filter(isSome);
-  return some.length === 0
-    ? option.none
-    : option.of([...some.map(s => s.value)]);
+  return some.length === 0 ? option.none : option.of(some.map((s) => s.value));
 }
 
 const isEither = <T, E>(
   m: Option<Either<E, T>> | Either<E, Option<T>>,
-): m is Either<E, Option<T>> => m._tag === 'Right' || m._tag === 'Left';
+): m is Either<E, Option<T>> => m._tag === "Right" || m._tag === "Left";
 
 export function transpose<E, T>(
   input: Option<Either<E, T>>,

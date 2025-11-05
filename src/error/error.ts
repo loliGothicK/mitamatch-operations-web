@@ -1,4 +1,4 @@
-import { left } from 'fp-ts/Either';
+import { left } from "fp-ts/Either";
 
 export type MitamaError = {
   target: string;
@@ -25,7 +25,7 @@ export class CallPath {
   }
 
   toString() {
-    return this.stack.join('.');
+    return this.stack.join(".");
   }
 
   static empty = new CallPath();

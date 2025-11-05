@@ -1,7 +1,7 @@
-'use client'; // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
-import { Button } from '@mui/material';
-import { useEffect } from 'react';
+import { Button } from "@mui/material";
+import { useEffect } from "react";
 
 export default function NotFound({
   error,
@@ -24,7 +24,7 @@ export default function NotFound({
           () => action()
         }
       >
-        {error.digest || 'Try again'}
+        {error.digest || "Try again"}
       </Button>
     </div>
   );

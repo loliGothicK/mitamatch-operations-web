@@ -1,4 +1,4 @@
-import { getDefaultStore, useAtom } from 'jotai';
+import { getDefaultStore, useAtom } from "jotai";
 
 const defaultStore = getDefaultStore();
 

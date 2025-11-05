@@ -1,9 +1,9 @@
-import { evaluate } from '@/evaluate/evaluate';
-import { memoriaList } from '@/domain/memoria/memoria';
-import { charmList } from '@/domain/charm/charm';
-import { costumeList } from '@/domain/costume/costume';
+import { evaluate } from "@/evaluate/evaluate";
+import { memoriaList } from "@/domain/memoria/memoria";
+import { charmList } from "@/domain/charm/charm";
+import { costumeList } from "@/domain/costume/costume";
 
-test.each(memoriaList)('.evaluate($name.full/$cardType)', memoiria => {
+test.each(memoriaList)(".evaluate($name.full/$cardType)", (memoiria) => {
   const result = evaluate(
     [{ ...memoiria, concentration: 0 }],
     [1000, 1000, 1000, 1000],

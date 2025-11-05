@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useAtom } from 'jotai';
-import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
-import { type MouseEvent, Suspense, useEffect, useId, useState } from 'react';
-import DifferenceIcon from '@mui/icons-material/Difference';
-import type { Unit } from '@/domain/types';
-import { generateShortLink, saveShortLink } from '@/actions/permlink';
-import { restore } from '@/actions/restore';
+import { useAtom } from "jotai";
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { type MouseEvent, Suspense, useEffect, useId, useState } from "react";
+import DifferenceIcon from "@mui/icons-material/Difference";
+import type { Unit } from "@/domain/types";
+import { generateShortLink, saveShortLink } from "@/actions/permlink";
+import { restore } from "@/actions/restore";
 
 import {
   Add,
@@ -24,7 +24,7 @@ import {
   Share,
   Close,
   Settings,
-} from '@mui/icons-material';
+} from "@mui/icons-material";
 import {
   AppBar,
   Avatar,
@@ -54,16 +54,16 @@ import {
   CardContent,
   TextField,
   InputAdornment,
-} from '@mui/material';
-import type { SelectChangeEvent, Theme } from '@mui/material';
-import { blue, green, purple, red, yellow } from '@mui/material/colors';
+} from "@mui/material";
+import type { SelectChangeEvent, Theme } from "@mui/material";
+import { blue, green, purple, red, yellow } from "@mui/material/colors";
 
-import { decodeDeck, encodeDeck } from '@/endec/serde';
-import Details from '@/components/deck-builder/Details';
-import Filter from '@/components/deck-builder/Filter';
-import Search from '@/components/deck-builder/Search';
-import Sortable from '@/components/sortable/Sortable';
-import type { Memoria } from '@/domain/memoria/memoria';
+import { decodeDeck, encodeDeck } from "@/endec/serde";
+import Details from "@/components/deck-builder/Details";
+import Filter from "@/components/deck-builder/Filter";
+import Search from "@/components/deck-builder/Search";
+import Sortable from "@/components/sortable/Sortable";
+import type { Memoria } from "@/domain/memoria/memoria";
 import {
   type MemoriaWithConcentration,
   adLevelAtom,
@@ -85,56 +85,64 @@ import {
   targetAfterAtom,
   type Concentration,
   unitTitleAtom,
-} from '@/jotai/memoriaAtoms';
+} from "@/jotai/memoriaAtoms";
 
-import { calcDiff } from '@/evaluate/calc';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import Toolbar from '@mui/material/Toolbar';
-import { useTheme } from '@mui/material/styles';
-import Cookies from 'js-cookie';
-import PopupState, { bindMenu, bindTrigger } from 'material-ui-popup-state';
-import { Virtuoso } from 'react-virtuoso';
-import { match } from 'ts-pattern';
-import { Lenz } from '@/domain/memoria/lens';
-import { isStackEffect } from '@/parser/skill';
-import { Calculator } from '@/deck-builder/_tabs/calculator';
-import type { ImageProps } from 'next/dist/shared/lib/get-img-props';
-import type { StrictOmit } from 'ts-essentials';
+import { calcDiff } from "@/evaluate/calc";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import Toolbar from "@mui/material/Toolbar";
+import { useTheme } from "@mui/material/styles";
+import Cookies from "js-cookie";
+import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
+import { Virtuoso } from "react-virtuoso";
+import { match } from "ts-pattern";
+import { Lenz } from "@/domain/memoria/lens";
+import { isStackEffect } from "@/parser/skill";
+import { Calculator } from "@/deck-builder/_tabs/calculator";
+import type { ImageProps } from "next/dist/shared/lib/get-img-props";
+import type { StrictOmit } from "ts-essentials";
 
-const COMMING_SOON = '/memoria/CommingSoon.jpeg';
+const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
 function Icon({
   cardType,
   attribute,
   position,
 }: {
-  cardType: Memoria['cardType'];
-  attribute: Memoria['attribute'];
+  cardType: Memoria["cardType"];
+  attribute: Memoria["attribute"];
   position?: number;
 }) {
   const kindImage = match(cardType)
-    .with('通常単体', () => (
-      <Image src={'/NormalSingle.png'} alt={'kind'} width={25} height={25} />
+
+    .with("通常単体", () => (
+      <Image src={"/NormalSingle.png"} alt={"kind"} width={25} height={25} />
     ))
-    .with('通常範囲', () => (
-      <Image src={'/NormalRange.png'} alt={'kind'} width={25} height={25} />
+
+    .with("通常範囲", () => (
+      <Image src={"/NormalRange.png"} alt={"kind"} width={25} height={25} />
     ))
-    .with('特殊単体', () => (
-      <Image src={'/SpecialSingle.png'} alt={'kind'} width={25} height={25} />
+
+    .with("特殊単体", () => (
+      <Image src={"/SpecialSingle.png"} alt={"kind"} width={25} height={25} />
     ))
-    .with('特殊範囲', () => (
-      <Image src={'/SpecialRange.png'} alt={'kind'} width={25} height={25} />
+
+    .with("特殊範囲", () => (
+      <Image src={"/SpecialRange.png"} alt={"kind"} width={25} height={25} />
     ))
-    .with('支援', () => (
-      <Image src={'/Assist.png'} alt={'kind'} width={25} height={25} />
+
+    .with("支援", () => (
+      <Image src={"/Assist.png"} alt={"kind"} width={25} height={25} />
     ))
-    .with('妨害', () => (
-      <Image src={'/Interference.png'} alt={'kind'} width={25} height={25} />
+
+    .with("妨害", () => (
+      <Image src={"/Interference.png"} alt={"kind"} width={25} height={25} />
     ))
-    .with('回復', () => (
-      <Image src={'/Recovery.png'} alt={'kind'} width={25} height={25} />
+
+    .with("回復", () => (
+      <Image src={"/Recovery.png"} alt={"kind"} width={25} height={25} />
     ))
+
     .exhaustive();
 
   const avatar = (color: string) => (
@@ -143,7 +151,7 @@ function Icon({
         width: 30,
         height: 30,
         left: position,
-        position: 'absolute',
+        position: "absolute",
         bgcolor: color,
       }}
     >
@@ -152,11 +160,17 @@ function Icon({
   );
 
   return match(attribute)
-    .with('Fire', () => avatar(red[500]))
-    .with('Water', () => avatar(blue[500]))
-    .with('Wind', () => avatar(green[500]))
-    .with('Light', () => avatar(yellow[500]))
-    .with('Dark', () => avatar(purple[500]))
+
+    .with("Fire", () => avatar(red[500]))
+
+    .with("Water", () => avatar(blue[500]))
+
+    .with("Wind", () => avatar(green[500]))
+
+    .with("Light", () => avatar(yellow[500]))
+
+    .with("Dark", () => avatar(purple[500]))
+
     .exhaustive();
 }
 
@@ -174,33 +188,33 @@ function ConcentrationIcon({
       sx={{
         top: 25,
         left: 60,
-        position: 'absolute',
+        position: "absolute",
       }}
     >
       {concentration === 4 ? (
         <Typography
-          variant='body2'
-          color='white'
+          variant="body2"
+          color="white"
           sx={{
-            position: 'absolute',
+            position: "absolute",
           }}
         >
           MAX
         </Typography>
       ) : (
         <Typography
-          variant='body2'
-          color='white'
+          variant="body2"
+          color="white"
           sx={{
-            position: 'absolute',
+            position: "absolute",
           }}
         >
           {concentration}
         </Typography>
       )}
       <Image
-        src={'/Concentration.png'}
-        alt={'concentration'}
+        src={"/Concentration.png"}
+        alt={"concentration"}
         width={30}
         height={30}
       />
@@ -213,7 +227,7 @@ function MemoriaImage({
   ...option
 }: { name: string } & StrictOmit<
   ImageProps,
-  'src' | 'alt' | 'width' | 'height' | 'onError'
+  "src" | "alt" | "width" | "height" | "onError"
 >) {
   const [imageSource, setImageSource] = useState(`/memoria/${name}.png`);
 
@@ -281,7 +295,7 @@ function MemoriaItem({
   });
 
   const changeValue = (prev: MemoriaWithConcentration[]) => {
-    return prev.map(memoria => {
+    return prev.map((memoria) => {
       if (memoria.name.short === name.short) {
         return {
           ...memoria,
@@ -313,7 +327,7 @@ function MemoriaItem({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? Number.POSITIVE_INFINITY : 'auto',
+    zIndex: isDragging ? Number.POSITIVE_INFINITY : "auto",
   };
 
   const skeleton = (w: number, h: number) => `
@@ -337,8 +351,8 @@ function MemoriaItem({
     </svg>`;
 
   const toBase64 = (str: string) => {
-    if (typeof window === 'undefined') {
-      return Buffer.from(str).toString('base64');
+    if (typeof window === "undefined") {
+      return Buffer.from(str).toString("base64");
     }
     return window.btoa(str);
   };
@@ -349,7 +363,7 @@ function MemoriaItem({
         sx={
           compare && compare.id === memoria.id
             ? {
-                filter: 'grayscale(80%)',
+                filter: "grayscale(80%)",
               }
             : {}
         }
@@ -366,25 +380,25 @@ function MemoriaItem({
               handleConcentration={disable || handleConcentration}
             />
           </Box>
-          <div {...attributes} {...listeners} style={{ touchAction: 'none' }}>
+          <div {...attributes} {...listeners} style={{ touchAction: "none" }}>
             <Tooltip
               title={
                 <Stack>
-                  <Typography variant='h6'>{name.short}</Typography>
-                  <Typography variant='body2'>
+                  <Typography variant="h6">{name.short}</Typography>
+                  <Typography variant="body2">
                     {Lenz.gvgSkill.name.get(memoria)}
                   </Typography>
-                  <Typography variant='body2'>
+                  <Typography variant="body2">
                     {Lenz.autoSkill.name.get(memoria)}
                   </Typography>
                 </Stack>
               }
-              placement={'top'}
+              placement={"top"}
               arrow
             >
               <MemoriaImage
                 name={memoria.name.short}
-                placeholder={'blur'}
+                placeholder={"blur"}
                 blurDataURL={toBase64(skeleton(100, 100))}
                 onContextMenu={onContextMenu ? undefined : handleContextMenu}
                 preload={preload}
@@ -392,34 +406,34 @@ function MemoriaItem({
             </Tooltip>
           </div>
           <ImageListItemBar
-            sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
-            position={'top'}
-            actionPosition={'right'}
+            sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
+            position={"top"}
+            actionPosition={"right"}
           />
           <Box>
             {!disable && (
               <ImageListItemBar
-                sx={{ bgcolor: 'rgba(0, 0, 0, 0)' }}
-                position={'top'}
-                actionPosition={'left'}
+                sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
+                position={"top"}
+                actionPosition={"left"}
                 actionIcon={
                   remove === undefined && (
                     <IconButton
                       sx={{
-                        color: 'rgba(255, 50, 50, 0.9)',
-                        bgcolor: 'rgba(0, 0, 0, 0.2)',
+                        color: "rgba(255, 50, 50, 0.9)",
+                        bgcolor: "rgba(0, 0, 0, 0.2)",
                         zIndex: Number.POSITIVE_INFINITY,
                       }}
-                      aria-label={'remove'}
+                      aria-label={"remove"}
                       onClick={() => {
-                        setDeck(prev =>
+                        setDeck((prev) =>
                           prev.filter(
-                            memoria => memoria.name.short !== name.short,
+                            (memoria) => memoria.name.short !== name.short,
                           ),
                         );
-                        setLegendaryDeck(prev =>
+                        setLegendaryDeck((prev) =>
                           prev.filter(
-                            memoria => memoria.name.short !== name.short,
+                            (memoria) => memoria.name.short !== name.short,
                           ),
                         );
                       }}
@@ -436,7 +450,7 @@ function MemoriaItem({
       <Menu
         open={contextMenu !== null}
         onClose={() => setContextMenu(null)}
-        anchorReference='anchorPosition'
+        anchorReference="anchorPosition"
         anchorPosition={
           contextMenu !== null
             ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
@@ -474,12 +488,12 @@ function Deck() {
     <Sortable items={deck} onChangeOrder={setDeck}>
       <Grid
         container
-        direction={'row'}
-        alignItems={'left'}
+        direction={"row"}
+        alignItems={"left"}
         spacing={2}
         sx={{ maxWidth: 600, minHeight: 100 }}
       >
-        {deck.map(memoria => {
+        {deck.map((memoria) => {
           return (
             <MemoriaItem memoria={memoria} key={memoria.id} preload={true} />
           );
@@ -496,12 +510,12 @@ function LegendaryDeck() {
     <Sortable items={deck} onChangeOrder={setDeck}>
       <Grid
         container
-        direction={'row'}
-        alignItems={'left'}
+        direction={"row"}
+        alignItems={"left"}
         spacing={2}
         sx={{ maxWidth: 600, minHeight: 100 }}
       >
-        {deck.map(memoria => {
+        {deck.map((memoria) => {
           return (
             <MemoriaItem memoria={memoria} key={memoria.id} preload={true} />
           );
@@ -523,24 +537,24 @@ function UnitComponent({ index }: { index: number }) {
 
   useEffect(() => {
     (async () => {
-      const value = params.get('deck');
-      const title = params.get('title');
-      setTitle(title ? decodeURI(title) : 'No Title');
+      const value = params.get("deck");
+      const title = params.get("title");
+      setTitle(title ? decodeURI(title) : "No Title");
       const cookie = Cookies.get(`deck-${index}`);
       if (value) {
         const { sw, deck, legendaryDeck } = await restore({
-          target: 'deck',
+          target: "deck",
           param: value,
         });
         setSw(sw);
         setRoleFilter(
-          sw === 'shield'
-            ? ['support', 'interference', 'recovery']
+          sw === "shield"
+            ? ["support", "interference", "recovery"]
             : [
-                'normal_single',
-                'normal_range',
-                'special_single',
-                'special_range',
+                "normal_single",
+                "normal_range",
+                "special_single",
+                "special_range",
               ],
         );
         setDeck(deck);
@@ -552,13 +566,13 @@ function UnitComponent({ index }: { index: number }) {
           const { sw, deck, legendaryDeck } = decodeResult.value;
           setSw(sw);
           setRoleFilter(
-            sw === 'shield'
-              ? ['support', 'interference', 'recovery']
+            sw === "shield"
+              ? ["support", "interference", "recovery"]
               : [
-                  'normal_single',
-                  'normal_range',
-                  'special_single',
-                  'special_range',
+                  "normal_single",
+                  "normal_range",
+                  "special_single",
+                  "special_range",
                 ],
           );
           setDeck(deck);
@@ -575,7 +589,7 @@ function UnitComponent({ index }: { index: number }) {
     setLegendaryDeck,
     setRoleFilter,
     setSw,
-    params.get,
+    params,
     setCompare,
     index,
   ]);
@@ -584,8 +598,8 @@ function UnitComponent({ index }: { index: number }) {
     <Box
       sx={{
         backgroundColor: theme.palette.background.paper,
-        minHeight: '60vh',
-        maxWidth: '600px',
+        minHeight: "60vh",
+        maxWidth: "600px",
         padding: 2,
       }}
     >
@@ -620,7 +634,7 @@ export default function MultipleSelect({
   kind,
   targets,
 }: {
-  kind: 'before' | 'after';
+  kind: "before" | "after";
   times: number;
   targets: MemoriaWithConcentration[];
 }) {
@@ -637,20 +651,24 @@ export default function MultipleSelect({
     const {
       target: { value },
     } = event;
-    (kind === 'before' ? setStackBeforeTargets : setStackAfterTargets)(
-      typeof value === 'string'
+    (kind === "before" ? setStackBeforeTargets : setStackAfterTargets)(
+      typeof value === "string"
         ? value
-            .split(',')
+
+            .split(",")
+
             // biome-ignore lint/style/noNonNullAssertion: should be fine
-            .map(name => unit.find(memoria => memoria.name.short === name)!.id)
+            .map(
+              (name) => unit.find((memoria) => memoria.name.short === name)!.id,
+            )
         : value.map(
             // biome-ignore lint/style/noNonNullAssertion: should be fine
-            name => unit.find(memoria => memoria.name.short === name)!.id,
+            (name) => unit.find((memoria) => memoria.name.short === name)!.id,
           ),
     );
     setPersonName(
       // On autofill, we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+      typeof value === "string" ? value.split(",") : value,
     );
   };
 
@@ -662,11 +680,11 @@ export default function MultipleSelect({
           multiple
           value={personName}
           onChange={handleChange}
-          input={<OutlinedInput label='Target' />}
+          input={<OutlinedInput label="Target" />}
           MenuProps={MenuProps}
-          variant={'outlined'}
+          variant={"outlined"}
         >
-          {targets.map(memoria => (
+          {targets.map((memoria) => (
             <MenuItem
               key={memoria.name.short}
               value={memoria.name.short}
@@ -708,36 +726,54 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
   }
 
   const [stackRateBefore, stackTimesBefore] = match(sw)
-    .with('sword', () => {
+
+    .with("sword", () => {
       const stack = Lenz.gvgSkill.effects
+
         .get(compare)
-        .find(isStackEffect('meteor'));
+
+        .find(isStackEffect("meteor"));
 
       return [stack?.rate, stack?.times];
     })
-    .with('shield', () => {
+
+    .with("shield", () => {
       const stack = Lenz.gvgSkill.effects
+
         .get(compare)
-        .find(eff => isStackEffect('eden')(eff) || isStackEffect('anima')(eff));
+
+        .find(
+          (eff) => isStackEffect("eden")(eff) || isStackEffect("anima")(eff),
+        );
 
       return [stack?.rate, stack?.times];
     })
+
     .exhaustive();
   const [stackRateAfter, stackTimesAfter] = match(sw)
-    .with('sword', () => {
+
+    .with("sword", () => {
       const stack = Lenz.gvgSkill.effects
+
         .get(compare)
-        .find(isStackEffect('meteor'));
+
+        .find(isStackEffect("meteor"));
 
       return [stack?.rate, stack?.times];
     })
-    .with('shield', () => {
+
+    .with("shield", () => {
       const stack = Lenz.gvgSkill.effects
+
         .get(compare)
-        .find(eff => isStackEffect('eden')(eff) || isStackEffect('anima')(eff));
+
+        .find(
+          (eff) => isStackEffect("eden")(eff) || isStackEffect("anima")(eff),
+        );
 
       return [stack?.rate, stack?.times];
     })
+
     .exhaustive();
 
   const diff = calcDiff(
@@ -770,29 +806,29 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
   );
 
   const style = {
-    display: 'grid',
-    gridTemplateColumns: 'auto auto 1fr',
-    width: 'max-content',
-    maxWidth: '100%',
-    padding: '2rem',
+    display: "grid",
+    gridTemplateColumns: "auto auto 1fr",
+    width: "max-content",
+    maxWidth: "100%",
+    padding: "2rem",
     lineHeight: 2,
   };
 
   const intoRow = ([type, [before, after]]: [string, [number, number]]) => {
     const sign = after - before > 0;
     const color = {
-      color: theme.palette[sign ? 'success' : 'error'][theme.palette.mode],
+      color: theme.palette[sign ? "success" : "error"][theme.palette.mode],
     };
     return (
       <div key={type}>
         <dt
           style={{
-            paddingRight: '1em',
-            textAlignLast: 'justify',
+            paddingRight: "1em",
+            textAlignLast: "justify",
             ...color,
           }}
         >{`${type}:`}</dt>
-        <dd style={color}>{`${sign ? '+' : ''}${after - before}`}</dd>
+        <dd style={color}>{`${sign ? "+" : ""}${after - before}`}</dd>
         <dd>{`(${before} => ${after})`}</dd>
       </div>
     );
@@ -801,14 +837,14 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
   return (
     <Grid
       container
-      direction={'column'}
-      alignItems='center'
-      justifyContent='space-between'
+      direction={"column"}
+      alignItems="center"
+      justifyContent="space-between"
     >
       <Grid container>
         <Grid size={{ xs: 5 }}>
-          <Stack direction={'column'}>
-            <Stack direction={'row'}>
+          <Stack direction={"column"}>
+            <Stack direction={"row"}>
               <Grid>
                 <MemoriaItem
                   memoria={compare}
@@ -816,30 +852,32 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
                   onContextMenu={false}
                 />
               </Grid>
-              <Stack direction={'column'} paddingLeft={5}>
-                <Typography variant='body2'>{`${Lenz.memoria.shortName.get(compare)}`}</Typography>
-                <Typography variant='body2'>{`${Lenz.gvgSkill.name.get(compare)}`}</Typography>
-                <Typography variant='body2'>{`${Lenz.autoSkill.name.get(compare)}`}</Typography>
+              <Stack direction={"column"} paddingLeft={5}>
+                <Typography variant="body2">{`${Lenz.memoria.shortName.get(compare)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.gvgSkill.name.get(compare)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.autoSkill.name.get(compare)}`}</Typography>
               </Stack>
             </Stack>
-            {Lenz.gvgSkill.description.get(compare).includes('スタック') && (
+            {Lenz.gvgSkill.description.get(compare).includes("スタック") && (
               <MultipleSelect
                 // biome-ignore lint/style/noNonNullAssertion: should be fine
                 times={stackTimesBefore!}
-                kind={'before'}
+                kind={"before"}
                 targets={legendaryDeck
+
                   .concat(deck)
-                  .filter(m => ![compare.id, candidate.id].includes(m.id))}
+
+                  .filter((m) => ![compare.id, candidate.id].includes(m.id))}
               />
             )}
           </Stack>
         </Grid>
         <Grid size={{ xs: 2 }} paddingTop={4}>
-          <ArrowRightAlt fontSize={'large'} />
+          <ArrowRightAlt fontSize={"large"} />
         </Grid>
         <Grid size={{ xs: 5 }}>
-          <Stack direction={'column'}>
-            <Stack direction={'row'}>
+          <Stack direction={"column"}>
+            <Stack direction={"row"}>
               <Grid>
                 <MemoriaItem
                   memoria={candidate}
@@ -847,53 +885,55 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
                   onContextMenu={false}
                 />
               </Grid>
-              <Stack direction={'column'} paddingLeft={5}>
-                <Typography variant='body2'>{`${Lenz.memoria.shortName.get(candidate)}`}</Typography>
-                <Typography variant='body2'>{`${Lenz.gvgSkill.name.get(candidate)}`}</Typography>
-                <Typography variant='body2'>{`${Lenz.autoSkill.name.get(candidate)}`}</Typography>
+              <Stack direction={"column"} paddingLeft={5}>
+                <Typography variant="body2">{`${Lenz.memoria.shortName.get(candidate)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.gvgSkill.name.get(candidate)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.autoSkill.name.get(candidate)}`}</Typography>
               </Stack>
             </Stack>
-            {Lenz.gvgSkill.description.get(candidate).includes('スタック') && (
+            {Lenz.gvgSkill.description.get(candidate).includes("スタック") && (
               <MultipleSelect
                 // biome-ignore lint/style/noNonNullAssertion: should be fine
                 times={stackTimesAfter!}
-                kind={'after'}
+                kind={"after"}
                 targets={legendaryDeck
+
                   .concat(deck)
-                  .filter(m => ![compare.id, candidate.id].includes(m.id))}
+
+                  .filter((m) => ![compare.id, candidate.id].includes(m.id))}
               />
             )}
           </Stack>
         </Grid>
       </Grid>
-      <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
+      <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
         ステータス
       </Divider>
       <Grid>
         <dl style={style}>
           {intoRow([
-            'ATK',
+            "ATK",
             [
               compare.status[compare.concentration][0],
               candidate.status[compare.concentration][0],
             ],
           ])}
           {intoRow([
-            'Sp.ATK',
+            "Sp.ATK",
             [
               compare.status[compare.concentration][1],
               candidate.status[compare.concentration][1],
             ],
           ])}
           {intoRow([
-            'DEF',
+            "DEF",
             [
               compare.status[compare.concentration][2],
               candidate.status[compare.concentration][2],
             ],
           ])}
           {intoRow([
-            'Sp.DEF',
+            "Sp.DEF",
             [
               compare.status[compare.concentration][3],
               candidate.status[compare.concentration][3],
@@ -901,38 +941,42 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
           ])}
         </dl>
       </Grid>
-      <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
+      <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
         {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0
-          ? 'ダメージ'
-          : '回復'}
+          ? "ダメージ"
+          : "回復"}
       </Divider>
       <Grid>
         <dl style={style}>
           {/* damage */}
           {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0 &&
-            intoRow(['ダメージ', diff.expectedToalDamage])}
+            intoRow(["ダメージ", diff.expectedToalDamage])}
           {/* recovery */}
           {diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] !==
-            0 && intoRow(['回復', diff.expectedTotalRecovery])}
+            0 && intoRow(["回復", diff.expectedTotalRecovery])}
         </dl>
       </Grid>
-      <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
-        {'バフ'}
+      <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
+        {"バフ"}
       </Divider>
       <Grid>
         <dl style={style}>
           {[...diff.expectedTotalBuff.entries()]
+
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+
             .map(([type, value]) => intoRow([type, value]))}
         </dl>
       </Grid>
-      <Divider textAlign={'left'} sx={{ margin: 2, width: '30vw' }}>
-        {'デバフ'}
+      <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
+        {"デバフ"}
       </Divider>
       <Grid>
         <dl style={style}>
           {[...diff.expectedTotalDebuff.entries()]
+
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+
             .map(([type, value]) => intoRow([type, value]))}
         </dl>
       </Grid>
@@ -970,27 +1014,27 @@ function VirtualizedList() {
   return (
     <>
       <Virtuoso
-        style={{ height: '60vh' }}
+        style={{ height: "60vh" }}
         totalCount={memoria.length}
-        itemContent={index => {
+        itemContent={(index) => {
           return (
             <Card
               sx={{
-                display: 'flex',
+                display: "flex",
                 bgcolor:
-                  theme.palette.mode === 'dark'
-                    ? 'rgba(255, 255, 255, 0.1)'
+                  theme.palette.mode === "dark"
+                    ? "rgba(255, 255, 255, 0.1)"
                     : alpha(theme.palette.primary.main, 0.2),
               }}
               key={index}
             >
               <IconButton
                 sx={{
-                  position: 'absolute',
+                  position: "absolute",
                   left: 0,
-                  bgcolor: 'rgba(0, 0, 0, 0.2)',
+                  bgcolor: "rgba(0, 0, 0, 0.2)",
                 }}
-                aria-label='add'
+                aria-label="add"
                 onClick={() => {
                   if (compare !== undefined) {
                     setOpen(true);
@@ -1000,43 +1044,45 @@ function VirtualizedList() {
                     });
                     return;
                   }
-                  if (memoria[index].labels.includes('Legendary')) {
-                    setLegendaryDeck(prev => addMemoria(prev, memoria[index]));
+                  if (memoria[index].labels.includes("Legendary")) {
+                    setLegendaryDeck((prev) =>
+                      addMemoria(prev, memoria[index]),
+                    );
                   } else {
-                    setDeck(prev => addMemoria(prev, memoria[index]));
+                    setDeck((prev) => addMemoria(prev, memoria[index]));
                   }
                 }}
               >
-                <Add color={'warning'} />
+                <Add color={"warning"} />
               </IconButton>
               <Icon
                 cardType={memoria[index].cardType}
                 attribute={memoria[index].attribute}
                 position={70}
               />
-              <Tooltip title={memoria[index].name.short} placement={'top'}>
+              <Tooltip title={memoria[index].name.short} placement={"top"}>
                 <CardMedia sx={{ width: 100, height: 100 }}>
                   <MemoriaImage name={memoria[index].name.short} />
                 </CardMedia>
               </Tooltip>
               <CardContent>
-                <Stack direction={'column'} sx={{ paddingLeft: 2 }}>
+                <Stack direction={"column"} sx={{ paddingLeft: 2 }}>
                   <Typography
-                    component='span'
-                    fontWeight='bold'
+                    component="span"
+                    fontWeight="bold"
                     fontSize={12}
-                    sx={{ display: 'block' }}
-                    color='text.primary'
+                    sx={{ display: "block" }}
+                    color="text.primary"
                   >
                     {Lenz.gvgSkill.name.get(memoria[index])}
                   </Typography>
                   <Divider sx={{ margin: 1 }} />
                   <Typography
-                    component='span'
-                    fontWeight='bold'
+                    component="span"
+                    fontWeight="bold"
                     fontSize={12}
-                    sx={{ display: 'block' }}
-                    color='text.primary'
+                    sx={{ display: "block" }}
+                    color="text.primary"
                   >
                     {Lenz.autoSkill.name.get(memoria[index])}
                   </Typography>
@@ -1047,37 +1093,37 @@ function VirtualizedList() {
         }}
       />
       <Dialog fullScreen open={open} onClose={onDialogClose}>
-        <AppBar sx={{ position: 'relative' }}>
+        <AppBar sx={{ position: "relative" }}>
           <Toolbar>
             <IconButton
-              edge='start'
-              color='inherit'
+              edge="start"
+              color="inherit"
               onClick={onDialogClose}
-              aria-label='close'
+              aria-label="close"
             >
               <Close />
             </IconButton>
 
-            <Typography sx={{ ml: 2, flex: 1 }} variant='h6' component='div'>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               期待値比較
             </Typography>
-            <Tooltip title='カウンター' placement='left'>
+            <Tooltip title="カウンター" placement="left">
               <Checkbox
                 disabled={
-                  ![compare, candidate].some(m =>
-                    m?.skills.gvgSkill.raw.description.includes('スタック'),
+                  ![compare, candidate].some((m) =>
+                    m?.skills.gvgSkill.raw.description.includes("スタック"),
                   )
                 }
-                icon={<ReplyOutlined style={{ transform: 'rotate(90deg)' }} />}
-                checkedIcon={<Reply style={{ transform: 'rotate(90deg)' }} />}
+                icon={<ReplyOutlined style={{ transform: "rotate(90deg)" }} />}
+                checkedIcon={<Reply style={{ transform: "rotate(90deg)" }} />}
                 onChange={(_, checked) => setCounter(() => checked)}
               />
             </Tooltip>
-            <Tooltip title='スタック' placement='left'>
+            <Tooltip title="スタック" placement="left">
               <Checkbox
                 disabled={
-                  ![compare, candidate].some(m =>
-                    m?.skills.gvgSkill.raw.description.includes('スタック'),
+                  ![compare, candidate].some((m) =>
+                    m?.skills.gvgSkill.raw.description.includes("スタック"),
                   )
                 }
                 icon={<LayersOutlined />}
@@ -1086,18 +1132,17 @@ function VirtualizedList() {
               />
             </Tooltip>
             <Button
-              autoFocus
-              color='inherit'
+              color="inherit"
               onClick={() => {
-                if (candidate?.labels.includes('Legendary')) {
-                  setLegendaryDeck(prev =>
-                    [...prev].map(memoria =>
+                if (candidate?.labels.includes("Legendary")) {
+                  setLegendaryDeck((prev) =>
+                    [...prev].map((memoria) =>
                       memoria.id === compare?.id ? candidate : memoria,
                     ),
                   );
                 } else {
-                  setDeck(prev =>
-                    [...prev].map(memoria =>
+                  setDeck((prev) =>
+                    [...prev].map((memoria) =>
                       // biome-ignore lint/style/noNonNullAssertion: should be fine
                       memoria.id === compare?.id ? candidate! : memoria,
                     ),
@@ -1115,12 +1160,12 @@ function VirtualizedList() {
         <Grid
           container
           sx={{
-            paddingLeft: { xs: '5%', md: '10%', lg: '20%' },
-            paddingRight: { xs: '5%', md: '10%', lg: '20%' },
+            paddingLeft: { xs: "5%", md: "10%", lg: "20%" },
+            paddingRight: { xs: "5%", md: "10%", lg: "20%" },
           }}
         >
-          {compare?.labels.includes('Legendary') ===
-          candidate?.labels.includes('Legendary') ? (
+          {compare?.labels.includes("Legendary") ===
+          candidate?.labels.includes("Legendary") ? (
             <DialogContent>
               <Compare counter={counter} stack={stack} />
             </DialogContent>
@@ -1128,12 +1173,12 @@ function VirtualizedList() {
             <DialogContent>
               <Typography
                 id={`modal-title-${uniqueId}`}
-                variant='h6'
-                component='h2'
+                variant="h6"
+                component="h2"
               >
                 Error
               </Typography>
-              <Typography variant='body2'>
+              <Typography variant="body2">
                 レジェンダリーメモリアと通常メモリアを比較することはできません。
               </Typography>
             </DialogContent>
@@ -1148,16 +1193,16 @@ function SortMenu() {
   const [sort, setSort] = useAtom(sortKindAtom);
   return (
     <PopupState
-      variant='popover'
-      popupId='demo-popup-menu'
+      variant="popover"
+      popupId="demo-popup-menu"
       disableAutoFocus={false}
       parentPopupState={null}
     >
-      {popupState => (
+      {(popupState) => (
         <>
           <Button {...bindTrigger(popupState)}>sorted by {sort}</Button>
           <Menu {...bindMenu(popupState)}>
-            {sortKind.map(kind => {
+            {sortKind.map((kind) => {
               return (
                 <MenuItem
                   key={kind}
@@ -1181,11 +1226,11 @@ function Source() {
   return (
     <Grid
       container
-      direction={'column'}
-      alignItems={'center'}
-      minHeight={'70vh'}
+      direction={"column"}
+      alignItems={"center"}
+      minHeight={"70vh"}
     >
-      <Grid minHeight={'60vh'} minWidth={'100%'}>
+      <Grid minHeight={"60vh"} minWidth={"100%"}>
         <ToggleButtons />
         <FilterModal />
         <SearchModal />
@@ -1206,24 +1251,24 @@ function ToggleButtons() {
   return (
     <Button
       onClick={() => {
-        if (sw === 'shield') {
-          setSw('sword');
+        if (sw === "shield") {
+          setSw("sword");
           setRoleFilter([
-            'normal_single',
-            'normal_range',
-            'special_single',
-            'special_range',
+            "normal_single",
+            "normal_range",
+            "special_single",
+            "special_range",
           ]);
         } else {
-          setSw('shield');
-          setRoleFilter(['support', 'interference', 'recovery']);
+          setSw("shield");
+          setRoleFilter(["support", "interference", "recovery"]);
         }
         setDeck([]);
         setLegendaryDeck([]);
         setCompare(undefined);
       }}
     >
-      {sw === 'shield' ? '後衛' : '前衛'}
+      {sw === "shield" ? "後衛" : "前衛"}
     </Button>
   );
 }
@@ -1240,7 +1285,7 @@ function FilterModal() {
 
   return (
     <>
-      <Tooltip title={'filter'} placement={'top'}>
+      <Tooltip title={"filter"} placement={"top"}>
         <Button onClick={handleOpen}>
           <FilterAlt />
         </Button>
@@ -1249,8 +1294,8 @@ function FilterModal() {
         <DialogContent>
           <Typography
             id={`modal-title-${uniqueId}`}
-            variant='h6'
-            component='h2'
+            variant="h6"
+            component="h2"
           >
             Filter
           </Typography>
@@ -1276,7 +1321,7 @@ function SearchModal() {
 
   return (
     <>
-      <Tooltip title={'search'} placement={'top'}>
+      <Tooltip title={"search"} placement={"top"}>
         <Button onClick={handleOpen}>
           <SearchOutlined />
         </Button>
@@ -1285,8 +1330,8 @@ function SearchModal() {
         <DialogContent>
           <Typography
             id={`modal-title-${uniqueId}`}
-            variant='h6'
-            component='h2'
+            variant="h6"
+            component="h2"
           >
             Search
           </Typography>
@@ -1306,10 +1351,10 @@ function Diff(props: { origin: Unit; current: Unit }) {
   const currentUnit = current.deck.concat(current.legendaryDeck);
 
   const incoming = currentUnit.filter(
-    memoria => !originUnit.map(memoria => memoria.id).includes(memoria.id),
+    (memoria) => !originUnit.map((memoria) => memoria.id).includes(memoria.id),
   );
   const outgoing = originUnit.filter(
-    memoria => !currentUnit.map(memoria => memoria.id).includes(memoria.id),
+    (memoria) => !currentUnit.map((memoria) => memoria.id).includes(memoria.id),
   );
 
   if (incoming.length > 0 || outgoing.length > 0) {
@@ -1318,12 +1363,12 @@ function Diff(props: { origin: Unit; current: Unit }) {
         <Typography>追加</Typography>
         <Grid
           container
-          direction={'row'}
-          alignItems={'left'}
+          direction={"row"}
+          alignItems={"left"}
           spacing={2}
           sx={{ maxWidth: 600, minHeight: 100 }}
         >
-          {incoming.map(memoria => {
+          {incoming.map((memoria) => {
             return (
               <MemoriaItem memoria={memoria} key={memoria.id} disable={true} />
             );
@@ -1332,12 +1377,12 @@ function Diff(props: { origin: Unit; current: Unit }) {
         <Typography>削除</Typography>
         <Grid
           container
-          direction={'row'}
-          alignItems={'left'}
+          direction={"row"}
+          alignItems={"left"}
           spacing={2}
           sx={{ maxWidth: 600, minHeight: 100 }}
         >
-          {outgoing.map(memoria => {
+          {outgoing.map((memoria) => {
             return (
               <MemoriaItem memoria={memoria} key={memoria.id} disable={true} />
             );
@@ -1371,7 +1416,7 @@ function DiffModal() {
 
   return (
     <>
-      <Tooltip title={'diff'} placement={'top'}>
+      <Tooltip title={"diff"} placement={"top"}>
         <Button onClick={handleOpen}>
           <DifferenceIcon />
         </Button>
@@ -1380,32 +1425,32 @@ function DiffModal() {
         <DialogContent>
           <Typography
             id={`modal-title-${uniqueId}`}
-            variant='h6'
-            component='h2'
+            variant="h6"
+            component="h2"
           >
             Diff
           </Typography>
           <Divider />
           <TextField
-            label='original'
+            label="original"
             id={`original-url-${uniqueId}`}
-            sx={{ m: 1, width: '50ch' }}
+            sx={{ m: 1, width: "50ch" }}
             slotProps={{
               input: {
                 startAdornment: (
-                  <InputAdornment position='start'>
+                  <InputAdornment position="start">
                     https://operations.mitama.io/deck-builder?deck=
                   </InputAdornment>
                 ),
               },
             }}
-            onChange={event => {
+            onChange={(event) => {
               const decodeResult = decodeDeck(event.target.value);
               if (decodeResult.isOk()) {
                 setSource(decodeResult.value);
               }
             }}
-            variant='standard'
+            variant="standard"
           />
           <Divider />
           {source &&
@@ -1428,11 +1473,11 @@ function ShareButton() {
   const [sw] = useAtom(swAtom);
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
-  const [modalOpen, setModalOpen] = useState<'short' | 'full' | false>(false);
+  const [modalOpen, setModalOpen] = useState<"short" | "full" | false>(false);
   const [openTip, setOpenTip] = useState<boolean>(false);
-  const [url, setUrl] = useState<string>('');
+  const [url, setUrl] = useState<string>("");
 
-  const handleClick = (mode: 'short' | 'full') => {
+  const handleClick = (mode: "short" | "full") => {
     setModalOpen(mode);
   };
   const handleClose = () => {
@@ -1451,15 +1496,15 @@ function ShareButton() {
 
   return (
     <PopupState
-      variant='popover'
-      popupId='demo-popup-menu'
+      variant="popover"
+      popupId="demo-popup-menu"
       disableAutoFocus={false}
       parentPopupState={null}
     >
-      {popupState => (
+      {(popupState) => (
         <>
           <Button {...bindTrigger(popupState)}>
-            <Tooltip title={'share'} placement={'top'}>
+            <Tooltip title={"share"} placement={"top"}>
               <Share />
             </Tooltip>
           </Button>
@@ -1467,53 +1512,53 @@ function ShareButton() {
             <MenuItem
               onClick={async () => {
                 popupState.close();
-                handleClick('short');
+                handleClick("short");
                 const short = await generateShortLink({ full });
                 setUrl(
                   `https://operations.mitama.io/deck-builder?deck=${short}&title=${encodeURI(title)}`,
                 );
-                await saveShortLink({ target: 'deck', full, short });
+                await saveShortLink({ target: "deck", full, short });
               }}
             >
-              {'short link'}
+              {"short link"}
             </MenuItem>
             <MenuItem
               onClick={() => {
                 popupState.close();
-                handleClick('full');
+                handleClick("full");
                 setUrl(
                   `https://operations.mitama.io/deck-builder?deck=${full}`,
                 );
               }}
             >
-              {'full link'}
+              {"full link"}
             </MenuItem>
           </Menu>
           <Dialog
             open={modalOpen !== false}
             onClose={handleClose}
-            aria-labelledby='form-dialog-title'
+            aria-labelledby="form-dialog-title"
             fullWidth={true}
           >
             <DialogContent>
               <FormControl
-                variant='outlined'
+                variant="outlined"
                 fullWidth={true}
-                onClick={e => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
               >
                 <OutlinedInput
-                  type='text'
+                  type="text"
                   value={url}
                   fullWidth={true}
                   endAdornment={
-                    <InputAdornment position='end'>
+                    <InputAdornment position="end">
                       <Tooltip
                         arrow
                         open={openTip}
                         onClose={handleCloseTip}
                         disableHoverListener
-                        placement='top'
-                        title='Copied!'
+                        placement="top"
+                        title="Copied!"
                       >
                         <IconButton onClick={handleClickButton}>
                           <Assignment />
@@ -1539,7 +1584,7 @@ function CalcSettings() {
   const uniqueId = useId();
   return (
     <>
-      <Tooltip title={'calc settings'} placement={'top'}>
+      <Tooltip title={"calc settings"} placement={"top"}>
         <IconButton onClick={() => setOpen(true)}>
           <Settings />
         </IconButton>
@@ -1548,13 +1593,13 @@ function CalcSettings() {
         <DialogContent>
           <Typography
             id={`modal-title-${uniqueId}`}
-            variant='h6'
-            component='h2'
+            variant="h6"
+            component="h2"
           >
             Calc Settings
           </Typography>
-          <Stack direction={'column'}>
-            <Stack direction={'row'}>
+          <Stack direction={"column"}>
+            <Stack direction={"row"}>
               <Calculator />
             </Stack>
           </Stack>
@@ -1575,24 +1620,24 @@ export function DeckBuilder({ index }: { index: number }) {
   return (
     <Grid
       container
-      direction={'row'}
+      direction={"row"}
       sx={{
-        width: '100%',
-        boxSizing: 'border-box',
+        width: "100%",
+        boxSizing: "border-box",
       }}
     >
       <Grid
         size={{ xs: 12, md: 4, lg: 3 }}
-        direction={'column'}
-        alignItems={'center'}
+        direction={"column"}
+        alignItems={"center"}
         sx={{
           padding: 2,
         }}
       >
         <Details />
       </Grid>
-      <Grid size={{ xs: 12, md: 8, lg: 5 }} alignItems={'center'}>
-        <Tooltip title='clear all' placement={'top'}>
+      <Grid size={{ xs: 12, md: 8, lg: 5 }} alignItems={"center"}>
+        <Tooltip title="clear all" placement={"top"}>
           <Button
             onClick={() => {
               setDeck([]);

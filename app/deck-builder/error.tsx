@@ -1,7 +1,7 @@
-'use client'; // Error boundaries must be Client Components
+"use client"; // Error boundaries must be Client Components
 
-import { useEffect } from 'react';
-import { captureException } from '@sentry/nextjs';
+import { useEffect } from "react";
+import { captureException } from "@sentry/nextjs";
 
 export default function ErrorPage({
   error,
@@ -18,7 +18,7 @@ export default function ErrorPage({
     <div>
       <h2>{error.message}</h2>
       <button
-        type={'reset'}
+        type={"reset"}
         onClick={
           // Attempt to recover by trying to re-render the segment
           () => reset()

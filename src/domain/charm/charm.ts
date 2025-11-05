@@ -1,6 +1,6 @@
-import { z } from 'zod';
+import { z } from "zod";
 
-import charmData from './charm.json';
+import charmData from "./charm.json";
 
 const charmSchema = z.object({
   id: z.number().readonly(),
@@ -22,4 +22,6 @@ const charmSchema = z.object({
  */
 export type Charm = z.infer<typeof charmSchema>;
 
-export const charmList = charmData.data.map(charm => charmSchema.parse(charm));
+export const charmList = charmData.data.map((charm) =>
+  charmSchema.parse(charm),
+);

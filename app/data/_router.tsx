@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { MemoriaList } from '@/data/_memoria/memoria';
-import { Layout } from '@/components/Layout';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import { useSearchParams } from 'next/navigation';
-import { type ReactNode, type SyntheticEvent, useState } from 'react';
-import { match } from 'ts-pattern';
+import { MemoriaList } from "@/data/_memoria/memoria";
+import { Layout } from "@/components/Layout";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import { useSearchParams } from "next/navigation";
+import { type ReactNode, type SyntheticEvent, useState } from "react";
+import { match } from "ts-pattern";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -20,7 +20,7 @@ function CustomTabPanel(props: TabPanelProps) {
 
   return (
     <div
-      role='tabpanel'
+      role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
@@ -34,23 +34,23 @@ function CustomTabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
 const TABS = [
   {
-    label: 'Memoria',
+    label: "Memoria",
     content: (query?: string) => <MemoriaList initialQuery={query} />,
     disabled: false,
   },
   {
-    label: 'Order',
+    label: "Order",
     content: (query?: string) => <MemoriaList initialQuery={query} />,
     disabled: true,
   },
   {
-    label: 'Costume',
+    label: "Costume",
     content: (query?: string) => <MemoriaList initialQuery={query} />,
     disabled: true,
   },
@@ -58,13 +58,17 @@ const TABS = [
 
 export default function DataPage({ dataType }: { dataType?: string }) {
   const searchParams = useSearchParams();
-  const query = searchParams.get('query') || undefined;
+  const query = searchParams.get("query") || undefined;
 
   const [value, setValue] = useState(
     match(dataType)
-      .with('memoria', () => 0)
-      .with('order', () => 1)
-      .with('costume', () => 2)
+
+      .with("memoria", () => 0)
+
+      .with("order", () => 1)
+
+      .with("costume", () => 2)
+
       .otherwise(() => 0),
   );
 
@@ -74,12 +78,12 @@ export default function DataPage({ dataType }: { dataType?: string }) {
 
   return (
     <Layout>
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ width: "100%" }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}
             onChange={handleChange}
-            aria-label='basic tabs example'
+            aria-label="basic tabs example"
           >
             {TABS.map((def, index) => (
               <Tab

@@ -1,4 +1,4 @@
-import { type FormEvent, type MouseEvent, useId, useState } from 'react';
+import { type FormEvent, type MouseEvent, useId, useState } from "react";
 
 import {
   Button,
@@ -8,9 +8,9 @@ import {
   Menu,
   MenuItem,
   TextField,
-} from '@mui/material';
+} from "@mui/material";
 
-import { EdgeLabelRenderer, type EdgeProps, getBezierPath } from 'reactflow';
+import { EdgeLabelRenderer, type EdgeProps, getBezierPath } from "reactflow";
 
 export default function LabeledEdge({
   id,
@@ -28,7 +28,7 @@ export default function LabeledEdge({
     targetY,
   });
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [contextMenu, setContextMenu] = useState<{
     mouseX: number;
     mouseY: number;
@@ -55,11 +55,11 @@ export default function LabeledEdge({
       {/* biome-ignore lint/a11y/noStaticElementInteractions: interactive node path */}
       <path
         d={edgePath}
-        className='react-flow__edge-path'
+        className="react-flow__edge-path"
         style={{
           ...style,
-          stroke: 'transparent',
-          cursor: 'pointer',
+          stroke: "transparent",
+          cursor: "pointer",
           strokeWidth: 10,
         }} // 透明に設定
         // ここに必要なイベントハンドラを追加
@@ -68,19 +68,19 @@ export default function LabeledEdge({
       <path // 実際の線
         id={id}
         d={edgePath}
-        className='react-flow__edge-path'
+        className="react-flow__edge-path"
         markerEnd={markerEnd}
-        style={{ ...style, stroke: 'dimgrey' }}
+        style={{ ...style, stroke: "dimgrey" }}
       />
       <EdgeLabelRenderer>
         <Button
           style={{
-            position: 'absolute',
+            position: "absolute",
             transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-            pointerEvents: 'all',
-            color: 'dimgrey',
-            backgroundColor: 'rgba(255, 255, 255, 0.4)',
-            display: comment !== '' ? 'block' : 'none',
+            pointerEvents: "all",
+            color: "dimgrey",
+            backgroundColor: "rgba(255, 255, 255, 0.4)",
+            display: comment !== "" ? "block" : "none",
           }}
           disabled={true}
           onClick={() => setDialogOpen(true)}
@@ -91,7 +91,7 @@ export default function LabeledEdge({
       <Menu
         open={contextMenu !== null}
         onClose={() => setContextMenu(null)}
-        anchorReference='anchorPosition'
+        anchorReference="anchorPosition"
         anchorPosition={
           contextMenu !== null
             ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
@@ -111,7 +111,7 @@ export default function LabeledEdge({
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
         PaperProps={{
-          component: 'form',
+          component: "form",
           onSubmit: (event: FormEvent<HTMLFormElement>) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
@@ -123,28 +123,27 @@ export default function LabeledEdge({
       >
         <DialogContent>
           <TextField
-            autoFocus
             required
-            margin='dense'
+            margin="dense"
             id={`comment-${uniqueId}`}
-            name='comment'
-            label='コメント'
+            name="comment"
+            label="コメント"
             fullWidth
-            variant='standard'
+            variant="standard"
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
           <Button
-            type='submit'
+            type="submit"
             onClick={() => {
-              setComment('');
+              setComment("");
               setDialogOpen(false);
             }}
           >
             Delete
           </Button>
-          <Button type='submit'>Save</Button>
+          <Button type="submit">Save</Button>
         </DialogActions>
       </Dialog>
     </>

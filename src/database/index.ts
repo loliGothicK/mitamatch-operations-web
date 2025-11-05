@@ -1,9 +1,9 @@
-import 'server-only';
+import "server-only";
 
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-import { decks, timelines, users } from '@/database/schema';
-import { eq } from 'drizzle-orm';
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
+import { decks, timelines, users } from "@/database/schema";
+import { eq } from "drizzle-orm";
 
 // biome-ignore lint/style/noNonNullAssertion: should be fine
 const sql = neon(process.env.POSTGRES_URL!);

@@ -1,47 +1,47 @@
-import createMdx from '@next/mdx';
-import { withSentryConfig } from '@sentry/nextjs';
+import createMdx from "@next/mdx";
+import { withSentryConfig } from "@sentry/nextjs";
 
 /** @types {import('next').NextConfig} */
 const nextConfig = {
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     remotePatterns: [
       {
-        protocol: 'https' as const,
-        hostname: 'cdn.discordapp.com',
-        port: '',
-        pathname: '/**',
-        search: '',
+        protocol: "https" as const,
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/**",
+        search: "",
       },
     ],
   },
   headers: async () => {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'Document-Policy',
-            value: 'js-profiling',
+            key: "Document-Policy",
+            value: "js-profiling",
           },
         ],
       },
     ];
   },
   serverExternalPackages: [
-    '@opentelemetry/auto-instrumentations-node',
-    '@opentelemetry/sdk-node',
-    '@sentry/profiling-node',
+    "@opentelemetry/auto-instrumentations-node",
+    "@opentelemetry/sdk-node",
+    "@sentry/profiling-node",
   ],
 };
 
 /** @type {import('remark-gfm').Options} */
-const remarkGFMOptions: import('remark-gfm').Options = {};
+const remarkGFMOptions: import("remark-gfm").Options = {};
 
 const withMdx = createMdx({
   options: {
-    remarkPlugins: [['remark-gfm', remarkGFMOptions]],
-    rehypePlugins: ['rehype-slug'],
+    remarkPlugins: [["remark-gfm", remarkGFMOptions]],
+    rehypePlugins: ["rehype-slug"],
   },
 });
 

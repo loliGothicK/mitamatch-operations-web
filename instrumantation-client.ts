@@ -8,10 +8,10 @@ import {
   feedbackIntegration,
   init,
   replayIntegration,
-} from '@sentry/nextjs';
+} from "@sentry/nextjs";
 
 init({
-  dsn: 'https://d811f383ea900362accb6a63e57d4302@o4507108758192128.ingest.us.sentry.io/4507108760223744',
+  dsn: "https://d811f383ea900362accb6a63e57d4302@o4507108758192128.ingest.us.sentry.io/4507108760223744",
 
   // Adjust this value in production, or use tracesSampler for greater control
   tracesSampleRate: 1,
@@ -31,7 +31,7 @@ init({
   // You can remove this option if you're not planning to use the Sentry Session Replay feature:
   integrations: [
     feedbackIntegration({
-      colorScheme: 'system',
+      colorScheme: "system",
       isNameRequired: true,
     }),
     browserTracingIntegration(),
@@ -43,5 +43,5 @@ init({
     }),
   ],
 
-  enabled: process.env.NODE_ENV !== 'development',
+  enabled: process.env.NODE_ENV !== "development",
 });

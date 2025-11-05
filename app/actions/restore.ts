@@ -1,9 +1,9 @@
-'use server';
-import type { Unit } from '@/domain/types';
-import { match } from 'ts-pattern';
-import { decodeDeck, decodeTimeline } from '@/endec/serde';
-import type { Order } from '@/domain/order/order';
-import { getDeckFullUrl, getTimelineFullUrl } from '@/database';
+"use server";
+import type { Unit } from "@/domain/types";
+import { match } from "ts-pattern";
+import { decodeDeck, decodeTimeline } from "@/endec/serde";
+import type { Order } from "@/domain/order/order";
+import { getDeckFullUrl, getTimelineFullUrl } from "@/database";
 
 type OrderWithPic = Order & {
   delay?: number;
@@ -12,38 +12,38 @@ type OrderWithPic = Order & {
 };
 
 export async function restore(_: {
-  target: 'deck';
+  target: "deck";
   param: string;
 }): Promise<Unit>;
 export async function restore(_: {
-  target: 'timeline';
+  target: "timeline";
   param: string;
 }): Promise<OrderWithPic[]>;
 export async function restore({
   target,
   param,
 }: {
-  target: 'deck' | 'timeline';
+  target: "deck" | "timeline";
   param: string;
 }): Promise<Unit | OrderWithPic[]> {
   const parseResult = match(target)
-    .with('deck', () => decodeDeck(param))
-    .with('timeline', () => decodeTimeline(param))
+    .with("deck", () => decodeDeck(param))
+    .with("timeline", () => decodeTimeline(param))
     .exhaustive();
 
   if (parseResult.isOk()) {
     return parseResult.value;
   }
   const full = await match(target)
-    .with('deck', async () => {
+    .with("deck", async () => {
       return (await getDeckFullUrl(param)) || param;
     })
-    .with('timeline', async () => {
+    .with("timeline", async () => {
       return (await getTimelineFullUrl(param)) || param;
     })
     .exhaustive();
   return match(target)
-    .with('deck', () => decodeDeck(full)._unsafeUnwrap())
-    .with('timeline', () => decodeTimeline(full)._unsafeUnwrap())
+    .with("deck", () => decodeDeck(full)._unsafeUnwrap())
+    .with("timeline", () => decodeTimeline(full)._unsafeUnwrap())
     .exhaustive();
 }

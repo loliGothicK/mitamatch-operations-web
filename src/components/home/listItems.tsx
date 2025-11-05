@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 import {
   Assignment,
@@ -6,34 +6,34 @@ import {
   Schema,
   ViewCompact,
   ViewTimeline,
-} from '@mui/icons-material';
+} from "@mui/icons-material";
 import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Tooltip,
-} from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 const links = [
   {
-    title: 'Data',
-    href: '/data',
+    title: "Data",
+    href: "/data",
     icon: <DataArray />,
   },
   {
-    title: 'Deck Builder',
-    href: '/deck-builder',
+    title: "Deck Builder",
+    href: "/deck-builder",
     icon: <ViewCompact />,
   },
   {
-    title: 'Timeline Builder',
-    href: '/timeline-builder',
+    title: "Timeline Builder",
+    href: "/timeline-builder",
     icon: <ViewTimeline />,
   },
   {
-    title: 'Flow Chart',
-    href: '/flowchart',
+    title: "Flow Chart",
+    href: "/flowchart",
     icon: <Schema />,
   },
 ];
@@ -42,7 +42,7 @@ export const mainListItems = (
   <>
     {links.map(({ title, href, icon }) => {
       return (
-        <Tooltip title={title} key={title} arrow placement={'right-end'}>
+        <Tooltip title={title} key={title} arrow placement={"right-end"}>
           <Link href={href}>
             <ListItemButton>
               <ListItemIcon>{icon}</ListItemIcon>
@@ -57,35 +57,35 @@ export const mainListItems = (
 
 const updates = [
   {
-    name: 'Database is now available (preview)',
+    name: "Database is now available (preview)",
     description: [
-      'You can check the implementation overview',
-      'This feature is still in preview.',
+      "You can check the implementation overview",
+      "This feature is still in preview.",
     ],
-    link: '/database',
+    link: "/database",
   },
   {
-    name: 'light/dark mode is now available',
-    description: ['You can toggle the color mode between light and dark.'],
-    link: '/',
+    name: "light/dark mode is now available",
+    description: ["You can toggle the color mode between light and dark."],
+    link: "/",
   },
   {
-    name: 'Flow Chart is now available for preview',
-    description: ['You can create, edit, and share your flow chart.'],
-    link: '/flowchart',
+    name: "Flow Chart is now available for preview",
+    description: ["You can create, edit, and share your flow chart."],
+    link: "/flowchart",
   },
   {
-    name: 'Timeline Builder for Web is now generally available (GA)',
+    name: "Timeline Builder for Web is now generally available (GA)",
     description: [
-      'Timeline Builder is now generally available for Web.',
-      'You can create, edit, and share your order timeline.',
+      "Timeline Builder is now generally available for Web.",
+      "You can create, edit, and share your order timeline.",
     ],
-    link: '/timeline-builder',
+    link: "/timeline-builder",
   },
   {
-    name: 'Deck Builder for Web is fully functional',
-    description: ['Deck Builder all features are now available.'],
-    link: '/deck-builder',
+    name: "Deck Builder for Web is fully functional",
+    description: ["Deck Builder all features are now available."],
+    link: "/deck-builder",
   },
 ];
 
@@ -93,12 +93,12 @@ export const UpdateListItems = () => {
   const theme = useTheme();
   return (
     <>
-      {updates.map(item => {
+      {updates.map((item) => {
         return (
           <Link
             key={item.name}
             href={item.link}
-            style={{ textDecoration: 'none', color: 'inherit' }}
+            style={{ textDecoration: "none", color: "inherit" }}
           >
             <ListItemButton>
               <ListItemIcon>

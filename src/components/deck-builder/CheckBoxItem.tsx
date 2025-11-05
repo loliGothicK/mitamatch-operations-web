@@ -1,6 +1,6 @@
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import type { ChangeEvent } from 'react';
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import type { ChangeEvent } from "react";
 
 export function CheckBoxItem({
   name,

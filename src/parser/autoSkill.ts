@@ -1,39 +1,39 @@
-import type { Amount, StatusKind } from '@/parser/common';
+import type { Amount, StatusKind } from "@/parser/common";
 
-import { match } from 'ts-pattern';
-import { parseAmount } from '@/parser/common';
-import { type Either, right, getApplicativeValidation } from 'fp-ts/Either';
-import { anyhow, type MitamaError, CallPath } from '@/error/error';
-import { pipe } from 'fp-ts/function';
-import { toValidated, type Validated } from '@/fp-ts-ext/Validated';
-import { getSemigroup } from 'fp-ts/Array';
-import { sequenceS } from 'fp-ts/Apply';
-import { fromNullable, type Option } from 'fp-ts/Option';
-import { option, either } from 'fp-ts';
-import { separator, transposeArray } from '@/fp-ts-ext/function';
+import { match } from "ts-pattern";
+import { parseAmount } from "@/parser/common";
+import { type Either, right, getApplicativeValidation } from "fp-ts/Either";
+import { anyhow, type MitamaError, CallPath } from "@/error/error";
+import { pipe } from "fp-ts/function";
+import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
+import { getSemigroup } from "fp-ts/Array";
+import { sequenceS } from "fp-ts/Apply";
+import { fromNullable, type Option } from "fp-ts/Option";
+import { option, either } from "fp-ts";
+import { separator, transposeArray } from "@/fp-ts-ext/function";
 
 export type Probability =
-  | 'certain' // 一定確率で
-  | 'medium' // 中確率で
-  | 'high'; // 高確率で
+  | "certain" // 一定確率で
+  | "medium" // 中確率で
+  | "high"; // 高確率で
 
-export type Trigger = 'Attack' | 'Assist' | 'Recovery' | 'Command';
+export type Trigger = "Attack" | "Assist" | "Recovery" | "Command";
 
 type PossibleStatus = Exclude<
   StatusKind,
-  'Life' | 'Light ATK' | 'Light DEF' | 'Dark ATK' | 'Dark DEF'
+  "Life" | "Light ATK" | "Light DEF" | "Dark ATK" | "Dark DEF"
 >;
 
 export type SupportKind = {
   type:
-    | 'DamageUp'
-    | 'SupportUp'
-    | 'RecoveryUp'
-    | 'MatchPtUp'
-    | 'MpCostDown'
-    | 'RangeUp'
-    | 'UP'
-    | 'DOWN';
+    | "DamageUp"
+    | "SupportUp"
+    | "RecoveryUp"
+    | "MatchPtUp"
+    | "MpCostDown"
+    | "RangeUp"
+    | "UP"
+    | "DOWN";
   amount: Amount;
   status?: PossibleStatus;
 };
@@ -57,20 +57,20 @@ const parseProbability = (
 ): Either<MitamaError, Probability> =>
   match<string, Either<MitamaError, Probability>>(description)
     .when(
-      sentence => sentence.includes('一定確率'),
-      () => right('certain'),
+      (sentence) => sentence.includes("一定確率"),
+      () => right("certain"),
     )
     .when(
-      sentence => sentence.includes('中確率'),
-      () => right('medium'),
+      (sentence) => sentence.includes("中確率"),
+      () => right("medium"),
     )
     .when(
-      sentence => sentence.includes('高確率'),
-      () => right('high'),
+      (sentence) => sentence.includes("高確率"),
+      () => right("high"),
     )
     .otherwise(() =>
       anyhow(description, `given text doesn't include any probability`, {
-        path: path.join('parseProbability'),
+        path: path.join("parseProbability"),
         memoriaName,
       }),
     );
@@ -83,33 +83,33 @@ const parseSingleStatus = (
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, PossibleStatus[]> =>
   separator(
-    status.split('と').map(stat =>
+    status.split("と").map((stat) =>
       match<string, Either<MitamaError, PossibleStatus[]>>(stat)
-        .with('ATK', () => right(['ATK']))
-        .with('DEF', () => right(['DEF']))
-        .with('Sp.ATK', () => right(['Sp.ATK']))
-        .with('Sp.DEF', () => right(['Sp.DEF']))
-        .with('火属性攻撃力', () => right(['Fire ATK']))
-        .with('水属性攻撃力', () => right(['Water ATK']))
-        .with('風属性攻撃力', () => right(['Wind ATK']))
-        .with('水属性攻撃力・風属性攻撃力', () =>
-          right(['Water ATK', 'Wind ATK']),
+        .with("ATK", () => right(["ATK"]))
+        .with("DEF", () => right(["DEF"]))
+        .with("Sp.ATK", () => right(["Sp.ATK"]))
+        .with("Sp.DEF", () => right(["Sp.DEF"]))
+        .with("火属性攻撃力", () => right(["Fire ATK"]))
+        .with("水属性攻撃力", () => right(["Water ATK"]))
+        .with("風属性攻撃力", () => right(["Wind ATK"]))
+        .with("水属性攻撃力・風属性攻撃力", () =>
+          right(["Water ATK", "Wind ATK"]),
         )
-        .with('火属性防御力', () => right(['Fire DEF']))
-        .with('水属性防御力', () => right(['Water DEF']))
-        .with('風属性防御力', () => right(['Wind DEF']))
-        .with('水属性防御力・風属性防御力', () =>
-          right(['Water DEF', 'Wind DEF']),
+        .with("火属性防御力", () => right(["Fire DEF"]))
+        .with("水属性防御力", () => right(["Water DEF"]))
+        .with("風属性防御力", () => right(["Wind DEF"]))
+        .with("水属性防御力・風属性防御力", () =>
+          right(["Water DEF", "Wind DEF"]),
         )
-        .with('火属性攻撃力・水属性攻撃力・風属性攻撃力', () =>
-          right(['Fire ATK', 'Water ATK', 'Wind ATK']),
+        .with("火属性攻撃力・水属性攻撃力・風属性攻撃力", () =>
+          right(["Fire ATK", "Water ATK", "Wind ATK"]),
         )
-        .with('火属性防御力・水属性防御力・風属性防御力', () =>
-          right(['Fire DEF', 'Water DEF', 'Wind DEF']),
+        .with("火属性防御力・水属性防御力・風属性防御力", () =>
+          right(["Fire DEF", "Water DEF", "Wind DEF"]),
         )
-        .otherwise(target =>
+        .otherwise((target) =>
           anyhow(target, `given text doesn't match any status`, {
-            path: path.join('parseSingleStatus'),
+            path: path.join("parseSingleStatus"),
           }),
         ),
     ),
@@ -120,18 +120,18 @@ const parseUpDown = (
   memoriaName: string,
   path: CallPath = CallPath.empty,
 ) =>
-  match<string, Either<MitamaError, 'UP' | 'DOWN'>>(upOrDown)
+  match<string, Either<MitamaError, "UP" | "DOWN">>(upOrDown)
     .when(
-      text => text.includes('アップ'),
-      () => right('UP' as const),
+      (text) => text.includes("アップ"),
+      () => right("UP" as const),
     )
     .when(
-      text => text.includes('ダウン'),
-      () => right('DOWN' as const),
+      (text) => text.includes("ダウン"),
+      () => right("DOWN" as const),
     )
-    .otherwise(target =>
+    .otherwise((target) =>
       anyhow(target, `given text doesn't include UP or DOWN`, {
-        path: path.join('parseUpDown'),
+        path: path.join("parseUpDown"),
         memoriaName,
       }),
     );
@@ -143,21 +143,21 @@ function parseStatus(
 ): Option<Validated<MitamaError, SupportKind[]>> {
   const global =
     /(ATK|DEF|Sp\.ATK|Sp\.DEF|火属性|水属性|風属性).*?を.*?(アップ|ダウン)/g;
-  const joined = () => path.join('parseStatus');
+  const joined = () => path.join("parseStatus");
 
   return pipe(
     fromNullable(description.match(global)),
-    option.flatMap(gmatch =>
+    option.flatMap((gmatch) =>
       pipe(
-        gmatch.map(status =>
+        gmatch.map((status) =>
           pipe(
             fromNullable(status.match(STATUS)),
             option.map(([, stat, upOrDown]) =>
               pipe(
                 parseSingleStatus(stat, joined()),
-                either.flatMap(stats =>
+                either.flatMap((stats) =>
                   separator(
-                    stats.map(stat =>
+                    stats.map((stat) =>
                       sequenceS(ap)({
                         type: toValidated(
                           parseUpDown(upOrDown, memoriaName, joined()),
@@ -196,12 +196,12 @@ function parseDamage(
     option.map(([, up]) =>
       pipe(
         sequenceS(ap)({
-          type: right('DamageUp' as const),
+          type: right("DamageUp" as const),
           amount: toValidated(
-            parseAmount(up, { path: path.join('parseDamage'), memoriaName }),
+            parseAmount(up, { path: path.join("parseDamage"), memoriaName }),
           ),
         }),
-        either.map(effect => [effect]),
+        either.map((effect) => [effect]),
       ),
     ),
   );
@@ -219,12 +219,12 @@ export function parseAssit(
     option.map(([, up]) =>
       pipe(
         sequenceS(ap)({
-          type: right('SupportUp' as const),
+          type: right("SupportUp" as const),
           amount: toValidated(
-            parseAmount(up, { path: path.join('parseAssit'), memoriaName }),
+            parseAmount(up, { path: path.join("parseAssit"), memoriaName }),
           ),
         }),
-        either.map(effect => [effect]),
+        either.map((effect) => [effect]),
       ),
     ),
   );
@@ -242,12 +242,12 @@ function parseRecovery(
     option.map(([, up]) =>
       pipe(
         sequenceS(ap)({
-          type: right('RecoveryUp' as const),
+          type: right("RecoveryUp" as const),
           amount: toValidated(
-            parseAmount(up, { path: path.join('parseRecovery'), memoriaName }),
+            parseAmount(up, { path: path.join("parseRecovery"), memoriaName }),
           ),
         }),
-        either.map(effect => [effect]),
+        either.map((effect) => [effect]),
       ),
     ),
   );
@@ -265,12 +265,12 @@ function parseMatchPt(
     option.map(([, up]) =>
       pipe(
         sequenceS(ap)({
-          type: right('MatchPtUp' as const),
+          type: right("MatchPtUp" as const),
           amount: toValidated(
-            parseAmount(up, { path: path.join('parseMatchPt'), memoriaName }),
+            parseAmount(up, { path: path.join("parseMatchPt"), memoriaName }),
           ),
         }),
-        either.map(effect => [effect]),
+        either.map((effect) => [effect]),
       ),
     ),
   );
@@ -283,7 +283,7 @@ function parseMpCost(
 ): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
     fromNullable(description.match(COST_DOWN)),
-    option.map(() => right([{ type: 'MpCostDown', amount: 'medium' }])),
+    option.map(() => right([{ type: "MpCostDown", amount: "medium" }])),
   );
 }
 
@@ -294,7 +294,7 @@ function parseRange(
 ): Option<Validated<MitamaError, SupportKind[]>> {
   return pipe(
     fromNullable(description.match(RANGE)),
-    option.map(() => right([{ type: 'RangeUp', amount: 'medium' }])),
+    option.map(() => right([{ type: "RangeUp", amount: "medium" }])),
   );
 }
 
@@ -305,24 +305,24 @@ const parseTrigger = (
 ): Either<MitamaError, Trigger> =>
   match<string, Either<MitamaError, Trigger>>(skillName)
     .when(
-      name => name.startsWith('攻:'),
-      () => right('Attack'),
+      (name) => name.startsWith("攻:"),
+      () => right("Attack"),
     )
     .when(
-      name => name.startsWith('援:'),
-      () => right('Assist'),
+      (name) => name.startsWith("援:"),
+      () => right("Assist"),
     )
     .when(
-      name => name.startsWith('回:'),
-      () => right('Recovery'),
+      (name) => name.startsWith("回:"),
+      () => right("Recovery"),
     )
     .when(
-      name => name.startsWith('コ:'),
-      () => right('Command'),
+      (name) => name.startsWith("コ:"),
+      () => right("Command"),
     )
     .otherwise(() =>
-      anyhow(skillName, 'no match trigger found', {
-        path: path.join('parseTrigger'),
+      anyhow(skillName, "no match trigger found", {
+        path: path.join("parseTrigger"),
         memoriaName,
       }),
     );
@@ -332,7 +332,7 @@ const parseEffects = (
   memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, readonly SupportKind[]> => {
-  const joined = path.join('parseEffects');
+  const joined = path.join("parseEffects");
   const effects = [
     parseRange(description),
     parseMpCost(description),
@@ -347,7 +347,7 @@ const parseEffects = (
     option.map(separator),
     option.getOrElse(() =>
       toValidated(
-        anyhow(description, 'No match support effects found', {
+        anyhow(description, "No match support effects found", {
           path: joined,
           memoriaName,
         }),
@@ -366,7 +366,7 @@ export function parseAutoSkill({
     description: string;
   };
 }): Validated<MitamaError, AutoSkill> {
-  const path = new CallPath(['parseAutoSkill']);
+  const path = new CallPath(["parseAutoSkill"]);
   return sequenceS(ap)({
     raw: right(autoSkill),
     trigger: toValidated(parseTrigger(autoSkill.name, memoriaName, path)),

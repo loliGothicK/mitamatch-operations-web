@@ -1,22 +1,22 @@
-import { type Memoria, memoriaList } from '@/domain/memoria/memoria';
-import { orderList, type Order } from '@/domain/order/order';
-import type { MemoriaWithConcentration } from '@/jotai/memoriaAtoms';
-import type { OrderWithPic } from '@/jotai/orderAtoms';
-import type { Unit } from '@/domain/types';
-import { type Result, fromThrowable, ok, err } from 'neverthrow';
-import { z } from 'zod';
-import { pipe } from 'fp-ts/function';
-import { partition } from 'fp-ts/Array';
-import { outdent } from 'outdent';
+import { type Memoria, memoriaList } from "@/domain/memoria/memoria";
+import { orderList, type Order } from "@/domain/order/order";
+import type { MemoriaWithConcentration } from "@/jotai/memoriaAtoms";
+import type { OrderWithPic } from "@/jotai/orderAtoms";
+import type { Unit } from "@/domain/types";
+import { type Result, fromThrowable, ok, err } from "neverthrow";
+import { z } from "zod";
+import { pipe } from "fp-ts/function";
+import { partition } from "fp-ts/Array";
+import { outdent } from "outdent";
 
 export function encodeDeck(
-  sw: 'sword' | 'shield',
+  sw: "sword" | "shield",
   deck: MemoriaWithConcentration[],
   legendaryDeck: MemoriaWithConcentration[],
 ) {
-  const deckInfo = deck.map(memoria => [memoria.id, memoria.concentration]);
+  const deckInfo = deck.map((memoria) => [memoria.id, memoria.concentration]);
   const legendaryDeckInfo = legendaryDeck.map(
-    memoria => [memoria.id, memoria.concentration] as const,
+    (memoria) => [memoria.id, memoria.concentration] as const,
   );
   return btoa(
     JSON.stringify({
@@ -36,7 +36,7 @@ const Concentration = z.union([
 ]);
 
 const encodedUnit = z.object({
-  sw: z.union([z.literal('sword'), z.literal('shield')]),
+  sw: z.union([z.literal("sword"), z.literal("shield")]),
   deck: z.array(z.tuple([z.number(), Concentration])),
   legendaryDeck: z.array(z.tuple([z.number(), Concentration])),
 });
@@ -46,7 +46,7 @@ type EncodedUnit = z.infer<typeof encodedUnit>;
 const atobSafe = (data: string) =>
   fromThrowable(
     atob,
-    e => outdent`
+    (e) => outdent`
     Error in \`atob(${data})\`:
     
     ${e}
@@ -55,7 +55,7 @@ const atobSafe = (data: string) =>
 
 const jsonParseSafe = fromThrowable(
   JSON.parse,
-  e => outdent`
+  (e) => outdent`
     Error in \`JSON.parse\`:
 
     ${e}
@@ -63,14 +63,14 @@ const jsonParseSafe = fromThrowable(
 );
 const unitParseSafe = fromThrowable(
   encodedUnit.parse,
-  e => outdent`
+  (e) => outdent`
     Error in \`JSON.parse\`:
 
     ${e}
   `,
 );
 
-const deckMap = new Map(memoriaList.map(memoria => [memoria.id, memoria]));
+const deckMap = new Map(memoriaList.map((memoria) => [memoria.id, memoria]));
 
 const restore = (
   data: [number, number][],
@@ -81,7 +81,7 @@ const restore = (
     partition(
       (
         item,
-      ): item is [Memoria, MemoriaWithConcentration['concentration'], number] =>
+      ): item is [Memoria, MemoriaWithConcentration["concentration"], number] =>
         item[0] !== undefined,
     ),
   );
@@ -122,7 +122,7 @@ export function decodeDeck(encoded: string): Result<Unit, string> {
 }
 
 export function encodeTimeline(timeline: OrderWithPic[]) {
-  const timelineInfo = timeline.map(order => {
+  const timelineInfo = timeline.map((order) => {
     return {
       id: order.id,
       delay: order.delay,
@@ -149,14 +149,14 @@ type Timeline = z.infer<typeof timelineSchema>;
 
 const timelineParseSafe = fromThrowable(
   timelineSchema.parse,
-  e => outdent`
+  (e) => outdent`
     Error in \`timelineSchema.parse\`:
 
     ${e}
   `,
 );
 
-const orderMap = new Map(orderList.map(order => [order.id, order] as const));
+const orderMap = new Map(orderList.map((order) => [order.id, order] as const));
 
 const restoreTimeline = (data: Timeline): Result<OrderWithPic[], string> => {
   const cov = data.timeline.map(({ id, ...xs }) => {
@@ -170,7 +170,7 @@ const restoreTimeline = (data: Timeline): Result<OrderWithPic[], string> => {
       ): item is {
         id: number;
         order: Order;
-        xs: Exclude<TimelineItem, 'order'>;
+        xs: Exclude<TimelineItem, "order">;
       } => item.order !== undefined,
     ),
   );

@@ -3,36 +3,14 @@
   "extends": [],
   "files": {
     "ignoreUnknown": true,
-    "includes": [
-      "**/*.ts",
-      "**/*.tsx",
-      "**/*.js",
-      "**/*.jsx",
-      "**/*.mjs",
-      "**/*.json",
-      "!**/.next",
-      "!**/node_modules",
-      "!**/coverage"
-    ],
+    "includes": ["**/*.json"],
     "maxSize": 20000000
   },
-  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
     "indentWidth": 2,
     "indentStyle": "space"
-  },
-  "javascript": {
-    "parser": {
-      "unsafeParameterDecoratorsEnabled": true
-    },
-    "formatter": {
-      "quoteStyle": "single",
-      "jsxQuoteStyle": "single",
-      "semicolons": "always",
-      "arrowParentheses": "asNeeded"
-    }
   },
   "json": {
     "parser": { "allowComments": true },
@@ -41,26 +19,6 @@
       "indentStyle": "space",
       "indentWidth": 2,
       "lineWidth": 80
-    }
-  },
-  "linter": {
-    "rules": {
-      "complexity": {
-        "noExcessiveCognitiveComplexity": "off"
-      },
-      "style": {
-        "noDefaultExport": "off",
-        "noImplicitBoolean": "off",
-        "useNamingConvention": "off"
-      },
-      "suspicious": {
-        "noReactSpecificProps": "off"
-      },
-      "correctness": {
-        "noUndeclaredVariables": "off",
-        "useImportExtensions": "off",
-        "noUndeclaredDependencies": "off"
-      }
     }
   },
   "vcs": {
