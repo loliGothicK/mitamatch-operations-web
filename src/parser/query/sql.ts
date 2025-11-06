@@ -4,6 +4,7 @@ import {
   type ExpressionValue,
   type ExprList,
   type Function as SqlFunction,
+  OrderBy,
   Parser,
 } from "node-sql-parser";
 import type { GridColDef } from "@mui/x-data-grid";
@@ -21,6 +22,11 @@ import { fromThrowable } from "neverthrow";
 
 const parser = new Parser();
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
+
+export type ParseResult = {
+  readonly where: Option<BinaryExpr>;
+  readonly orderBy: Option<OrderByExpr[]>;
+};
 
 function isExpressionValueArray(data: any): data is ExpressionValue[] {
   if (!Array.isArray(data)) {
@@ -41,6 +47,11 @@ export type BinaryExpr = {
   lhs: AtomicExpr | BinaryExpr | AtomicExprList;
   operator: string;
   rhs: AtomicExpr | BinaryExpr | AtomicExprList;
+};
+export type OrderByExpr = {
+  type: "order_by";
+  target: AtomicExpr | BinaryExpr | AtomicExprList;
+  direction: "ASC" | "DESC";
 };
 
 function parseExpr(
@@ -181,9 +192,31 @@ function parseWhere(
     );
 }
 
+function parseOrderBy(
+  orderby: OrderBy[] | null,
+): Validated<MitamaError, Option<OrderByExpr[]>> {
+  return match(orderby)
+    .with(null, () => right(option.none))
+    .otherwise((orderby) =>
+      pipe(
+        orderby.map((clause) =>
+          sequenceS(ap)({
+            type: right("order_by" as const),
+            target: parseExpr(clause.expr),
+            direction: right(clause.type),
+          }),
+        ),
+        separator,
+        either.map(option.some),
+      ),
+    );
+}
+
+type WhiteList = Set<GridColDef["field"]>;
+
 export function sqlToModel(
   sql: string,
-): Validated<MitamaError, [Set<GridColDef["field"]>, Option<BinaryExpr>]> {
+): Validated<MitamaError, [WhiteList, ParseResult]> {
   const ast = fromThrowable(parser.astify.bind(parser))(sql, {
     database: "MySQL",
   });
@@ -201,7 +234,10 @@ export function sqlToModel(
   if (ast.value[0].type === "select") {
     const stmt = ast.value[0];
     return pipe(
-      parseWhere(stmt.where),
+      sequenceS(ap)({
+        where: parseWhere(stmt.where),
+        orderBy: parseOrderBy(stmt.orderby),
+      }),
       either.map(
         (filter) =>
           [

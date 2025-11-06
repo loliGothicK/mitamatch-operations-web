@@ -15,9 +15,8 @@ import { match, P } from "ts-pattern";
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import Link from "@/components/link";
-import { schema } from "@/data/_common/schema";
 import { QueryConsle } from "@/data/_common/QueryConsle";
-import { IExpression } from "@/parser/query/filter";
+import { SchemaResolver } from "@/parser/query/filter";
 
 const columns: GridColDef<Memoria>[] = [
   {
@@ -127,26 +126,91 @@ const columns: GridColDef<Memoria>[] = [
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-const resolver: Record<string, (memoria: Memoria) => string | number> = {
-  name: (memoria: Memoria) => Lenz.memoria.fullName.get(memoria),
-  type: (memoria: Memoria) => Lenz.memoria.cardType.get(memoria),
-  attribute: (memoria: Memoria) =>
-    match(Lenz.memoria.attribute.get(memoria))
-      .with("Fire", () => "火")
-      .with("Water", () => "水")
-      .with("Wind", () => "風")
-      .with("Light", () => "光")
-      .with("Dark", () => "闇")
-      .exhaustive(),
-  cost: (memoria: Memoria) => Lenz.memoria.cost.get(memoria),
-  atk: (memoria: Memoria) => Lenz.memoria.atk.get(memoria),
-  spatk: (memoria: Memoria) => Lenz.memoria.spatk.get(memoria),
-  def: (memoria: Memoria) => Lenz.memoria.def.get(memoria),
-  spdef: (memoria: Memoria) => Lenz.memoria.spdef.get(memoria),
-  questSkill: (memoria: Memoria) =>
-    Lenz.memoria.questSkill.get(memoria).raw.name,
-  gvgSkill: (memoria: Memoria) => Lenz.memoria.gvgSkill.get(memoria).raw.name,
-  autoSkill: (memoria: Memoria) => Lenz.memoria.autoSkill.get(memoria).raw.name,
+const schema = {
+  memoria: [
+    "name",
+    "type",
+    "attribute",
+    "cost",
+    "atk",
+    "spatk",
+    "def",
+    "spdef",
+    "questSkill",
+    "gvgSkill",
+    "autoSkill",
+  ],
+};
+
+const resolver: SchemaResolver<Memoria> = {
+  name: {
+    type: "string",
+    accessor: (memoria: Memoria) => Lenz.memoria.fullName.get(memoria),
+  },
+  type: {
+    type: "string",
+    accessor: (memoria: Memoria) => Lenz.memoria.cardType.get(memoria),
+  },
+  attribute: {
+    type: "string",
+    accessor: (memoria: Memoria) =>
+      match(Lenz.memoria.attribute.get(memoria))
+        .with("Fire", () => "火")
+        .with("Water", () => "水")
+        .with("Wind", () => "風")
+        .with("Light", () => "光")
+        .with("Dark", () => "闇")
+        .exhaustive(),
+  },
+  cost: {
+    type: "number",
+    accessor: (memoria: Memoria) => Lenz.memoria.cost.get(memoria),
+  },
+  atk: {
+    type: "number",
+    accessor: (memoria: Memoria) => Lenz.memoria.atk.get(memoria),
+  },
+  spatk: {
+    type: "number",
+    accessor: (memoria: Memoria) => Lenz.memoria.spatk.get(memoria),
+  },
+  def: {
+    type: "number",
+    accessor: (memoria: Memoria) => Lenz.memoria.def.get(memoria),
+  },
+  spdef: {
+    type: "number",
+    accessor: (memoria: Memoria) => Lenz.memoria.spatk.get(memoria),
+  },
+  "questSkill.name": {
+    type: "string",
+    accessor: (memoria: Memoria) =>
+      Lenz.memoria.questSkill.get(memoria).raw.name,
+  },
+  "questSkill.description": {
+    type: "string",
+    accessor: (memoria: Memoria) =>
+      Lenz.memoria.questSkill.get(memoria).raw.description,
+  },
+  "gvgSkill.name": {
+    type: "string",
+    accessor: (memoria: Memoria) => Lenz.memoria.gvgSkill.get(memoria).raw.name,
+  },
+  "gvgSkill.description": {
+    type: "string",
+    accessor: (memoria: Memoria) =>
+      Lenz.memoria.gvgSkill.get(memoria).raw.description,
+  },
+  "autoSkill.name": {
+    type: "string",
+    accessor: (memoria: Memoria) =>
+      Lenz.memoria.autoSkill.get(memoria).raw.name,
+  },
+  "autoSkill.description": {
+    type: "string",
+    accessor: (memoria: Memoria) =>
+      Lenz.memoria.autoSkill.get(memoria).raw.description,
+  },
 };
 
 const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
@@ -177,23 +241,14 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
     [setVisivility],
   );
 
-  const updateData = useCallback(
-    (pred: IExpression<Memoria>) => {
-      setRows(() => {
-        return dataSource.toReversed().filter((memoria) => pred.apply(memoria));
-      });
-    },
-    [setRows],
-  );
-
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
       <QueryConsle
         resolver={resolver}
         initial={initialQuery}
         schema={schema}
-        updateVisivility={visivilityChanged}
-        updateData={updateData}
+        updateVisivilityAction={visivilityChanged}
+        updateDataAction={setRows}
       />
       <DataGrid
         rows={rows}

@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { flow, pipe } from "fp-ts/function";
 import { sqlToModel } from "@/parser/query/sql";
 import { either } from "fp-ts";
@@ -11,7 +17,7 @@ import { Info, PlayArrowRounded, Share } from "@mui/icons-material";
 import { GridColDef } from "@mui/x-data-grid";
 import Console from "@/components/Console";
 import { isSome } from "fp-ts/Option";
-import build, { IExpression } from "@/parser/query/filter";
+import build, { SchemaResolver } from "@/parser/query/filter";
 import { isRight } from "fp-ts/Either";
 import { CompletionSource } from "@codemirror/autocomplete";
 
@@ -36,14 +42,14 @@ export function QueryConsle<
   initial,
   resolver,
   schema,
-  updateVisivility,
-  updateData,
+  updateVisivilityAction,
+  updateDataAction,
   completions,
 }: {
-  resolver: Record<string, (key: T) => string | number>;
+  resolver: SchemaResolver<T>;
   schema: Schema;
-  updateVisivility: (whiteList: Set<GridColDef["field"]>) => void;
-  updateData: (pred: IExpression<T>) => void;
+  updateVisivilityAction: (whiteList: Set<GridColDef["field"]>) => void;
+  updateDataAction: Dispatch<SetStateAction<T[]>>;
   initial?: string;
   completions?: CompletionSource[];
 }) {
@@ -82,32 +88,40 @@ export function QueryConsle<
     (first = false) => {
       return pipe(
         sqlToModel(query),
-        either.map(([whiteList, expr]) => {
-          updateVisivility(whiteList);
-          if (isSome(expr)) {
-            const pred = build(expr.value, resolver);
-            if (isRight(pred)) {
-              updateData(pred.right);
-              if (!first) {
-                setState(
-                  flow(
-                    openLens.set(true),
-                    messageLens.set(`Executed successfully.`),
-                    severityLens.set("success"),
-                  ),
-                );
-              }
-            } else {
+        either.map(([whiteList, result]) => {
+          updateVisivilityAction(whiteList);
+          const pred = build(result, resolver);
+          if (isRight(pred)) {
+            const { where, orderBy } = pred.right;
+            if (isSome(where)) {
+              updateDataAction((prev) =>
+                prev.filter(where.value.apply.bind(where.value)),
+              );
+            }
+            if (isSome(orderBy)) {
+              updateDataAction((prev) =>
+                prev.sort(orderBy.value.compare.bind(orderBy.value)),
+              );
+            }
+            if (!first) {
               setState(
                 flow(
                   openLens.set(true),
-                  messageLens.set(
-                    `Query Build Error: ${pred.left.map((e) => e.msg).join("\n")}`,
-                  ),
-                  severityLens.set("error"),
+                  messageLens.set(`Executed successfully.`),
+                  severityLens.set("success"),
                 ),
               );
             }
+          } else {
+            setState(
+              flow(
+                openLens.set(true),
+                messageLens.set(
+                  `Query Build Error: ${pred.left.map((e) => e.msg).join("\n")}`,
+                ),
+                severityLens.set("error"),
+              ),
+            );
           }
           return true;
         }),
@@ -125,7 +139,7 @@ export function QueryConsle<
         }),
       );
     },
-    [query, resolver, updateVisivility, updateData],
+    [query, resolver, updateVisivilityAction, updateDataAction],
   );
 
   useEffect(() => {
