@@ -14,7 +14,7 @@ import { Lenz } from "@/domain/memoria/lens";
 import type { Attribute } from "@/parser/skill";
 import { match, P } from "ts-pattern";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Console from "@/components/Console";
 import { memoriaCompletionSource } from "@/data/_memoria/autocomplete";
 import { Alert, IconButton, Snackbar, Tooltip } from "@mui/material";
@@ -269,6 +269,11 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
   const handleClose = () => {
     setState({ ...state, open: false });
   };
+
+  useEffect(() => {
+    if (initialQuery !== undefined) queryExecutor();
+  }, [initialQuery, queryExecutor]);
+
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
       <Box display={"flex"} sx={{ justifyContent: "left" }}>
