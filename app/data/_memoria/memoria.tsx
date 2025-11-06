@@ -99,7 +99,7 @@ const columns: GridColDef<Memoria>[] = [
     headerName: "Sp.DEF",
     type: "number",
     width: 80,
-    valueGetter: (_, memoria: Memoria) => Lenz.memoria.spatk.get(memoria),
+    valueGetter: (_, memoria: Memoria) => Lenz.memoria.spdef.get(memoria),
   },
   {
     field: "questSkill",
@@ -180,7 +180,7 @@ const resolver: SchemaResolver<Memoria> = {
   },
   spdef: {
     type: "number",
-    accessor: (memoria: Memoria) => Lenz.memoria.spatk.get(memoria),
+    accessor: (memoria: Memoria) => Lenz.memoria.spdef.get(memoria),
   },
   "questSkill.name": {
     type: "string",
