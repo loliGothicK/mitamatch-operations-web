@@ -1058,7 +1058,6 @@ function VirtualizedList() {
             >
               <Close />
             </IconButton>
-
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               期待値比較
             </Typography>

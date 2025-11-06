@@ -177,12 +177,14 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
     return `${totalTime} (${delay ? `${delay}` : ""}${prepare_time ? `+${prepare_time}` : ""}${active_time ? `+${active_time}` : ""}) s`;
   };
 
+  const starts = left - (order.delay || 0);
+
   return (
     <div ref={setNodeRef} style={style}>
       <Divider textAlign={"left"} sx={{ paddingLeft: 0 }}>
         <Typography fontSize={10}>
-          {`${left < 0 ? "-" : ""}${Math.trunc(left / 60)}`}:
-          {Math.abs(left % 60)
+          {`${starts < 0 ? "-" : ""}${Math.trunc(starts / 60)}`}:
+          {Math.abs(starts % 60)
             .toString()
             .padStart(2, "0")}
         </Typography>
@@ -338,7 +340,7 @@ function Timeline() {
   }, [setTitle, setTimeline, params]);
 
   const reducer = (
-    value: number,
+    left: number,
     order: OrderWithPic,
     index: number,
   ): number => {
@@ -350,7 +352,7 @@ function Timeline() {
           : order.prepare_time;
     const delay =
       index > timeline.length - 2 ? 0 : timeline[index + 1].delay || 0;
-    return value - prepareTime - order.active_time - delay;
+    return left - prepareTime - order.active_time - delay;
   };
 
   return (
@@ -404,6 +406,7 @@ function Source() {
       <Virtuoso
         style={{ height: "70vh", width: "100%", padding: 0 }}
         totalCount={orders.length}
+        computeItemKey={(index) => orders[index].id}
         itemContent={(index) => {
           return (
             <Card
