@@ -17,6 +17,7 @@ import { separator } from "@/fp-ts-ext/function";
 import { sequenceS } from "fp-ts/Apply";
 import { getSemigroup } from "fp-ts/Array";
 import type { Option } from "fp-ts/Option";
+import { fromThrowable } from "neverthrow";
 
 const parser = new Parser();
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
@@ -183,16 +184,22 @@ function parseWhere(
 export function sqlToModel(
   sql: string,
 ): Validated<MitamaError, [Set<GridColDef["field"]>, Option<BinaryExpr>]> {
-  const ast = parser.astify(sql, { database: "PostgresQL" });
+  const ast = fromThrowable(parser.astify.bind(parser))(sql, {
+    database: "MySQL",
+  });
 
-  if (!Array.isArray(ast)) {
+  if (ast.isErr()) {
+    return toValidated(anyhow(sql, ast.error as string));
+  }
+
+  if (!Array.isArray(ast.value)) {
     return toValidated(
       anyhow(sql, "Multiple SQL statements are not supported."),
     );
   }
 
-  if (ast[0].type === "select") {
-    const stmt = ast[0];
+  if (ast.value[0].type === "select") {
+    const stmt = ast.value[0];
     return pipe(
       parseWhere(stmt.where),
       either.map(

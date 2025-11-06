@@ -204,66 +204,71 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
     );
   }, [query]);
 
-  const queryExecutor = useCallback(() => {
-    return pipe(
-      sqlToModel(query),
-      either.map(([whiteList, expr]) => {
-        setVisivility(
-          (prev): GridColumnVisibilityModel =>
-            match(whiteList)
-              .with(P.set("*"), () => visivilityAll)
-              .otherwise(() =>
-                Object.fromEntries(
-                  Object.entries(prev).map(([field]) => [
-                    field as GridColDef["field"],
-                    whiteList.has(field),
-                  ]),
+  const queryExecutor = useCallback(
+    (first = false) => {
+      return pipe(
+        sqlToModel(query),
+        either.map(([whiteList, expr]) => {
+          setVisivility(
+            (prev): GridColumnVisibilityModel =>
+              match(whiteList)
+                .with(P.set("*"), () => visivilityAll)
+                .otherwise(() =>
+                  Object.fromEntries(
+                    Object.entries(prev).map(([field]) => [
+                      field as GridColDef["field"],
+                      whiteList.has(field),
+                    ]),
+                  ),
                 ),
-              ),
-        );
-        if (isSome(expr)) {
-          const pred = build(expr.value, resolver);
-          if (isRight(pred)) {
-            setRows(() => {
-              return dataSource
-                .toReversed()
-                .filter((memoria) => pred.right.apply(memoria));
-            });
-            setState(
-              flow(
-                openLens.set(true),
-                messageLens.set(`Executed successfully.`),
-                severityLens.set("success"),
-              ),
-            );
-          } else {
-            setState(
-              flow(
-                openLens.set(true),
-                messageLens.set(
-                  `Query Build Error: ${pred.left.map((e) => e.msg).join("\n")}`,
+          );
+          if (isSome(expr)) {
+            const pred = build(expr.value, resolver);
+            if (isRight(pred)) {
+              setRows(() => {
+                return dataSource
+                  .toReversed()
+                  .filter((memoria) => pred.right.apply(memoria));
+              });
+              if (!first) {
+                setState(
+                  flow(
+                    openLens.set(true),
+                    messageLens.set(`Executed successfully.`),
+                    severityLens.set("success"),
+                  ),
+                );
+              }
+            } else {
+              setState(
+                flow(
+                  openLens.set(true),
+                  messageLens.set(
+                    `Query Build Error: ${pred.left.map((e) => e.msg).join("\n")}`,
+                  ),
+                  severityLens.set("error"),
                 ),
-                severityLens.set("error"),
-              ),
-            );
+              );
+            }
           }
-        }
-        return true;
-      }),
-      either.getOrElse((err) => {
-        setState(
-          flow(
-            openLens.set(true),
-            messageLens.set(
-              `SQL Parse Error: ${err.map((e) => e.msg).join("\n")}`,
+          return true;
+        }),
+        either.getOrElse((err) => {
+          setState(
+            flow(
+              openLens.set(true),
+              messageLens.set(
+                `SQL Parse Error: ${err.map((e) => e.msg).join("\n")}`,
+              ),
+              severityLens.set("error"),
             ),
-            severityLens.set("error"),
-          ),
-        );
-        return true;
-      }),
-    );
-  }, [query]);
+          );
+          return true;
+        }),
+      );
+    },
+    [query],
+  );
   const { vertical, horizontal, open, message, severity } = state;
 
   const handleClose = () => {
@@ -271,8 +276,8 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
   };
 
   useEffect(() => {
-    if (initialQuery !== undefined) queryExecutor();
-  }, [initialQuery, queryExecutor]);
+    if (initialQuery !== undefined) queryExecutor(true);
+  }, [initialQuery]); // oxlint-disable-line exhaustive-deps
 
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
@@ -286,7 +291,7 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
         >
           <Alert severity={severity}>{message}</Alert>
         </Snackbar>
-        <IconButton onClick={queryExecutor} sx={{ marginRight: 1 }}>
+        <IconButton onClick={() => queryExecutor()} sx={{ marginRight: 1 }}>
           <Tooltip title={"Ctrl + Enter"} placement="top">
             <PlayArrowRounded />
           </Tooltip>
