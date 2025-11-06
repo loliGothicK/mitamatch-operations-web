@@ -27,6 +27,7 @@ import build from "@/parser/query/filter";
 import { isRight } from "fp-ts/Either";
 import { Lens } from "monocle-ts";
 import Link from "@/components/link";
+import { schema } from "@/data/_schema/schema";
 
 const columns: GridColDef<Memoria>[] = [
   {
@@ -135,22 +136,6 @@ const columns: GridColDef<Memoria>[] = [
 ];
 
 const paginationModel = { page: 0, pageSize: 10 };
-
-const schema = {
-  memoria: [
-    "name",
-    "type",
-    "attribute",
-    "cost",
-    "atk",
-    "spatk",
-    "def",
-    "spdef",
-    "questSkill",
-    "gvgSkill",
-    "autoSkill",
-  ],
-};
 
 type ToastState = {
   open: boolean;

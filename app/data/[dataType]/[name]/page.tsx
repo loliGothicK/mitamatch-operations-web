@@ -209,7 +209,7 @@ function SkillCard({
             </Typography>
             {"sp" in skill && (
               <Chip
-                label={`Cost ${skill.sp}`}
+                label={`消費MP ${skill.sp}`}
                 sx={{ marginLeft: "auto", marginTop: 2 }}
               />
             )}
