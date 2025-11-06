@@ -181,7 +181,7 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
   const [query, setQuery] = useState(
     initialQuery
       ? decodeURI(initialQuery)
-      : "select * from memoria where `cost` > 18 limit 10;",
+      : "select * from memoria where `cost` > 18;",
   );
   const [rows, setRows] = useState<Memoria[]>(dataSource.toReversed());
   const [state, setState] = useState<ToastState>({
