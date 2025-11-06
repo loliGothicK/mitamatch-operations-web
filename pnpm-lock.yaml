@@ -21,7 +21,7 @@ importers:
         specifier: 6.11.3
         version: 6.11.3
       '@codemirror/lint':
-        specifier: ^6.9.1
+        specifier: 6.9.2
         version: 6.9.2
       '@dnd-kit/core':
         specifier: 6.3.1
@@ -268,7 +268,7 @@ importers:
         specifier: 20.0.10
         version: 20.0.10
       oxfmt:
-        specifier: ^0.11.0
+        specifier: 0.11.0
         version: 0.11.0
       ts-node:
         specifier: 11.0.0-beta.1

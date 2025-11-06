@@ -970,6 +970,7 @@ function VirtualizedList() {
       <Virtuoso
         style={{ height: "60vh" }}
         totalCount={memoria.length}
+        computeItemKey={(index) => memoria[index].id}
         itemContent={(index) => {
           return (
             <Card
