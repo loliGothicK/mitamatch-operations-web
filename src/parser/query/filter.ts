@@ -11,7 +11,7 @@ import { either } from "fp-ts";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
 import { sequenceS } from "fp-ts/Apply";
 import { getSemigroup } from "fp-ts/Array";
-import { P } from 'ts-pattern';
+import { P } from "ts-pattern";
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 /**
@@ -27,20 +27,17 @@ const ap = getApplicativeValidation(getSemigroup<MitamaError>());
  * @returns マッチング用のRegExpオブジェクト
  */
 function likeToRegExp(pattern: string, flags?: string): RegExp {
-
   // 1. 正規表現の特殊文字 (., +, * など) をエスケープする
   //    'file.txt' が 'file\.txt' になるようにする
-  const escapedPattern = pattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const escapedPattern = pattern.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
   // 2. LIKEのワイルドカードを正規表現のワイルドカードに変換する
   //    '%' -> '.*'
   //    '_' -> '.'
-  const regexString = escapedPattern
-    .replace(/%/g, '.*')
-    .replace(/_/g, '.');
+  const regexString = escapedPattern.replace(/%/g, ".*").replace(/_/g, ".");
 
   // 3. LIKEは文字列全体にマッチするため、'^' と '$' で囲む
-  return new RegExp('^' + regexString + '$', flags);
+  return new RegExp("^" + regexString + "$", flags);
 }
 
 export default function build<T>(
@@ -66,23 +63,45 @@ export default function build<T>(
       .with("OR", () =>
         right((left: Lit, right: Lit) => Boolean(left) || Boolean(right)),
       )
-      .with('LIKE', () => match([lhs, rhs])
-        .with([{ type: P.not('field') }, P.any], () => anyhow('LIKE', 'Invalid operands for LIKE operator. The left operand must be a column name.'))
-        .with([P.any, { type: P.not('value') }], () => anyhow('LIKE', 'Invalid operands for LIKE operator. The left operand must be a string literal.'))
-        .otherwise(() => {
-          return right((left: Lit, right: Lit) => {
-            return likeToRegExp(right as string).test(left as string);
-          });
-        })
+      .with("LIKE", () =>
+        match([lhs, rhs])
+          .with([{ type: P.not("field") }, P.any], () =>
+            anyhow(
+              "LIKE",
+              "Invalid operands for LIKE operator. The left operand must be a column name.",
+            ),
+          )
+          .with([P.any, { type: P.not("value") }], () =>
+            anyhow(
+              "LIKE",
+              "Invalid operands for LIKE operator. The left operand must be a string literal.",
+            ),
+          )
+          .otherwise(() => {
+            return right((left: Lit, right: Lit) => {
+              return likeToRegExp(right as string).test(left as string);
+            });
+          }),
       )
-      .with('ILIKE', () => match([lhs, rhs])
-        .with([{ type: P.not('field') }, P.any], () => anyhow('ILIKE', 'Invalid operands for LIKE operator. The left operand must be a column name.'))
-        .with([P.any, { type: P.not('value') }], () => anyhow('ILIKE', 'Invalid operands for LIKE operator. The left operand must be a string literal.'))
-        .otherwise(() => {
-          return right((left: Lit, right: Lit) => {
-            return likeToRegExp(right as string, 'i').test(left as string);
-          });
-        })
+      .with("ILIKE", () =>
+        match([lhs, rhs])
+          .with([{ type: P.not("field") }, P.any], () =>
+            anyhow(
+              "ILIKE",
+              "Invalid operands for LIKE operator. The left operand must be a column name.",
+            ),
+          )
+          .with([P.any, { type: P.not("value") }], () =>
+            anyhow(
+              "ILIKE",
+              "Invalid operands for LIKE operator. The left operand must be a string literal.",
+            ),
+          )
+          .otherwise(() => {
+            return right((left: Lit, right: Lit) => {
+              return likeToRegExp(right as string, "i").test(left as string);
+            });
+          }),
       )
       .otherwise(() => anyhow("operator", `Unsupported operator: ${operator}`));
 
@@ -94,7 +113,9 @@ export default function build<T>(
           pipe(
             sequenceS(ap)({
               left: cvt(binary.lhs),
-              operator: toValidated(intoOperator(binary.operator, binary.lhs, binary.rhs)),
+              operator: toValidated(
+                intoOperator(binary.operator, binary.lhs, binary.rhs),
+              ),
               right: cvt(binary.rhs),
             }),
             either.map(({ left, operator, right }) => {

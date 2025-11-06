@@ -4,7 +4,7 @@ import { githubDark } from "@uiw/codemirror-theme-github";
 import {
   sql,
   keywordCompletionSource,
-  PostgreSQL,
+  MySQL,
   schemaCompletionSource,
 } from "@codemirror/lang-sql";
 import {
@@ -34,7 +34,7 @@ const keywordWhitelist = new Set([
 ]);
 
 // デフォルトの SQL 補完ソースを取得
-const defaultSqlSource = keywordCompletionSource(PostgreSQL);
+const defaultSqlSource = keywordCompletionSource(MySQL);
 
 const supportedKeywordSource: CompletionSource = async (context) => {
   // 1. まずデフォルトの補完結果（キーワード、テーブル名などすべて）を取得
@@ -106,7 +106,7 @@ export default function Console<
   const completions = autocompletion({
     override: [
       tableCompletionSource(schema[type]),
-      schemaCompletionSource({ dialect: PostgreSQL, schema }),
+      schemaCompletionSource({ dialect: MySQL, schema }),
       supportedKeywordSource,
       ...iter(option.fromNullable(completion)),
     ],
@@ -117,7 +117,7 @@ export default function Console<
       height="50px"
       theme={githubDark}
       extensions={[
-        sql({ dialect: PostgreSQL, schema }),
+        sql({ dialect: MySQL, schema }),
         completions,
         queryLinter,
         customKeymap,
