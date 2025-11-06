@@ -158,7 +158,7 @@ type Lit = string | number | boolean;
  * @param T データソースのitemの型
  * @param U この式が評価された結果の型 (number, string, booleanなど)
  */
-interface IExpression<T> {
+export interface IExpression<T> {
   apply(item: T): Lit;
 }
 

@@ -3,7 +3,6 @@ import {
   type Memoria,
   memoriaList as dataSource,
 } from "@/domain/memoria/memoria";
-import { Box } from "@mui/system";
 
 import {
   DataGrid,
@@ -14,20 +13,11 @@ import { Lenz } from "@/domain/memoria/lens";
 import type { Attribute } from "@/parser/skill";
 import { match, P } from "ts-pattern";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
-import Console from "@/components/Console";
-import { memoriaCompletionSource } from "@/data/_memoria/autocomplete";
-import { Alert, IconButton, Snackbar, Tooltip } from "@mui/material";
-import { PlayArrowRounded, Info, Share } from "@mui/icons-material";
-import { sqlToModel } from "@/parser/query/sql";
-import { flow, pipe } from "fp-ts/function";
-import { either } from "fp-ts";
-import { isSome } from "fp-ts/Option";
-import build from "@/parser/query/filter";
-import { isRight } from "fp-ts/Either";
-import { Lens } from "monocle-ts";
+import { useCallback, useState } from "react";
 import Link from "@/components/link";
-import { schema } from "@/data/_schema/schema";
+import { schema } from "@/data/_common/schema";
+import { QueryConsle } from "@/data/_common/QueryConsle";
+import { IExpression } from "@/parser/query/filter";
 
 const columns: GridColDef<Memoria>[] = [
   {
@@ -137,18 +127,6 @@ const columns: GridColDef<Memoria>[] = [
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-type ToastState = {
-  open: boolean;
-  vertical: "top" | "bottom";
-  horizontal: "left" | "center" | "right";
-  message: string;
-  severity: "error" | "warning" | "info" | "success";
-};
-
-const openLens = Lens.fromProp<ToastState>()("open");
-const messageLens = Lens.fromProp<ToastState>()("message");
-const severityLens = Lens.fromProp<ToastState>()("severity");
-
 const resolver: Record<string, (memoria: Memoria) => string | number> = {
   name: (memoria: Memoria) => Lenz.memoria.fullName.get(memoria),
   type: (memoria: Memoria) => Lenz.memoria.cardType.get(memoria),
@@ -178,143 +156,44 @@ const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
 
 export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
   const [visivility, setVisivility] = useState(visivilityAll);
-  const [query, setQuery] = useState(
-    initialQuery
-      ? decodeURI(initialQuery)
-      : "select * from memoria where `cost` > 18;",
-  );
   const [rows, setRows] = useState<Memoria[]>(dataSource.toReversed());
-  const [state, setState] = useState<ToastState>({
-    open: false,
-    vertical: "top" as const,
-    horizontal: "center" as const,
-    message: "Query Error",
-    severity: "error",
-  });
-  const shared = useCallback(async () => {
-    await navigator.clipboard.writeText(
-      `https://operations.mitama.io/data/memoria?query=${encodeURI(query)}`,
-    );
-    setState(
-      flow(
-        openLens.set(true),
-        messageLens.set("Successfuly copeid URL to clipboard."),
-        severityLens.set("success"),
-      ),
-    );
-  }, [query]);
 
-  const queryExecutor = useCallback(
-    (first = false) => {
-      return pipe(
-        sqlToModel(query),
-        either.map(([whiteList, expr]) => {
-          setVisivility(
-            (prev): GridColumnVisibilityModel =>
-              match(whiteList)
-                .with(P.set("*"), () => visivilityAll)
-                .otherwise(() =>
-                  Object.fromEntries(
-                    Object.entries(prev).map(([field]) => [
-                      field as GridColDef["field"],
-                      whiteList.has(field),
-                    ]),
-                  ),
-                ),
-          );
-          if (isSome(expr)) {
-            const pred = build(expr.value, resolver);
-            if (isRight(pred)) {
-              setRows(() => {
-                return dataSource
-                  .toReversed()
-                  .filter((memoria) => pred.right.apply(memoria));
-              });
-              if (!first) {
-                setState(
-                  flow(
-                    openLens.set(true),
-                    messageLens.set(`Executed successfully.`),
-                    severityLens.set("success"),
-                  ),
-                );
-              }
-            } else {
-              setState(
-                flow(
-                  openLens.set(true),
-                  messageLens.set(
-                    `Query Build Error: ${pred.left.map((e) => e.msg).join("\n")}`,
-                  ),
-                  severityLens.set("error"),
-                ),
-              );
-            }
-          }
-          return true;
-        }),
-        either.getOrElse((err) => {
-          setState(
-            flow(
-              openLens.set(true),
-              messageLens.set(
-                `SQL Parse Error: ${err.map((e) => e.msg).join("\n")}`,
+  const visivilityChanged = useCallback(
+    (whiteList: Set<GridColDef["field"]>) => {
+      setVisivility(
+        (prev): GridColumnVisibilityModel =>
+          match(whiteList)
+            .with(P.set("*"), () => visivilityAll)
+            .otherwise(() =>
+              Object.fromEntries(
+                Object.entries(prev).map(([field]) => [
+                  field as GridColDef["field"],
+                  whiteList.has(field),
+                ]),
               ),
-              severityLens.set("error"),
             ),
-          );
-          return true;
-        }),
       );
     },
-    [query],
+    [setVisivility],
   );
-  const { vertical, horizontal, open, message, severity } = state;
 
-  const handleClose = () => {
-    setState({ ...state, open: false });
-  };
-
-  useEffect(() => {
-    if (initialQuery !== undefined) queryExecutor(true);
-  }, [initialQuery]); // oxlint-disable-line exhaustive-deps
+  const updateData = useCallback(
+    (pred: IExpression<Memoria>) => {
+      setRows(() => {
+        return dataSource.toReversed().filter((memoria) => pred.apply(memoria));
+      });
+    },
+    [setRows],
+  );
 
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
-      <Box display={"flex"} sx={{ justifyContent: "left" }}>
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          autoHideDuration={2000}
-          open={open}
-          onClose={handleClose}
-          key={vertical + horizontal}
-        >
-          <Alert severity={severity}>{message}</Alert>
-        </Snackbar>
-        <IconButton onClick={() => queryExecutor()} sx={{ marginRight: 1 }}>
-          <Tooltip title={"Ctrl + Enter"} placement="top">
-            <PlayArrowRounded />
-          </Tooltip>
-        </IconButton>
-        <IconButton onClick={shared}>
-          <Share />
-        </IconButton>
-        {/* 右端に寄せる */}
-        <Box sx={{ display: "flex", flexGrow: 1, justifyContent: "right" }}>
-          <Tooltip title={"help"} placement="top">
-            <IconButton onClick={() => {}} sx={{ marginRight: 1 }}>
-              <Info />
-            </IconButton>
-          </Tooltip>
-        </Box>
-      </Box>
-      <Console
-        type={"memoria"}
+      <QueryConsle
+        resolver={resolver}
+        initial={initialQuery}
         schema={schema}
-        completion={memoriaCompletionSource}
-        initialeValue={query}
-        execute={queryExecutor}
-        onChangeBack={setQuery}
+        updateVisivility={visivilityChanged}
+        updateData={updateData}
       />
       <DataGrid
         rows={rows}

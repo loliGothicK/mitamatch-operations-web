@@ -71,14 +71,14 @@ export default function Console<
 >({
   type,
   schema,
-  completion,
+  completions,
   initialeValue,
   execute,
   onChangeBack,
 }: {
   type: keyof Schema;
   schema: Schema;
-  completion?: CompletionSource;
+  completions?: CompletionSource[];
   initialeValue?: string;
   execute: () => void;
   onChangeBack: (value: string) => void;
@@ -103,12 +103,12 @@ export default function Console<
       },
     ]),
   );
-  const completions = autocompletion({
+  const myCompletions = autocompletion({
     override: [
       tableCompletionSource(schema[type]),
       schemaCompletionSource({ dialect: MySQL, schema }),
       supportedKeywordSource,
-      ...iter(option.fromNullable(completion)),
+      ...iter(option.fromNullable(completions)).flat(),
     ],
   });
   return (
@@ -118,7 +118,7 @@ export default function Console<
       theme={githubDark}
       extensions={[
         sql({ dialect: MySQL, schema }),
-        completions,
+        myCompletions,
         queryLinter,
         customKeymap,
       ]}
