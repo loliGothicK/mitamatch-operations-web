@@ -118,7 +118,7 @@ export default function build<T>(
               const bool = operator.endsWith("ILIKE")
                 ? likeToRegExp(right as string, "i").test(left as string)
                 : likeToRegExp(right as string).test(left as string);
-              return operator.startsWith("NOT") ? bool : !bool;
+              return operator.startsWith("NOT") ? !bool : bool;
             });
           }),
       )
