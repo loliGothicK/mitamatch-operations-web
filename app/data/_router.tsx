@@ -62,10 +62,11 @@ export default function DataPage({ dataType }: { dataType?: string }) {
 
   const [value, setValue] = useState(
     match(dataType)
+      .with(undefined, () => 0)
       .with("memoria", () => 0)
       .with("order", () => 1)
       .with("costume", () => 2)
-      .otherwise(() => 0),
+      .run(),
   );
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
