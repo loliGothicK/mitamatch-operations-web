@@ -55,9 +55,8 @@ export function QueryConsle<
   initial?: string;
   completions?: CompletionSource[];
 }) {
-  console.log(initial);
   const [query, setQuery] = useState(
-    initial ? decodeURIComponent(initial) : "select * from memoria where `cost` > 18;",
+    initial || "select * from memoria where `cost` > 18;",
   );
   const [state, setState] = useState<ToastState>({
     open: false,
