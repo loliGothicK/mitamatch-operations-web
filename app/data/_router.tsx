@@ -8,6 +8,8 @@ import Box from "@mui/material/Box";
 import { useSearchParams } from "next/navigation";
 import { type ReactNode, type SyntheticEvent, useState } from "react";
 import { match } from "ts-pattern";
+import NotFound from "next/dist/client/components/builtin/not-found";
+import {z} from "zod";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -56,17 +58,25 @@ const TABS = [
   },
 ];
 
+const pageSchema = z.enum(['memoria', 'order', 'costume']).optional();
+
 export default function DataPage({ dataType }: { dataType?: string }) {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || undefined;
 
+  const parsed = pageSchema.safeParse(dataType);
+
+  if (!parsed.success) {
+    return <NotFound />
+  }
+
   const [value, setValue] = useState(
-    match(dataType)
+    match(parsed.data)
       .with(undefined, () => 0)
       .with("memoria", () => 0)
       .with("order", () => 1)
       .with("costume", () => 2)
-      .run(),
+      .exhaustive(),
   );
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
