@@ -56,7 +56,7 @@ export function QueryConsle<
   completions?: CompletionSource[];
 }) {
   const [query, setQuery] = useState(
-    initial ? decodeURI(initial) : "select * from memoria where `cost` > 18;",
+    initial ? `${decodeURI(initial)};` : "select * from memoria where `cost` > 18;",
   );
 
   const [state, setState] = useState<ToastState>({
@@ -75,7 +75,7 @@ export function QueryConsle<
 
   const shared = useCallback(async () => {
     await navigator.clipboard.writeText(
-      `https://operations.mitama.io/data/memoria?query=${encodeURI(query)}`,
+      `https://operations.mitama.io/data/memoria?query="${encodeURI(query.trim().replace(/;$/, ''))}"`,
     );
     setState(
       flow(
