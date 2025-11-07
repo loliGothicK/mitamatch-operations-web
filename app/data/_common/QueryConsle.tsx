@@ -39,6 +39,7 @@ export function QueryConsle<
   },
   T,
 >({
+  origin,
   initial,
   resolver,
   schema,
@@ -46,6 +47,7 @@ export function QueryConsle<
   updateDataAction,
   completions,
 }: {
+  origin: T[];
   resolver: SchemaResolver<T>;
   schema: Schema;
   updateVisivilityAction: (whiteList: Set<GridColDef["field"]>) => void;
@@ -94,13 +96,13 @@ export function QueryConsle<
           if (isRight(pred)) {
             const { where, orderBy } = pred.right;
             if (isSome(where)) {
-              updateDataAction((prev) =>
-                prev.filter(where.value.apply.bind(where.value)),
+              updateDataAction(() =>
+                origin.filter(where.value.apply.bind(where.value)),
               );
             }
             if (isSome(orderBy)) {
-              updateDataAction((prev) =>
-                prev.sort(orderBy.value.compare.bind(orderBy.value)),
+              updateDataAction((data) =>
+                data.sort(orderBy.value.compare.bind(orderBy.value)),
               );
             }
             if (!first) {

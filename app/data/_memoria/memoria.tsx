@@ -244,6 +244,7 @@ export function MemoriaList({ initialQuery }: { initialQuery?: string }) {
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
       <QueryConsle
+        origin={dataSource.toReversed()}
         resolver={resolver}
         initial={initialQuery}
         schema={schema}
