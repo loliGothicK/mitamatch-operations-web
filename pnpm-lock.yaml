@@ -144,8 +144,8 @@ importers:
         specifier: 8.0.4
         version: 8.0.4
       jose:
-        specifier: 6.1.0
-        version: 6.1.0
+        specifier: 6.1.1
+        version: 6.1.1
       jotai:
         specifier: 2.15.1
         version: 2.15.1(@babel/core@7.28.4)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0)
@@ -3793,8 +3793,8 @@ packages:
     resolution: {integrity: sha512-0Q4Uk8WF7BUwqXHuAjc23vmopWJw5WH7w2tqBoUOZpOjW/ZnR44GXXd1r82RvnmI2GZge3ivrYXk/BE2+VtW2g==}
     engines: {node: ^18.14.0 || ^20.0.0 || ^22.0.0 || >=24.0.0}
 
-  jose@6.1.0:
-    resolution: {integrity: sha512-TTQJyoEoKcC1lscpVDCSsVgYzUDg/0Bt3WE//WiTPK6uOCQC2KZS4MpugbMWt/zyjkopgZoXhZuCi00gLudfUA==}
+  jose@6.1.1:
+    resolution: {integrity: sha512-GWSqjfOPf4cWOkBzw5THBjtGPhXKqYnfRBzh4Ni+ArTrQQ9unvmsA3oFLqaYKoKe5sjWmGu5wVKg9Ft1i+LQfg==}
 
   jotai@2.15.1:
     resolution: {integrity: sha512-yHT1HAZ3ba2Q8wgaUQ+xfBzEtcS8ie687I8XVCBinfg4bNniyqLIN+utPXWKQE93LMF5fPbQSVRZqgpcN5yd6Q==}
@@ -8774,7 +8774,7 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jose@6.1.0: {}
+  jose@6.1.1: {}
 
   jotai@2.15.1(@babel/core@7.28.4)(@babel/template@7.27.2)(@types/react@19.2.2)(react@19.2.0):
     optionalDependencies:
