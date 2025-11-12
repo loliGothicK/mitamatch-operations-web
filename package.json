@@ -98,7 +98,7 @@
     "@types/react": "19.2.3",
     "@types/react-dom": "19.2.2",
     "@types/ws": "8.18.1",
-    "@vitejs/plugin-react": "5.1.0",
+    "@vitejs/plugin-react": "5.1.1",
     "@vitest/coverage-v8": "4.0.8",
     "drizzle-kit": "0.31.6",
     "happy-dom": "20.0.10",
