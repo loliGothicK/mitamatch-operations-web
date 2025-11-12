@@ -111,7 +111,7 @@
     "zod": "4.1.12"
   },
   "volta": {
-    "node": "24.11.0"
+    "node": "24.11.1"
   },
   "packageManager": "pnpm@10.21.0",
   "pnpm": {
