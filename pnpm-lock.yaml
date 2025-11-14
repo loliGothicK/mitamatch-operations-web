@@ -40,7 +40,7 @@ importers:
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.4)(react@19.2.0))(@types/react@19.2.4)(react@19.2.0)
       '@mdx-js/loader':
         specifier: 3.1.1
-        version: 3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.5))
+        version: 3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.12))
       '@mdx-js/react':
         specifier: 3.1.1
         version: 3.1.1(@types/react@19.2.4)(react@19.2.0)
@@ -67,7 +67,7 @@ importers:
         version: 1.0.2
       '@next/mdx':
         specifier: 16.0.1
-        version: 16.0.1(@mdx-js/loader@3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.5)))(@mdx-js/react@3.1.1(@types/react@19.2.4)(react@19.2.0))
+        version: 16.0.1(@mdx-js/loader@3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.12)))(@mdx-js/react@3.1.1(@types/react@19.2.4)(react@19.2.0))
       '@next/third-parties':
         specifier: 16.0.1
         version: 16.0.1(next@16.0.1(@babel/core@7.28.4)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
@@ -94,7 +94,7 @@ importers:
         version: 1.38.0
       '@sentry/nextjs':
         specifier: 10.23.0
-        version: 10.23.0(@opentelemetry/context-async-hooks@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/core@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.2.0(@opentelemetry/api@1.9.0))(next@16.0.1(@babel/core@7.28.4)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)(webpack@5.98.0(esbuild@0.25.5))
+        version: 10.23.0(@opentelemetry/context-async-hooks@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/core@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.2.0(@opentelemetry/api@1.9.0))(next@16.0.1(@babel/core@7.28.4)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)(webpack@5.98.0(esbuild@0.25.12))
       '@sentry/node':
         specifier: 10.23.0
         version: 10.23.0
@@ -262,8 +262,8 @@ importers:
         specifier: 4.0.8
         version: 4.0.8(vitest@4.0.8(@types/debug@4.1.12)(@types/node@22.15.30)(happy-dom@20.0.10)(terser@5.44.0)(tsx@4.20.6))
       drizzle-kit:
-        specifier: 0.31.6
-        version: 0.31.6
+        specifier: 0.31.7
+        version: 0.31.7
       happy-dom:
         specifier: 20.0.10
         version: 20.0.10
@@ -3278,8 +3278,8 @@ packages:
     peerDependencies:
       drizzle-orm: '>=0.28.3'
 
-  drizzle-kit@0.31.6:
-    resolution: {integrity: sha512-/B4e/4pwnx25QwD5xXgdpo1S+077a2VZdosXbItE/oNmUgQwZydGDz9qJYmnQl/b+5IX0rLfwRhrPnroGtrg8Q==}
+  drizzle-kit@0.31.7:
+    resolution: {integrity: sha512-hOzRGSdyKIU4FcTSFYGKdXEjFsncVwHZ43gY3WU5Bz9j5Iadp6Rh6hxLSQ1IWXpKLBKt/d5y1cpSPcV+FcoQ1A==}
     hasBin: true
 
   drizzle-orm@0.44.7:
@@ -6064,12 +6064,12 @@ snapshots:
 
   '@marijn/find-cluster-break@1.0.2': {}
 
-  '@mdx-js/loader@3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.5))':
+  '@mdx-js/loader@3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.12))':
     dependencies:
       '@mdx-js/mdx': 3.1.0(acorn@8.15.0)
       source-map: 0.7.4
     optionalDependencies:
-      webpack: 5.98.0(esbuild@0.25.5)
+      webpack: 5.98.0(esbuild@0.25.12)
     transitivePeerDependencies:
       - acorn
       - supports-color
@@ -6279,11 +6279,11 @@ snapshots:
 
   '@next/env@16.0.1': {}
 
-  '@next/mdx@16.0.1(@mdx-js/loader@3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.5)))(@mdx-js/react@3.1.1(@types/react@19.2.4)(react@19.2.0))':
+  '@next/mdx@16.0.1(@mdx-js/loader@3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.12)))(@mdx-js/react@3.1.1(@types/react@19.2.4)(react@19.2.0))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
-      '@mdx-js/loader': 3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.5))
+      '@mdx-js/loader': 3.1.1(acorn@8.15.0)(webpack@5.98.0(esbuild@0.25.12))
       '@mdx-js/react': 3.1.1(@types/react@19.2.4)(react@19.2.0)
 
   '@next/swc-darwin-arm64@16.0.1':
@@ -7133,7 +7133,7 @@ snapshots:
       '@sentry/types': 7.120.4
       '@sentry/utils': 7.120.4
 
-  '@sentry/nextjs@10.23.0(@opentelemetry/context-async-hooks@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/core@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.2.0(@opentelemetry/api@1.9.0))(next@16.0.1(@babel/core@7.28.4)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)(webpack@5.98.0(esbuild@0.25.5))':
+  '@sentry/nextjs@10.23.0(@opentelemetry/context-async-hooks@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/core@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.2.0(@opentelemetry/api@1.9.0))(next@16.0.1(@babel/core@7.28.4)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)(webpack@5.98.0(esbuild@0.25.12))':
     dependencies:
       '@opentelemetry/api': 1.9.0
       '@opentelemetry/semantic-conventions': 1.38.0
@@ -7145,7 +7145,7 @@ snapshots:
       '@sentry/opentelemetry': 10.23.0(@opentelemetry/api@1.9.0)(@opentelemetry/context-async-hooks@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/core@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.2.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.38.0)
       '@sentry/react': 10.23.0(react@19.2.0)
       '@sentry/vercel-edge': 10.23.0
-      '@sentry/webpack-plugin': 4.3.0(webpack@5.98.0(esbuild@0.25.5))
+      '@sentry/webpack-plugin': 4.3.0(webpack@5.98.0(esbuild@0.25.12))
       next: 16.0.1(@babel/core@7.28.4)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       resolve: 1.22.8
       rollup: 4.35.0
@@ -7261,12 +7261,12 @@ snapshots:
       '@opentelemetry/resources': 2.2.0(@opentelemetry/api@1.9.0)
       '@sentry/core': 10.23.0
 
-  '@sentry/webpack-plugin@4.3.0(webpack@5.98.0(esbuild@0.25.5))':
+  '@sentry/webpack-plugin@4.3.0(webpack@5.98.0(esbuild@0.25.12))':
     dependencies:
       '@sentry/bundler-plugin-core': 4.3.0
       unplugin: 1.0.1
       uuid: 9.0.1
-      webpack: 5.98.0(esbuild@0.25.5)
+      webpack: 5.98.0(esbuild@0.25.12)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -8157,12 +8157,12 @@ snapshots:
       '@paralleldrive/cuid2': 2.2.2
       drizzle-orm: 0.44.7(@neondatabase/serverless@1.0.2)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.15.6)(pg@8.16.3)(prisma@6.5.0(typescript@5.9.3))
 
-  drizzle-kit@0.31.6:
+  drizzle-kit@0.31.7:
     dependencies:
       '@drizzle-team/brocli': 0.10.2
       '@esbuild-kit/esm-loader': 2.6.5
-      esbuild: 0.25.5
-      esbuild-register: 3.6.0(esbuild@0.25.5)
+      esbuild: 0.25.12
+      esbuild-register: 3.6.0(esbuild@0.25.12)
     transitivePeerDependencies:
       - supports-color
 
@@ -8208,14 +8208,6 @@ snapshots:
     dependencies:
       debug: 4.4.3
       esbuild: 0.25.12
-    transitivePeerDependencies:
-      - supports-color
-    optional: true
-
-  esbuild-register@3.6.0(esbuild@0.25.5):
-    dependencies:
-      debug: 4.4.3
-      esbuild: 0.25.5
     transitivePeerDependencies:
       - supports-color
 
@@ -9958,16 +9950,16 @@ snapshots:
 
   tapable@2.3.0: {}
 
-  terser-webpack-plugin@5.3.14(esbuild@0.25.5)(webpack@5.98.0(esbuild@0.25.5)):
+  terser-webpack-plugin@5.3.14(esbuild@0.25.12)(webpack@5.98.0(esbuild@0.25.12)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.3
       serialize-javascript: 6.0.2
       terser: 5.44.0
-      webpack: 5.98.0(esbuild@0.25.5)
+      webpack: 5.98.0(esbuild@0.25.12)
     optionalDependencies:
-      esbuild: 0.25.5
+      esbuild: 0.25.12
 
   terser@5.44.0:
     dependencies:
@@ -10207,7 +10199,7 @@ snapshots:
 
   webpack-virtual-modules@0.5.0: {}
 
-  webpack@5.98.0(esbuild@0.25.5):
+  webpack@5.98.0(esbuild@0.25.12):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.8
@@ -10229,7 +10221,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.3
       tapable: 2.3.0
-      terser-webpack-plugin: 5.3.14(esbuild@0.25.5)(webpack@5.98.0(esbuild@0.25.5))
+      terser-webpack-plugin: 5.3.14(esbuild@0.25.12)(webpack@5.98.0(esbuild@0.25.12))
       watchpack: 2.4.4
       webpack-sources: 3.3.3
     transitivePeerDependencies:
