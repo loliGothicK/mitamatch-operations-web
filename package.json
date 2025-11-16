@@ -59,7 +59,7 @@
     "fp-ts": "2.16.11",
     "import-in-the-middle": "1.15.0",
     "iron-session": "8.0.4",
-    "jose": "6.1.1",
+    "jose": "6.1.2",
     "jotai": "2.15.1",
     "js-cookie": "3.0.5",
     "material-ui-popup-state": "5.3.6",
