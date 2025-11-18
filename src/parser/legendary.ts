@@ -1,7 +1,7 @@
 import type { Attribute } from "@/parser/skill";
 import type { Trigger } from "@/parser/autoSkill";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
-import { anyhow, type MitamaError, CallPath } from "@/error/error";
+import { bail, type MitamaError, CallPath } from "@/error/error";
 import { pipe } from "fp-ts/function";
 import { either } from "fp-ts";
 import { separator } from "@/fp-ts-ext/function";
@@ -41,7 +41,7 @@ const parseAttribute = (
     .with("風", () => right("Wind"))
     .otherwise(() =>
       toValidated(
-        anyhow(element, "given text does not match any attribute", {
+        bail(element, "given text does not match any attribute", {
           ...meta,
           path: meta.path.join("parseAttribute"),
         }),
@@ -61,7 +61,7 @@ const parseTrigger = (
     .with("回復メモリア使用時", () => right("Recovery"))
     .otherwise(() =>
       toValidated(
-        anyhow(trigger, "given text does not match any trigger", {
+        bail(trigger, "given text does not match any trigger", {
           ...meta,
           path: meta.path.join("parseTrigger"),
         }),

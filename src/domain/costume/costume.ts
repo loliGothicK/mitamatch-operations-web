@@ -1,90 +1,124 @@
-import type { OmitProperties } from "ts-essentials";
 import { z } from "zod";
 
 import costumeData from "./costume.json";
+import { match, P } from "ts-pattern";
+import { Option } from "fp-ts/Option";
+import { option } from "fp-ts";
 
-const atomicAdxSchema = z.object({ name: z.string(), description: z.string() });
-const adxSchema = z.tuple([atomicAdxSchema, atomicAdxSchema, atomicAdxSchema]);
+const exSchema = z.object({ name: z.string(), description: z.string() });
+const adxSchema = z.object({
+  name: z.string(),
+  description: z.string(),
+  requiredLimitBreak: z
+    .union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)])
+    .readonly(),
+  requiresAwakening: z.boolean().readonly(),
+});
 
 const costumeSchema = z.object({
   id: z.number().readonly(),
-  lily: z.string().readonly(),
   name: z.string().readonly(),
-  type: z.string().readonly(),
-  rare: z
-    .object({
-      name: z.string().readonly(),
-      description: z.string().readonly(),
-    })
+  cardType: z
+    .union([
+      z.literal(1),
+      z.literal(2),
+      z.literal(3),
+      z.literal(4),
+      z.literal(5),
+      z.literal(6),
+      z.literal(7),
+    ])
+    .transform((type) =>
+      match(type)
+        .with(1, () => "通常単体" as const)
+        .with(2, () => "通常範囲" as const)
+        .with(3, () => "特殊単体" as const)
+        .with(4, () => "特殊範囲" as const)
+        .with(5, () => "支援" as const)
+        .with(6, () => "妨害" as const)
+        .with(7, () => "回復" as const)
+        .exhaustive(),
+    )
     .readonly(),
-  ex: z
-    .object({
-      up: z
-        .object({
-          name: z.string().readonly(),
-          description: z.string().readonly(),
-        })
-        .readonly(),
-      down: z
-        .object({
-          name: z.string().readonly(),
-          description: z.string().readonly(),
-        })
-        .optional()
-        .nullable()
-        .readonly(),
-    })
+  jobSkills: z.array(z.array(z.string())).readonly(),
+  specialSkills: z
+    .union([z.array(adxSchema), z.tuple([exSchema.readonly()])])
     .optional()
     .nullable()
     .readonly(),
-  adx: z
-    .tuple([adxSchema, adxSchema, adxSchema, adxSchema])
-    .optional()
-    .nullable()
-    .readonly(),
-  skills: z.array(z.string()).readonly(),
 });
 
-/**
- * This type alias `Costume` represents a costume object in the application.
- * It is inferred from the `costumeSchema` which is a zod schema object, with the 'skills' property omitted.
- * The `costumeSchema` defines the structure of a costume object, which includes:
- * - id: a number representing the unique identifier of the costume.
- * - lily: a string representing the lily associated with the costume.
- * - name: a string representing the name of the costume.
- * - type: a string representing the type of the costume.
- * - rare: an object with 'name' and 'description' properties representing the rarity of the costume.
- * - ex: an optional object with 'name' and 'description' properties representing the extra information of the costume.
- * - status: a tuple of four numbers representing the status of the costume ([Atk, Sp.ATK, DEF, Sp.DEF]).
- */
-export type Costume = OmitProperties<
+type Ex = {
+  type: "ex";
+  name: string;
+  description: string;
+};
+
+type Adx = {
+  type: "adx";
+  get: (opt: { limitBreak: number; isAwakened: boolean }) => {
+    name: string;
+    description: string;
+  }[];
+};
+
+export type Costume = Omit<
   z.infer<typeof costumeSchema>,
-  "skills"
+  "jobSkills" | "specialSkills"
 > & {
+  readonly rate: number;
   readonly status: readonly [number, number, number, number];
+  readonly specialSkill: Option<Ex | Adx>;
 };
 
 export const costumeList: Costume[] = costumeData.data.map((costume) => {
-  const parsed = costumeSchema.parse(costume);
+  const { jobSkills, specialSkills, ...parsed } = costumeSchema.parse(costume);
   return {
     ...parsed,
-    status: skillsToStatus(parsed.skills),
+    ...skillsToStatus(jobSkills),
+    specialSkill: match(specialSkills)
+      .with(P.nullish, () => option.none)
+      .with([], () => option.none)
+      .with([P._], ([ex]) =>
+        option.of({
+          type: "ex" as const,
+          name: ex.name,
+          description: ex.description,
+        }),
+      )
+      .otherwise((adx) =>
+        option.of({
+          type: "adx" as const,
+          get: ({
+            limitBreak,
+            isAwakened,
+          }: {
+            limitBreak: number;
+            isAwakened: boolean;
+          }) => {
+            const filteredSkills = adx.filter((skill) => {
+              const limitBreakMet = skill.requiredLimitBreak === limitBreak;
+              const awakeningMet = !skill.requiresAwakening || isAwakened;
+              return limitBreakMet && awakeningMet;
+            });
+
+            return filteredSkills.map((skill) => ({
+              name: skill.name,
+              description: skill.description,
+            }));
+          },
+        }),
+      ),
   };
 });
 
-function skillsToStatus(
-  skills: readonly string[],
-): readonly [number, number, number, number] {
+function skillsToStatus(skills: readonly string[][]) {
+  let rate = 0;
   const status = [0, 0, 0, 0] as [number, number, number, number];
-  const regex = /(ATK|Sp\.ATK|DEF|Sp\.DEF)\+\d+/g;
-  const statRegex = /^(.+)\+(\d+)$/;
+  const statRegex = /^(.+)\+(\d+)/;
 
   for (const [, stat, value] of skills
-    .filter((skill) => skill.startsWith("固有"))
-    .flatMap((skill) => {
-      const match = skill.match(regex);
-      return match === null ? [] : match;
-    })
+    .flat()
     .map((skill) => skill.match(statRegex)!)) {
     switch (stat) {
       case "ATK": {
@@ -104,8 +138,11 @@ function skillsToStatus(
         break;
       }
       default:
-        break;
+        rate += Number.parseInt(value, 10);
     }
   }
-  return status;
+  return {
+    rate,
+    status,
+  };
 }

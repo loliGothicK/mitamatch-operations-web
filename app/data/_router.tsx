@@ -9,7 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { type ReactNode, type SyntheticEvent, useState } from "react";
 import { match } from "ts-pattern";
 import NotFound from "next/dist/client/components/builtin/not-found";
-import {z} from "zod";
+import { z } from "zod";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -58,7 +58,7 @@ const TABS = [
   },
 ];
 
-const pageSchema = z.enum(['memoria', 'order', 'costume']).optional();
+const pageSchema = z.enum(["memoria", "order", "costume"]).optional();
 
 export default function DataPage({ dataType }: { dataType?: string }) {
   const searchParams = useSearchParams();
@@ -67,7 +67,7 @@ export default function DataPage({ dataType }: { dataType?: string }) {
   const parsed = pageSchema.safeParse(dataType);
 
   if (!parsed.success) {
-    return <NotFound />
+    return <NotFound />;
   }
 
   const [value, setValue] = useState(

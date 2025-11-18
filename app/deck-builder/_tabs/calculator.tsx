@@ -44,6 +44,10 @@ import { atomWithStorage } from "jotai/utils";
 import { Settings } from "@mui/icons-material";
 import { useId, useState } from "react";
 import { statusKind, type StatusKind } from "@/parser/common";
+import { isLeft } from "fp-ts/lib/Either";
+import { isNone, isSome } from "fp-ts/Option";
+import { match } from "ts-pattern";
+import { option } from "fp-ts";
 const charmFilterAtom = atomWithStorage<("火" | "水" | "風")[]>(
   "charmFilter",
   [],
@@ -149,15 +153,21 @@ export function Calculator() {
     costume,
   );
 
-  const { skill, supportBuff, supportDebuff } = evaluate(
+  const evaluateResult = evaluate(
     [...deck, ...legendaryDeck],
     finalStatus,
     [def, spDef],
     charm,
     costume,
-    adLevel,
+    { limitBraek: adLevel, isAwakened: true },
     settings,
   );
+
+  if (isLeft(evaluateResult)) {
+    return <>{evaluateResult.left.map((err) => err.msg).join("\n")}</>;
+  }
+
+  const { skill, supportBuff, supportDebuff } = evaluateResult.right;
 
   const expectedToalDamage = skill
     .map(({ expected }) => expected.damage)
@@ -238,7 +248,7 @@ export function Calculator() {
     }));
   const costumeOptions = costumeList
     .filter((costume) => {
-      if (!(costume.ex || costume.adx)) {
+      if (isNone(costume.specialSkill)) {
         return false;
       }
       if (costumeFilter.length === 0) {
@@ -246,7 +256,10 @@ export function Calculator() {
       }
       return costumeFilter.every((option) => {
         if (option === "AD") {
-          return costume.adx !== undefined && costume.adx !== null;
+          return (
+            isSome(costume.specialSkill) &&
+            costume.specialSkill.value.type === "adx"
+          );
         }
         if (option === "通常衣装") {
           return costume.status[0] > costume.status[1];
@@ -256,18 +269,33 @@ export function Calculator() {
         }
         if (option === "火" || option === "水" || option === "風") {
           return (
-            costume.ex?.up.description.includes(option) ||
-            costume.adx
-              ?.flat()
-              .some(({ name }) => name.includes(`${option}属性効果増加`))
+            isSome(costume.specialSkill) &&
+            match(costume.specialSkill.value)
+              .with({ type: "ex" }, ({ name }) => name.includes(option))
+              .with({ type: "adx" }, (adx) =>
+                adx
+                  .get({ limitBreak: 3, isAwakened: true })
+                  .some(({ description }) =>
+                    description.includes(`${option}属性効果増加`),
+                  ),
+              )
+              .exhaustive()
           );
         }
-        return costume.type.includes(option);
+        return costume.cardType.includes(option);
       });
     })
     .map((costume) => ({
-      title: `${costume.lily}/${costume.name}`,
-      desc: costume.ex?.up.name || costume.adx?.[3][0].description,
+      title: costume.name,
+      desc: match(costume.specialSkill)
+        .with(option.none, () => "")
+        .with({ value: { type: "ex" } }, ({ value: { name } }) => name)
+        .with({ value: { type: "adx" } }, ({ value: { get } }) =>
+          get({ limitBreak: 3, isAwakened: true })
+            .map(({ name }) => name)
+            .join("/"),
+        )
+        .exhaustive(),
     }));
 
   return (
@@ -354,7 +382,15 @@ export function Calculator() {
             justifyContent={"center"}
             alignItems={"center"}
           >
-            <Grid size={{ xs: costume.adx ? 9 : 12 }}>
+            <Grid
+              size={{
+                xs:
+                  isSome(costume.specialSkill) &&
+                  costume.specialSkill.value.type === "adx"
+                    ? 9
+                    : 12,
+              }}
+            >
               <Autocomplete
                 disablePortal
                 options={costumeOptions.sort((a, b) =>
@@ -377,8 +413,7 @@ export function Calculator() {
                   if (value) {
                     setCostume(
                       costumeList.find(
-                        (costume) =>
-                          `${costume.lily}/${costume.name}` === value.title,
+                        (costume) => costume.name === value.title,
                       )!,
                     );
                   }
@@ -386,16 +421,17 @@ export function Calculator() {
                 sx={{ marginTop: 2 }}
               />
             </Grid>
-            {costume?.adx && (
-              <Grid size={{ xs: 3 }} sx={{ marginTop: 2 }}>
-                <NumberInput
-                  defaultValue={adLevel}
-                  min={0}
-                  max={3}
-                  onChange={(value, _) => setAdLevel(value || 0)}
-                />
-              </Grid>
-            )}
+            {isSome(costume.specialSkill) &&
+              costume.specialSkill.value.type === "adx" && (
+                <Grid size={{ xs: 3 }} sx={{ marginTop: 2 }}>
+                  <NumberInput
+                    defaultValue={adLevel}
+                    min={0}
+                    max={3}
+                    onChange={(value, _) => setAdLevel(value || 0)}
+                  />
+                </Grid>
+              )}
           </Grid>
         </Grid>
         <Grid size={{ xs: 12 }}>

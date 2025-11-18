@@ -3,6 +3,7 @@ import type { Costume } from "@/domain/costume/costume";
 import { evaluate, type StackOption } from "@/evaluate/evaluate";
 import type { MemoriaWithConcentration } from "@/jotai/memoriaAtoms";
 import { statusKind, type StatusKind } from "@/parser/common";
+import { isLeft, left, right } from "fp-ts/Either";
 
 export function calcFinalStatus(
   deck: MemoriaWithConcentration[],
@@ -40,7 +41,7 @@ export function calcDiff(
   [def, spDef]: [number, number],
   charm: Charm,
   costume: Costume,
-  adLevel: number,
+  adxOptions: { limitBraek: number; isAwakened: boolean },
   options: {
     counter?: boolean;
     stack?: {
@@ -62,7 +63,7 @@ export function calcDiff(
     [def, spDef],
     charm,
     costume,
-    adLevel,
+    adxOptions,
     { ...options, stack: options.stack?.before },
   );
   const resultAfter = evaluate(
@@ -71,24 +72,31 @@ export function calcDiff(
     [def, spDef],
     charm,
     costume,
-    adLevel,
+    adxOptions,
     { ...options, stack: options.stack?.after },
   );
 
-  const expectedToalDamageBefore = resultBefore.skill
+  if (isLeft(resultBefore)) {
+    return left(resultBefore.left);
+  }
+  if (isLeft(resultAfter)) {
+    return left(resultAfter.left);
+  }
+
+  const expectedToalDamageBefore = resultBefore.right.skill
     .map(({ expected }) => expected.damage)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
-  const expectedToalDamageAfter = resultAfter.skill
+  const expectedToalDamageAfter = resultAfter.right.skill
     .map(({ expected }) => expected.damage)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
-  const expectedTotalRecoveryBefore = resultBefore.skill
+  const expectedTotalRecoveryBefore = resultBefore.right.skill
     .map(({ expected }) => expected.recovery)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
-  const expectedTotalRecoveryAfter = resultAfter.skill
+  const expectedTotalRecoveryAfter = resultAfter.right.skill
     .map(({ expected }) => expected.recovery)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
 
-  const expectedTotalBuffBefore = resultBefore.skill
+  const expectedTotalBuffBefore = resultBefore.right.skill
     .map(({ expected }) => expected.buff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
       if (!cur) {
@@ -103,9 +111,9 @@ export function calcDiff(
       return acc;
     }, new Map());
 
-  for (const [type, amount] of Object.entries(resultBefore.supportBuff).filter(
-    ([, amount]) => !!amount,
-  )) {
+  for (const [type, amount] of Object.entries(
+    resultBefore.right.supportBuff,
+  ).filter(([, amount]) => !!amount)) {
     expectedTotalBuffBefore.set(
       type as StatusKind,
       (expectedTotalBuffBefore.get(type as StatusKind) || 0) +
@@ -113,7 +121,7 @@ export function calcDiff(
     );
   }
 
-  const expectedTotalBuffAfter = resultAfter.skill
+  const expectedTotalBuffAfter = resultAfter.right.skill
     .map(({ expected }) => expected.buff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
       if (!cur) {
@@ -128,9 +136,9 @@ export function calcDiff(
       return acc;
     }, new Map());
 
-  for (const [type, amount] of Object.entries(resultAfter.supportBuff).filter(
-    ([, amount]) => !!amount,
-  )) {
+  for (const [type, amount] of Object.entries(
+    resultAfter.right.supportBuff,
+  ).filter(([, amount]) => !!amount)) {
     expectedTotalBuffAfter.set(
       type as StatusKind,
       (expectedTotalBuffAfter.get(type as StatusKind) || 0) +
@@ -138,7 +146,7 @@ export function calcDiff(
     );
   }
 
-  const expectedTotalDebuffBefore = resultBefore.skill
+  const expectedTotalDebuffBefore = resultBefore.right.skill
     .map(({ expected }) => expected.debuff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
       if (!cur) {
@@ -154,7 +162,7 @@ export function calcDiff(
     }, new Map());
 
   for (const [type, amount] of Object.entries(
-    resultBefore.supportDebuff,
+    resultBefore.right.supportDebuff,
   ).filter(([, amount]) => !!amount)) {
     expectedTotalDebuffBefore.set(
       type as StatusKind,
@@ -163,7 +171,7 @@ export function calcDiff(
     );
   }
 
-  const expectedTotalDebuffAfter = resultAfter.skill
+  const expectedTotalDebuffAfter = resultAfter.right.skill
     .map(({ expected }) => expected.debuff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
       if (!cur) {
@@ -178,9 +186,9 @@ export function calcDiff(
       return acc;
     }, new Map());
 
-  for (const [type, amount] of Object.entries(resultAfter.supportDebuff).filter(
-    ([, amount]) => !!amount,
-  )) {
+  for (const [type, amount] of Object.entries(
+    resultAfter.right.supportDebuff,
+  ).filter(([, amount]) => !!amount)) {
     expectedTotalDebuffAfter.set(
       type as StatusKind,
       (expectedTotalDebuffAfter.get(type as StatusKind) || 0) +
@@ -188,7 +196,7 @@ export function calcDiff(
     );
   }
 
-  return {
+  return right({
     expectedToalDamage: [expectedToalDamageBefore, expectedToalDamageAfter] as [
       number,
       number,
@@ -219,5 +227,5 @@ export function calcDiff(
         ] as [StatusKind, [number, number]];
       }),
     ),
-  };
+  });
 }

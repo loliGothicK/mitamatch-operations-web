@@ -5,7 +5,12 @@ import type {
   Concentration,
   MemoriaWithConcentration,
 } from "@/jotai/memoriaAtoms";
-import { type Amount, parseElement, type StatusKind } from "@/parser/common";
+import {
+  type Amount,
+  parseElement,
+  parseIntSafe,
+  type StatusKind,
+} from "@/parser/common";
 import type { Probability } from "@/parser/autoSkill";
 import { P, match } from "ts-pattern";
 import { Lenz } from "@/domain/memoria/lens";
@@ -14,9 +19,18 @@ import {
   isDamageEffect,
   isNotStackOrElement,
 } from "@/parser/skill";
-import { either } from "fp-ts";
+import { fromNullable, Option } from "fp-ts/Option";
+import { pipe } from "fp-ts/function";
+import { getApplicativeValidation, isLeft, left, right } from "fp-ts/Either";
+import { anyhow, MitamaError, ValidateResult } from "@/error/error";
+import { either, option } from "fp-ts";
+import { separator, transpose } from "@/fp-ts-ext/function";
+import { sequenceS } from "fp-ts/Apply";
+import { getSemigroup } from "fp-ts/Array";
+import { toValidated } from "@/fp-ts-ext/Validated";
 
 const NotApplicable = Number.NaN;
+const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 function ToBeDefined(hint: string): never {
   throw new Error(`Not implemented: ${hint}`);
@@ -46,73 +60,119 @@ function parseAbility(description?: string): Map<string, number> {
   return result;
 }
 
+type BattleEffect = {
+  type: "charm" | "skill" | "order" | "autoSkill";
+  value: number;
+};
+
+const themeEffects: Map<Attribute, BattleEffect[]> = new Map([
+  [
+    "Water",
+    [
+      { type: "charm", value: 1.1 },
+      { type: "skill", value: 1.1 },
+      { type: "order", value: 1.1 },
+    ],
+  ],
+  [
+    "Wind",
+    [
+      { type: "charm", value: 1.1 },
+      { type: "skill", value: 1.1 },
+      { type: "order", value: 1.1 },
+    ],
+  ],
+]);
+
 const EFFECT_UP = /自身が使用する(.+)属性メモリアのスキル効果(\d+)%UP/;
 const TRIGGER_RATE_UP =
   /自身が使用する(.+?)属性メモリアの補助スキル発動確率が(\d+)％UP/;
 
-function parseEx(description?: string): Map<string, number> {
-  const result = new Map<string, number>([
-    ["Fire", 1.0],
-    ["Water", 1.0],
-    ["Wind", 1.0],
-    ["Light", 1.0],
-    ["Dark", 1.0],
-  ]);
-  if (!description) {
-    return result;
-  }
-  const _match = description.match(EFFECT_UP);
-  if (!_match) {
-    return result;
-  }
-  result.set(_match[1], 1.0 + Number(_match[2]) / 100);
-  return result;
+function parseEffectUp(
+  description: string,
+): ValidateResult<{ attribute: Attribute; effect: BattleEffect }> {
+  return pipe(
+    fromNullable(description.match(EFFECT_UP)),
+    either.fromOption(() => [
+      anyhow(description, `Does not match ${EFFECT_UP}`),
+    ]),
+    either.flatMap(([, attribute, rate]) =>
+      sequenceS(ap)({
+        attribute: toValidated(parseElement(attribute)),
+        effect: sequenceS(ap)({
+          type: right("skill" as const),
+          value: toValidated(parseIntSafe(rate)),
+        }),
+      }),
+    ),
+  );
 }
 
-function parseAdx(adx: Costume["adx"], adxLevel: number) {
-  const effUp = {
-    Fire: 1.0,
-    Water: 1.0,
-    Wind: 1.0,
-    Light: 1.0,
-    Dark: 1.0,
-  };
-  const rateUp = {
-    Fire: 1.0,
-    Water: 1.0,
-    Wind: 1.0,
-    Light: 1.0,
-    Dark: 1.0,
-  };
-  if (!adx) {
-    return [effUp, rateUp];
-  }
+function parseRateUp(
+  description: string,
+): ValidateResult<{ attribute: Attribute; effect: BattleEffect }> {
+  return pipe(
+    fromNullable(description.match(TRIGGER_RATE_UP)),
+    either.fromOption(() => [
+      anyhow(description, `Does not match ${TRIGGER_RATE_UP}`),
+    ]),
+    either.flatMap(([, attribute, rate]) =>
+      sequenceS(ap)({
+        attribute: toValidated(parseElement(attribute)),
+        effect: sequenceS(ap)({
+          type: right("autoSkill" as const),
+          value: toValidated(parseIntSafe(rate)),
+        }),
+      }),
+    ),
+  );
+}
 
-  for (const skill of adx[adxLevel]) {
-    const _match = skill.description?.match(EFFECT_UP);
-    if (!_match) {
-      continue;
-    }
-    const attributes = parseElement(_match[1]);
-    if (either.isLeft(attributes)) {
-      continue;
-    }
-    effUp[attributes.right] = 1.0 + Number(_match[2]) / 100;
-  }
+type SpSkikkEff = Map<Attribute, BattleEffect[]>;
 
-  for (const skill of adx[adxLevel]) {
-    const _match = skill.description?.match(TRIGGER_RATE_UP);
-    if (!_match) {
-      continue;
-    }
-    const attributes = parseElement(_match[1]);
-    if (either.isLeft(attributes)) {
-      continue;
-    }
-    rateUp[attributes.right] = Number(_match[2]) / 100;
-  }
-
-  return [effUp, rateUp] as const;
+function parseSpecialSkillEffect(
+  special: Costume["specialSkill"],
+  limitBreak: number,
+  isAwakened: boolean,
+): ValidateResult<Option<SpSkikkEff>> {
+  return transpose(
+    pipe(
+      special,
+      option.map((special) =>
+        match(special)
+          .with(
+            { type: "ex" },
+            ({ description }): ValidateResult<SpSkikkEff> => {
+              return pipe(
+                parseEffectUp(description),
+                either.map(
+                  ({ attribute, effect }) => new Map([[attribute, [effect]]]),
+                ),
+              );
+            },
+          )
+          .with({ type: "adx" }, ({ get }): ValidateResult<SpSkikkEff> => {
+            return pipe(
+              get({ limitBreak, isAwakened }).map(({ description }) =>
+                pipe(
+                  parseEffectUp(description),
+                  either.alt(() => parseRateUp(description)),
+                ),
+              ),
+              separator,
+              either.map((effects) =>
+                effects.reduce(
+                  (acc, { attribute, effect }) =>
+                    acc.set(attribute, [effect, ...(acc.get(attribute) ?? [])]),
+                  new Map(),
+                ),
+              ),
+            );
+          })
+          .exhaustive(),
+      ),
+    ),
+  );
 }
 
 export type StackOption = {
@@ -210,22 +270,86 @@ export function evaluate(
   [opDef, opSpDef]: [number, number],
   charm: Charm,
   costume: Costume,
-  adxLevel: number,
+  { limitBraek, isAwakened }: { limitBraek: number; isAwakened: boolean },
   options: EvaluateOptions = {},
-): EvaluateResult {
+): ValidateResult<EvaluateResult> {
   const themeRate = {
-    Fire: 1.1,
-    Water: 1.1,
-    Wind: 1.1,
-    Light: 1.0,
-    Dark: 1.0,
+    Fire:
+      themeEffects.get("Fire")?.find(({ type }) => type === "skill")?.value ||
+      1.0,
+    Water:
+      themeEffects.get("Water")?.find(({ type }) => type === "skill")?.value ||
+      1.0,
+    Wind:
+      themeEffects.get("Wind")?.find(({ type }) => type === "skill")?.value ||
+      1.0,
+    Light:
+      themeEffects.get("Light")?.find(({ type }) => type === "skill")?.value ||
+      1.0,
+    Dark:
+      themeEffects.get("Dark")?.find(({ type }) => type === "skill")?.value ||
+      1.0,
   };
   const graceRate = 1.1;
   const charmRate = 1.1;
   const charmEx = parseAbility(charm?.ability);
   const costumeRate = 1.15;
-  const costumeEx = parseEx(costume?.ex?.up.description);
-  const [costumeAdx, adx] = parseAdx(costume?.adx, adxLevel);
+  const costumeSpecial = parseSpecialSkillEffect(
+    costume.specialSkill,
+    limitBraek,
+    isAwakened,
+  );
+
+  if (isLeft(costumeSpecial)) {
+    return left(costumeSpecial.left);
+  }
+
+  const adx: Record<Attribute, number> = match(costumeSpecial.right)
+    .with(option.none, () => ({
+      Fire: 0.0,
+      Water: 0.0,
+      Wind: 0.0,
+      Light: 0.0,
+      Dark: 0.0,
+    }))
+    .otherwise(({ value }) => ({
+      Fire:
+        value.get("Fire")?.find(({ type }) => type === "autoSkill")?.value ||
+        0.0,
+      Water:
+        value.get("Water")?.find(({ type }) => type === "autoSkill")?.value ||
+        0.0,
+      Wind:
+        value.get("Wind")?.find(({ type }) => type === "autoSkill")?.value ||
+        0.0,
+      Light:
+        value.get("Light")?.find(({ type }) => type === "autoSkill")?.value ||
+        0.0,
+      Dark:
+        value.get("Dark")?.find(({ type }) => type === "autoSkill")?.value ||
+        0.0,
+    }));
+
+  const costumeRateUp: Record<Attribute, number> = match(costumeSpecial.right)
+    .with(option.none, () => ({
+      Fire: 0.0,
+      Water: 0.0,
+      Wind: 0.0,
+      Light: 0.0,
+      Dark: 0.0,
+    }))
+    .otherwise(({ value }) => ({
+      Fire:
+        value.get("Fire")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Water:
+        value.get("Water")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Wind:
+        value.get("Wind")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Light:
+        value.get("Light")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Dark:
+        value.get("Dark")?.find(({ type }) => type === "skill")?.value || 0.0,
+    }));
 
   const skill = deck.map((memoria) => {
     const skillLevel = match(memoria.concentration)
@@ -273,10 +397,9 @@ export function evaluate(
       charmRate *
       charmEx.get(memoria.attribute)! *
       costumeRate *
-      costumeEx.get(memoria.attribute)! *
       graceRate *
       themeRate[memoria.attribute] *
-      costumeAdx[memoria.attribute];
+      costumeRateUp[memoria.attribute];
 
     const config = {
       calibration,
@@ -297,11 +420,11 @@ export function evaluate(
     };
   });
 
-  return {
+  return right({
     skill,
     supportBuff: support("UP", [atk, spAtk, def, spDef], deck, adx),
     supportDebuff: support("DOWN", [atk, spAtk, def, spDef], deck, adx),
-  };
+  });
 }
 
 type Config = {

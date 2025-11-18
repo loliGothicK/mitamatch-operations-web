@@ -9,7 +9,7 @@ import {
 } from "node-sql-parser";
 import type { GridColDef } from "@mui/x-data-grid";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
-import { anyhow, type MitamaError } from "@/error/error";
+import { bail, type MitamaError } from "@/error/error";
 import { getApplicativeValidation, isRight, right } from "fp-ts/Either";
 import { match, P } from "ts-pattern";
 import { pipe } from "fp-ts/function";
@@ -69,7 +69,7 @@ function parseExpr(
           "interval",
         ),
       },
-      ({ type }) => toValidated(anyhow(type, "unsupported expression type")),
+      ({ type }) => toValidated(bail(type, "unsupported expression type")),
     )
     .with(
       { type: "binary_expr" },
@@ -83,7 +83,7 @@ function parseExpr(
           });
         } else {
           return toValidated(
-            anyhow("binary_expr", "unsupported expression type"),
+            bail("binary_expr", "unsupported expression type"),
           );
         }
       },
@@ -102,7 +102,7 @@ function parseExpr(
                   )
                   .otherwise(() =>
                     toValidated(
-                      anyhow(
+                      bail(
                         "expr_list",
                         "binary expression in exprssion list is not supported.",
                       ),
@@ -113,11 +113,11 @@ function parseExpr(
           ),
         );
       } else {
-        return toValidated(anyhow("expr_list", "unsupported expression list"));
+        return toValidated(bail("expr_list", "unsupported expression list"));
       }
     })
     .with({ type: "expr" }, () =>
-      toValidated(anyhow("expr", "unsupported expression type")),
+      toValidated(bail("expr", "unsupported expression type")),
     )
     .with({ type: "column_ref" }, (column) =>
       match(column)
@@ -139,7 +139,7 @@ function parseExpr(
                 )
                 .otherwise(() =>
                   toValidated(
-                    anyhow(
+                    bail(
                       type,
                       `unsupported VALUE TYPE with \`${value}: ${type}\``,
                     ),
@@ -177,7 +177,7 @@ function parseWhere(
       match(where)
         .with({ type: "function" }, () =>
           toValidated(
-            anyhow(
+            bail(
               where.type,
               "SQL Functions are not supported in WHERE clause.",
             ),
@@ -222,13 +222,11 @@ export function sqlToModel(
   });
 
   if (ast.isErr()) {
-    return toValidated(anyhow(sql, ast.error as string));
+    return toValidated(bail(sql, ast.error as string));
   }
 
   if (!Array.isArray(ast.value)) {
-    return toValidated(
-      anyhow(sql, "Multiple SQL statements are not supported."),
-    );
+    return toValidated(bail(sql, "Multiple SQL statements are not supported."));
   }
 
   if (ast.value[0].type === "select") {
@@ -259,6 +257,6 @@ export function sqlToModel(
       ),
     );
   } else {
-    return toValidated(anyhow(sql, "Only SELECT statements are supported."));
+    return toValidated(bail(sql, "Only SELECT statements are supported."));
   }
 }

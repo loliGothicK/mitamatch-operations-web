@@ -5,7 +5,7 @@ import type {
   ParseResult,
 } from "@/parser/query/sql";
 import { match } from "ts-pattern";
-import { anyhow, type MitamaError } from "@/error/error";
+import { bail, type MitamaError } from "@/error/error";
 import { type Either, getApplicativeValidation, right } from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import { either, option } from "fp-ts";
@@ -85,13 +85,13 @@ export default function build<T>(
                   (left: Lit, right: Lit) => String(left) + String(right),
                 );
               } else {
-                return anyhow("+", "Invalid operands for + operator.");
+                return bail("+", "Invalid operands for + operator.");
               }
             } else {
-              return anyhow("+", "Invalid operands for + operator.");
+              return bail("+", "Invalid operands for + operator.");
             }
           })
-          .otherwise(() => anyhow("+", "Invalid operands for + operator.")),
+          .otherwise(() => bail("+", "Invalid operands for + operator.")),
       )
       .with("AND", () =>
         right((left: Lit, right: Lit) => Boolean(left) && Boolean(right)),
@@ -102,13 +102,13 @@ export default function build<T>(
       .with(P.union("LIKE", "ILIKE", "NOT LIKE", "NOT ILIKE"), (operator) =>
         match([lhs, rhs])
           .with([{ type: P.not("field") }, P.any], () =>
-            anyhow(
+            bail(
               "LIKE",
               "Invalid operands for LIKE operator. The left operand must be a column name.",
             ),
           )
           .with([P.any, { type: P.not("value") }], () =>
-            anyhow(
+            bail(
               "LIKE",
               "Invalid operands for LIKE operator. The left operand must be a string literal.",
             ),
@@ -122,7 +122,7 @@ export default function build<T>(
             });
           }),
       )
-      .otherwise(() => anyhow("operator", `Unsupported operator: ${operator}`));
+      .otherwise(() => bail("operator", `Unsupported operator: ${operator}`));
 
   const cvt = (input: Input) =>
     match<Input, Validated<MitamaError, IExpression<T>>>(input)
@@ -143,7 +143,7 @@ export default function build<T>(
           ),
       )
       .when(Array.isArray, () =>
-        toValidated(anyhow("expr_list", "AtomicExprList is not supported yet")),
+        toValidated(bail("expr_list", "AtomicExprList is not supported yet")),
       )
       .otherwise((atomic) =>
         match<typeof atomic, Validated<MitamaError, IExpression<T>>>(atomic)
@@ -155,7 +155,7 @@ export default function build<T>(
               return right(new Field(resolver[field.value as string].accessor));
             } else {
               return toValidated(
-                anyhow(
+                bail(
                   field.value,
                   `Cannot resolve ${field.value} with schema definition.`,
                 ),

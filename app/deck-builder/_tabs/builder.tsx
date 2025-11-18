@@ -101,6 +101,7 @@ import { isStackEffect } from "@/parser/skill";
 import { Calculator } from "@/deck-builder/_tabs/calculator";
 import type { ImageProps } from "next/dist/shared/lib/get-img-props";
 import type { StrictOmit } from "ts-essentials";
+import { isLeft } from "fp-ts/Either";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -751,7 +752,7 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
     [def, spDef],
     charm,
     costume,
-    adLevel,
+    { limitBraek: adLevel, isAwakened: true },
     {
       counter,
       stack: stack
@@ -768,6 +769,10 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
         : undefined,
     },
   );
+
+  if (isLeft(diff)) {
+    return <Typography>error!</Typography>;
+  }
 
   const style = {
     display: "grid",
@@ -900,18 +905,21 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
         </dl>
       </Grid>
       <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
-        {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0
+        {diff.right.expectedToalDamage[1] - diff.right.expectedToalDamage[0] !==
+        0
           ? "ダメージ"
           : "回復"}
       </Divider>
       <Grid>
         <dl style={style}>
           {/* damage */}
-          {diff.expectedToalDamage[1] - diff.expectedToalDamage[0] !== 0 &&
-            intoRow(["ダメージ", diff.expectedToalDamage])}
+          {diff.right.expectedToalDamage[1] -
+            diff.right.expectedToalDamage[0] !==
+            0 && intoRow(["ダメージ", diff.right.expectedToalDamage])}
           {/* recovery */}
-          {diff.expectedTotalRecovery[1] - diff.expectedTotalRecovery[0] !==
-            0 && intoRow(["回復", diff.expectedTotalRecovery])}
+          {diff.right.expectedTotalRecovery[1] -
+            diff.right.expectedTotalRecovery[0] !==
+            0 && intoRow(["回復", diff.right.expectedTotalRecovery])}
         </dl>
       </Grid>
       <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
@@ -919,7 +927,7 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
       </Divider>
       <Grid>
         <dl style={style}>
-          {[...diff.expectedTotalBuff.entries()]
+          {[...diff.right.expectedTotalBuff.entries()]
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
             .map(([type, value]) => intoRow([type, value]))}
         </dl>
@@ -929,7 +937,7 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
       </Divider>
       <Grid>
         <dl style={style}>
-          {[...diff.expectedTotalDebuff.entries()]
+          {[...diff.right.expectedTotalDebuff.entries()]
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
             .map(([type, value]) => intoRow([type, value]))}
         </dl>

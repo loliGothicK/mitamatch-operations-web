@@ -1,6 +1,6 @@
 import { match, P } from "ts-pattern";
 import { type Either, right } from "fp-ts/Either";
-import { anyhow, type MitamaError, CallPath } from "@/error/error";
+import { bail, type MitamaError, CallPath } from "@/error/error";
 import type { Attribute } from "@/parser/skill";
 
 export const parseIntSafe = (
@@ -12,7 +12,7 @@ export const parseIntSafe = (
   const int = Number.parseInt(num, 10);
   return !Number.isNaN(int)
     ? right(int)
-    : anyhow(num, "given text doesn't match number", {
+    : bail(num, "given text doesn't match number", {
         ...meta,
         path: meta.path.join("parseIntSafe"),
       });
@@ -27,7 +27,7 @@ export const parseFloatSafe = (
   const float = Number.parseFloat(num);
   return !Number.isNaN(float)
     ? right(float)
-    : anyhow(num, "given text doesn't match number", {
+    : bail(num, "given text doesn't match number", {
         ...meta,
         path: meta.path.join("parseFloatSafe"),
       });
@@ -46,7 +46,7 @@ export const parseElement = (
     .with("光", () => right("Light"))
     .with("闇", () => right("Dark"))
     .otherwise((src) =>
-      anyhow(src, "given text doesn't match any element", {
+      bail(src, "given text doesn't match any element", {
         ...meta,
         path: meta.path.join("parseElement"),
       }),
@@ -92,7 +92,7 @@ export const parseAmount = (
       () => right("super-ultra-large"),
     )
     .otherwise((src) =>
-      anyhow(src, "given text doesn't match any amount", {
+      bail(src, "given text doesn't match any amount", {
         ...meta,
         path: meta.path.join("parseAmount"),
       }),
@@ -152,7 +152,7 @@ export const parseStatus = (
       right(["Fire DEF", "Water DEF", "Wind DEF"]),
     )
     .otherwise((src) =>
-      anyhow(src, "given text doesn't match any status", {
+      bail(src, "given text doesn't match any status", {
         ...meta,
         path: meta.path.join("parseStatus"),
       }),

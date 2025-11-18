@@ -3,7 +3,7 @@ import type { Amount, StatusKind } from "@/parser/common";
 import { match } from "ts-pattern";
 import { parseAmount } from "@/parser/common";
 import { type Either, right, getApplicativeValidation } from "fp-ts/Either";
-import { anyhow, type MitamaError, CallPath } from "@/error/error";
+import { bail, type MitamaError, CallPath } from "@/error/error";
 import { pipe } from "fp-ts/function";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
 import { getSemigroup } from "fp-ts/Array";
@@ -69,7 +69,7 @@ const parseProbability = (
       () => right("high"),
     )
     .otherwise(() =>
-      anyhow(description, `given text doesn't include any probability`, {
+      bail(description, `given text doesn't include any probability`, {
         path: path.join("parseProbability"),
         memoriaName,
       }),
@@ -108,7 +108,7 @@ const parseSingleStatus = (
           right(["Fire DEF", "Water DEF", "Wind DEF"]),
         )
         .otherwise((target) =>
-          anyhow(target, `given text doesn't match any status`, {
+          bail(target, `given text doesn't match any status`, {
             path: path.join("parseSingleStatus"),
           }),
         ),
@@ -130,7 +130,7 @@ const parseUpDown = (
       () => right("DOWN" as const),
     )
     .otherwise((target) =>
-      anyhow(target, `given text doesn't include UP or DOWN`, {
+      bail(target, `given text doesn't include UP or DOWN`, {
         path: path.join("parseUpDown"),
         memoriaName,
       }),
@@ -321,7 +321,7 @@ const parseTrigger = (
       () => right("Command"),
     )
     .otherwise(() =>
-      anyhow(skillName, "no match trigger found", {
+      bail(skillName, "no match trigger found", {
         path: path.join("parseTrigger"),
         memoriaName,
       }),
@@ -347,7 +347,7 @@ const parseEffects = (
     option.map(separator),
     option.getOrElse(() =>
       toValidated(
-        anyhow(description, "No match support effects found", {
+        bail(description, "No match support effects found", {
           path: joined,
           memoriaName,
         }),

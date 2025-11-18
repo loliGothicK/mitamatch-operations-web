@@ -11,7 +11,7 @@ import {
 import type { Amount } from "@/parser/common";
 import { pipe } from "fp-ts/function";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
-import { anyhow, type MitamaError, CallPath } from "@/error/error";
+import { bail, type MitamaError, CallPath } from "@/error/error";
 import {
   bind,
   Do,
@@ -162,7 +162,7 @@ function parseRange(
         )
         .otherwise(() =>
           toValidated(
-            anyhow(num, "given text doesn't match range", {
+            bail(num, "given text doesn't match range", {
               path,
               memoriaName,
             }),
@@ -190,7 +190,7 @@ function parseDamage(
     if (buff.includes("ダウン")) {
       return right("debuff" as const);
     }
-    return anyhow(buff, "given text doesn't include 'buff' or 'debuff'", {
+    return bail(buff, "given text doesn't include 'buff' or 'debuff'", {
       path: joined(),
       memoriaName,
     });
@@ -245,7 +245,7 @@ function parseDamage(
                 ),
                 option.getOrElse(() =>
                   toValidated(
-                    anyhow(eff, "given text doesn't match ATK_EFF", {
+                    bail(eff, "given text doesn't match ATK_EFF", {
                       path: joined(),
                       memoriaName,
                     }),
@@ -269,7 +269,7 @@ function parseDamage(
       ),
       option.getOrElse(() =>
         toValidated(
-          anyhow(description, "given text doesn't match ATK_DAMAGE", {
+          bail(description, "given text doesn't match ATK_DAMAGE", {
             path,
             memoriaName,
           }),
@@ -359,7 +359,7 @@ function parseBuffAndDebuff(
     ),
     option.getOrElse(() =>
       toValidated(
-        anyhow(description, `given text doesn't match ${STAT_UP_OR_DOWN}`, {
+        bail(description, `given text doesn't match ${STAT_UP_OR_DOWN}`, {
           path: joined(),
           memoriaName,
         }),
@@ -465,7 +465,7 @@ const parseHeal = (
     ),
     option.getOrElse(() =>
       toValidated(
-        anyhow(description, `given text doesn't match ${RECOVERY}`, {
+        bail(description, `given text doesn't match ${RECOVERY}`, {
           path: joined(),
           memoriaName,
         }),
@@ -632,7 +632,7 @@ function parseElementEffect(
     if (name.includes("エンハンシア")) {
       return right(["enhance" as const, "minima" as const]);
     }
-    return anyhow(name, "given text doesn't match resonance type", {
+    return bail(name, "given text doesn't match resonance type", {
       path: path.join("parseElementEffect.parseResonanceType"),
       memoriaName,
     });
@@ -647,7 +647,7 @@ function parseElementEffect(
         }),
       ),
       option.getOrElse(() =>
-        anyhow(description, "given text doesn't match rate", {
+        bail(description, "given text doesn't match rate", {
           path: path.join("parseElementEffect.parseRate"),
           memoriaName,
         }),
