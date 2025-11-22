@@ -59,9 +59,7 @@ export default function build<T>(
 
   const isLikeSpecialPattern = (pattern: string): pattern is string => {
     return (
-      (completion &&
-        pattern in completion &&
-        "like" in completion[pattern]) ||
+      (completion && pattern in completion && "like" in completion[pattern]) ||
       false
     );
   };
@@ -186,10 +184,7 @@ export default function build<T>(
               return right(new Field(resolver[field].accessor));
             } else {
               return toValidated(
-                bail(
-                  field,
-                  `Cannot resolve ${field} with schema definition.`,
-                ),
+                bail(field, `Cannot resolve ${field} with schema definition.`),
               );
             }
           })

@@ -262,10 +262,16 @@ export function Calculator() {
           );
         }
         if (option === "通常衣装") {
-          return costume.status[0] > costume.status[1];
+          return (
+            costume.status.summary.particular[0] >
+            costume.status.summary.particular[1]
+          );
         }
         if (option === "特殊衣装") {
-          return costume.status[0] < costume.status[1];
+          return (
+            costume.status.summary.particular[0] <
+            costume.status.summary.particular[1]
+          );
         }
         if (option === "火" || option === "水" || option === "風") {
           return (

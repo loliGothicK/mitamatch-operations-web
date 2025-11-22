@@ -140,9 +140,6 @@ importers:
       fp-ts:
         specifier: 2.16.11
         version: 2.16.11
-      import-in-the-middle:
-        specifier: 1.15.0
-        version: 1.15.0
       iron-session:
         specifier: 8.0.4
         version: 8.0.4
@@ -194,9 +191,6 @@ importers:
       remark-gfm:
         specifier: 4.0.1
         version: 4.0.1
-      require-in-the-middle:
-        specifier: 7.5.2
-        version: 7.5.2
       tocbot:
         specifier: 4.36.4
         version: 4.36.4
@@ -270,9 +264,15 @@ importers:
       happy-dom:
         specifier: 20.0.10
         version: 20.0.10
+      import-in-the-middle:
+        specifier: 1.15.0
+        version: 1.15.0
       oxfmt:
         specifier: 0.14.0
         version: 0.14.0
+      require-in-the-middle:
+        specifier: 7.5.2
+        version: 7.5.2
       ts-node:
         specifier: 11.0.0-beta.1
         version: 11.0.0-beta.1(@types/node@22.15.30)(typescript@5.9.3)
@@ -7842,10 +7842,6 @@ snapshots:
 
   '@xtuc/long@4.2.2': {}
 
-  acorn-import-attributes@1.9.5(acorn@8.14.1):
-    dependencies:
-      acorn: 8.14.1
-
   acorn-import-attributes@1.9.5(acorn@8.15.0):
     dependencies:
       acorn: 8.15.0
@@ -7856,7 +7852,7 @@ snapshots:
 
   acorn-walk@8.3.4:
     dependencies:
-      acorn: 8.14.1
+      acorn: 8.15.0
 
   acorn@8.14.1: {}
 
@@ -8552,8 +8548,8 @@ snapshots:
 
   import-in-the-middle@1.15.0:
     dependencies:
-      acorn: 8.14.1
-      acorn-import-attributes: 1.9.5(acorn@8.14.1)
+      acorn: 8.15.0
+      acorn-import-attributes: 1.9.5(acorn@8.15.0)
       cjs-module-lexer: 1.4.3
       module-details-from-path: 1.0.4
 

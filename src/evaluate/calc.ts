@@ -24,10 +24,10 @@ export function calcFinalStatus(
       ];
     },
     [
-      selfStatus[0] + charm.status[0] + costume.status[0],
-      selfStatus[1] + charm.status[1] + costume.status[1],
-      selfStatus[2] + charm.status[2] + costume.status[2],
-      selfStatus[3] + charm.status[3] + costume.status[3],
+      selfStatus[0] + charm.status[0] + costume.status.summary.particular[0],
+      selfStatus[1] + charm.status[1] + costume.status.summary.particular[1],
+      selfStatus[2] + charm.status[2] + costume.status.summary.particular[2],
+      selfStatus[3] + charm.status[3] + costume.status.summary.particular[3],
     ],
   );
 }

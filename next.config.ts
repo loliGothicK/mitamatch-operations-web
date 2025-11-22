@@ -3,9 +3,6 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 /** @types {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: ["@vercel/otel"],
-  },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     remotePatterns: [
@@ -35,6 +32,9 @@ const nextConfig = {
     "@opentelemetry/auto-instrumentations-node",
     "@opentelemetry/sdk-node",
     "@sentry/profiling-node",
+    "@vercel/otel",
+    "import-in-the-middle",
+    "require-in-the-middle",
   ],
 };
 
