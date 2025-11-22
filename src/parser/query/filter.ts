@@ -15,6 +15,7 @@ import { getSemigroup } from "fp-ts/Array";
 import { P } from "ts-pattern";
 import { Option } from "fp-ts/Option";
 import { separator, transpose } from "@/fp-ts-ext/function";
+import { ComleteCandidate } from "@/data/_common/autocomplete";
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 /**
@@ -46,6 +47,7 @@ function likeToRegExp(pattern: string, flags?: string): RegExp {
 export default function build<T>(
   expr: ParseResult,
   resolver: SchemaResolver<T>,
+  completion?: Record<string, ComleteCandidate>,
 ): Validated<
   MitamaError,
   {
@@ -54,6 +56,16 @@ export default function build<T>(
   }
 > {
   type Input = AtomicExpr | BinaryExpr | AtomicExprList;
+
+  const isLikeSpecialPattern = (pattern: string): pattern is string => {
+    return (
+      (completion &&
+        pattern in completion &&
+        "like" in completion[pattern]) ||
+      false
+    );
+  };
+
   const intoOperator = (
     operator: string,
     lhs: Input,
@@ -113,14 +125,33 @@ export default function build<T>(
               "Invalid operands for LIKE operator. The left operand must be a string literal.",
             ),
           )
-          .otherwise(() => {
+          .with(
+            [
+              {
+                type: "field",
+                value: P.string.and(P.when(isLikeSpecialPattern)).select(),
+              },
+              { type: "value" },
+            ],
+            (key) => {
+              return right((left: Lit, right: Lit) =>
+                completion![key].like!.operator(
+                  left as string,
+                  right as string,
+                ),
+              );
+            },
+          )
+          .with([{ type: "field" }, { type: "value" }], () => {
             return right((left: Lit, right: Lit) => {
+              const field = left as string;
               const bool = operator.endsWith("ILIKE")
-                ? likeToRegExp(right as string, "i").test(left as string)
-                : likeToRegExp(right as string).test(left as string);
+                ? likeToRegExp(right as string, "i").test(field)
+                : likeToRegExp(right as string).test(field);
               return operator.startsWith("NOT") ? !bool : bool;
             });
-          }),
+          })
+          .otherwise(() => bail("LIKE", "Invalid operands for LIKE operator.")),
       )
       .otherwise(() => bail("operator", `Unsupported operator: ${operator}`));
 
@@ -150,14 +181,14 @@ export default function build<T>(
           .with({ type: "value" }, (lit) =>
             right(new Literal(lit.value as Lit)),
           )
-          .with({ type: "field" }, (field) => {
-            if (field.value in resolver) {
-              return right(new Field(resolver[field.value as string].accessor));
+          .with({ type: "field", value: P.string.select() }, (field) => {
+            if (field in resolver) {
+              return right(new Field(resolver[field].accessor));
             } else {
               return toValidated(
                 bail(
-                  field.value,
-                  `Cannot resolve ${field.value} with schema definition.`,
+                  field,
+                  `Cannot resolve ${field} with schema definition.`,
                 ),
               );
             }

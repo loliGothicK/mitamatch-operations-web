@@ -12,7 +12,7 @@ import {
   type CompletionSource,
 } from "@codemirror/autocomplete";
 import { queryLinter } from "@/parser/query/linter";
-import { tableCompletionSource } from "@/data/_memoria/autocomplete";
+import { makeColumnCompletionSource } from "@/data/_common/autocomplete";
 import { option } from "fp-ts";
 import { iter } from "@/fp-ts-ext/function";
 
@@ -105,7 +105,7 @@ export default function Console<
   );
   const myCompletions = autocompletion({
     override: [
-      tableCompletionSource(schema[type]),
+      makeColumnCompletionSource(schema[type]),
       schemaCompletionSource({ dialect: MySQL, schema }),
       supportedKeywordSource,
       ...iter(option.fromNullable(completions)).flat(),

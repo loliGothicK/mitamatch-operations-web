@@ -1494,6 +1494,19 @@
       "favoriteFood": "和食、いちご",
       "hatedFood": "辛いもの",
       "hobby": "絵画"
+    },
+    {
+      "name": "竹腰千華",
+      "kanaName": "たけごしちはな",
+      "firstName": "千華",
+      "legion": "ローエングリン",
+      "garden": "百合ヶ丘女学院高等学校",
+      "grade": "2年",
+      "birthday": "2025-11-25T00:00:00+09:00",
+      "bloodType": "AB",
+      "favoriteFood": "小雨、古生物、架空生物",
+      "hatedFood": "特になし",
+      "hobby": "将棋"
     }
   ]
 }

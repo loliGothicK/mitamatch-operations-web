@@ -40,7 +40,40 @@ const costumeSchema = z.object({
         .exhaustive(),
     )
     .readonly(),
-  jobSkills: z.array(z.array(z.string())).readonly(),
+  rareSkill: z.object({
+    name: z.string().readonly(),
+    description: z.string().readonly(),
+    note: z.string().optional().nullable().readonly(),
+    effectTime: z.number().readonly(),
+  }),
+  jobSkills: z
+    .array(
+      z.array(
+        z
+          .object({
+            jobSkillType: z.union([
+              z.literal(0),
+              z.literal(1),
+              z.literal(2),
+              z.literal(3),
+              z.literal(4),
+              z.literal(5),
+              z.literal(6),
+              z.literal(8),
+              z.literal(9),
+              z.literal(10),
+              z.literal(11),
+            ]),
+            value: z.number(),
+          })
+          .transform((skill) =>
+            match(skill.jobSkillType)
+              .with(6, () => ({ jobSkillType: 6, value: skill.value / 10.0 }))
+              .otherwise(() => skill),
+          ),
+      ),
+    )
+    .readonly(),
   specialSkills: z
     .union([z.array(adxSchema), z.tuple([exSchema.readonly()])])
     .optional()
@@ -67,7 +100,13 @@ export type Costume = Omit<
   "jobSkills" | "specialSkills"
 > & {
   readonly rate: number;
-  readonly status: readonly [number, number, number, number];
+  readonly status: {
+    raw: z.infer<typeof costumeSchema>["jobSkills"];
+    summary: {
+      common: readonly [number, number, number, number, number];
+      particular: readonly [number, number, number, number];
+    };
+  };
   readonly specialSkill: Option<Ex | Adx>;
 };
 
@@ -112,37 +151,65 @@ export const costumeList: Costume[] = costumeData.data.map((costume) => {
   };
 });
 
-function skillsToStatus(skills: readonly string[][]) {
+function skillsToStatus(skills: z.infer<typeof costumeSchema>["jobSkills"]) {
   let rate = 0;
-  const status = [0, 0, 0, 0] as [number, number, number, number];
-  const statRegex = /^(.+)\+(\d+)/;
+  const common = [0, 0, 0, 0, 0] as [number, number, number, number, number];
+  const particular = [0, 0, 0, 0] as [number, number, number, number];
 
-  for (const [, stat, value] of skills
-    .flat()
-    .map((skill) => skill.match(statRegex)!)) {
-    switch (stat) {
-      case "ATK": {
-        status[0] += Number.parseInt(value, 10);
+  for (const { jobSkillType, value } of skills.flat()) {
+    switch (jobSkillType) {
+      case 1: {
+        common[0] += value;
         break;
       }
-      case "Sp.ATK": {
-        status[1] += Number.parseInt(value, 10);
+      case 2: {
+        common[1] += value;
         break;
       }
-      case "DEF": {
-        status[2] += Number.parseInt(value, 10);
+      case 3: {
+        common[2] += value;
         break;
       }
-      case "Sp.DEF": {
-        status[3] += Number.parseInt(value, 10);
+      case 4: {
+        common[3] += value;
+        break;
+      }
+      case 5: {
+        common[4] += value;
+        break;
+      }
+      case 6: {
+        rate += value;
+        break;
+      }
+      case 8: {
+        particular[0] += value;
+        break;
+      }
+      case 9: {
+        particular[1] += value;
+        break;
+      }
+      case 10: {
+        particular[2] += value;
+        break;
+      }
+      case 11: {
+        particular[3] += value;
         break;
       }
       default:
-        rate += Number.parseInt(value, 10);
+        break;
     }
   }
   return {
     rate,
-    status,
+    status: {
+      raw: skills,
+      summary: {
+        common,
+        particular,
+      },
+    },
   };
 }

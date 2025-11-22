@@ -19,7 +19,10 @@ import Console from "@/components/Console";
 import { isSome } from "fp-ts/Option";
 import build, { SchemaResolver } from "@/parser/query/filter";
 import { isRight } from "fp-ts/Either";
-import { CompletionSource } from "@codemirror/autocomplete";
+import {
+  ComleteCandidate,
+  makeSchemaCompletionSource,
+} from "@/data/_common/autocomplete";
 
 type ToastState = {
   open: boolean;
@@ -39,25 +42,25 @@ export function QueryConsle<
   },
   T,
 >({
+  type,
   origin,
   initial,
   resolver,
   schema,
   updateVisivilityAction,
   updateDataAction,
-  completions,
+  completion,
 }: {
+  type: keyof Schema;
   origin: T[];
   resolver: SchemaResolver<T>;
   schema: Schema;
   updateVisivilityAction: (whiteList: Set<GridColDef["field"]>) => void;
   updateDataAction: Dispatch<SetStateAction<T[]>>;
-  initial?: string;
-  completions?: CompletionSource[];
+  initial: string;
+  completion?: Record<string, ComleteCandidate>;
 }) {
-  const [query, setQuery] = useState(
-    initial || "select * from memoria where `cost` > 18;",
-  );
+  const [query, setQuery] = useState(initial);
   const [state, setState] = useState<ToastState>({
     open: false,
     vertical: "top" as const,
@@ -91,7 +94,7 @@ export function QueryConsle<
         sqlToModel(query),
         either.map(([whiteList, result]) => {
           updateVisivilityAction(whiteList);
-          const pred = build(result, resolver);
+          const pred = build(result, resolver, completion);
           if (isRight(pred)) {
             const { where, orderBy } = pred.right;
             if (isSome(where)) {
@@ -177,9 +180,9 @@ export function QueryConsle<
         </Box>
       </Box>
       <Console
-        type={"memoria"}
+        type={type}
         schema={schema}
-        completions={completions}
+        completions={completion ? [makeSchemaCompletionSource(completion)] : []}
         initialeValue={query}
         execute={queryExecutor}
         onChangeBack={setQuery}

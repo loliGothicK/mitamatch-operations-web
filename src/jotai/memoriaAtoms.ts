@@ -24,7 +24,7 @@ import { charmList } from "@/domain/charm/charm";
 import { costumeList } from "@/domain/costume/costume";
 import Cookies from "js-cookie";
 import { match, P } from "ts-pattern";
-import { Lenz } from "@/domain/memoria/lens";
+import { Lenz } from "@/domain/lenz";
 import { isElementEffect, isStackEffect } from "@/parser/skill";
 import { activeProjectAtom } from "@/jotai/projectAtoms";
 
@@ -177,7 +177,7 @@ export const filteredMemoriaAtom = atom((get) => {
       });
 
       const basicStatus = get(basicStatusFilterAtom).every((filter) => {
-        return Lenz.gvgSkill.effects.get(memoria).some((eff) =>
+        return Lenz.memoria.gvgSkill.effects.get(memoria).some((eff) =>
           match(eff)
             .with({ status: filter.status }, ({ type }) =>
               match(filter.upDown)
@@ -190,7 +190,7 @@ export const filteredMemoriaAtom = atom((get) => {
       });
 
       const elementStatus = get(elementStatusFilterAtom).every((filter) => {
-        return Lenz.gvgSkill.effects.get(memoria).some((eff) =>
+        return Lenz.memoria.gvgSkill.effects.get(memoria).some((eff) =>
           match(eff)
             .with({ status: filter.status }, ({ type }) =>
               match(filter.upDown)
@@ -205,20 +205,24 @@ export const filteredMemoriaAtom = atom((get) => {
       const otherSkill = get(otherSkillFilterAtom).every((filter) => {
         return match(filter)
           .with(P.union("anima", "barrier", "meteor", "eden"), (filter) =>
-            Lenz.gvgSkill.effects.get(memoria).some(isStackEffect(filter)),
+            Lenz.memoria.gvgSkill.effects
+              .get(memoria)
+              .some(isStackEffect(filter)),
           )
           .with(P.union("minima", "spread", "enhance"), (filter) =>
-            Lenz.gvgSkill.effects.get(memoria).some(isElementEffect(filter)),
+            Lenz.memoria.gvgSkill.effects
+              .get(memoria)
+              .some(isElementEffect(filter)),
           )
           .with(
             P.union("heal", "charge", "counter", "s-counter"),
             (filter) =>
-              !!Lenz.gvgSkill.kinds
+              !!Lenz.memoria.gvgSkill.kinds
                 .get(memoria)
                 ?.some((kind) => kind === filter),
           )
           .otherwise(({ element, kind }) =>
-            Lenz.gvgSkill.kinds.get(memoria)?.some((k) =>
+            Lenz.memoria.gvgSkill.kinds.get(memoria)?.some((k) =>
               match(k)
                 .with({ element, kind }, () => true)
                 .otherwise(() => false),
@@ -228,39 +232,39 @@ export const filteredMemoriaAtom = atom((get) => {
 
       const vanguardSupport = get(vanguardSupportFilterAtom).every((filter) => {
         if (typeof filter === "string") {
-          return Lenz.autoSkill.effects
+          return Lenz.memoria.autoSkill.effects
             .get(memoria)
             .some((x) => x.type === filter);
         }
-        return Lenz.autoSkill.effects.get(memoria).some((x) => {
+        return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
           return x.status === filter.status && x.type === filter.upDown;
         });
       });
 
       const assistSupport = get(assistSupportFilterAtom).every((filter) => {
         if (typeof filter === "string") {
-          return Lenz.autoSkill.effects
+          return Lenz.memoria.autoSkill.effects
             .get(memoria)
             .some((x) => x.type === filter);
         }
-        return Lenz.autoSkill.effects.get(memoria).some((x) => {
+        return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
           return x.status === filter.status && x.type === filter.upDown;
         });
       });
 
       const recoverySupport = get(recoverySupportFilterAtom).every((filter) => {
         if (typeof filter === "string") {
-          return Lenz.autoSkill.effects
+          return Lenz.memoria.autoSkill.effects
             .get(memoria)
             .some((x) => x.type === filter);
         }
-        return Lenz.autoSkill.effects.get(memoria).some((x) => {
+        return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
           return x.status === filter.status && x.type === filter.upDown;
         });
       });
 
       const otherSupport = get(otherSupportFilterAtom).every((filter) => {
-        return Lenz.autoSkill.effects.get(memoria).some((x) => {
+        return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
           return x.type === filter;
         });
       });
@@ -278,10 +282,12 @@ export const filteredMemoriaAtom = atom((get) => {
         recoverySupport &&
         otherSupport &&
         !get(rwDeckAtom).some(
-          ({ name }) => Lenz.memoria.shortName.get(memoria) === name.short,
+          ({ name }) =>
+            Lenz.memoria.general.shortName.get(memoria) === name.short,
         ) &&
         !get(rwLegendaryDeckAtom).some(
-          ({ name }) => Lenz.memoria.shortName.get(memoria) === name.short,
+          ({ name }) =>
+            Lenz.memoria.general.shortName.get(memoria) === name.short,
         )
       );
     })

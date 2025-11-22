@@ -96,7 +96,7 @@ import Cookies from "js-cookie";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { Virtuoso } from "react-virtuoso";
 import { match } from "ts-pattern";
-import { Lenz } from "@/domain/memoria/lens";
+import { Lenz } from "@/domain/lenz";
 import { isStackEffect } from "@/parser/skill";
 import { Calculator } from "@/deck-builder/_tabs/calculator";
 import type { ImageProps } from "next/dist/shared/lib/get-img-props";
@@ -373,10 +373,10 @@ function MemoriaItem({
                 <Stack>
                   <Typography variant="h6">{name.short}</Typography>
                   <Typography variant="body2">
-                    {Lenz.gvgSkill.name.get(memoria)}
+                    {Lenz.memoria.gvgSkill.name.get(memoria)}
                   </Typography>
                   <Typography variant="body2">
-                    {Lenz.autoSkill.name.get(memoria)}
+                    {Lenz.memoria.autoSkill.name.get(memoria)}
                   </Typography>
                 </Stack>
               }
@@ -710,13 +710,13 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
 
   const [stackRateBefore, stackTimesBefore] = match(sw)
     .with("sword", () => {
-      const stack = Lenz.gvgSkill.effects
+      const stack = Lenz.memoria.gvgSkill.effects
         .get(compare)
         .find(isStackEffect("meteor"));
       return [stack?.rate, stack?.times];
     })
     .with("shield", () => {
-      const stack = Lenz.gvgSkill.effects
+      const stack = Lenz.memoria.gvgSkill.effects
         .get(compare)
         .find(
           (eff) => isStackEffect("eden")(eff) || isStackEffect("anima")(eff),
@@ -727,13 +727,13 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
     .exhaustive();
   const [stackRateAfter, stackTimesAfter] = match(sw)
     .with("sword", () => {
-      const stack = Lenz.gvgSkill.effects
+      const stack = Lenz.memoria.gvgSkill.effects
         .get(compare)
         .find(isStackEffect("meteor"));
       return [stack?.rate, stack?.times];
     })
     .with("shield", () => {
-      const stack = Lenz.gvgSkill.effects
+      const stack = Lenz.memoria.gvgSkill.effects
         .get(compare)
         .find(
           (eff) => isStackEffect("eden")(eff) || isStackEffect("anima")(eff),
@@ -822,12 +822,14 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
                 />
               </Grid>
               <Stack direction={"column"} paddingLeft={5}>
-                <Typography variant="body2">{`${Lenz.memoria.shortName.get(compare)}`}</Typography>
-                <Typography variant="body2">{`${Lenz.gvgSkill.name.get(compare)}`}</Typography>
-                <Typography variant="body2">{`${Lenz.autoSkill.name.get(compare)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.memoria.general.shortName.get(compare)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.memoria.gvgSkill.name.get(compare)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.memoria.autoSkill.name.get(compare)}`}</Typography>
               </Stack>
             </Stack>
-            {Lenz.gvgSkill.description.get(compare).includes("スタック") && (
+            {Lenz.memoria.gvgSkill.description
+              .get(compare)
+              .includes("スタック") && (
               <MultipleSelect
                 times={stackTimesBefore!}
                 kind={"before"}
@@ -852,12 +854,14 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
                 />
               </Grid>
               <Stack direction={"column"} paddingLeft={5}>
-                <Typography variant="body2">{`${Lenz.memoria.shortName.get(candidate)}`}</Typography>
-                <Typography variant="body2">{`${Lenz.gvgSkill.name.get(candidate)}`}</Typography>
-                <Typography variant="body2">{`${Lenz.autoSkill.name.get(candidate)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.memoria.general.shortName.get(candidate)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.memoria.gvgSkill.name.get(candidate)}`}</Typography>
+                <Typography variant="body2">{`${Lenz.memoria.autoSkill.name.get(candidate)}`}</Typography>
               </Stack>
             </Stack>
-            {Lenz.gvgSkill.description.get(candidate).includes("スタック") && (
+            {Lenz.memoria.gvgSkill.description
+              .get(candidate)
+              .includes("スタック") && (
               <MultipleSelect
                 times={stackTimesAfter!}
                 kind={"after"}
@@ -1037,7 +1041,7 @@ function VirtualizedList() {
                     sx={{ display: "block" }}
                     color="text.primary"
                   >
-                    {Lenz.gvgSkill.name.get(memoria[index])}
+                    {Lenz.memoria.gvgSkill.name.get(memoria[index])}
                   </Typography>
                   <Divider sx={{ margin: 1 }} />
                   <Typography
@@ -1047,7 +1051,7 @@ function VirtualizedList() {
                     sx={{ display: "block" }}
                     color="text.primary"
                   >
-                    {Lenz.autoSkill.name.get(memoria[index])}
+                    {Lenz.memoria.autoSkill.name.get(memoria[index])}
                   </Typography>
                 </Stack>
               </CardContent>

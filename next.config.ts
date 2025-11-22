@@ -3,6 +3,9 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 /** @types {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: ["@vercel/otel"],
+  },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     remotePatterns: [

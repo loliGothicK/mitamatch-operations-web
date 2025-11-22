@@ -13,7 +13,7 @@ import {
 } from "@/parser/common";
 import type { Probability } from "@/parser/autoSkill";
 import { P, match } from "ts-pattern";
-import { Lenz } from "@/domain/memoria/lens";
+import { Lenz } from "@/domain/lenz";
 import {
   type Attribute,
   isDamageEffect,
@@ -360,7 +360,9 @@ export function evaluate(
       .with(4, () => 1.5)
       .exhaustive();
 
-    const ranged = Lenz.gvgSkill.effects.get(memoria).find(isNotStackOrElement);
+    const ranged = Lenz.memoria.gvgSkill.effects
+      .get(memoria)
+      .find(isNotStackOrElement);
     const range = match(ranged?.range)
       .with([P._, P._], ([a, b]) => (a + b) / 2)
       .run();
@@ -368,7 +370,7 @@ export function evaluate(
     const rangePlus =
       1.0 -
       deck
-        .map((memoria) => Lenz.memoria.autoSkill.get(memoria))
+        .map((memoria) => Lenz.memoria.general.autoSkill.get(memoria))
         .filter((support) =>
           support.effects.some((effect) => effect.type === "RangeUp"),
         )
@@ -443,7 +445,7 @@ function damage(
   { counter: enableCounter, stack }: EvaluateOptions,
 ): number | undefined {
   if (
-    !Lenz.gvgSkill.effects
+    !Lenz.memoria.gvgSkill.effects
       .get(memoria)
       .some((effect) => effect.type === "damage")
   ) {
@@ -537,7 +539,7 @@ function damage(
     )
     .otherwise(() => calibration);
 
-  const amount = Lenz.gvgSkill.effects
+  const amount = Lenz.memoria.gvgSkill.effects
     .get(memoria)
     .find(isDamageEffect)?.amount;
 
@@ -555,7 +557,9 @@ function damage(
           .with("extra-large", () => 13.5 / 100)
           .with("large", () => 11.5 / 100)
           .with("medium", () => 10.0 / 100)
-          .otherwise(() => ToBeDefined(Lenz.memoria.shortName.get(memoria))),
+          .otherwise(() =>
+            ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
+          ),
     )
     .when(
       (kind) => kind.includes("範囲"),
@@ -566,7 +570,9 @@ function damage(
           .with("large", () => 10.0 / 100)
           .with("medium", () => 8.5 / 100)
           .with("small", () => 7.0 / 100)
-          .otherwise(() => ToBeDefined(Lenz.memoria.shortName.get(memoria))),
+          .otherwise(() =>
+            ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
+          ),
     )
     .otherwise(() => {
       throw new Error("Invalid kind");
@@ -575,7 +581,10 @@ function damage(
   const support = deck
     .map(
       (memoria) =>
-        [Lenz.memoria.autoSkill.get(memoria), memoria.concentration] as const,
+        [
+          Lenz.memoria.general.autoSkill.get(memoria),
+          memoria.concentration,
+        ] as const,
     )
     .map(([support, concentration]) => {
       const up = support.effects.find((effect) => effect.type === "DamageUp");
@@ -590,7 +599,8 @@ function damage(
 
   const memoriaRate = skillRate * skillLevel;
   const counter =
-    enableCounter && Lenz.gvgSkill.name.get(memoria).includes("カウンター")
+    enableCounter &&
+    Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
       ? 1.5
       : 1.0;
   const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
@@ -619,7 +629,9 @@ function buff(
     }[]
   | undefined {
   if (
-    !Lenz.gvgSkill.effects.get(memoria).some((effect) => effect.type === "buff")
+    !Lenz.memoria.gvgSkill.effects
+      .get(memoria)
+      .some((effect) => effect.type === "buff")
   ) {
     return undefined;
   }
@@ -757,7 +769,7 @@ function buff(
           .map(
             (memoria) =>
               [
-                Lenz.memoria.autoSkill.get(memoria),
+                Lenz.memoria.general.autoSkill.get(memoria),
                 memoria.concentration,
               ] as const,
           )
@@ -777,12 +789,13 @@ function buff(
           })
           .reduce((acc, cur) => acc + cur, 1);
 
-  return Lenz.gvgSkill.effects
+  return Lenz.memoria.gvgSkill.effects
     .get(memoria)
     .filter((effect) => effect.type === "buff")
     .map(({ amount, status }) => {
       const counter =
-        enableCounter && Lenz.gvgSkill.name.get(memoria).includes("カウンター")
+        enableCounter &&
+        Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
           ? 1.5
           : 1.0;
       const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
@@ -795,10 +808,10 @@ function buff(
             .with("extra-large", () => 3.8 / 100)
             .with("super-large", () => 4.27 / 100)
             .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .with("super-ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
@@ -823,10 +836,10 @@ function buff(
             .with("extra-large", () => 3.8 / 100)
             .with("super-large", () => 4.27 / 100)
             .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .with("super-ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
@@ -851,10 +864,10 @@ function buff(
             .with("extra-large", () => 5.22 / 100)
             .with("super-large", () => 5.75) // TODO
             .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // TBD
             .with("super-ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
@@ -879,10 +892,10 @@ function buff(
             .with("extra-large", () => 5.22 / 100)
             .with("super-large", () => 5.75) // TODO
             .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .with("super-ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
@@ -908,13 +921,13 @@ function buff(
               .with("large", () => 4.89 / 100)
               .with("extra-large", () => 5.51 / 100) // 戦場の一番星
               .with("super-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("ultra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("super-ultra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
@@ -940,16 +953,16 @@ function buff(
               .with("medium", () => 5.65 / 100)
               .with("large", () => 6.11 / 100)
               .with("extra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("super-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("ultra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("super-ultra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
@@ -1001,7 +1014,7 @@ function debuff(
     }[]
   | undefined {
   if (
-    !Lenz.gvgSkill.effects
+    !Lenz.memoria.gvgSkill.effects
       .get(memoria)
       .some((effect) => effect.type === "debuff")
   ) {
@@ -1140,7 +1153,7 @@ function debuff(
           .map(
             (memoria) =>
               [
-                Lenz.memoria.autoSkill.get(memoria),
+                Lenz.memoria.general.autoSkill.get(memoria),
                 memoria.concentration,
               ] as const,
           )
@@ -1160,12 +1173,13 @@ function debuff(
           })
           .reduce((acc, cur) => acc + cur, 1);
 
-  return Lenz.gvgSkill.effects
+  return Lenz.memoria.gvgSkill.effects
     .get(memoria)
     .filter((effect) => effect.type === "debuff")
     .map(({ amount, status }) => {
       const counter =
-        enableCounter && Lenz.gvgSkill.name.get(memoria).includes("カウンター")
+        enableCounter &&
+        Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
           ? 1.5
           : 1.0;
       const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
@@ -1177,13 +1191,13 @@ function debuff(
             .with("large", () => 4.18 / 100)
             .with("extra-large", () => 4.71 / 100)
             .with("super-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .with("super-ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
@@ -1196,7 +1210,7 @@ function debuff(
                 support *
                 range *
                 (enableCounter &&
-                Lenz.gvgSkill.name.get(memoria).includes("カウンター")
+                Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
                   ? 1.5
                   : 1.0),
             ),
@@ -1209,13 +1223,13 @@ function debuff(
             .with("large", () => 4.18 / 100)
             .with("extra-large", () => 4.71 / 100)
             .with("super-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .with("super-ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
@@ -1240,10 +1254,10 @@ function debuff(
             .with("extra-large", () => 5.75 / 100)
             .with("super-large", () => 6.2 / 100) // TODO
             .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .with("super-ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
@@ -1268,10 +1282,10 @@ function debuff(
             .with("extra-large", () => 5.75 / 100)
             .with("super-large", () => 6.22 / 100)
             .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .with("super-ultra-large", () =>
-              ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
             .exhaustive();
           const memoriaRate = skillRate * skillLevel;
@@ -1297,13 +1311,13 @@ function debuff(
               .with("large", () => 4.89 / 100)
               .with("extra-large", () => 5.49 / 100)
               .with("super-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("ultra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("super-ultra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
@@ -1329,16 +1343,16 @@ function debuff(
               .with("medium", () => 5.65 / 100)
               .with("large", () => 6.11 / 100)
               .with("extra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("super-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("ultra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .with("super-ultra-large", () =>
-                ToBeDefined(Lenz.memoria.shortName.get(memoria)),
+                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
               ) // 現状存在しない
               .exhaustive();
             const memoriaRate = skillRate * skillLevel;
@@ -1415,7 +1429,7 @@ function recovery(
       .run();
   }
 
-  const skillRate = match(Lenz.gvgSkill.description.get(memoria))
+  const skillRate = match(Lenz.memoria.gvgSkill.description.get(memoria))
     .when(
       (sentence) => sentence.includes("特大回復"),
       () => 13.2 / 100,
@@ -1433,7 +1447,10 @@ function recovery(
   const support = deck
     .map(
       (memoria) =>
-        [Lenz.memoria.autoSkill.get(memoria), memoria.concentration] as const,
+        [
+          Lenz.memoria.general.autoSkill.get(memoria),
+          memoria.concentration,
+        ] as const,
     )
     .map(([support, concentration]) => {
       const up = support.effects.find((effect) => effect.type === "RecoveryUp");
@@ -1448,7 +1465,8 @@ function recovery(
 
   const memoriaRate = skillRate * skillLevel;
   const counter =
-    enableCounter && Lenz.gvgSkill.name.get(memoria).includes("カウンター")
+    enableCounter &&
+    Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
       ? 1.5
       : 1.0;
   const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
@@ -1497,7 +1515,7 @@ function support(
   };
   const map = deck
     .flatMap((memoria) => {
-      return Lenz.autoSkill.effects
+      return Lenz.memoria.autoSkill.effects
         .get(memoria)
         .map(
           (effect) =>
