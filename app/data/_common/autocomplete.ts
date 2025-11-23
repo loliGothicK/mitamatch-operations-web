@@ -4,7 +4,7 @@ import type {
 } from "@codemirror/autocomplete";
 
 export type ComleteCandidate = {
-  normal?: string[];
+  equals?: string[];
   like?: {
     pattern: string[];
     operator: (item: string, pattern: string) => boolean;
@@ -44,11 +44,11 @@ export const makeSchemaCompletionSource =
     if (
       operator === "=" &&
       columnName in map &&
-      map[columnName].normal !== undefined
+      map[columnName].equals !== undefined
     ) {
       return {
         from: from,
-        options: map[columnName].normal.map((val) => ({
+        options: map[columnName].equals.map((val) => ({
           label: val,
           type: "enum",
           boost: 10,

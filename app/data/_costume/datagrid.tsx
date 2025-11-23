@@ -16,7 +16,10 @@ import Link from "@/components/link";
 import { QueryConsle } from "@/data/_common/QueryConsle";
 import { SchemaResolver } from "@/parser/query/filter";
 import { useVisivility } from "@/data/_common/useVisivility";
-import { Tooltip, Typography } from "@mui/material";
+import { Box, Chip, Tooltip, Typography } from "@mui/material";
+import { match } from "ts-pattern";
+import { option } from "fp-ts";
+import { ComleteCandidate } from "@/data/_common/autocomplete";
 
 const columns: GridColDef<Costume>[] = [
   {
@@ -101,11 +104,72 @@ const columns: GridColDef<Costume>[] = [
       </Tooltip>
     ),
   },
+  {
+    field: "specialSkill",
+    headerName: "Special Skill",
+    width: 1000,
+    valueGetter: (_, costume) => costume.specialSkill,
+    renderCell: (params) => (
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        {match(params.row.specialSkill)
+          .with(option.none, () => <></>)
+          .with(
+            { value: { type: "ex" } },
+            ({ value: { name, description } }) => {
+              return (
+                <Tooltip
+                  title={description}
+                  placement="top"
+                  sx={{
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography>{name}</Typography>
+                </Tooltip>
+              );
+            },
+          )
+          .with({ value: { type: "adx" } }, ({ value: { get } }) => {
+            return (
+              <>
+                {get({ limitBreak: 0, isAwakened: true }).map(
+                  ({ name, description }) => {
+                    return (
+                      <Tooltip
+                        key={params.row.name + name}
+                        title={description}
+                        placement="top"
+                        sx={{
+                          alignItems: "center",
+                        }}
+                      >
+                        <Chip label={name} />
+                      </Tooltip>
+                    );
+                  },
+                )}
+              </>
+            );
+          })
+          .exhaustive()}
+      </Box>
+    ),
+  },
 ];
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-const schema = {
+export const schema = {
   costume: [
     "name",
     "type",
@@ -115,6 +179,8 @@ const schema = {
     "spdef",
     "rareSkill.name",
     "rareSkill.desc",
+    "specialSkill.name",
+    "specialSkill.desc",
   ],
 };
 
@@ -158,6 +224,33 @@ const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
   return acc;
 }, {});
 
+const completeCandidates: Record<string, ComleteCandidate> = {
+  type: {
+    equals: [
+      "通常単体",
+      "通常範囲",
+      "特殊単体",
+      "特殊範囲",
+      "支援",
+      "妨害",
+      "回復",
+    ],
+    like: {
+      pattern: ["前衛", "後衛", "通常", "特殊"],
+      operator: (item: string, pattern: string): boolean => {
+        return match(pattern)
+          .with("前衛", () =>
+            ["通常単体", "通常範囲", "特殊単体", "特殊範囲"].includes(item),
+          )
+          .with("後衛", () => ["支援", "妨害", "回復"].includes(item))
+          .with("通常", () => ["通常単体", "通常範囲"].includes(item))
+          .with("特殊", () => ["特殊単体", "特殊範囲"].includes(item))
+          .run();
+      },
+    },
+  },
+};
+
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   const [visivility, setVisivility, visivilityChanged] =
     useVisivility(visivilityAll);
@@ -175,6 +268,7 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
         schema={schema}
         updateVisivilityAction={visivilityChanged}
         updateDataAction={setRows}
+        completion={completeCandidates}
       />
       <DataGrid
         rows={rows}

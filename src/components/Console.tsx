@@ -11,7 +11,7 @@ import {
   autocompletion,
   type CompletionSource,
 } from "@codemirror/autocomplete";
-import { queryLinter } from "@/parser/query/linter";
+import { makeQueryLinter } from "@/parser/query/linter";
 import { makeColumnCompletionSource } from "@/data/_common/autocomplete";
 import { option } from "fp-ts";
 import { iter } from "@/fp-ts-ext/function";
@@ -119,7 +119,7 @@ export default function Console<
       extensions={[
         sql({ dialect: MySQL, schema }),
         myCompletions,
-        queryLinter,
+        makeQueryLinter(schema),
         customKeymap,
       ]}
       onChange={onChange}

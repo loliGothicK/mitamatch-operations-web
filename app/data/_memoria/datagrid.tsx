@@ -130,7 +130,7 @@ const columns: GridColDef<Memoria>[] = [
 
 const paginationModel = { page: 0, pageSize: 10 };
 
-const schema = {
+export const schema = {
   memoria: [
     "name",
     "type",
@@ -228,7 +228,7 @@ const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
 
 const enumMap: Record<string, ComleteCandidate> = {
   type: {
-    normal: [
+    equals: [
       "'通常単体'",
       "'通常範囲'",
       "'特殊単体'",
@@ -252,7 +252,7 @@ const enumMap: Record<string, ComleteCandidate> = {
     },
   },
   attribute: {
-    normal: ["'火'", "'水'", "'風'", "'光'", "'闇'"],
+    equals: ["'火'", "'水'", "'風'", "'光'", "'闇'"],
   },
 };
 
