@@ -8,23 +8,14 @@ import NotFound from "next/dist/client/components/builtin/not-found";
 import { default as MemoriaDetail } from "@/data/_memoria/deital";
 import { default as CostumeDetail } from "@/data/_costume/deital";
 import { bail } from "@/error/error";
-import { z } from "zod";
 import { isLeft, right } from "fp-ts/Either";
+import {parseIntSafe} from "@/parser/common";
+import {either} from "fp-ts";
 
 type Props = {
   params: Promise<{ slug?: string | string[] }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
-
-const cardTypeSchema = z.union([
-  z.literal(1),
-  z.literal(2),
-  z.literal(3),
-  z.literal(4),
-  z.literal(5),
-  z.literal(6),
-  z.literal(7),
-]);
 
 export default async function Page({ params, searchParams }: Props) {
   const { slug } = await params;
@@ -32,11 +23,13 @@ export default async function Page({ params, searchParams }: Props) {
 
   const cardType = match(type)
     .with(undefined, () => right(1 as const))
-    .with(P.string, (type) =>
-      match(cardTypeSchema.safeParse(type))
-        .with({ success: true }, ({ data }) => right(data))
-        .otherwise(() => bail(type, "Invalid card type")),
-    )
+    .with(P.string, (type) => pipe(
+      parseIntSafe(type),
+      either.flatMap(type => match(type)
+        .with(P.number.between(1, 7), () => right(type as 1 | 2 | 3 | 4 | 5 | 6 | 7))
+        .otherwise(() => bail(`${type}`, "Invalid card type"))
+      )
+    ))
     .otherwise((type) => bail(type.join(", "), "Invalid card type"));
 
   if (isLeft(cardType)) {
@@ -44,7 +37,7 @@ export default async function Page({ params, searchParams }: Props) {
   }
 
   return match(slug)
-    .with(undefined, () => <DataPage />)
+    .with(undefined, () => <DataPage dataType={'memoria'}/>)
     .with([P.union("memoria", "order", "costume")], ([slug]) => (
       <DataPage dataType={slug} />
     ))

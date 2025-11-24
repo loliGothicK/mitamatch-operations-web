@@ -31,7 +31,17 @@ const columns: GridColDef<Memoria>[] = [
     }),
     renderCell: (params) => (
       <Link
-        href={`/data/memoria/${encodeURI(params.row.name.full)}?type=${encodeURI(params.row.cardType)}`}
+        href={`/data/memoria/${encodeURI(params.row.name.full)}?type=${
+          match(params.row.cardType)
+            .with('通常単体', () => 1)
+            .with('通常範囲', () => 2)
+            .with('特殊単体', () => 3)
+            .with('特殊範囲', () => 4)
+            .with('支援', () => 5)
+            .with('妨害', () => 6)
+            .with('回復', () => 7)
+            .exhaustive()
+        }`}
       >
         <Image
           src={`/memoria/${params.value.name}.png`}

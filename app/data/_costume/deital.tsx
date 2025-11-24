@@ -346,7 +346,14 @@ function DetailData({ costume }: { costume: Costume }) {
       }}
     >
       {match(costume.specialSkill)
-        .with(option.none, () => <StatusTable costume={costume} />)
+        .with(option.none, () => (
+          <>
+            <Divider flexItem={true} textAlign="left" sx={{ py: 2 }}>
+              {"詳細"}
+            </Divider>
+            <StatusTable costume={costume} />
+          </>
+        ))
         .with({ value: { type: "ex" } }, ({ value }) => (
           <SkillTabs specialSkill={value} costume={costume} />
         ))

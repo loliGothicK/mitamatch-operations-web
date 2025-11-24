@@ -6,9 +6,8 @@ import { Layout } from "@/components/Layout";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { useSearchParams } from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import { type ReactNode, type SyntheticEvent, useState } from "react";
-import { match } from "ts-pattern";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { z } from "zod";
 
@@ -59,28 +58,26 @@ const TABS = [
   },
 ];
 
-const pageSchema = z.enum(["memoria", "order", "costume"]).optional();
+const ROUTES = ['memoria', 'costume', "order"] as const;
+
+const pageSchema = z.enum(["memoria", "costume", "order"]).optional();
 
 export default function DataPage({ dataType }: { dataType?: string }) {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || undefined;
 
   const parsed = pageSchema.safeParse(dataType);
 
   if (!parsed.success) {
+    console.error(parsed.error);
     return <NotFound />;
   }
 
-  const [value, setValue] = useState(
-    match(parsed.data)
-      .with(undefined, () => 0)
-      .with("memoria", () => 0)
-      .with("costume", () => 1)
-      .with("order", () => 2)
-      .exhaustive(),
-  );
+  const [value, setValue] = useState(ROUTES.indexOf(parsed.data || "memoria"));
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
+    router.push(ROUTES[newValue]);
     setValue(newValue);
   };
 

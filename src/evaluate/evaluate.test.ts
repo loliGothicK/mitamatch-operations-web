@@ -10,7 +10,7 @@ test.each(memoriaList)(".evaluate($name.full/$cardType)", (memoiria) => {
     [1000, 1000],
     charmList[0],
     costumeList[0],
-    3,
+    { limitBraek: 3, isAwakened: true },
   );
   expect(result).toBeTruthy();
 });
