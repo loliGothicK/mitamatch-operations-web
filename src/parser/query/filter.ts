@@ -16,6 +16,7 @@ import { P } from "ts-pattern";
 import { Option } from "fp-ts/Option";
 import { separator, transpose } from "@/fp-ts-ext/function";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
+import { Json } from "fp-ts/Json";
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 /**
@@ -227,7 +228,8 @@ export type SchemaResolver<T> = Record<
     readonly accessor: Accessor<T>;
   }
 >;
-type Lit = string | number | boolean;
+type JsonBlob = { data: Json };
+type Lit = string | number | boolean | JsonBlob;
 
 /**
  * 実行可能な式の最小単位。

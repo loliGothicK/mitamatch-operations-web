@@ -11,6 +11,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Checkbox,
   Chip,
   Divider,
   Grid,
@@ -22,10 +23,12 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { Costume, costumeList } from "@/domain/costume/costume";
+import { Adx, Costume, costumeList, Ex } from "@/domain/costume/costume";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { Lenz } from "@/domain/lenz";
 import Info from "@/components/data/Info";
+import { match } from "ts-pattern";
+import { option } from "fp-ts";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -198,13 +201,164 @@ function Basic({ costume }: { costume: Costume }) {
   );
 }
 
-export default function Deital({ lily, job }: { lily: string; job: string }) {
+function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
+  const [value, setValue] = useState(3);
+
+  const handleChange = (_: SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const [isAwakened, setIsAwakened] = useState(true);
+
+  return (
+    <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label="突破 0" {...a11yProps(0)} />
+          <Tab label="突破 1" {...a11yProps(1)} />
+          <Tab label="突破 2" {...a11yProps(2)} />
+          <Tab label="突破 3" {...a11yProps(3)} />
+        </Tabs>
+      </Box>
+      {awakable &&
+        (
+          // 右寄せ
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          >
+            覚醒
+            <Checkbox
+              onChange={() => setIsAwakened(!isAwakened)}
+              defaultChecked
+            />
+          </Box>
+        )}
+      {[0, 1, 2, 3].map((limitBreak) => {
+        return (
+          <CustomTabPanel
+            key={`tab-${limitBreak}`}
+            value={value}
+            index={limitBreak}
+          >
+            {get({ limitBreak, isAwakened }).map(({ name, description }) => {
+              return (
+                <Card>
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      {name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </CustomTabPanel>
+        );
+      })}
+    </Box>
+  );
+}
+
+function ExSkill({ ex }: { ex: Ex }) {
+  return (
+    <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      {ex.skills.map((skill) => (
+        <Card key={skill.name}>
+          <CardContent>
+            <Typography variant="h5" component="div">
+              {skill.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {skill.description}
+            </Typography>
+          </CardContent>
+        </Card>
+      ))}
+    </Box>
+  );
+}
+
+function SkillTabs({
+  specialSkill,
+  costume,
+}: {
+  specialSkill: Adx | Ex;
+  costume: Costume;
+}) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
+  const label = match(specialSkill)
+    .with({ type: "ex" }, () => "EXスキル")
+    .with({ type: "adx" }, () => "ADXスキル")
+    .exhaustive();
+
+  return (
+    <Box
+      sx={{
+        width: "100%",
+      }}
+    >
+      <Divider flexItem={true} textAlign="left" sx={{ py: 2 }}>
+        {"詳細"}
+      </Divider>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label={label} {...a11yProps(0)} />
+          <Tab label="ステータス" {...a11yProps(1)} />
+        </Tabs>
+      </Box>
+      <CustomTabPanel value={value} index={0}>
+        {match(specialSkill)
+          .with({ type: "ex" }, (ex) => <ExSkill ex={ex} />)
+          .with({ type: "adx" }, (adx) => <AdxSkill adx={adx} />)
+          .exhaustive()}
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={1}>
+        <StatusTable costume={costume} />
+      </CustomTabPanel>
+    </Box>
+  );
+}
+
+function DetailData({ costume }: { costume: Costume }) {
+  return (
+    <Box
+      sx={{
+        width: "100%",
+      }}
+    >
+      {match(costume.specialSkill)
+        .with(option.none, () => <StatusTable costume={costume} />)
+        .with({ value: { type: "ex" } }, ({ value }) => (
+          <SkillTabs specialSkill={value} costume={costume} />
+        ))
+        .with({ value: { type: "adx" } }, ({ value }) => (
+          <SkillTabs specialSkill={value} costume={costume} />
+        ))
+        .exhaustive()}
+    </Box>
+  );
+}
+
+export default function Deital({ lily, job }: { lily: string; job: string }) {
   const costume = costumeList.find(
     (costume) => costume.name === `${lily}/${job}`,
   );
@@ -234,31 +388,7 @@ export default function Deital({ lily, job }: { lily: string; job: string }) {
               {"レアスキル"}
             </Divider>
             <RareSkill costume={costume} />
-            <Box
-              sx={{
-                width: "100%",
-              }}
-            >
-              <Divider flexItem={true} textAlign="left" sx={{ py: 2 }}>
-                {"詳細"}
-              </Divider>
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="basic tabs example"
-                >
-                  <Tab label="スキル的なもの" {...a11yProps(0)} />
-                  <Tab label="ステータス的なもの" {...a11yProps(1)} />
-                </Tabs>
-              </Box>
-              <CustomTabPanel value={value} index={0}>
-                Item One
-              </CustomTabPanel>
-              <CustomTabPanel value={value} index={1}>
-                <StatusTable costume={costume} />
-              </CustomTabPanel>
-            </Box>
+            <DetailData costume={costume} />
           </Grid>
           <Grid size={4}>
             <Image

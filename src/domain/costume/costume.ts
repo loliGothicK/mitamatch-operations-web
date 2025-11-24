@@ -5,16 +5,6 @@ import { match, P } from "ts-pattern";
 import { Option } from "fp-ts/Option";
 import { option } from "fp-ts";
 
-const exSchema = z.object({ name: z.string(), description: z.string() });
-const adxSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  requiredLimitBreak: z
-    .union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)])
-    .readonly(),
-  requiresAwakening: z.boolean().readonly(),
-});
-
 const costumeSchema = z.object({
   id: z.number().readonly(),
   name: z.string().readonly(),
@@ -75,24 +65,37 @@ const costumeSchema = z.object({
     )
     .readonly(),
   specialSkills: z
-    .union([z.array(adxSchema), z.tuple([exSchema.readonly()])])
+    .array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        requiredLimitBreak: z
+          .union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)])
+          .optional()
+          .readonly(),
+        requiresAwakening: z.boolean().optional().readonly(),
+      }),
+    )
     .optional()
     .nullable()
     .readonly(),
 });
 
-type Ex = {
+export type Ex = {
   type: "ex";
-  name: string;
-  description: string;
+  skills: readonly {
+    name: string;
+    description: string;
+  }[];
 };
 
-type Adx = {
+export type Adx = {
   type: "adx";
   get: (opt: { limitBreak: number; isAwakened: boolean }) => {
     name: string;
     description: string;
   }[];
+  awakable: boolean;
 };
 
 export type Costume = Omit<
@@ -118,11 +121,10 @@ export const costumeList: Costume[] = costumeData.data.map((costume) => {
     specialSkill: match(specialSkills)
       .with(P.nullish, () => option.none)
       .with([], () => option.none)
-      .with([P._], ([ex]) =>
+      .with(P.array({ requiredLimitBreak: 0 }), (ex) =>
         option.of({
           type: "ex" as const,
-          name: ex.name,
-          description: ex.description,
+          skills: ex,
         }),
       )
       .otherwise((adx) =>
@@ -146,6 +148,7 @@ export const costumeList: Costume[] = costumeData.data.map((costume) => {
               description: skill.description,
             }));
           },
+          awakable: adx.some((skill) => skill.requiresAwakening),
         }),
       ),
   };

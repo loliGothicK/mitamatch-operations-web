@@ -142,11 +142,16 @@ function parseSpecialSkillEffect(
         match(special)
           .with(
             { type: "ex" },
-            ({ description }): ValidateResult<SpSkikkEff> => {
+            ({ skills }): ValidateResult<SpSkikkEff> => {
               return pipe(
-                parseEffectUp(description),
-                either.map(
-                  ({ attribute, effect }) => new Map([[attribute, [effect]]]),
+                skills.map(({ description }) => parseEffectUp(description)),
+                separator,
+                either.map((effects) =>
+                  effects.reduce(
+                    (acc, { attribute, effect }) =>
+                      acc.set(attribute, [effect, ...(acc.get(attribute) ?? [])]),
+                    new Map(),
+                  ),
                 ),
               );
             },

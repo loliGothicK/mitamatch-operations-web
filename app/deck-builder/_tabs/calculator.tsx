@@ -277,7 +277,9 @@ export function Calculator() {
           return (
             isSome(costume.specialSkill) &&
             match(costume.specialSkill.value)
-              .with({ type: "ex" }, ({ name }) => name.includes(option))
+              .with({ type: "ex" }, ({ skills }) =>
+                skills.some(({ name }) => name.includes(option)),
+              )
               .with({ type: "adx" }, (adx) =>
                 adx
                   .get({ limitBreak: 3, isAwakened: true })
@@ -295,7 +297,9 @@ export function Calculator() {
       title: costume.name,
       desc: match(costume.specialSkill)
         .with(option.none, () => "")
-        .with({ value: { type: "ex" } }, ({ value: { name } }) => name)
+        .with({ value: { type: "ex" } }, ({ value: { skills } }) =>
+          skills.map(({ name }) => name).join("/"),
+        )
         .with({ value: { type: "adx" } }, ({ value: { get } }) =>
           get({ limitBreak: 3, isAwakened: true })
             .map(({ name }) => name)

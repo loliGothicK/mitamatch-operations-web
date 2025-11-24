@@ -120,25 +120,20 @@ const columns: GridColDef<Costume>[] = [
       >
         {match(params.row.specialSkill)
           .with(option.none, () => <></>)
-          .with(
-            { value: { type: "ex" } },
-            ({ value: { name, description } }) => {
-              return (
-                <Tooltip
-                  title={description}
-                  placement="top"
-                  sx={{
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography>{name}</Typography>
-                </Tooltip>
-              );
-            },
-          )
+          .with({ value: { type: "ex" } }, ({ value: { skills } }) => {
+            return skills.map(({ name, description }) => (
+              <Tooltip
+                key={params.row.name + name}
+                title={description}
+                placement="top"
+                sx={{
+                  alignItems: "center",
+                }}
+              >
+                <Chip label={name} />
+              </Tooltip>
+            ));
+          })
           .with({ value: { type: "adx" } }, ({ value: { get } }) => {
             return (
               <>
@@ -179,8 +174,7 @@ export const schema = {
     "spdef",
     "rareSkill.name",
     "rareSkill.desc",
-    "specialSkill.name",
-    "specialSkill.desc",
+    "specialSkill",
   ],
 };
 
