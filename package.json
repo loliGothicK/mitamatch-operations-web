@@ -109,7 +109,7 @@
     "typescript": "5.9.3",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "4.0.13",
-    "zod": "4.1.12"
+    "zod": "4.1.13"
   },
   "volta": {
     "node": "24.11.1"
