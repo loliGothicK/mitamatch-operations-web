@@ -70,7 +70,7 @@ export default function Console<
 }: {
   type: keyof Schema;
   schema: Schema;
-  completions?: CompletionSource[];
+  completions?: readonly CompletionSource[];
   initialeValue?: string;
   execute: () => void;
   onChangeBack: (value: string) => void;

@@ -10,7 +10,7 @@ import { QueryConsle } from "@/data/_common/QueryConsle";
 import { Clazz, SchemaResolver } from "@/parser/query/filter";
 import { useVisivility } from "@/data/_common/useVisivility";
 import { Box, Chip, Tooltip, Typography } from "@mui/material";
-import { match } from "ts-pattern";
+import { match, P } from "ts-pattern";
 import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
@@ -232,7 +232,21 @@ const completeCandidates: Record<string, ComleteCandidate> = {
   },
   specialSkill: {
     like: {
-      pattern: ["EX", "ADX", "Awakable"],
+      pattern: [
+        "EX",
+        "ADX",
+        "覚醒",
+        "火",
+        "水",
+        "風",
+        "光",
+        "闇",
+        "対火",
+        "対水",
+        "対風",
+        "対光",
+        "対闇",
+      ],
       item: "clazz",
       operator: ({ data }: Clazz, pattern: string): boolean => {
         return pattern
@@ -242,9 +256,30 @@ const completeCandidates: Record<string, ComleteCandidate> = {
             match(query)
               .with("EX", () => isSome(data) && data.value.type === "ex")
               .with("ADX", () => isSome(data) && data.value.type === "adx")
-              .with(
-                "Awakable",
-                () => isSome(data) && data.value.type === "adx" && data.value.awakable,
+              .with("覚醒", () => isSome(data) && data.value.type === "adx" && data.value.awakable)
+              .with(P.union("火", "水", "風", "光", "闇"), (attribute) =>
+                match(data)
+                  .with({ value: { type: "ex", skills: P._.select() } }, (skills) =>
+                    skills.some(({ name }) => name.includes(`${attribute}属性メモリア効果増加`)),
+                  )
+                  .with({ value: { type: "adx", get: P._.select() } }, (get) =>
+                    get({ limitBreak: 3, isAwakened: true }).some(({ name }) =>
+                      name.includes(`${attribute}属性メモリア効果増加`),
+                    ),
+                  )
+                  .otherwise(() => false),
+              )
+              .with(P.union("対火", "対水", "対風", "対光", "対闇"), (attribute) =>
+                match(data)
+                  .with({ value: { type: "ex", skills: P._.select() } }, (skills) =>
+                    skills.some(({ name }) => name.includes(`${attribute.replace('対', '')}属性メモリア効果耐性`)),
+                  )
+                  .with({ value: { type: "adx", get: P._.select() } }, (get) =>
+                    get({ limitBreak: 3, isAwakened: true }).some(({ name }) =>
+                      name.includes(`${attribute.replace('対', '')}属性メモリア効果耐性`),
+                    ),
+                  )
+                  .otherwise(() => false),
               )
               .run(),
           );
@@ -263,7 +298,7 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
         type={"costume"}
         origin={dataSource.toReversed()}
         resolver={resolver}
-        initial={initialQuery || "select * from costume where `specialSkill` like 'EX, Awakable';"}
+        initial={initialQuery || "select * from costume where `specialSkill` like 'ADX, 覚醒';"}
         schema={schema}
         updateVisivilityAction={visivilityChanged}
         updateDataAction={setRows}
