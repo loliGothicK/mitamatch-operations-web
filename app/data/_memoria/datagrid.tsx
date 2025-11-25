@@ -218,7 +218,7 @@ const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
 
 const enumMap: Record<string, ComleteCandidate> = {
   type: {
-    equals: ["'通常単体'", "'通常範囲'", "'特殊単体'", "'特殊範囲'", "'支援'", "'妨害'", "'回復'"],
+    equals: ["通常単体", "通常範囲", "特殊単体", "特殊範囲", "支援", "妨害", "回復"],
     like: {
       pattern: ["前衛", "後衛", "通常", "特殊"],
       item: "string",
@@ -233,7 +233,7 @@ const enumMap: Record<string, ComleteCandidate> = {
     },
   },
   attribute: {
-    equals: ["'火'", "'水'", "'風'", "'光'", "'闇'"],
+    equals: ["火", "水", "風", "光", "闇"],
   },
 };
 
