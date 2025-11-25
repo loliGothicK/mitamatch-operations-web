@@ -77,7 +77,7 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
   const [value, setValue] = useState(ROUTES.indexOf(parsed.data || "memoria"));
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
-    router.push(ROUTES[newValue]);
+    router.push(`/data/${ROUTES[newValue]}`);
     setValue(newValue);
   };
 
