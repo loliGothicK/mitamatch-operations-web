@@ -9,10 +9,7 @@ const sql = neon(process.env.POSTGRES_URL!);
 const db = drizzle({ client: sql });
 
 export async function getUser(discordId: string) {
-  const result = await db
-    .select()
-    .from(users)
-    .where(eq(users.discordId, discordId));
+  const result = await db.select().from(users).where(eq(users.discordId, discordId));
 
   return result[0];
 }
@@ -30,10 +27,7 @@ export async function getDeckFullUrl(short: string) {
 
 // タイムラインの短縮URLがDBに存在する場合、タイムラインのフルURLを取得する
 export async function getTimelineFullUrl(short: string) {
-  const result = await db
-    .select()
-    .from(timelines)
-    .where(eq(timelines.short, short));
+  const result = await db.select().from(timelines).where(eq(timelines.short, short));
 
   if (result.length === 0) {
     return null;

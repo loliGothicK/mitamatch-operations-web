@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
 import { flow, pipe } from "fp-ts/function";
 import { sqlToModel } from "@/parser/query/sql";
 import { either } from "fp-ts";
@@ -19,10 +13,7 @@ import Console from "@/components/Console";
 import { isSome } from "fp-ts/Option";
 import build, { SchemaResolver } from "@/parser/query/filter";
 import { isRight } from "fp-ts/Either";
-import {
-  ComleteCandidate,
-  makeSchemaCompletionSource,
-} from "@/data/_common/autocomplete";
+import { ComleteCandidate, makeSchemaCompletionSource } from "@/data/_common/autocomplete";
 
 type ToastState = {
   open: boolean;
@@ -98,14 +89,10 @@ export function QueryConsle<
           if (isRight(pred)) {
             const { where, orderBy } = pred.right;
             if (isSome(where)) {
-              updateDataAction(() =>
-                origin.filter(where.value.apply.bind(where.value)),
-              );
+              updateDataAction(() => origin.filter(where.value.apply.bind(where.value)));
             }
             if (isSome(orderBy)) {
-              updateDataAction((data) =>
-                data.sort(orderBy.value.compare.bind(orderBy.value)),
-              );
+              updateDataAction((data) => data.sort(orderBy.value.compare.bind(orderBy.value)));
             }
             if (!first) {
               setState(
@@ -120,9 +107,7 @@ export function QueryConsle<
             setState(
               flow(
                 openLens.set(true),
-                messageLens.set(
-                  `Query Build Error: ${pred.left.map((e) => e.msg).join("\n")}`,
-                ),
+                messageLens.set(`Query Build Error: ${pred.left.map((e) => e.msg).join("\n")}`),
                 severityLens.set("error"),
               ),
             );
@@ -133,9 +118,7 @@ export function QueryConsle<
           setState(
             flow(
               openLens.set(true),
-              messageLens.set(
-                `SQL Parse Error: ${err.map((e) => e.msg).join("\n")}`,
-              ),
+              messageLens.set(`SQL Parse Error: ${err.map((e) => e.msg).join("\n")}`),
               severityLens.set("error"),
             ),
           );

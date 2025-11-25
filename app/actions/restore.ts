@@ -11,14 +11,8 @@ type OrderWithPic = Order & {
   sub?: string;
 };
 
-export async function restore(_: {
-  target: "deck";
-  param: string;
-}): Promise<Unit>;
-export async function restore(_: {
-  target: "timeline";
-  param: string;
-}): Promise<OrderWithPic[]>;
+export async function restore(_: { target: "deck"; param: string }): Promise<Unit>;
+export async function restore(_: { target: "timeline"; param: string }): Promise<OrderWithPic[]>;
 export async function restore({
   target,
   param,

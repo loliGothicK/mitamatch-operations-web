@@ -1,25 +1,19 @@
 import Paper from "@mui/material/Paper";
-import {
-  type Costume,
-  costumeList as dataSource,
-} from "@/domain/costume/costume";
+import { type Costume, costumeList as dataSource } from "@/domain/costume/costume";
 
-import {
-  DataGrid,
-  type GridColDef,
-  type GridColumnVisibilityModel,
-} from "@mui/x-data-grid";
+import { DataGrid, type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "@/components/link";
 import { QueryConsle } from "@/data/_common/QueryConsle";
-import { SchemaResolver } from "@/parser/query/filter";
+import { Clazz, SchemaResolver } from "@/parser/query/filter";
 import { useVisivility } from "@/data/_common/useVisivility";
 import { Box, Chip, Tooltip, Typography } from "@mui/material";
 import { match } from "ts-pattern";
 import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
+import { isSome } from "fp-ts/lib/Option";
 
 const columns: GridColDef<Costume>[] = [
   {
@@ -137,22 +131,20 @@ const columns: GridColDef<Costume>[] = [
           .with({ value: { type: "adx" } }, ({ value: { get } }) => {
             return (
               <>
-                {get({ limitBreak: 0, isAwakened: true }).map(
-                  ({ name, description }) => {
-                    return (
-                      <Tooltip
-                        key={params.row.name + name}
-                        title={description}
-                        placement="top"
-                        sx={{
-                          alignItems: "center",
-                        }}
-                      >
-                        <Chip label={name} />
-                      </Tooltip>
-                    );
-                  },
-                )}
+                {get({ limitBreak: 0, isAwakened: true }).map(({ name, description }) => {
+                  return (
+                    <Tooltip
+                      key={params.row.name + name}
+                      title={description}
+                      placement="top"
+                      sx={{
+                        alignItems: "center",
+                      }}
+                    >
+                      <Chip label={name} />
+                    </Tooltip>
+                  );
+                })}
               </>
             );
           })
@@ -211,6 +203,10 @@ const resolver: SchemaResolver<Costume> = {
     type: "string",
     accessor: (costume: Costume) => costume.rareSkill.description,
   },
+  specialSkill: {
+    type: "clazz",
+    accessor: (costume: Costume) => ({ data: costume.specialSkill }),
+  },
 };
 
 const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
@@ -220,22 +216,13 @@ const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
 
 const completeCandidates: Record<string, ComleteCandidate> = {
   type: {
-    equals: [
-      "通常単体",
-      "通常範囲",
-      "特殊単体",
-      "特殊範囲",
-      "支援",
-      "妨害",
-      "回復",
-    ],
+    equals: ["通常単体", "通常範囲", "特殊単体", "特殊範囲", "支援", "妨害", "回復"],
     like: {
       pattern: ["前衛", "後衛", "通常", "特殊"],
+      item: "string",
       operator: (item: string, pattern: string): boolean => {
         return match(pattern)
-          .with("前衛", () =>
-            ["通常単体", "通常範囲", "特殊単体", "特殊範囲"].includes(item),
-          )
+          .with("前衛", () => ["通常単体", "通常範囲", "特殊単体", "特殊範囲"].includes(item))
           .with("後衛", () => ["支援", "妨害", "回復"].includes(item))
           .with("通常", () => ["通常単体", "通常範囲"].includes(item))
           .with("特殊", () => ["特殊単体", "特殊範囲"].includes(item))
@@ -243,11 +230,31 @@ const completeCandidates: Record<string, ComleteCandidate> = {
       },
     },
   },
+  specialSkill: {
+    like: {
+      pattern: ["EX", "ADX", "Awakable"],
+      item: "clazz",
+      operator: ({ data }: Clazz, pattern: string): boolean => {
+        return pattern
+          .replaceAll(" ", "")
+          .split(",")
+          .every((query) =>
+            match(query)
+              .with("EX", () => isSome(data) && data.value.type === "ex")
+              .with("ADX", () => isSome(data) && data.value.type === "adx")
+              .with(
+                "Awakable",
+                () => isSome(data) && data.value.type === "adx" && data.value.awakable,
+              )
+              .run(),
+          );
+      },
+    },
+  },
 };
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
-  const [visivility, setVisivility, visivilityChanged] =
-    useVisivility(visivilityAll);
+  const [visivility, setVisivility, visivilityChanged] = useVisivility(visivilityAll);
   const [rows, setRows] = useState<Costume[]>(dataSource.toReversed());
 
   return (
@@ -256,9 +263,7 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
         type={"costume"}
         origin={dataSource.toReversed()}
         resolver={resolver}
-        initial={
-          initialQuery || "select * from costume where `type` = '特殊範囲';"
-        }
+        initial={initialQuery || "select * from costume where `specialSkill` like 'EX, Awakable';"}
         schema={schema}
         updateVisivilityAction={visivilityChanged}
         updateDataAction={setRows}

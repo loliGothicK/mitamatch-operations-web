@@ -72,16 +72,12 @@ const unitParseSafe = fromThrowable(
 
 const deckMap = new Map(memoriaList.map((memoria) => [memoria.id, memoria]));
 
-const restore = (
-  data: [number, number][],
-): Result<MemoriaWithConcentration[], number[]> => {
+const restore = (data: [number, number][]): Result<MemoriaWithConcentration[], number[]> => {
   const cov = data.map(([i, c]) => [deckMap.get(i), c, i] as const);
   const { left, right } = pipe(
     cov,
     partition(
-      (
-        item,
-      ): item is [Memoria, MemoriaWithConcentration["concentration"], number] =>
+      (item): item is [Memoria, MemoriaWithConcentration["concentration"], number] =>
         item[0] !== undefined,
     ),
   );
@@ -99,26 +95,22 @@ export function decodeDeck(encoded: string): Result<Unit, string> {
   return atobSafe(encoded)
     .andThen(jsonParseSafe)
     .andThen(unitParseSafe)
-    .andThen(
-      ({ sw, deck, legendaryDeck }: EncodedUnit): Result<Unit, string> => {
-        const restoreLegendaryDeckResult = restore(legendaryDeck);
-        const restoreDeckResult = restore(deck);
-        if (restoreLegendaryDeckResult.isOk() && restoreDeckResult.isOk()) {
-          return ok({
-            sw,
-            legendaryDeck: restoreLegendaryDeckResult.value,
-            deck: restoreDeckResult.value,
-          });
-        }
-        const notFound = [
-          ...(restoreLegendaryDeckResult.isErr()
-            ? restoreLegendaryDeckResult.error
-            : []),
-          ...(restoreDeckResult.isErr() ? restoreDeckResult.error : []),
-        ];
-        return err(`${notFound} are not found in memoria.json`);
-      },
-    );
+    .andThen(({ sw, deck, legendaryDeck }: EncodedUnit): Result<Unit, string> => {
+      const restoreLegendaryDeckResult = restore(legendaryDeck);
+      const restoreDeckResult = restore(deck);
+      if (restoreLegendaryDeckResult.isOk() && restoreDeckResult.isOk()) {
+        return ok({
+          sw,
+          legendaryDeck: restoreLegendaryDeckResult.value,
+          deck: restoreDeckResult.value,
+        });
+      }
+      const notFound = [
+        ...(restoreLegendaryDeckResult.isErr() ? restoreLegendaryDeckResult.error : []),
+        ...(restoreDeckResult.isErr() ? restoreDeckResult.error : []),
+      ];
+      return err(`${notFound} are not found in memoria.json`);
+    });
 }
 
 export function encodeTimeline(timeline: OrderWithPic[]) {
@@ -186,9 +178,7 @@ const restoreTimeline = (data: Timeline): Result<OrderWithPic[], string> => {
       );
 };
 
-export function decodeTimeline(
-  encoded: string,
-): Result<OrderWithPic[], string> {
+export function decodeTimeline(encoded: string): Result<OrderWithPic[], string> {
   return atobSafe(encoded)
     .andThen(jsonParseSafe)
     .andThen(timelineParseSafe)

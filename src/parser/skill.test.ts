@@ -34,29 +34,26 @@ test.each(data)(".parseSkill($name)", (memoria) => {
 
   describe("damage effect should exists only one exactly", () => {
     const damageEffects = skill.right.effects.filter(isDamageEffect);
-    expect(damageEffects.length).toBe(
-      ["支援", "妨害", "回復"].includes(memoria.cardType) ? 0 : 1,
-    );
+    expect(damageEffects.length).toBe(["支援", "妨害", "回復"].includes(memoria.cardType) ? 0 : 1);
   });
 });
 
 // test for 極大ダメージ
-test.each(
-  data.filter(({ gvgSkill }) => gvgSkill.description.includes("極大ダメージ")),
-)(".parseSkill($name)/極大ダメージ", (memoria) => {
-  expect(
-    parseSkill({
-      memoriaName: memoria.name,
-      cardType: cardType(memoria.cardType),
-      skill: memoria.gvgSkill,
-    }),
-  ).toEqual(
-    right(
-      expect.objectContaining({
-        effects: expect.arrayContaining([
-          expect.objectContaining({ amount: "ultra-large" }),
-        ]),
+test.each(data.filter(({ gvgSkill }) => gvgSkill.description.includes("極大ダメージ")))(
+  ".parseSkill($name)/極大ダメージ",
+  (memoria) => {
+    expect(
+      parseSkill({
+        memoriaName: memoria.name,
+        cardType: cardType(memoria.cardType),
+        skill: memoria.gvgSkill,
       }),
-    ),
-  );
-});
+    ).toEqual(
+      right(
+        expect.objectContaining({
+          effects: expect.arrayContaining([expect.objectContaining({ amount: "ultra-large" })]),
+        }),
+      ),
+    );
+  },
+);

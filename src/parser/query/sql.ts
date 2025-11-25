@@ -60,34 +60,22 @@ function parseExpr(
   return match(expr)
     .with(
       {
-        type: P.union(
-          "param",
-          "function",
-          "case",
-          "aggr_func",
-          "cast",
-          "interval",
-        ),
+        type: P.union("param", "function", "case", "aggr_func", "cast", "interval"),
       },
       ({ type }) => toValidated(bail(type, "unsupported expression type")),
     )
-    .with(
-      { type: "binary_expr" },
-      (binary): Validated<MitamaError, BinaryExpr> => {
-        if (isBinary(binary)) {
-          return sequenceS(ap)({
-            type: right("binary_expr" as const),
-            lhs: parseExpr(binary.left),
-            operator: right(binary.operator),
-            rhs: parseExpr(binary.right),
-          });
-        } else {
-          return toValidated(
-            bail("binary_expr", "unsupported expression type"),
-          );
-        }
-      },
-    )
+    .with({ type: "binary_expr" }, (binary): Validated<MitamaError, BinaryExpr> => {
+      if (isBinary(binary)) {
+        return sequenceS(ap)({
+          type: right("binary_expr" as const),
+          lhs: parseExpr(binary.left),
+          operator: right(binary.operator),
+          rhs: parseExpr(binary.right),
+        });
+      } else {
+        return toValidated(bail("binary_expr", "unsupported expression type"));
+      }
+    })
     .with({ type: "expr_list" }, (list) => {
       if (isExpressionValueArray(list.value)) {
         return separator(
@@ -102,10 +90,7 @@ function parseExpr(
                   )
                   .otherwise(() =>
                     toValidated(
-                      bail(
-                        "expr_list",
-                        "binary expression in exprssion list is not supported.",
-                      ),
+                      bail("expr_list", "binary expression in exprssion list is not supported."),
                     ),
                   ),
               ),
@@ -116,14 +101,10 @@ function parseExpr(
         return toValidated(bail("expr_list", "unsupported expression list"));
       }
     })
-    .with({ type: "expr" }, () =>
-      toValidated(bail("expr", "unsupported expression type")),
-    )
+    .with({ type: "expr" }, () => toValidated(bail("expr", "unsupported expression type")))
     .with({ type: "column_ref" }, (column) =>
       match(column)
-        .with({ value: P._ }, ({ value }) =>
-          right({ type: "field" as const, value: value }),
-        )
+        .with({ value: P._ }, ({ value }) => right({ type: "field" as const, value: value }))
         .with({ column: P._ }, ({ column }) =>
           match(column)
             .with({ expr: P._ }, ({ expr: { type, value } }) =>
@@ -131,24 +112,13 @@ function parseExpr(
                 .with("backticks_quote_string", () =>
                   right({ type: "field" as const, value: value as string }),
                 )
-                .with("string", () =>
-                  right({ type: "value" as const, value: value as string }),
-                )
-                .with("default", () =>
-                  right({ type: "field" as const, value: value as string }),
-                )
+                .with("string", () => right({ type: "value" as const, value: value as string }))
+                .with("default", () => right({ type: "field" as const, value: value as string }))
                 .otherwise(() =>
-                  toValidated(
-                    bail(
-                      type,
-                      `unsupported VALUE TYPE with \`${value}: ${type}\``,
-                    ),
-                  ),
+                  toValidated(bail(type, `unsupported VALUE TYPE with \`${value}: ${type}\``)),
                 ),
             )
-            .otherwise((column) =>
-              right({ type: "field" as const, value: column as string }),
-            ),
+            .otherwise((column) => right({ type: "field" as const, value: column as string })),
         )
         .exhaustive(),
     )
@@ -176,12 +146,7 @@ function parseWhere(
     .otherwise((where) =>
       match(where)
         .with({ type: "function" }, () =>
-          toValidated(
-            bail(
-              where.type,
-              "SQL Functions are not supported in WHERE clause.",
-            ),
-          ),
+          toValidated(bail(where.type, "SQL Functions are not supported in WHERE clause.")),
         )
         .otherwise(({ left, operator, right }) =>
           pipe(
@@ -192,9 +157,7 @@ function parseWhere(
     );
 }
 
-function parseOrderBy(
-  orderby: OrderBy[] | null,
-): Validated<MitamaError, Option<OrderByExpr[]>> {
+function parseOrderBy(orderby: OrderBy[] | null): Validated<MitamaError, Option<OrderByExpr[]>> {
   return match(orderby)
     .with(null, () => right(option.none))
     .otherwise((orderby) =>
@@ -214,9 +177,7 @@ function parseOrderBy(
 
 type WhiteList = Set<GridColDef["field"]>;
 
-export function sqlToModel(
-  sql: string,
-): Validated<MitamaError, [WhiteList, ParseResult]> {
+export function sqlToModel(sql: string): Validated<MitamaError, [WhiteList, ParseResult]> {
   const ast = fromThrowable(parser.astify.bind(parser))(sql, {
     database: "MySQL",
   });

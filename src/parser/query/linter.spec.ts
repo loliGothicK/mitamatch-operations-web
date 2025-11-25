@@ -1,12 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { EditorState } from "@codemirror/state";
 import { sql } from "@codemirror/lang-sql";
-import {
-  analyzeQueryStructure,
-  checkCommandPermissions,
-  validateSchema,
-  DbSchema,
-} from "./linter";
+import { analyzeQueryStructure, checkCommandPermissions, validateSchema, DbSchema } from "./linter";
 import { syntaxTree } from "@codemirror/language";
 
 // for debug
@@ -33,15 +28,12 @@ const TEST_SCHEMA: DbSchema = {
 const ALLOWED = new Set(["select", "with"]);
 
 // State生成ヘルパー
-const mkState = (doc: string) =>
-  EditorState.create({ doc, extensions: [sql()] });
+const mkState = (doc: string) => EditorState.create({ doc, extensions: [sql()] });
 
 describe("SQL Linter Logic", () => {
   describe("analyzeQueryStructure (Context Building)", () => {
     it("extracts CTEs correctly", () => {
-      const state = mkState(
-        "WITH cte1 AS (SELECT 1), cte2 AS (SELECT 2) SELECT * FROM cte1",
-      );
+      const state = mkState("WITH cte1 AS (SELECT 1), cte2 AS (SELECT 2) SELECT * FROM cte1");
       const ctx = analyzeQueryStructure(state);
 
       expect(ctx.definedCTEs.has("cte1")).toBe(true);
@@ -49,9 +41,7 @@ describe("SQL Linter Logic", () => {
     });
 
     it("extracts Aliases correctly", () => {
-      const state = mkState(
-        "SELECT * FROM USERS u JOIN ORDERS o ON u.id = o.id",
-      );
+      const state = mkState("SELECT * FROM USERS u JOIN ORDERS o ON u.id = o.id");
       const ctx = analyzeQueryStructure(state);
 
       expect(ctx.aliasMap.get("u")).toBe("users");

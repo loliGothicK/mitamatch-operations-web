@@ -14,9 +14,7 @@ export const iter = <T>(a: Option<T>) =>
 
 export type Flatten<T> = T extends unknown[] ? T : T[];
 
-export const separator = <E, T>(
-  seq: readonly Either<E, T>[],
-): Either<Flatten<E>, Flatten<T>> => {
+export const separator = <E, T>(seq: readonly Either<E, T>[]): Either<Flatten<E>, Flatten<T>> => {
   const left = seq.filter(isLeft).map((l) => l.left);
   const right = seq.filter(either.isRight).map((r) => r.right);
   return left.length === 0
@@ -33,12 +31,8 @@ const isEither = <T, E>(
   m: Option<Either<E, T>> | Either<E, Option<T>>,
 ): m is Either<E, Option<T>> => m._tag === "Right" || m._tag === "Left";
 
-export function transpose<E, T>(
-  input: Option<Either<E, T>>,
-): Either<E, Option<T>>;
-export function transpose<E, T>(
-  input: Either<E, Option<T>>,
-): Option<Either<E, T>>;
+export function transpose<E, T>(input: Option<Either<E, T>>): Either<E, Option<T>>;
+export function transpose<E, T>(input: Either<E, Option<T>>): Option<Either<E, T>>;
 export function transpose<E, T>(
   input: Option<Either<E, T>> | Either<E, Option<T>>,
 ): Either<E, Option<T>> | Option<Either<E, T>> {

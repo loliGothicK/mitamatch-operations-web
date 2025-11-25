@@ -6,16 +6,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 
 import { CheckBoxItem } from "@/components/deck-builder/CheckBoxItem";
-import {
-  currentRoleFilterAtom,
-  elementFilterAtom,
-  roleFilterAtom,
-} from "@/jotai/memoriaAtoms";
-import {
-  type FilterType,
-  elementFilter,
-  roleFilterMap,
-} from "@/types/filterType";
+import { currentRoleFilterAtom, elementFilterAtom, roleFilterAtom } from "@/jotai/memoriaAtoms";
+import { type FilterType, elementFilter, roleFilterMap } from "@/types/filterType";
 import { elementFilterMap } from "@/components/deck-builder/Details";
 
 function RoleCheckbox() {
@@ -29,22 +21,16 @@ function RoleCheckbox() {
         control={
           <Checkbox
             checked={filter.length === currentRoleFilter.length}
-            indeterminate={
-              filter.length > 0 && filter.length < currentRoleFilter.length
-            }
+            indeterminate={filter.length > 0 && filter.length < currentRoleFilter.length}
             onChange={() => {
               setFilter((prev) => {
                 if (filter.length === currentRoleFilter.length) {
                   return prev.filter(
-                    (v) =>
-                      !(currentRoleFilter as readonly FilterType[]).includes(v),
+                    (v) => !(currentRoleFilter as readonly FilterType[]).includes(v),
                   );
                 }
                 return [
-                  ...prev.filter(
-                    (v) =>
-                      !(currentRoleFilter as readonly FilterType[]).includes(v),
-                  ),
+                  ...prev.filter((v) => !(currentRoleFilter as readonly FilterType[]).includes(v)),
                   ...currentRoleFilter,
                 ];
               });
@@ -85,20 +71,14 @@ function ElementCheckbox() {
         control={
           <Checkbox
             checked={filter.length === elementFilter.length}
-            indeterminate={
-              filter.length > 0 && filter.length < elementFilter.length
-            }
+            indeterminate={filter.length > 0 && filter.length < elementFilter.length}
             onChange={() => {
               setFilter((prev) => {
                 if (filter.length === elementFilter.length) {
-                  return prev.filter(
-                    (v) => !(elementFilter as readonly string[]).includes(v),
-                  );
+                  return prev.filter((v) => !(elementFilter as readonly string[]).includes(v));
                 }
                 return [
-                  ...prev.filter(
-                    (v) => !(elementFilter as readonly string[]).includes(v),
-                  ),
+                  ...prev.filter((v) => !(elementFilter as readonly string[]).includes(v)),
                   ...elementFilter,
                 ];
               });

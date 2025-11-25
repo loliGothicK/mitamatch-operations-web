@@ -6,8 +6,6 @@ import { right } from "fp-ts/Either";
 test.each(data.filter((memoria) => "legendarySkill" in memoria))(
   ".parseLegendary($name)",
   ({ legendarySkill, name }) => {
-    expect(parseLegendary(legendarySkill, name)).toEqual(
-      right(expect.anything()),
-    );
+    expect(parseLegendary(legendarySkill, name)).toEqual(right(expect.anything()));
   },
 );

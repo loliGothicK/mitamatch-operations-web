@@ -4,7 +4,5 @@ import { parseAutoSkill } from "./autoSkill";
 import { right } from "fp-ts/Either";
 
 test.each(data)(".parseAutoSkill($name)", ({ name, autoSkill }) => {
-  expect(parseAutoSkill({ memoriaName: name, autoSkill })).toEqual(
-    right(expect.anything()),
-  );
+  expect(parseAutoSkill({ memoriaName: name, autoSkill })).toEqual(right(expect.anything()));
 });

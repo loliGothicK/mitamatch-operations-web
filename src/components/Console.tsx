@@ -1,16 +1,8 @@
 import CodeMirror, { keymap, Prec } from "@uiw/react-codemirror";
 import { useCallback, useState } from "react";
 import { githubDark } from "@uiw/codemirror-theme-github";
-import {
-  sql,
-  keywordCompletionSource,
-  MySQL,
-  schemaCompletionSource,
-} from "@codemirror/lang-sql";
-import {
-  autocompletion,
-  type CompletionSource,
-} from "@codemirror/autocomplete";
+import { sql, keywordCompletionSource, MySQL, schemaCompletionSource } from "@codemirror/lang-sql";
+import { autocompletion, type CompletionSource } from "@codemirror/autocomplete";
 import { makeQueryLinter } from "@/parser/query/linter";
 import { makeColumnCompletionSource } from "@/data/_common/autocomplete";
 import { option } from "fp-ts";

@@ -39,8 +39,7 @@ function a11yProps(index: number) {
 }
 
 export function DeckBuilderPage() {
-  const [openProjectList, setOpenProjectList] =
-    useAtomDefault(openProjectListAtom);
+  const [openProjectList, setOpenProjectList] = useAtomDefault(openProjectListAtom);
   const [value, setValue] = useAtomDefault(activeProjectAtom);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
@@ -56,31 +55,21 @@ export function DeckBuilderPage() {
         }}
       >
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             {[...openProjectList.entries()].map(([name, index]) => {
               return (
                 <Tab
                   key={name}
                   value={index}
                   label={
-                    <Stack
-                      direction={"row"}
-                      component={"span"}
-                      alignItems={"center"}
-                    >
+                    <Stack direction={"row"} component={"span"} alignItems={"center"}>
                       {name}
                       <IconButton
                         component={"span"}
                         onClick={() => {
                           setOpenProjectList((opens) => {
                             opens.delete(name);
-                            setValue(() =>
-                              opens.size > 0 ? [...opens.values()][0] : false,
-                            );
+                            setValue(() => (opens.size > 0 ? [...opens.values()][0] : false));
                             return opens;
                           });
                         }}

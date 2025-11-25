@@ -22,24 +22,14 @@ export const memoriaLens = {
 
 export const gvgSkillLens = {
   name: Lens.fromPath<Memoria>()(["skills", "gvgSkill", "raw", "name"]),
-  description: Lens.fromPath<Memoria>()([
-    "skills",
-    "gvgSkill",
-    "raw",
-    "description",
-  ]),
+  description: Lens.fromPath<Memoria>()(["skills", "gvgSkill", "raw", "description"]),
   effects: Lens.fromPath<Memoria>()(["skills", "gvgSkill", "effects"]),
   kinds: Lens.fromPath<Memoria>()(["skills", "gvgSkill", "kinds"]),
 };
 
 export const supportLens = {
   name: Lens.fromPath<Memoria>()(["skills", "autoSkill", "raw", "name"]),
-  description: Lens.fromPath<Memoria>()([
-    "skills",
-    "autoSkill",
-    "raw",
-    "description",
-  ]),
+  description: Lens.fromPath<Memoria>()(["skills", "autoSkill", "raw", "description"]),
   trigger: Lens.fromPath<Memoria>()(["skills", "autoSkill", "trigger"]),
   probability: Lens.fromPath<Memoria>()(["skills", "autoSkill", "probability"]),
   effects: Lens.fromPath<Memoria>()(["skills", "autoSkill", "effects"]),

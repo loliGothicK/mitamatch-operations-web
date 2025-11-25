@@ -12,10 +12,7 @@ export function calcFinalStatus(
   costume: Costume,
 ) {
   return deck.reduce(
-    (
-      prev: [number, number, number, number],
-      memoria,
-    ): [number, number, number, number] => {
+    (prev: [number, number, number, number], memoria): [number, number, number, number] => {
       return [
         prev[0] + memoria.status[memoria.concentration]?.[0],
         prev[1] + memoria.status[memoria.concentration]?.[1],
@@ -66,15 +63,10 @@ export function calcDiff(
     adxOptions,
     { ...options, stack: options.stack?.before },
   );
-  const resultAfter = evaluate(
-    deckAfter,
-    statusAfter,
-    [def, spDef],
-    charm,
-    costume,
-    adxOptions,
-    { ...options, stack: options.stack?.after },
-  );
+  const resultAfter = evaluate(deckAfter, statusAfter, [def, spDef], charm, costume, adxOptions, {
+    ...options,
+    stack: options.stack?.after,
+  });
 
   if (isLeft(resultBefore)) {
     return left(resultBefore.left);
@@ -111,9 +103,9 @@ export function calcDiff(
       return acc;
     }, new Map());
 
-  for (const [type, amount] of Object.entries(
-    resultBefore.right.supportBuff,
-  ).filter(([, amount]) => !!amount)) {
+  for (const [type, amount] of Object.entries(resultBefore.right.supportBuff).filter(
+    ([, amount]) => !!amount,
+  )) {
     expectedTotalBuffBefore.set(
       type as StatusKind,
       (expectedTotalBuffBefore.get(type as StatusKind) || 0) +
@@ -136,9 +128,9 @@ export function calcDiff(
       return acc;
     }, new Map());
 
-  for (const [type, amount] of Object.entries(
-    resultAfter.right.supportBuff,
-  ).filter(([, amount]) => !!amount)) {
+  for (const [type, amount] of Object.entries(resultAfter.right.supportBuff).filter(
+    ([, amount]) => !!amount,
+  )) {
     expectedTotalBuffAfter.set(
       type as StatusKind,
       (expectedTotalBuffAfter.get(type as StatusKind) || 0) +
@@ -161,9 +153,9 @@ export function calcDiff(
       return acc;
     }, new Map());
 
-  for (const [type, amount] of Object.entries(
-    resultBefore.right.supportDebuff,
-  ).filter(([, amount]) => !!amount)) {
+  for (const [type, amount] of Object.entries(resultBefore.right.supportDebuff).filter(
+    ([, amount]) => !!amount,
+  )) {
     expectedTotalDebuffBefore.set(
       type as StatusKind,
       (expectedTotalDebuffBefore.get(type as StatusKind) || 0) +
@@ -186,9 +178,9 @@ export function calcDiff(
       return acc;
     }, new Map());
 
-  for (const [type, amount] of Object.entries(
-    resultAfter.right.supportDebuff,
-  ).filter(([, amount]) => !!amount)) {
+  for (const [type, amount] of Object.entries(resultAfter.right.supportDebuff).filter(
+    ([, amount]) => !!amount,
+  )) {
     expectedTotalDebuffAfter.set(
       type as StatusKind,
       (expectedTotalDebuffAfter.get(type as StatusKind) || 0) +
@@ -197,22 +189,16 @@ export function calcDiff(
   }
 
   return right({
-    expectedToalDamage: [expectedToalDamageBefore, expectedToalDamageAfter] as [
+    expectedToalDamage: [expectedToalDamageBefore, expectedToalDamageAfter] as [number, number],
+    expectedTotalRecovery: [expectedTotalRecoveryBefore, expectedTotalRecoveryAfter] as [
       number,
       number,
     ],
-    expectedTotalRecovery: [
-      expectedTotalRecoveryBefore,
-      expectedTotalRecoveryAfter,
-    ] as [number, number],
     expectedTotalBuff: new Map(
       statusKind.map((type) => {
         return [
           type,
-          [
-            expectedTotalBuffBefore.get(type) || 0,
-            expectedTotalBuffAfter.get(type) || 0,
-          ],
+          [expectedTotalBuffBefore.get(type) || 0, expectedTotalBuffAfter.get(type) || 0],
         ] as [StatusKind, [number, number]];
       }),
     ),
@@ -220,10 +206,7 @@ export function calcDiff(
       statusKind.map((type) => {
         return [
           type,
-          [
-            expectedTotalDebuffBefore.get(type) || 0,
-            expectedTotalDebuffAfter.get(type) || 0,
-          ],
+          [expectedTotalDebuffBefore.get(type) || 0, expectedTotalDebuffAfter.get(type) || 0],
         ] as [StatusKind, [number, number]];
       }),
     ),

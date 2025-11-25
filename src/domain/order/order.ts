@@ -53,6 +53,4 @@ const orderSchema = z.object({
  */
 export type Order = z.infer<typeof orderSchema>;
 
-export const orderList = orderData.data.map((order) =>
-  orderSchema.parse(order),
-);
+export const orderList = orderData.data.map((order) => orderSchema.parse(order));

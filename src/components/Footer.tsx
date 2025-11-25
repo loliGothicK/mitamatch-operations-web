@@ -29,9 +29,7 @@ export default function Footer({ ...props }) {
   };
 
   return (
-    <Container
-      sx={{ bgcolor: theme.palette.background.paper, minWidth: "100vw" }}
-    >
+    <Container sx={{ bgcolor: theme.palette.background.paper, minWidth: "100vw" }}>
       <footer>
         <Box
           sx={{
@@ -51,18 +49,12 @@ export default function Footer({ ...props }) {
           <Box sx={{ GridArea: "logo" }}>
             <Stack justifyContent="center" alignItems="center">
               <Image
-                src={
-                  theme.palette.mode === "dark"
-                    ? "/MO_DARK.png"
-                    : "/MO_LIGHT.png"
-                }
+                src={theme.palette.mode === "dark" ? "/MO_DARK.png" : "/MO_LIGHT.png"}
                 alt={"mode"}
                 width={300}
                 height={100}
               />
-              <Typography>
-                {"一瞬でレギオンマッチを改善。驚きの速さで。"}
-              </Typography>
+              <Typography>{"一瞬でレギオンマッチを改善。驚きの速さで。"}</Typography>
             </Stack>
           </Box>
           <Box sx={{ gridArea: "docs" }}>
@@ -119,14 +111,11 @@ export default function Footer({ ...props }) {
                     display: "grid",
                     flex: "1 0 auto",
                     gridTemplateAreas: '"leadingVisual text trailingVisual"',
-                    gridTemplateColumns:
-                      "min-content minmax(0, auto) min-content",
+                    gridTemplateColumns: "min-content minmax(0, auto) min-content",
                     placeContent: "center",
                   }}
                 >
-                  <span
-                    style={{ marginRight: "0.5rem", gridArea: "leadingVisual" }}
-                  >
+                  <span style={{ marginRight: "0.5rem", gridArea: "leadingVisual" }}>
                     <svg
                       fill={theme.palette.primary.dark}
                       aria-hidden="true"
@@ -173,8 +162,8 @@ export default function Footer({ ...props }) {
               variant="body2"
               gutterBottom={false}
             >
-              All copyrights (images, text, data, etc.) on this website are
-              owned by ©AZONE INTERNATIONAL and acus/アサルトリリィプロジェクト.
+              All copyrights (images, text, data, etc.) on this website are owned by ©AZONE
+              INTERNATIONAL and acus/アサルトリリィプロジェクト.
             </Typography>
           </Grid>
           <Grid>

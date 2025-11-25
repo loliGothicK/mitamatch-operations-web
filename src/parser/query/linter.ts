@@ -64,17 +64,9 @@ export function analyzeQueryStructure(state: EditorState): QueryContext {
 
           // 0. カッコの深さの更新
           // Punctuation "(" または ノード名にParenが含まれる場合
-          if (
-            text === "(" ||
-            type.includes("OpenParen") ||
-            type.includes("ParenL")
-          ) {
+          if (text === "(" || type.includes("OpenParen") || type.includes("ParenL")) {
             parenDepth++;
-          } else if (
-            text === ")" ||
-            type.includes("CloseParen") ||
-            type.includes("ParenR")
-          ) {
+          } else if (text === ")" || type.includes("CloseParen") || type.includes("ParenR")) {
             parenDepth--;
           }
 
@@ -84,9 +76,7 @@ export function analyzeQueryStructure(state: EditorState): QueryContext {
               inWithClause = true;
             }
             // ★重要: カッコの外 (depth 0) でのみ、WITH句を終了させる
-            else if (
-              ["select", "insert", "update", "delete", "values"].includes(text)
-            ) {
+            else if (["select", "insert", "update", "delete", "values"].includes(text)) {
               if (parenDepth === 0) {
                 inWithClause = false;
               }
@@ -95,10 +85,7 @@ export function analyzeQueryStructure(state: EditorState): QueryContext {
 
           // 2. CTE 定義の検出
           // inWithClause が true の間だけ探す
-          if (
-            inWithClause &&
-            (type === "Identifier" || type === "QuotedIdentifier")
-          ) {
+          if (inWithClause && (type === "Identifier" || type === "QuotedIdentifier")) {
             const next = cursor.node.nextSibling;
 
             // "AS" チェック
@@ -135,10 +122,7 @@ export function analyzeQueryStructure(state: EditorState): QueryContext {
                   const nextText = normalize(state, next);
 
                   // AS省略エイリアス
-                  if (
-                    next.name === "Identifier" ||
-                    next.name === "QuotedIdentifier"
-                  ) {
+                  if (next.name === "Identifier" || next.name === "QuotedIdentifier") {
                     ctx.aliasMap.set(nextText, text);
                   }
                   // ASありエイリアス
@@ -146,8 +130,7 @@ export function analyzeQueryStructure(state: EditorState): QueryContext {
                     const nextNext = next.nextSibling;
                     if (
                       nextNext &&
-                      (nextNext.name === "Identifier" ||
-                        nextNext.name === "QuotedIdentifier")
+                      (nextNext.name === "Identifier" || nextNext.name === "QuotedIdentifier")
                     ) {
                       ctx.aliasMap.set(normalize(state, nextNext), text);
                     }
@@ -177,9 +160,7 @@ export function checkCommandPermissions(
       if (node.name === "Statement") {
         const text = state.sliceDoc(node.from, node.to);
         // コメント除去して最初の単語
-        const match = text.match(
-          /^\s*(?:--.*|\/\*[\s\S]*?\*\/|\s+)*([a-zA-Z]+)/,
-        );
+        const match = text.match(/^\s*(?:--.*|\/\*[\s\S]*?\*\/|\s+)*([a-zA-Z]+)/);
 
         if (match) {
           const command = match[1].toLowerCase();
@@ -227,16 +208,7 @@ export function validateSchema(
             if (["from", "join", "update", "into"].includes(text)) {
               expectingTable = true;
             } else if (
-              [
-                "select",
-                "set",
-                "where",
-                "group",
-                "order",
-                "having",
-                "limit",
-                "on",
-              ].includes(text)
+              ["select", "set", "where", "group", "order", "having", "limit", "on"].includes(text)
             ) {
               expectingTable = false;
             }
@@ -262,10 +234,7 @@ export function validateSchema(
 
               // 次のトークンがIdentifierならエイリアスとしてスキップ
               const next = cursor.node.nextSibling;
-              if (
-                next &&
-                (next.name === "Identifier" || next.name === "QuotedIdentifier")
-              ) {
+              if (next && (next.name === "Identifier" || next.name === "QuotedIdentifier")) {
                 cursor.nextSibling();
               }
             }
@@ -274,13 +243,7 @@ export function validateSchema(
               // "AS" の直後でなければチェック
               const prev = cursor.node.prevSibling;
               if (!prev || normalize(state, prev) !== "as") {
-                validateStandaloneColumn(
-                  cursor.node,
-                  state,
-                  ctx,
-                  normalizedSchema,
-                  diagnostics,
-                );
+                validateStandaloneColumn(cursor.node, state, ctx, normalizedSchema, diagnostics);
               }
             }
           }
@@ -353,9 +316,7 @@ function validateStandaloneColumn(
   diagnostics: Diagnostic[],
 ) {
   const colName = normalize(state, node);
-  const hasCTE = Array.from(ctx.activeTables).some((t) =>
-    ctx.definedCTEs.has(t),
-  );
+  const hasCTE = Array.from(ctx.activeTables).some((t) => ctx.definedCTEs.has(t));
   if (hasCTE) return;
 
   let found = false;
@@ -376,10 +337,7 @@ function validateStandaloneColumn(
   }
 }
 
-function normalize(
-  state: EditorState,
-  node: SyntaxNode | { from: number; to: number },
-): string {
+function normalize(state: EditorState, node: SyntaxNode | { from: number; to: number }): string {
   return state
     .sliceDoc(node.from, node.to)
     .replace(/["`\[\]]/g, "")

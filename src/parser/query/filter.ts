@@ -1,11 +1,6 @@
-import type {
-  AtomicExpr,
-  AtomicExprList,
-  BinaryExpr,
-  ParseResult,
-} from "@/parser/query/sql";
+import type { AtomicExpr, AtomicExprList, BinaryExpr, ParseResult } from "@/parser/query/sql";
 import { match } from "ts-pattern";
-import { bail, type MitamaError } from "@/error/error";
+import { anyhow, bail, type MitamaError } from "@/error/error";
 import { type Either, getApplicativeValidation, right } from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import { either, option } from "fp-ts";
@@ -16,7 +11,7 @@ import { P } from "ts-pattern";
 import { Option } from "fp-ts/Option";
 import { separator, transpose } from "@/fp-ts-ext/function";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
-import { Json } from "fp-ts/Json";
+import { Costume } from "@/domain/costume/costume";
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 /**
@@ -59,10 +54,7 @@ export default function build<T>(
   type Input = AtomicExpr | BinaryExpr | AtomicExprList;
 
   const isLikeSpecialPattern = (pattern: string): pattern is string => {
-    return (
-      (completion && pattern in completion && "like" in completion[pattern]) ||
-      false
-    );
+    return (completion && pattern in completion && "like" in completion[pattern]) || false;
   };
 
   const intoOperator = (
@@ -85,16 +77,12 @@ export default function build<T>(
                 resolver[lhs.value as string].type === "number" &&
                 resolver[rhs.value as string].type === "number"
               ) {
-                return right(
-                  (left: Lit, right: Lit) => Number(left) + Number(right),
-                );
+                return right((left: Lit, right: Lit) => Number(left) + Number(right));
               } else if (
                 resolver[lhs.value as string].type === "string" &&
                 resolver[rhs.value as string].type === "string"
               ) {
-                return right(
-                  (left: Lit, right: Lit) => String(left) + String(right),
-                );
+                return right((left: Lit, right: Lit) => String(left) + String(right));
               } else {
                 return bail("+", "Invalid operands for + operator.");
               }
@@ -104,12 +92,8 @@ export default function build<T>(
           })
           .otherwise(() => bail("+", "Invalid operands for + operator.")),
       )
-      .with("AND", () =>
-        right((left: Lit, right: Lit) => Boolean(left) && Boolean(right)),
-      )
-      .with("OR", () =>
-        right((left: Lit, right: Lit) => Boolean(left) || Boolean(right)),
-      )
+      .with("AND", () => right((left: Lit, right: Lit) => Boolean(left) && Boolean(right)))
+      .with("OR", () => right((left: Lit, right: Lit) => Boolean(left) || Boolean(right)))
       .with(P.union("LIKE", "ILIKE", "NOT LIKE", "NOT ILIKE"), (operator) =>
         match([lhs, rhs])
           .with([{ type: P.not("field") }, P.any], () =>
@@ -133,10 +117,19 @@ export default function build<T>(
               { type: "value" },
             ],
             (key) => {
-              return right((left: Lit, right: Lit) =>
-                completion![key].like!.operator(
-                  left as string,
-                  right as string,
+              return pipe(
+                either.fromNullable(anyhow("completion", "completion source not found"))(
+                  completion ? completion[key].like : undefined,
+                ),
+                either.map((like) =>
+                  match(like)
+                    .with({ item: "string" }, ({ operator }) => (left: Lit, right: Lit) => {
+                      return operator(left as string, right as string);
+                    })
+                    .with({ item: "clazz" }, ({ operator }) => (left: Lit, right: Lit) => {
+                      return operator(left as Clazz, right as string);
+                    })
+                    .exhaustive(),
                 ),
               );
             },
@@ -162,9 +155,7 @@ export default function build<T>(
           pipe(
             sequenceS(ap)({
               left: cvt(binary.lhs),
-              operator: toValidated(
-                intoOperator(binary.operator, binary.lhs, binary.rhs),
-              ),
+              operator: toValidated(intoOperator(binary.operator, binary.lhs, binary.rhs)),
               right: cvt(binary.rhs),
             }),
             either.map(({ left, operator, right }) => {
@@ -177,16 +168,12 @@ export default function build<T>(
       )
       .otherwise((atomic) =>
         match<typeof atomic, Validated<MitamaError, IExpression<T>>>(atomic)
-          .with({ type: "value" }, (lit) =>
-            right(new Literal(lit.value as Lit)),
-          )
+          .with({ type: "value" }, (lit) => right(new Literal(lit.value as Lit)))
           .with({ type: "field", value: P.string.select() }, (field) => {
             if (field in resolver) {
               return right(new Field(resolver[field].accessor));
             } else {
-              return toValidated(
-                bail(field, `Cannot resolve ${field} with schema definition.`),
-              );
+              return toValidated(bail(field, `Cannot resolve ${field} with schema definition.`));
             }
           })
           .exhaustive(),
@@ -208,10 +195,7 @@ export default function build<T>(
               ),
             ),
             either.map(
-              (ir) =>
-                new OrderByClause(
-                  ir.map((ir) => new OrderBy(ir.target, ir.direction)),
-                ),
+              (ir) => new OrderByClause(ir.map((ir) => new OrderBy(ir.target, ir.direction))),
             ),
           ),
         ),
@@ -220,16 +204,16 @@ export default function build<T>(
   });
 }
 
-type Accessor<T> = (item: T) => string | number;
+type Accessor<T> = (item: T) => string | number | Clazz;
 export type SchemaResolver<T> = Record<
   string,
   {
-    readonly type: "string" | "number";
+    readonly type: "string" | "number" | "clazz";
     readonly accessor: Accessor<T>;
   }
 >;
-type JsonBlob = { data: Json };
-type Lit = string | number | boolean | JsonBlob;
+export type Clazz = { data: Costume["specialSkill"] };
+type Lit = string | number | boolean | Clazz;
 
 /**
  * 実行可能な式の最小単位。

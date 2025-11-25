@@ -1,18 +1,7 @@
 import Link from "next/link";
 
-import {
-  Assignment,
-  DataArray,
-  Schema,
-  ViewCompact,
-  ViewTimeline,
-} from "@mui/icons-material";
-import {
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Tooltip,
-} from "@mui/material";
+import { Assignment, DataArray, Schema, ViewCompact, ViewTimeline } from "@mui/icons-material";
+import { ListItemButton, ListItemIcon, ListItemText, Tooltip } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 const links = [
@@ -58,10 +47,7 @@ export const mainListItems = (
 const updates = [
   {
     name: "Database is now available (preview)",
-    description: [
-      "You can check the implementation overview",
-      "This feature is still in preview.",
-    ],
+    description: ["You can check the implementation overview", "This feature is still in preview."],
     link: "/database",
   },
   {

@@ -13,17 +13,10 @@ const timelineAtom = atom<OrderWithPic[]>([]);
 export const accelerationIndexAtom = atom(-1);
 export const rwTimelineAtom = atom(
   (get) => get(timelineAtom),
-  (
-    get,
-    set,
-    update: OrderWithPic[] | ((prev: OrderWithPic[]) => OrderWithPic[]),
-  ) => {
-    const newValue =
-      typeof update === "function" ? update(get(timelineAtom)) : update;
+  (get, set, update: OrderWithPic[] | ((prev: OrderWithPic[]) => OrderWithPic[])) => {
+    const newValue = typeof update === "function" ? update(get(timelineAtom)) : update;
     // We should update the acceleration index if the new timeline includes an acceleration order.
-    const accelerationIndex = newValue.findIndex((order) =>
-      order.name.includes("戦術加速"),
-    );
+    const accelerationIndex = newValue.findIndex((order) => order.name.includes("戦術加速"));
     set(accelerationIndexAtom, accelerationIndex);
     set(timelineAtom, newValue);
   },

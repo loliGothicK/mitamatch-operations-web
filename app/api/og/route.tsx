@@ -36,41 +36,39 @@ export async function GET(reqest: NextRequest) {
           };
 
           return new ImageResponse(
-            (
-              <div style={style}>
-                {legendary.map((name) => {
-                  return (
-                    <Image
-                      src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
-                      key={name}
-                      alt={"memoria"}
-                      width={100}
-                      height={100}
-                    />
-                  );
-                })}
-                <div
-                  key={"divider"}
-                  style={{
-                    gridColumn: "1 / -1",
-                    height: "2px",
-                    background: "#000",
-                    margin: "10px 0",
-                  }}
-                />
-                {deck.map((name) => {
-                  return (
-                    <Image
-                      src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
-                      key={name}
-                      alt={"memoria"}
-                      width={100}
-                      height={100}
-                    />
-                  );
-                })}
-              </div>
-            ),
+            <div style={style}>
+              {legendary.map((name) => {
+                return (
+                  <Image
+                    src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
+                    key={name}
+                    alt={"memoria"}
+                    width={100}
+                    height={100}
+                  />
+                );
+              })}
+              <div
+                key={"divider"}
+                style={{
+                  gridColumn: "1 / -1",
+                  height: "2px",
+                  background: "#000",
+                  margin: "10px 0",
+                }}
+              />
+              {deck.map((name) => {
+                return (
+                  <Image
+                    src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
+                    key={name}
+                    alt={"memoria"}
+                    width={100}
+                    height={100}
+                  />
+                );
+              })}
+            </div>,
             {
               ...size,
             },
@@ -86,19 +84,17 @@ export async function GET(reqest: NextRequest) {
           ).then((res) => res.json())) as { timeline: string[] };
 
           return new ImageResponse(
-            (
-              <div style={style}>
-                {timeline.map((name) => (
-                  <Image
-                    src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/order/${name}.png`}
-                    key={name}
-                    alt={"memoria"}
-                    width={100}
-                    height={100}
-                  />
-                ))}
-              </div>
-            ),
+            <div style={style}>
+              {timeline.map((name) => (
+                <Image
+                  src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/order/${name}.png`}
+                  key={name}
+                  alt={"memoria"}
+                  width={100}
+                  height={100}
+                />
+              ))}
+            </div>,
             {
               width: 1200,
               height: 100,

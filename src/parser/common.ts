@@ -68,28 +68,20 @@ export const parseAmount = (
   },
 ) =>
   match<string, Either<MitamaError, Amount>>(amount)
-    .with(P.union("小アップ", "小ダウン", "小ダメージ", "小回復"), () =>
-      right("small"),
-    )
-    .with(P.union("アップ", "ダウン", "ダメージ", "回復"), () =>
-      right("medium"),
-    )
-    .with(P.union("大アップ", "大ダウン", "大ダメージ", "大回復"), () =>
-      right("large"),
-    )
+    .with(P.union("小アップ", "小ダウン", "小ダメージ", "小回復"), () => right("small"))
+    .with(P.union("アップ", "ダウン", "ダメージ", "回復"), () => right("medium"))
+    .with(P.union("大アップ", "大ダウン", "大ダメージ", "大回復"), () => right("large"))
     .with(P.union("特大アップ", "特大ダウン", "特大ダメージ", "特大回復"), () =>
       right("extra-large"),
     )
-    .with(
-      P.union("超特大アップ", "超特大ダウン", "超特大ダメージ", "超特大回復"),
-      () => right("super-large"),
+    .with(P.union("超特大アップ", "超特大ダウン", "超特大ダメージ", "超特大回復"), () =>
+      right("super-large"),
     )
     .with(P.union("極大アップ", "極大ダウン", "極大ダメージ", "極大回復"), () =>
       right("ultra-large"),
     )
-    .with(
-      P.union("超極大アップ", "超極大ダウン", "超極大ダメージ", "超極大回復"),
-      () => right("super-ultra-large"),
+    .with(P.union("超極大アップ", "超極大ダウン", "超極大ダメージ", "超極大回復"), () =>
+      right("super-ultra-large"),
     )
     .otherwise((src) =>
       bail(src, "given text doesn't match any amount", {

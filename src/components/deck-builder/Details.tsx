@@ -7,12 +7,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 import { rwDeckAtom, rwLegendaryDeckAtom } from "@/jotai/memoriaAtoms";
-import {
-  isBuffEffect,
-  isDebuffEffect,
-  isStackEffect,
-  stackKinds,
-} from "@/parser/skill";
+import { isBuffEffect, isDebuffEffect, isStackEffect, stackKinds } from "@/parser/skill";
 import type { SupportKind } from "@/parser/autoSkill";
 import { elementFilter } from "@/types/filterType";
 
@@ -63,9 +58,7 @@ export function statusPatternToJapanese(pattern: StatusPattern): string {
     .exhaustive();
 }
 
-export function stackPatternToJapanese(
-  pattern: (typeof stackKinds)[number],
-): string {
+export function stackPatternToJapanese(pattern: (typeof stackKinds)[number]): string {
   return match(pattern)
     .with("eden", () => "エデン")
     .with("barrier", () => "バリア")
@@ -75,10 +68,7 @@ export function stackPatternToJapanese(
 }
 
 type SupportPattern =
-  | `${Exclude<
-      StatusKind,
-      "Life" | "Light ATK" | "Light DEF" | "Dark ATK" | "Dark DEF"
-    >}/${UpDown}`
+  | `${Exclude<StatusKind, "Life" | "Light ATK" | "Light DEF" | "Dark ATK" | "Dark DEF">}/${UpDown}`
   | "DamageUp"
   | "SupportUp"
   | "RecoveryUp"
@@ -148,9 +138,7 @@ export function intoSupportPattern(kind: SupportKind): SupportPattern {
     .with("MpCostDown", () => "MpCostDown")
     .with("RangeUp", () => "RangeUp")
     .with("UP", () => intoStatusPattern({ status: kind.status!, upDown: "UP" }))
-    .with("DOWN", () =>
-      intoStatusPattern({ status: kind.status!, upDown: "DOWN" }),
-    )
+    .with("DOWN", () => intoStatusPattern({ status: kind.status!, upDown: "DOWN" }))
     .exhaustive() as SupportPattern;
 }
 
@@ -158,9 +146,7 @@ export default function Details() {
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
 
-  const skills = deck
-    .concat(legendaryDeck)
-    .map((memoria) => memoria.skills.gvgSkill);
+  const skills = deck.concat(legendaryDeck).map((memoria) => memoria.skills.gvgSkill);
 
   const skillAggregate = new Map<StatusPattern, number>();
   for (const pattern of skills.flatMap((skill) => {
@@ -176,9 +162,7 @@ export default function Details() {
     skillAggregate.set(pattern, (skillAggregate.get(pattern) || 0) + 1);
   }
 
-  const supports = [...deck, ...legendaryDeck].map(
-    (memoria) => memoria.skills.autoSkill,
-  );
+  const supports = [...deck, ...legendaryDeck].map((memoria) => memoria.skills.autoSkill);
 
   const supportAggregate = new Map<SupportPattern, number>();
   for (const pattern of supports.flatMap((support) => {
@@ -204,21 +188,13 @@ export default function Details() {
   }
 
   const stackAggregate = new Map<(typeof stackKinds)[number], number>();
-  for (const pattern of skills.flatMap((skill) =>
-    skill.effects.filter(isStackEffect()),
-  )) {
+  for (const pattern of skills.flatMap((skill) => skill.effects.filter(isStackEffect()))) {
     const { kind, times } = pattern;
     stackAggregate.set(kind, (stackAggregate.get(kind) || 0) + times);
   }
 
   return (
-    <Grid
-      container
-      spacing={1}
-      alignItems={"left"}
-      direction={"column"}
-      sx={{ marginTop: 5 }}
-    >
+    <Grid container spacing={1} alignItems={"left"} direction={"column"} sx={{ marginTop: 5 }}>
       <Typography variant="body1">スキル</Typography>
       <Divider />
       <Grid container>
@@ -229,8 +205,7 @@ export default function Details() {
               return (
                 <Grid size={{ xs: 4 }} key={pattern}>
                   <Typography fontSize={10}>
-                    {statusPatternToJapanese(pattern)} :{" "}
-                    {skillAggregate.get(pattern)}
+                    {statusPatternToJapanese(pattern)} : {skillAggregate.get(pattern)}
                   </Typography>
                 </Grid>
               );
@@ -248,8 +223,7 @@ export default function Details() {
               return (
                 <Grid size={{ xs: 4 }} key={pattern}>
                   <Typography fontSize={10}>
-                    {stackPatternToJapanese(pattern)} :{" "}
-                    {stackAggregate.get(pattern)}
+                    {stackPatternToJapanese(pattern)} : {stackAggregate.get(pattern)}
                   </Typography>
                 </Grid>
               );
@@ -268,8 +242,7 @@ export default function Details() {
               return (
                 <Grid size={{ xs: 4 }} key={pattern}>
                   <Typography fontSize={10}>
-                    {supportPatternToJapanese(pattern)} :{" "}
-                    {supportAggregate.get(pattern)}
+                    {supportPatternToJapanese(pattern)} : {supportAggregate.get(pattern)}
                   </Typography>
                 </Grid>
               );
@@ -300,15 +273,7 @@ export default function Details() {
       <Divider />
       <Grid container spacing={1}>
         {kindAggregate.size !== 0 &&
-          [
-            "通常単体",
-            "通常範囲",
-            "特殊単体",
-            "特殊範囲",
-            "支援",
-            "妨害",
-            "回復",
-          ]
+          ["通常単体", "通常範囲", "特殊単体", "特殊範囲", "支援", "妨害", "回復"]
             .filter((kind) => kindAggregate.get(kind) !== undefined)
             .map((kind) => {
               return (

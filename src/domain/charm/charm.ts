@@ -22,6 +22,4 @@ const charmSchema = z.object({
  */
 export type Charm = z.infer<typeof charmSchema>;
 
-export const charmList = charmData.data.map((charm) =>
-  charmSchema.parse(charm),
-);
+export const charmList = charmData.data.map((charm) => charmSchema.parse(charm));

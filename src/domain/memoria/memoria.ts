@@ -49,13 +49,7 @@ const memoriaSchema = z.object({
     )
     .readonly(),
   attribute: z
-    .union([
-      z.literal(1),
-      z.literal(2),
-      z.literal(3),
-      z.literal(4),
-      z.literal(5),
-    ])
+    .union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)])
     .transform((element) =>
       match(element)
         .with(1, () => "Fire" as const)
@@ -67,21 +61,13 @@ const memoriaSchema = z.object({
     )
     .readonly(),
   status: z
-    .tuple([
-      statusSchema,
-      statusSchema,
-      statusSchema,
-      statusSchema,
-      statusSchema,
-    ])
+    .tuple([statusSchema, statusSchema, statusSchema, statusSchema, statusSchema])
     .readonly(),
   cost: z.number().readonly(),
   questSkill: ActiveSkillSchema.readonly(),
   gvgSkill: ActiveSkillSchema.readonly(),
   autoSkill: PassiveSkillSchema.readonly(),
-  labels: z
-    .array(z.enum(["Legendary", "Ultimate", "SuperAwakening"]))
-    .readonly(),
+  labels: z.array(z.enum(["Legendary", "Ultimate", "SuperAwakening"])).readonly(),
   legendarySkill: z
     .tuple([
       PassiveSkillSchema,
@@ -142,8 +128,7 @@ export const memoriaList: Memoria[] = memoriaData.data
         error => ${zodResult.error}
     `);
     }
-    const { questSkill, gvgSkill, autoSkill, legendarySkill, name, ...raw } =
-      zodResult.value;
+    const { questSkill, gvgSkill, autoSkill, legendarySkill, name, ...raw } = zodResult.value;
     const parseSkillsResult = sequenceS(ap)({
       questSkill: parseSkill({
         cardType: raw.cardType,
@@ -156,9 +141,7 @@ export const memoriaList: Memoria[] = memoriaData.data
         memoriaName: name,
       }),
       autoSkill: parseAutoSkill({ memoriaName: name, autoSkill }),
-      legendary: legendarySkill
-        ? parseLegendary(legendarySkill, name)
-        : right(undefined),
+      legendary: legendarySkill ? parseLegendary(legendarySkill, name) : right(undefined),
     });
     if (isLeft(parseSkillsResult)) {
       throw new Error(`skill parse failed: ${fmtErr(parseSkillsResult.left)}`);
@@ -167,10 +150,7 @@ export const memoriaList: Memoria[] = memoriaData.data
       ...raw,
       skills: { ...parseSkillsResult.right },
       name: {
-        short: name.replace(
-          /(?:クリエイターズコラボ|Ultimate Memoria )-(.*)-/g,
-          "$1",
-        ),
+        short: name.replace(/(?:クリエイターズコラボ|Ultimate Memoria )-(.*)-/g, "$1"),
         full: name,
       },
     };

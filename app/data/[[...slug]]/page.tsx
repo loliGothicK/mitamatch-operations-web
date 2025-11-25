@@ -9,8 +9,8 @@ import { default as MemoriaDetail } from "@/data/_memoria/deital";
 import { default as CostumeDetail } from "@/data/_costume/deital";
 import { bail } from "@/error/error";
 import { isLeft, right } from "fp-ts/Either";
-import {parseIntSafe} from "@/parser/common";
-import {either} from "fp-ts";
+import { parseIntSafe } from "@/parser/common";
+import { either } from "fp-ts";
 
 type Props = {
   params: Promise<{ slug?: string | string[] }>;
@@ -23,13 +23,16 @@ export default async function Page({ params, searchParams }: Props) {
 
   const cardType = match(type)
     .with(undefined, () => right(1 as const))
-    .with(P.string, (type) => pipe(
-      parseIntSafe(type),
-      either.flatMap(type => match(type)
-        .with(P.number.between(1, 7), () => right(type as 1 | 2 | 3 | 4 | 5 | 6 | 7))
-        .otherwise(() => bail(`${type}`, "Invalid card type"))
-      )
-    ))
+    .with(P.string, (type) =>
+      pipe(
+        parseIntSafe(type),
+        either.flatMap((type) =>
+          match(type)
+            .with(P.number.between(1, 7), () => right(type as 1 | 2 | 3 | 4 | 5 | 6 | 7))
+            .otherwise(() => bail(`${type}`, "Invalid card type")),
+        ),
+      ),
+    )
     .otherwise((type) => bail(type.join(", "), "Invalid card type"));
 
   if (isLeft(cardType)) {
@@ -37,18 +40,13 @@ export default async function Page({ params, searchParams }: Props) {
   }
 
   return match(slug)
-    .with(undefined, () => <DataPage dataType={'memoria'}/>)
-    .with([P.union("memoria", "order", "costume")], ([slug]) => (
-      <DataPage dataType={slug} />
-    ))
+    .with(undefined, () => <DataPage dataType={"memoria"} />)
+    .with([P.union("memoria", "order", "costume").select()], (slug) => <DataPage dataType={slug} />)
     .with(["memoria", P.string], ([, name]) => (
       <MemoriaDetail name={decodeURIComponent(name)} type={cardType.right} />
     ))
     .with(["costume", P.string, P.string], ([, lily, job]) => (
-      <CostumeDetail
-        lily={decodeURIComponent(lily)}
-        job={decodeURIComponent(job)}
-      />
+      <CostumeDetail lily={decodeURIComponent(lily)} job={decodeURIComponent(job)} />
     ))
     .otherwise(() => <NotFound />);
 }

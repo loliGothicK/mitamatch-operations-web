@@ -19,11 +19,7 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import type { SortingStrategy } from "@dnd-kit/sortable";
-import {
-  SortableContext,
-  arrayMove,
-  sortableKeyboardCoordinates,
-} from "@dnd-kit/sortable";
+import { SortableContext, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import type { OmitProperties } from "ts-essentials";
 
 /**
@@ -121,12 +117,7 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
   );
 
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragEnd={onDragEnd}
-      {...dnd}
-    >
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd} {...dnd}>
       <SortableContext items={items} strategy={strategy}>
         {children}
       </SortableContext>

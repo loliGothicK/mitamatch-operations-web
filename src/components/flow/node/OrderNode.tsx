@@ -21,12 +21,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import { type Order, orderList } from "@/domain/order/order";
-import {
-  type NodeData,
-  edgeStorageAtom,
-  idAtom,
-  nodeStorageAtom,
-} from "@/jotai/flowAtoms";
+import { type NodeData, edgeStorageAtom, idAtom, nodeStorageAtom } from "@/jotai/flowAtoms";
 
 import { Handle, type NodeProps, Position } from "reactflow";
 
@@ -109,23 +104,13 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
             )}
             <CardContent>
               {order ? (
-                <Typography
-                  variant="body1"
-                  fontSize={10}
-                  color="text.secondary"
-                  component="div"
-                >
+                <Typography variant="body1" fontSize={10} color="text.secondary" component="div">
                   {order.name}
                 </Typography>
               ) : (
                 <Skeleton width={100} />
               )}
-              <Typography
-                variant="body1"
-                fontSize={12}
-                color="text.secondary"
-                component="div"
-              >
+              <Typography variant="body1" fontSize={12} color="text.secondary" component="div">
                 {pic}
               </Typography>
             </CardContent>
@@ -149,9 +134,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
         onClose={() => setContextMenu(null)}
         anchorReference="anchorPosition"
         anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : undefined
+          contextMenu !== null ? { top: contextMenu.mouseY, left: contextMenu.mouseX } : undefined
         }
       >
         <MenuItem

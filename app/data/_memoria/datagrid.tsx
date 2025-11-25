@@ -1,14 +1,7 @@
 import Paper from "@mui/material/Paper";
-import {
-  type Memoria,
-  memoriaList as dataSource,
-} from "@/domain/memoria/memoria";
+import { type Memoria, memoriaList as dataSource } from "@/domain/memoria/memoria";
 
-import {
-  DataGrid,
-  type GridColDef,
-  type GridColumnVisibilityModel,
-} from "@mui/x-data-grid";
+import { DataGrid, type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
 import type { Attribute } from "@/parser/skill";
 import { match } from "ts-pattern";
@@ -31,17 +24,15 @@ const columns: GridColDef<Memoria>[] = [
     }),
     renderCell: (params) => (
       <Link
-        href={`/data/memoria/${encodeURI(params.row.name.full)}?type=${
-          match(params.row.cardType)
-            .with('通常単体', () => 1)
-            .with('通常範囲', () => 2)
-            .with('特殊単体', () => 3)
-            .with('特殊範囲', () => 4)
-            .with('支援', () => 5)
-            .with('妨害', () => 6)
-            .with('回復', () => 7)
-            .exhaustive()
-        }`}
+        href={`/data/memoria/${encodeURI(params.row.name.full)}?type=${match(params.row.cardType)
+          .with("通常単体", () => 1)
+          .with("通常範囲", () => 2)
+          .with("特殊単体", () => 3)
+          .with("特殊範囲", () => 4)
+          .with("支援", () => 5)
+          .with("妨害", () => 6)
+          .with("回復", () => 7)
+          .exhaustive()}`}
       >
         <Image
           src={`/memoria/${params.value.name}.png`}
@@ -97,8 +88,7 @@ const columns: GridColDef<Memoria>[] = [
     headerName: "Sp.ATK",
     type: "number",
     width: 80,
-    valueGetter: (_, memoria: Memoria) =>
-      Lenz.memoria.general.spatk.get(memoria),
+    valueGetter: (_, memoria: Memoria) => Lenz.memoria.general.spatk.get(memoria),
   },
   {
     field: "def",
@@ -112,29 +102,25 @@ const columns: GridColDef<Memoria>[] = [
     headerName: "Sp.DEF",
     type: "number",
     width: 80,
-    valueGetter: (_, memoria: Memoria) =>
-      Lenz.memoria.general.spdef.get(memoria),
+    valueGetter: (_, memoria: Memoria) => Lenz.memoria.general.spdef.get(memoria),
   },
   {
     field: "questSkill",
     headerName: "Quest Skill",
     width: 300,
-    valueGetter: (_, memoria: Memoria) =>
-      Lenz.memoria.general.questSkill.get(memoria).raw.name,
+    valueGetter: (_, memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.name,
   },
   {
     field: "gvgSkill",
     headerName: "GVG Skill",
     width: 300,
-    valueGetter: (_, memoria: Memoria) =>
-      Lenz.memoria.general.gvgSkill.get(memoria).raw.name,
+    valueGetter: (_, memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.name,
   },
   {
     field: "autoSkill",
     headerName: "Auto Skill",
     width: 300,
-    valueGetter: (_, memoria: Memoria) =>
-      Lenz.memoria.general.autoSkill.get(memoria).raw.name,
+    valueGetter: (_, memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.name,
   },
 ];
 
@@ -201,33 +187,27 @@ const resolver: SchemaResolver<Memoria> = {
   },
   "questSkill.name": {
     type: "string",
-    accessor: (memoria: Memoria) =>
-      Lenz.memoria.general.questSkill.get(memoria).raw.name,
+    accessor: (memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.name,
   },
   "questSkill.desc": {
     type: "string",
-    accessor: (memoria: Memoria) =>
-      Lenz.memoria.general.questSkill.get(memoria).raw.description,
+    accessor: (memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.description,
   },
   "gvgSkill.name": {
     type: "string",
-    accessor: (memoria: Memoria) =>
-      Lenz.memoria.general.gvgSkill.get(memoria).raw.name,
+    accessor: (memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.name,
   },
   "gvgSkill.desc": {
     type: "string",
-    accessor: (memoria: Memoria) =>
-      Lenz.memoria.general.gvgSkill.get(memoria).raw.description,
+    accessor: (memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.description,
   },
   "autoSkill.name": {
     type: "string",
-    accessor: (memoria: Memoria) =>
-      Lenz.memoria.general.autoSkill.get(memoria).raw.name,
+    accessor: (memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.name,
   },
   "autoSkill.desc": {
     type: "string",
-    accessor: (memoria: Memoria) =>
-      Lenz.memoria.general.autoSkill.get(memoria).raw.description,
+    accessor: (memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.description,
   },
 };
 
@@ -238,22 +218,13 @@ const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
 
 const enumMap: Record<string, ComleteCandidate> = {
   type: {
-    equals: [
-      "'通常単体'",
-      "'通常範囲'",
-      "'特殊単体'",
-      "'特殊範囲'",
-      "'支援'",
-      "'妨害'",
-      "'回復'",
-    ],
+    equals: ["'通常単体'", "'通常範囲'", "'特殊単体'", "'特殊範囲'", "'支援'", "'妨害'", "'回復'"],
     like: {
       pattern: ["前衛", "後衛", "通常", "特殊"],
+      item: "string",
       operator: (item: string, pattern: string): boolean => {
         return match(pattern)
-          .with("前衛", () =>
-            ["通常単体", "通常範囲", "特殊単体", "特殊範囲"].includes(item),
-          )
+          .with("前衛", () => ["通常単体", "通常範囲", "特殊単体", "特殊範囲"].includes(item))
           .with("後衛", () => ["支援", "妨害", "回復"].includes(item))
           .with("通常", () => ["通常単体", "通常範囲"].includes(item))
           .with("特殊", () => ["特殊単体", "特殊範囲"].includes(item))
@@ -267,8 +238,7 @@ const enumMap: Record<string, ComleteCandidate> = {
 };
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
-  const [visivility, setVisivility, visivilityChanged] =
-    useVisivility(visivilityAll);
+  const [visivility, setVisivility, visivilityChanged] = useVisivility(visivilityAll);
   const [rows, setRows] = useState<Memoria[]>(dataSource.toReversed());
 
   return (

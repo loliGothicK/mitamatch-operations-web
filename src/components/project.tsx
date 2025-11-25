@@ -16,24 +16,10 @@ import {
   type UseTreeItemParameters,
 } from "@mui/x-tree-view";
 import clsx from "clsx";
-import {
-  type ElementType,
-  forwardRef,
-  type HTMLAttributes,
-  type Ref,
-} from "react";
+import { type ElementType, forwardRef, type HTMLAttributes, type Ref } from "react";
 import { IconButton, Stack, Tooltip } from "@mui/material";
-import {
-  Folder,
-  Groups as UnitIcon,
-  Minimize,
-  NearMe as OrderIcon,
-} from "@mui/icons-material";
-import {
-  projectOpenAtom,
-  openProjectListAtom,
-  activeProjectAtom,
-} from "@/jotai/projectAtoms";
+import { Folder, Groups as UnitIcon, Minimize, NearMe as OrderIcon } from "@mui/icons-material";
+import { projectOpenAtom, openProjectListAtom, activeProjectAtom } from "@/jotai/projectAtoms";
 import { useAtomDefault } from "@/jotai/default";
 
 declare module "react" {
@@ -44,8 +30,7 @@ declare module "react" {
 }
 
 interface StyledTreeItemProps
-  extends Omit<UseTreeItemParameters, "rootRef">,
-    HTMLAttributes<HTMLLIElement> {
+  extends Omit<UseTreeItemParameters, "rootRef">, HTMLAttributes<HTMLLIElement> {
   labelIcon: ElementType<SvgIconProps>;
   labelInfo?: string;
 }
@@ -71,20 +56,16 @@ const CustomTreeItemContent = styled(TreeItemContent)(({ theme }) => ({
   },
 }));
 
-const CustomTreeItemIconContainer = styled(TreeItemIconContainer)(
-  ({ theme }) => ({
-    marginRight: theme.spacing(1),
-  }),
-);
+const CustomTreeItemIconContainer = styled(TreeItemIconContainer)(({ theme }) => ({
+  marginRight: theme.spacing(1),
+}));
 
-const CustomTreeItemGroupTransition = styled(TreeItemGroupTransition)(
-  ({ theme }) => ({
-    marginLeft: 0,
-    "& .content": {
-      paddingLeft: theme.spacing(2),
-    },
-  }),
-);
+const CustomTreeItemGroupTransition = styled(TreeItemGroupTransition)(({ theme }) => ({
+  marginLeft: 0,
+  "& .content": {
+    paddingLeft: theme.spacing(2),
+  },
+}));
 
 const CustomTreeItem = forwardRef(function CustomTreeItem(
   props: Omit<StyledTreeItemProps, "label" | "itemId"> & {
@@ -97,15 +78,7 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
   const [, setOpenProjectList] = useAtomDefault(openProjectListAtom);
   const [, setValue] = useAtomDefault(activeProjectAtom);
 
-  const {
-    id,
-    itemId,
-    label,
-    disabled,
-    children,
-    labelIcon: LabelIcon,
-    ...other
-  } = props;
+  const { id, itemId, label, disabled, children, labelIcon: LabelIcon, ...other } = props;
 
   const {
     getRootProps,
@@ -150,10 +123,7 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
             }),
           })}
         >
-          <CustomTreeItemIconContainer
-            {...getIconContainerProps()}
-            sx={{ borderRadius: 30 }}
-          >
+          <CustomTreeItemIconContainer {...getIconContainerProps()} sx={{ borderRadius: 30 }}>
             <TreeItemIcon status={status} />
           </CustomTreeItemIconContainer>
           <Box
@@ -172,9 +142,7 @@ const CustomTreeItem = forwardRef(function CustomTreeItem(
             />
           </Box>
         </CustomTreeItemContent>
-        {children && (
-          <CustomTreeItemGroupTransition {...getGroupTransitionProps()} />
-        )}
+        {children && <CustomTreeItemGroupTransition {...getGroupTransitionProps()} />}
       </CustomTreeItemRoot>
     </TreeItemProvider>
   );
@@ -190,12 +158,7 @@ export default function ProjectTreeView(props: { sx: { gridArea: string } }) {
         backgroundColor: theme.palette.background.paper,
       }}
     >
-      <Stack
-        direction={"row"}
-        display={"flex"}
-        alignItems={"center"}
-        sx={{ p: 2 }}
-      >
+      <Stack direction={"row"} display={"flex"} alignItems={"center"} sx={{ p: 2 }}>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           Project
         </Typography>

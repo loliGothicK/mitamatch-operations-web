@@ -1,10 +1,4 @@
-export const elementFilter = [
-  "Fire",
-  "Water",
-  "Wind",
-  "Light",
-  "Dark",
-] as const;
+export const elementFilter = ["Fire", "Water", "Wind", "Light", "Dark"] as const;
 
 export const roleFilter = [
   "normal_single",

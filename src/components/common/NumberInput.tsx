@@ -6,18 +6,10 @@ interface Props {
   defaultValue?: number;
   min?: number;
   max?: number;
-  onChange?: (
-    value: number | null,
-    event: NumberField.Root.ChangeEventDetails,
-  ) => void;
+  onChange?: (value: number | null, event: NumberField.Root.ChangeEventDetails) => void;
 }
 
-export default function NumberInput({
-  defaultValue,
-  min,
-  max,
-  onChange,
-}: Props): ReactElement {
+export default function NumberInput({ defaultValue, min, max, onChange }: Props): ReactElement {
   const id = useId();
   return (
     <NumberField.Root

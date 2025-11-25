@@ -62,23 +62,14 @@ export default function FlowChart() {
 
   return (
     <Layout>
-      <Grid
-        container
-        direction={"row"}
-        alignItems={"center"}
-        sx={{ height: "10vh" }}
-      >
+      <Grid container direction={"row"} alignItems={"center"} sx={{ height: "10vh" }}>
         <Stack direction={"row"} display={"flex"}>
           <Stack direction={"row"}>
             <Autocomplete
               disablePortal
-              options={orderList
-                .filter((order) => order.payed)
-                .map((order) => order.name)}
+              options={orderList.filter((order) => order.payed).map((order) => order.name)}
               sx={{ width: 250 }}
-              renderInput={(params) => (
-                <TextField {...params} label="Select Order" />
-              )}
+              renderInput={(params) => <TextField {...params} label="Select Order" />}
               onChange={(_, value) => {
                 if (value) {
                   setSelect(orderList.find((order) => order.name === value)!);
@@ -178,11 +169,7 @@ export default function FlowChart() {
             p: 4,
           }}
         >
-          <Typography
-            id={`modal-modal-title-${id}`}
-            variant="h6"
-            component="h2"
-          >
+          <Typography id={`modal-modal-title-${id}`} variant="h6" component="h2">
             Flowchart の使い方
           </Typography>
           {[

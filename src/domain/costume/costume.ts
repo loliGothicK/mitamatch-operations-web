@@ -98,10 +98,7 @@ export type Adx = {
   awakable: boolean;
 };
 
-export type Costume = Omit<
-  z.infer<typeof costumeSchema>,
-  "jobSkills" | "specialSkills"
-> & {
+export type Costume = Omit<z.infer<typeof costumeSchema>, "jobSkills" | "specialSkills"> & {
   readonly rate: number;
   readonly status: {
     raw: z.infer<typeof costumeSchema>["jobSkills"];
@@ -130,13 +127,7 @@ export const costumeList: Costume[] = costumeData.data.map((costume) => {
       .otherwise((adx) =>
         option.of({
           type: "adx" as const,
-          get: ({
-            limitBreak,
-            isAwakened,
-          }: {
-            limitBreak: number;
-            isAwakened: boolean;
-          }) => {
+          get: ({ limitBreak, isAwakened }: { limitBreak: number; isAwakened: boolean }) => {
             const filteredSkills = adx.filter((skill) => {
               const limitBreakMet = skill.requiredLimitBreak === limitBreak;
               const awakeningMet = !skill.requiresAwakening || isAwakened;

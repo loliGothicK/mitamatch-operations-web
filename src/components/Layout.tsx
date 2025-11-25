@@ -3,13 +3,7 @@
 import { Provider, getDefaultStore } from "jotai";
 import Footer from "@/components/Footer";
 import { mainListItems } from "@/components/home/listItems";
-import {
-  DarkMode,
-  LightMode,
-  Person,
-  Menu as MenuIcon,
-  Folder,
-} from "@mui/icons-material";
+import { DarkMode, LightMode, Person, Menu as MenuIcon, Folder } from "@mui/icons-material";
 import {
   AppBar as MuiAppBar,
   Box,
@@ -31,14 +25,7 @@ import {
 } from "@mui/material";
 import { createTheme, styled, useTheme } from "@mui/material/styles";
 import { ThemeProvider, useMediaQuery } from "@mui/system";
-import {
-  type ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { type ReactNode, createContext, useContext, useEffect, useMemo, useState } from "react";
 import { redirect } from "next/navigation";
 import { defaultSession, type SessionData } from "@/session/sessionData";
 import Image from "next/image";
@@ -77,8 +64,7 @@ const MenuIcons = styled(MuiDrawer)(({ theme }) => ({
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function BasicLayout({ children }: { children: ReactNode }) {
-  const [user, setUser] =
-    useState<Omit<SessionData, "expires">>(defaultSession);
+  const [user, setUser] = useState<Omit<SessionData, "expires">>(defaultSession);
   const [, setProjectOpen] = useAtom(projectOpenAtom);
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
@@ -126,13 +112,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
             <MenuIcon />
           </IconButton>
           <Link href="/" sx={{ pr: 2 }}>
-            <Image
-              src="/MitamaLabLogo.png"
-              alt="logo"
-              width={40}
-              height={40}
-              priority={true}
-            />
+            <Image src="/MitamaLabLogo.png" alt="logo" width={40} height={40} priority={true} />
           </Link>
           <Typography
             component="h1"
@@ -161,17 +141,13 @@ function BasicLayout({ children }: { children: ReactNode }) {
                 <>
                   <Button {...bindTrigger(popupState)}>{"Docs"}</Button>
                   <Menu {...bindMenu(popupState)}>
-                    {(
-                      ["Deck Builder", "Timeline Builder", "Flowchart"] as const
-                    ).map((kind) => {
+                    {(["Deck Builder", "Timeline Builder", "Flowchart"] as const).map((kind) => {
                       return (
                         <MenuItem
                           key={kind}
                           onClick={() => {
                             popupState.close();
-                            redirect(
-                              `/docs/${kind.toLowerCase().split(" ").join("-")}`,
-                            );
+                            redirect(`/docs/${kind.toLowerCase().split(" ").join("-")}`);
                           }}
                         >
                           {kind}
@@ -184,11 +160,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
             </PopupState>
           </Stack>
           <Box flexGrow={0.5} />
-          <IconButton
-            sx={{ ml: 1 }}
-            onClick={colorMode.toggleColorMode}
-            color="inherit"
-          >
+          <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
             {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
           </IconButton>
           <IconButton onClick={() => redirect("/api/auth/discord")}>
@@ -217,12 +189,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
       <MenuIcons variant="permanent" sx={{ gridArea: "navigation" }}>
         <List component="nav">
           {user.isLoggedIn && (
-            <Tooltip
-              title={"Project"}
-              key={"Project"}
-              arrow
-              placement={"right-end"}
-            >
+            <Tooltip title={"Project"} key={"Project"} arrow placement={"right-end"}>
               <ListItemButton onClick={() => setProjectOpen(true)}>
                 <ListItemIcon>
                   <Folder />

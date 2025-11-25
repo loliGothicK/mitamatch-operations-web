@@ -23,7 +23,7 @@ import {
 } from "@mui/material";
 import { AutoSkill } from "@/parser/autoSkill";
 import { Skill } from "@/parser/skill";
-import {match} from "ts-pattern";
+import { match } from "ts-pattern";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -89,36 +89,25 @@ function StatusTable({ status }: { status: Memoria["status"] }) {
   );
 }
 
-export default function Deital({
-  name,
-  type,
-}: {
-  name: string;
-  type?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
-}) {
-  const cardType = (type: Memoria['cardType']) => match(type)
-    .with('通常単体', () => 1 as const)
-    .with('通常範囲', () => 2 as const)
-    .with('特殊単体', () => 3 as const)
-    .with('特殊範囲', () => 4 as const)
-    .with('支援', () => 5 as const)
-    .with('妨害', () => 6 as const)
-    .with('回復', () => 7 as const)
-    .exhaustive();
+export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 | 4 | 5 | 6 | 7 }) {
+  const cardType = (type: Memoria["cardType"]) =>
+    match(type)
+      .with("通常単体", () => 1 as const)
+      .with("通常範囲", () => 2 as const)
+      .with("特殊単体", () => 3 as const)
+      .with("特殊範囲", () => 4 as const)
+      .with("支援", () => 5 as const)
+      .with("妨害", () => 6 as const)
+      .with("回復", () => 7 as const)
+      .exhaustive();
 
-  const data = memoriaList.filter(
-    (memoria) => memoria.name.full === decodeURI(name),
-  );
+  const data = memoriaList.filter((memoria) => memoria.name.full === decodeURI(name));
   const indices = data.map((memoria) => cardType(memoria.cardType));
   const [value, setValue] = useState(type ? indices.findIndex((_) => _ === type) : 0);
 
-  const handleChange = (
-    _: SyntheticEvent,
-    newValue: 1 | 2 | 3 | 4 | 5 | 6 | 7,
-  ) => {
+  const handleChange = (_: SyntheticEvent, newValue: 1 | 2 | 3 | 4 | 5 | 6 | 7) => {
     setValue(newValue);
   };
-
 
   return (
     <Layout>
@@ -132,12 +121,7 @@ export default function Deital({
         }}
       >
         <Box>
-          <Stack
-            direction={"row"}
-            justifyContent={"left"}
-            alignItems={"center"}
-            gap={2}
-          >
+          <Stack direction={"row"} justifyContent={"left"} alignItems={"center"} gap={2}>
             <Image
               src={`/memoria/${data[0].name.short}.png`}
               alt={data[0].name.short}
@@ -154,43 +138,22 @@ export default function Deital({
           </Stack>
         </Box>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             {data.map((memoria, index) => (
-              <Tab
-                key={memoria.cardType}
-                label={memoria.cardType}
-                {...a11yProps(index)}
-              />
+              <Tab key={memoria.cardType} label={memoria.cardType} {...a11yProps(index)} />
             ))}
           </Tabs>
         </Box>
         {data.map((memoria, index) => (
           <CustomTabPanel index={index} value={value} key={memoria.cardType}>
-            <Box
-              display={"flex"}
-              flexDirection={"column"}
-              alignItems={"center"}
-            >
+            <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
               <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
                 ステータス
               </Divider>
               <StatusTable status={memoria.status} />
-              <SkillCard
-                skill={memoria.skills.questSkill}
-                title={"対ヒュージスキル"}
-              />
-              <SkillCard
-                skill={memoria.skills.gvgSkill}
-                title={"レギオンマッチスキル"}
-              />
-              <SkillCard
-                skill={memoria.skills.autoSkill}
-                title={"レギオンマッチ補助スキル"}
-              />
+              <SkillCard skill={memoria.skills.questSkill} title={"対ヒュージスキル"} />
+              <SkillCard skill={memoria.skills.gvgSkill} title={"レギオンマッチスキル"} />
+              <SkillCard skill={memoria.skills.autoSkill} title={"レギオンマッチ補助スキル"} />
             </Box>
           </CustomTabPanel>
         ))}
@@ -199,33 +162,20 @@ export default function Deital({
   );
 }
 
-function SkillCard({
-  skill,
-  title,
-}: {
-  skill: Skill | AutoSkill;
-  title: string;
-}) {
+function SkillCard({ skill, title }: { skill: Skill | AutoSkill; title: string }) {
   return (
     <>
       <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
         {title}
       </Divider>
-      <Card
-        sx={{ width: "90%", margin: "auto" }}
-        variant="outlined"
-        square={true}
-      >
+      <Card sx={{ width: "90%", margin: "auto" }} variant="outlined" square={true}>
         <CardContent>
           <Box display="flex" alignItems="flex-start">
             <Typography variant="h5" component="div" sx={{ margin: 2 }}>
               {skill.raw.name}
             </Typography>
             {"sp" in skill && (
-              <Chip
-                label={`消費MP ${skill.sp}`}
-                sx={{ marginLeft: "auto", marginTop: 2 }}
-              />
+              <Chip label={`消費MP ${skill.sp}`} sx={{ marginLeft: "auto", marginTop: 2 }} />
             )}
           </Box>
           <Divider sx={{ margin: 2 }} />

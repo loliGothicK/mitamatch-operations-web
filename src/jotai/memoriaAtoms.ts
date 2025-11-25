@@ -30,12 +30,8 @@ import { activeProjectAtom } from "@/jotai/projectAtoms";
 
 export const targetBeforeAtom = atom<MemoriaId[]>([]);
 export const targetAfterAtom = atom<MemoriaId[]>([]);
-export const compareModeAtom = atom<MemoriaWithConcentration | undefined>(
-  undefined,
-);
-export const candidateAtom = atom<MemoriaWithConcentration | undefined>(
-  undefined,
-);
+export const compareModeAtom = atom<MemoriaWithConcentration | undefined>(undefined);
+export const candidateAtom = atom<MemoriaWithConcentration | undefined>(undefined);
 export const adLevelAtom = atom(3);
 export const charmAtom = atom(charmList.reverse()[0]);
 export const costumeAtom = atom(costumeList.reverse()[0]);
@@ -74,8 +70,7 @@ export const rwDeckAtom = atom(
       | MemoriaWithConcentration[]
       | ((prev: MemoriaWithConcentration[]) => MemoriaWithConcentration[]),
   ) => {
-    const newValue =
-      typeof update === "function" ? update(get(deckAtom)) : update;
+    const newValue = typeof update === "function" ? update(get(deckAtom)) : update;
     const index = getDefaultStore().get(activeProjectAtom);
     Cookies.set(
       `deck-${index === false ? 0 : index}`,
@@ -95,8 +90,7 @@ export const rwLegendaryDeckAtom = atom(
       | MemoriaWithConcentration[]
       | ((prev: MemoriaWithConcentration[]) => MemoriaWithConcentration[]),
   ) => {
-    const newValue =
-      typeof update === "function" ? update(get(legendaryDeckAtom)) : update;
+    const newValue = typeof update === "function" ? update(get(legendaryDeckAtom)) : update;
     const index = getDefaultStore().get(activeProjectAtom);
     Cookies.set(
       `deck-${index === false ? 0 : index}`,
@@ -108,11 +102,7 @@ export const rwLegendaryDeckAtom = atom(
 
 export const unitTitleAtom = atom("No Title");
 export const swAtom = atom<"sword" | "shield">("shield");
-export const roleFilterAtom = atom<RoleFilterType[]>([
-  "support",
-  "interference",
-  "recovery",
-]);
+export const roleFilterAtom = atom<RoleFilterType[]>(["support", "interference", "recovery"]);
 export const elementFilterAtom = atom<ElementFilterType[]>([...elementFilter]);
 export const labelFilterAtom = atom<LabelSearch[]>([]);
 
@@ -120,12 +110,7 @@ export const currentRoleFilterAtom = atom((get) => {
   const sw = get(swAtom);
   return match<"sword" | "shield", RoleFilterType[]>(sw)
     .with("shield", () => ["support", "interference", "recovery"])
-    .with("sword", () => [
-      "normal_single",
-      "normal_range",
-      "special_single",
-      "special_range",
-    ])
+    .with("sword", () => ["normal_single", "normal_range", "special_single", "special_range"])
     .exhaustive();
 });
 
@@ -154,13 +139,9 @@ export const filteredMemoriaAtom = atom((get) => {
   return memoriaList
     .filter((memoria) => {
       const sw = match(get(swAtom))
-        .with("shield", () =>
-          ["支援", "妨害", "回復"].includes(memoria.cardType),
-        )
+        .with("shield", () => ["支援", "妨害", "回復"].includes(memoria.cardType))
         .with("sword", () =>
-          ["通常単体", "通常範囲", "特殊単体", "特殊範囲"].includes(
-            memoria.cardType,
-          ),
+          ["通常単体", "通常範囲", "特殊単体", "特殊範囲"].includes(memoria.cardType),
         )
         .exhaustive();
 
@@ -205,21 +186,14 @@ export const filteredMemoriaAtom = atom((get) => {
       const otherSkill = get(otherSkillFilterAtom).every((filter) => {
         return match(filter)
           .with(P.union("anima", "barrier", "meteor", "eden"), (filter) =>
-            Lenz.memoria.gvgSkill.effects
-              .get(memoria)
-              .some(isStackEffect(filter)),
+            Lenz.memoria.gvgSkill.effects.get(memoria).some(isStackEffect(filter)),
           )
           .with(P.union("minima", "spread", "enhance"), (filter) =>
-            Lenz.memoria.gvgSkill.effects
-              .get(memoria)
-              .some(isElementEffect(filter)),
+            Lenz.memoria.gvgSkill.effects.get(memoria).some(isElementEffect(filter)),
           )
           .with(
             P.union("heal", "charge", "counter", "s-counter"),
-            (filter) =>
-              !!Lenz.memoria.gvgSkill.kinds
-                .get(memoria)
-                ?.some((kind) => kind === filter),
+            (filter) => !!Lenz.memoria.gvgSkill.kinds.get(memoria)?.some((kind) => kind === filter),
           )
           .otherwise(({ element, kind }) =>
             Lenz.memoria.gvgSkill.kinds.get(memoria)?.some((k) =>
@@ -232,9 +206,7 @@ export const filteredMemoriaAtom = atom((get) => {
 
       const vanguardSupport = get(vanguardSupportFilterAtom).every((filter) => {
         if (typeof filter === "string") {
-          return Lenz.memoria.autoSkill.effects
-            .get(memoria)
-            .some((x) => x.type === filter);
+          return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => x.type === filter);
         }
         return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
           return x.status === filter.status && x.type === filter.upDown;
@@ -243,9 +215,7 @@ export const filteredMemoriaAtom = atom((get) => {
 
       const assistSupport = get(assistSupportFilterAtom).every((filter) => {
         if (typeof filter === "string") {
-          return Lenz.memoria.autoSkill.effects
-            .get(memoria)
-            .some((x) => x.type === filter);
+          return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => x.type === filter);
         }
         return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
           return x.status === filter.status && x.type === filter.upDown;
@@ -254,9 +224,7 @@ export const filteredMemoriaAtom = atom((get) => {
 
       const recoverySupport = get(recoverySupportFilterAtom).every((filter) => {
         if (typeof filter === "string") {
-          return Lenz.memoria.autoSkill.effects
-            .get(memoria)
-            .some((x) => x.type === filter);
+          return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => x.type === filter);
         }
         return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
           return x.status === filter.status && x.type === filter.upDown;
@@ -282,12 +250,10 @@ export const filteredMemoriaAtom = atom((get) => {
         recoverySupport &&
         otherSupport &&
         !get(rwDeckAtom).some(
-          ({ name }) =>
-            Lenz.memoria.general.shortName.get(memoria) === name.short,
+          ({ name }) => Lenz.memoria.general.shortName.get(memoria) === name.short,
         ) &&
         !get(rwLegendaryDeckAtom).some(
-          ({ name }) =>
-            Lenz.memoria.general.shortName.get(memoria) === name.short,
+          ({ name }) => Lenz.memoria.general.shortName.get(memoria) === name.short,
         )
       );
     })
@@ -301,13 +267,11 @@ export const filteredMemoriaAtom = atom((get) => {
         .with("Sp.DEF", () => b.status[4][3] - b.status[4][3])
         .with(
           "ATK+Sp.ATK",
-          () =>
-            b.status[4][0] + b.status[4][1] - (a.status[4][0] + a.status[4][1]),
+          () => b.status[4][0] + b.status[4][1] - (a.status[4][0] + a.status[4][1]),
         )
         .with(
           "DEF+Sp.DEF",
-          () =>
-            b.status[4][2] + b.status[4][3] - (a.status[4][2] + a.status[4][3]),
+          () => b.status[4][2] + b.status[4][3] - (a.status[4][2] + a.status[4][3]),
         )
         .exhaustive();
     });

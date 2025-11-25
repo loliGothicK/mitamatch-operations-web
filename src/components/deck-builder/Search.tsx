@@ -74,19 +74,11 @@ function BasicStatusCheckbox() {
           <CheckBoxItem
             key={intoStatusPattern(flag)}
             name={statusPatternToJapanese(intoStatusPattern(flag))}
-            checked={filter.some(
-              (v) => v.status === flag.status && v.upDown === flag.upDown,
-            )}
+            checked={filter.some((v) => v.status === flag.status && v.upDown === flag.upDown)}
             handleChange={() => {
               setFilter((prev) => {
-                if (
-                  filter.some(
-                    (v) => v.status === flag.status && v.upDown === flag.upDown,
-                  )
-                ) {
-                  return prev.filter(
-                    (v) => v.status !== flag.status || v.upDown !== flag.upDown,
-                  );
+                if (filter.some((v) => v.status === flag.status && v.upDown === flag.upDown)) {
+                  return prev.filter((v) => v.status !== flag.status || v.upDown !== flag.upDown);
                 }
                 return [...prev, flag];
               });
@@ -108,19 +100,11 @@ function ElementStatusCheckbox() {
           <CheckBoxItem
             key={intoStatusPattern(flag)}
             name={statusPatternToJapanese(intoStatusPattern(flag))}
-            checked={filter.some(
-              (v) => v.status === flag.status && v.upDown === flag.upDown,
-            )}
+            checked={filter.some((v) => v.status === flag.status && v.upDown === flag.upDown)}
             handleChange={() => {
               setFilter((prev) => {
-                if (
-                  filter.some(
-                    (v) => v.status === flag.status && v.upDown === flag.upDown,
-                  )
-                ) {
-                  return prev.filter(
-                    (v) => v.status !== flag.status || v.upDown !== flag.upDown,
-                  );
+                if (filter.some((v) => v.status === flag.status && v.upDown === flag.upDown)) {
+                  return prev.filter((v) => v.status !== flag.status || v.upDown !== flag.upDown);
                 }
                 return [...prev, flag];
               });
@@ -170,29 +154,21 @@ function OtherSkillCheckbox() {
         return (
           <CheckBoxItem
             key={intoElementalSkillPattern(flag)}
-            name={elementalSkillPatternToJapanese(
-              intoElementalSkillPattern(flag),
-            )}
+            name={elementalSkillPatternToJapanese(intoElementalSkillPattern(flag))}
             checked={filter.some(
-              (v) =>
-                typeof v !== "string" &&
-                v.element === flag.element &&
-                v.kind === flag.kind,
+              (v) => typeof v !== "string" && v.element === flag.element && v.kind === flag.kind,
             )}
             handleChange={() => {
               setFilter((prev) => {
                 if (
                   filter.some(
                     (v) =>
-                      typeof v !== "string" &&
-                      v.element === flag.element &&
-                      v.kind === flag.kind,
+                      typeof v !== "string" && v.element === flag.element && v.kind === flag.kind,
                   )
                 ) {
                   return prev.filter(
                     (v) =>
-                      typeof v !== "string" &&
-                      (v.element !== flag.element || v.kind !== flag.kind),
+                      typeof v !== "string" && (v.element !== flag.element || v.kind !== flag.kind),
                   );
                 }
                 return [...prev, flag];
@@ -236,9 +212,7 @@ export function VanguardSupportCheckbox() {
                       return v === flag;
                     }
                     if (typeof v !== "string" && typeof flag !== "string") {
-                      return (
-                        v.status === flag.status && v.upDown === flag.upDown
-                      );
+                      return v.status === flag.status && v.upDown === flag.upDown;
                     }
                     return false;
                   })
@@ -248,9 +222,7 @@ export function VanguardSupportCheckbox() {
                       return v !== flag;
                     }
                     if (typeof v !== "string" && typeof flag !== "string") {
-                      return !(
-                        v.status === flag.status && v.upDown === flag.upDown
-                      );
+                      return !(v.status === flag.status && v.upDown === flag.upDown);
                     }
                     return true;
                   });
@@ -296,9 +268,7 @@ export function AssistSupportCheckbox() {
                       return v === flag;
                     }
                     if (typeof v !== "string" && typeof flag !== "string") {
-                      return (
-                        v.status === flag.status && v.upDown === flag.upDown
-                      );
+                      return v.status === flag.status && v.upDown === flag.upDown;
                     }
                     return false;
                   })
@@ -308,9 +278,7 @@ export function AssistSupportCheckbox() {
                       return v !== flag;
                     }
                     if (typeof v !== "string" && typeof flag !== "string") {
-                      return !(
-                        v.status === flag.status && v.upDown === flag.upDown
-                      );
+                      return !(v.status === flag.status && v.upDown === flag.upDown);
                     }
                     return true;
                   });
@@ -356,9 +324,7 @@ export function RecoverySupportCheckbox() {
                       return v === flag;
                     }
                     if (typeof v !== "string" && typeof flag !== "string") {
-                      return (
-                        v.status === flag.status && v.upDown === flag.upDown
-                      );
+                      return v.status === flag.status && v.upDown === flag.upDown;
                     }
                     return false;
                   })
@@ -368,9 +334,7 @@ export function RecoverySupportCheckbox() {
                       return v !== flag;
                     }
                     if (typeof v !== "string" && typeof flag !== "string") {
-                      return !(
-                        v.status === flag.status && v.upDown === flag.upDown
-                      );
+                      return !(v.status === flag.status && v.upDown === flag.upDown);
                     }
                     return true;
                   });
@@ -423,11 +387,7 @@ export default function Search() {
       <Button onClick={resetFilters}>リセット</Button>
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList
-            onChange={handleChange}
-            variant={"scrollable"}
-            scrollButtons="auto"
-          >
+          <TabList onChange={handleChange} variant={"scrollable"} scrollButtons="auto">
             <Tab label="ラベル" value="1" />
             <Tab label="基礎ステータス（スキル）" value="2" />
             <Tab label="属性ステータス（スキル）" value="3" />

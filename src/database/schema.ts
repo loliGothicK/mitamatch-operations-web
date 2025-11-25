@@ -1,11 +1,4 @@
-import {
-  pgTable,
-  uniqueIndex,
-  text,
-  timestamp,
-  foreignKey,
-  check,
-} from "drizzle-orm/pg-core";
+import { pgTable, uniqueIndex, text, timestamp, foreignKey, check } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { cuid2 } from "drizzle-cuid2/postgres";
 
@@ -29,10 +22,7 @@ export const users = pgTable(
       "btree",
       table.discordId.asc().nullsLast().op("text_ops"),
     ),
-    uniqueIndex("User_email_key").using(
-      "btree",
-      table.email.asc().nullsLast().op("text_ops"),
-    ),
+    uniqueIndex("User_email_key").using("btree", table.email.asc().nullsLast().op("text_ops")),
   ],
 );
 
@@ -49,10 +39,7 @@ export const decks = pgTable(
     updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
   },
   (table) => [
-    uniqueIndex("Deck_userId_key").using(
-      "btree",
-      table.userId.asc().nullsLast().op("text_ops"),
-    ),
+    uniqueIndex("Deck_userId_key").using("btree", table.userId.asc().nullsLast().op("text_ops")),
     foreignKey({
       columns: [table.userId],
       foreignColumns: [users.id],

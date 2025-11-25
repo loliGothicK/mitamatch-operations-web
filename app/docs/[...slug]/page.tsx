@@ -36,11 +36,7 @@ const Toc = () => {
   );
 };
 
-export default function Page({
-  params,
-}: {
-  params: Promise<{ slug: string[] }>;
-}) {
+export default function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   let slug: string[] = [];
 
   const DocComponent = lazy(async () => {
@@ -72,10 +68,7 @@ export default function Page({
                     slug
                       .slice(0, slug.length - 1)
                       .map((title, index) => (
-                        <Link
-                          key={title}
-                          href={`/docs/${takeLeft(index + 1)(slug).join("/")}`}
-                        >
+                        <Link key={title} href={`/docs/${takeLeft(index + 1)(slug).join("/")}`}>
                           {title}
                         </Link>
                       ))

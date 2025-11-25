@@ -2,15 +2,7 @@
 
 import { tocAtom } from "@/jotai/docsAtoms";
 import { KeyboardArrowDown, KeyboardArrowRight } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  List,
-  ListItemText,
-  Stack,
-} from "@mui/material";
+import { Box, Button, Divider, Grid, List, ListItemText, Stack } from "@mui/material";
 import { useAtom } from "jotai";
 import Link from "next/link";
 import type { PropsWithChildren } from "react";
@@ -87,10 +79,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
             <KeyboardArrowRight />
           </Button>
         )}
-        <Link
-          href={`/docs/${row.slug}`}
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
+        <Link href={`/docs/${row.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
           <ListItemText primary={row.name} style={{ marginLeft: "0.5rem" }} />
         </Link>
       </Grid>
@@ -146,12 +135,7 @@ const rows = [
  */
 export function Documents({ children }: PropsWithChildren) {
   return (
-    <Grid
-      container
-      direction={"row"}
-      style={{ minHeight: "100vh" }}
-      sx={{ my: 10 }}
-    >
+    <Grid container direction={"row"} style={{ minHeight: "100vh" }} sx={{ my: 10 }}>
       <Grid size={{ xs: 12, lg: 3 }}>
         <List
           style={{

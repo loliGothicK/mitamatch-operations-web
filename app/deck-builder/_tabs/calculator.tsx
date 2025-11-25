@@ -48,10 +48,7 @@ import { isLeft } from "fp-ts/lib/Either";
 import { isNone, isSome } from "fp-ts/Option";
 import { match } from "ts-pattern";
 import { option } from "fp-ts";
-const charmFilterAtom = atomWithStorage<("火" | "水" | "風")[]>(
-  "charmFilter",
-  [],
-);
+const charmFilterAtom = atomWithStorage<("火" | "水" | "風")[]>("charmFilter", []);
 const costumeFilterOptions = [
   "AD",
   "火",
@@ -67,9 +64,10 @@ const costumeFilterOptions = [
   "通常衣装",
   "特殊衣装",
 ] as const;
-const costumeFilterAtom = atomWithStorage<
-  (typeof costumeFilterOptions)[number][]
->("costumeFilter", []);
+const costumeFilterAtom = atomWithStorage<(typeof costumeFilterOptions)[number][]>(
+  "costumeFilter",
+  [],
+);
 
 type AdvancedSettings = {
   counter: boolean;
@@ -102,11 +100,7 @@ function AdvancedSettingsModal() {
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
-          <Typography
-            id={`modal-title-${uniqueId}`}
-            variant="h6"
-            component="h2"
-          >
+          <Typography id={`modal-title-${uniqueId}`} variant="h6" component="h2">
             Experimental
           </Typography>
           <FormGroup>
@@ -114,9 +108,7 @@ function AdvancedSettingsModal() {
               control={
                 <Checkbox
                   defaultChecked={settings.counter}
-                  onChange={(_, checked) =>
-                    setSettings((set) => ({ ...set, counter: checked }))
-                  }
+                  onChange={(_, checked) => setSettings((set) => ({ ...set, counter: checked }))}
                 />
               }
               label="カウンターを適用する"
@@ -146,12 +138,7 @@ export function Calculator() {
   const [adLevel, setAdLevel] = useAtom(adLevelAtom);
   const [settings] = useAtom(advancedSettings);
 
-  const finalStatus = calcFinalStatus(
-    [...deck, ...legendaryDeck],
-    selfStatus,
-    charm,
-    costume,
-  );
+  const finalStatus = calcFinalStatus([...deck, ...legendaryDeck], selfStatus, charm, costume);
 
   const evaluateResult = evaluate(
     [...deck, ...legendaryDeck],
@@ -204,9 +191,7 @@ export function Calculator() {
     .map(({ expected }) => expected.recovery)
     .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
 
-  for (const [type, amount] of Object.entries(supportBuff).filter(
-    ([, amount]) => !!amount,
-  )) {
+  for (const [type, amount] of Object.entries(supportBuff).filter(([, amount]) => !!amount)) {
     expectedTotalBuff.set(
       type as StatusKind,
       (expectedTotalBuff.get(type as StatusKind) || 0) +
@@ -214,9 +199,7 @@ export function Calculator() {
     );
   }
 
-  for (const [type, amount] of Object.entries(supportDebuff).filter(
-    ([, amount]) => !!amount,
-  )) {
+  for (const [type, amount] of Object.entries(supportDebuff).filter(([, amount]) => !!amount)) {
     expectedTotalDebuff.set(
       type as StatusKind,
       (expectedTotalDebuff.get(type as StatusKind) || 0) +
@@ -256,22 +239,13 @@ export function Calculator() {
       }
       return costumeFilter.every((option) => {
         if (option === "AD") {
-          return (
-            isSome(costume.specialSkill) &&
-            costume.specialSkill.value.type === "adx"
-          );
+          return isSome(costume.specialSkill) && costume.specialSkill.value.type === "adx";
         }
         if (option === "通常衣装") {
-          return (
-            costume.status.summary.particular[0] >
-            costume.status.summary.particular[1]
-          );
+          return costume.status.summary.particular[0] > costume.status.summary.particular[1];
         }
         if (option === "特殊衣装") {
-          return (
-            costume.status.summary.particular[0] <
-            costume.status.summary.particular[1]
-          );
+          return costume.status.summary.particular[0] < costume.status.summary.particular[1];
         }
         if (option === "火" || option === "水" || option === "風") {
           return (
@@ -283,9 +257,7 @@ export function Calculator() {
               .with({ type: "adx" }, (adx) =>
                 adx
                   .get({ limitBreak: 3, isAwakened: true })
-                  .some(({ description }) =>
-                    description.includes(`${option}属性効果増加`),
-                  ),
+                  .some(({ description }) => description.includes(`${option}属性効果増加`)),
               )
               .exhaustive()
           );
@@ -353,9 +325,7 @@ export function Calculator() {
           </FormGroup>
           <Autocomplete
             disablePortal
-            options={charmOptions.sort((a, b) =>
-              a.ability.localeCompare(b.ability),
-            )}
+            options={charmOptions.sort((a, b) => a.ability.localeCompare(b.ability))}
             groupBy={(option) => option.ability}
             getOptionLabel={(option) => option.title}
             renderInput={(params) => <TextField {...params} label="charm" />}
@@ -367,9 +337,7 @@ export function Calculator() {
             )}
             onChange={(_, value) => {
               if (value) {
-                setCharm(
-                  charmList.find((charm) => charm.name === value.title)!,
-                );
+                setCharm(charmList.find((charm) => charm.name === value.title)!);
               }
             }}
             sx={{ marginTop: 2 }}
@@ -381,22 +349,14 @@ export function Calculator() {
             options={costumeFilterOptions}
             multiple
             onChange={(_, value) => {
-              setCostumeFilter(
-                value as (typeof costumeFilterOptions)[number][],
-              );
+              setCostumeFilter(value as (typeof costumeFilterOptions)[number][]);
             }}
           />
-          <Grid
-            container
-            direction={"row"}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
+          <Grid container direction={"row"} justifyContent={"center"} alignItems={"center"}>
             <Grid
               size={{
                 xs:
-                  isSome(costume.specialSkill) &&
-                  costume.specialSkill.value.type === "adx"
+                  isSome(costume.specialSkill) && costume.specialSkill.value.type === "adx"
                     ? 9
                     : 12,
               }}
@@ -404,15 +364,11 @@ export function Calculator() {
               <Autocomplete
                 disablePortal
                 options={costumeOptions.sort((a, b) =>
-                  a.desc && b.desc
-                    ? a.desc.localeCompare(b.desc)
-                    : a.title.localeCompare(b.title),
+                  a.desc && b.desc ? a.desc.localeCompare(b.desc) : a.title.localeCompare(b.title),
                 )}
                 groupBy={(option) => option.desc || "その他"}
                 getOptionLabel={(option) => option.title}
-                renderInput={(params) => (
-                  <TextField {...params} label="costume" />
-                )}
+                renderInput={(params) => <TextField {...params} label="costume" />}
                 renderGroup={(params) => (
                   <li key={params.key}>
                     <GroupHeader>{params.group}</GroupHeader>
@@ -421,27 +377,22 @@ export function Calculator() {
                 )}
                 onChange={(_, value) => {
                   if (value) {
-                    setCostume(
-                      costumeList.find(
-                        (costume) => costume.name === value.title,
-                      )!,
-                    );
+                    setCostume(costumeList.find((costume) => costume.name === value.title)!);
                   }
                 }}
                 sx={{ marginTop: 2 }}
               />
             </Grid>
-            {isSome(costume.specialSkill) &&
-              costume.specialSkill.value.type === "adx" && (
-                <Grid size={{ xs: 3 }} sx={{ marginTop: 2 }}>
-                  <NumberInput
-                    defaultValue={adLevel}
-                    min={0}
-                    max={3}
-                    onChange={(value, _) => setAdLevel(value || 0)}
-                  />
-                </Grid>
-              )}
+            {isSome(costume.specialSkill) && costume.specialSkill.value.type === "adx" && (
+              <Grid size={{ xs: 3 }} sx={{ marginTop: 2 }}>
+                <NumberInput
+                  defaultValue={adLevel}
+                  min={0}
+                  max={3}
+                  onChange={(value, _) => setAdLevel(value || 0)}
+                />
+              </Grid>
+            )}
           </Grid>
         </Grid>
         <Grid size={{ xs: 12 }}>
@@ -583,9 +534,7 @@ export function Calculator() {
                 <Grid key={kind}>
                   <Typography
                     variant="body1"
-                    color={
-                      theme.palette.mode === "light" ? "darkblue" : "turquoise"
-                    }
+                    color={theme.palette.mode === "light" ? "darkblue" : "turquoise"}
                   >
                     {`${kind}/DOWN: ${expectedTotalDebuff.get(kind)!}`}
                   </Typography>
@@ -622,9 +571,7 @@ export function Calculator() {
                       <Typography
                         key={buff.type}
                         variant="body2"
-                        color={
-                          theme.palette.mode === "light" ? "darkred" : "pink"
-                        }
+                        color={theme.palette.mode === "light" ? "darkred" : "pink"}
                       >
                         {display({ ...buff, upDown: "UP" })}
                       </Typography>
@@ -635,11 +582,7 @@ export function Calculator() {
                       <Typography
                         key={debuff.type}
                         variant="body2"
-                        color={
-                          theme.palette.mode === "light"
-                            ? "darkblue"
-                            : "turquoise"
-                        }
+                        color={theme.palette.mode === "light" ? "darkblue" : "turquoise"}
                       >
                         {display({ ...debuff, upDown: "DOWN" })}
                       </Typography>

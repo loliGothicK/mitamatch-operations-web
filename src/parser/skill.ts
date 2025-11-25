@@ -12,13 +12,7 @@ import type { Amount } from "@/parser/common";
 import { pipe } from "fp-ts/function";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
 import { bail, type MitamaError, CallPath } from "@/error/error";
-import {
-  bind,
-  Do,
-  type Either,
-  getApplicativeValidation,
-  right,
-} from "fp-ts/Either";
+import { bind, Do, type Either, getApplicativeValidation, right } from "fp-ts/Either";
 import { getSemigroup } from "fp-ts/Array";
 import { sequenceS } from "fp-ts/Apply";
 import { separator, transposeArray } from "@/fp-ts-ext/function";
@@ -26,12 +20,7 @@ import { separator, transposeArray } from "@/fp-ts-ext/function";
 export const elements = ["Fire", "Water", "Wind", "Light", "Dark"] as const;
 export type Attribute = (typeof elements)[number];
 
-export const elementalKind = [
-  "Stimulation",
-  "Spread",
-  "Strengthen",
-  "Weaken",
-] as const;
+export const elementalKind = ["Stimulation", "Spread", "Strengthen", "Weaken"] as const;
 export type ElementalKind = (typeof elementalKind)[number];
 
 export type Elemental = {
@@ -39,13 +28,7 @@ export type Elemental = {
   readonly kind: ElementalKind;
 };
 
-export type SkillKind =
-  | Elemental
-  | "charge"
-  | "counter"
-  | "s-counter"
-  | "heal"
-  | "recover";
+export type SkillKind = Elemental | "charge" | "counter" | "s-counter" | "heal" | "recover";
 
 export const stackKinds = ["meteor", "barrier", "eden", "anima"] as const;
 export const elementEffectKinds = ["spread", "minima", "enhance"] as const;
@@ -102,25 +85,19 @@ export type SkillEffect =
 
 export const isDamageEffect = (effect: SkillEffect): effect is DamageEffect =>
   effect.type === "damage";
-export const isBuffEffect = (effect: SkillEffect): effect is BuffEffect =>
-  effect.type === "buff";
+export const isBuffEffect = (effect: SkillEffect): effect is BuffEffect => effect.type === "buff";
 export const isDebuffEffect = (effect: SkillEffect): effect is DebuffEffect =>
   effect.type === "debuff";
-export const isHealEffect = (effect: SkillEffect): effect is HealEffect =>
-  effect.type === "heal";
+export const isHealEffect = (effect: SkillEffect): effect is HealEffect => effect.type === "heal";
 export const isStackEffect =
   (kind?: (typeof stackKinds)[number]) =>
   (effect: SkillEffect): effect is StackEffect => {
-    return (
-      effect.type === "stack" && (kind === undefined || effect.kind === kind)
-    );
+    return effect.type === "stack" && (kind === undefined || effect.kind === kind);
   };
 export const isElementEffect =
   (kind?: (typeof elementEffectKinds)[number]) =>
   (effect: SkillEffect): effect is StackEffect => {
-    return (
-      effect.type === "element" && (kind === undefined || effect.kind === kind)
-    );
+    return effect.type === "element" && (kind === undefined || effect.kind === kind);
   };
 export const isNotStackOrElement = (
   effect: SkillEffect,
@@ -144,11 +121,7 @@ function parseRange(
 ): Validated<MitamaError, readonly [number, number]> {
   return pipe(
     separator(
-      num
-        .split("～")
-        .map((n) =>
-          parseIntSafe(n, { path: path.join("parseRange"), memoriaName }),
-        ),
+      num.split("～").map((n) => parseIntSafe(n, { path: path.join("parseRange"), memoriaName })),
     ),
     either.flatMap((range) =>
       match(range)
@@ -173,8 +146,7 @@ function parseRange(
 }
 
 const ATK_DAMAGE = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
-const ATK_EFF =
-  /(?:、自身の|、敵の|、)(.+?)[をの]((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))/;
+const ATK_EFF = /(?:、自身の|、敵の|、)(.+?)[をの]((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))/;
 
 function parseDamage(
   description: string,
@@ -219,9 +191,7 @@ function parseDamage(
                       separator(
                         status
                           .split("と")
-                          .map((s) =>
-                            parseStatus(s, { path: joined(), memoriaName }),
-                          ),
+                          .map((s) => parseStatus(s, { path: joined(), memoriaName })),
                       ),
                     ),
                     either.flatMap(({ status }) =>
@@ -285,9 +255,7 @@ function parseDamage(
             either.map((effects) => [damage as SkillEffect, ...effects]),
           ),
         ),
-        option.getOrElse(
-          (): Validated<MitamaError, SkillEffect[]> => right([damage]),
-        ),
+        option.getOrElse((): Validated<MitamaError, SkillEffect[]> => right([damage])),
       ),
     ),
   );
@@ -307,9 +275,7 @@ const parseStatChanges = (
   const joined = path.join("parseStatChanges");
   return pipe(
     pipe(
-      status
-        .split("と")
-        .map((s) => parseStatus(s, { path: joined, memoriaName })),
+      status.split("と").map((s) => parseStatus(s, { path: joined, memoriaName })),
       separator,
     ),
     either.flatMap((stats) =>
@@ -317,14 +283,8 @@ const parseStatChanges = (
         stats.map((stat) =>
           sequenceS(ap)({
             type: right(type),
-            range: parseRange(
-              range,
-              memoriaName,
-              path.join("parseStatChanges"),
-            ),
-            amount: toValidated(
-              parseAmount(eff, { path: joined, memoriaName }),
-            ),
+            range: parseRange(range, memoriaName, path.join("parseStatChanges")),
+            amount: toValidated(parseAmount(eff, { path: joined, memoriaName })),
             status: right(stat),
           }),
         ),
@@ -373,12 +333,7 @@ function parseBuff(
   memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
-  return parseBuffAndDebuff(
-    "buff",
-    description,
-    memoriaName,
-    path.join("parseBuff"),
-  );
+  return parseBuffAndDebuff("buff", description, memoriaName, path.join("parseBuff"));
 }
 
 function parseDebuff(
@@ -386,12 +341,7 @@ function parseDebuff(
   memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
-  return parseBuffAndDebuff(
-    "debuff",
-    description,
-    memoriaName,
-    path.join("parseDebuff"),
-  );
+  return parseBuffAndDebuff("debuff", description, memoriaName, path.join("parseDebuff"));
 }
 
 const RECOVERY = /味方(.+)体のHPを(.*?回復)/;
@@ -408,9 +358,7 @@ const parseRecoveryBuff = (
     fromNullable(description.match(RECOVERY_BUFF)),
     option.map(([, status, up]) =>
       pipe(
-        status
-          .split("と")
-          .map((s) => parseStatus(s, { path: joined(), memoriaName })),
+        status.split("と").map((s) => parseStatus(s, { path: joined(), memoriaName })),
         separator,
         either.flatMap(
           (statuses): Validated<MitamaError, SkillEffect[]> =>
@@ -419,9 +367,7 @@ const parseRecoveryBuff = (
                 sequenceS(ap)({
                   type: right("buff" as const),
                   range: right(range),
-                  amount: toValidated(
-                    parseAmount(up, { path: joined(), memoriaName }),
-                  ),
+                  amount: toValidated(parseAmount(up, { path: joined(), memoriaName })),
                   status: right(stat),
                 }),
               ),
@@ -434,11 +380,7 @@ const parseRecoveryBuff = (
   );
 };
 
-const parseHeal = (
-  description: string,
-  memoriaName: string,
-  path: CallPath = CallPath.empty,
-) => {
+const parseHeal = (description: string, memoriaName: string, path: CallPath = CallPath.empty) => {
   const joined = () => path.join("parseHeal");
   return pipe(
     fromNullable(description.match(RECOVERY)),
@@ -446,18 +388,14 @@ const parseHeal = (
       pipe(
         Do,
         bind("range", () => parseRange(range, memoriaName, joined())),
-        bind("buff", ({ range }) =>
-          parseRecoveryBuff(range, description, memoriaName, joined()),
-        ),
+        bind("buff", ({ range }) => parseRecoveryBuff(range, description, memoriaName, joined())),
         bind(
           "recovery",
           ({ range }): Validated<MitamaError, SkillEffect> =>
             sequenceS(ap)({
               type: right("heal" as const),
               range: right(range),
-              amount: toValidated(
-                parseAmount(heal, { path: joined(), memoriaName }),
-              ),
+              amount: toValidated(parseAmount(heal, { path: joined(), memoriaName })),
             }),
         ),
         either.map(({ recovery, buff }) => [recovery, ...buff]),
@@ -476,11 +414,9 @@ const parseHeal = (
 
 const STACK_TYPE = {
   meteor: /「次の攻撃時にダメージが(?<rate>\d+)%アップするスタック」/,
-  barrier:
-    /「次の被ダメージ時に被ダメージを(?<rate>\d+)%ダウンさせるスタック」/,
+  barrier: /「次の被ダメージ時に被ダメージを(?<rate>\d+)%ダウンさせるスタック」/,
   eden: /「次の回復時に回復効果が(?<rate>\d+)%アップするスタック」/,
-  anima:
-    /「次の支援\/妨害時に支援\/妨害効果が(?<rate>\d+)%アップするスタック」/,
+  anima: /「次の支援\/妨害時に支援\/妨害効果が(?<rate>\d+)%アップするスタック」/,
 };
 const NUMBER_OF_STACK = /を(?<numberOf>\d)回蓄積/;
 
@@ -508,22 +444,16 @@ const parseStackEffect =
               rate: pipe(
                 match?.groups?.rate,
                 either.fromNullable(err("`groups.rate` does not exists")),
-                either.flatMap((rate) =>
-                  parseIntSafe(rate, { path: joined(), memoriaName }),
-                ),
+                either.flatMap((rate) => parseIntSafe(rate, { path: joined(), memoriaName })),
                 toValidated,
               ),
               times: pipe(
                 description.match(NUMBER_OF_STACK),
-                either.fromNullable(
-                  err(`given text doesn't match ${NUMBER_OF_STACK}`),
-                ),
+                either.fromNullable(err(`given text doesn't match ${NUMBER_OF_STACK}`)),
                 either.flatMap((match) =>
                   pipe(
                     match?.groups?.numberOf,
-                    either.fromNullable(
-                      err("`groups.numberOf` does not exists"),
-                    ),
+                    either.fromNullable(err("`groups.numberOf` does not exists")),
                     either.flatMap((numberOf) =>
                       parseIntSafe(numberOf, { path: joined(), memoriaName }),
                     ),
@@ -554,58 +484,31 @@ function parseStack(
   return match(name)
     .when(
       (name) => name.includes("メテオ"),
-      () =>
-        parseStackEffect(["meteor"])(
-          description,
-          memoriaName,
-          branch("meteor"),
-        ),
+      () => parseStackEffect(["meteor"])(description, memoriaName, branch("meteor")),
     )
     .when(
       (name) => name.includes("バリア"),
-      () =>
-        parseStackEffect(["barrier"])(
-          description,
-          memoriaName,
-          branch("barrier"),
-        ),
+      () => parseStackEffect(["barrier"])(description, memoriaName, branch("barrier")),
     )
     .when(
       (name) => name.includes("エデン"),
-      () =>
-        parseStackEffect(["eden"])(description, memoriaName, branch("eden")),
+      () => parseStackEffect(["eden"])(description, memoriaName, branch("eden")),
     )
     .when(
       (name) => name.includes("アニマ"),
-      () =>
-        parseStackEffect(["anima"])(description, memoriaName, branch("anima")),
+      () => parseStackEffect(["anima"])(description, memoriaName, branch("anima")),
     )
     .when(
       (name) => name.includes("コメット"),
-      () =>
-        parseStackEffect(["meteor", "barrier"])(
-          description,
-          memoriaName,
-          branch("comet"),
-        ),
+      () => parseStackEffect(["meteor", "barrier"])(description, memoriaName, branch("comet")),
     )
     .when(
       (name) => name.includes("エーテル"),
-      () =>
-        parseStackEffect(["anima", "meteor"])(
-          description,
-          memoriaName,
-          branch("ether"),
-        ),
+      () => parseStackEffect(["anima", "meteor"])(description, memoriaName, branch("ether")),
     )
     .when(
       (name) => name.includes("ルミナス"),
-      () =>
-        parseStackEffect(["anima", "barrier"])(
-          description,
-          memoriaName,
-          branch("luminous"),
-        ),
+      () => parseStackEffect(["anima", "barrier"])(description, memoriaName, branch("luminous")),
     )
     .otherwise(() => right([]));
 }
@@ -617,9 +520,7 @@ function parseElementEffect(
   memoriaName: string,
   path: CallPath = CallPath.empty,
 ): Validated<MitamaError, SkillEffect[]> {
-  const parseResonanceType = (
-    name: string,
-  ): Either<MitamaError, ElementEffect["kind"][]> => {
+  const parseResonanceType = (name: string): Either<MitamaError, ElementEffect["kind"][]> => {
     if (name.includes("ミニマ") || name.includes("Mn")) {
       return right(["minima" as const]);
     }
@@ -798,15 +699,9 @@ const parseKinds = (skillName: string): Option<readonly SkillKind[]> => {
     )
     .otherwise(() => option.none);
 
-  const charge = skillName.includes("チャージ")
-    ? option.of("charge" as SkillKind)
-    : option.none;
-  const heal = skillName.includes("ヒール")
-    ? option.of("heal" as SkillKind)
-    : option.none;
-  const recover = skillName.includes("リカバー")
-    ? option.of("recover" as SkillKind)
-    : option.none;
+  const charge = skillName.includes("チャージ") ? option.of("charge" as SkillKind) : option.none;
+  const heal = skillName.includes("ヒール") ? option.of("heal" as SkillKind) : option.none;
+  const recover = skillName.includes("リカバー") ? option.of("recover" as SkillKind) : option.none;
 
   return transposeArray([elemental, counter, charge, heal, recover]);
 };
@@ -817,14 +712,7 @@ export const parseSkill = ({
   skill,
 }: {
   memoriaName: string;
-  cardType:
-    | "通常単体"
-    | "通常範囲"
-    | "特殊単体"
-    | "特殊範囲"
-    | "支援"
-    | "妨害"
-    | "回復";
+  cardType: "通常単体" | "通常範囲" | "特殊単体" | "特殊範囲" | "支援" | "妨害" | "回復";
   skill: { name: string; description: string; sp: number };
 }): Validated<MitamaError, Skill> => {
   const path = new CallPath(["parseSkill"]);
@@ -844,17 +732,9 @@ export const parseSkill = ({
           .exhaustive(),
       ),
       either.bind("stack", () => parseStack(skill, memoriaName, path)),
-      either.bind("elementEffect", () =>
-        parseElementEffect(skill, memoriaName, path),
-      ),
-      either.map(({ effects, stack, elementEffect }) => [
-        ...effects,
-        ...stack,
-        ...elementEffect,
-      ]),
+      either.bind("elementEffect", () => parseElementEffect(skill, memoriaName, path)),
+      either.map(({ effects, stack, elementEffect }) => [...effects, ...stack, ...elementEffect]),
     ),
-    kinds: right(
-      option.getOrElse((): readonly SkillKind[] => [])(parseKinds(skill.name)),
-    ),
+    kinds: right(option.getOrElse((): readonly SkillKind[] => [])(parseKinds(skill.name))),
   });
 };

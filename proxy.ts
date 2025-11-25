@@ -19,9 +19,7 @@ export default async function proxy(req: NextRequest) {
 
   // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname;
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    path.startsWith(route),
-  );
+  const isProtectedRoute = protectedRoutes.some((route) => path.startsWith(route));
 
   if (!isProtectedRoute) {
     return NextResponse.next();
@@ -70,9 +68,7 @@ const NONCE_BIT_LENGTH = 128;
 // Nonceの生成
 // Node.jsのAPIは利用できないので、Web Crypto APIを使用
 function generateNonce(): string {
-  return bufferToHex(
-    crypto.getRandomValues(new Uint8Array(NONCE_BIT_LENGTH / 8)),
-  );
+  return bufferToHex(crypto.getRandomValues(new Uint8Array(NONCE_BIT_LENGTH / 8)));
 }
 
 // CSPヘッダの生成

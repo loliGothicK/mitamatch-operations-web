@@ -58,17 +58,11 @@ export type OtherSkillSearch =
   | Elemental
   | (typeof elementEffectKinds)[number]
   | (typeof stackKinds)[number];
-export type ElementalSkillPattern =
-  `${Elemental["element"]}/${Elemental["kind"]}`;
-export function intoElementalSkillPattern({
-  element,
-  kind,
-}: Elemental): ElementalSkillPattern {
+export type ElementalSkillPattern = `${Elemental["element"]}/${Elemental["kind"]}`;
+export function intoElementalSkillPattern({ element, kind }: Elemental): ElementalSkillPattern {
   return `${element}/${kind}`;
 }
-export function elementalSkillPatternToJapanese(
-  pattern: ElementalSkillPattern,
-) {
+export function elementalSkillPatternToJapanese(pattern: ElementalSkillPattern) {
   const [element, kind] = pattern.split("/");
   const first = match(element as unknown as Attribute)
     .with("Fire", () => "火")
@@ -98,9 +92,7 @@ export function allOtherSkillSearch(): OtherSkillSearch[] {
     "spread",
     "enhance",
     "minima",
-    ...elementalKind.flatMap((kind) =>
-      elements.map((element) => ({ kind, element })),
-    ),
+    ...elementalKind.flatMap((kind) => elements.map((element) => ({ kind, element }))),
   ];
 }
 
@@ -111,27 +103,16 @@ export type VanguardSupportSearch =
   | ElementStatusSearch;
 
 export function allVanguardSupportSearch(): VanguardSupportSearch[] {
-  return [
-    "MatchPtUp",
-    "DamageUp",
-    ...allBasicStatusSearch(),
-    ...allElementStatusSearch(),
-  ];
+  return ["MatchPtUp", "DamageUp", ...allBasicStatusSearch(), ...allElementStatusSearch()];
 }
 
-export type AssistSupportSearch =
-  | "SupportUp"
-  | BasicStatusSearch
-  | ElementStatusSearch;
+export type AssistSupportSearch = "SupportUp" | BasicStatusSearch | ElementStatusSearch;
 
 export function allAssistSupportSearch(): AssistSupportSearch[] {
   return ["SupportUp", ...allBasicStatusSearch(), ...allElementStatusSearch()];
 }
 
-export type RecoverySupportSearch =
-  | "RecoveryUp"
-  | BasicStatusSearch
-  | ElementStatusSearch;
+export type RecoverySupportSearch = "RecoveryUp" | BasicStatusSearch | ElementStatusSearch;
 
 export function allRecoverySupportSearch(): RecoverySupportSearch[] {
   return ["RecoveryUp", ...allBasicStatusSearch(), ...allElementStatusSearch()];

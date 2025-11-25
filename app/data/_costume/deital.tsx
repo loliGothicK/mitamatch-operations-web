@@ -84,10 +84,7 @@ function StatusTable({
         </TableHead>
         <TableBody>
           {raw.map((row, index) => (
-            <TableRow
-              key={index}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
+            <TableRow key={index} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
               <TableCell component="th" scope="row">
                 {`Level ${index}`}
               </TableCell>
@@ -95,9 +92,7 @@ function StatusTable({
                 <TableCell key={`${index}=>${value}`} align="right">
                   {row
                     .filter(
-                      (skill) =>
-                        skill.jobSkillType === value ||
-                        skill.jobSkillType === value + 6,
+                      (skill) => skill.jobSkillType === value || skill.jobSkillType === value + 6,
                     )
                     .reduce((acc, skill) => acc + skill.value, 0)}
                 </TableCell>
@@ -163,11 +158,7 @@ function RareSkill({ costume: { rareSkill } }: { costume: Costume }) {
             )}
           </Box>
           <Divider sx={{ margin: 2 }} />
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            sx={{ margin: 2 }}
-          >
+          <Typography variant="subtitle1" color="text.secondary" sx={{ margin: 2 }}>
             {rareSkill.description}
           </Typography>
           {rareSkill.note && <Info margin={2}>{rareSkill.note}</Info>}
@@ -191,10 +182,7 @@ function Basic({ costume }: { costume: Costume }) {
           <Typography component="div" variant="h5">
             {costume.name}
           </Typography>
-          <Chip
-            label={costume.cardType}
-            sx={{ marginLeft: "auto", marginTop: 2 }}
-          />
+          <Chip label={costume.cardType} sx={{ marginLeft: "auto", marginTop: 2 }} />
         </CardContent>
       </Box>
     </Card>
@@ -213,11 +201,7 @@ function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
   return (
     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
       <Box>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="突破 0" {...a11yProps(0)} />
           <Tab label="突破 1" {...a11yProps(1)} />
           <Tab label="突破 2" {...a11yProps(2)} />
@@ -235,19 +219,12 @@ function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
             }}
           >
             覚醒
-            <Checkbox
-              onChange={() => setIsAwakened(!isAwakened)}
-              defaultChecked
-            />
+            <Checkbox onChange={() => setIsAwakened(!isAwakened)} defaultChecked />
           </Box>
         )}
       {[0, 1, 2, 3].map((limitBreak) => {
         return (
-          <CustomTabPanel
-            key={`tab-${limitBreak}`}
-            value={value}
-            index={limitBreak}
-          >
+          <CustomTabPanel key={`tab-${limitBreak}`} value={value} index={limitBreak}>
             {get({ limitBreak, isAwakened }).map(({ name, description }) => {
               return (
                 <Card>
@@ -288,13 +265,7 @@ function ExSkill({ ex }: { ex: Ex }) {
   );
 }
 
-function SkillTabs({
-  specialSkill,
-  costume,
-}: {
-  specialSkill: Adx | Ex;
-  costume: Costume;
-}) {
+function SkillTabs({ specialSkill, costume }: { specialSkill: Adx | Ex; costume: Costume }) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
@@ -316,11 +287,7 @@ function SkillTabs({
         {"詳細"}
       </Divider>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label={label} {...a11yProps(0)} />
           <Tab label="ステータス" {...a11yProps(1)} />
         </Tabs>
@@ -366,9 +333,7 @@ function DetailData({ costume }: { costume: Costume }) {
 }
 
 export default function Deital({ lily, job }: { lily: string; job: string }) {
-  const costume = costumeList.find(
-    (costume) => costume.name === `${lily}/${job}`,
-  );
+  const costume = costumeList.find((costume) => costume.name === `${lily}/${job}`);
 
   if (costume === undefined) return <NotFound />;
 

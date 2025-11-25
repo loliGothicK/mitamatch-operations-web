@@ -1,24 +1,12 @@
 import type { Charm } from "@/domain/charm/charm";
 import type { Costume } from "@/domain/costume/costume";
 import type { MemoriaId } from "@/domain/memoria/memoria";
-import type {
-  Concentration,
-  MemoriaWithConcentration,
-} from "@/jotai/memoriaAtoms";
-import {
-  type Amount,
-  parseElement,
-  parseIntSafe,
-  type StatusKind,
-} from "@/parser/common";
+import type { Concentration, MemoriaWithConcentration } from "@/jotai/memoriaAtoms";
+import { type Amount, parseElement, parseIntSafe, type StatusKind } from "@/parser/common";
 import type { Probability } from "@/parser/autoSkill";
 import { P, match } from "ts-pattern";
 import { Lenz } from "@/domain/lenz";
-import {
-  type Attribute,
-  isDamageEffect,
-  isNotStackOrElement,
-} from "@/parser/skill";
+import { type Attribute, isDamageEffect, isNotStackOrElement } from "@/parser/skill";
 import { fromNullable, Option } from "fp-ts/Option";
 import { pipe } from "fp-ts/function";
 import { getApplicativeValidation, isLeft, left, right } from "fp-ts/Either";
@@ -36,8 +24,7 @@ function ToBeDefined(hint: string): never {
   throw new Error(`Not implemented: ${hint}`);
 }
 
-const ABILITY =
-  /メモリア使用時、それが(.+)属性メモリアの場合、さらにメモリアスキル効果UP\+(\d+)%/;
+const ABILITY = /メモリア使用時、それが(.+)属性メモリアの場合、さらにメモリアスキル効果UP\+(\d+)%/;
 
 function parseAbility(description?: string): Map<string, number> {
   const result = new Map<string, number>([
@@ -85,17 +72,14 @@ const themeEffects: Map<Attribute, BattleEffect[]> = new Map([
 ]);
 
 const EFFECT_UP = /自身が使用する(.+)属性メモリアのスキル効果(\d+)%UP/;
-const TRIGGER_RATE_UP =
-  /自身が使用する(.+?)属性メモリアの補助スキル発動確率が(\d+)％UP/;
+const TRIGGER_RATE_UP = /自身が使用する(.+?)属性メモリアの補助スキル発動確率が(\d+)％UP/;
 
 function parseEffectUp(
   description: string,
 ): ValidateResult<{ attribute: Attribute; effect: BattleEffect }> {
   return pipe(
     fromNullable(description.match(EFFECT_UP)),
-    either.fromOption(() => [
-      anyhow(description, `Does not match ${EFFECT_UP}`),
-    ]),
+    either.fromOption(() => [anyhow(description, `Does not match ${EFFECT_UP}`)]),
     either.flatMap(([, attribute, rate]) =>
       sequenceS(ap)({
         attribute: toValidated(parseElement(attribute)),
@@ -113,9 +97,7 @@ function parseRateUp(
 ): ValidateResult<{ attribute: Attribute; effect: BattleEffect }> {
   return pipe(
     fromNullable(description.match(TRIGGER_RATE_UP)),
-    either.fromOption(() => [
-      anyhow(description, `Does not match ${TRIGGER_RATE_UP}`),
-    ]),
+    either.fromOption(() => [anyhow(description, `Does not match ${TRIGGER_RATE_UP}`)]),
     either.flatMap(([, attribute, rate]) =>
       sequenceS(ap)({
         attribute: toValidated(parseElement(attribute)),
@@ -140,22 +122,19 @@ function parseSpecialSkillEffect(
       special,
       option.map((special) =>
         match(special)
-          .with(
-            { type: "ex" },
-            ({ skills }): ValidateResult<SpSkikkEff> => {
-              return pipe(
-                skills.map(({ description }) => parseEffectUp(description)),
-                separator,
-                either.map((effects) =>
-                  effects.reduce(
-                    (acc, { attribute, effect }) =>
-                      acc.set(attribute, [effect, ...(acc.get(attribute) ?? [])]),
-                    new Map(),
-                  ),
+          .with({ type: "ex" }, ({ skills }): ValidateResult<SpSkikkEff> => {
+            return pipe(
+              skills.map(({ description }) => parseEffectUp(description)),
+              separator,
+              either.map((effects) =>
+                effects.reduce(
+                  (acc, { attribute, effect }) =>
+                    acc.set(attribute, [effect, ...(acc.get(attribute) ?? [])]),
+                  new Map(),
                 ),
-              );
-            },
-          )
+              ),
+            );
+          })
           .with({ type: "adx" }, ({ get }): ValidateResult<SpSkikkEff> => {
             return pipe(
               get({ limitBreak, isAwakened }).map(({ description }) =>
@@ -202,10 +181,7 @@ function _level(amount: Amount): number {
     .exhaustive();
 }
 
-function _probability(
-  probability: Probability,
-  concentration: Concentration,
-): number {
+function _probability(probability: Probability, concentration: Concentration): number {
   return match(probability)
     .with("certain", () =>
       match(concentration)
@@ -254,17 +230,11 @@ type EvaluateResult = {
     };
   }[];
   readonly supportBuff: Record<
-    Exclude<
-      StatusKind,
-      "Light ATK" | "Dark ATK" | "Light DEF" | "Dark DEF" | "Life"
-    >,
+    Exclude<StatusKind, "Light ATK" | "Dark ATK" | "Light DEF" | "Dark DEF" | "Life">,
     number
   >;
   readonly supportDebuff: Record<
-    Exclude<
-      StatusKind,
-      "Light ATK" | "Dark ATK" | "Light DEF" | "Dark DEF" | "Life"
-    >,
+    Exclude<StatusKind, "Light ATK" | "Dark ATK" | "Light DEF" | "Dark DEF" | "Life">,
     number
   >;
 };
@@ -279,31 +249,17 @@ export function evaluate(
   options: EvaluateOptions = {},
 ): ValidateResult<EvaluateResult> {
   const themeRate = {
-    Fire:
-      themeEffects.get("Fire")?.find(({ type }) => type === "skill")?.value ||
-      1.0,
-    Water:
-      themeEffects.get("Water")?.find(({ type }) => type === "skill")?.value ||
-      1.0,
-    Wind:
-      themeEffects.get("Wind")?.find(({ type }) => type === "skill")?.value ||
-      1.0,
-    Light:
-      themeEffects.get("Light")?.find(({ type }) => type === "skill")?.value ||
-      1.0,
-    Dark:
-      themeEffects.get("Dark")?.find(({ type }) => type === "skill")?.value ||
-      1.0,
+    Fire: themeEffects.get("Fire")?.find(({ type }) => type === "skill")?.value || 1.0,
+    Water: themeEffects.get("Water")?.find(({ type }) => type === "skill")?.value || 1.0,
+    Wind: themeEffects.get("Wind")?.find(({ type }) => type === "skill")?.value || 1.0,
+    Light: themeEffects.get("Light")?.find(({ type }) => type === "skill")?.value || 1.0,
+    Dark: themeEffects.get("Dark")?.find(({ type }) => type === "skill")?.value || 1.0,
   };
   const graceRate = 1.1;
   const charmRate = 1.1;
   const charmEx = parseAbility(charm?.ability);
   const costumeRate = 1.15;
-  const costumeSpecial = parseSpecialSkillEffect(
-    costume.specialSkill,
-    limitBraek,
-    isAwakened,
-  );
+  const costumeSpecial = parseSpecialSkillEffect(costume.specialSkill, limitBraek, isAwakened);
 
   if (isLeft(costumeSpecial)) {
     return left(costumeSpecial.left);
@@ -318,21 +274,11 @@ export function evaluate(
       Dark: 0.0,
     }))
     .otherwise(({ value }) => ({
-      Fire:
-        value.get("Fire")?.find(({ type }) => type === "autoSkill")?.value ||
-        0.0,
-      Water:
-        value.get("Water")?.find(({ type }) => type === "autoSkill")?.value ||
-        0.0,
-      Wind:
-        value.get("Wind")?.find(({ type }) => type === "autoSkill")?.value ||
-        0.0,
-      Light:
-        value.get("Light")?.find(({ type }) => type === "autoSkill")?.value ||
-        0.0,
-      Dark:
-        value.get("Dark")?.find(({ type }) => type === "autoSkill")?.value ||
-        0.0,
+      Fire: value.get("Fire")?.find(({ type }) => type === "autoSkill")?.value || 0.0,
+      Water: value.get("Water")?.find(({ type }) => type === "autoSkill")?.value || 0.0,
+      Wind: value.get("Wind")?.find(({ type }) => type === "autoSkill")?.value || 0.0,
+      Light: value.get("Light")?.find(({ type }) => type === "autoSkill")?.value || 0.0,
+      Dark: value.get("Dark")?.find(({ type }) => type === "autoSkill")?.value || 0.0,
     }));
 
   const costumeRateUp: Record<Attribute, number> = match(costumeSpecial.right)
@@ -344,16 +290,11 @@ export function evaluate(
       Dark: 0.0,
     }))
     .otherwise(({ value }) => ({
-      Fire:
-        value.get("Fire")?.find(({ type }) => type === "skill")?.value || 0.0,
-      Water:
-        value.get("Water")?.find(({ type }) => type === "skill")?.value || 0.0,
-      Wind:
-        value.get("Wind")?.find(({ type }) => type === "skill")?.value || 0.0,
-      Light:
-        value.get("Light")?.find(({ type }) => type === "skill")?.value || 0.0,
-      Dark:
-        value.get("Dark")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Fire: value.get("Fire")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Water: value.get("Water")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Wind: value.get("Wind")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Light: value.get("Light")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Dark: value.get("Dark")?.find(({ type }) => type === "skill")?.value || 0.0,
     }));
 
   const skill = deck.map((memoria) => {
@@ -365,9 +306,7 @@ export function evaluate(
       .with(4, () => 1.5)
       .exhaustive();
 
-    const ranged = Lenz.memoria.gvgSkill.effects
-      .get(memoria)
-      .find(isNotStackOrElement);
+    const ranged = Lenz.memoria.gvgSkill.effects.get(memoria).find(isNotStackOrElement);
     const range = match(ranged?.range)
       .with([P._, P._], ([a, b]) => (a + b) / 2)
       .run();
@@ -376,13 +315,9 @@ export function evaluate(
       1.0 -
       deck
         .map((memoria) => Lenz.memoria.general.autoSkill.get(memoria))
-        .filter((support) =>
-          support.effects.some((effect) => effect.type === "RangeUp"),
-        )
+        .filter((support) => support.effects.some((effect) => effect.type === "RangeUp"))
         .map((rangeUp) => {
-          const up = rangeUp.effects.find(
-            (effect) => effect.type === "RangeUp",
-          );
+          const up = rangeUp.effects.find((effect) => effect.type === "RangeUp");
           if (!up) {
             return 0;
           }
@@ -394,11 +329,7 @@ export function evaluate(
             .with(4, () => 0.15)
             .exhaustive();
         })
-        .reduce(
-          (acc: number, cur: number) =>
-            acc * (1.0 - cur - adx[memoria.attribute]),
-          1.0,
-        );
+        .reduce((acc: number, cur: number) => acc * (1.0 - cur - adx[memoria.attribute]), 1.0);
 
     const calibration =
       charmRate *
@@ -449,11 +380,7 @@ function damage(
   { calibration, skillLevel, range, memoria, deck, adx }: Config,
   { counter: enableCounter, stack }: EvaluateOptions,
 ): number | undefined {
-  if (
-    !Lenz.memoria.gvgSkill.effects
-      .get(memoria)
-      .some((effect) => effect.type === "damage")
-  ) {
+  if (!Lenz.memoria.gvgSkill.effects.get(memoria).some((effect) => effect.type === "damage")) {
     return undefined;
   }
 
@@ -472,17 +399,14 @@ function damage(
     Dark: 1,
   };
 
-  for (const memoria of deck.filter(
-    (memoria) => memoria.skills.legendary !== undefined,
-  )) {
+  for (const memoria of deck.filter((memoria) => memoria.skills.legendary !== undefined)) {
     match(memoria.skills.legendary)
       .when(
         (legendary) =>
           legendary?.skill.attributes.includes("Fire") &&
           legendary?.skill.trigger === "Attack/Physical",
         () => {
-          normalLegendary.Fire +=
-            memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
+          normalLegendary.Fire += memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
@@ -499,8 +423,7 @@ function damage(
           legendary?.skill.attributes.includes("Wind") &&
           legendary?.skill.trigger === "Attack/Physical",
         () => {
-          normalLegendary.Wind +=
-            memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
+          normalLegendary.Wind += memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
@@ -534,19 +457,11 @@ function damage(
   }
 
   const finalCalibration = match(memoria.cardType)
-    .with(
-      P.union("通常単体", "通常範囲"),
-      () => calibration * normalLegendary[memoria.attribute],
-    )
-    .with(
-      P.union("特殊単体", "特殊範囲"),
-      () => calibration * specialLegendary[memoria.attribute],
-    )
+    .with(P.union("通常単体", "通常範囲"), () => calibration * normalLegendary[memoria.attribute])
+    .with(P.union("特殊単体", "特殊範囲"), () => calibration * specialLegendary[memoria.attribute])
     .otherwise(() => calibration);
 
-  const amount = Lenz.memoria.gvgSkill.effects
-    .get(memoria)
-    .find(isDamageEffect)?.amount;
+  const amount = Lenz.memoria.gvgSkill.effects.get(memoria).find(isDamageEffect)?.amount;
 
   if (!amount) {
     return undefined;
@@ -562,9 +477,7 @@ function damage(
           .with("extra-large", () => 13.5 / 100)
           .with("large", () => 11.5 / 100)
           .with("medium", () => 10.0 / 100)
-          .otherwise(() =>
-            ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-          ),
+          .otherwise(() => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))),
     )
     .when(
       (kind) => kind.includes("範囲"),
@@ -575,22 +488,14 @@ function damage(
           .with("large", () => 10.0 / 100)
           .with("medium", () => 8.5 / 100)
           .with("small", () => 7.0 / 100)
-          .otherwise(() =>
-            ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-          ),
+          .otherwise(() => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))),
     )
     .otherwise(() => {
       throw new Error("Invalid kind");
     });
 
   const support = deck
-    .map(
-      (memoria) =>
-        [
-          Lenz.memoria.general.autoSkill.get(memoria),
-          memoria.concentration,
-        ] as const,
-    )
+    .map((memoria) => [Lenz.memoria.general.autoSkill.get(memoria), memoria.concentration] as const)
     .map(([support, concentration]) => {
       const up = support.effects.find((effect) => effect.type === "DamageUp");
       if (!up) {
@@ -604,16 +509,11 @@ function damage(
 
   const memoriaRate = skillRate * skillLevel;
   const counter =
-    enableCounter &&
-    Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
-      ? 1.5
-      : 1.0;
+    enableCounter && Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター") ? 1.5 : 1.0;
   const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
 
   return Math.floor(
-    (memoria.cardType.includes("通常")
-      ? atk - (2 / 3) * opDef
-      : spAtk - (2 / 3) * opSpDef) *
+    (memoria.cardType.includes("通常") ? atk - (2 / 3) * opDef : spAtk - (2 / 3) * opSpDef) *
       memoriaRate *
       finalCalibration *
       support *
@@ -633,11 +533,7 @@ function buff(
       amount: number;
     }[]
   | undefined {
-  if (
-    !Lenz.memoria.gvgSkill.effects
-      .get(memoria)
-      .some((effect) => effect.type === "buff")
-  ) {
+  if (!Lenz.memoria.gvgSkill.effects.get(memoria).some((effect) => effect.type === "buff")) {
     return undefined;
   }
 
@@ -663,14 +559,11 @@ function buff(
     Dark: 1,
   };
 
-  for (const memoria of deck.filter(
-    (memoria) => memoria.skills.legendary !== undefined,
-  )) {
+  for (const memoria of deck.filter((memoria) => memoria.skills.legendary !== undefined)) {
     match(memoria.skills.legendary)
       .when(
         (legendary) =>
-          legendary?.skill.attributes.includes("Fire") &&
-          legendary?.skill.trigger === "Assist",
+          legendary?.skill.attributes.includes("Fire") && legendary?.skill.trigger === "Assist",
         () => {
           supportLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -678,8 +571,7 @@ function buff(
       )
       .when(
         (legendary) =>
-          legendary?.skill.attributes.includes("Water") &&
-          legendary?.skill.trigger === "Assist",
+          legendary?.skill.attributes.includes("Water") && legendary?.skill.trigger === "Assist",
         () => {
           supportLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -687,8 +579,7 @@ function buff(
       )
       .when(
         (legendary) =>
-          legendary?.skill.attributes.includes("Wind") &&
-          legendary?.skill.trigger === "Assist",
+          legendary?.skill.attributes.includes("Wind") && legendary?.skill.trigger === "Assist",
         () => {
           supportLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -699,8 +590,7 @@ function buff(
           legendary?.skill.attributes.includes("Fire") &&
           legendary?.skill.trigger === "Attack/Physical",
         () => {
-          normalLegendary.Fire +=
-            memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
+          normalLegendary.Fire += memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
@@ -717,8 +607,7 @@ function buff(
           legendary?.skill.attributes.includes("Wind") &&
           legendary?.skill.trigger === "Attack/Physical",
         () => {
-          normalLegendary.Wind +=
-            memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
+          normalLegendary.Wind += memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
@@ -752,18 +641,9 @@ function buff(
   }
 
   const finalCalibration = match(memoria.cardType)
-    .with(
-      P.union("通常単体", "通常範囲"),
-      () => calibration * normalLegendary[memoria.attribute],
-    )
-    .with(
-      P.union("特殊単体", "特殊範囲"),
-      () => calibration * specialLegendary[memoria.attribute],
-    )
-    .with(
-      P.union("支援", "妨害"),
-      () => calibration * supportLegendary[memoria.attribute],
-    )
+    .with(P.union("通常単体", "通常範囲"), () => calibration * normalLegendary[memoria.attribute])
+    .with(P.union("特殊単体", "特殊範囲"), () => calibration * specialLegendary[memoria.attribute])
+    .with(P.union("支援", "妨害"), () => calibration * supportLegendary[memoria.attribute])
     .with("回復", () => calibration)
     .exhaustive();
 
@@ -773,23 +653,15 @@ function buff(
       : deck
           .map(
             (memoria) =>
-              [
-                Lenz.memoria.general.autoSkill.get(memoria),
-                memoria.concentration,
-              ] as const,
+              [Lenz.memoria.general.autoSkill.get(memoria), memoria.concentration] as const,
           )
           .map(([support, concentration]) => {
-            const up = support.effects.find(
-              (effect) => effect.type === "SupportUp",
-            );
+            const up = support.effects.find((effect) => effect.type === "SupportUp");
             if (!up) {
               return 0;
             }
             const level = _level(up.amount);
-            const probability = _probability(
-              support.probability,
-              concentration,
-            );
+            const probability = _probability(support.probability, concentration);
             return level * (probability + adx[memoria.attribute]);
           })
           .reduce((acc, cur) => acc + cur, 1);
@@ -799,10 +671,7 @@ function buff(
     .filter((effect) => effect.type === "buff")
     .map(({ amount, status }) => {
       const counter =
-        enableCounter &&
-        Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
-          ? 1.5
-          : 1.0;
+        enableCounter && Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター") ? 1.5 : 1.0;
       const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
       return match(status!)
         .with("ATK", () => {
@@ -812,9 +681,7 @@ function buff(
             .with("large", () => 3.04 / 100)
             .with("extra-large", () => 3.8 / 100)
             .with("super-large", () => 4.27 / 100)
-            .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
             .with("super-ultra-large", () =>
               ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
@@ -823,13 +690,7 @@ function buff(
           return {
             type: status!,
             amount: Math.floor(
-              atk *
-                memoriaRate *
-                finalCalibration *
-                support *
-                range *
-                counter *
-                stackRate,
+              atk * memoriaRate * finalCalibration * support * range * counter * stackRate,
             ),
           };
         })
@@ -840,9 +701,7 @@ function buff(
             .with("large", () => 3.04 / 100)
             .with("extra-large", () => 3.8 / 100)
             .with("super-large", () => 4.27 / 100)
-            .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
             .with("super-ultra-large", () =>
               ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
@@ -851,13 +710,7 @@ function buff(
           return {
             type: status!,
             amount: Math.floor(
-              spAtk *
-                memoriaRate *
-                finalCalibration *
-                support *
-                range *
-                counter *
-                stackRate,
+              spAtk * memoriaRate * finalCalibration * support * range * counter * stackRate,
             ),
           };
         })
@@ -868,9 +721,7 @@ function buff(
             .with("large", () => 4.75 / 100)
             .with("extra-large", () => 5.22 / 100)
             .with("super-large", () => 5.75) // TODO
-            .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // TBD
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // TBD
             .with("super-ultra-large", () =>
               ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
@@ -879,13 +730,7 @@ function buff(
           return {
             type: status!,
             amount: Math.floor(
-              def *
-                memoriaRate *
-                finalCalibration *
-                support *
-                range *
-                counter *
-                stackRate,
+              def * memoriaRate * finalCalibration * support * range * counter * stackRate,
             ),
           };
         })
@@ -896,9 +741,7 @@ function buff(
             .with("large", () => 4.75 / 100)
             .with("extra-large", () => 5.22 / 100)
             .with("super-large", () => 5.75) // TODO
-            .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
             .with("super-ultra-large", () =>
               ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
@@ -907,7 +750,27 @@ function buff(
           return {
             type: status!,
             amount: Math.floor(
-              spDef *
+              spDef * memoriaRate * finalCalibration * support * range * counter * stackRate,
+            ),
+          };
+        })
+        .with(P.union("Fire ATK", "Water ATK", "Wind ATK", "Light ATK", "Dark ATK"), () => {
+          const skillRate = match(amount!)
+            .with("small", () => 3.25 / 100)
+            .with("medium", () => 4.0 / 100)
+            .with("large", () => 4.89 / 100)
+            .with("extra-large", () => 5.51 / 100) // 戦場の一番星
+            .with("super-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("super-ultra-large", () =>
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
+            ) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              Math.floor((atk + spAtk) / 2) *
                 memoriaRate *
                 finalCalibration *
                 support *
@@ -917,74 +780,32 @@ function buff(
             ),
           };
         })
-        .with(
-          P.union("Fire ATK", "Water ATK", "Wind ATK", "Light ATK", "Dark ATK"),
-          () => {
-            const skillRate = match(amount!)
-              .with("small", () => 3.25 / 100)
-              .with("medium", () => 4.0 / 100)
-              .with("large", () => 4.89 / 100)
-              .with("extra-large", () => 5.51 / 100) // 戦場の一番星
-              .with("super-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("ultra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("super-ultra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .exhaustive();
-            const memoriaRate = skillRate * skillLevel;
-            return {
-              type: status!,
-              amount: Math.floor(
-                Math.floor((atk + spAtk) / 2) *
-                  memoriaRate *
-                  finalCalibration *
-                  support *
-                  range *
-                  counter *
-                  stackRate,
-              ),
-            };
-          },
-        )
-        .with(
-          P.union("Fire DEF", "Water DEF", "Wind DEF", "Light DEF", "Dark DEF"),
-          () => {
-            const skillRate = match(amount!)
-              .with("small", () => 4.74 / 100)
-              .with("medium", () => 5.65 / 100)
-              .with("large", () => 6.11 / 100)
-              .with("extra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("super-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("ultra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("super-ultra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .exhaustive();
-            const memoriaRate = skillRate * skillLevel;
-            return {
-              type: status!,
-              amount: Math.floor(
-                Math.floor((def + spDef) / 2) *
-                  memoriaRate *
-                  finalCalibration *
-                  support *
-                  range *
-                  counter *
-                  stackRate,
-              ),
-            };
-          },
-        )
+        .with(P.union("Fire DEF", "Water DEF", "Wind DEF", "Light DEF", "Dark DEF"), () => {
+          const skillRate = match(amount!)
+            .with("small", () => 4.74 / 100)
+            .with("medium", () => 5.65 / 100)
+            .with("large", () => 6.11 / 100)
+            .with("extra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("super-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("super-ultra-large", () =>
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
+            ) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              Math.floor((def + spDef) / 2) *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                counter *
+                stackRate,
+            ),
+          };
+        })
         .with("Life", () => {
           const skillRate = match(amount!)
             .with("medium", () => 0.45 / 100)
@@ -1018,11 +839,7 @@ function debuff(
       amount: number;
     }[]
   | undefined {
-  if (
-    !Lenz.memoria.gvgSkill.effects
-      .get(memoria)
-      .some((effect) => effect.type === "debuff")
-  ) {
+  if (!Lenz.memoria.gvgSkill.effects.get(memoria).some((effect) => effect.type === "debuff")) {
     return undefined;
   }
 
@@ -1047,14 +864,11 @@ function debuff(
     Light: 1,
     Dark: 1,
   };
-  for (const memoria of deck.filter(
-    (memoria) => memoria.skills.legendary !== undefined,
-  )) {
+  for (const memoria of deck.filter((memoria) => memoria.skills.legendary !== undefined)) {
     match(memoria.skills.legendary)
       .when(
         (legendary) =>
-          legendary?.skill.attributes.includes("Fire") &&
-          legendary?.skill.trigger === "Assist",
+          legendary?.skill.attributes.includes("Fire") && legendary?.skill.trigger === "Assist",
         () => {
           supportLegendary.Fire +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -1062,8 +876,7 @@ function debuff(
       )
       .when(
         (legendary) =>
-          legendary?.skill.attributes.includes("Water") &&
-          legendary?.skill.trigger === "Assist",
+          legendary?.skill.attributes.includes("Water") && legendary?.skill.trigger === "Assist",
         () => {
           supportLegendary.Water +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -1071,8 +884,7 @@ function debuff(
       )
       .when(
         (legendary) =>
-          legendary?.skill.attributes.includes("Wind") &&
-          legendary?.skill.trigger === "Assist",
+          legendary?.skill.attributes.includes("Wind") && legendary?.skill.trigger === "Assist",
         () => {
           supportLegendary.Wind +=
             memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
@@ -1083,8 +895,7 @@ function debuff(
           legendary?.skill.attributes.includes("Fire") &&
           legendary?.skill.trigger === "Attack/Physical",
         () => {
-          normalLegendary.Fire +=
-            memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
+          normalLegendary.Fire += memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
@@ -1101,8 +912,7 @@ function debuff(
           legendary?.skill.attributes.includes("Wind") &&
           legendary?.skill.trigger === "Attack/Physical",
         () => {
-          normalLegendary.Wind +=
-            memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
+          normalLegendary.Wind += memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
@@ -1136,18 +946,9 @@ function debuff(
   }
 
   const finalCalibration = match(memoria.cardType)
-    .with(
-      P.union("通常単体", "通常範囲"),
-      () => calibration * normalLegendary[memoria.attribute],
-    )
-    .with(
-      P.union("特殊単体", "特殊範囲"),
-      () => calibration * specialLegendary[memoria.attribute],
-    )
-    .with(
-      P.union("支援", "妨害"),
-      () => calibration * supportLegendary[memoria.attribute],
-    )
+    .with(P.union("通常単体", "通常範囲"), () => calibration * normalLegendary[memoria.attribute])
+    .with(P.union("特殊単体", "特殊範囲"), () => calibration * specialLegendary[memoria.attribute])
+    .with(P.union("支援", "妨害"), () => calibration * supportLegendary[memoria.attribute])
     .with("回復", () => calibration)
     .exhaustive();
 
@@ -1157,23 +958,15 @@ function debuff(
       : deck
           .map(
             (memoria) =>
-              [
-                Lenz.memoria.general.autoSkill.get(memoria),
-                memoria.concentration,
-              ] as const,
+              [Lenz.memoria.general.autoSkill.get(memoria), memoria.concentration] as const,
           )
           .map(([support, concentration]) => {
-            const up = support.effects.find(
-              (effect) => effect.type === "SupportUp",
-            );
+            const up = support.effects.find((effect) => effect.type === "SupportUp");
             if (!up) {
               return 0;
             }
             const level = _level(up.amount);
-            const probability = _probability(
-              support.probability,
-              concentration,
-            );
+            const probability = _probability(support.probability, concentration);
             return level * (probability + adx[memoria.attribute]);
           })
           .reduce((acc, cur) => acc + cur, 1);
@@ -1183,10 +976,7 @@ function debuff(
     .filter((effect) => effect.type === "debuff")
     .map(({ amount, status }) => {
       const counter =
-        enableCounter &&
-        Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
-          ? 1.5
-          : 1.0;
+        enableCounter && Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター") ? 1.5 : 1.0;
       const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
       return match(status!)
         .with("ATK", () => {
@@ -1195,12 +985,8 @@ function debuff(
             .with("medium", () => 3.34 / 100)
             .with("large", () => 4.18 / 100)
             .with("extra-large", () => 4.71 / 100)
-            .with("super-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // 現状存在しない
-            .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // 現状存在しない
+            .with("super-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
             .with("super-ultra-large", () =>
               ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
@@ -1214,8 +1000,7 @@ function debuff(
                 finalCalibration *
                 support *
                 range *
-                (enableCounter &&
-                Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
+                (enableCounter && Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
                   ? 1.5
                   : 1.0),
             ),
@@ -1227,12 +1012,8 @@ function debuff(
             .with("medium", () => 3.34 / 100)
             .with("large", () => 4.18 / 100)
             .with("extra-large", () => 4.71 / 100)
-            .with("super-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // 現状存在しない
-            .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // 現状存在しない
+            .with("super-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
             .with("super-ultra-large", () =>
               ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
@@ -1241,13 +1022,7 @@ function debuff(
           return {
             type: status!,
             amount: Math.floor(
-              spAtk *
-                memoriaRate *
-                finalCalibration *
-                support *
-                range *
-                counter *
-                stackRate,
+              spAtk * memoriaRate * finalCalibration * support * range * counter * stackRate,
             ),
           };
         })
@@ -1258,9 +1033,7 @@ function debuff(
             .with("large", () => 5.23 / 100)
             .with("extra-large", () => 5.75 / 100)
             .with("super-large", () => 6.2 / 100) // TODO
-            .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
             .with("super-ultra-large", () =>
               ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
@@ -1269,13 +1042,7 @@ function debuff(
           return {
             type: status!,
             amount: Math.floor(
-              def *
-                memoriaRate *
-                finalCalibration *
-                support *
-                range *
-                counter *
-                stackRate,
+              def * memoriaRate * finalCalibration * support * range * counter * stackRate,
             ),
           };
         })
@@ -1286,9 +1053,7 @@ function debuff(
             .with("large", () => 5.23 / 100)
             .with("extra-large", () => 5.75 / 100)
             .with("super-large", () => 6.22 / 100)
-            .with("ultra-large", () =>
-              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-            ) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
             .with("super-ultra-large", () =>
               ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
             ) // 現状存在しない
@@ -1297,7 +1062,27 @@ function debuff(
           return {
             type: status!,
             amount: Math.floor(
-              spDef *
+              spDef * memoriaRate * finalCalibration * support * range * counter * stackRate,
+            ),
+          };
+        })
+        .with(P.union("Fire ATK", "Water ATK", "Wind ATK", "Light ATK", "Dark ATK"), () => {
+          const skillRate = match(amount!)
+            .with("small", () => 3.25 / 100)
+            .with("medium", () => 4.0 / 100)
+            .with("large", () => 4.89 / 100)
+            .with("extra-large", () => 5.49 / 100)
+            .with("super-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("super-ultra-large", () =>
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
+            ) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              Math.floor((atk + spAtk) / 2) *
                 memoriaRate *
                 finalCalibration *
                 support *
@@ -1307,74 +1092,32 @@ function debuff(
             ),
           };
         })
-        .with(
-          P.union("Fire ATK", "Water ATK", "Wind ATK", "Light ATK", "Dark ATK"),
-          () => {
-            const skillRate = match(amount!)
-              .with("small", () => 3.25 / 100)
-              .with("medium", () => 4.0 / 100)
-              .with("large", () => 4.89 / 100)
-              .with("extra-large", () => 5.49 / 100)
-              .with("super-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("ultra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("super-ultra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .exhaustive();
-            const memoriaRate = skillRate * skillLevel;
-            return {
-              type: status!,
-              amount: Math.floor(
-                Math.floor((atk + spAtk) / 2) *
-                  memoriaRate *
-                  finalCalibration *
-                  support *
-                  range *
-                  counter *
-                  stackRate,
-              ),
-            };
-          },
-        )
-        .with(
-          P.union("Fire DEF", "Water DEF", "Wind DEF", "Light DEF", "Dark DEF"),
-          () => {
-            const skillRate = match(amount!)
-              .with("small", () => 4.74 / 100)
-              .with("medium", () => 5.65 / 100)
-              .with("large", () => 6.11 / 100)
-              .with("extra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("super-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("ultra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .with("super-ultra-large", () =>
-                ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
-              ) // 現状存在しない
-              .exhaustive();
-            const memoriaRate = skillRate * skillLevel;
-            return {
-              type: status!,
-              amount: Math.floor(
-                Math.floor((def + spDef) / 2) *
-                  memoriaRate *
-                  finalCalibration *
-                  support *
-                  range *
-                  counter *
-                  stackRate,
-              ),
-            };
-          },
-        )
+        .with(P.union("Fire DEF", "Water DEF", "Wind DEF", "Light DEF", "Dark DEF"), () => {
+          const skillRate = match(amount!)
+            .with("small", () => 4.74 / 100)
+            .with("medium", () => 5.65 / 100)
+            .with("large", () => 6.11 / 100)
+            .with("extra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("super-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("ultra-large", () => ToBeDefined(Lenz.memoria.general.shortName.get(memoria))) // 現状存在しない
+            .with("super-ultra-large", () =>
+              ToBeDefined(Lenz.memoria.general.shortName.get(memoria)),
+            ) // 現状存在しない
+            .exhaustive();
+          const memoriaRate = skillRate * skillLevel;
+          return {
+            type: status!,
+            amount: Math.floor(
+              Math.floor((def + spDef) / 2) *
+                memoriaRate *
+                finalCalibration *
+                support *
+                range *
+                counter *
+                stackRate,
+            ),
+          };
+        })
         .with("Life", () => {
           throw new Error("Not implemented");
         })
@@ -1400,35 +1143,28 @@ function recovery(
     Dark: 1,
   };
   for (const memoria of deck.filter(
-    (memoria) =>
-      memoria.skills.legendary !== undefined && memoria.cardType === "回復",
+    (memoria) => memoria.skills.legendary !== undefined && memoria.cardType === "回復",
   )) {
     match(memoria.skills.legendary)
       .when(
         (legendary) =>
-          legendary?.skill.attributes.includes("Fire") &&
-          legendary?.skill.trigger === "Recovery",
+          legendary?.skill.attributes.includes("Fire") && legendary?.skill.trigger === "Recovery",
         () => {
-          legendary.Fire +=
-            memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
+          legendary.Fire += memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         (legendary) =>
-          legendary?.skill.attributes.includes("Water") &&
-          legendary?.skill.trigger === "Recovery",
+          legendary?.skill.attributes.includes("Water") && legendary?.skill.trigger === "Recovery",
         () => {
-          legendary.Water +=
-            memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
+          legendary.Water += memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .when(
         (legendary) =>
-          legendary?.skill.attributes.includes("Wind") &&
-          legendary?.skill.trigger === "Recovery",
+          legendary?.skill.attributes.includes("Wind") && legendary?.skill.trigger === "Recovery",
         () => {
-          legendary.Wind +=
-            memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
+          legendary.Wind += memoria.skills.legendary?.skill.rates[memoria.concentration] || 0;
         },
       )
       .run();
@@ -1450,13 +1186,7 @@ function recovery(
     .run();
 
   const support = deck
-    .map(
-      (memoria) =>
-        [
-          Lenz.memoria.general.autoSkill.get(memoria),
-          memoria.concentration,
-        ] as const,
-    )
+    .map((memoria) => [Lenz.memoria.general.autoSkill.get(memoria), memoria.concentration] as const)
     .map(([support, concentration]) => {
       const up = support.effects.find((effect) => effect.type === "RecoveryUp");
       if (!up) {
@@ -1470,10 +1200,7 @@ function recovery(
 
   const memoriaRate = skillRate * skillLevel;
   const counter =
-    enableCounter &&
-    Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター")
-      ? 1.5
-      : 1.0;
+    enableCounter && Lenz.memoria.gvgSkill.name.get(memoria).includes("カウンター") ? 1.5 : 1.0;
   const stackRate = stack?.targets.includes(memoria.id) ? stack?.rate : 1.0;
 
   return Math.floor(
@@ -1494,17 +1221,11 @@ function support(
   deck: MemoriaWithConcentration[],
   adx: { [key in Attribute]: number },
 ): Record<
-  Exclude<
-    StatusKind,
-    "Light ATK" | "Dark ATK" | "Light DEF" | "Dark DEF" | "Life"
-  >,
+  Exclude<StatusKind, "Light ATK" | "Dark ATK" | "Light DEF" | "Dark DEF" | "Life">,
   number
 > {
   const result: Record<
-    Exclude<
-      StatusKind,
-      "Light ATK" | "Dark ATK" | "Light DEF" | "Dark DEF" | "Life"
-    >,
+    Exclude<StatusKind, "Light ATK" | "Dark ATK" | "Light DEF" | "Dark DEF" | "Life">,
     number
   > = {
     ATK: 0,
@@ -1522,10 +1243,7 @@ function support(
     .flatMap((memoria) => {
       return Lenz.memoria.autoSkill.effects
         .get(memoria)
-        .map(
-          (effect) =>
-            [memoria.concentration, memoria.attribute, effect] as const,
-        );
+        .map((effect) => [memoria.concentration, memoria.attribute, effect] as const);
     })
     .filter(([, , effect]) => effect.type === type)
     .map(([concentration, attributes, { amount, status }]) => {
@@ -1622,9 +1340,7 @@ function support(
           const memoriaRate = skillRate * skillLevel;
           return {
             type: status!,
-            amount: Math.floor(
-              Math.floor((atk + spAtk) / 2) * memoriaRate * probability,
-            ),
+            amount: Math.floor(Math.floor((atk + spAtk) / 2) * memoriaRate * probability),
           };
         })
         .with(P.union("Fire DEF", "Water DEF", "Wind DEF"), () => {
@@ -1640,9 +1356,7 @@ function support(
           const memoriaRate = skillRate * skillLevel;
           return {
             type: status!,
-            amount: Math.floor(
-              Math.floor((def + spDef) / 2) * memoriaRate * probability,
-            ),
+            amount: Math.floor(Math.floor((def + spDef) / 2) * memoriaRate * probability),
           };
         })
         .exhaustive();

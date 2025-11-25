@@ -11,7 +11,10 @@
       "bloodType": "A",
       "favoriteFood": "ラムネ、ハンバーガー",
       "hatedFood": "虫",
-      "hobby": "身体を動かすこと、水晶集め"
+      "hobby": "身体を動かすこと、水晶集め",
+      "introduction": "とある事件をきっかけにリリィを目指し、百合ヶ丘女学院に補欠合格で入学する。人当たりがよい性格で、いつの間にか周囲から好かれるという才能の持ち主。頑張りすぎて突っ走る面もある。",
+      "keyColor": "FF9DAE",
+      "subColor": "FFDBE1"
     },
     {
       "name": "白井夢結",
@@ -24,7 +27,10 @@
       "bloodType": "A",
       "favoriteFood": "紅茶、サンドウィッチ、ケーキ、激辛食品",
       "hatedFood": "低俗なもの、下品なもの",
-      "hobby": "読書、観劇、音楽鑑賞"
+      "hobby": "読書、観劇、音楽鑑賞",
+      "introduction": "百合ヶ丘女学院を代表する実力を持つリリィの一人。ストイックで自分に厳しい性格。とある事件をきっかけに、他人から距離を置くようになってしまった。",
+      "keyColor": "7F90DC",
+      "subColor": "CAD4FF"
     },
     {
       "name": "楓・J・ヌーベル",
@@ -37,7 +43,10 @@
       "bloodType": "AB",
       "favoriteFood": "プロシェフの料理、かわいい女の子",
       "hatedFood": "下品なもの",
-      "hobby": "芸術品の収集、カメラ、トレーニング"
+      "hobby": "芸術品の収集、カメラ、トレーニング",
+      "introduction": "百合ヶ丘女学院の外部入学試験をトップの成績で突破した才媛。高貴で裕福な家柄の出身で、卑怯な手段も美しくはないので嫌う正々堂々とした性格。",
+      "keyColor": "9CA5AA",
+      "subColor": "D8DFE2"
     },
     {
       "name": "二川二水",
@@ -50,7 +59,10 @@
       "bloodType": "O",
       "favoriteFood": "駄菓子、牛丼",
       "hatedFood": "数学",
-      "hobby": "官報を読むこと、漫画を描くこと、キャンプ、コスプレ"
+      "hobby": "官報を読むこと、漫画を描くこと、キャンプ、コスプレ",
+      "introduction": "圧倒的な質と量を誇る「リリィオタク」で、リリィ個人だけでなくCHARM、戦略戦術に至るまで幅広い知識を持っている。普段は自己主張しないタイプだが、リリィ関連の話題になると積極的な姿勢に変わる。",
+      "keyColor": "94D7FF",
+      "subColor": "CCECFF"
     },
     {
       "name": "安藤鶴紗",
@@ -63,7 +75,10 @@
       "bloodType": "O",
       "favoriteFood": "コーヒー、猫",
       "hatedFood": "狭い所",
-      "hobby": "折り紙"
+      "hobby": "折り紙",
+      "introduction": "ヒュージ研究で有名な多国籍企業『G.E.H.E.N.A.』と関係があるリリィ。口数が少ないため周囲に冷たい印象を与えるが、根は優しい性格。",
+      "keyColor": "FF7969",
+      "subColor": "FFC7C0"
     },
     {
       "name": "吉村・Thi・梅",
@@ -76,7 +91,10 @@
       "bloodType": "O",
       "favoriteFood": "ブンチャー",
       "hatedFood": "トレーニング",
-      "hobby": "亀のマスコット集め、絵を描くこと"
+      "hobby": "亀のマスコット集め、絵を描くこと",
+      "introduction": "ベトナム出身のリリィで地味な練習を嫌う天才肌。底抜けに明るく、馬鹿にされても怒らない生来のおおらかな性格。ムードメーカーであり仲間の苦境では頼りになる。",
+      "keyColor": "FFEB5A",
+      "subColor": "FFFAD4"
     },
     {
       "name": "郭神琳",
@@ -89,7 +107,10 @@
       "bloodType": "A",
       "favoriteFood": "故郷の料理、和食",
       "hatedFood": "優柔不断な人",
-      "hobby": "読書、詩作、サイクリング、工夫茶、兵法書を読むこと"
+      "hobby": "読書、詩作、サイクリング、工夫茶、兵法書を読むこと",
+      "introduction": "台北出身の上品なお嬢様で、幼稚舎から百合ヶ丘女学院に所属する生え抜きのリリィ。間違っていると思う事には毅然と立ち向かうが、普段はとても優しい少女。学生寮では王雨嘉とルームメイトである。",
+      "keyColor": "FFAD48",
+      "subColor": "FFE9CE"
     },
     {
       "name": "王雨嘉",
@@ -102,7 +123,10 @@
       "bloodType": "AB",
       "favoriteFood": "魚料理",
       "hatedFood": "心霊現象",
-      "hobby": "絵を描くこと、猫のマスコットの小物集め、料理、アクアテラリウム、手芸"
+      "hobby": "絵を描くこと、猫のマスコットの小物集め、料理、アクアテラリウム、手芸",
+      "introduction": "三姉妹の真ん中で優秀な姉と妹に囲まれて育ったため自信のない性格。無口で感情表現が苦手なため、困ると黙りこんでしまい「怒ってる」とよく誤解される。学生寮では郭神琳とルームメイトである。",
+      "keyColor": "9AE187",
+      "subColor": "DCFFD3"
     },
     {
       "name": "ミリアム・ヒルデガルド・v・グロピウス",
@@ -115,7 +139,10 @@
       "bloodType": "AB",
       "favoriteFood": "とても甘いもの",
       "hatedFood": "辛いもの",
-      "hobby": "変身魔法少女チャーミーリリィの視聴、グッズ集め、機械いじり、模型"
+      "hobby": "変身魔法少女チャーミーリリィの視聴、グッズ集め、機械いじり、模型",
+      "introduction": "百合ヶ丘女学院工廠科に所属するドイツ出身のリリィ。CHARMの開発と研究を行っている。面倒見が良いため、よく上級生の研究の手伝いや日常の世話をしている。",
+      "keyColor": "B09DDC",
+      "subColor": "DED0FF"
     },
     {
       "name": "相澤一葉",
@@ -128,7 +155,10 @@
       "bloodType": "A",
       "favoriteFood": "クリームシチュー、コーヒー、完全食",
       "hatedFood": "コーラ、小動物",
-      "hobby": "ボードゲーム、ツーリング、バイクの運転、操縦技術"
+      "hobby": "ボードゲーム、ツーリング、バイクの運転、操縦技術",
+      "introduction": "真面目で正義感が強い学級委員長タイプ。『ヘルヴォル』のリーダーで、エレンスゲの犠牲を顧みない戦い方を変えようと考えている。うっかりミスが玉に瑕で、ミスを突っ込まれると照れながらも強がるが、序列は1位。",
+      "keyColor": "599AEB",
+      "subColor": "ACD1FF"
     },
     {
       "name": "佐々木藍",
@@ -141,7 +171,10 @@
       "bloodType": "B",
       "favoriteFood": "たい焼き",
       "hatedFood": "コーヒー、辛いカレー、注射",
-      "hobby": "お昼寝すること、食べること、戦うこと"
+      "hobby": "お昼寝すること、食べること、戦うこと",
+      "introduction": "見た目同様に性格は幼く、『ヘルヴォル』のマスコット的な存在。非常にマイペースで、お昼寝すること、食べること、戦うことが大好き。エレンスゲを運営する『アウニャメンディ・システマス』社の研究所出身。序列は47位。",
+      "keyColor": "B4B4B4",
+      "subColor": "F3F3F3"
     },
     {
       "name": "飯島恋花",
@@ -154,7 +187,10 @@
       "bloodType": "A",
       "favoriteFood": "ラーメン",
       "hatedFood": "サラダ、ジェットコースター",
-      "hobby": "ファッション雑誌を読むこと、コーディネート、フットサル"
+      "hobby": "ファッション雑誌を読むこと、コーディネート、フットサル",
+      "introduction": "『ヘルヴォル』のムードメーカー。言動はフランクで姉御肌。気楽に見えるが知性は高く、戦術理論なども身につけている。過去の苦い経験から、努めて熱くならずにチームを鼓舞するよう振舞うようになった。序列は13位。",
+      "keyColor": "FFD374",
+      "subColor": "FFBFBF"
     },
     {
       "name": "初鹿野瑤",
@@ -167,7 +203,10 @@
       "bloodType": "O",
       "favoriteFood": "シュークリーム",
       "hatedFood": "レバー",
-      "hobby": "アニマルグッズ収集、裁縫"
+      "hobby": "アニマルグッズ収集、裁縫",
+      "introduction": "頭の回転が速く、気が利き、洞察力にも優れている。コミュニケーションが得意ではなく口数が少ないため、周りにはクールな印象を与えている。反面、可愛いものが大好きで自分より小さい子は抱きしめたくなる。序列は14位。",
+      "keyColor": "E66969",
+      "subColor": "FFE9B9"
     },
     {
       "name": "芹沢千香瑠",
@@ -180,7 +219,10 @@
       "bloodType": "AB",
       "favoriteFood": "とろとろ卵のオムライス、マンゴー、犬、雪",
       "hatedFood": "汚れたもの",
-      "hobby": "料理、水泳、家事全般"
+      "hobby": "料理、水泳、家事全般",
+      "introduction": "心優しいみんなのお姉さん的な存在。料理が得意で、よくレギオンメンバーにふるまっている。盤石の守備・戦術理解でレギオンの要となれる存在。リリィとしての高い適性を持つが……。序列は84位。",
+      "keyColor": "F189C9",
+      "subColor": "FFCCEB"
     },
     {
       "name": "今叶星",
@@ -193,7 +235,10 @@
       "bloodType": "A",
       "favoriteFood": "果物、紅茶",
       "hatedFood": "辛いもの、カエル、ナマコ",
-      "hobby": "焼き菓子作り、ガーデニング"
+      "hobby": "焼き菓子作り、ガーデニング",
+      "introduction": "明るくみんなをまとめる『グラン・エプレ』のリーダー。本来は臆病な性格だが責任感が強く、「世界を守る素養があるのだから、その責務を果たすべきである」とし、自分を奮い立たせている。学科は造園。",
+      "keyColor": "F6E068",
+      "subColor": "FFF7CB"
     },
     {
       "name": "宮川高嶺",
@@ -206,7 +251,10 @@
       "bloodType": "O",
       "favoriteFood": "叶星の焼いたタルト、焼き菓子",
       "hatedFood": "ニンジン、朝起きること",
-      "hobby": "フィルムカメラ、紅茶を淹れること"
+      "hobby": "フィルムカメラ、紅茶を淹れること",
+      "introduction": "思わせぶりな態度や含みのある発言をし、ミステリアスなイメージを持たれるような振る舞いをする。幼馴染である今叶星がすべての行動原理の中心であり、人としてもリリィとしても強い愛を持って接している。学科は造園。",
+      "keyColor": "D193EB",
+      "subColor": "EFC9FF"
     },
     {
       "name": "土岐紅巴",
@@ -219,7 +267,10 @@
       "bloodType": "A",
       "favoriteFood": "辛いもの",
       "hatedFood": "かき氷",
-      "hobby": "ひとりカラオケ、擬似姉妹契約者の絡みを見る"
+      "hobby": "ひとりカラオケ、擬似姉妹契約者の絡みを見る",
+      "introduction": "おとなしくやさしい照れ屋な女の子。目立つことを好まずひっそりと行動する。擬似姉妹の絡みが好きで、その妄想時は興奮気味となり表情が緩む。歌が好きで声が綺麗なため、姫歌が対抗心を燃やしている。学科は音楽（声楽）。",
+      "keyColor": "81E6CB",
+      "subColor": "C5FFEF"
     },
     {
       "name": "丹羽灯莉",
@@ -232,7 +283,10 @@
       "bloodType": "AB",
       "favoriteFood": "マカロン",
       "hatedFood": "梅干し",
-      "hobby": "お絵かき、もの作り全般"
+      "hobby": "お絵かき、もの作り全般",
+      "introduction": "好奇心と創造欲を満たすため、好きなことを好きな時に好きなだけ行う。天才肌で独特の考えを持っており、気になったことは空気を読まず質問・指摘する。明るく無邪気な言動から憎めない性格で友人も多い。学科は絵画。",
+      "keyColor": "85E6F2",
+      "subColor": "CFFAFF"
     },
     {
       "name": "定盛姫歌",
@@ -245,7 +299,10 @@
       "bloodType": "B",
       "favoriteFood": "イチゴのショートケーキ、おにぎり",
       "hatedFood": "ピータン、雨",
-      "hobby": "アイドルリリィ活動、歌うこと、装飾"
+      "hobby": "アイドルリリィ活動、歌うこと、装飾",
+      "introduction": "世界で一番可愛いアイドルリリィを自称し活躍する。自信家だが理性的な面もあり、判断力は高い方である。戦術理解には定評があり、戦闘中の行動や作戦立案では頼りになる。「ひめひめ」と呼んで欲しい。学科は音楽（声楽）。",
+      "keyColor": "F87F9F",
+      "subColor": "FFB8CB"
     },
     {
       "name": "真島百由",
@@ -258,7 +315,10 @@
       "bloodType": "O",
       "favoriteFood": "肉料理",
       "hatedFood": "とくになし",
-      "hobby": "マギ・CHARMの研究、開発"
+      "hobby": "マギ・CHARMの研究、開発",
+      "introduction": "戦える『アーセナル（CHARMの修理・改造・開発技術者の総称）』を育成テーマに掲げる、百合ヶ丘女学院工廠科が誇る天才少女。\\n工廠科内での評判は高いが、一方で「マッドサイエンティスト」「変わり者」などと評されたりと、常人には計り知れないところが多い。",
+      "keyColor": "61BED4",
+      "subColor": "D4F7FF"
     },
     {
       "name": "一柳結梨",
@@ -271,7 +331,10 @@
       "bloodType": "？",
       "favoriteFood": "スコーン",
       "hatedFood": "なし",
-      "hobby": "匂いで相手の気持ちがわかる"
+      "hobby": "匂いで相手の気持ちがわかる",
+      "introduction": "海岸で一柳隊が発見した謎の少女。\\n保護した当初はかなり弱っていたが、梨璃の献身的な介護により無事回復。その後、リリィとしての適性があることがわかり、一柳隊に入隊する。\\n梨璃から沢山の愛情を受け取って過ごしているため、梨璃のことが大好き。",
+      "keyColor": "F0B6FF",
+      "subColor": "F9E1FF"
     },
     {
       "name": "天野天葉",
@@ -284,7 +347,10 @@
       "bloodType": "O",
       "favoriteFood": "好き嫌いのない大食家",
       "hatedFood": "蜂",
-      "hobby": "ガーデニング"
+      "hobby": "ガーデニング",
+      "introduction": "2年生で、高いマギ保有量と身体能力を有する優秀なリリィ。明るく陽気な性格で周りを引っ張る。\\nかつては百合ヶ丘の伝説的なレギオン、初代『アールヴヘイム』に所属していた。解散後は称号化したレギオン名を引き継いだ、2代目アールヴヘイムの主将を務める。",
+      "keyColor": "FCF1A8",
+      "subColor": "FFFCEB"
     },
     {
       "name": "番匠谷依奈",
@@ -297,7 +363,10 @@
       "bloodType": "A",
       "favoriteFood": "マンゴー",
       "hatedFood": "不潔なもの、犬",
-      "hobby": "アクアリウム、テラリウム、コスプレ"
+      "hobby": "アクアリウム、テラリウム、コスプレ",
+      "introduction": "最強のレギオン、初代『アールヴヘイム』で司令塔を務め、甲州撤退戦をはじめ多くの戦場で名を馳せた一流のリリィ。\\nレアスキル『円環の御手』を有し、2振りのCHARMで華麗に戦う姿から『プランセス』の異名で愛されている。",
+      "keyColor": "ADA9FB",
+      "subColor": "DDDBFF"
     },
     {
       "name": "高町なのは",
@@ -310,7 +379,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FFDAFF",
+      "subColor": "FFF3FF"
     },
     {
       "name": "フェイト・T・ハラオウン",
@@ -323,7 +395,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "F2EB86",
+      "subColor": "FFFCCD"
     },
     {
       "name": "八神はやて",
@@ -336,7 +411,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "DEEDF0",
+      "subColor": "F5FDFF"
     },
     {
       "name": "船田純",
@@ -349,7 +427,10 @@
       "bloodType": "O",
       "favoriteFood": "カレー、辛いもの",
       "hatedFood": "海（泳げない）",
-      "hobby": "万華鏡作り、御朱印集め、温泉巡り、水墨画"
+      "hobby": "万華鏡作り、御朱印集め、温泉巡り、水墨画",
+      "introduction": "船田ツインズ、双子の妹。気位が高く、ストレートに物を言う性格だが、その実力は本物。\\nかつては厳格な個の能力主義を重んじていたが、遊学を経て、仲間意識が芽生えるようになる。姉の口から出る言葉はすべて正しいと確信しているため、大抵のことなら言うことを聞く。",
+      "keyColor": "B28FF8",
+      "subColor": "DDCCFF"
     },
     {
       "name": "船田初",
@@ -362,7 +443,10 @@
       "bloodType": "O",
       "favoriteFood": "和菓子、うどん",
       "hatedFood": "辛いもの",
-      "hobby": "そろばん、飴細工、ガラス細工、将棋"
+      "hobby": "そろばん、飴細工、ガラス細工、将棋",
+      "introduction": "船田ツインズ、双子の姉。物腰が柔らかく道徳的で、決して隙を見せない聡明さを持つリリィ。\\n初等科の最後の年に起きたある出来事により、妹を守ることにこの身のすべてを捧げると決意した。\\n妹が自分以外に好意を示していることを快く思わないなど、嫉妬深い一面がある",
+      "keyColor": "FCB2CB",
+      "subColor": "FFE1EB"
     },
     {
       "name": "川村楪",
@@ -375,7 +459,10 @@
       "bloodType": "A",
       "favoriteFood": "ハンバーガー",
       "hatedFood": "魚",
-      "hobby": "音楽鑑賞、ヘッドホン集め"
+      "hobby": "音楽鑑賞、ヘッドホン集め",
+      "introduction": "『輝ける者たち』の1人で、月岡椛とは幼馴染。\\n世界屈指のリンカーと謳われているほどだが、普段は気ままで遊び人気質。\\nそんな彼女の独特のファッションセンスを支持するリリィも少なくない。",
+      "keyColor": "FCBB76",
+      "subColor": "FFD9B0"
     },
     {
       "name": "川添美鈴",
@@ -388,7 +475,10 @@
       "bloodType": "AB",
       "favoriteFood": "お茶会",
       "hatedFood": "喧騒",
-      "hobby": "茶道、紅茶"
+      "hobby": "茶道、紅茶",
+      "introduction": "夢結のシュッツエンゲルのリリィ。ミステリアスな雰囲気をまとい、本心を語る相手は少ないが、シルトの夢結に向ける優しい眼差しは本物。",
+      "keyColor": "9D9B9A",
+      "subColor": "CCCAC8"
     },
     {
       "name": "月岡椛",
@@ -401,7 +491,10 @@
       "bloodType": "Ｏ",
       "favoriteFood": "果物",
       "hatedFood": "納豆、タコ",
-      "hobby": "茶道、和歌、華道、書道"
+      "hobby": "茶道、和歌、華道、書道",
+      "introduction": "『輝ける者たち』の1人で、川村楪とは幼馴染。\\n御台場女学校高等科の生徒会長兼『ヘオロットセインツ』の主将。\\nお淑やかで心優しく、誰にでも気遣った振る舞いをする。ただし楪にだけは遠慮せず本心を曝け出すこともある。",
+      "keyColor": "F9775B",
+      "subColor": "FFB3A3"
     },
     {
       "name": "岸本・ルチア・来夢",
@@ -414,7 +507,10 @@
       "bloodType": "Ｏ",
       "favoriteFood": "遊園地",
       "hatedFood": "ホラー映画、お化け屋敷",
-      "hobby": "ヘアアレンジ、おしゃべり"
+      "hobby": "ヘアアレンジ、おしゃべり",
+      "introduction": "戦死してしまった姉の意思を継いでルドビコ女学院に入学した1年生。\\n体は小さく、優秀だった姉ほどの実力はないが、頑張り屋で不思議と人を引き付ける魅力がある。生まれながらの強化リリィであり、ヒュージを引きつけながらも狙われないという特異体質を持っている。",
+      "keyColor": "FFE7EF",
+      "subColor": "FFF6F9"
     },
     {
       "name": "福山・ジャンヌ・幸恵",
@@ -427,7 +523,10 @@
       "bloodType": "Ｏ",
       "favoriteFood": "ミュージカル、カラオケ",
       "hatedFood": "裁縫、細かい作業",
-      "hobby": "音楽鑑賞"
+      "hobby": "音楽鑑賞",
+      "introduction": "ルドビコ女学院で中等部から学ぶ、生え抜きの二年生。天然気味で、慌てぐせや細かいことが苦手な面もあるが、リリィとしてルドビコ歴代屈指の才覚を持っている。百合ヶ丘女学院の白井夢結は師ともいえる存在であり、現在でも連絡を取り合っている仲である。",
+      "keyColor": "BA96D8",
+      "subColor": "E1C4F9"
     },
     {
       "name": "田中壱",
@@ -440,7 +539,10 @@
       "bloodType": "B",
       "favoriteFood": "犬、和食、味のり",
       "hatedFood": "蛇",
-      "hobby": "歌唱、デザインの学習"
+      "hobby": "歌唱、デザインの学習",
+      "introduction": "1年椿組のクラス委員長を務める才媛。現アールヴヘイムの前身となる「壱盤隊」では隊長を務めていた。\\n優れた身体能力を持ち、高い戦闘力を誇る。レアスキル『この世の理』を駆使し、どんな戦況においても輝かしい戦果を残す。",
+      "keyColor": "B3ECC9",
+      "subColor": "D0FFE2"
     },
     {
       "name": "江川樟美",
@@ -453,7 +555,10 @@
       "bloodType": "AB",
       "favoriteFood": "馬、猫、ご飯（お米）",
       "hatedFood": "コミュニケーション、大きな音",
-      "hobby": "家事全般、温泉、お風呂"
+      "hobby": "家事全般、温泉、お風呂",
+      "introduction": "百合ヶ丘女学院幼稚舎時代に「百合ヶ丘建学以来屈指の才能」と謳われ、「神の子」と呼ばれていた。\\nシュッツエンゲルの契約を結んだ天野天葉と共に2代目アールヴヘイムに所属。家事全般が得意で、料理の腕前はプロ級と評判。",
+      "keyColor": "E6EEF7",
+      "subColor": "D2E7FF"
     },
     {
       "name": "遠藤亜羅椰",
@@ -466,7 +571,10 @@
       "bloodType": "AB",
       "favoriteFood": "ライオン、果実全般",
       "hatedFood": "退屈なこと、単調な作業",
-      "hobby": "油彩画、哲学"
+      "hobby": "油彩画、哲学",
+      "introduction": "レアスキル『フェイズトランセンデンス』をS級で保持する実力者。戦闘時は最前線に立ち、華麗で力強いCHARM捌きで敵陣へと斬り込む。\\n可愛い子を好きすぎるという点において問題児扱いされることもあるが、学業においても優秀な成績を修める優等生である。",
+      "keyColor": "FF80B3",
+      "subColor": "FFBFD9"
     },
     {
       "name": "高須賀月詩",
@@ -479,7 +587,10 @@
       "bloodType": "O",
       "favoriteFood": "ラッシー",
       "hatedFood": "勉強",
-      "hobby": "運動全般、怪談奇談"
+      "hobby": "運動全般、怪談奇談",
+      "introduction": "エースの証明とも言われるレアスキル『円環の御手』を持ち、攻撃的なポジションであればどこでもこなすことができる。\\n性格も攻撃スタイルも猪突猛進タイプで、暴走娘と揶揄されることもあるが、それは裏表のない性格の現れでもあると言える。",
+      "keyColor": "FFC29C",
+      "subColor": "FFE4D3"
     },
     {
       "name": "渡邉茜",
@@ -492,7 +603,10 @@
       "bloodType": "O",
       "favoriteFood": "ヨーグルト",
       "hatedFood": "怪談・奇談",
-      "hobby": "楽器演奏（フルート）"
+      "hobby": "楽器演奏（フルート）",
+      "introduction": "冷静且つ的確な指示で戦場を支配する姿から「コンダクター（指揮者）」の二つ名を持つ。\\n初代アールヴヘイムにも所属し、当時も副司令塔として活躍。温厚な性格で、メンバーの姉的な存在でもある。",
+      "keyColor": "86B8E8",
+      "subColor": "CEE7FF"
     },
     {
       "name": "金箱弥宙",
@@ -505,7 +619,10 @@
       "bloodType": "A",
       "favoriteFood": "カップ麺、カップ焼きそば",
       "hatedFood": "爬虫類",
-      "hobby": "リリィオタク、TVゲーム"
+      "hobby": "リリィオタク、TVゲーム",
+      "introduction": "1年杉組のクラス委員長。アーセナル（CHARMの修理・改造・開発技術者の総称）であり、凄まじいCHARM捌きを得意とするリリィでもある。\\n飄々とした性格で、時に人を小馬鹿にしたような物言いもするが、心根はとても優しい。リリィオタクとしても知られている。",
+      "keyColor": "DDE9DF",
+      "subColor": "D5FDDC"
     },
     {
       "name": "森辰姫",
@@ -518,7 +635,10 @@
       "bloodType": "B",
       "favoriteFood": "お刺身、寿司",
       "hatedFood": "ナメクジ",
-      "hobby": "CHARMいじり、釣り、折り紙"
+      "hobby": "CHARMいじり、釣り、折り紙",
+      "introduction": "強化リリィ出身。レアスキルは『ルナティックトランサー』。自分用のCHARMを作るために工廠科へ進学した。\\nかなりの人見知りで、戦闘においては連携を考えずに一人で戦いがち。ヒュージの声が聴けるという特別な聴覚を持つ。",
+      "keyColor": "C9FDF4",
+      "subColor": "E0FFFA"
     },
     {
       "name": "槇若菜",
@@ -531,7 +651,10 @@
       "bloodType": "O",
       "favoriteFood": "花火、お祭り",
       "hatedFood": "散らかった部屋、不潔なもの",
-      "hobby": "書道、漢文や古文の学習"
+      "hobby": "書道、漢文や古文の学習",
+      "introduction": "高い戦術理解と剛勇さを併せ持ち、司令塔や副官を一流レベルでこなせるリリィ。下級生に厳しい3年生が多い中で、優しく穏やかな若菜は誰からも慕われている。天葉のシュッツエンゲルであり、若菜と天葉と樟美を指して「最も華麗なノルン」と呼ばれている。",
+      "keyColor": "E5C4DD",
+      "subColor": "FAE5F2"
     },
     {
       "name": "岡田綺更",
@@ -544,7 +667,10 @@
       "bloodType": "AB",
       "favoriteFood": "美術館、ギャラリー",
       "hatedFood": "騒音、大きな音",
-      "hobby": "哲学、歴史学、カリグラフィー、アンティーク雑貨収集"
+      "hobby": "哲学、歴史学、カリグラフィー、アンティーク雑貨収集",
+      "introduction": "百合ヶ丘女学院の現風紀委員長であり、「吸血姫」の異名を持つリリィ。数々の問題のあるリリィを、巧みな話術とブーステッドスキルを用いた「尋問」で更生させてきた。誰に対しても厳格ではあるが、依奈とシュッツエンゲルの契りを交わしてからも気が多いのが玉に瑕。",
+      "keyColor": "E7D1AE",
+      "subColor": "FAE9CE"
     },
     {
       "name": "六角汐里",
@@ -557,7 +683,10 @@
       "bloodType": "O",
       "favoriteFood": "モルモット、ハイラックス",
       "hatedFood": "雷、歯医者",
-      "hobby": "陶芸"
+      "hobby": "陶芸",
+      "introduction": "おしとやかな性格とは裏腹に、『不動劔の姫』の異名を持つ、超攻撃型のリリィ。\\nCHARMの扱いがとても荒いことでも有名。\\n放課後は、所属するそうさく倶楽部で、好きな陶芸に勤しんでいる。",
+      "keyColor": "C19893",
+      "subColor": "EBDAD8"
     },
     {
       "name": "秦祀",
@@ -570,7 +699,10 @@
       "bloodType": "A",
       "favoriteFood": "なめろう",
       "hatedFood": "梅干し",
-      "hobby": "詩作、将棋"
+      "hobby": "詩作、将棋",
+      "introduction": "生徒会、オルトリンデ代行、級長連絡会議議長を務める夢結のルームメイト。\\n生徒たちから慕われる優しいお姉さん的存在だが、怒らせると怖い。\\n指導者としても人気があり、教えを乞いたいリリィが大勢いる。",
+      "keyColor": "787B7D",
+      "subColor": "BCBFC1"
     },
     {
       "name": "伊東閑",
@@ -583,7 +715,10 @@
       "bloodType": "A",
       "favoriteFood": "クマ(テディベアとかキャラ的な意味)",
       "hatedFood": "虫全般",
-      "hobby": "戦術論"
+      "hobby": "戦術論",
+      "introduction": "一柳梨璃のルームメイトで、シュバルツグレイルの主将。リリィとして総合力が高く冷静な判断力をもつことから「氷帝」のあだ名をもつ。非常に理論的であるが、同室の梨璃にアドバイスをしたり世話をやいたりする一面もある。",
+      "keyColor": "97A6EA",
+      "subColor": "C2CDFF"
     },
     {
       "name": "王莉芬",
@@ -596,7 +731,10 @@
       "bloodType": "B",
       "favoriteFood": "漫画を読むこと（小説とかは読まない）",
       "hatedFood": "読書、暗記ものの勉強",
-      "hobby": "運動全般、アウトドア"
+      "hobby": "運動全般、アウトドア",
+      "introduction": "スウェーデンのガーデン、ヘイムスクリングラトレードゴード中等部の三年生。王雨嘉の妹で、「王家最後の秘密兵器」と呼ばれている。あふれるリリィセンスと奔放な性格から欧州ではすでに有名。姉の雨嘉とは仲が良く、とても慕っている。",
+      "keyColor": "DFADEE",
+      "subColor": "F2CEF2"
     },
     {
       "name": "藤田槿",
@@ -609,7 +747,10 @@
       "bloodType": "A",
       "favoriteFood": "甘いもの",
       "hatedFood": "苦いもの",
-      "hobby": "模型製作、ドールハウス、切り絵"
+      "hobby": "模型製作、ドールハウス、切り絵",
+      "introduction": "船田姉妹と同じ『輝ける者たち』の1人。\\n技を極めた可憐なCHARMの手さばきから、『劔の妖精』という二つ名で呼ばれている。\\n船田初とは気心の知れた仲だが、妹・船田純とは何かと反りが合わない様子。",
+      "keyColor": "7CD6DA",
+      "subColor": "C3FCFF"
     },
     {
       "name": "立花響",
@@ -622,7 +763,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FFCE54",
+      "subColor": "FFE9B2"
     },
     {
       "name": "小日向未来",
@@ -635,7 +779,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "967ADC",
+      "subColor": "C9B4FF"
     },
     {
       "name": "雪音クリス",
@@ -648,7 +795,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "ED5565",
+      "subColor": "FFA8B1"
     },
     {
       "name": "キャロル・マールス・ディーンハイム",
@@ -661,7 +811,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "B828D7",
+      "subColor": "E985FF"
     },
     {
       "name": "黒木・フランシスカ・百合亜",
@@ -674,7 +827,10 @@
       "bloodType": "B",
       "favoriteFood": "パール小物、アフタヌーンティ",
       "hatedFood": "嫉妬、冗談、野蛮なもの",
-      "hobby": "ピアノ、お菓子作り"
+      "hobby": "ピアノ、お菓子作り",
+      "introduction": "ヒュージとの戦いで重症を負い、一命をとりとめるも、代償として実験により強化リリィとなった二年生。\\n華麗なテクニックと力押しという泥臭さを同居させる戦いをする。\\n感情を表に出すのが苦手で、1人で行動することが多いが、実は情に厚く仲間思いである。",
+      "keyColor": "6786B0",
+      "subColor": "A2B8D7"
     },
     {
       "name": "天宮・ソフィア・聖恋",
@@ -687,7 +843,10 @@
       "bloodType": "B",
       "favoriteFood": "お祭り、花火、プール",
       "hatedFood": "絵を描くこと",
-      "hobby": "トレーニング、陸上競技"
+      "hobby": "トレーニング、陸上競技",
+      "introduction": "ルドビコ女学院の一年生。親友の来夢とは幼馴染で、本当の姉妹のように育ってきた。\\n来夢の姉である未来から「来夢をお願いね」と託されており、来夢を守るために日々努力を欠かさない。\\n密かに来夢に想いを寄せている。",
+      "keyColor": "FFF093",
+      "subColor": "FFF6BF"
     },
     {
       "name": "松永・ブリジッタ・佳世",
@@ -700,7 +859,10 @@
       "bloodType": "AB",
       "favoriteFood": "マジカルリリィ(アニメ)、漫画",
       "hatedFood": "潜入、決断、大きい音",
-      "hobby": "リリィ情報収集、漫画を読むこと"
+      "hobby": "リリィ情報収集、漫画を読むこと",
+      "introduction": "ルドビコ女学院の二年生で、漫画オタクであり、かつリリィオタクでもある。\\n普段はおどおどとした性格だが、自分の得意な分野の話をする時とルナティックトランサーを発動した時に、\\nその性格が大きく変容する。",
+      "keyColor": "3C69D9",
+      "subColor": "749AFA"
     },
     {
       "name": "高島八雲",
@@ -713,7 +875,10 @@
       "bloodType": "A",
       "favoriteFood": "鳥",
       "hatedFood": "方向音痴",
-      "hobby": "言語学習・家事全般"
+      "hobby": "言語学習・家事全般",
+      "introduction": "エレンスゲ女学園の現校長。とても厳格だが、生徒思いの良き指導者でもある。元リリィで、現役時代は御台場女学校の『ヘオロットセインツ』に所属していた。",
+      "keyColor": "F0DBB6",
+      "subColor": "F9F2E5"
     },
     {
       "name": "松村優珂",
@@ -726,7 +891,10 @@
       "bloodType": "O",
       "favoriteFood": "フェレットのホワイトファーブラックアイ",
       "hatedFood": "自分の字（極度の丸文字）で手書きを避ける",
-      "hobby": "多肉植物の育成、ファッション、アンティーク雑貨収集、歌"
+      "hobby": "多肉植物の育成、ファッション、アンティーク雑貨収集、歌",
+      "introduction": "クエレブレの隊長で、スキラー数値を補うなどの強化を施されてリリィとなった元マディックの強化リリィ。気が強く年齢に関係なく高圧的な態度をとることが多いが仲間想いで、マディックに対しては優しく礼儀正しい。序列2位。",
+      "keyColor": "C8AAFF",
+      "subColor": "E6DCFF"
     },
     {
       "name": "時崎狂三",
@@ -739,7 +907,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "F1794F",
+      "subColor": "FFBBA3"
     },
     {
       "name": "五河琴里",
@@ -752,7 +923,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FF576B",
+      "subColor": "FFACB6"
     },
     {
       "name": "夜刀神十香",
@@ -765,7 +939,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "584196",
+      "subColor": "9D86DC"
     },
     {
       "name": "西住みほ",
@@ -778,7 +955,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "E25A6B",
+      "subColor": "FF9DA9"
     },
     {
       "name": "西住まほ",
@@ -791,7 +971,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "877C7C",
+      "subColor": "B6AAAA"
     },
     {
       "name": "ダージリン",
@@ -804,7 +987,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "60AAEF",
+      "subColor": "A7D4FF"
     },
     {
       "name": "アンチョビ",
@@ -817,7 +1003,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "7EA3A1",
+      "subColor": "A6C8C6"
     },
     {
       "name": "立原紗癒",
@@ -830,7 +1019,10 @@
       "bloodType": "AB",
       "favoriteFood": "ヒヤシンス",
       "hatedFood": "暑さ、早起き",
-      "hobby": "星を見ること、詩集集め"
+      "hobby": "星を見ること、詩集集め",
+      "introduction": "ローエングリンの主将で、現役最高のスキラー数値(98)を誇るリリィ。お嬢様らしい口調で、毅然としているが少し天然なところもある。近隣ガーデンのリリィたちを集めて議論する戦術サロンを定期的に開催している。",
+      "keyColor": "FFF8CB",
+      "subColor": "FFFDEF"
     },
     {
       "name": "横田悠夏",
@@ -843,7 +1035,10 @@
       "bloodType": "AB",
       "favoriteFood": "パーティやお茶会、ボルダリング",
       "hatedFood": "地図を読むこと（方向音痴）",
-      "hobby": "和楽器演奏、茶の湯"
+      "hobby": "和楽器演奏、茶の湯",
+      "introduction": "アメリカのボストンブレイヴァーズガーデンから、神庭女子藝術高校にやってきた転校生。喜怒哀楽がわかりやすく非常に明るい性格。宮川高嶺とは従姉妹の関係で、幼い頃から憧れており、同じガーデンで戦うことを夢見てきた。嬉しいことがあると抱き着く癖がある。",
+      "keyColor": "7DC3F0",
+      "subColor": "B9E1FA"
     },
     {
       "name": "イリヤスフィール・フォン・アインツベルン",
@@ -856,7 +1051,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FFBCC7",
+      "subColor": "FFD7DD"
     },
     {
       "name": "美遊・エーデルフェルト",
@@ -869,7 +1067,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "C497F6",
+      "subColor": "DBBEFA"
     },
     {
       "name": "クロエ・フォン・アインツベルン",
@@ -882,7 +1083,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "F89A7D",
+      "subColor": "F9C2B2"
     },
     {
       "name": "牧野美岳",
@@ -895,7 +1099,10 @@
       "bloodType": "A",
       "favoriteFood": "飴",
       "hatedFood": "機械やIT機器の操作",
-      "hobby": "読書"
+      "hobby": "読書",
+      "introduction": "冷静かつ真面目な性格で、感情的になりがちなクエレブレの緩衝材的役割を担う。一度エレンスゲ女学園を離れた過去の出来事から裏切り者扱いされており、学園での印象はあまり良くない。序列80位。",
+      "keyColor": "6E7DD7",
+      "subColor": "AFBEFF"
     },
     {
       "name": "賀川蒔菜",
@@ -908,7 +1115,10 @@
       "bloodType": "AB",
       "favoriteFood": "ガム",
       "hatedFood": "整理整頓",
-      "hobby": "テレビゲーム"
+      "hobby": "テレビゲーム",
+      "introduction": "クエレブレの中でも特に自由奔放で、楽しいことと嫌いなことをはっきり分ける享楽主義者。クエレブレのことは心底気に入っており、特に結爾とは波長が合うのかよく行動を共にしている。序列15位。",
+      "keyColor": "FA8C5A",
+      "subColor": "FFC8AF"
     },
     {
       "name": "本間秋日",
@@ -921,7 +1131,10 @@
       "bloodType": "O",
       "favoriteFood": "美術館巡り、フクロモモンガ",
       "hatedFood": "不潔なもの（掃除好き）",
-      "hobby": "DIY"
+      "hobby": "DIY",
+      "introduction": "神庭女子藝術高校の現生徒会長。強気で前のめりな性格は、様々な挫折と苦難を乗り越えてきた経験に裏付けされており、彼女の叱咤激励で助けられた生徒も少なくない。情にも厚く、悩みのある生徒には、親身になって接する。たまに親身になりすぎて、悩みすぎることもしばしば。",
+      "keyColor": "B4AAF5",
+      "subColor": "DCD7FF"
     },
     {
       "name": "森本結爾",
@@ -934,7 +1147,10 @@
       "bloodType": "O",
       "favoriteFood": "恐竜・古代生物",
       "hatedFood": "物を捨てられない（整理はできる）",
-      "hobby": "漫画を読むこと"
+      "hobby": "漫画を読むこと",
+      "introduction": "独特な感性の持ち主で、毒舌かつぶっきらぼう。可愛い女の子が好きだがコミュ力が低く、距離感をよく誤るので避けられることが多い。クエレブレ、とりわけ優珂のことは信頼している。序列8位。",
+      "keyColor": "96E1AA",
+      "subColor": "D7FFD7"
     },
     {
       "name": "鹿目まどか",
@@ -947,7 +1163,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FFB1DD",
+      "subColor": "FFCEEA"
     },
     {
       "name": "巴マミ",
@@ -960,7 +1179,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FFE673",
+      "subColor": "FFF1BF"
     },
     {
       "name": "暁美ほむら",
@@ -973,7 +1195,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "E0B0E7",
+      "subColor": "EEC7F3"
     },
     {
       "name": "美樹さやか",
@@ -986,7 +1211,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "AEE5FA",
+      "subColor": "CFF2FF"
     },
     {
       "name": "佐倉杏子",
@@ -999,7 +1227,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FC9D9E",
+      "subColor": "FFC9C9"
     },
     {
       "name": "結城友奈",
@@ -1012,7 +1243,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "F3A8A8",
+      "subColor": "FDCFCF"
     },
     {
       "name": "東郷美森",
@@ -1025,7 +1259,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "92C6D9",
+      "subColor": "B4E0EA"
     },
     {
       "name": "三好夏凜",
@@ -1038,7 +1275,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "F89E97",
+      "subColor": "FBCDB9"
     },
     {
       "name": "乃木園子",
@@ -1051,7 +1291,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "D3A2E1",
+      "subColor": "EACDFC"
     },
     {
       "name": "犬吠埼風",
@@ -1064,7 +1307,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "E5B951",
+      "subColor": "F3DA78"
     },
     {
       "name": "犬吠埼樹",
@@ -1077,7 +1323,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "99CF8F",
+      "subColor": "C7EA9A"
     },
     {
       "name": "石塚藤乃",
@@ -1090,7 +1339,10 @@
       "bloodType": "AB",
       "favoriteFood": "美しいもの・人文学",
       "hatedFood": "寒さ",
-      "hobby": "絵画（日本画）"
+      "hobby": "絵画（日本画）",
+      "introduction": "神庭女子藝術高校に初等科から学ぶ生え抜きのリリィで、圧倒的な強さを誇り、過去、幕張奪還戦において大きな戦功を上げている。そのためガーデン内外問わず人気者。表向きは穏やかでおしとやかな性格だが、実際はかなりの変わり者で、予想のつかない行動を取ることが多い。",
+      "keyColor": "E6A596",
+      "subColor": "CCFFF4"
     },
     {
       "name": "塩崎鈴夢",
@@ -1103,7 +1355,10 @@
       "bloodType": "O",
       "favoriteFood": "鉱物収集",
       "hatedFood": "注射",
-      "hobby": "絵を描くこと、博物学"
+      "hobby": "絵を描くこと、博物学",
+      "introduction": "口数が少なく気弱な性格。過去のとある経験から、人との関わりを極力持たないようにしている。しかし、生徒会長の本間秋日のことは慕っている。そんな性格とは裏腹に戦い方はかなり過激で、そのギャップに注目するリリィも多い。",
+      "keyColor": "E6DCCD",
+      "subColor": "FAF5F0"
     },
     {
       "name": "倉又雪陽",
@@ -1116,7 +1371,10 @@
       "bloodType": "A",
       "favoriteFood": "カトラリー収集、ウサギ",
       "hatedFood": "干しブドウ",
-      "hobby": "家事全般、カルトナージュ"
+      "hobby": "家事全般、カルトナージュ",
+      "introduction": "すごく優しい性格で、百合ヶ丘女学院の中でも屈指の良い人。ローエングリン主将の立原紗癒とは幼馴染で、朝が苦手な彼女を起こすのが日課。レアスキル覚醒後、様々なレギオンから勧誘されたが、迷うことなく紗癒の傍にいることを選んだ。",
+      "keyColor": "FFA197",
+      "subColor": "FFC2BF"
     },
     {
       "name": "妹島広夢",
@@ -1129,7 +1387,10 @@
       "bloodType": "O",
       "favoriteFood": "カピバラ、アロマオイル",
       "hatedFood": "食虫植物",
-      "hobby": "スポーツ全般（するのも鑑賞するのもすき）、お菓子作り"
+      "hobby": "スポーツ全般（するのも鑑賞するのもすき）、お菓子作り",
+      "introduction": "難関の中等部セレクションを突破して百合ヶ丘女学院に編入した実力派リリィ。自信家で勝ち気だが根は優しい性格。デュエルが得意で優秀なリリィだが、普段は意外と抜けており、そのギャップから年代問わずに愛されている。",
+      "keyColor": "CD92D6",
+      "subColor": "EABBF9"
     },
     {
       "name": "苅谷緋紅",
@@ -1142,7 +1403,10 @@
       "bloodType": "O",
       "favoriteFood": "ツーリング（バイク）",
       "hatedFood": "勉強（好きな科目はやるが他はやらない）",
-      "hobby": "登山／ハイキング"
+      "hobby": "登山／ハイキング",
+      "introduction": "スラム出身で荒々しい性格だが、人を惹きつけるカリスマ性がある。感情的になりやすいもののコミュニケーション能力は意外と高く、クエレブレでは蒔菜に慕われている。序列43位。",
+      "keyColor": "FBAD60",
+      "subColor": "FFCE87"
     },
     {
       "name": "御坂美琴",
@@ -1155,7 +1419,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FFB085",
+      "subColor": "FFD7C1"
     },
     {
       "name": "白井黒子",
@@ -1168,7 +1435,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FF9F92",
+      "subColor": "FFCEC7"
     },
     {
       "name": "食蜂操祈",
@@ -1181,7 +1451,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "FFD179",
+      "subColor": "FFE9C0"
     },
     {
       "name": "早川弥宏",
@@ -1194,7 +1467,10 @@
       "bloodType": "A",
       "favoriteFood": "地元(鎌倉府）、鷹",
       "hatedFood": "目立つこと/人前で何かすること。",
-      "hobby": "美食家（おいしいお店を探して食する。食べ物に好き嫌いはない。自分は作らない）"
+      "hobby": "美食家（おいしいお店を探して食する。食べ物に好き嫌いはない。自分は作らない）",
+      "introduction": "鎌倉出身のスターリリィ。百合ヶ丘女学院初等部入学時は補欠合格だったが、現在はパートナーである真と共に「最強のフリーランス」と呼ばれるほどの実力派。夢結とは中等部時代に一緒の予備隊で交流があり、今でも親しい仲。",
+      "keyColor": "FFDBE7",
+      "subColor": "FFEDF3"
     },
     {
       "name": "富永真",
@@ -1207,7 +1483,10 @@
       "bloodType": "AB",
       "favoriteFood": "お笑い",
       "hatedFood": "静寂、漫画以外の読書",
-      "hobby": "テレビや動画を見ること"
+      "hobby": "テレビや動画を見ること",
+      "introduction": "ムードメーカー兼問題児として知られているリリィだが、パートナーの弥宏と共に「最強のフリーランス」と呼ばれるほどの実力者。関西弁ベースのおしゃべりで、夢結のことを気に入っているが、それが原因で本人からは煙たがられている。",
+      "keyColor": "FFF29E",
+      "subColor": "FFFBE0"
     },
     {
       "name": "エミリア",
@@ -1220,7 +1499,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "CBB8EE",
+      "subColor": "E1DBF5"
     },
     {
       "name": "レム",
@@ -1233,7 +1515,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "94D3F8",
+      "subColor": "D1EBF8"
     },
     {
       "name": "ラム",
@@ -1246,7 +1531,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "F8A1C7",
+      "subColor": "F9DAE9"
     },
     {
       "name": "幼少期レム",
@@ -1259,7 +1547,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "94D3F8",
+      "subColor": "D1EBF8"
     },
     {
       "name": "幼少期ラム",
@@ -1272,7 +1563,10 @@
       "bloodType": "--",
       "favoriteFood": "--",
       "hatedFood": "--",
-      "hobby": "--"
+      "hobby": "--",
+      "introduction": "--",
+      "keyColor": "F8A1C7",
+      "subColor": "F9DAE9"
     },
     {
       "name": "高松祇恵良",
@@ -1285,7 +1579,10 @@
       "bloodType": "A",
       "favoriteFood": "和食全般（一汁三菜的な）",
       "hatedFood": "不明",
-      "hobby": "和歌、香道"
+      "hobby": "和歌、香道",
+      "introduction": "百合ヶ丘女学院の理事長であり、理事長代行を務めている高松咬月の実姉。姿こそ妙齢の女性に見えるが、南極戦役の数少ない生き残りであり、今なおその力は衰えていない。",
+      "keyColor": "ECE6FF",
+      "subColor": "F5F2FF"
     },
     {
       "name": "山梨日羽梨",
@@ -1298,7 +1595,10 @@
       "bloodType": "O",
       "favoriteFood": "チンチラ",
       "hatedFood": "熱いもの、虫",
-      "hobby": "戦譜分析、戦術理解、ビーズ細工、アクセサリー作り"
+      "hobby": "戦譜分析、戦術理解、ビーズ細工、アクセサリー作り",
+      "introduction": "幼稚舎から百合ヶ丘に学ぶ生え抜きの才媛。強気な性格かつ厳しい物言いをすることが多々あるが、自分が認めた相手にはとことん肩入れする。百合ヶ丘2年きってのリリィオタクであり、二水のことを入学当時から気にかけていた。",
+      "keyColor": "D1C6AA",
+      "subColor": "E8E3D4"
     },
     {
       "name": "多田紫恵楽",
@@ -1311,7 +1611,10 @@
       "bloodType": "A",
       "favoriteFood": "ウサギ、お風呂",
       "hatedFood": "孤独（一人でいるのが苦手）",
-      "hobby": "書道"
+      "hobby": "書道",
+      "introduction": "美しい容姿を持ち、アイドルリリィ的に持て囃されているリリィ。とても優しく気弱な面もあるが、仲間のために戦う気持ちは人一倍強い。辰姫とは互いに愛称で呼び合う仲。",
+      "keyColor": "E8D4D4",
+      "subColor": "F5EAEA"
     },
     {
       "name": "毛綱乃彩",
@@ -1324,7 +1627,10 @@
       "bloodType": "AB",
       "favoriteFood": "散歩、日光浴",
       "hatedFood": "じめじめした場所、ぬるぬるした食べ物",
-      "hobby": "バトントワリング、きのこの栽培"
+      "hobby": "バトントワリング、きのこの栽培",
+      "introduction": "超がつくほどの感覚派で天才肌のリリィ。華麗で優美な戦闘スタイルから「妖精（ピクシー）」という異名を持つ。温和で優しい性格だが、何者にも侵されない独自のペースをたもっており、私生活でも戦闘時でも唯一無二の存在感を放つ。",
+      "keyColor": "807986",
+      "subColor": "8397B7"
     },
     {
       "name": "菱田治",
@@ -1337,7 +1643,10 @@
       "bloodType": "A",
       "favoriteFood": "フクロウ",
       "hatedFood": "寒さ",
-      "hobby": "鉱石集め・スチームパンク"
+      "hobby": "鉱石集め・スチームパンク",
+      "introduction": "御台場女学校で屈指の実力を誇り、ヘオロットセインツの影の主将とも評されるリリィ。数多くの特型ヒュージを倒した実績から「怪異斬り」の異名を持つ。御台場を守る一番のリリィになることを、早くに亡くした幼馴染の今村咲魅に誓い、日々戦い続けている。",
+      "keyColor": "98C6BC",
+      "subColor": "C6E3E0"
     },
     {
       "name": "西郷紅",
@@ -1350,7 +1659,10 @@
       "bloodType": "AB",
       "favoriteFood": "戦闘",
       "hatedFood": "料理",
-      "hobby": "アロマ"
+      "hobby": "アロマ",
+      "introduction": "ヘオロットセインツに所属する天才美少女リリィ。自信に裏付けされたパワフルかつ豪快な言動が目立ちがちだが、セインツが得意とする戦術を深く理解しているなど、聡明な一面も持ち合わせている。",
+      "keyColor": "ECD595",
+      "subColor": "E89A76"
     },
     {
       "name": "坪井七保",
@@ -1363,7 +1675,10 @@
       "bloodType": "AB",
       "favoriteFood": "ハムスター",
       "hatedFood": "高い所",
-      "hobby": "読書"
+      "hobby": "読書",
+      "introduction": "バシャンドレの隊長であり、エレンスゲ女学園の現風紀委員長。エレンスゲ女学園きっての常識人として知られており、ガーデン内外問わず慕われている。子供扱いされることを嫌い、背丈の話になると力強く否定する一面もある。序列3位。",
+      "keyColor": "F8AEDE",
+      "subColor": "F8D3E6"
     },
     {
       "name": "日比野羽来",
@@ -1376,7 +1691,10 @@
       "bloodType": "O",
       "favoriteFood": "リス",
       "hatedFood": "お掃除",
-      "hobby": "楽しいこと"
+      "hobby": "楽しいこと",
+      "introduction": "イルミンシャイネスのムードメーカー的存在のリリィ。楽しいことが大好きで少々子供っぽい側面もあるが、仲間を想う気持ちは人一倍強い。幼馴染の手島恋町とは冠輝の誓いを交わした仲。",
+      "keyColor": "FAF0DC",
+      "subColor": "C7B4B4"
     },
     {
       "name": "谷口聖",
@@ -1389,7 +1707,10 @@
       "bloodType": "O",
       "favoriteFood": "麺類、棒付き飴、グミ",
       "hatedFood": "歯医者",
-      "hobby": "裁縫"
+      "hobby": "裁縫",
+      "introduction": "その類稀なる才能と人懐っこい性格で周囲から愛されていることから「百合ヶ丘の恋人」という異名を持つリリィ。トレードマークの髪飾りは気分によって替えており、気合いを入れる時はシルトである六角汐里のお手製のものを着けている。",
+      "keyColor": "82B2FF",
+      "subColor": "FFE2AB"
     },
     {
       "name": "江坂雫月",
@@ -1402,7 +1723,10 @@
       "bloodType": "A",
       "favoriteFood": "インコ",
       "hatedFood": "ネコ",
-      "hobby": "ぬいぐるみ作り"
+      "hobby": "ぬいぐるみ作り",
+      "introduction": "G.E.H.E.N.A.により研究施設に閉じ込められていたリリィ。長い時間を研究施設で過ごしていたため、世間知らずで外の世界に憧れを抱いている。藍とは施設で出会い遊んだ仲。",
+      "keyColor": "FFFAFA",
+      "subColor": "DC143C"
     },
     {
       "name": "佐野桜花",
@@ -1415,7 +1739,10 @@
       "bloodType": "AB",
       "favoriteFood": "サポートロボ",
       "hatedFood": "動物全般",
-      "hobby": "機械いじり、プログラミング"
+      "hobby": "機械いじり、プログラミング",
+      "introduction": "かつては百合ヶ丘女学院に所属していたが、現在はG.E.H.E.N.A.の研究員。小島撫子を強く尊敬しており、彼女の理想のためならば犠牲もいとわないが、その犠牲に対して礼を欠くことはない。",
+      "keyColor": "708090",
+      "subColor": "9DD3CC"
     },
     {
       "name": "鳥居美歩",
@@ -1428,7 +1755,10 @@
       "bloodType": "O",
       "favoriteFood": "フェレット",
       "hatedFood": "狭い所、高い所",
-      "hobby": "少女趣味なもの全般、絵本あつめ"
+      "hobby": "少女趣味なもの全般、絵本あつめ",
+      "introduction": "かつて松村優珂と同じマディック隊に所属しており、その隊長を務めていた。リリィとして高い素質を持っていたが、G.E.H.E.N.A.により実験の被験者とされてしまう。",
+      "keyColor": "008080",
+      "subColor": "00CCCC"
     },
     {
       "name": "外崎杏花",
@@ -1441,7 +1771,10 @@
       "bloodType": "O",
       "favoriteFood": "ドラゴン、CHARMの妖精チャーミィ",
       "hatedFood": "論理的思考、ゾンビ",
-      "hobby": "魔法使いについての研究、神秘学、幻獣の絵を描く"
+      "hobby": "魔法使いについての研究、神秘学、幻獣の絵を描く",
+      "introduction": "神庭に転入してきた秋日の幼馴染。みんなから可愛がられるタイプで、年齢よりも幼く見られることが多い。幼少期より、魔法使いになることを夢見ており、その想いは容姿や戦闘スタイルにも表れている。",
+      "keyColor": "AF957E",
+      "subColor": "E13636"
     },
     {
       "name": "安孫子比呂美",
@@ -1454,7 +1787,10 @@
       "bloodType": "AB",
       "favoriteFood": "植物育成・ハーブティ・お香",
       "hatedFood": "虫、辛いもの",
-      "hobby": "読書、ガジェット集め"
+      "hobby": "読書、ガジェット集め",
+      "introduction": "神庭を守りたいという強い意志をもった3年生。高い戦術理解とデュエル能力を兼ね備えており、攻守バランスの取れた戦闘が可能。過去にとある事件を起こしており、学校内での風当たりはあまりよくない。",
+      "keyColor": "63B8C0",
+      "subColor": "D9F1EF"
     },
     {
       "name": "澁川智英",
@@ -1467,7 +1803,10 @@
       "bloodType": "O",
       "favoriteFood": "流行のもの",
       "hatedFood": "匂いに敏感で香水が嫌い",
-      "hobby": "スニーカー集め、ヨーヨー"
+      "hobby": "スニーカー集め、ヨーヨー",
+      "introduction": "寝坊、遅刻など少しだらしない所はあるが、明朗快活で人柄も良いので、たいてい許されてしまう。地元を守りたいという強い意志を持ち、戦術に縛られず、己の直感を信じて行動する。",
+      "keyColor": "FF9B9B",
+      "subColor": "88FFB5"
     },
     {
       "name": "桑田一乙",
@@ -1480,7 +1819,10 @@
       "bloodType": "B",
       "favoriteFood": "植物、ビオトープ",
       "hatedFood": "肉食",
-      "hobby": "時代劇鑑賞、忍者について学ぶこと"
+      "hobby": "時代劇鑑賞、忍者について学ぶこと",
+      "introduction": "天然で抜けたところが目立つが、生徒想いの優しい造園科の先生。現役時代はイルマ女子美術高校でアーセナルとして研鑽を積み、マグス装備研究の最前線にいた。時代劇が好きで、特に忍者に憧れを抱いている。",
+      "keyColor": "68be8d",
+      "subColor": "BED3CA"
     },
     {
       "name": "一之宮・ミカエラ・日葵",
@@ -1493,7 +1835,10 @@
       "bloodType": "A",
       "favoriteFood": "和食、いちご",
       "hatedFood": "辛いもの",
-      "hobby": "絵画"
+      "hobby": "絵画",
+      "introduction": "かつてはイルマ女子美術高校に在籍し、「イルマ四天王」の1人に数えられたほどの実力者だったが、「自由で華麗な戦い」を追い求め、私立ルドビコ女学院に転校。理想を追い求める性格で、妥協することを嫌う。",
+      "keyColor": "FFBA57",
+      "subColor": "FFEEB9"
     },
     {
       "name": "竹腰千華",
@@ -1506,7 +1851,10 @@
       "bloodType": "AB",
       "favoriteFood": "小雨、古生物、架空生物",
       "hatedFood": "特になし",
-      "hobby": "将棋"
+      "hobby": "将棋",
+      "introduction": "初代アールヴヘイム主将を務め、御台場迎撃戦では総指揮を執った実力者。戦いだけでなくCHARM開発まで行うことから「万能の天才」とも呼ばれている。自他ともに厳しく、超が付くほどのドSと評されることもある。",
+      "keyColor": "FFCCD3",
+      "subColor": "FFE6E9"
     }
   ]
 }

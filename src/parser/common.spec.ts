@@ -77,14 +77,8 @@ describe("parseStatus", () => {
     ["火属性防御力・風属性防御力", ["Fire DEF", "Wind DEF"]],
     ["水属性攻撃力・風属性攻撃力", ["Water ATK", "Wind ATK"]],
     ["水属性防御力・風属性防御力", ["Water DEF", "Wind DEF"]],
-    [
-      "火属性攻撃力・水属性攻撃力・風属性攻撃力",
-      ["Fire ATK", "Water ATK", "Wind ATK"],
-    ],
-    [
-      "火属性防御力・水属性防御力・風属性防御力",
-      ["Fire DEF", "Water DEF", "Wind DEF"],
-    ],
+    ["火属性攻撃力・水属性攻撃力・風属性攻撃力", ["Fire ATK", "Water ATK", "Wind ATK"]],
+    ["火属性防御力・水属性防御力・風属性防御力", ["Fire DEF", "Water DEF", "Wind DEF"]],
   ])("should parse %s correctly", (input, expected) => {
     expect(parseStatus(input)).toEqual(right(expected));
   });

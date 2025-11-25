@@ -1,11 +1,4 @@
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import "@/components/home/home.css";
 import Image from "next/image";
 import { useTheme } from "@mui/material/styles";
@@ -30,9 +23,7 @@ export default function Home() {
         <Box className="hero-image" width={1500} height={500}>
           <Box zIndex={2}>
             <Image
-              src={
-                theme.palette.mode === "dark" ? "/MO_DARK.png" : "/MO_LIGHT.png"
-              }
+              src={theme.palette.mode === "dark" ? "/MO_DARK.png" : "/MO_LIGHT.png"}
               alt={"Mitamatch Operations"}
               width={1500}
               height={500}
@@ -145,12 +136,7 @@ function Feature({
   return (
     <Card sx={{ gridArea }}>
       <CardActionArea onClick={action}>
-        <CardMedia
-          component="img"
-          height="250"
-          image={image}
-          alt="deck builder"
-        />
+        <CardMedia component="img" height="250" image={image} alt="deck builder" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {title}

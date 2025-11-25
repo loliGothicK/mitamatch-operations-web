@@ -93,9 +93,7 @@ export function parseLegendary(
             attributes: separator(
               attributes
                 .split("/")
-                .map((attribute) =>
-                  parseAttribute(attribute, { path, memoriaName }),
-                ),
+                .map((attribute) => parseAttribute(attribute, { path, memoriaName })),
             ),
             trigger: parseTrigger(trigger, { path, memoriaName }),
             rate: toValidated(parseFloatSafe(rate, { path, memoriaName })),

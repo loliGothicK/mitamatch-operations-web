@@ -5,14 +5,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { type FormEvent, Suspense, useEffect, useId, useState } from "react";
 
-import {
-  Add,
-  Assignment,
-  DragIndicator,
-  Edit,
-  Remove,
-  Share,
-} from "@mui/icons-material";
+import { Add, Assignment, DragIndicator, Edit, Remove, Share } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -140,14 +133,7 @@ function Info({ order }: { order: OrderWithPic }) {
 
 function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
   const [, setTimeline] = useAtom(rwTimelineAtom);
-  const {
-    isDragging,
-    setNodeRef,
-    attributes,
-    listeners,
-    transform,
-    transition,
-  } = useSortable({
+  const { isDragging, setNodeRef, attributes, listeners, transform, transition } = useSortable({
     id: order.id,
   });
   const [open, setOpen] = useState(false);
@@ -168,11 +154,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
     touchAction: "none",
   };
 
-  const timeFormat = ({
-    delay,
-    prepare_time,
-    active_time,
-  }: OrderWithPic): string => {
+  const timeFormat = ({ delay, prepare_time, active_time }: OrderWithPic): string => {
     const totalTime = (delay || 0) + (prepare_time || 0) + (active_time || 0);
     return `${totalTime} (${delay ? `${delay}` : ""}${prepare_time ? `+${prepare_time}` : ""}${active_time ? `+${active_time}` : ""}) s`;
   };
@@ -198,18 +180,10 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
             <ListItem key={order.id} sx={{ padding: 0 }}>
               <ListItemAvatar>
                 <Avatar>
-                  <Image
-                    src={`/order/${order.name}.png`}
-                    alt={order.name}
-                    width={50}
-                    height={50}
-                  />
+                  <Image src={`/order/${order.name}.png`} alt={order.name} width={50} height={50} />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
-                primary={<Info order={order} />}
-                secondary={order.effect}
-              />
+              <ListItemText primary={<Info order={order} />} secondary={order.effect} />
             </ListItem>
           </Tooltip>
         </Stack>
@@ -225,10 +199,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
           onClick={() => {
             // remove order from timeline
             setTimeline((prev) => {
-              Cookies.set(
-                "timeline",
-                encodeTimeline(prev.filter((o) => o.id !== order.id)),
-              );
+              Cookies.set("timeline", encodeTimeline(prev.filter((o) => o.id !== order.id)));
               return prev.filter((o) => o.id !== order.id);
             });
           }}
@@ -339,29 +310,20 @@ function Timeline() {
     })();
   }, [setTitle, setTimeline, params]);
 
-  const reducer = (
-    left: number,
-    order: OrderWithPic,
-    index: number,
-  ): number => {
+  const reducer = (left: number, order: OrderWithPic, index: number): number => {
     const prepareTime =
       index === 0
         ? order.prepare_time
         : timeline[index - 1].name.includes("戦術加速")
           ? 5
           : order.prepare_time;
-    const delay =
-      index > timeline.length - 2 ? 0 : timeline[index + 1].delay || 0;
+    const delay = index > timeline.length - 2 ? 0 : timeline[index + 1].delay || 0;
     return left - prepareTime - order.active_time - delay;
   };
 
   return (
     timeline.length !== 0 && (
-      <Sortable
-        items={timeline}
-        onChangeOrder={setTimeline}
-        strategy={verticalListSortingStrategy}
-      >
+      <Sortable items={timeline} onChangeOrder={setTimeline} strategy={verticalListSortingStrategy}>
         <List sx={{ width: "100%", maxWidth: "65vh", overflow: "auto" }}>
           {timeline.map((order, index) => (
             <TimelineItem
@@ -373,13 +335,8 @@ function Timeline() {
           <Divider textAlign={"left"} sx={{ paddingLeft: 0 }}>
             <Typography fontSize={10}>
               {(() => {
-                const left = takeLeft(timeline.length)(timeline).reduce(
-                  reducer,
-                  900,
-                );
-                return `${left < 0 ? "-" : ""}${Math.trunc(left / 60)}:${Math.abs(
-                  left % 60,
-                )
+                const left = takeLeft(timeline.length)(timeline).reduce(reducer, 900);
+                return `${left < 0 ? "-" : ""}${Math.trunc(left / 60)}:${Math.abs(left % 60)
                   .toString()
                   .padStart(2, "0")}`;
               })()}
@@ -438,10 +395,7 @@ function Source() {
                   }
                   setSelectedOrder((prev) => {
                     const delay = prev.length === 0 ? undefined : 5;
-                    Cookies.set(
-                      "timeline",
-                      encodeTimeline([...prev, { ...orders[index], delay }]),
-                    );
+                    Cookies.set("timeline", encodeTimeline([...prev, { ...orders[index], delay }]));
                     return [...prev, { ...orders[index], delay }];
                   });
                 }}
@@ -581,9 +535,7 @@ function ShareButton() {
               onClick={() => {
                 popupState.close();
                 handleClick("full");
-                setUrl(
-                  `https://operations.mitama.io/timeline-builder?timeline=${full}`,
-                );
+                setUrl(`https://operations.mitama.io/timeline-builder?timeline=${full}`);
               }}
             >
               {"full link"}
@@ -596,11 +548,7 @@ function ShareButton() {
             fullWidth={true}
           >
             <DialogContent>
-              <FormControl
-                variant="outlined"
-                fullWidth={true}
-                onClick={(e) => e.stopPropagation()}
-              >
+              <FormControl variant="outlined" fullWidth={true} onClick={(e) => e.stopPropagation()}>
                 <OutlinedInput
                   type="text"
                   value={url}
@@ -640,14 +588,7 @@ function TimelineBuilder() {
   const [, setPayed] = useAtom(payedAtom);
 
   return (
-    <Grid
-      container
-      spacing={2}
-      size={{ xs: 12 }}
-      direction={"row"}
-      alignItems={"left"}
-      margin={2}
-    >
+    <Grid container spacing={2} size={{ xs: 12 }} direction={"row"} alignItems={"left"} margin={2}>
       <Grid size={{ xs: 12, md: 8, lg: 8 }} alignItems={"center"} mt={5}>
         <Container
           maxWidth={false}

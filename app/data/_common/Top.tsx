@@ -6,7 +6,7 @@ import { Layout } from "@/components/Layout";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import {useRouter, useSearchParams} from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, type SyntheticEvent, useState } from "react";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { z } from "zod";
@@ -58,11 +58,11 @@ const TABS = [
   },
 ];
 
-const ROUTES = ['memoria', 'costume', "order"] as const;
+const ROUTES = ["memoria", "costume", "order"] as const;
 
 const pageSchema = z.enum(["memoria", "costume", "order"]).optional();
 
-export default function DataPage({ dataType }: { dataType?: string }) {
+export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[number] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || undefined;
@@ -85,11 +85,7 @@ export default function DataPage({ dataType }: { dataType?: string }) {
     <Layout>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             {TABS.map((def, index) => (
               <Tab
                 key={def.label}
