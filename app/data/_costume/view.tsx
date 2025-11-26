@@ -5,7 +5,7 @@ import NotFound from "next/dist/client/components/builtin/not-found";
 import { Layout } from "@/components/Layout";
 import { characterList } from "@/domain/character/character";
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import {comparator} from "@/domain/costume/function";
+import { comparator } from "@/domain/costume/function";
 
 export default function CostumeView({ name }: { name: string }) {
   const costumes = costumeList.filter((costume) => costume.name.includes(name));
