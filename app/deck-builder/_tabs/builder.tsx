@@ -628,7 +628,7 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
   const [sw] = useAtom(swAtom);
 
   if (candidate === undefined || compare === undefined) {
-    return <Typography>メンテナンス中</Typography>;
+    return <Typography>Something went wrong!</Typography>;
   }
 
   const [stackRateBefore, stackTimesBefore] = match(sw)
@@ -686,7 +686,7 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
   );
 
   if (isLeft(diff)) {
-    return <Typography>error!</Typography>;
+    return <Typography>メンテナンス中です、ご迷惑をおかけしてすいません</Typography>;
   }
 
   const style = {
