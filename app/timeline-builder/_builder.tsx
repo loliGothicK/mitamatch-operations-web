@@ -384,11 +384,8 @@ function Source() {
                 }}
                 onClick={() => {
                   if (
-                    orders[index].kind.includes("Elemental") &&
-                    !orders[index].kind.includes("Special") &&
-                    timeline.some((order) => {
-                      return order.kind === orders[index].kind;
-                    })
+                    timeline.some((order) => orders[index].effect.replace(/^(.+)Lv.\d/g, '$1')
+                      === order.effect.replace(/^(.+)Lv.\d/g, '$1'))
                   ) {
                     setOpen(true);
                     return;
@@ -429,7 +426,7 @@ function Source() {
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={open}
         onClose={handleClose}
-        message="同属性オーダーがすでにタイムラインに存在します"
+        message="同じカテゴリのオーダーは複数発動できません"
       />
     </>
   );

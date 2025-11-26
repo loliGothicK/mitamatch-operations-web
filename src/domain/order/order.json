@@ -1,6 +1,18 @@
 {
   "data": [
     {
+      "id": 183,
+      "name": "蒼天煌威",
+      "status": [2702, 2671, 1882, 1889],
+      "effect": "[水風]属性効果増加Lv.5",
+      "description": "水属性と風属性のメモリアスキル効果が極大増加する(70%）。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": true,
+      "kind": "Elemental/Special",
+      "usually": true
+    },
+    {
       "id": 182,
       "name": "鳳炎封界",
       "status": [1888, 1897, 2679, 2685],
