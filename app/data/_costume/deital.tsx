@@ -174,7 +174,10 @@ function Basic({ costume }: { costume: Costume }) {
       <CardMedia
         component="img"
         sx={{ width: 150 }}
-        image={`/costume/icon/${Lenz.costume.general.name.lily.get(costume)}/${Lenz.costume.general.name.job.get(costume)}.jpg`}
+        image={`/costume/icon/${Lenz.costume.general.name.lily.get(costume)}/${Lenz.costume.general.name.job
+          .get(costume)
+          .replace("*", "")
+          .replace(/\((.+)\/(.+)\)/g, "($1)($2)")}.jpg`}
         alt="Live from space album cover"
       />
       <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -333,7 +336,7 @@ function DetailData({ costume }: { costume: Costume }) {
 }
 
 export default function Deital({ lily, job }: { lily: string; job: string }) {
-  const costume = costumeList.find((costume) => costume.name === `${lily}/${job}`);
+  const costume = costumeList.find((costume) => Lenz.costume.general.name.normalized.full.get(costume) === `${lily}/${job}`);
 
   if (costume === undefined) return <NotFound />;
 

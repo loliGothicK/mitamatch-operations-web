@@ -15,3 +15,9 @@ export const comparator =
     // 降順なら結果を反転させる
     return order === "asc" ? result : -result;
   };
+
+export const normalizeJobName = (job: string) => {
+  return job
+    .replace("*", "")
+    .replace(/\((.+)\/(.+)\)/g, "($1)($2)")
+};

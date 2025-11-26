@@ -12,6 +12,7 @@ import { isLeft, right } from "fp-ts/Either";
 import { parseIntSafe } from "@/parser/common";
 import { either } from "fp-ts";
 import CostumeView from "@/data/_costume/view";
+import {normalizeJobName} from "@/domain/costume/function";
 
 type Props = {
   params: Promise<{ slug?: string | string[] }>;
@@ -48,7 +49,7 @@ export default async function Page({ params, searchParams }: Props) {
     ))
     .with(["costume", P.string.select()], (name) => <CostumeView name={decodeURIComponent(name)} />)
     .with(["costume", P.string, P.string], ([, lily, job]) => (
-      <CostumeDetail lily={decodeURIComponent(lily)} job={decodeURIComponent(job)} />
+      <CostumeDetail lily={decodeURIComponent(lily)} job={normalizeJobName(decodeURIComponent(job))} />
     ))
     .otherwise(() => <NotFound />);
 }
