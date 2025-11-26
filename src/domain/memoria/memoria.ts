@@ -150,7 +150,7 @@ export const memoriaList: Memoria[] = memoriaData.data
       ...raw,
       skills: { ...parseSkillsResult.right },
       name: {
-        short: name.replace(/(?:クリエイターズコラボ|Ultimate Memoria )-(.*)-/g, "$1"),
+        short: name.replace(/(?:クリエイターズコラボ|Ultimate Memoria|Emotional Memoria)\s*-(.*)-/g, "$1"),
         full: name,
       },
     };
