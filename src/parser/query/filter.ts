@@ -8,10 +8,11 @@ import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
 import { sequenceS } from "fp-ts/Apply";
 import { getSemigroup } from "fp-ts/Array";
 import { P } from "ts-pattern";
-import { Option } from "fp-ts/Option";
+import {isSome, Option} from "fp-ts/Option";
 import { separator, transpose } from "@/fp-ts-ext/function";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { Costume } from "@/domain/costume/costume";
+import { Memoria } from "@/domain/memoria/memoria";
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 /**
@@ -49,6 +50,7 @@ export default function build<T>(
   {
     readonly where: Option<IExpression<T>>;
     readonly orderBy: Option<IComparator<T>>;
+    readonly limit: (data: T[]) => T[];
   }
 > {
   type Input = AtomicExpr | BinaryExpr | AtomicExprList;
@@ -63,7 +65,20 @@ export default function build<T>(
     rhs: Input,
   ): Either<MitamaError, (left: Lit, right: Lit) => Lit> =>
     match(operator)
-      .with("=", () => right((left: Lit, right: Lit) => left === right))
+      .with("=", () =>
+        match(lhs)
+          .with({ type: "field", value: "label" }, () =>
+            right((left: Lit, right: Lit) =>
+              ((left as Clazz).data as Memoria["labels"])
+                .map((label) => label.toLowerCase())
+                .includes(right as string),
+            ),
+          )
+          .with({ type: "field", value: "specialSkill" }, () =>
+            bail("specialSkill", "specialSkill cannot be compared, must be used LIKE operator."),
+          )
+          .otherwise(() => right((left: Lit, right: Lit) => left === right)),
+      )
       .with("!=", () => right((left: Lit, right: Lit) => left !== right))
       .with(">", () => right((left: Lit, right: Lit) => left > right))
       .with("<", () => right((left: Lit, right: Lit) => left < right))
@@ -201,18 +216,34 @@ export default function build<T>(
         ),
       ),
     ),
+    limit: right((arr: T[]): T[] => {
+      if (isSome(expr.limit.limit)) {
+        return arr.slice(pipe(expr.limit.offset, option.getOrElse(() => 0)), expr.limit.limit.value);
+      }
+      return arr;
+    })
   });
 }
 
-type Accessor<T> = (item: T) => string | number | Clazz;
+type Accessor<T, R> = (item: T) => R;
 export type SchemaResolver<T> = Record<
   string,
-  {
-    readonly type: "string" | "number" | "clazz";
-    readonly accessor: Accessor<T>;
-  }
+  | {
+      readonly type: "string";
+      readonly accessor: Accessor<T, string>;
+    }
+  | {
+      readonly type: "number";
+      readonly accessor: Accessor<T, number>;
+    }
+  | {
+      readonly type: "clazz";
+      readonly accessor: Accessor<T, Clazz>;
+    }
 >;
-export type Clazz = { data: Costume["specialSkill"] };
+export type Clazz =
+  | { type: "specialSkill"; data: Costume["specialSkill"] }
+  | { type: "labels"; data: Memoria["labels"] };
 type Lit = string | number | boolean | Clazz;
 
 /**
@@ -245,7 +276,7 @@ class Literal<T> implements IExpression<T> {
  * @param T データソースのitemの型
  */
 class Field<T> implements IExpression<T> {
-  constructor(private getter: Accessor<T>) {}
+  constructor(private getter: Accessor<T, Lit>) {}
 
   apply(item: T): Lit {
     return this.getter(item);

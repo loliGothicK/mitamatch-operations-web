@@ -4,6 +4,7 @@ import {
   type ExpressionValue,
   type ExprList,
   type Function as SqlFunction,
+  Limit,
   OrderBy,
   Parser,
 } from "node-sql-parser";
@@ -26,6 +27,10 @@ const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 export type ParseResult = {
   readonly where: Option<BinaryExpr>;
   readonly orderBy: Option<OrderByExpr[]>;
+  readonly limit: {
+    limit: Option<number>;
+    offset: Option<number>;
+  };
 };
 
 function isExpressionValueArray(data: any): data is ExpressionValue[] {
@@ -177,6 +182,27 @@ function parseOrderBy(orderby: OrderBy[] | null): Validated<MitamaError, Option<
 
 type WhiteList = Set<GridColDef["field"]>;
 
+function parseLimit(limit: Limit | null): Validated<MitamaError, {
+  limit: Option<number>;
+  offset: Option<number>;
+}> {
+  return match(limit)
+    .with(null, () => right({
+      limit: option.none,
+      offset: option.none,
+    }))
+    .otherwise(({ value }) => right({
+      limit: pipe(
+        option.fromNullable(value.find(({ type }) => type === "limit")),
+        option.map(({ value }) => value)
+      ),
+      offset: pipe(
+        option.fromNullable(value.find(({ type }) => type === "offset")),
+        option.map(({ value }) => value)
+      ),
+    }));
+}
+
 export function sqlToModel(sql: string): Validated<MitamaError, [WhiteList, ParseResult]> {
   const ast = fromThrowable(parser.astify.bind(parser))(sql, {
     database: "MySQL",
@@ -196,6 +222,7 @@ export function sqlToModel(sql: string): Validated<MitamaError, [WhiteList, Pars
       sequenceS(ap)({
         where: parseWhere(stmt.where),
         orderBy: parseOrderBy(stmt.orderby),
+        limit: parseLimit(stmt.limit),
       }),
       either.map(
         (filter) =>

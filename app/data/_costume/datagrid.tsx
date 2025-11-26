@@ -4,12 +4,12 @@ import { type Costume, costumeList as dataSource } from "@/domain/costume/costum
 import { DataGrid, type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
 import Image from "next/image";
-import { useState } from "react";
+import {JSX, useState } from "react";
 import Link from "@/components/link";
 import { QueryConsle } from "@/data/_common/QueryConsle";
 import { Clazz, SchemaResolver } from "@/parser/query/filter";
 import { useVisivility } from "@/data/_common/useVisivility";
-import { Box, Chip, Tooltip, Typography } from "@mui/material";
+import {Box, Chip, List, ListItem, ListItemText, ListSubheader, Tooltip, Typography} from "@mui/material";
 import { match, P } from "ts-pattern";
 import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
@@ -209,7 +209,10 @@ const resolver: SchemaResolver<Costume> = {
   },
   specialSkill: {
     type: "clazz",
-    accessor: (costume: Costume) => ({ data: costume.specialSkill }),
+    accessor: (costume: Costume) => ({
+      type: "specialSkill",
+      data: costume.specialSkill,
+    }),
   },
 };
 
@@ -252,7 +255,10 @@ const completeCandidates: Record<string, ComleteCandidate> = {
         "対闇",
       ],
       item: "clazz",
-      operator: ({ data }: Clazz, pattern: string): boolean => {
+      operator: ({ type, data }: Clazz, pattern: string): boolean => {
+        if (type !== "specialSkill") {
+          return false;
+        }
         return pattern
           .replaceAll(" ", "")
           .split(",")
@@ -308,6 +314,56 @@ const completeCandidates: Record<string, ComleteCandidate> = {
   },
 };
 
+/**
+ * A functional React component that provides help-related content.
+ *
+ * @return {JSX.Element} The rendered JSX element representing the help section.
+ */
+function Help(): JSX.Element {
+  return (
+    <Box sx={{ p: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        クエリ構文ヘルプ
+      </Typography>
+      <Typography variant="body1" component={"p"}>
+        MySQLライクなクエリを使用してデータをフィルタリング、ソートできます。
+      </Typography>
+      <List dense>
+        <ListSubheader>サポートされているキーワード</ListSubheader>
+        <ListItem>
+          <ListItemText
+            primary="SELECT"
+            secondary="表示するカラムを選択します。例: SELECT `name`, `atk`"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="WHERE"
+            secondary="データをフィルタリングします。例: WHERE `cost` > 18 AND `type` = '支援'"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="ORDER BY"
+            secondary="データをソートします。例: ORDER BY `atk` DESC"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="LIMIT" secondary="表示する行数を制限します。例: LIMIT 10" />
+        </ListItem>
+      </List>
+      <List dense>
+        <ListSubheader>利用可能なカラム</ListSubheader>
+        {schema.costume.map((col) => (
+          <ListItem key={col} sx={{ py: 0 }}>
+            <ListItemText primary={`\`${col}\``} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+}
+
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   const [visivility, setVisivility, visivilityChanged] = useVisivility(visivilityAll);
   const [rows, setRows] = useState<Costume[]>(dataSource.toReversed());
@@ -328,6 +384,7 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
         updateVisivilityAction={visivilityChanged}
         updateDataAction={setRows}
         completion={completeCandidates}
+        help={<Help />}
       />
       <DataGrid
         rows={rows}

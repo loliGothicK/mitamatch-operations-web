@@ -6,7 +6,7 @@ import { Lenz } from "@/domain/lenz";
 import type { Attribute } from "@/parser/skill";
 import { match } from "ts-pattern";
 import Image from "next/image";
-import { useState } from "react";
+import { JSX, useState } from "react";
 import Link from "@/components/link";
 import { QueryConsle } from "@/data/_common/QueryConsle";
 import { SchemaResolver } from "@/parser/query/filter";
@@ -14,6 +14,7 @@ import { useVisivility } from "@/data/_common/useVisivility";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { atomWithReset } from "jotai/utils";
 import { useSetAtom } from "jotai";
+import { Box, List, ListItem, ListItemText, ListSubheader, Typography } from "@mui/material";
 
 const queryAtom = atomWithReset("select * from memoria where `cost` > 18;");
 
@@ -146,6 +147,7 @@ export const schema = {
     "gvgSkill.desc",
     "autoSkill.name",
     "autoSkill.desc",
+    "label",
   ],
 };
 
@@ -213,6 +215,13 @@ const resolver: SchemaResolver<Memoria> = {
     type: "string",
     accessor: (memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.description,
   },
+  label: {
+    type: "clazz",
+    accessor: (memoria: Memoria) => ({
+      type: "labels",
+      data: Lenz.memoria.general.labels.get(memoria),
+    }),
+  },
 };
 
 const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
@@ -239,7 +248,60 @@ const enumMap: Record<string, ComleteCandidate> = {
   attribute: {
     equals: ["火", "水", "風", "光", "闇"],
   },
+  label: {
+    equals: ["legendary", "ultimate"],
+  },
 };
+
+/**
+ * A functional React component that provides help-related content.
+ *
+ * @return {JSX.Element} The rendered JSX element representing the help section.
+ */
+function Help(): JSX.Element {
+  return (
+    <Box sx={{ p: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        クエリ構文ヘルプ
+      </Typography>
+      <Typography variant="body1" component={"p"}>
+        MySQLライクなクエリを使用してデータをフィルタリング、ソートできます。
+      </Typography>
+      <List dense>
+        <ListSubheader>サポートされているキーワード</ListSubheader>
+        <ListItem>
+          <ListItemText
+            primary="SELECT"
+            secondary="表示するカラムを選択します。例: SELECT `name`, `atk`"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="WHERE"
+            secondary="データをフィルタリングします。例: WHERE `cost` > 18 AND `type` = '支援'"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText
+            primary="ORDER BY"
+            secondary="データをソートします。例: ORDER BY `atk` DESC"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="LIMIT" secondary="表示する行数を制限します。例: LIMIT 10" />
+        </ListItem>
+      </List>
+      <List dense>
+        <ListSubheader>利用可能なカラム</ListSubheader>
+        {schema.memoria.map((col) => (
+          <ListItem key={col} sx={{ py: 0 }}>
+            <ListItemText primary={`\`${col}\``} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+}
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   const [visivility, setVisivility, visivilityChanged] = useVisivility(visivilityAll);
@@ -261,6 +323,7 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
         updateVisivilityAction={visivilityChanged}
         updateDataAction={setRows}
         completion={enumMap}
+        help={<Help />}
       />
       <DataGrid
         rows={rows}

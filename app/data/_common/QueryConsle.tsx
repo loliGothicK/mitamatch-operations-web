@@ -1,11 +1,18 @@
 "use client";
 
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
+import {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { flow, pipe } from "fp-ts/function";
 import { sqlToModel } from "@/parser/query/sql";
 import { either } from "fp-ts";
 import { Box } from "@mui/system";
-import { Alert, IconButton, Snackbar, Tooltip } from "@mui/material";
+import { Alert, IconButton, Modal, Snackbar, Tooltip } from "@mui/material";
 import { Lens } from "monocle-ts";
 import { ClearAll, Info, PlayArrowRounded, Share } from "@mui/icons-material";
 import { GridColDef } from "@mui/x-data-grid";
@@ -28,6 +35,18 @@ const openLens = Lens.fromProp<ToastState>()("open");
 const messageLens = Lens.fromProp<ToastState>()("message");
 const severityLens = Lens.fromProp<ToastState>()("severity");
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 export function QueryConsle<
   Schema extends {
     [p: string]: string[];
@@ -41,6 +60,7 @@ export function QueryConsle<
   queryAtom,
   updateVisivilityAction,
   updateDataAction,
+  help,
   completion,
 }: {
   table: keyof Schema;
@@ -50,6 +70,7 @@ export function QueryConsle<
   queryAtom: WritableAtom<string, [SetStateAction<string>], void>;
   updateVisivilityAction: (whiteList: Set<GridColDef["field"]>) => void;
   updateDataAction: Dispatch<SetStateAction<T[]>>;
+  help: ComponentPropsWithoutRef<typeof Modal>["children"];
   completion?: Record<string, ComleteCandidate>;
 }) {
   const [query, setQuery] = useAtom(queryAtom);
@@ -93,9 +114,9 @@ export function QueryConsle<
           updateVisivilityAction(whiteList);
           const pred = build(result, resolver, completion);
           if (isRight(pred)) {
-            const { where, orderBy } = pred.right;
+            const { where, orderBy, limit } = pred.right;
             if (isSome(where)) {
-              updateDataAction(() => origin.filter(where.value.apply.bind(where.value)));
+              updateDataAction(() => limit(origin.filter(where.value.apply.bind(where.value))));
             }
             if (isSome(orderBy)) {
               updateDataAction((data) => data.sort(orderBy.value.compare.bind(orderBy.value)));
@@ -142,6 +163,10 @@ export function QueryConsle<
     updateDataAction(origin);
   }, [setQuery]);
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
+
   useEffect(() => {
     runQuery(true);
   }, []);
@@ -158,6 +183,14 @@ export function QueryConsle<
         >
           <Alert severity={severity}>{message}</Alert>
         </Snackbar>
+        <Modal
+          open={modalOpen}
+          onClose={handleModalClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>{help}</Box>
+        </Modal>
         <IconButton onClick={() => runQuery()} sx={{ marginRight: 1 }}>
           <Tooltip title={"Ctrl + Enter"} placement="top">
             <PlayArrowRounded />
@@ -174,7 +207,7 @@ export function QueryConsle<
         {/* 右端に寄せる */}
         <Box sx={{ display: "flex", flexGrow: 1, justifyContent: "right" }}>
           <Tooltip title={"help"} placement="top">
-            <IconButton onClick={() => {}} sx={{ marginRight: 1 }}>
+            <IconButton onClick={handleModalOpen} sx={{ marginRight: 1 }}>
               <Info />
             </IconButton>
           </Tooltip>
