@@ -8,7 +8,7 @@ import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
 import { sequenceS } from "fp-ts/Apply";
 import { getSemigroup } from "fp-ts/Array";
 import { P } from "ts-pattern";
-import {isSome, Option} from "fp-ts/Option";
+import { isSome, Option } from "fp-ts/Option";
 import { separator, transpose } from "@/fp-ts-ext/function";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { Costume } from "@/domain/costume/costume";
@@ -218,10 +218,16 @@ export default function build<T>(
     ),
     limit: right((arr: T[]): T[] => {
       if (isSome(expr.limit.limit)) {
-        return arr.slice(pipe(expr.limit.offset, option.getOrElse(() => 0)), expr.limit.limit.value);
+        return arr.slice(
+          pipe(
+            expr.limit.offset,
+            option.getOrElse(() => 0),
+          ),
+          expr.limit.limit.value,
+        );
       }
       return arr;
-    })
+    }),
   });
 }
 

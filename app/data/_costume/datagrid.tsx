@@ -4,12 +4,21 @@ import { type Costume, costumeList as dataSource } from "@/domain/costume/costum
 import { DataGrid, type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
 import Image from "next/image";
-import {JSX, useState } from "react";
+import { JSX, useState } from "react";
 import Link from "@/components/link";
 import { QueryConsle } from "@/data/_common/QueryConsle";
 import { Clazz, SchemaResolver } from "@/parser/query/filter";
 import { useVisivility } from "@/data/_common/useVisivility";
-import {Box, Chip, List, ListItem, ListItemText, ListSubheader, Tooltip, Typography} from "@mui/material";
+import {
+  Box,
+  Chip,
+  List,
+  ListItem,
+  ListItemText,
+  ListSubheader,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { match, P } from "ts-pattern";
 import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";

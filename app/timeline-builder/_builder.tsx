@@ -384,8 +384,11 @@ function Source() {
                 }}
                 onClick={() => {
                   if (
-                    timeline.some((order) => orders[index].effect.replace(/^(.+)Lv.\d/g, '$1')
-                      === order.effect.replace(/^(.+)Lv.\d/g, '$1'))
+                    timeline.some(
+                      (order) =>
+                        orders[index].effect.replace(/^(.+)Lv.\d/g, "$1") ===
+                        order.effect.replace(/^(.+)Lv.\d/g, "$1"),
+                    )
                   ) {
                     setOpen(true);
                     return;

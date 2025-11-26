@@ -182,25 +182,32 @@ function parseOrderBy(orderby: OrderBy[] | null): Validated<MitamaError, Option<
 
 type WhiteList = Set<GridColDef["field"]>;
 
-function parseLimit(limit: Limit | null): Validated<MitamaError, {
-  limit: Option<number>;
-  offset: Option<number>;
-}> {
+function parseLimit(limit: Limit | null): Validated<
+  MitamaError,
+  {
+    limit: Option<number>;
+    offset: Option<number>;
+  }
+> {
   return match(limit)
-    .with(null, () => right({
-      limit: option.none,
-      offset: option.none,
-    }))
-    .otherwise(({ value }) => right({
-      limit: pipe(
-        option.fromNullable(value.find(({ type }) => type === "limit")),
-        option.map(({ value }) => value)
-      ),
-      offset: pipe(
-        option.fromNullable(value.find(({ type }) => type === "offset")),
-        option.map(({ value }) => value)
-      ),
-    }));
+    .with(null, () =>
+      right({
+        limit: option.none,
+        offset: option.none,
+      }),
+    )
+    .otherwise(({ value }) =>
+      right({
+        limit: pipe(
+          option.fromNullable(value.find(({ type }) => type === "limit")),
+          option.map(({ value }) => value),
+        ),
+        offset: pipe(
+          option.fromNullable(value.find(({ type }) => type === "offset")),
+          option.map(({ value }) => value),
+        ),
+      }),
+    );
 }
 
 export function sqlToModel(sql: string): Validated<MitamaError, [WhiteList, ParseResult]> {
