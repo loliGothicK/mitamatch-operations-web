@@ -119,7 +119,7 @@ export function QueryConsle<
               updateDataAction(() => limit(origin.filter(where.value.apply.bind(where.value))));
             }
             if (isSome(orderBy)) {
-              updateDataAction((data) => data.sort(orderBy.value.compare.bind(orderBy.value)));
+              updateDataAction((data) => data.toSorted(orderBy.value.compare.bind(orderBy.value)));
             }
             if (!first) {
               setState(

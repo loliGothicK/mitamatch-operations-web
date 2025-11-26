@@ -26,7 +26,7 @@ import { isSome } from "fp-ts/lib/Option";
 import { atomWithReset } from "jotai/utils";
 import { useSetAtom } from "jotai";
 
-const queryAtom = atomWithReset("select * from costume where `specialSkill` like 'ADX, 覚醒';");
+const queryAtom = atomWithReset("select * from costume order by released;");
 
 const columns: GridColDef<Costume>[] = [
   {
@@ -165,6 +165,12 @@ const columns: GridColDef<Costume>[] = [
       </Box>
     ),
   },
+  {
+    field: "released",
+    headerName: "Released",
+    width: 100,
+    valueGetter: (_, costume) => Lenz.costume.general.released.get(costume),
+  },
 ];
 
 const paginationModel = { page: 0, pageSize: 10 };
@@ -180,6 +186,7 @@ export const schema = {
     "rareSkill.name",
     "rareSkill.desc",
     "specialSkill",
+    "released",
   ],
 };
 
@@ -222,6 +229,10 @@ const resolver: SchemaResolver<Costume> = {
       type: "specialSkill",
       data: costume.specialSkill,
     }),
+  },
+  released: {
+    type: "string",
+    accessor: (costume: Costume) => Lenz.costume.general.released.get(costume),
   },
 };
 
@@ -373,8 +384,15 @@ function Help(): JSX.Element {
   );
 }
 
+const HIDDEN_COLUMNS: GridColDef["field"][] = ["released"];
+
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
-  const [visivility, setVisivility, visivilityChanged] = useVisivility(visivilityAll);
+  const [visivility, setVisivility, visivilityChanged] = useVisivility(
+    HIDDEN_COLUMNS.reduce((model, col) => {
+      model[col] = false;
+      return model;
+    }, visivilityAll),
+  );
   const [rows, setRows] = useState<Costume[]>(dataSource.toReversed());
   const setQuery = useSetAtom(queryAtom);
 

@@ -79,6 +79,7 @@ const costumeSchema = z.object({
     .optional()
     .nullable()
     .readonly(),
+  released: z.iso.date().readonly(),
 });
 
 export type Ex = {

@@ -128,7 +128,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 1,
@@ -258,7 +259,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 2,
@@ -388,7 +390,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 3,
@@ -517,7 +520,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 4,
@@ -647,7 +651,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 5,
@@ -777,7 +782,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 6,
@@ -907,7 +913,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 7,
@@ -1037,7 +1044,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 8,
@@ -1166,7 +1174,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 9,
@@ -1296,7 +1305,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 10,
@@ -1426,7 +1436,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 11,
@@ -1555,7 +1566,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 12,
@@ -1685,7 +1697,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 13,
@@ -1815,7 +1828,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 14,
@@ -1945,7 +1959,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 15,
@@ -2075,7 +2090,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 16,
@@ -2205,7 +2221,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 17,
@@ -2335,7 +2352,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 18,
@@ -2465,7 +2483,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 19,
@@ -2575,7 +2594,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-05-31"
     },
     {
       "id": 20,
@@ -2685,7 +2705,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-30"
     },
     {
       "id": 21,
@@ -2791,7 +2812,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-05-28"
     },
     {
       "id": 22,
@@ -2896,7 +2918,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-20"
     },
     {
       "id": 23,
@@ -3006,7 +3029,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-31"
     },
     {
       "id": 24,
@@ -3140,7 +3164,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-20"
     },
     {
       "id": 25,
@@ -3274,7 +3299,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-20"
     },
     {
       "id": 26,
@@ -3408,7 +3434,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-19"
     },
     {
       "id": 27,
@@ -3607,7 +3634,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-20"
     },
     {
       "id": 28,
@@ -3741,7 +3769,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-19"
     },
     {
       "id": 29,
@@ -3875,7 +3904,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-20"
     },
     {
       "id": 30,
@@ -4008,7 +4038,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-20"
     },
     {
       "id": 31,
@@ -4114,7 +4145,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-09-14"
     },
     {
       "id": 32,
@@ -4220,7 +4252,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-07"
     },
     {
       "id": 33,
@@ -4325,7 +4358,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-19"
     },
     {
       "id": 34,
@@ -4430,7 +4464,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-06"
     },
     {
       "id": 35,
@@ -4536,7 +4571,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-09"
     },
     {
       "id": 36,
@@ -4642,7 +4678,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-10"
     },
     {
       "id": 37,
@@ -4748,7 +4785,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-09"
     },
     {
       "id": 38,
@@ -4891,7 +4929,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-03"
     },
     {
       "id": 39,
@@ -5030,7 +5069,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-03"
     },
     {
       "id": 40,
@@ -5139,7 +5179,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-15"
     },
     {
       "id": 41,
@@ -5249,7 +5290,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-05-31"
     },
     {
       "id": 42,
@@ -5366,7 +5408,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-08-31"
     },
     {
       "id": 43,
@@ -5483,7 +5526,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-10"
     },
     {
       "id": 44,
@@ -5617,7 +5661,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-19"
     },
     {
       "id": 45,
@@ -5751,7 +5796,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-30"
     },
     {
       "id": 46,
@@ -5885,7 +5931,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-30"
     },
     {
       "id": 47,
@@ -6019,7 +6066,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-30"
     },
     {
       "id": 48,
@@ -6217,7 +6265,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 49,
@@ -6354,7 +6403,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-03"
     },
     {
       "id": 50,
@@ -6471,7 +6521,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-08-31"
     },
     {
       "id": 51,
@@ -6587,7 +6638,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-31"
     },
     {
       "id": 52,
@@ -6704,7 +6756,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-22"
     },
     {
       "id": 53,
@@ -6821,7 +6874,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-22"
     },
     {
       "id": 54,
@@ -6937,7 +6991,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-22"
     },
     {
       "id": 55,
@@ -7080,7 +7135,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-30"
     },
     {
       "id": 56,
@@ -7216,7 +7272,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-03"
     },
     {
       "id": 57,
@@ -7357,7 +7414,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-02"
     },
     {
       "id": 58,
@@ -7500,7 +7558,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-30"
     },
     {
       "id": 59,
@@ -7617,7 +7676,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-28"
     },
     {
       "id": 60,
@@ -7733,7 +7793,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-28"
     },
     {
       "id": 61,
@@ -7870,7 +7931,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-31"
     },
     {
       "id": 62,
@@ -8012,7 +8074,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-03"
     },
     {
       "id": 63,
@@ -8154,7 +8217,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-03"
     },
     {
       "id": 64,
@@ -8290,7 +8354,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-31"
     },
     {
       "id": 65,
@@ -8427,7 +8492,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-09"
     },
     {
       "id": 66,
@@ -8570,7 +8636,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-09"
     },
     {
       "id": 67,
@@ -8686,7 +8753,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-03"
     },
     {
       "id": 68,
@@ -8803,7 +8871,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-31"
     },
     {
       "id": 69,
@@ -8940,7 +9009,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-20"
     },
     {
       "id": 70,
@@ -9083,7 +9153,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-20"
     },
     {
       "id": 71,
@@ -9220,7 +9291,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-13"
     },
     {
       "id": 72,
@@ -9363,7 +9435,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-30"
     },
     {
       "id": 73,
@@ -9500,7 +9573,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-30"
     },
     {
       "id": 74,
@@ -9643,7 +9717,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-10"
     },
     {
       "id": 75,
@@ -9782,7 +9857,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-22"
     },
     {
       "id": 76,
@@ -9980,7 +10056,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-31"
     },
     {
       "id": 77,
@@ -10123,7 +10200,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-03"
     },
     {
       "id": 78,
@@ -10322,7 +10400,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-31"
     },
     {
       "id": 79,
@@ -10521,7 +10600,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-30"
     },
     {
       "id": 80,
@@ -10720,7 +10800,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-30"
     },
     {
       "id": 81,
@@ -10919,7 +11000,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-31"
     },
     {
       "id": 82,
@@ -11118,7 +11200,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 83,
@@ -11317,7 +11400,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-30"
     },
     {
       "id": 84,
@@ -11516,7 +11600,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-30"
     },
     {
       "id": 85,
@@ -11715,7 +11800,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-31"
     },
     {
       "id": 86,
@@ -11986,7 +12072,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-31"
     },
     {
       "id": 87,
@@ -12257,7 +12344,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-09-30"
     },
     {
       "id": 88,
@@ -12528,7 +12616,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-09-30"
     },
     {
       "id": 89,
@@ -12799,7 +12888,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-10-31"
     },
     {
       "id": 90,
@@ -13070,7 +13160,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-20"
     },
     {
       "id": 91,
@@ -13269,7 +13360,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 92,
@@ -13399,7 +13491,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 93,
@@ -13529,7 +13622,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 94,
@@ -13659,7 +13753,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 95,
@@ -13788,7 +13883,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 96,
@@ -13918,7 +14014,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 97,
@@ -14048,7 +14145,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 98,
@@ -14178,7 +14276,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 99,
@@ -14308,7 +14407,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 100,
@@ -14437,7 +14537,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 101,
@@ -14567,7 +14668,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-10"
     },
     {
       "id": 102,
@@ -14697,7 +14799,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-10"
     },
     {
       "id": 103,
@@ -14826,7 +14929,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-10"
     },
     {
       "id": 104,
@@ -14956,7 +15060,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-10"
     },
     {
       "id": 105,
@@ -15086,7 +15191,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-10"
     },
     {
       "id": 106,
@@ -15216,7 +15322,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-19"
     },
     {
       "id": 107,
@@ -15346,7 +15453,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-19"
     },
     {
       "id": 108,
@@ -15476,7 +15584,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-19"
     },
     {
       "id": 109,
@@ -15606,7 +15715,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-19"
     },
     {
       "id": 110,
@@ -15736,7 +15846,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-19"
     },
     {
       "id": 111,
@@ -15846,7 +15957,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 112,
@@ -16045,7 +16157,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-31"
     },
     {
       "id": 113,
@@ -16179,7 +16292,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 114,
@@ -16313,7 +16427,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 115,
@@ -16447,7 +16562,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 116,
@@ -16556,7 +16672,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-08"
     },
     {
       "id": 117,
@@ -16666,7 +16783,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-08"
     },
     {
       "id": 118,
@@ -16800,7 +16918,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-09-18"
     },
     {
       "id": 119,
@@ -16934,7 +17053,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-09-18"
     },
     {
       "id": 120,
@@ -17068,7 +17188,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-04-15"
     },
     {
       "id": 121,
@@ -17201,7 +17322,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-04-15"
     },
     {
       "id": 122,
@@ -17311,7 +17433,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-08"
     },
     {
       "id": 123,
@@ -17445,7 +17568,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-06"
     },
     {
       "id": 124,
@@ -17579,7 +17703,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-06"
     },
     {
       "id": 125,
@@ -17712,7 +17837,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-04-15"
     },
     {
       "id": 126,
@@ -17855,7 +17981,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-20"
     },
     {
       "id": 127,
@@ -17989,7 +18116,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-31"
     },
     {
       "id": 128,
@@ -18123,7 +18251,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-31"
     },
     {
       "id": 129,
@@ -18257,7 +18386,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-31"
     },
     {
       "id": 130,
@@ -18391,7 +18521,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-21"
     },
     {
       "id": 131,
@@ -18525,7 +18656,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-03-31"
     },
     {
       "id": 132,
@@ -18659,7 +18791,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-03-31"
     },
     {
       "id": 133,
@@ -18792,7 +18925,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-03-31"
     },
     {
       "id": 134,
@@ -18926,7 +19060,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-10"
     },
     {
       "id": 135,
@@ -19063,7 +19198,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-13"
     },
     {
       "id": 136,
@@ -19173,7 +19309,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-13"
     },
     {
       "id": 137,
@@ -19283,7 +19420,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-13"
     },
     {
       "id": 138,
@@ -19393,7 +19531,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-13"
     },
     {
       "id": 139,
@@ -19510,7 +19649,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-08"
     },
     {
       "id": 140,
@@ -19644,7 +19784,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-31"
     },
     {
       "id": 141,
@@ -19778,7 +19919,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-31"
     },
     {
       "id": 142,
@@ -19912,7 +20054,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-31"
     },
     {
       "id": 143,
@@ -20046,7 +20189,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-05-16"
     },
     {
       "id": 144,
@@ -20180,7 +20324,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-05-16"
     },
     {
       "id": 145,
@@ -20323,7 +20468,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-17"
     },
     {
       "id": 146,
@@ -20460,7 +20606,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-17"
     },
     {
       "id": 147,
@@ -20594,7 +20741,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-19"
     },
     {
       "id": 148,
@@ -20728,7 +20876,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-05-16"
     },
     {
       "id": 149,
@@ -20862,7 +21011,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-05-16"
     },
     {
       "id": 150,
@@ -20998,7 +21148,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-08"
     },
     {
       "id": 151,
@@ -21141,7 +21292,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-08"
     },
     {
       "id": 152,
@@ -21275,7 +21427,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-19"
     },
     {
       "id": 153,
@@ -21409,7 +21562,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-28"
     },
     {
       "id": 154,
@@ -21542,7 +21696,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-28"
     },
     {
       "id": 155,
@@ -21675,7 +21830,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-02-28"
     },
     {
       "id": 156,
@@ -21785,7 +21941,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-20"
     },
     {
       "id": 157,
@@ -21895,7 +22052,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 158,
@@ -22005,7 +22163,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 159,
@@ -22115,7 +22274,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 160,
@@ -22224,7 +22384,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-01-20"
     },
     {
       "id": 161,
@@ -22334,7 +22495,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-25"
     },
     {
       "id": 162,
@@ -22444,7 +22606,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-05-28"
     },
     {
       "id": 163,
@@ -22554,7 +22717,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-04-15"
     },
     {
       "id": 164,
@@ -22664,7 +22828,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-03-17"
     },
     {
       "id": 165,
@@ -22753,7 +22918,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-04-15"
     },
     {
       "id": 166,
@@ -22870,7 +23036,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-25"
     },
     {
       "id": 167,
@@ -23013,7 +23180,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-27"
     },
     {
       "id": 168,
@@ -23147,7 +23315,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-03-21"
     },
     {
       "id": 169,
@@ -23281,7 +23450,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-20"
     },
     {
       "id": 170,
@@ -23415,7 +23585,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-20"
     },
     {
       "id": 171,
@@ -23549,7 +23720,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-03-21"
     },
     {
       "id": 172,
@@ -23683,7 +23855,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-03-21"
     },
     {
       "id": 173,
@@ -23820,7 +23993,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-27"
     },
     {
       "id": 174,
@@ -23962,7 +24136,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-20"
     },
     {
       "id": 175,
@@ -24096,7 +24271,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-04-30"
     },
     {
       "id": 176,
@@ -24206,7 +24382,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-10"
     },
     {
       "id": 177,
@@ -24340,7 +24517,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-04-30"
     },
     {
       "id": 178,
@@ -24474,7 +24652,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-04-30"
     },
     {
       "id": 179,
@@ -24580,7 +24759,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-04-28"
     },
     {
       "id": 180,
@@ -24670,7 +24850,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-24"
     },
     {
       "id": 181,
@@ -24760,7 +24941,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-30"
     },
     {
       "id": 182,
@@ -24893,7 +25075,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-05-31"
     },
     {
       "id": 183,
@@ -25027,7 +25210,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-05-31"
     },
     {
       "id": 184,
@@ -25161,7 +25345,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-18"
     },
     {
       "id": 185,
@@ -25271,7 +25456,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-18"
     },
     {
       "id": 186,
@@ -25405,7 +25591,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-18"
     },
     {
       "id": 187,
@@ -25538,7 +25725,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-20"
     },
     {
       "id": 188,
@@ -25672,7 +25860,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-20"
     },
     {
       "id": 189,
@@ -25806,7 +25995,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-20"
     },
     {
       "id": 190,
@@ -25940,7 +26130,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-29"
     },
     {
       "id": 191,
@@ -26074,7 +26265,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-29"
     },
     {
       "id": 192,
@@ -26207,7 +26399,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-20"
     },
     {
       "id": 193,
@@ -26341,7 +26534,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-22"
     },
     {
       "id": 194,
@@ -26475,7 +26669,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-06-22"
     },
     {
       "id": 195,
@@ -26609,7 +26804,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-17"
     },
     {
       "id": 196,
@@ -26743,7 +26939,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-17"
     },
     {
       "id": 197,
@@ -26877,7 +27074,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-03"
     },
     {
       "id": 198,
@@ -27011,7 +27209,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-17"
     },
     {
       "id": 199,
@@ -27145,7 +27344,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-03"
     },
     {
       "id": 200,
@@ -27279,7 +27479,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-17"
     },
     {
       "id": 201,
@@ -27413,7 +27614,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-20"
     },
     {
       "id": 202,
@@ -27547,7 +27749,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-20"
     },
     {
       "id": 203,
@@ -27688,7 +27891,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-08"
     },
     {
       "id": 204,
@@ -27822,7 +28026,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-20"
     },
     {
       "id": 205,
@@ -27932,7 +28137,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-31"
     },
     {
       "id": 206,
@@ -28042,7 +28248,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-31"
     },
     {
       "id": 207,
@@ -28152,7 +28359,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-31"
     },
     {
       "id": 208,
@@ -28262,7 +28470,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-15"
     },
     {
       "id": 209,
@@ -28385,7 +28594,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-08-17"
     },
     {
       "id": 210,
@@ -28508,7 +28718,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-08-17"
     },
     {
       "id": 211,
@@ -28641,7 +28852,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-31"
     },
     {
       "id": 212,
@@ -28757,7 +28969,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-08-17"
     },
     {
       "id": 213,
@@ -28867,7 +29080,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-08-08"
     },
     {
       "id": 214,
@@ -29001,7 +29215,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-31"
     },
     {
       "id": 215,
@@ -29135,7 +29350,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-07-31"
     },
     {
       "id": 216,
@@ -29269,7 +29485,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-03"
     },
     {
       "id": 217,
@@ -29379,7 +29596,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-11"
     },
     {
       "id": 218,
@@ -29489,7 +29707,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-08-11"
     },
     {
       "id": 219,
@@ -29623,7 +29842,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-09-14"
     },
     {
       "id": 220,
@@ -29757,7 +29977,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-09-14"
     },
     {
       "id": 221,
@@ -29891,7 +30112,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-09-14"
     },
     {
       "id": 222,
@@ -30008,7 +30230,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-10-15"
     },
     {
       "id": 223,
@@ -30125,7 +30348,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-10-15"
     },
     {
       "id": 224,
@@ -30235,7 +30459,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-10-15"
     },
     {
       "id": 225,
@@ -30369,7 +30594,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-09-30"
     },
     {
       "id": 226,
@@ -30503,7 +30729,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-09-30"
     },
     {
       "id": 227,
@@ -30637,7 +30864,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-09-30"
     },
     {
       "id": 228,
@@ -30771,7 +30999,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-11"
     },
     {
       "id": 229,
@@ -30905,7 +31134,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-11"
     },
     {
       "id": 230,
@@ -31038,7 +31268,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-11"
     },
     {
       "id": 231,
@@ -31172,7 +31403,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-14"
     },
     {
       "id": 232,
@@ -31306,7 +31538,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-14"
     },
     {
       "id": 233,
@@ -31416,7 +31649,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-08"
     },
     {
       "id": 234,
@@ -31526,7 +31760,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-08"
     },
     {
       "id": 235,
@@ -31659,7 +31894,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-31"
     },
     {
       "id": 236,
@@ -31793,7 +32029,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-31"
     },
     {
       "id": 237,
@@ -31927,7 +32164,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-10-31"
     },
     {
       "id": 238,
@@ -32036,7 +32274,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-11"
     },
     {
       "id": 239,
@@ -32146,7 +32385,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-11"
     },
     {
       "id": 240,
@@ -32256,7 +32496,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-11"
     },
     {
       "id": 241,
@@ -32373,7 +32614,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-10-07"
     },
     {
       "id": 242,
@@ -32502,7 +32744,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2021-12-26"
     },
     {
       "id": 243,
@@ -32631,7 +32874,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2021-12-26"
     },
     {
       "id": 244,
@@ -32760,7 +33004,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2021-12-26"
     },
     {
       "id": 245,
@@ -32889,7 +33134,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2021-12-26"
     },
     {
       "id": 246,
@@ -32999,7 +33245,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-26"
     },
     {
       "id": 247,
@@ -33109,7 +33356,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-12-26"
     },
     {
       "id": 248,
@@ -33219,7 +33467,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-10"
     },
     {
       "id": 249,
@@ -33329,7 +33578,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-10"
     },
     {
       "id": 250,
@@ -33438,7 +33688,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-10"
     },
     {
       "id": 251,
@@ -33637,7 +33888,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-23"
     },
     {
       "id": 252,
@@ -33747,7 +33999,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-30"
     },
     {
       "id": 253,
@@ -33884,7 +34137,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-08"
     },
     {
       "id": 254,
@@ -34026,7 +34280,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-10"
     },
     {
       "id": 255,
@@ -34169,7 +34424,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-08"
     },
     {
       "id": 256,
@@ -34279,7 +34535,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2021-11-30"
     },
     {
       "id": 257,
@@ -34389,7 +34646,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-31"
     },
     {
       "id": 258,
@@ -34498,7 +34756,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-31"
     },
     {
       "id": 259,
@@ -34608,7 +34867,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-31"
     },
     {
       "id": 260,
@@ -34807,7 +35067,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 261,
@@ -34917,7 +35178,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-28"
     },
     {
       "id": 262,
@@ -35027,7 +35289,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-28"
     },
     {
       "id": 263,
@@ -35137,7 +35400,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-28"
     },
     {
       "id": 264,
@@ -35211,7 +35475,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-27"
     },
     {
       "id": 265,
@@ -35320,7 +35585,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-08-17"
     },
     {
       "id": 266,
@@ -35394,7 +35660,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-10-27"
     },
     {
       "id": 267,
@@ -35504,7 +35771,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-06-21"
     },
     {
       "id": 268,
@@ -35577,7 +35845,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-09"
     },
     {
       "id": 269,
@@ -35650,7 +35919,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-04-13"
     },
     {
       "id": 270,
@@ -35724,7 +35994,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-03-16"
     },
     {
       "id": 271,
@@ -35798,7 +36069,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-08-10"
     },
     {
       "id": 272,
@@ -35872,7 +36144,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-12-21"
     },
     {
       "id": 273,
@@ -35982,7 +36255,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-03-12"
     },
     {
       "id": 274,
@@ -36099,7 +36373,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-09"
     },
     {
       "id": 275,
@@ -36209,7 +36484,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-03-12"
     },
     {
       "id": 276,
@@ -36319,7 +36595,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-03-10"
     },
     {
       "id": 277,
@@ -36428,7 +36705,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-03-31"
     },
     {
       "id": 278,
@@ -36538,7 +36816,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-03-31"
     },
     {
       "id": 279,
@@ -36648,7 +36927,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-03-31"
     },
     {
       "id": 280,
@@ -36758,7 +37038,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-01-20"
     },
     {
       "id": 281,
@@ -36868,7 +37149,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-02-09"
     },
     {
       "id": 282,
@@ -36978,7 +37260,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-05-25"
     },
     {
       "id": 283,
@@ -37088,7 +37371,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-24"
     },
     {
       "id": 284,
@@ -37198,7 +37482,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-03-24"
     },
     {
       "id": 285,
@@ -37308,7 +37593,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-24"
     },
     {
       "id": 286,
@@ -37418,7 +37704,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-25"
     },
     {
       "id": 287,
@@ -37528,7 +37815,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-03-24"
     },
     {
       "id": 288,
@@ -37638,7 +37926,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-05-25"
     },
     {
       "id": 289,
@@ -37748,7 +38037,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-25"
     },
     {
       "id": 290,
@@ -37858,7 +38148,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-15"
     },
     {
       "id": 291,
@@ -37967,7 +38258,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-15"
     },
     {
       "id": 292,
@@ -38076,7 +38368,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-04-15"
     },
     {
       "id": 293,
@@ -38193,7 +38486,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-10-31"
     },
     {
       "id": 294,
@@ -38310,7 +38604,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-10-31"
     },
     {
       "id": 295,
@@ -38426,7 +38721,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-10-31"
     },
     {
       "id": 296,
@@ -38543,7 +38839,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-10-31"
     },
     {
       "id": 297,
@@ -38653,7 +38950,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-05-19"
     },
     {
       "id": 298,
@@ -38763,7 +39061,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-05-19"
     },
     {
       "id": 299,
@@ -38873,7 +39172,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-05-19"
     },
     {
       "id": 300,
@@ -38983,7 +39283,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-05-31"
     },
     {
       "id": 301,
@@ -39093,7 +39394,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-05-31"
     },
     {
       "id": 302,
@@ -39203,7 +39505,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-05-31"
     },
     {
       "id": 303,
@@ -39313,7 +39616,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-25"
     },
     {
       "id": 304,
@@ -39423,7 +39727,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-09-23"
     },
     {
       "id": 305,
@@ -39540,7 +39845,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-08-24"
     },
     {
       "id": 306,
@@ -39649,7 +39955,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-10-21"
     },
     {
       "id": 307,
@@ -39766,7 +40073,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-09-23"
     },
     {
       "id": 308,
@@ -39875,7 +40183,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-08-24"
     },
     {
       "id": 309,
@@ -39985,7 +40294,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-25"
     },
     {
       "id": 310,
@@ -40102,7 +40412,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-10-21"
     },
     {
       "id": 311,
@@ -40212,7 +40523,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-30"
     },
     {
       "id": 312,
@@ -40322,7 +40634,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-30"
     },
     {
       "id": 313,
@@ -40432,7 +40745,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-06-30"
     },
     {
       "id": 314,
@@ -40555,7 +40869,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-07-31"
     },
     {
       "id": 315,
@@ -40671,7 +40986,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-07-31"
     },
     {
       "id": 316,
@@ -40794,7 +41110,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-07-31"
     },
     {
       "id": 317,
@@ -40904,7 +41221,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-08-31"
     },
     {
       "id": 318,
@@ -41021,7 +41339,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-08-31"
     },
     {
       "id": 319,
@@ -41138,7 +41457,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-09-16"
     },
     {
       "id": 320,
@@ -41248,7 +41568,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-09-16"
     },
     {
       "id": 321,
@@ -41365,7 +41686,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-09-16"
     },
     {
       "id": 322,
@@ -41508,7 +41830,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-05"
     },
     {
       "id": 323,
@@ -41645,7 +41968,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-05"
     },
     {
       "id": 324,
@@ -41762,7 +42086,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-23"
     },
     {
       "id": 325,
@@ -41899,7 +42224,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-22"
     },
     {
       "id": 326,
@@ -42016,7 +42342,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-23"
     },
     {
       "id": 327,
@@ -42159,7 +42486,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-22"
     },
     {
       "id": 328,
@@ -42357,7 +42685,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-05"
     },
     {
       "id": 329,
@@ -42556,7 +42885,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-05"
     },
     {
       "id": 330,
@@ -42673,7 +43003,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-22"
     },
     {
       "id": 331,
@@ -42790,7 +43121,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-22"
     },
     {
       "id": 332,
@@ -42906,7 +43238,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-22"
     },
     {
       "id": 333,
@@ -43023,7 +43356,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-09-10"
     },
     {
       "id": 334,
@@ -43133,7 +43467,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-21"
     },
     {
       "id": 335,
@@ -43243,7 +43578,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-20"
     },
     {
       "id": 336,
@@ -43353,7 +43689,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-31"
     },
     {
       "id": 337,
@@ -43463,7 +43800,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-07-20"
     },
     {
       "id": 338,
@@ -43580,7 +43918,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-09-30"
     },
     {
       "id": 339,
@@ -43697,7 +44036,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-09-30"
     },
     {
       "id": 340,
@@ -43807,7 +44147,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-09-30"
     },
     {
       "id": 341,
@@ -43917,7 +44258,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-12-11"
     },
     {
       "id": 342,
@@ -44034,7 +44376,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-11"
     },
     {
       "id": 343,
@@ -44151,7 +44494,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-18"
     },
     {
       "id": 344,
@@ -44261,7 +44605,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-02-18"
     },
     {
       "id": 345,
@@ -44378,7 +44723,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-19"
     },
     {
       "id": 346,
@@ -44495,7 +44841,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-10"
     },
     {
       "id": 347,
@@ -44612,7 +44959,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-10"
     },
     {
       "id": 348,
@@ -44729,7 +45077,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-19"
     },
     {
       "id": 349,
@@ -44846,7 +45195,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-19"
     },
     {
       "id": 350,
@@ -44963,7 +45313,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-11"
     },
     {
       "id": 351,
@@ -45080,7 +45431,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-18"
     },
     {
       "id": 352,
@@ -45197,7 +45549,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-10"
     },
     {
       "id": 353,
@@ -45314,7 +45667,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-10"
     },
     {
       "id": 354,
@@ -45431,7 +45785,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-10"
     },
     {
       "id": 355,
@@ -45548,7 +45903,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-10"
     },
     {
       "id": 356,
@@ -45665,7 +46021,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-25"
     },
     {
       "id": 357,
@@ -45782,7 +46139,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-25"
     },
     {
       "id": 358,
@@ -45892,7 +46250,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-11-30"
     },
     {
       "id": 359,
@@ -46009,7 +46368,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-30"
     },
     {
       "id": 360,
@@ -46126,7 +46486,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-11-30"
     },
     {
       "id": 361,
@@ -46236,7 +46597,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2022-12-31"
     },
     {
       "id": 362,
@@ -46353,7 +46715,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-31"
     },
     {
       "id": 363,
@@ -46470,7 +46833,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-31"
     },
     {
       "id": 364,
@@ -46587,7 +46951,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-03"
     },
     {
       "id": 365,
@@ -46703,7 +47068,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2022-12-31"
     },
     {
       "id": 366,
@@ -46820,7 +47186,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-22"
     },
     {
       "id": 367,
@@ -46937,7 +47304,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-22"
     },
     {
       "id": 368,
@@ -47054,7 +47422,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-20"
     },
     {
       "id": 369,
@@ -47171,7 +47540,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-20"
     },
     {
       "id": 370,
@@ -47288,7 +47658,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-20"
     },
     {
       "id": 371,
@@ -47405,7 +47776,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-24"
     },
     {
       "id": 372,
@@ -47522,7 +47894,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-24"
     },
     {
       "id": 373,
@@ -47638,7 +48011,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-20"
     },
     {
       "id": 374,
@@ -47748,7 +48122,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-01-20"
     },
     {
       "id": 375,
@@ -47858,7 +48233,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-02-09"
     },
     {
       "id": 376,
@@ -47975,7 +48351,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-20"
     },
     {
       "id": 377,
@@ -48085,7 +48462,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-01-31"
     },
     {
       "id": 378,
@@ -48202,7 +48580,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-02"
     },
     {
       "id": 379,
@@ -48319,7 +48698,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-31"
     },
     {
       "id": 380,
@@ -48436,7 +48816,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-03"
     },
     {
       "id": 381,
@@ -48553,7 +48934,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-03"
     },
     {
       "id": 382,
@@ -48669,7 +49051,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-31"
     },
     {
       "id": 383,
@@ -48786,7 +49169,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-01-31"
     },
     {
       "id": 384,
@@ -48902,7 +49286,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-31"
     },
     {
       "id": 385,
@@ -49019,7 +49404,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-31"
     },
     {
       "id": 386,
@@ -49136,7 +49522,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-11"
     },
     {
       "id": 387,
@@ -49252,7 +49639,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-09"
     },
     {
       "id": 388,
@@ -49369,7 +49757,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-09"
     },
     {
       "id": 389,
@@ -49486,7 +49875,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-09"
     },
     {
       "id": 390,
@@ -49603,7 +49993,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-28"
     },
     {
       "id": 391,
@@ -49720,7 +50111,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-28"
     },
     {
       "id": 392,
@@ -49836,7 +50228,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-02-28"
     },
     {
       "id": 393,
@@ -49953,7 +50346,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-03"
     },
     {
       "id": 394,
@@ -50070,7 +50464,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-03"
     },
     {
       "id": 395,
@@ -50187,7 +50582,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-11"
     },
     {
       "id": 396,
@@ -50304,7 +50700,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-11"
     },
     {
       "id": 397,
@@ -50447,7 +50844,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-18"
     },
     {
       "id": 398,
@@ -50563,7 +50961,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-20"
     },
     {
       "id": 399,
@@ -50680,7 +51079,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-21"
     },
     {
       "id": 400,
@@ -50817,7 +51217,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-21"
     },
     {
       "id": 401,
@@ -50960,7 +51361,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-21"
     },
     {
       "id": 402,
@@ -51077,7 +51479,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-21"
     },
     {
       "id": 403,
@@ -51225,7 +51628,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-18"
     },
     {
       "id": 404,
@@ -51373,7 +51777,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-18"
     },
     {
       "id": 405,
@@ -51496,7 +51901,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-20"
     },
     {
       "id": 406,
@@ -51639,7 +52045,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-21"
     },
     {
       "id": 407,
@@ -51756,7 +52163,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-03-21"
     },
     {
       "id": 408,
@@ -51873,7 +52281,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-20"
     },
     {
       "id": 409,
@@ -52016,7 +52425,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-03"
     },
     {
       "id": 410,
@@ -52159,7 +52569,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-30"
     },
     {
       "id": 411,
@@ -52302,7 +52713,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-03"
     },
     {
       "id": 412,
@@ -52445,7 +52857,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-03"
     },
     {
       "id": 413,
@@ -52582,7 +52995,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-03"
     },
     {
       "id": 414,
@@ -52725,7 +53139,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-30"
     },
     {
       "id": 415,
@@ -52862,7 +53277,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-30"
     },
     {
       "id": 416,
@@ -53004,7 +53420,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-30"
     },
     {
       "id": 417,
@@ -53141,7 +53558,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-30"
     },
     {
       "id": 418,
@@ -53280,7 +53698,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 419,
@@ -53423,7 +53842,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-31"
     },
     {
       "id": 420,
@@ -53559,7 +53979,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-31"
     },
     {
       "id": 421,
@@ -53701,7 +54122,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-31"
     },
     {
       "id": 422,
@@ -53843,7 +54265,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-03"
     },
     {
       "id": 423,
@@ -53986,7 +54409,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-09"
     },
     {
       "id": 424,
@@ -54123,7 +54547,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-09"
     },
     {
       "id": 425,
@@ -54240,7 +54665,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-10"
     },
     {
       "id": 426,
@@ -54357,7 +54783,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-10"
     },
     {
       "id": 427,
@@ -54474,7 +54901,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-04-10"
     },
     {
       "id": 428,
@@ -54673,7 +55101,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-19"
     },
     {
       "id": 429,
@@ -54872,7 +55301,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-19"
     },
     {
       "id": 430,
@@ -55015,7 +55445,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-12"
     },
     {
       "id": 431,
@@ -55158,7 +55589,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-11"
     },
     {
       "id": 432,
@@ -55295,7 +55727,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-21"
     },
     {
       "id": 433,
@@ -55432,7 +55865,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-11"
     },
     {
       "id": 434,
@@ -55575,7 +56009,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-05-11"
     },
     {
       "id": 435,
@@ -55718,7 +56153,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-09"
     },
     {
       "id": 436,
@@ -55867,7 +56303,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-16"
     },
     {
       "id": 437,
@@ -56010,7 +56447,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-16"
     },
     {
       "id": 438,
@@ -56209,7 +56647,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-23"
     },
     {
       "id": 439,
@@ -56346,7 +56785,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-20"
     },
     {
       "id": 440,
@@ -56495,7 +56935,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-16"
     },
     {
       "id": 441,
@@ -56637,7 +57078,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-31"
     },
     {
       "id": 442,
@@ -56774,7 +57216,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-11"
     },
     {
       "id": 443,
@@ -56911,7 +57354,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-31"
     },
     {
       "id": 444,
@@ -57054,7 +57498,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-11"
     },
     {
       "id": 445,
@@ -57191,7 +57636,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-23"
     },
     {
       "id": 446,
@@ -57333,7 +57779,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-20"
     },
     {
       "id": 447,
@@ -57476,7 +57923,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-16"
     },
     {
       "id": 448,
@@ -57613,7 +58061,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-20"
     },
     {
       "id": 449,
@@ -57756,7 +58205,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-31"
     },
     {
       "id": 450,
@@ -57898,7 +58348,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-20"
     },
     {
       "id": 451,
@@ -58035,7 +58486,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-31"
     },
     {
       "id": 452,
@@ -58177,7 +58629,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-11"
     },
     {
       "id": 453,
@@ -58314,7 +58767,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-20"
     },
     {
       "id": 454,
@@ -58457,7 +58911,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-11"
     },
     {
       "id": 455,
@@ -58599,7 +59054,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-11"
     },
     {
       "id": 456,
@@ -58742,7 +59198,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-10"
     },
     {
       "id": 457,
@@ -58885,7 +59342,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-10"
     },
     {
       "id": 458,
@@ -59033,7 +59491,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-20"
     },
     {
       "id": 459,
@@ -59169,7 +59628,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-10"
     },
     {
       "id": 460,
@@ -59306,7 +59766,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-11"
     },
     {
       "id": 461,
@@ -59455,7 +59916,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-20"
     },
     {
       "id": 462,
@@ -59598,7 +60060,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-20"
     },
     {
       "id": 463,
@@ -59741,7 +60204,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-31"
     },
     {
       "id": 464,
@@ -59884,7 +60348,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-31"
     },
     {
       "id": 465,
@@ -60021,7 +60486,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-31"
     },
     {
       "id": 466,
@@ -60164,7 +60630,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-03"
     },
     {
       "id": 467,
@@ -60301,7 +60768,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-03"
     },
     {
       "id": 468,
@@ -60444,7 +60912,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-03"
     },
     {
       "id": 469,
@@ -60581,7 +61050,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-31"
     },
     {
       "id": 470,
@@ -60724,7 +61194,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-03"
     },
     {
       "id": 471,
@@ -60861,7 +61332,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-31"
     },
     {
       "id": 472,
@@ -60998,7 +61470,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-13"
     },
     {
       "id": 473,
@@ -61141,7 +61614,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-10"
     },
     {
       "id": 474,
@@ -61283,7 +61757,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-13"
     },
     {
       "id": 475,
@@ -61420,7 +61895,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-10"
     },
     {
       "id": 476,
@@ -61563,7 +62039,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-10"
     },
     {
       "id": 477,
@@ -61700,7 +62177,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-30"
     },
     {
       "id": 478,
@@ -61843,7 +62321,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-30"
     },
     {
       "id": 479,
@@ -61986,7 +62465,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-30"
     },
     {
       "id": 480,
@@ -62123,7 +62603,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-30"
     },
     {
       "id": 481,
@@ -62260,7 +62741,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-30"
     },
     {
       "id": 482,
@@ -62403,7 +62885,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-30"
     },
     {
       "id": 483,
@@ -62546,7 +63029,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-12"
     },
     {
       "id": 484,
@@ -62688,7 +63172,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-12"
     },
     {
       "id": 485,
@@ -62825,7 +63310,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-12"
     },
     {
       "id": 486,
@@ -62961,7 +63447,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-06"
     },
     {
       "id": 487,
@@ -63103,7 +63590,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-22"
     },
     {
       "id": 488,
@@ -63240,7 +63728,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-06"
     },
     {
       "id": 489,
@@ -63377,7 +63866,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-22"
     },
     {
       "id": 490,
@@ -63519,7 +64009,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-22"
     },
     {
       "id": 491,
@@ -63656,7 +64147,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-06"
     },
     {
       "id": 492,
@@ -63793,7 +64285,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-22"
     },
     {
       "id": 493,
@@ -63936,7 +64429,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-22"
     },
     {
       "id": 494,
@@ -64079,7 +64573,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-22"
     },
     {
       "id": 495,
@@ -64209,7 +64704,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-07-20"
     },
     {
       "id": 496,
@@ -64339,7 +64835,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-08-10"
     },
     {
       "id": 497,
@@ -64469,7 +64966,8 @@
           }
         ]
       ],
-      "specialSkills": []
+      "specialSkills": [],
+      "released": "2023-07-20"
     },
     {
       "id": 498,
@@ -64612,7 +65110,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-31"
     },
     {
       "id": 499,
@@ -64749,7 +65248,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-03"
     },
     {
       "id": 500,
@@ -64892,7 +65392,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-31"
     },
     {
       "id": 501,
@@ -65035,7 +65536,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-31"
     },
     {
       "id": 502,
@@ -65172,7 +65674,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-31"
     },
     {
       "id": 503,
@@ -65309,7 +65812,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-31"
     },
     {
       "id": 504,
@@ -65446,7 +65950,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-03"
     },
     {
       "id": 505,
@@ -65589,7 +66094,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-03"
     },
     {
       "id": 506,
@@ -65732,7 +66238,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-05"
     },
     {
       "id": 507,
@@ -65875,7 +66382,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-13"
     },
     {
       "id": 508,
@@ -66012,7 +66520,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-05"
     },
     {
       "id": 509,
@@ -66148,7 +66657,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-06-13"
     },
     {
       "id": 510,
@@ -66285,7 +66795,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-03"
     },
     {
       "id": 511,
@@ -66428,7 +66939,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-03"
     },
     {
       "id": 512,
@@ -66571,7 +67083,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-05"
     },
     {
       "id": 513,
@@ -66708,7 +67221,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-05"
     },
     {
       "id": 514,
@@ -66845,7 +67359,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-28"
     },
     {
       "id": 515,
@@ -66988,7 +67503,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-07-28"
     },
     {
       "id": 516,
@@ -67125,7 +67641,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-05"
     },
     {
       "id": 517,
@@ -67262,7 +67779,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-20"
     },
     {
       "id": 518,
@@ -67405,7 +67923,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-20"
     },
     {
       "id": 519,
@@ -67547,7 +68066,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-20"
     },
     {
       "id": 520,
@@ -67684,7 +68204,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-20"
     },
     {
       "id": 521,
@@ -67821,7 +68342,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-10"
     },
     {
       "id": 522,
@@ -67964,7 +68486,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-10"
     },
     {
       "id": 523,
@@ -68100,7 +68623,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-31"
     },
     {
       "id": 524,
@@ -68243,7 +68767,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-31"
     },
     {
       "id": 525,
@@ -68380,7 +68905,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-31"
     },
     {
       "id": 526,
@@ -68523,7 +69049,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 527,
@@ -68666,7 +69193,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-26"
     },
     {
       "id": 528,
@@ -68809,7 +69337,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 529,
@@ -68952,7 +69481,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-23"
     },
     {
       "id": 530,
@@ -69089,7 +69619,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 531,
@@ -69226,7 +69757,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-26"
     },
     {
       "id": 532,
@@ -69368,7 +69900,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-26"
     },
     {
       "id": 533,
@@ -69505,7 +70038,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-23"
     },
     {
       "id": 534,
@@ -69648,7 +70182,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-23"
     },
     {
       "id": 535,
@@ -69785,7 +70320,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 536,
@@ -69928,7 +70464,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-23"
     },
     {
       "id": 537,
@@ -70071,7 +70608,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-05"
     },
     {
       "id": 538,
@@ -70208,7 +70746,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-23"
     },
     {
       "id": 539,
@@ -70407,7 +70946,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-23"
     },
     {
       "id": 540,
@@ -70550,7 +71090,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 541,
@@ -70693,7 +71234,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 542,
@@ -70836,7 +71378,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 543,
@@ -70973,7 +71516,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 544,
@@ -71115,7 +71659,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 545,
@@ -71252,7 +71797,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-03"
     },
     {
       "id": 546,
@@ -71395,7 +71941,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-28"
     },
     {
       "id": 547,
@@ -71538,7 +72085,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 548,
@@ -71681,7 +72229,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-03"
     },
     {
       "id": 549,
@@ -71818,7 +72367,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-03"
     },
     {
       "id": 550,
@@ -71961,7 +72511,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 551,
@@ -72104,7 +72655,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-23"
     },
     {
       "id": 552,
@@ -72241,7 +72793,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-08-23"
     },
     {
       "id": 553,
@@ -72383,7 +72936,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-05"
     },
     {
       "id": 554,
@@ -72520,7 +73074,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-05"
     },
     {
       "id": 555,
@@ -72663,7 +73218,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-17"
     },
     {
       "id": 556,
@@ -72800,7 +73356,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-09-17"
     },
     {
       "id": 557,
@@ -72943,7 +73500,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 558,
@@ -73085,7 +73643,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 559,
@@ -73222,7 +73781,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 560,
@@ -73365,7 +73925,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-09"
     },
     {
       "id": 561,
@@ -73502,7 +74063,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-09"
     },
     {
       "id": 562,
@@ -73644,7 +74206,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-09"
     },
     {
       "id": 563,
@@ -73787,7 +74350,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-03"
     },
     {
       "id": 564,
@@ -73924,7 +74488,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-16"
     },
     {
       "id": 565,
@@ -74067,7 +74632,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-10-26"
     },
     {
       "id": 566,
@@ -74204,7 +74770,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-29"
     },
     {
       "id": 567,
@@ -74346,7 +74913,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-31"
     },
     {
       "id": 568,
@@ -74489,7 +75057,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-03"
     },
     {
       "id": 569,
@@ -74626,7 +75195,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-03"
     },
     {
       "id": 570,
@@ -74768,7 +75338,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-03"
     },
     {
       "id": 571,
@@ -74910,7 +75481,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-31"
     },
     {
       "id": 572,
@@ -75047,7 +75619,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-03"
     },
     {
       "id": 573,
@@ -75184,7 +75757,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-31"
     },
     {
       "id": 574,
@@ -75321,7 +75895,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-03"
     },
     {
       "id": 575,
@@ -75464,7 +76039,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-29"
     },
     {
       "id": 576,
@@ -75663,7 +76239,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-31"
     },
     {
       "id": 577,
@@ -75862,7 +76439,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-31"
     },
     {
       "id": 578,
@@ -75999,7 +76577,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-14"
     },
     {
       "id": 579,
@@ -76141,7 +76720,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-14"
     },
     {
       "id": 580,
@@ -76340,7 +76920,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-14"
     },
     {
       "id": 581,
@@ -76482,7 +77063,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-05"
     },
     {
       "id": 582,
@@ -76619,7 +77201,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-13"
     },
     {
       "id": 583,
@@ -76756,7 +77339,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-11-23"
     },
     {
       "id": 584,
@@ -76899,7 +77483,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-13"
     },
     {
       "id": 585,
@@ -77041,7 +77626,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-03"
     },
     {
       "id": 586,
@@ -77178,7 +77764,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2023-12-22"
     },
     {
       "id": 587,
@@ -77315,7 +77902,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-21"
     },
     {
       "id": 588,
@@ -77458,7 +78046,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-21"
     },
     {
       "id": 589,
@@ -77601,7 +78190,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-30"
     },
     {
       "id": 590,
@@ -77737,7 +78327,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-30"
     },
     {
       "id": 591,
@@ -77875,7 +78466,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-05"
     },
     {
       "id": 592,
@@ -78011,7 +78603,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-05"
     },
     {
       "id": 593,
@@ -78154,7 +78747,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-30"
     },
     {
       "id": 594,
@@ -78297,7 +78891,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-05"
     },
     {
       "id": 595,
@@ -78440,7 +79035,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-04"
     },
     {
       "id": 596,
@@ -78582,7 +79178,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-10"
     },
     {
       "id": 597,
@@ -78719,7 +79316,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-23"
     },
     {
       "id": 598,
@@ -78868,7 +79466,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-20"
     },
     {
       "id": 599,
@@ -79011,7 +79610,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-13"
     },
     {
       "id": 600,
@@ -79154,7 +79754,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-09"
     },
     {
       "id": 601,
@@ -79297,7 +79898,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-26"
     },
     {
       "id": 602,
@@ -79434,7 +80036,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-26"
     },
     {
       "id": 603,
@@ -79577,7 +80180,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-26"
     },
     {
       "id": 604,
@@ -79714,7 +80318,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 605,
@@ -79852,7 +80457,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 606,
@@ -80051,7 +80657,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 607,
@@ -80250,7 +80857,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-09"
     },
     {
       "id": 608,
@@ -80449,7 +81057,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-09"
     },
     {
       "id": 609,
@@ -80592,7 +81201,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-09"
     },
     {
       "id": 610,
@@ -80728,7 +81338,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-09"
     },
     {
       "id": 611,
@@ -80865,7 +81476,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 612,
@@ -81063,7 +81675,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 613,
@@ -81205,7 +81818,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 614,
@@ -81348,7 +81962,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-13"
     },
     {
       "id": 615,
@@ -81485,7 +82100,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-08"
     },
     {
       "id": 616,
@@ -81628,7 +82244,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-05"
     },
     {
       "id": 617,
@@ -81770,7 +82387,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 618,
@@ -81913,7 +82531,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 619,
@@ -82049,7 +82668,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 620,
@@ -82192,7 +82812,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-20"
     },
     {
       "id": 621,
@@ -82335,7 +82956,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-11"
     },
     {
       "id": 622,
@@ -82472,7 +83094,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-20"
     },
     {
       "id": 623,
@@ -82671,7 +83294,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-31"
     },
     {
       "id": 624,
@@ -82870,7 +83494,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-20"
     },
     {
       "id": 625,
@@ -83011,7 +83636,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-20"
     },
     {
       "id": 626,
@@ -83152,7 +83778,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-31"
     },
     {
       "id": 627,
@@ -83350,7 +83977,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-20"
     },
     {
       "id": 628,
@@ -83548,7 +84176,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-14"
     },
     {
       "id": 629,
@@ -83746,7 +84375,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-31"
     },
     {
       "id": 630,
@@ -83893,7 +84523,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-31"
     },
     {
       "id": 631,
@@ -84092,7 +84723,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-31"
     },
     {
       "id": 632,
@@ -84233,7 +84865,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-14"
     },
     {
       "id": 633,
@@ -84372,7 +85005,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-23"
     },
     {
       "id": 634,
@@ -84519,7 +85153,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-23"
     },
     {
       "id": 635,
@@ -84718,7 +85353,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-14"
     },
     {
       "id": 636,
@@ -84916,7 +85552,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-14"
     },
     {
       "id": 637,
@@ -85057,7 +85694,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-20"
     },
     {
       "id": 638,
@@ -85200,7 +85838,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-05"
     },
     {
       "id": 639,
@@ -85337,7 +85976,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-08"
     },
     {
       "id": 640,
@@ -85480,7 +86120,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-23"
     },
     {
       "id": 641,
@@ -85622,7 +86263,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-26"
     },
     {
       "id": 642,
@@ -85765,7 +86407,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-23"
     },
     {
       "id": 643,
@@ -85908,7 +86551,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-05"
     },
     {
       "id": 644,
@@ -86051,7 +86695,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 645,
@@ -86194,7 +86839,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 646,
@@ -86336,7 +86982,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 647,
@@ -86479,7 +87126,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 648,
@@ -86622,7 +87270,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-03"
     },
     {
       "id": 649,
@@ -86758,7 +87407,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-26"
     },
     {
       "id": 650,
@@ -86895,7 +87545,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-23"
     },
     {
       "id": 651,
@@ -87032,7 +87683,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-05"
     },
     {
       "id": 652,
@@ -87169,7 +87821,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 653,
@@ -87306,7 +87959,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 654,
@@ -87442,7 +88096,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 655,
@@ -87579,7 +88234,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 656,
@@ -87716,7 +88372,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-03"
     },
     {
       "id": 657,
@@ -87852,7 +88509,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-26"
     },
     {
       "id": 658,
@@ -87989,7 +88647,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-23"
     },
     {
       "id": 659,
@@ -88126,7 +88785,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-05"
     },
     {
       "id": 660,
@@ -88263,7 +88923,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 661,
@@ -88400,7 +89061,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 662,
@@ -88536,7 +89198,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 663,
@@ -88673,7 +89336,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 664,
@@ -88810,7 +89474,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-03"
     },
     {
       "id": 665,
@@ -88946,7 +89611,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-26"
     },
     {
       "id": 666,
@@ -89083,7 +89749,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-23"
     },
     {
       "id": 667,
@@ -89220,7 +89887,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-05"
     },
     {
       "id": 668,
@@ -89357,7 +90025,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 669,
@@ -89494,7 +90163,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 670,
@@ -89630,7 +90300,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 671,
@@ -89767,7 +90438,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 672,
@@ -89904,7 +90576,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-03"
     },
     {
       "id": 673,
@@ -90046,7 +90719,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-26"
     },
     {
       "id": 674,
@@ -90189,7 +90863,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-23"
     },
     {
       "id": 675,
@@ -90332,7 +91007,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-05"
     },
     {
       "id": 676,
@@ -90475,7 +91151,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 677,
@@ -90618,7 +91295,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 678,
@@ -90760,7 +91438,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 679,
@@ -90903,7 +91582,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 680,
@@ -91046,7 +91726,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-03"
     },
     {
       "id": 681,
@@ -91188,7 +91869,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-26"
     },
     {
       "id": 682,
@@ -91331,7 +92013,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-23"
     },
     {
       "id": 683,
@@ -91474,7 +92157,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-05"
     },
     {
       "id": 684,
@@ -91617,7 +92301,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-20"
     },
     {
       "id": 685,
@@ -91760,7 +92445,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 686,
@@ -91902,7 +92588,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-01-31"
     },
     {
       "id": 687,
@@ -92045,7 +92732,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-11"
     },
     {
       "id": 688,
@@ -92188,7 +92876,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-02-03"
     },
     {
       "id": 689,
@@ -92387,7 +93076,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-31"
     },
     {
       "id": 690,
@@ -92534,7 +93224,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-30"
     },
     {
       "id": 691,
@@ -92733,7 +93424,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-30"
     },
     {
       "id": 692,
@@ -92872,7 +93564,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 693,
@@ -93012,7 +93705,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-03"
     },
     {
       "id": 694,
@@ -93211,7 +93905,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-03"
     },
     {
       "id": 695,
@@ -93410,7 +94105,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-03"
     },
     {
       "id": 696,
@@ -93609,7 +94305,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-03"
     },
     {
       "id": 697,
@@ -93808,7 +94505,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-31"
     },
     {
       "id": 698,
@@ -93949,7 +94647,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-31"
     },
     {
       "id": 699,
@@ -94096,7 +94795,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-03"
     },
     {
       "id": 700,
@@ -94295,7 +94995,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-12"
     },
     {
       "id": 701,
@@ -94494,7 +95195,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-30"
     },
     {
       "id": 702,
@@ -94633,7 +95335,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-03"
     },
     {
       "id": 703,
@@ -94832,7 +95535,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 704,
@@ -94978,7 +95682,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 705,
@@ -95177,7 +95882,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 706,
@@ -95376,7 +96082,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-07"
     },
     {
       "id": 707,
@@ -95575,7 +96282,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-07"
     },
     {
       "id": 708,
@@ -95774,7 +96482,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-07"
     },
     {
       "id": 709,
@@ -95973,7 +96682,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-10"
     },
     {
       "id": 710,
@@ -96114,7 +96824,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-10"
     },
     {
       "id": 711,
@@ -96312,7 +97023,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-10"
     },
     {
       "id": 712,
@@ -96453,7 +97165,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-31"
     },
     {
       "id": 713,
@@ -96652,7 +97365,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-03"
     },
     {
       "id": 714,
@@ -96793,7 +97507,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-03"
     },
     {
       "id": 715,
@@ -96936,7 +97651,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-22"
     },
     {
       "id": 716,
@@ -97135,7 +97851,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-12"
     },
     {
       "id": 717,
@@ -97276,7 +97993,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-12"
     },
     {
       "id": 718,
@@ -97475,7 +98193,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-12"
     },
     {
       "id": 719,
@@ -97616,7 +98335,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-30"
     },
     {
       "id": 720,
@@ -97815,7 +98535,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-30"
     },
     {
       "id": 721,
@@ -98014,7 +98735,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-30"
     },
     {
       "id": 722,
@@ -98161,7 +98883,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-10"
     },
     {
       "id": 723,
@@ -98360,7 +99083,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-10"
     },
     {
       "id": 724,
@@ -98559,7 +99283,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-13"
     },
     {
       "id": 725,
@@ -98758,7 +99483,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-13"
     },
     {
       "id": 726,
@@ -98899,7 +99625,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-13"
     },
     {
       "id": 727,
@@ -99098,7 +99825,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-10"
     },
     {
       "id": 728,
@@ -99236,7 +99964,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-05"
     },
     {
       "id": 729,
@@ -99368,7 +100097,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-05"
     },
     {
       "id": 730,
@@ -99500,7 +100230,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-05"
     },
     {
       "id": 731,
@@ -99632,7 +100363,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-05"
     },
     {
       "id": 732,
@@ -99770,7 +100502,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-05"
     },
     {
       "id": 733,
@@ -99908,7 +100641,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-05"
     },
     {
       "id": 734,
@@ -100046,7 +100780,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 735,
@@ -100178,7 +100913,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 736,
@@ -100310,7 +101046,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 737,
@@ -100442,7 +101179,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 738,
@@ -100580,7 +101318,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 739,
@@ -100718,7 +101457,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-05-18"
     },
     {
       "id": 740,
@@ -100859,7 +101599,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-06"
     },
     {
       "id": 741,
@@ -101005,7 +101746,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-06"
     },
     {
       "id": 742,
@@ -101204,7 +101946,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-06"
     },
     {
       "id": 743,
@@ -101403,7 +102146,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-03"
     },
     {
       "id": 744,
@@ -101601,7 +102345,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-08-26"
     },
     {
       "id": 745,
@@ -101800,7 +102545,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-31"
     },
     {
       "id": 746,
@@ -101940,7 +102686,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-31"
     },
     {
       "id": 747,
@@ -102081,7 +102828,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-31"
     },
     {
       "id": 748,
@@ -102222,7 +102970,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-28"
     },
     {
       "id": 749,
@@ -102421,7 +103170,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-15"
     },
     {
       "id": 750,
@@ -102620,7 +103370,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-15"
     },
     {
       "id": 751,
@@ -102819,7 +103570,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-20"
     },
     {
       "id": 752,
@@ -103018,7 +103770,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-20"
     },
     {
       "id": 753,
@@ -103159,7 +103912,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-20"
     },
     {
       "id": 754,
@@ -103298,7 +104052,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-22"
     },
     {
       "id": 755,
@@ -103431,7 +104186,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-22"
     },
     {
       "id": 756,
@@ -103564,7 +104320,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-22"
     },
     {
       "id": 757,
@@ -103697,7 +104454,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-22"
     },
     {
       "id": 758,
@@ -103836,7 +104594,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-22"
     },
     {
       "id": 759,
@@ -103975,7 +104734,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-22"
     },
     {
       "id": 760,
@@ -104174,7 +104934,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 761,
@@ -104321,7 +105082,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-03"
     },
     {
       "id": 762,
@@ -104520,7 +105282,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-23"
     },
     {
       "id": 763,
@@ -104658,7 +105421,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 764,
@@ -104857,7 +105621,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-03"
     },
     {
       "id": 765,
@@ -104996,7 +105761,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-05"
     },
     {
       "id": 766,
@@ -105137,7 +105903,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 767,
@@ -105336,7 +106103,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 768,
@@ -105535,7 +106303,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 769,
@@ -105734,7 +106503,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-25"
     },
     {
       "id": 770,
@@ -105881,7 +106651,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-25"
     },
     {
       "id": 771,
@@ -106022,7 +106793,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 772,
@@ -106221,7 +106993,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 773,
@@ -106360,7 +107133,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 774,
@@ -106500,7 +107274,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-23"
     },
     {
       "id": 775,
@@ -106638,7 +107413,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 776,
@@ -106778,7 +107554,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-03"
     },
     {
       "id": 777,
@@ -106917,7 +107694,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-23"
     },
     {
       "id": 778,
@@ -107056,7 +107834,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-25"
     },
     {
       "id": 779,
@@ -107255,7 +108034,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 780,
@@ -107454,7 +108234,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 781,
@@ -107652,7 +108433,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-19"
     },
     {
       "id": 782,
@@ -107792,7 +108574,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-19"
     },
     {
       "id": 783,
@@ -107991,7 +108774,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-19"
     },
     {
       "id": 784,
@@ -108190,7 +108974,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-06"
     },
     {
       "id": 785,
@@ -108389,7 +109174,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-10-15"
     },
     {
       "id": 786,
@@ -108587,7 +109373,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-12"
     },
     {
       "id": 787,
@@ -108734,7 +109521,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-12"
     },
     {
       "id": 788,
@@ -108874,7 +109662,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-12"
     },
     {
       "id": 789,
@@ -109073,7 +109862,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-14"
     },
     {
       "id": 790,
@@ -109272,7 +110062,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-14"
     },
     {
       "id": 791,
@@ -109413,7 +110204,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-14"
     },
     {
       "id": 792,
@@ -109553,7 +110345,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-15"
     },
     {
       "id": 793,
@@ -109752,7 +110545,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-20"
     },
     {
       "id": 794,
@@ -109951,7 +110745,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-08"
     },
     {
       "id": 795,
@@ -110149,7 +110944,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-08"
     },
     {
       "id": 796,
@@ -110348,7 +111144,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-08"
     },
     {
       "id": 797,
@@ -110489,7 +111286,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-28"
     },
     {
       "id": 798,
@@ -110636,7 +111434,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-03"
     },
     {
       "id": 799,
@@ -110834,7 +111633,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-03"
     },
     {
       "id": 800,
@@ -111033,7 +111833,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-28"
     },
     {
       "id": 801,
@@ -111232,7 +112033,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-28"
     },
     {
       "id": 802,
@@ -111379,7 +112181,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-31"
     },
     {
       "id": 803,
@@ -111520,7 +112323,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-02"
     },
     {
       "id": 804,
@@ -111718,7 +112522,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-03"
     },
     {
       "id": 805,
@@ -111865,7 +112670,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-30"
     },
     {
       "id": 806,
@@ -112006,7 +112812,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-03"
     },
     {
       "id": 807,
@@ -112205,7 +113012,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-30"
     },
     {
       "id": 808,
@@ -112344,7 +113152,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 809,
@@ -112483,7 +113292,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-23"
     },
     {
       "id": 810,
@@ -112616,7 +113426,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 811,
@@ -112749,7 +113560,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-23"
     },
     {
       "id": 812,
@@ -112882,7 +113694,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 813,
@@ -113015,7 +113828,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-23"
     },
     {
       "id": 814,
@@ -113148,7 +113962,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 815,
@@ -113281,7 +114096,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-23"
     },
     {
       "id": 816,
@@ -113420,7 +114236,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 817,
@@ -113559,7 +114376,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-23"
     },
     {
       "id": 818,
@@ -113698,7 +114516,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-30"
     },
     {
       "id": 819,
@@ -113837,7 +114656,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-07-23"
     },
     {
       "id": 820,
@@ -113978,7 +114798,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-31"
     },
     {
       "id": 821,
@@ -114177,7 +114998,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-31"
     },
     {
       "id": 822,
@@ -114318,7 +115140,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-03"
     },
     {
       "id": 823,
@@ -114517,7 +115340,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-03"
     },
     {
       "id": 824,
@@ -114716,7 +115540,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-31"
     },
     {
       "id": 825,
@@ -114915,7 +115740,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-12"
     },
     {
       "id": 826,
@@ -115114,7 +115940,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-12"
     },
     {
       "id": 827,
@@ -115255,7 +116082,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-12"
     },
     {
       "id": 828,
@@ -115402,7 +116230,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-21"
     },
     {
       "id": 829,
@@ -115549,7 +116378,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-16"
     },
     {
       "id": 830,
@@ -115748,7 +116578,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-21"
     },
     {
       "id": 831,
@@ -115947,7 +116778,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-21"
     },
     {
       "id": 832,
@@ -116094,7 +116926,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-12-05"
     },
     {
       "id": 833,
@@ -116293,7 +117126,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-10"
     },
     {
       "id": 834,
@@ -116492,7 +117326,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-10"
     },
     {
       "id": 835,
@@ -116633,7 +117468,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-10"
     },
     {
       "id": 836,
@@ -116831,7 +117667,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-23"
     },
     {
       "id": 837,
@@ -116978,7 +117815,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-06"
     },
     {
       "id": 838,
@@ -117176,7 +118014,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-06"
     },
     {
       "id": 839,
@@ -117375,7 +118214,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-06"
     },
     {
       "id": 840,
@@ -117514,7 +118354,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 841,
@@ -117647,7 +118488,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 842,
@@ -117780,7 +118622,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 843,
@@ -117913,7 +118756,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 844,
@@ -118052,7 +118896,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 845,
@@ -118191,7 +119036,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-09-10"
     },
     {
       "id": 846,
@@ -118389,7 +119235,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-11"
     },
     {
       "id": 847,
@@ -118535,7 +119382,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-11"
     },
     {
       "id": 848,
@@ -118734,7 +119582,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-11"
     },
     {
       "id": 849,
@@ -118877,7 +119726,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 850,
@@ -119013,7 +119863,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-14"
     },
     {
       "id": 851,
@@ -119156,7 +120007,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 852,
@@ -119297,7 +120149,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-07"
     },
     {
       "id": 853,
@@ -119444,7 +120297,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-07"
     },
     {
       "id": 854,
@@ -119642,7 +120496,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-07"
     },
     {
       "id": 855,
@@ -119841,7 +120696,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-15"
     },
     {
       "id": 856,
@@ -119982,7 +120838,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-05"
     },
     {
       "id": 857,
@@ -120121,7 +120978,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-03"
     },
     {
       "id": 858,
@@ -120254,7 +121112,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-03"
     },
     {
       "id": 859,
@@ -120387,7 +121246,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-03"
     },
     {
       "id": 860,
@@ -120520,7 +121380,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-03"
     },
     {
       "id": 861,
@@ -120659,7 +121520,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-03"
     },
     {
       "id": 862,
@@ -120798,7 +121660,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-11-03"
     },
     {
       "id": 863,
@@ -120945,7 +121808,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-22"
     },
     {
       "id": 864,
@@ -121144,7 +122008,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-15"
     },
     {
       "id": 865,
@@ -121342,7 +122207,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-22"
     },
     {
       "id": 866,
@@ -121541,7 +122407,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-08"
     },
     {
       "id": 867,
@@ -121739,7 +122606,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-22"
     },
     {
       "id": 868,
@@ -121937,7 +122805,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-02"
     },
     {
       "id": 869,
@@ -122135,7 +123004,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-31"
     },
     {
       "id": 870,
@@ -122334,7 +123204,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-11"
     },
     {
       "id": 871,
@@ -122533,7 +123404,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-11"
     },
     {
       "id": 872,
@@ -122673,7 +123545,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-11"
     },
     {
       "id": 873,
@@ -122872,7 +123745,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-11"
     },
     {
       "id": 874,
@@ -123012,7 +123886,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-30"
     },
     {
       "id": 875,
@@ -123211,7 +124086,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-30"
     },
     {
       "id": 876,
@@ -123410,7 +124286,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-30"
     },
     {
       "id": 877,
@@ -123608,7 +124485,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-06"
     },
     {
       "id": 878,
@@ -123807,7 +124685,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-21"
     },
     {
       "id": 879,
@@ -124005,7 +124884,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-21"
     },
     {
       "id": 880,
@@ -124152,7 +125032,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-21"
     },
     {
       "id": 881,
@@ -124351,7 +125232,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-19"
     },
     {
       "id": 882,
@@ -124549,7 +125431,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-03"
     },
     {
       "id": 883,
@@ -124696,7 +125579,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-03"
     },
     {
       "id": 884,
@@ -124895,7 +125779,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-20"
     },
     {
       "id": 885,
@@ -125093,7 +125978,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-23"
     },
     {
       "id": 886,
@@ -125292,7 +126178,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-20"
     },
     {
       "id": 887,
@@ -125435,7 +126322,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-20"
     },
     {
       "id": 888,
@@ -125634,7 +126522,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-31"
     },
     {
       "id": 889,
@@ -125775,7 +126664,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-31"
     },
     {
       "id": 890,
@@ -125922,7 +126812,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-23"
     },
     {
       "id": 891,
@@ -126121,7 +127012,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-31"
     },
     {
       "id": 892,
@@ -126262,7 +127154,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-20"
     },
     {
       "id": 893,
@@ -126421,7 +127314,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-14"
     },
     {
       "id": 894,
@@ -126568,7 +127462,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-20"
     },
     {
       "id": 895,
@@ -126839,7 +127734,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-14"
     },
     {
       "id": 896,
@@ -127110,7 +128006,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-14"
     },
     {
       "id": 897,
@@ -127309,7 +128206,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-21"
     },
     {
       "id": 898,
@@ -127508,7 +128406,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-15"
     },
     {
       "id": 899,
@@ -127707,7 +128606,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-07"
     },
     {
       "id": 900,
@@ -127848,7 +128748,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-21"
     },
     {
       "id": 901,
@@ -128047,7 +128948,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-05-21"
     },
     {
       "id": 902,
@@ -128246,7 +129148,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-06"
     },
     {
       "id": 903,
@@ -128445,7 +129348,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-19"
     },
     {
       "id": 904,
@@ -128644,7 +129548,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-21"
     },
     {
       "id": 905,
@@ -128842,7 +129747,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-14"
     },
     {
       "id": 906,
@@ -128982,7 +129888,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-21"
     },
     {
       "id": 907,
@@ -129181,7 +130088,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-06-21"
     },
     {
       "id": 908,
@@ -129320,7 +130228,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 909,
@@ -129453,7 +130362,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 910,
@@ -129586,7 +130496,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 911,
@@ -129719,7 +130630,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 912,
@@ -129858,7 +130770,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 913,
@@ -129997,7 +130910,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 914,
@@ -130135,7 +131049,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 915,
@@ -130267,7 +131182,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 916,
@@ -130399,7 +131315,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 917,
@@ -130531,7 +131448,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 918,
@@ -130669,7 +131587,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 919,
@@ -130807,7 +131726,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-20"
     },
     {
       "id": 920,
@@ -130946,7 +131866,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-23"
     },
     {
       "id": 921,
@@ -131079,7 +132000,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-23"
     },
     {
       "id": 922,
@@ -131212,7 +132134,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-23"
     },
     {
       "id": 923,
@@ -131345,7 +132268,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-23"
     },
     {
       "id": 924,
@@ -131484,7 +132408,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-23"
     },
     {
       "id": 925,
@@ -131623,7 +132548,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-23"
     },
     {
       "id": 926,
@@ -131762,7 +132688,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-25"
     },
     {
       "id": 927,
@@ -131895,7 +132822,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-25"
     },
     {
       "id": 928,
@@ -132028,7 +132956,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-25"
     },
     {
       "id": 929,
@@ -132161,7 +133090,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-25"
     },
     {
       "id": 930,
@@ -132300,7 +133230,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-25"
     },
     {
       "id": 931,
@@ -132439,7 +133370,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-25"
     },
     {
       "id": 932,
@@ -132577,7 +133509,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 933,
@@ -132709,7 +133642,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 934,
@@ -132841,7 +133775,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 935,
@@ -132973,7 +133908,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 936,
@@ -133111,7 +134047,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 937,
@@ -133249,7 +134186,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-01-31"
     },
     {
       "id": 938,
@@ -133388,7 +134326,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-05"
     },
     {
       "id": 939,
@@ -133521,7 +134460,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-05"
     },
     {
       "id": 940,
@@ -133654,7 +134594,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-05"
     },
     {
       "id": 941,
@@ -133787,7 +134728,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-05"
     },
     {
       "id": 942,
@@ -133926,7 +134868,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-05"
     },
     {
       "id": 943,
@@ -134065,7 +135008,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-02-05"
     },
     {
       "id": 944,
@@ -134212,7 +135156,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-04-07"
     },
     {
       "id": 945,
@@ -134353,7 +135298,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-03-30"
     },
     {
       "id": 946,
@@ -134494,7 +135440,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-31"
     },
     {
       "id": 947,
@@ -134765,7 +135712,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-31"
     },
     {
       "id": 948,
@@ -134906,7 +135854,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-30"
     },
     {
       "id": 949,
@@ -135177,7 +136126,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-09-30"
     },
     {
       "id": 950,
@@ -135324,7 +136274,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-30"
     },
     {
       "id": 951,
@@ -135464,7 +136415,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-03"
     },
     {
       "id": 952,
@@ -135605,7 +136557,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-31"
     },
     {
       "id": 953,
@@ -135875,7 +136828,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-03"
     },
     {
       "id": 954,
@@ -136016,7 +136970,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-31"
     },
     {
       "id": 955,
@@ -136157,7 +137112,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-20"
     },
     {
       "id": 956,
@@ -136307,7 +137263,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-22"
     },
     {
       "id": 957,
@@ -136506,7 +137463,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-22"
     },
     {
       "id": 958,
@@ -136705,7 +137663,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-20"
     },
     {
       "id": 959,
@@ -136852,7 +137811,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-22"
     },
     {
       "id": 960,
@@ -137123,7 +138083,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-20"
     },
     {
       "id": 961,
@@ -137264,7 +138225,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-11"
     },
     {
       "id": 962,
@@ -137535,7 +138497,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-10-11"
     },
     {
       "id": 963,
@@ -137806,7 +138769,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-10-11"
     },
     {
       "id": 964,
@@ -137953,7 +138917,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-11"
     },
     {
       "id": 965,
@@ -138223,7 +139188,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-10-31"
     },
     {
       "id": 966,
@@ -138422,7 +139388,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-31"
     },
     {
       "id": 967,
@@ -138563,7 +139530,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 968,
@@ -138833,7 +139801,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 969,
@@ -139104,7 +140073,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 970,
@@ -139302,7 +140272,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-11"
     },
     {
       "id": 971,
@@ -139501,7 +140472,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-11"
     },
     {
       "id": 972,
@@ -139699,7 +140671,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-03"
     },
     {
       "id": 973,
@@ -139898,7 +140871,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-28"
     },
     {
       "id": 974,
@@ -140096,7 +141070,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-16"
     },
     {
       "id": 975,
@@ -140237,7 +141212,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-11"
     },
     {
       "id": 976,
@@ -140384,7 +141360,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-16"
     },
     {
       "id": 977,
@@ -140583,7 +141560,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-08"
     },
     {
       "id": 978,
@@ -140782,7 +141760,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-08"
     },
     {
       "id": 979,
@@ -140923,7 +141902,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-06"
     },
     {
       "id": 980,
@@ -141070,7 +142050,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-10"
     },
     {
       "id": 981,
@@ -141211,7 +142192,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-08"
     },
     {
       "id": 982,
@@ -141358,7 +142340,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-11"
     },
     {
       "id": 983,
@@ -141556,7 +142539,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-11"
     },
     {
       "id": 984,
@@ -141755,7 +142739,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-11"
     },
     {
       "id": 985,
@@ -142025,7 +143010,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-17"
     },
     {
       "id": 986,
@@ -142224,7 +143210,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-08"
     },
     {
       "id": 987,
@@ -142422,7 +143409,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-04"
     },
     {
       "id": 988,
@@ -142621,7 +143609,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-18"
     },
     {
       "id": 989,
@@ -142820,7 +143809,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-18"
     },
     {
       "id": 990,
@@ -143018,7 +144008,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-18"
     },
     {
       "id": 991,
@@ -143159,7 +144150,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-18"
     },
     {
       "id": 992,
@@ -143358,7 +144350,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-18"
     },
     {
       "id": 993,
@@ -143556,7 +144549,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-18"
     },
     {
       "id": 994,
@@ -143755,7 +144749,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-10-17"
     },
     {
       "id": 995,
@@ -143954,7 +144949,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-20"
     },
     {
       "id": 996,
@@ -144153,7 +145149,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-20"
     },
     {
       "id": 997,
@@ -144300,7 +145297,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-20"
     },
     {
       "id": 998,
@@ -144571,7 +145569,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-11-06"
     },
     {
       "id": 999,
@@ -144770,7 +145769,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-13"
     },
     {
       "id": 1000,
@@ -145041,7 +146041,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-08-19"
     },
     {
       "id": 1001,
@@ -145311,7 +146312,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-08-22"
     },
     {
       "id": 1002,
@@ -145582,7 +146584,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-08-19"
     },
     {
       "id": 1003,
@@ -145853,7 +146856,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-08-19"
     },
     {
       "id": 1004,
@@ -146123,7 +147127,8 @@
           "requiredLimitBreak": 3,
           "requiresAwakening": true
         }
-      ]
+      ],
+      "released": "2025-08-22"
     },
     {
       "id": 1005,
@@ -146260,7 +147265,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-14"
     },
     {
       "id": 1006,
@@ -146397,7 +147403,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-07-20"
     },
     {
       "id": 1007,
@@ -146544,7 +147551,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-08-06"
     },
     {
       "id": 1008,
@@ -146695,7 +147703,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 1009,
@@ -146845,7 +147854,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-22"
     },
     {
       "id": 1010,
@@ -146988,7 +147998,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-03"
     },
     {
       "id": 1011,
@@ -147127,7 +148138,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-03"
     },
     {
       "id": 1012,
@@ -147270,7 +148282,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-03"
     },
     {
       "id": 1013,
@@ -147421,7 +148434,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 1014,
@@ -147559,7 +148573,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-22"
     },
     {
       "id": 1015,
@@ -147696,7 +148711,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-03"
     },
     {
       "id": 1016,
@@ -147829,7 +148845,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-03"
     },
     {
       "id": 1017,
@@ -147966,7 +148983,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-03"
     },
     {
       "id": 1018,
@@ -148105,7 +149123,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 1019,
@@ -148243,7 +149262,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-22"
     },
     {
       "id": 1020,
@@ -148380,7 +149400,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-03"
     },
     {
       "id": 1021,
@@ -148513,7 +149534,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-03"
     },
     {
       "id": 1022,
@@ -148650,7 +149672,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-03"
     },
     {
       "id": 1023,
@@ -148789,7 +149812,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 1024,
@@ -148927,7 +149951,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-22"
     },
     {
       "id": 1025,
@@ -149064,7 +150089,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-03"
     },
     {
       "id": 1026,
@@ -149197,7 +150223,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-03"
     },
     {
       "id": 1027,
@@ -149334,7 +150361,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-03"
     },
     {
       "id": 1028,
@@ -149473,7 +150501,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 1029,
@@ -149623,7 +150652,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-22"
     },
     {
       "id": 1030,
@@ -149766,7 +150796,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-03"
     },
     {
       "id": 1031,
@@ -149905,7 +150936,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-03"
     },
     {
       "id": 1032,
@@ -150048,7 +151080,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-03"
     },
     {
       "id": 1033,
@@ -150199,7 +151232,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-11"
     },
     {
       "id": 1034,
@@ -150349,7 +151383,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-09-22"
     },
     {
       "id": 1035,
@@ -150492,7 +151527,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-03-03"
     },
     {
       "id": 1036,
@@ -150631,7 +151667,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-06-03"
     },
     {
       "id": 1037,
@@ -150774,7 +151811,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2024-04-03"
     },
     {
       "id": 1038,
@@ -150925,7 +151963,8 @@
           "requiredLimitBreak": 0,
           "requiresAwakening": false
         }
-      ]
+      ],
+      "released": "2025-11-11"
     }
   ]
 }
