@@ -14,6 +14,10 @@ import { match, P } from "ts-pattern";
 import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
+import { atomWithReset } from "jotai/utils";
+import { useSetAtom } from "jotai";
+
+const queryAtom = atomWithReset("select * from costume where `specialSkill` like 'ADX, 覚醒';");
 
 const columns: GridColDef<Costume>[] = [
   {
@@ -47,7 +51,7 @@ const columns: GridColDef<Costume>[] = [
   {
     field: "type",
     headerName: "Type",
-    width: 100,
+    width: 80,
     valueGetter: (_, costume) => Lenz.costume.general.cardType.get(costume),
   },
   {
@@ -101,7 +105,7 @@ const columns: GridColDef<Costume>[] = [
   {
     field: "specialSkill",
     headerName: "Special Skill",
-    width: 1000,
+    width: 1080,
     valueGetter: (_, costume) => costume.specialSkill,
     renderCell: (params) => (
       <Box
@@ -253,35 +257,51 @@ const completeCandidates: Record<string, ComleteCandidate> = {
           .replaceAll(" ", "")
           .split(",")
           .every((query) =>
-            match(query)
+            match(query.trim())
               .with("EX", () => isSome(data) && data.value.type === "ex")
               .with("ADX", () => isSome(data) && data.value.type === "adx")
               .with("覚醒", () => isSome(data) && data.value.type === "adx" && data.value.awakable)
               .with(P.union("火", "水", "風", "光", "闇"), (attribute) =>
                 match(data)
                   .with({ value: { type: "ex", skills: P._.select() } }, (skills) =>
-                    skills.some(({ name }) => name.includes(`${attribute}属性メモリア効果増加`)),
+                    skills.some(({ description }) =>
+                      new RegExp(
+                        String.raw`自身が使用する${attribute}属性メモリアのスキル効果([+-]?\d+(?:\.\d+)?)％UP`,
+                        "g",
+                      ).test(description),
+                    ),
                   )
                   .with({ value: { type: "adx", get: P._.select() } }, (get) =>
-                    get({ limitBreak: 3, isAwakened: true }).some(({ name }) =>
-                      name.includes(`${attribute}属性メモリア効果増加`),
+                    get({ limitBreak: 3, isAwakened: true }).some(({ description }) =>
+                      new RegExp(
+                        String.raw`自身が使用する${attribute}属性メモリアのスキル効果([+-]?\d+(?:\.\d+)?)％UP`,
+                        "g",
+                      ).test(description),
                     ),
                   )
                   .otherwise(() => false),
               )
-              .with(P.union("対火", "対水", "対風", "対光", "対闇"), (attribute) =>
+              .with(P.union("対火", "対水", "対風", "対光", "対闇"), ([, attribute]) =>
                 match(data)
                   .with({ value: { type: "ex", skills: P._.select() } }, (skills) =>
-                    skills.some(({ name }) => name.includes(`${attribute.replace('対', '')}属性メモリア効果耐性`)),
+                    skills.some(({ description }) =>
+                      new RegExp(
+                        String.raw`自身に対する${attribute}属性メモリアのダメージ/妨害スキル効果([+-]?\d+(?:\.\d+)?)％DOWN`,
+                        "g",
+                      ).test(description),
+                    ),
                   )
                   .with({ value: { type: "adx", get: P._.select() } }, (get) =>
-                    get({ limitBreak: 3, isAwakened: true }).some(({ name }) =>
-                      name.includes(`${attribute.replace('対', '')}属性メモリア効果耐性`),
+                    get({ limitBreak: 3, isAwakened: true }).some(({ description }) =>
+                      new RegExp(
+                        String.raw`自身に対する${attribute}属性メモリアのダメージ/妨害スキル効果([+-]?\d+(?:\.\d+)?)％DOWN`,
+                        "g",
+                      ).test(description),
                     ),
                   )
                   .otherwise(() => false),
               )
-              .run(),
+              .otherwise(() => false),
           );
       },
     },
@@ -291,14 +311,19 @@ const completeCandidates: Record<string, ComleteCandidate> = {
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   const [visivility, setVisivility, visivilityChanged] = useVisivility(visivilityAll);
   const [rows, setRows] = useState<Costume[]>(dataSource.toReversed());
+  const setQuery = useSetAtom(queryAtom);
+
+  if (initialQuery) {
+    setQuery(initialQuery);
+  }
 
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
       <QueryConsle
-        type={"costume"}
+        table={"costume"}
         origin={dataSource.toReversed()}
         resolver={resolver}
-        initial={initialQuery || "select * from costume where `specialSkill` like 'ADX, 覚醒';"}
+        queryAtom={queryAtom}
         schema={schema}
         updateVisivilityAction={visivilityChanged}
         updateDataAction={setRows}

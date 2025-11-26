@@ -1,5 +1,4 @@
 import CodeMirror, { keymap, Prec } from "@uiw/react-codemirror";
-import { useCallback, useState } from "react";
 import { githubDark } from "@uiw/codemirror-theme-github";
 import { sql, keywordCompletionSource, MySQL, schemaCompletionSource } from "@codemirror/lang-sql";
 import { autocompletion, type CompletionSource } from "@codemirror/autocomplete";
@@ -62,27 +61,20 @@ export default function Console<
   },
 >({
   type,
+  value,
   schema,
   completions,
-  initialeValue,
   execute,
-  onChangeBack,
+  onChange,
 }: {
   type: keyof Schema;
+  value?: string;
   schema: Schema;
   completions?: readonly CompletionSource[];
   initialeValue?: string;
   execute: () => void;
-  onChangeBack: (value: string) => void;
+  onChange: (val: string, _: unknown) => void;
 }) {
-  const [value, setValue] = useState(initialeValue || "");
-  const onChange = useCallback(
-    (val: string, _: unknown) => {
-      onChangeBack(val);
-      setValue(val);
-    },
-    [onChangeBack],
-  );
   const customKeymap = Prec.highest(
     keymap.of([
       {

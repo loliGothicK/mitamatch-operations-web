@@ -12,6 +12,10 @@ import { QueryConsle } from "@/data/_common/QueryConsle";
 import { SchemaResolver } from "@/parser/query/filter";
 import { useVisivility } from "@/data/_common/useVisivility";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
+import { atomWithReset } from "jotai/utils";
+import { useSetAtom } from "jotai";
+
+const queryAtom = atomWithReset("select * from memoria where `cost` > 18;");
 
 const columns: GridColDef<Memoria>[] = [
   {
@@ -240,14 +244,19 @@ const enumMap: Record<string, ComleteCandidate> = {
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   const [visivility, setVisivility, visivilityChanged] = useVisivility(visivilityAll);
   const [rows, setRows] = useState<Memoria[]>(dataSource.toReversed());
+  const setQuery = useSetAtom(queryAtom);
+
+  if (initialQuery) {
+    setQuery(initialQuery);
+  }
 
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
       <QueryConsle
-        type={"memoria"}
+        table={"memoria"}
         origin={dataSource.toReversed()}
         resolver={resolver}
-        initial={initialQuery || "select * from memoria where `cost` > 18;"}
+        queryAtom={queryAtom}
         schema={schema}
         updateVisivilityAction={visivilityChanged}
         updateDataAction={setRows}

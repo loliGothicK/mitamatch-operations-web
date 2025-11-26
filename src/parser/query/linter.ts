@@ -201,14 +201,17 @@ export function validateSchema(
 
         do {
           const type = cursor.name;
-          const text = normalize(state, cursor.node);
+          const rawText = raw(state, cursor.node);
+          const nomalizedText = normalize(state, cursor.node);
 
           // 1. 文脈切り替え (from/join等)
           if (type === "Keyword") {
-            if (["from", "join", "update", "into"].includes(text)) {
+            if (["from", "join", "update", "into"].includes(nomalizedText)) {
               expectingTable = true;
             } else if (
-              ["select", "set", "where", "group", "order", "having", "limit", "on"].includes(text)
+              ["select", "set", "where", "group", "order", "having", "limit", "on"].includes(
+                nomalizedText,
+              )
             ) {
               expectingTable = false;
             }
@@ -219,7 +222,7 @@ export function validateSchema(
           if (type === "Identifier" || type === "QuotedIdentifier") {
             // A. テーブル文脈
             if (expectingTable) {
-              const tableName = text;
+              const tableName = rawText;
               const isCTE = ctx.definedCTEs.has(tableName);
               const isReal = knownRealTables.has(tableName);
 
@@ -342,6 +345,10 @@ function normalize(state: EditorState, node: SyntaxNode | { from: number; to: nu
     .sliceDoc(node.from, node.to)
     .replace(/["`\[\]]/g, "")
     .toLowerCase();
+}
+
+function raw(state: EditorState, node: SyntaxNode | { from: number; to: number }): string {
+  return state.sliceDoc(node.from, node.to).replace(/["`\[\]]/g, "");
 }
 
 export function normalizeSchema(schema: DbSchema): DbSchema {

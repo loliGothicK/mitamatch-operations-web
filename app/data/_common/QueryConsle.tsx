@@ -7,13 +7,14 @@ import { either } from "fp-ts";
 import { Box } from "@mui/system";
 import { Alert, IconButton, Snackbar, Tooltip } from "@mui/material";
 import { Lens } from "monocle-ts";
-import { Info, PlayArrowRounded, Share } from "@mui/icons-material";
+import { ClearAll, Info, PlayArrowRounded, Share } from "@mui/icons-material";
 import { GridColDef } from "@mui/x-data-grid";
 import Console from "@/components/Console";
 import { isSome } from "fp-ts/Option";
 import build, { SchemaResolver } from "@/parser/query/filter";
 import { isRight } from "fp-ts/Either";
 import { ComleteCandidate, makeSchemaCompletionSource } from "@/data/_common/autocomplete";
+import { useAtom, WritableAtom } from "jotai";
 
 type ToastState = {
   open: boolean;
@@ -33,25 +34,25 @@ export function QueryConsle<
   },
   T,
 >({
-  type,
+  table,
   origin,
-  initial,
   resolver,
   schema,
+  queryAtom,
   updateVisivilityAction,
   updateDataAction,
   completion,
 }: {
-  type: keyof Schema;
+  table: keyof Schema;
   origin: T[];
   resolver: SchemaResolver<T>;
   schema: Schema;
+  queryAtom: WritableAtom<string, [SetStateAction<string>], void>;
   updateVisivilityAction: (whiteList: Set<GridColDef["field"]>) => void;
   updateDataAction: Dispatch<SetStateAction<T[]>>;
-  initial: string;
   completion?: Record<string, ComleteCandidate>;
 }) {
-  const [query, setQuery] = useState(initial);
+  const [query, setQuery] = useAtom(queryAtom);
   const [state, setState] = useState<ToastState>({
     open: false,
     vertical: "top" as const,
@@ -59,6 +60,11 @@ export function QueryConsle<
     message: "Query Error",
     severity: "error",
   });
+  const [value, setValue] = useState(query);
+  const onChange = useCallback((val: string, _: unknown) => {
+    setValue(val);
+    setQuery(val);
+  }, []);
 
   const { vertical, horizontal, open, message, severity } = state;
 
@@ -79,7 +85,7 @@ export function QueryConsle<
     );
   }, [query]);
 
-  const queryExecutor = useCallback(
+  const runQuery = useCallback(
     (first = false) => {
       return pipe(
         sqlToModel(query),
@@ -129,9 +135,16 @@ export function QueryConsle<
     [query, resolver, updateVisivilityAction, updateDataAction],
   );
 
+  const clearQuery = useCallback(() => {
+    const atomicQuery = `select * from ${String(table)};`;
+    setQuery(atomicQuery);
+    setValue(atomicQuery);
+    updateDataAction(origin);
+  }, [setQuery]);
+
   useEffect(() => {
-    if (initial !== undefined) queryExecutor(true);
-  }, [initial]); // oxlint-disable-line exhaustive-deps
+    runQuery(true);
+  }, []);
 
   return (
     <>
@@ -145,9 +158,14 @@ export function QueryConsle<
         >
           <Alert severity={severity}>{message}</Alert>
         </Snackbar>
-        <IconButton onClick={() => queryExecutor()} sx={{ marginRight: 1 }}>
+        <IconButton onClick={() => runQuery()} sx={{ marginRight: 1 }}>
           <Tooltip title={"Ctrl + Enter"} placement="top">
             <PlayArrowRounded />
+          </Tooltip>
+        </IconButton>
+        <IconButton onClick={() => clearQuery()} sx={{ marginRight: 1 }}>
+          <Tooltip title={"Clear All"} placement="top">
+            <ClearAll />
           </Tooltip>
         </IconButton>
         <IconButton onClick={shared}>
@@ -163,12 +181,13 @@ export function QueryConsle<
         </Box>
       </Box>
       <Console
-        type={type}
+        type={table}
+        value={value}
         schema={schema}
         completions={completion ? [makeSchemaCompletionSource(completion)] : []}
         initialeValue={query}
-        execute={queryExecutor}
-        onChangeBack={setQuery}
+        execute={runQuery}
+        onChange={onChange}
       />
     </>
   );
