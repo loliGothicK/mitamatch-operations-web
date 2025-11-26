@@ -11,6 +11,7 @@ import { bail } from "@/error/error";
 import { isLeft, right } from "fp-ts/Either";
 import { parseIntSafe } from "@/parser/common";
 import { either } from "fp-ts";
+import CostumeView from "@/data/_costume/view";
 
 type Props = {
   params: Promise<{ slug?: string | string[] }>;
@@ -45,6 +46,7 @@ export default async function Page({ params, searchParams }: Props) {
     .with(["memoria", P.string], ([, name]) => (
       <MemoriaDetail name={decodeURIComponent(name)} type={cardType.right} />
     ))
+    .with(["costume", P.string.select()], (name) => <CostumeView name={decodeURIComponent(name)} />)
     .with(["costume", P.string, P.string], ([, lily, job]) => (
       <CostumeDetail lily={decodeURIComponent(lily)} job={decodeURIComponent(job)} />
     ))

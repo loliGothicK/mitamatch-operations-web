@@ -628,7 +628,7 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
   const [sw] = useAtom(swAtom);
 
   if (candidate === undefined || compare === undefined) {
-    return <Typography>error!</Typography>;
+    return <Typography>メンテナンス中</Typography>;
   }
 
   const [stackRateBefore, stackTimesBefore] = match(sw)

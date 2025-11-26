@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { type FormEvent, Suspense, useEffect, useId, useState } from "react";
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 
 import { Add, Assignment, DragIndicator, Edit, Remove, Share } from "@mui/icons-material";
 import {
@@ -323,7 +324,9 @@ function Timeline() {
 
   return (
     timeline.length !== 0 && (
-      <Sortable items={timeline} onChangeOrder={setTimeline} strategy={verticalListSortingStrategy}>
+      <Sortable items={timeline} onChangeOrder={setTimeline} strategy={verticalListSortingStrategy} dnd={{
+        modifiers: [restrictToVerticalAxis]
+      }}>
         <List sx={{ width: "100%", maxWidth: "65vh", overflow: "auto" }}>
           {timeline.map((order, index) => (
             <TimelineItem
@@ -386,8 +389,8 @@ function Source() {
                   if (
                     timeline.some(
                       (order) =>
-                        orders[index].effect.replace(/^(.+)Lv.\d/g, "$1") ===
-                        order.effect.replace(/^(.+)Lv.\d/g, "$1"),
+                        orders[index].effect.replace(/^(.+)Lv.\d/g, "$1").replace(/(通常|特殊):/g, '') ===
+                        order.effect.replace(/^(.+)Lv.\d/g, "$1").replace(/(通常|特殊):/g, ''),
                     )
                   ) {
                     setOpen(true);

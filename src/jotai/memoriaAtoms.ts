@@ -263,8 +263,8 @@ export const filteredMemoriaAtom = atom((get) => {
         .with("NAME", () => a.name.short.localeCompare(b.name.short))
         .with("ATK", () => b.status[4][0] - a.status[4][0])
         .with("Sp.ATK", () => b.status[4][1] - a.status[4][1])
-        .with("DEF", () => b.status[4][2] - b.status[4][1])
-        .with("Sp.DEF", () => b.status[4][3] - b.status[4][3])
+        .with("DEF", () => b.status[4][2] - a.status[4][2])
+        .with("Sp.DEF", () => b.status[4][3] - a.status[4][3])
         .with(
           "ATK+Sp.ATK",
           () => b.status[4][0] + b.status[4][1] - (a.status[4][0] + a.status[4][1]),
