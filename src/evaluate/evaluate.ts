@@ -287,18 +287,18 @@ export function evaluate(
 
   const costumeRateUp: Record<Attribute, number> = match(costumeSpecial.right)
     .with(option.none, () => ({
-      Fire: 0.0,
-      Water: 0.0,
-      Wind: 0.0,
-      Light: 0.0,
-      Dark: 0.0,
+      Fire: 1.0,
+      Water: 1.0,
+      Wind: 1.0,
+      Light: 1.0,
+      Dark: 1.0,
     }))
     .otherwise(({ value }) => ({
-      Fire: value.get("Fire")?.find(({ type }) => type === "skill")?.value || 0.0,
-      Water: value.get("Water")?.find(({ type }) => type === "skill")?.value || 0.0,
-      Wind: value.get("Wind")?.find(({ type }) => type === "skill")?.value || 0.0,
-      Light: value.get("Light")?.find(({ type }) => type === "skill")?.value || 0.0,
-      Dark: value.get("Dark")?.find(({ type }) => type === "skill")?.value || 0.0,
+      Fire: value.get("Fire")?.find(({ type }) => type === "skill")?.value || 1.0,
+      Water: value.get("Water")?.find(({ type }) => type === "skill")?.value || 1.0,
+      Wind: value.get("Wind")?.find(({ type }) => type === "skill")?.value || 1.0,
+      Light: value.get("Light")?.find(({ type }) => type === "skill")?.value || 1.0,
+      Dark: value.get("Dark")?.find(({ type }) => type === "skill")?.value || 1.0,
     }));
 
   const skill = deck.map((memoria) => {
@@ -342,6 +342,15 @@ export function evaluate(
       graceRate *
       themeRate[memoria.attribute] *
       costumeRateUp[memoria.attribute];
+
+    console.log(`
+      ${charmRate} *
+      ${charmEx.get(memoria.attribute)!} *
+      ${costumeRate} *
+      ${graceRate} *
+      ${themeRate[memoria.attribute]} *
+      ${costumeRateUp[memoria.attribute]}
+    `);
 
     const config = {
       calibration,

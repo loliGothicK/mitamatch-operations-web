@@ -544,6 +544,9 @@ export function Calculator() {
         </Grid>
       </Grid>
       <Divider sx={{ margin: 2 }}>{"詳細"}</Divider>
+      <Typography>
+        {JSON.stringify(evaluateResult.right.skill.map(({ memoria, expected }) => ({memoria: memoria.name, expected})), null, 2)}
+      </Typography>
       <Grid container spacing={2}>
         {skill.map(({ memoria, expected }) => {
           return (

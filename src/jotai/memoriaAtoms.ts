@@ -37,7 +37,7 @@ export const charmAtom = atom(charmList.reverse()[0]);
 export const costumeAtom = atom(costumeList.reverse()[0]);
 export const defAtom = atom(400_000);
 export const spDefAtom = atom(400_000);
-export const statusAtom = atom([200_000, 200_000, 200_000, 200_000] as [
+export const statusAtom = atom([700_000, 700_000, 700_000, 700_000] as [
   number,
   number,
   number,
@@ -73,7 +73,7 @@ export const rwDeckAtom = atom(
     const newValue = typeof update === "function" ? update(get(deckAtom)) : update;
     const index = getDefaultStore().get(activeProjectAtom);
     Cookies.set(
-      `deck-${index === false ? 0 : index}`,
+      `deck-${index}`,
       encodeDeck(get(swAtom), newValue, get(rwLegendaryDeckAtom)),
     );
     set(deckAtom, newValue);
@@ -93,7 +93,7 @@ export const rwLegendaryDeckAtom = atom(
     const newValue = typeof update === "function" ? update(get(legendaryDeckAtom)) : update;
     const index = getDefaultStore().get(activeProjectAtom);
     Cookies.set(
-      `deck-${index === false ? 0 : index}`,
+      `deck-${index}`,
       encodeDeck(get(swAtom), get(rwDeckAtom), newValue),
     );
     set(legendaryDeckAtom, newValue);

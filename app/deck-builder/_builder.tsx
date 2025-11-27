@@ -4,10 +4,11 @@ import { DeckBuilder } from "@/deck-builder/_tabs/builder";
 import { Layout } from "@/components/Layout";
 import { Box, IconButton, Stack, Tab, Tabs } from "@mui/material";
 import type { ReactNode, SyntheticEvent } from "react";
-import { createStore, Provider } from "jotai";
+import {createStore, Provider, useAtom} from "jotai";
 import { useAtomDefault } from "@/jotai/default";
-import { activeProjectAtom, openProjectListAtom } from "@/jotai/projectAtoms";
+import {activeProjectAtom, builderModeAtom, openProjectListAtom} from "@/jotai/projectAtoms";
 import { Close } from "@mui/icons-material";
+import {Calculator} from "@/deck-builder/_tabs/calculator";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -40,11 +41,14 @@ function a11yProps(index: number) {
 
 export function DeckBuilderPage() {
   const [openProjectList, setOpenProjectList] = useAtomDefault(openProjectListAtom);
-  const [value, setValue] = useAtomDefault(activeProjectAtom);
+  const [value, setValue] = useAtom(activeProjectAtom);
+  const [mode] = useAtomDefault(builderModeAtom);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(() => newValue);
   };
+
+  const projects = [...openProjectList.entries()];
 
   return (
     <Layout>
@@ -56,7 +60,7 @@ export function DeckBuilderPage() {
       >
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            {[...openProjectList.entries()].map(([name, index]) => {
+            {mode === "user" ? projects.map(([name, index]) => {
               return (
                 <Tab
                   key={name}
@@ -69,7 +73,7 @@ export function DeckBuilderPage() {
                         onClick={() => {
                           setOpenProjectList((opens) => {
                             opens.delete(name);
-                            setValue(() => (opens.size > 0 ? [...opens.values()][0] : false));
+                            setValue(() => (opens.size > 0 ? [...opens.values()][0] : -1));
                             return opens;
                           });
                         }}
@@ -81,13 +85,30 @@ export function DeckBuilderPage() {
                   {...a11yProps(index)}
                 />
               );
-            })}
+            }).concat([
+              <Tab
+                label="Calc"
+                {...a11yProps(projects.length)}
+                // 適用するスタイル: 自動マージンで右に押し出す
+                sx={{ marginLeft: 'auto' }}
+              />
+            ]) : (
+              [
+                <Tab label={"Builder"} {...a11yProps(0)} />,
+                <Tab label="Calc" {...a11yProps(1)} sx={{ marginLeft: 'auto' }} />,
+              ]
+            )}
           </Tabs>
         </Box>
-        {value === false ? (
-          <CustomTabPanel index={0} value={0} key={"untitled"}>
-            <DeckBuilder index={0} />
-          </CustomTabPanel>
+        {mode === "guest" ? (
+          [
+            <CustomTabPanel index={0} value={value} key={"untitled"}>
+              <DeckBuilder index={0} />
+            </CustomTabPanel>,
+            <CustomTabPanel index={1} value={value} key={"calculator"}>
+              <Calculator />
+            </CustomTabPanel>
+          ]
         ) : (
           [...openProjectList.entries()].map(([name, index]) => {
             const store = createStore();
