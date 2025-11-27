@@ -9,7 +9,7 @@ export const costumeLens = {
     lily: { get: (costume: Costume) => costume.name.split("/")[0] },
     job: { get: (costume: Costume) => costume.name.split("/").slice(1).join("/") },
     normalized: {
-      uri: {
+      URI: {
         get: (costume: Costume) =>
           [
             encodeURI(costume.name.split("/")[0]),

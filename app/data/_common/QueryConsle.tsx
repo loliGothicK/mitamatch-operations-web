@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  ComponentPropsWithoutRef,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useCallback, useState } from "react";
 import { flow, pipe } from "fp-ts/function";
 import { sqlToModel } from "@/parser/query/sql";
 import { either } from "fp-ts";
@@ -22,6 +15,7 @@ import build, { SchemaResolver } from "@/parser/query/filter";
 import { isRight } from "fp-ts/Either";
 import { ComleteCandidate, makeSchemaCompletionSource } from "@/data/_common/autocomplete";
 import { useAtom, WritableAtom } from "jotai";
+import { useEffectOnce } from "react-use";
 
 type ToastState = {
   open: boolean;
@@ -82,10 +76,13 @@ export function QueryConsle<
     severity: "error",
   });
   const [value, setValue] = useState(query);
-  const onChange = useCallback((val: string, _: unknown) => {
-    setValue(val);
-    setQuery(val);
-  }, []);
+  const onChange = useCallback(
+    (val: string, _: unknown) => {
+      setValue(val);
+      setQuery(val);
+    },
+    [setValue, setQuery],
+  );
 
   const { vertical, horizontal, open, message, severity } = state;
 
@@ -153,7 +150,7 @@ export function QueryConsle<
         }),
       );
     },
-    [query, resolver, updateVisivilityAction, updateDataAction],
+    [origin, completion, query, resolver, updateVisivilityAction, updateDataAction],
   );
 
   const clearQuery = useCallback(() => {
@@ -161,15 +158,15 @@ export function QueryConsle<
     setQuery(atomicQuery);
     setValue(atomicQuery);
     updateDataAction(origin);
-  }, [setQuery]);
+  }, [origin, table, setQuery, setValue, updateDataAction]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
-  useEffect(() => {
+  useEffectOnce(() => {
     runQuery(true);
-  }, []);
+  });
 
   return (
     <>

@@ -21,7 +21,7 @@ export const useVisivility = (all: GridColumnVisibilityModel) => {
             ),
       );
     },
-    [setVisivility],
+    [setVisivility, all],
   );
 
   return [visivility, setVisivility, changed] as const;

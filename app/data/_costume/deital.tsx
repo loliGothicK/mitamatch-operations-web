@@ -230,7 +230,7 @@ function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
           <CustomTabPanel key={`tab-${limitBreak}`} value={value} index={limitBreak}>
             {get({ limitBreak, isAwakened }).map(({ name, description }) => {
               return (
-                <Card>
+                <Card key={name}>
                   <CardContent>
                     <Typography variant="h5" component="div">
                       {name}

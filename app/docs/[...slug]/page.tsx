@@ -5,12 +5,13 @@ import { Documents } from "@/components/docs/Documents";
 import "@/styles/markdown.css";
 import { Breadcrumbs, Grid } from "@mui/material";
 import { takeLeft } from "fp-ts/Array";
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy } from "react";
 import { destroy, init } from "tocbot";
 import Link from "@/components/link";
+import { useEffectOnce } from "react-use";
 
 const Toc = () => {
-  useEffect(() => {
+  useEffectOnce(() => {
     init({
       tocSelector: ".toc", //　目次を追加する class 名
       contentSelector: ".mitamatch-markdown", // 目次を取得するコンテンツの class 名
@@ -21,7 +22,7 @@ const Toc = () => {
 
     // 不要となったtocbotインスタンスを削除
     return () => destroy();
-  }, []);
+  });
 
   return (
     <nav

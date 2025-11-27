@@ -343,12 +343,12 @@ function validateStandaloneColumn(
 function normalize(state: EditorState, node: SyntaxNode | { from: number; to: number }): string {
   return state
     .sliceDoc(node.from, node.to)
-    .replace(/["`\[\]]/g, "")
+    .replace(/["`[\]]/g, "")
     .toLowerCase();
 }
 
 function raw(state: EditorState, node: SyntaxNode | { from: number; to: number }): string {
-  return state.sliceDoc(node.from, node.to).replace(/["`\[\]]/g, "");
+  return state.sliceDoc(node.from, node.to).replace(/["`[\]]/g, "");
 }
 
 export function normalizeSchema(schema: DbSchema): DbSchema {

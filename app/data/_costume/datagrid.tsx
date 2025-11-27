@@ -38,9 +38,7 @@ const columns: GridColDef<Costume>[] = [
       name: Lenz.costume.general.name.full.get(costume),
     }),
     renderCell: (params) => (
-      <Link
-        href={`/data/costume/${Lenz.costume.general.name.normalized.uri.get(params.row)}`}
-      >
+      <Link href={`/data/costume/${Lenz.costume.general.name.normalized.URI.get(params.row)}`}>
         <Image
           src={`/costume/icon/${Lenz.costume.general.name.normalized.full.get(params.row)}.jpg`}
           alt={params.value.name}
