@@ -71,8 +71,8 @@ const themeEffects: Map<Attribute, BattleEffect[]> = new Map([
   ],
 ]);
 
-const EFFECT_UP = /自身が使用する(.+)属性メモリアのスキル効果(\d+)%UP/;
-const TRIGGER_RATE_UP = /自身が使用する(.+?)属性メモリアの補助スキル発動確率が(\d+)％UP/;
+const EFFECT_UP = /自身が使用する(.+)属性メモリアのスキル効果(\d+)[%％]UP/;
+const TRIGGER_RATE_UP = /自身が使用する(.+?)属性メモリアの補助スキル発動確率が(\d+)[%％]UP/;
 
 function parseEffectUp(
   description: string,
@@ -124,7 +124,9 @@ function parseSpecialSkillEffect(
         match(special)
           .with({ type: "ex" }, ({ skills }): ValidateResult<SpSkikkEff> => {
             return pipe(
-              skills.map(({ description }) => parseEffectUp(description)),
+              skills
+                .filter(({ description }) => !/自身に対する[火水風光闇]属性メモリアのダメージ\/妨害スキル効果\d+[%％]DOWN/.test(description))
+                .map(({ description }) => parseEffectUp(description)),
               separator,
               either.map((effects) =>
                 effects.reduce(
@@ -137,7 +139,9 @@ function parseSpecialSkillEffect(
           })
           .with({ type: "adx" }, ({ get }): ValidateResult<SpSkikkEff> => {
             return pipe(
-              get({ limitBreak, isAwakened }).map(({ description }) =>
+              get({ limitBreak, isAwakened })
+                .filter(({ description }) => !/自身に対する[火水風光闇]属性メモリアのダメージ\/妨害スキル効果\d+[%％]DOWN/.test(description))
+                .map(({ description }) =>
                 pipe(
                   parseEffectUp(description),
                   either.alt(() => parseRateUp(description)),

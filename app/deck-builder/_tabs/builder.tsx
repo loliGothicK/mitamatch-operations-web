@@ -3,7 +3,7 @@
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { type MouseEvent, Suspense, useEffect, useId, useState } from "react";
+import {Dispatch, type MouseEvent, SetStateAction, Suspense, useCallback, useEffect, useId, useState} from "react";
 import DifferenceIcon from "@mui/icons-material/Difference";
 import type { Unit } from "@/domain/types";
 import { generateShortLink, saveShortLink } from "@/actions/permlink";
@@ -224,7 +224,7 @@ function MemoriaItem({
 }: {
   readonly memoria: MemoriaWithConcentration;
   readonly remove?: false;
-  readonly onConcentrationChange?: ((value: number) => void) | false;
+  readonly onConcentrationChange?: Dispatch<SetStateAction<Concentration | undefined>> | false;
   readonly onContextMenu?: false;
   readonly disable?: true;
   readonly preload?: boolean;
@@ -273,7 +273,7 @@ function MemoriaItem({
       setConcentration(4);
     }
     if (onConcentrationChange) {
-      onConcentrationChange(concentrationValue > 0 ? concentrationValue - 1 : 4);
+      onConcentrationChange(concentrationValue > 0 ? (concentrationValue - 1) as Concentration : 4);
     } else {
       setDeck(changeValue);
       setLegendaryDeck(changeValue);
@@ -611,7 +611,7 @@ export default function MultipleSelect({
   );
 }
 
-function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
+function Compare({ counter, stack, setAction }: { counter?: boolean; stack?: boolean; setAction: Dispatch<SetStateAction<Concentration | undefined>>; }) {
   const theme = useTheme();
   const [compare] = useAtom(compareModeAtom);
   const [candidate] = useAtom(candidateAtom);
@@ -686,35 +686,25 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
   );
 
   if (isLeft(diff)) {
-    return <Typography>メンテナンス中です、ご迷惑をおかけしてすいません</Typography>;
+    return <Typography>{JSON.stringify(diff.left)}</Typography>;
   }
-
-  const style = {
-    display: "grid",
-    gridTemplateColumns: "auto auto 1fr",
-    width: "max-content",
-    maxWidth: "100%",
-    padding: "2rem",
-    lineHeight: 2,
-  };
 
   const intoRow = ([type, [before, after]]: [string, [number, number]]) => {
     const sign = after - before > 0;
-    const color = {
-      color: theme.palette[sign ? "success" : "error"][theme.palette.mode],
-    };
+    const color = theme.palette[sign ? "success" : "error"][theme.palette.mode];
     return (
-      <div key={type}>
-        <dt
-          style={{
-            paddingRight: "1em",
-            textAlignLast: "justify",
-            ...color,
-          }}
-        >{`${type}:`}</dt>
-        <dd style={color}>{`${sign ? "+" : ""}${after - before}`}</dd>
-        <dd>{`(${before} => ${after})`}</dd>
-      </div>
+      <Grid key={type} size={{ xs: 12, md: 6 }}>
+        <Card>
+          <CardContent sx={{ height: '100%' }}>
+            <Typography variant="h5" component="div" color={color}>
+              {`${type}: ${sign ? "+" : ""}${after - before}`}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {`(${before} => ${after})`}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Grid>
     );
   };
 
@@ -757,7 +747,7 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
               <Grid>
                 <MemoriaItem
                   memoria={candidate}
-                  onConcentrationChange={false}
+                  onConcentrationChange={setAction}
                   onContextMenu={false}
                 />
               </Grid>
@@ -779,63 +769,55 @@ function Compare({ counter, stack }: { counter?: boolean; stack?: boolean }) {
           </Stack>
         </Grid>
       </Grid>
-      <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
+      <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
         ステータス
       </Divider>
-      <Grid>
-        <dl style={style}>
-          {intoRow([
-            "ATK",
-            [compare.status[compare.concentration][0], candidate.status[compare.concentration][0]],
-          ])}
-          {intoRow([
-            "Sp.ATK",
-            [compare.status[compare.concentration][1], candidate.status[compare.concentration][1]],
-          ])}
-          {intoRow([
-            "DEF",
-            [compare.status[compare.concentration][2], candidate.status[compare.concentration][2]],
-          ])}
-          {intoRow([
-            "Sp.DEF",
-            [compare.status[compare.concentration][3], candidate.status[compare.concentration][3]],
-          ])}
-        </dl>
+      <Grid container={true} width={"100%"}>
+        {intoRow([
+          "ATK",
+          [compare.status[compare.concentration][0], candidate.status[compare.concentration][0]],
+        ])}
+        {intoRow([
+          "Sp.ATK",
+          [compare.status[compare.concentration][1], candidate.status[compare.concentration][1]],
+        ])}
+        {intoRow([
+          "DEF",
+          [compare.status[compare.concentration][2], candidate.status[compare.concentration][2]],
+        ])}
+        {intoRow([
+          "Sp.DEF",
+          [compare.status[compare.concentration][3], candidate.status[compare.concentration][3]],
+        ])}
       </Grid>
-      <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
+      <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
         {diff.right.expectedToalDamage[1] - diff.right.expectedToalDamage[0] !== 0
           ? "ダメージ"
           : "回復"}
       </Divider>
-      <Grid>
-        <dl style={style}>
+      <Grid container={true} width={"100%"}>
           {/* damage */}
           {diff.right.expectedToalDamage[1] - diff.right.expectedToalDamage[0] !== 0 &&
             intoRow(["ダメージ", diff.right.expectedToalDamage])}
           {/* recovery */}
           {diff.right.expectedTotalRecovery[1] - diff.right.expectedTotalRecovery[0] !== 0 &&
             intoRow(["回復", diff.right.expectedTotalRecovery])}
-        </dl>
       </Grid>
-      <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
+      <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
         {"バフ"}
       </Divider>
-      <Grid>
-        <dl style={style}>
+      <Grid container={true} width={"100%"}>
           {[...diff.right.expectedTotalBuff.entries()]
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
             .map(([type, value]) => intoRow([type, value]))}
-        </dl>
       </Grid>
-      <Divider textAlign={"left"} sx={{ margin: 2, width: "30vw" }}>
+      <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
         {"デバフ"}
       </Divider>
-      <Grid>
-        <dl style={style}>
+      <Grid container={true} width={"100%"}>
           {[...diff.right.expectedTotalDebuff.entries()]
             .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
             .map(([type, value]) => intoRow([type, value]))}
-        </dl>
       </Grid>
     </Grid>
   );
@@ -854,16 +836,18 @@ function VirtualizedList() {
   const [, setTargetBefore] = useAtom(targetBeforeAtom);
   const [, setTargetAfter] = useAtom(targetAfterAtom);
   const uniqueId = useId();
+  const [condidateConcentration, setCondidateConcentration] = useState<Concentration | undefined>(undefined);
 
-  const addMemoria = (prev: MemoriaWithConcentration[], newMemoria: Memoria) => {
-    return [...prev, { ...newMemoria, concentration: 4 as Concentration }];
+  const addMemoria = (prev: MemoriaWithConcentration[], newMemoria: Memoria, concentration: Concentration | undefined = condidateConcentration) => {
+    return [...prev, { ...newMemoria, concentration: concentration ?? 4 }];
   };
 
-  const onDialogClose = () => {
+  const onDialogClose = useCallback(() => {
     setTargetBefore([]);
     setTargetAfter([]);
     setOpen(false);
-  };
+    setCondidateConcentration(undefined);
+  }, [setTargetBefore, setTargetAfter, setOpen, setCondidateConcentration]);
 
   return (
     <>
@@ -895,7 +879,7 @@ function VirtualizedList() {
                     setOpen(true);
                     setCandidate({
                       ...memoria[index],
-                      concentration: 4 as Concentration,
+                      concentration: condidateConcentration ?? 4,
                     });
                     return;
                   }
@@ -1008,7 +992,7 @@ function VirtualizedList() {
         >
           {compare?.labels.includes("Legendary") === candidate?.labels.includes("Legendary") ? (
             <DialogContent>
-              <Compare counter={counter} stack={stack} />
+              <Compare counter={counter} stack={stack} setAction={setCondidateConcentration} />
             </DialogContent>
           ) : (
             <DialogContent>
