@@ -25,7 +25,6 @@ import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
 import { atomWithReset } from "jotai/utils";
 import { useSetAtom } from "jotai";
-import {normalizeJobName} from "@/domain/costume/function";
 
 const queryAtom = atomWithReset("select * from costume order by released;");
 
@@ -40,7 +39,7 @@ const columns: GridColDef<Costume>[] = [
     }),
     renderCell: (params) => (
       <Link
-        href={`/data/costume/${encodeURI(Lenz.costume.general.name.lily.get(params.row))}/${encodeURI(normalizeJobName(Lenz.costume.general.name.job.get(params.row)))}`}
+        href={`/data/costume/${Lenz.costume.general.name.normalized.uri.get(params.row)}`}
       >
         <Image
           src={`/costume/icon/${Lenz.costume.general.name.normalized.full.get(params.row)}.jpg`}

@@ -336,7 +336,9 @@ function DetailData({ costume }: { costume: Costume }) {
 }
 
 export default function Deital({ lily, job }: { lily: string; job: string }) {
-  const costume = costumeList.find((costume) => Lenz.costume.general.name.normalized.full.get(costume) === `${lily}/${job}`);
+  const costume = costumeList.find(
+    (costume) => Lenz.costume.general.name.normalized.full.get(costume) === `${lily}/${job}`,
+  );
 
   if (costume === undefined) return <NotFound />;
 

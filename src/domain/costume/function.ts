@@ -17,7 +17,5 @@ export const comparator =
   };
 
 export const normalizeJobName = (job: string) => {
-  return job
-    .replace("*", "")
-    .replace(/\((.+)\/(.+)\)/g, "($1)($2)")
+  return job.replace("*", "").replace(/\((.+)\/(.+)\)/g, "($1)($2)");
 };
