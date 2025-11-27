@@ -6,7 +6,15 @@ import type { Order } from "@/domain/order/order";
 import { getDeckFullUrl, getTimelineFullUrl } from "@/database";
 
 type OrderWithPic = Order & {
-  delay?: number;
+  delay:
+    | {
+        source: "manual";
+        value: number;
+      }
+    | {
+        source: "auto";
+        value?: number;
+      };
   pic?: string;
   sub?: string;
 };

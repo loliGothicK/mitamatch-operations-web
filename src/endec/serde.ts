@@ -5,9 +5,10 @@ import type { OrderWithPic } from "@/jotai/orderAtoms";
 import type { Unit } from "@/domain/types";
 import { type Result, fromThrowable, ok, err } from "neverthrow";
 import { z } from "zod";
-import { pipe } from "fp-ts/function";
+import { identity, pipe } from "fp-ts/function";
 import { partition } from "fp-ts/Array";
 import { outdent } from "outdent";
+import { match, P } from "ts-pattern";
 
 export function encodeDeck(
   sw: "sword" | "shield",
@@ -125,24 +126,63 @@ export function encodeTimeline(timeline: OrderWithPic[]) {
   return btoa(JSON.stringify({ timeline: timelineInfo }));
 }
 
-const timelineItemSchema = z.object({
+const timelineItemSchemaV1 = z.object({
   id: z.number(),
   delay: z.number().optional().nullable(),
   pic: z.string().optional().nullable(),
   sub: z.string().optional().nullable(),
 });
 
-const timelineSchema = z.object({
-  timeline: z.array(timelineItemSchema),
+const timelineItemSchemaV2 = z.object({
+  id: z.number(),
+  delay: z.union([
+    z.object({
+      source: z.literal("auto"),
+      value: z.number().optional(),
+    }),
+    z.object({
+      source: z.literal("manual"),
+      value: z.number(),
+    }),
+  ]),
+  pic: z.string().optional().nullable(),
+  sub: z.string().optional().nullable(),
 });
 
-type TimelineItem = z.infer<typeof timelineItemSchema>;
+const timelineSchema = z.object({
+  timeline: z.array(timelineItemSchemaV2),
+});
+
+const backwardsCompatibleSchema = z
+  .object({
+    timeline: z.union([z.array(timelineItemSchemaV1), z.array(timelineItemSchemaV2)]),
+  })
+  .transform((xs) => ({
+    timeline: xs.timeline.map(
+      ({ delay, ...xs }): z.infer<typeof timelineItemSchemaV2> => ({
+        ...xs,
+        delay: match(delay)
+          .with(P.nullish, () => ({ source: "auto" as const }))
+          .with(5, () => ({
+            source: "auto" as const,
+            value: 5,
+          }))
+          .with(P.number, (delay) => ({
+            source: "manual" as const,
+            value: delay,
+          }))
+          .otherwise(identity),
+      }),
+    ),
+  }));
+
+type TimelineItem = z.infer<typeof timelineItemSchemaV2>;
 type Timeline = z.infer<typeof timelineSchema>;
 
 const timelineParseSafe = fromThrowable(
-  timelineSchema.parse,
+  backwardsCompatibleSchema.parse,
   (e) => outdent`
-    Error in \`timelineSchema.parse\`:
+    Error in \`backwardsCompatibleSchema.parse\`:
 
     ${e}
   `,
@@ -173,7 +213,9 @@ const restoreTimeline = (data: Timeline): Result<OrderWithPic[], string> => {
           ...order,
           pic: pic ? decodeURIComponent(pic) : undefined,
           sub: sub ? decodeURIComponent(sub) : undefined,
-          delay: delay ? delay : undefined,
+          delay: delay || {
+            source: "auto",
+          },
         })),
       );
 };

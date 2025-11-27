@@ -3,7 +3,15 @@
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { type FormEvent, Suspense, useEffect, useId, useState } from "react";
+import {
+  type FormEvent,
+  SetStateAction,
+  Suspense,
+  useCallback,
+  useEffect,
+  useId,
+  useState,
+} from "react";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 import { Add, Assignment, DragIndicator, Edit, Remove, Share } from "@mui/icons-material";
@@ -48,18 +56,25 @@ import {
   filterAtom,
   filteredOrderAtom,
   payedAtom,
-  rwTimelineAtom,
+  timelineAtom,
   timelineTitleAtom,
 } from "@/jotai/orderAtoms";
 
 import { useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { takeLeft } from "fp-ts/Array";
 import Cookies from "js-cookie";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { Virtuoso } from "react-virtuoso";
 import { generateShortLink, saveShortLink } from "@/actions/permlink";
 import { restore } from "@/actions/restore";
+import {
+  ComputedOrder,
+  formatTime,
+  normalizeTimeline,
+  useComputedTimeline,
+} from "@/timeline-builder/_hook";
+import { match } from "ts-pattern";
+import { identity } from "fp-ts/function";
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -132,8 +147,8 @@ function Info({ order }: { order: OrderWithPic }) {
   return <Typography variant="body1">{order.name}</Typography>;
 }
 
-function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
-  const [, setTimeline] = useAtom(rwTimelineAtom);
+function TimelineItem({ order }: { order: ComputedOrder }) {
+  const [, setTimeline] = useAtom(timelineAtom);
   const { isDragging, setNodeRef, attributes, listeners, transform, transition } = useSortable({
     id: order.id,
   });
@@ -155,21 +170,30 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
     touchAction: "none",
   };
 
-  const timeFormat = ({ delay, prepare_time, active_time }: OrderWithPic): string => {
-    const totalTime = (delay || 0) + (prepare_time || 0) + (active_time || 0);
-    return `${totalTime} (${delay ? `${delay}` : ""}${prepare_time ? `+${prepare_time}` : ""}${active_time ? `+${active_time}` : ""}) s`;
-  };
-
-  const starts = left - (order.delay || 0);
-
   return (
     <div ref={setNodeRef} style={style}>
-      <Divider textAlign={"left"} sx={{ paddingLeft: 0 }}>
-        <Typography fontSize={10}>
-          {`${starts < 0 ? "-" : ""}${Math.trunc(starts / 60)}`}:
-          {Math.abs(starts % 60)
-            .toString()
-            .padStart(2, "0")}
+      <Divider textAlign={"left"}>
+        <Typography
+          variant="caption"
+          component="span"
+          sx={{
+            whiteSpace: "nowrap", // 改行防止
+            color: order.activationTime < 0 ? "error.main" : "text.primary", // 時間超過チェック
+          }}
+        >
+          {/* 1. 発動時点での時間 (Parepare Start Time) */}
+          <span style={{ fontWeight: "bold", fontSize: "12px" }}>
+            {formatTime(order.prepareStartTime)}
+          </span>
+          {/* 2. -> 準備時間 -> (経過した時間を示す) */}
+          <span style={{ color: "dimgray", margin: "0 8px", fontSize: "10px" }}>
+            {" -> Prep:"}
+            {order.actualPrepareTime}s{" -> "}
+          </span>
+          {/* 3. 効果終了時点の時間 (End Time) */}
+          <span style={{ color: "primary.main", fontSize: "12px" }}>
+            {formatTime(order.endTime)}
+          </span>
         </Typography>
       </Divider>
       <Stack direction={"row"} padding={0} alignItems={"center"}>
@@ -177,7 +201,7 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
           <DragIndicator sx={{ color: "dimgrey", touchAction: "none" }} />
         </div>
         <Stack direction={"row"} padding={0} alignItems={"center"}>
-          <Tooltip title={timeFormat(order)} placement="top">
+          <Tooltip title={order.description} placement="top">
             <ListItem key={order.id} sx={{ padding: 0 }}>
               <ListItemAvatar>
                 <Avatar>
@@ -231,18 +255,27 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
               event.preventDefault();
               const formData = new FormData(event.currentTarget);
               const formJson = Object.fromEntries(formData.entries());
-              setTimeline((prev) =>
-                prev.map((o) =>
+              setTimeline((prev) => {
+                return prev.map((o) =>
                   o.id === order.id
                     ? {
                         ...o,
-                        delay: Number.parseInt(formJson.delay as string, 10),
-                        pic: formJson.pic as string,
-                        sub: formJson.sub as string,
+                        delay: match(formJson.delay as string)
+                          .with("", () => ({ source: "auto" as const }))
+                          .otherwise((value) => ({
+                            source: "manual",
+                            value: Number.parseInt(value, 10),
+                          })),
+                        pic: match(formJson.pic as string)
+                          .with("", () => undefined)
+                          .otherwise(identity),
+                        sub: match(formJson.sub as string)
+                          .with("", () => undefined)
+                          .otherwise(identity),
                       }
                     : o,
-                ),
-              );
+                );
+              });
               handleClose();
             },
           },
@@ -290,18 +323,44 @@ function TimelineItem({ order, left }: { order: OrderWithPic; left: number }) {
 
 function Timeline() {
   const [, setTitle] = useAtom(timelineTitleAtom);
-  const [timeline, setTimeline] = useAtom(rwTimelineAtom);
+  const [timeline, setTimeline] = useAtom(timelineAtom);
   const params = useSearchParams();
+
+  const handleChange = useCallback(
+    (action: SetStateAction<OrderWithPic[]>) => {
+      if (typeof action === "function") {
+        console.log("???");
+        setTimeline((prev) => {
+          const newTimeline = normalizeTimeline(action(prev));
+          Cookies.set("timeline", encodeTimeline(newTimeline));
+          return newTimeline;
+        });
+      } else {
+        console.log("!!!");
+        const newTimeline = normalizeTimeline(action);
+        console.log(newTimeline);
+        setTimeline(newTimeline);
+        Cookies.set("timeline", encodeTimeline(newTimeline));
+      }
+    },
+    [setTimeline],
+  );
+
+  // ■ ここで計算済みデータを取得
+  const computedOrders = useComputedTimeline(timeline);
 
   useEffect(() => {
     (async () => {
       const value = params.get("timeline");
       const title = params.get("title");
-      setTitle(title ? decodeURI(title) : "No Title");
+      if (title)
+        setTitle(decodeURI(title)); // Null check fix
+      else setTitle("No Title");
+
       const cookie = Cookies.get("timeline");
       if (value) {
-        const timeline = await restore({ target: "timeline", param: value });
-        setTimeline(timeline);
+        const restored = await restore({ target: "timeline", param: value });
+        setTimeline(restored);
       } else if (cookie) {
         const decodeResult = decodeTimeline(cookie);
         if (decodeResult.isOk()) {
@@ -311,43 +370,28 @@ function Timeline() {
     })();
   }, [setTitle, setTimeline, params]);
 
-  const reducer = (left: number, order: OrderWithPic, index: number): number => {
-    const prepareTime =
-      index === 0
-        ? order.prepare_time
-        : timeline[index - 1].name.includes("戦術加速")
-          ? 5
-          : order.prepare_time;
-    const delay = index > timeline.length - 2 ? 0 : timeline[index + 1].delay || 0;
-    return left - prepareTime - order.active_time - delay;
-  };
-
   return (
     timeline.length !== 0 && (
       <Sortable
         items={timeline}
-        onChangeOrder={setTimeline}
+        onChangeOrder={handleChange}
         strategy={verticalListSortingStrategy}
         dnd={{
           modifiers: [restrictToVerticalAxis],
         }}
       >
         <List sx={{ width: "100%", maxWidth: "65vh", overflow: "auto" }}>
-          {timeline.map((order, index) => (
-            <TimelineItem
-              key={order.id}
-              order={order}
-              left={takeLeft(index)(timeline).reduce(reducer, 900)}
-            />
+          {computedOrders.map((order) => (
+            // TimelineItemに計算済みの start (wait開始時間) を渡す
+            <TimelineItem key={order.id} order={order} />
           ))}
-          <Divider textAlign={"left"} sx={{ paddingLeft: 0 }}>
-            <Typography fontSize={10}>
-              {(() => {
-                const left = takeLeft(timeline.length)(timeline).reduce(reducer, 900);
-                return `${left < 0 ? "-" : ""}${Math.trunc(left / 60)}:${Math.abs(left % 60)
-                  .toString()
-                  .padStart(2, "0")}`;
-              })()}
+
+          {/* 最後の終了時間表示 */}
+          <Divider textAlign={"left"}>
+            <Typography fontSize={12} sx={{ fontWeight: "bold" }}>
+              {computedOrders.length > 0
+                ? formatTime(computedOrders[computedOrders.length - 1].endTime)
+                : "15:00"}
             </Typography>
           </Divider>
         </List>
@@ -358,12 +402,46 @@ function Timeline() {
 
 function Source() {
   const [orders] = useAtom(filteredOrderAtom);
-  const [timeline, setSelectedOrder] = useAtom(rwTimelineAtom);
+  const [timeline, setTimeline] = useAtom(timelineAtom);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleAddOrder = (index: number) => {
+    if (
+      timeline.some(
+        (order) =>
+          orders[index].effect.replace(/^(.+)Lv.\d/g, "$1").replace(/(通常|特殊):/g, "") ===
+            order.effect.replace(/^(.+)Lv.\d/g, "$1").replace(/(通常|特殊):/g, "") ||
+          (orders[index].effect.includes("闇") &&
+            !orders[index].effect.includes("光闇") &&
+            order.effect.includes("闇") &&
+            !order.effect.includes("光闇")) ||
+          (orders[index].effect.includes("光") &&
+            !orders[index].effect.includes("光闇") &&
+            order.effect.includes("光") &&
+            !order.effect.includes("光闇")),
+      )
+    ) {
+      setOpen(true);
+      return;
+    }
+    setTimeline((prev) => {
+      const newOrder: OrderWithPic = {
+        ...orders[index],
+        delay: {
+          source: "auto",
+        },
+      };
+
+      const newTimeline = normalizeTimeline([...prev, newOrder]);
+
+      Cookies.set("timeline", encodeTimeline(newTimeline));
+      return newTimeline;
+    });
   };
 
   return (
@@ -390,33 +468,7 @@ function Source() {
                   left: 0,
                   bgcolor: "rgba(0, 0, 0, 0.2)",
                 }}
-                onClick={() => {
-                  if (
-                    timeline.some(
-                      (order) =>
-                        orders[index].effect
-                          .replace(/^(.+)Lv.\d/g, "$1")
-                          .replace(/(通常|特殊):/g, "") ===
-                          order.effect.replace(/^(.+)Lv.\d/g, "$1").replace(/(通常|特殊):/g, "") ||
-                        (orders[index].effect.includes("闇") &&
-                          !orders[index].effect.includes("光闇") &&
-                          order.effect.includes("闇") &&
-                          !order.effect.includes("光闇")) ||
-                        (orders[index].effect.includes("光") &&
-                          !orders[index].effect.includes("光闇") &&
-                          order.effect.includes("光") &&
-                          !order.effect.includes("光闇")),
-                    )
-                  ) {
-                    setOpen(true);
-                    return;
-                  }
-                  setSelectedOrder((prev) => {
-                    const delay = prev.length === 0 ? undefined : 5;
-                    Cookies.set("timeline", encodeTimeline([...prev, { ...orders[index], delay }]));
-                    return [...prev, { ...orders[index], delay }];
-                  });
-                }}
+                onClick={() => handleAddOrder(index)}
               >
                 <Add color={"warning"} />
               </IconButton>
@@ -501,7 +553,7 @@ function FilterMenu() {
 
 function ShareButton() {
   const [title] = useAtom(timelineTitleAtom);
-  const [timeline] = useAtom(rwTimelineAtom);
+  const [timeline] = useAtom(timelineAtom);
   const [modalOpen, setModalOpen] = useState<"short" | "full" | false>(false);
   const [openTip, setOpenTip] = useState<boolean>(false);
   const [url, setUrl] = useState<string>("");
