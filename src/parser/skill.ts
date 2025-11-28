@@ -4,11 +4,9 @@ import { match, P } from "ts-pattern";
 import {
   parseAmount,
   parseStatus,
-  type StatusKind,
   parseIntSafe,
   parseElement,
 } from "@/parser/common";
-import type { Amount } from "@/parser/common";
 import { pipe } from "fp-ts/function";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
 import { bail, type MitamaError, CallPath } from "@/error/error";
@@ -16,6 +14,7 @@ import { bind, Do, type Either, getApplicativeValidation, right } from "fp-ts/Ei
 import { getSemigroup } from "fp-ts/Array";
 import { sequenceS } from "fp-ts/Apply";
 import { separator, transposeArray } from "@/fp-ts-ext/function";
+import {Amount, StatusKind} from "@/evaluate/types";
 
 export const elements = ["Fire", "Water", "Wind", "Light", "Dark"] as const;
 export type Attribute = (typeof elements)[number];
