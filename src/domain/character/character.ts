@@ -18,6 +18,8 @@ const characterSchema = z.object({
   subColor: z.string().regex(/^[0-9a-f]{6}$/i),
 });
 
+export type Character = z.infer<typeof characterSchema>;
+
 export const characterList: z.infer<typeof characterSchema>[] = costumeData.data.map((_) =>
   characterSchema.parse(_),
 );

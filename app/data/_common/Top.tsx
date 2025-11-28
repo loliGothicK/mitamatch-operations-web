@@ -10,6 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, type SyntheticEvent, useState } from "react";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { z } from "zod";
+import View from "@/data/_character/view";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -44,23 +45,20 @@ const TABS = [
   {
     label: "Memoria",
     content: (query?: string) => <MemoriaDataGrid initialQuery={query} />,
-    disabled: false,
   },
   {
     label: "Costume",
     content: (query?: string) => <CostumeDataGrid initialQuery={query} />,
-    disabled: false,
   },
   {
-    label: "Order",
-    content: (query?: string) => <CostumeDataGrid initialQuery={query} />,
-    disabled: true,
+    label: "Character",
+    content: (_?: string) => <View />,
   },
 ];
 
-const ROUTES = ["memoria", "costume", "order"] as const;
+const ROUTES = ["memoria", "costume", "character"] as const;
 
-const pageSchema = z.enum(["memoria", "costume", "order"]).optional();
+const pageSchema = z.enum(ROUTES).optional();
 
 export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[number] }) {
   const router = useRouter();
@@ -85,14 +83,9 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
     <Layout>
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tabs value={value} onChange={handleChange} aria-label="data tabs">
             {TABS.map((def, index) => (
-              <Tab
-                key={def.label}
-                label={def.label}
-                {...a11yProps(index)}
-                disabled={def.disabled}
-              />
+              <Tab key={def.label} label={def.label} {...a11yProps(index)} />
             ))}
           </Tabs>
         </Box>

@@ -11,8 +11,9 @@ import { bail } from "@/error/error";
 import { isLeft, right } from "fp-ts/Either";
 import { parseIntSafe } from "@/parser/common";
 import { either } from "fp-ts";
-import CostumeView from "@/data/_costume/view";
+import { default as CharacterDetail } from "@/data/_character/detail";
 import { normalizeJobName } from "@/domain/costume/function";
+import View from "@/data/_character/view";
 
 type Props = {
   params: Promise<{ slug?: string | string[] }>;
@@ -43,16 +44,21 @@ export default async function Page({ params, searchParams }: Props) {
 
   return match(slug)
     .with(undefined, () => <DataPage dataType={"memoria"} />)
-    .with([P.union("memoria", "order", "costume").select()], (slug) => <DataPage dataType={slug} />)
+    .with([P.union("memoria", "costume", "character").select()], (slug) => (
+      <DataPage dataType={slug} />
+    ))
     .with(["memoria", P.string], ([, name]) => (
       <MemoriaDetail name={decodeURIComponent(name)} type={cardType.right} />
     ))
-    .with(["costume", P.string.select()], (name) => <CostumeView name={decodeURIComponent(name)} />)
     .with(["costume", P.string, P.string], ([, lily, job]) => (
       <CostumeDetail
         lily={decodeURIComponent(lily)}
         job={normalizeJobName(decodeURIComponent(job))}
       />
+    ))
+    .with(["character"], () => <View />)
+    .with(["character", P.string.select()], (name) => (
+      <CharacterDetail name={decodeURIComponent(name)} />
     ))
     .otherwise(() => <NotFound />);
 }
