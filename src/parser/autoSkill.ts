@@ -1,5 +1,3 @@
-import type { Amount, StatusKind } from "@/parser/common";
-
 import { match } from "ts-pattern";
 import { parseAmount } from "@/parser/common";
 import { type Either, right, getApplicativeValidation } from "fp-ts/Either";
@@ -11,6 +9,7 @@ import { sequenceS } from "fp-ts/Apply";
 import { fromNullable, type Option } from "fp-ts/Option";
 import { option, either } from "fp-ts";
 import { separator, transposeArray } from "@/fp-ts-ext/function";
+import { Amount, StatusKind } from "@/evaluate/types";
 
 export type Probability =
   | "certain" // 一定確率で

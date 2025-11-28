@@ -3,7 +3,16 @@
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import {Dispatch, type MouseEvent, SetStateAction, Suspense, useCallback, useEffect, useId, useState} from "react";
+import {
+  Dispatch,
+  type MouseEvent,
+  SetStateAction,
+  Suspense,
+  useCallback,
+  useEffect,
+  useId,
+  useState,
+} from "react";
 import DifferenceIcon from "@mui/icons-material/Difference";
 import type { Unit } from "@/domain/types";
 import { generateShortLink, saveShortLink } from "@/actions/permlink";
@@ -87,7 +96,7 @@ import {
   unitTitleAtom,
 } from "@/jotai/memoriaAtoms";
 
-import { calcDiff } from "@/evaluate/calc";
+import { calcDiff } from "@/evaluate/diff";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Toolbar from "@mui/material/Toolbar";
@@ -273,7 +282,9 @@ function MemoriaItem({
       setConcentration(4);
     }
     if (onConcentrationChange) {
-      onConcentrationChange(concentrationValue > 0 ? (concentrationValue - 1) as Concentration : 4);
+      onConcentrationChange(
+        concentrationValue > 0 ? ((concentrationValue - 1) as Concentration) : 4,
+      );
     } else {
       setDeck(changeValue);
       setLegendaryDeck(changeValue);
@@ -611,7 +622,15 @@ export default function MultipleSelect({
   );
 }
 
-function Compare({ counter, stack, setAction }: { counter?: boolean; stack?: boolean; setAction: Dispatch<SetStateAction<Concentration | undefined>>; }) {
+function Compare({
+  counter,
+  stack,
+  setAction,
+}: {
+  counter?: boolean;
+  stack?: boolean;
+  setAction: Dispatch<SetStateAction<Concentration | undefined>>;
+}) {
   const theme = useTheme();
   const [compare] = useAtom(compareModeAtom);
   const [candidate] = useAtom(candidateAtom);
@@ -669,7 +688,7 @@ function Compare({ counter, stack, setAction }: { counter?: boolean; stack?: boo
     costume,
     { limitBraek: adLevel, isAwakened: true },
     {
-      counter,
+      counter: counter ?? false,
       stack: stack
         ? {
             before: {
@@ -695,7 +714,7 @@ function Compare({ counter, stack, setAction }: { counter?: boolean; stack?: boo
     return (
       <Grid key={type} size={{ xs: 12, md: 6 }}>
         <Card>
-          <CardContent sx={{ height: '100%' }}>
+          <CardContent sx={{ height: "100%" }}>
             <Typography variant="h5" component="div" color={color}>
               {`${type}: ${sign ? "+" : ""}${after - before}`}
             </Typography>
@@ -796,28 +815,28 @@ function Compare({ counter, stack, setAction }: { counter?: boolean; stack?: boo
           : "回復"}
       </Divider>
       <Grid container={true} width={"100%"}>
-          {/* damage */}
-          {diff.right.expectedToalDamage[1] - diff.right.expectedToalDamage[0] !== 0 &&
-            intoRow(["ダメージ", diff.right.expectedToalDamage])}
-          {/* recovery */}
-          {diff.right.expectedTotalRecovery[1] - diff.right.expectedTotalRecovery[0] !== 0 &&
-            intoRow(["回復", diff.right.expectedTotalRecovery])}
+        {/* damage */}
+        {diff.right.expectedToalDamage[1] - diff.right.expectedToalDamage[0] !== 0 &&
+          intoRow(["ダメージ", diff.right.expectedToalDamage])}
+        {/* recovery */}
+        {diff.right.expectedTotalRecovery[1] - diff.right.expectedTotalRecovery[0] !== 0 &&
+          intoRow(["回復", diff.right.expectedTotalRecovery])}
       </Grid>
       <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
         {"バフ"}
       </Divider>
       <Grid container={true} width={"100%"}>
-          {[...diff.right.expectedTotalBuff.entries()]
-            .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
-            .map(([type, value]) => intoRow([type, value]))}
+        {[...diff.right.expectedTotalBuff.entries()]
+          .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+          .map(([type, value]) => intoRow([type, value]))}
       </Grid>
       <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
         {"デバフ"}
       </Divider>
       <Grid container={true} width={"100%"}>
-          {[...diff.right.expectedTotalDebuff.entries()]
-            .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
-            .map(([type, value]) => intoRow([type, value]))}
+        {[...diff.right.expectedTotalDebuff.entries()]
+          .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+          .map(([type, value]) => intoRow([type, value]))}
       </Grid>
     </Grid>
   );
@@ -836,9 +855,15 @@ function VirtualizedList() {
   const [, setTargetBefore] = useAtom(targetBeforeAtom);
   const [, setTargetAfter] = useAtom(targetAfterAtom);
   const uniqueId = useId();
-  const [condidateConcentration, setCondidateConcentration] = useState<Concentration | undefined>(undefined);
+  const [condidateConcentration, setCondidateConcentration] = useState<Concentration | undefined>(
+    undefined,
+  );
 
-  const addMemoria = (prev: MemoriaWithConcentration[], newMemoria: Memoria, concentration: Concentration | undefined = condidateConcentration) => {
+  const addMemoria = (
+    prev: MemoriaWithConcentration[],
+    newMemoria: Memoria,
+    concentration: Concentration | undefined = condidateConcentration,
+  ) => {
     return [...prev, { ...newMemoria, concentration: concentration ?? 4 }];
   };
 

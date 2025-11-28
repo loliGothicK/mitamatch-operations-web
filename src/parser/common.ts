@@ -2,6 +2,7 @@ import { match, P } from "ts-pattern";
 import { type Either, right } from "fp-ts/Either";
 import { bail, type MitamaError, CallPath } from "@/error/error";
 import type { Attribute } from "@/parser/skill";
+import { Amount, StatusKind } from "@/evaluate/types";
 
 export const parseIntSafe = (
   num: string,
@@ -52,15 +53,6 @@ export const parseElement = (
       }),
     );
 
-export type Amount =
-  | "small" // 小アップ
-  | "medium" // アップ
-  | "large" // 大アップ
-  | "extra-large" // 特大アップ
-  | "super-large" // 超特大アップ
-  | "ultra-large" // 極大アップ
-  | "super-ultra-large"; // 超極大アップ
-
 export const parseAmount = (
   amount: string,
   meta: { path: CallPath; memoriaName?: string } = {
@@ -72,16 +64,16 @@ export const parseAmount = (
     .with(P.union("アップ", "ダウン", "ダメージ", "回復"), () => right("medium"))
     .with(P.union("大アップ", "大ダウン", "大ダメージ", "大回復"), () => right("large"))
     .with(P.union("特大アップ", "特大ダウン", "特大ダメージ", "特大回復"), () =>
-      right("extra-large"),
+      right("extraLarge"),
     )
     .with(P.union("超特大アップ", "超特大ダウン", "超特大ダメージ", "超特大回復"), () =>
-      right("super-large"),
+      right("superLarge"),
     )
     .with(P.union("極大アップ", "極大ダウン", "極大ダメージ", "極大回復"), () =>
-      right("ultra-large"),
+      right("ultraLarge"),
     )
     .with(P.union("超極大アップ", "超極大ダウン", "超極大ダメージ", "超極大回復"), () =>
-      right("super-ultra-large"),
+      right("superUltraLarge"),
     )
     .otherwise((src) =>
       bail(src, "given text doesn't match any amount", {
@@ -89,26 +81,6 @@ export const parseAmount = (
         path: meta.path.join("parseAmount"),
       }),
     );
-
-export const statusKind = [
-  "ATK",
-  "DEF",
-  "Sp.ATK",
-  "Sp.DEF",
-  "Life",
-  "Fire ATK",
-  "Fire DEF",
-  "Water ATK",
-  "Water DEF",
-  "Wind ATK",
-  "Wind DEF",
-  "Light ATK",
-  "Light DEF",
-  "Dark ATK",
-  "Dark DEF",
-] as const;
-
-export type StatusKind = (typeof statusKind)[number];
 
 export const parseStatus = (
   status: string,

@@ -51,7 +51,7 @@ test.each(data.filter(({ gvgSkill }) => gvgSkill.description.includes("極大ダ
     ).toEqual(
       right(
         expect.objectContaining({
-          effects: expect.arrayContaining([expect.objectContaining({ amount: "ultra-large" })]),
+          effects: expect.arrayContaining([expect.objectContaining({ amount: "ultraLarge" })]),
         }),
       ),
     );

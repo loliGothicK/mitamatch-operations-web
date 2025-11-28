@@ -3,7 +3,6 @@
 import NumberInput from "@/components/common/NumberInput";
 import { charmList } from "@/domain/charm/charm";
 import { costumeList } from "@/domain/costume/costume";
-import { calcFinalStatus } from "@/evaluate/calc";
 import { evaluate, type StackOption } from "@/evaluate/evaluate";
 import {
   adLevelAtom,
@@ -43,11 +42,14 @@ import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { Settings } from "@mui/icons-material";
 import { useId, useState } from "react";
-import { statusKind, type StatusKind } from "@/parser/common";
 import { isLeft } from "fp-ts/lib/Either";
-import { isNone, isSome } from "fp-ts/Option";
+import { fromNullable, isNone, isSome } from "fp-ts/Option";
 import { match } from "ts-pattern";
 import { option } from "fp-ts";
+import { calcFinalStatus } from "@/evaluate/diff";
+import { StatusKind } from "@/evaluate/types";
+import { statusKind } from "@/evaluate/constants";
+import { pipe } from "fp-ts/function";
 const charmFilterAtom = atomWithStorage<("火" | "水" | "風")[]>("charmFilter", []);
 const costumeFilterOptions = [
   "AD",
@@ -76,7 +78,6 @@ type AdvancedSettings = {
 
 const advancedSettings = atomWithStorage<AdvancedSettings>("advancedSettings", {
   counter: false,
-  stack: undefined,
 });
 
 function AdvancedSettingsModal() {
@@ -147,7 +148,10 @@ export function Calculator() {
     charm,
     costume,
     { limitBraek: adLevel, isAwakened: true },
-    settings,
+    {
+      counter: settings.counter,
+      stack: fromNullable(settings.stack),
+    },
   );
 
   if (isLeft(evaluateResult)) {
@@ -158,14 +162,22 @@ export function Calculator() {
 
   const expectedToalDamage = skill
     .map(({ expected }) => expected.damage)
-    .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
+    .reduce(
+      (acc: number, cur) =>
+        pipe(
+          cur,
+          option.getOrElse(() => 0),
+          (cur) => acc + cur,
+        ),
+      0,
+    );
   const expectedTotalBuff = skill
     .map(({ expected }) => expected.buff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
-      if (!cur) {
+      if (isNone(cur)) {
         return acc;
       }
-      for (const elem of cur) {
+      for (const elem of cur.value) {
         const { type, amount } = elem;
         if (type) {
           acc.set(type, (acc.get(type) || 0) + amount);
@@ -176,10 +188,10 @@ export function Calculator() {
   const expectedTotalDebuff = skill
     .map(({ expected }) => expected.debuff)
     .reduce((acc: Map<StatusKind, number>, cur) => {
-      if (!cur) {
+      if (isNone(cur)) {
         return acc;
       }
-      for (const elem of cur) {
+      for (const elem of cur.value) {
         const { type, amount } = elem;
         if (type) {
           acc.set(type, (acc.get(type) || 0) + amount);
@@ -189,7 +201,15 @@ export function Calculator() {
     }, new Map());
   const expectedTotalRecovery = skill
     .map(({ expected }) => expected.recovery)
-    .reduce((acc: number, cur) => acc + (cur ? cur : 0), 0);
+    .reduce(
+      (acc: number, cur) =>
+        pipe(
+          cur,
+          option.getOrElse(() => 0),
+          (cur) => acc + cur,
+        ),
+      0,
+    );
 
   for (const [type, amount] of Object.entries(supportBuff).filter(([, amount]) => !!amount)) {
     expectedTotalBuff.set(
@@ -544,9 +564,6 @@ export function Calculator() {
         </Grid>
       </Grid>
       <Divider sx={{ margin: 2 }}>{"詳細"}</Divider>
-      <Typography>
-        {JSON.stringify(evaluateResult.right.skill.map(({ memoria, expected }) => ({memoria: memoria.name, expected})), null, 2)}
-      </Typography>
       <Grid container spacing={2}>
         {skill.map(({ memoria, expected }) => {
           return (
@@ -563,34 +580,36 @@ export function Calculator() {
                     flex: "1 0 auto",
                   }}
                 >
-                  {expected.damage && (
-                    <Typography variant="body2">{`damage: ${expected.damage}`}</Typography>
+                  {isSome(expected.damage) && (
+                    <Typography variant="body2">{`damage: ${expected.damage.value}`}</Typography>
                   )}
-                  {expected.recovery && (
-                    <Typography variant="body2">{`recovery: ${expected.recovery}`}</Typography>
+                  {isSome(expected.recovery) && (
+                    <Typography variant="body2">{`recovery: ${expected.recovery.value}`}</Typography>
                   )}
-                  {expected.buff?.map((buff) => {
-                    return (
-                      <Typography
-                        key={buff.type}
-                        variant="body2"
-                        color={theme.palette.mode === "light" ? "darkred" : "pink"}
-                      >
-                        {display({ ...buff, upDown: "UP" })}
-                      </Typography>
-                    );
-                  })}
-                  {expected.debuff?.map((debuff) => {
-                    return (
-                      <Typography
-                        key={debuff.type}
-                        variant="body2"
-                        color={theme.palette.mode === "light" ? "darkblue" : "turquoise"}
-                      >
-                        {display({ ...debuff, upDown: "DOWN" })}
-                      </Typography>
-                    );
-                  })}
+                  {isSome(expected.buff) &&
+                    expected.buff.value.map((buff) => {
+                      return (
+                        <Typography
+                          key={buff.type}
+                          variant="body2"
+                          color={theme.palette.mode === "light" ? "darkred" : "pink"}
+                        >
+                          {display({ ...buff, upDown: "UP" })}
+                        </Typography>
+                      );
+                    })}
+                  {isSome(expected.debuff) &&
+                    expected.debuff.value.map((debuff) => {
+                      return (
+                        <Typography
+                          key={debuff.type}
+                          variant="body2"
+                          color={theme.palette.mode === "light" ? "darkblue" : "turquoise"}
+                        >
+                          {display({ ...debuff, upDown: "DOWN" })}
+                        </Typography>
+                      );
+                    })}
                 </CardContent>
               </Card>
             </Grid>

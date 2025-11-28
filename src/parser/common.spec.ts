@@ -27,21 +27,28 @@ describe("parseAmount", () => {
   it.each(["特大アップ", "特大ダウン", "特大ダメージ", "特大回復"])(
     'should parse "extra-large" amount correctly',
     (amount) => {
-      expect(parseAmount(amount)).toEqual(right("extra-large"));
+      expect(parseAmount(amount)).toEqual(right("extraLarge"));
     },
   );
 
   it.each(["超特大アップ", "超特大ダウン", "超特大ダメージ", "超特大回復"])(
     'should parse "super-large" amount correctly',
     (amount) => {
-      expect(parseAmount(amount)).toEqual(right("super-large"));
+      expect(parseAmount(amount)).toEqual(right("superLarge"));
     },
   );
 
   it.each(["極大アップ", "極大ダウン", "極大ダメージ", "極大回復"])(
     'should parse "ultra-large" amount correctly',
     (amount) => {
-      expect(parseAmount(amount)).toEqual(right("ultra-large"));
+      expect(parseAmount(amount)).toEqual(right("ultraLarge"));
+    },
+  );
+
+  it.each(["超極大アップ", "超極大ダウン", "超極大ダメージ", "超極大回復"])(
+    'should parse "super-ultra-large" amount correctly',
+    (amount) => {
+      expect(parseAmount(amount)).toEqual(right("superUltraLarge"));
     },
   );
 

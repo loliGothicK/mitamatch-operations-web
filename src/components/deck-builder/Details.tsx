@@ -12,7 +12,8 @@ import type { SupportKind } from "@/parser/autoSkill";
 import { elementFilter } from "@/types/filterType";
 
 import { match } from "ts-pattern";
-import { statusKind, type StatusKind } from "@/parser/common";
+import { StatusKind } from "@/evaluate/types";
+import { statusKind } from "@/evaluate/constants";
 
 type UpDown = "UP" | "DOWN";
 type StatusPattern = `${StatusKind}/${UpDown}`;

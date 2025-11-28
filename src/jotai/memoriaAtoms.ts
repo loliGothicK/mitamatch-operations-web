@@ -72,10 +72,7 @@ export const rwDeckAtom = atom(
   ) => {
     const newValue = typeof update === "function" ? update(get(deckAtom)) : update;
     const index = getDefaultStore().get(activeProjectAtom);
-    Cookies.set(
-      `deck-${index}`,
-      encodeDeck(get(swAtom), newValue, get(rwLegendaryDeckAtom)),
-    );
+    Cookies.set(`deck-${index}`, encodeDeck(get(swAtom), newValue, get(rwLegendaryDeckAtom)));
     set(deckAtom, newValue);
   },
 );
@@ -92,10 +89,7 @@ export const rwLegendaryDeckAtom = atom(
   ) => {
     const newValue = typeof update === "function" ? update(get(legendaryDeckAtom)) : update;
     const index = getDefaultStore().get(activeProjectAtom);
-    Cookies.set(
-      `deck-${index}`,
-      encodeDeck(get(swAtom), get(rwDeckAtom), newValue),
-    );
+    Cookies.set(`deck-${index}`, encodeDeck(get(swAtom), get(rwDeckAtom), newValue));
     set(legendaryDeckAtom, newValue);
   },
 );
