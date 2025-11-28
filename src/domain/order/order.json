@@ -1,6 +1,18 @@
 {
   "data": [
     {
+      "id": 184,
+      "name": "風淵の裂波",
+      "status": [2262, 2263, 1546, 1543],
+      "effect": "[水風]属性効果増加Lv.5",
+      "description": "水属性と風属性のメモリアスキル効果が極大増加する(70%）。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": false,
+      "kind": "Elemental/Special",
+      "usually": true
+    },
+    {
       "id": 183,
       "name": "蒼天煌威",
       "status": [2702, 2671, 1882, 1889],
