@@ -4,7 +4,16 @@ import { costumeList } from "@/domain/costume/costume";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { Layout } from "@/components/Layout";
 import { characterList } from "@/domain/character/character";
-import {Box, Card, CardActions, CardContent, CardMedia, Divider, Grid, Typography} from "@mui/material";
+import {
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { Lenz } from "@/domain/lenz";
 import Link from "@/components/link";
 
@@ -50,7 +59,16 @@ export default function Detail({ name }: { name: string }) {
           <Grid container={true} spacing={2} sx={{ width: "100%" }}>
             {costumes.map((costume) => (
               <Grid size={2.4} key={costume.name} p={1}>
-                <Card key={costume.name} sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column", padding: 2 }}>
+                <Card
+                  key={costume.name}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    padding: 2,
+                  }}
+                >
                   <Link
                     href={`/data/costume/${name}/${Lenz.costume.general.name.normalized.job.get(costume)}`}
                   >
