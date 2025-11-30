@@ -5,7 +5,6 @@ import { DataGrid, type GridColDef, type GridColumnVisibilityModel } from "@mui/
 import { Lenz } from "@/domain/lenz";
 import type { Attribute } from "@/parser/skill";
 import { match } from "ts-pattern";
-import Image from "next/image";
 import { JSX, useState } from "react";
 import Link from "@/components/link";
 import { QueryConsle } from "@/data/_common/QueryConsle";
@@ -15,6 +14,7 @@ import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { atomWithReset } from "jotai/utils";
 import { useSetAtom } from "jotai";
 import { Box, List, ListItem, ListItemText, ListSubheader, Typography } from "@mui/material";
+import { MemoriaIcon } from "@/components/image/MemoriaIcon";
 
 const queryAtom = atomWithReset("select * from memoria where `cost` > 18;");
 
@@ -39,12 +39,7 @@ const columns: GridColDef<Memoria>[] = [
           .with("回復", () => 7)
           .exhaustive()}`}
       >
-        <Image
-          src={`/memoria/${params.value.name}.png`}
-          alt={params.value.name}
-          width={80}
-          height={80}
-        />
+        <MemoriaIcon memoria={params.row} size={80} />
       </Link>
     ),
     sortComparator: (a, b) => a.id - b.id,

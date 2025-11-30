@@ -5,9 +5,9 @@ import { pipe } from "fp-ts/function";
 import { sort } from "fp-ts/Array";
 import * as O from "fp-ts/Ord";
 import * as N from "fp-ts/number";
+import * as M from "fp-ts/Monoid";
 import { match } from "ts-pattern";
 
-// 1. name (文字列の昇順)
 const byGarden = pipe(
   N.Ord,
   O.contramap((character: Character) =>
@@ -17,12 +17,42 @@ const byGarden = pipe(
       .with("神庭女子藝術高等学校", () => 3)
       .with("御台場女学校", () => 4)
       .with("私立ルドビコ女学院", () => 5)
-      .with("", () => Number.POSITIVE_INFINITY)
-      .run(),
+      .otherwise(() => Number.POSITIVE_INFINITY),
   ),
 );
+const byLegion = pipe(
+  N.Ord,
+  O.contramap((character: Character) =>
+    match(character.legion)
+      .with("一柳隊", () => 1)
+      .with("アールヴヘイム", () => 2)
+      .with("ローエングリン", () => 3)
+      .with("レギンレイヴ", () => 4)
+      .with("エイル", () => 5)
+      .with("シュバルツグレイル", () => 6)
+      .with("サングリーズル", () => 7)
+      .with("シュヴェルトライテ", () => 8)
+      .with("ヘルヴォル", () => 9)
+      .with("クエレブレ", () => 10)
+      .with("バシャンドレ", () => 11)
+      .with("グラン・エプレ", () => 12)
+      .with("神庭生徒会防衛隊", () => 13)
+      .with("ロネスネス", () => 14)
+      .with("ヘオロットセインツ", () => 15)
+      .with("アイアンサイド", () => 16)
+      .with("テンプルレギオン", () => 16)
+      .otherwise(() => Number.POSITIVE_INFINITY),
+  ),
+);
+const characterOrd = M.concatAll(O.getMonoid<Character>())([
+  byGarden,
+  byLegion,
+]);
 
 export default function View() {
+  const characters = sort(characterOrd)(
+    characterList.filter(({ name, garden }) => !name.includes(garden) || garden.length === 0),
+  );
   return (
     <Box
       sx={{
@@ -33,11 +63,9 @@ export default function View() {
       }}
     >
       <Grid container={true} spacing={2}>
-        {sort(byGarden)(
-          characterList.filter(({ name, garden }) => !name.includes(garden) || garden.length === 0),
-        ).map((character) => (
+        {characters.map((character) => (
           <Grid size={3} key={character.name}>
-            <Link href={`/data/character/${character.name}`}>
+            <Link href={`/data/character/${character.name}`} scroll={true}>
               <Card sx={{ display: "flex", width: "100%" }}>
                 <CardMedia
                   component="img"

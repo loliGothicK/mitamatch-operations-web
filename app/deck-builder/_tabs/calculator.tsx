@@ -50,6 +50,7 @@ import { calcFinalStatus } from "@/evaluate/diff";
 import { StatusKind } from "@/evaluate/types";
 import { statusKind } from "@/evaluate/constants";
 import { pipe } from "fp-ts/function";
+import { MemoriaIcon } from "@/components/image/MemoriaIcon";
 const charmFilterAtom = atomWithStorage<("火" | "水" | "風")[]>("charmFilter", []);
 const costumeFilterOptions = [
   "AD",
@@ -569,12 +570,9 @@ export function Calculator() {
           return (
             <Grid key={memoria.id} size={{ xs: 12, md: 6 }}>
               <Card sx={{ display: "flex" }}>
-                <CardMedia
-                  component="img"
-                  sx={{ width: 100, height: 100 }}
-                  image={`/memoria/${memoria.name.short}.png`}
-                  alt={memoria.name.short}
-                />
+                <CardMedia>
+                  <MemoriaIcon memoria={memoria} />
+                </CardMedia>
                 <CardContent
                   sx={{
                     flex: "1 0 auto",

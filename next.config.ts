@@ -3,6 +3,9 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 /** @types {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    scrollRestoration: true,
+  },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   images: {
     remotePatterns: [

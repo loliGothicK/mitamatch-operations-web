@@ -11,6 +11,9 @@ import { type ReactNode, type SyntheticEvent, useState } from "react";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { z } from "zod";
 import View from "@/data/_character/view";
+import { AppBar, Breadcrumbs, Typography } from "@mui/material";
+import Toolbar from "@mui/material/Toolbar";
+import Link from "@/components/link";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -75,7 +78,7 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
   const [value, setValue] = useState(ROUTES.indexOf(parsed.data || "memoria"));
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
-    router.push(`/data/${ROUTES[newValue]}`);
+    router.push(`/data/${ROUTES[newValue]}`, { scroll: false });
     setValue(newValue);
   };
 
@@ -89,6 +92,16 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
             ))}
           </Tabs>
         </Box>
+        <AppBar position="static">
+          <Toolbar>
+            <Breadcrumbs separator="›" aria-label="breadcrumb">
+              <Link underline="hover" color="inherit" href="/data">
+                data
+              </Link>
+              <Typography sx={{ color: "text.primary" }}>{dataType ?? "memoria"}</Typography>
+            </Breadcrumbs>
+          </Toolbar>
+        </AppBar>
         {TABS.map((tab, index) => (
           <CustomTabPanel index={index} value={value} key={tab.label}>
             {tab.content(query)}

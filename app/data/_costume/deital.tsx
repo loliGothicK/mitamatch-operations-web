@@ -8,6 +8,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import {
+  AppBar,
+  Breadcrumbs,
   Card,
   CardContent,
   CardMedia,
@@ -22,6 +24,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Toolbar,
 } from "@mui/material";
 import { Adx, Costume, costumeList, Ex } from "@/domain/costume/costume";
 import NotFound from "next/dist/client/components/builtin/not-found";
@@ -29,6 +32,7 @@ import { Lenz } from "@/domain/lenz";
 import Info from "@/components/data/Info";
 import { match } from "ts-pattern";
 import { option } from "fp-ts";
+import Link from "@/components/link";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -358,6 +362,19 @@ export default function Deital({ lily, job }: { lily: string; job: string }) {
           gap: 2,
         }}
       >
+        <AppBar position="static">
+          <Toolbar>
+            <Breadcrumbs separator="›" aria-label="breadcrumb">
+              <Link underline="hover" color="inherit" href="/data">
+                data
+              </Link>
+              <Link underline="hover" color="inherit" href="/data/costume">
+                costume
+              </Link>
+              <Typography sx={{ color: "text.primary" }}>{`${lily}/${job}`}</Typography>
+            </Breadcrumbs>
+          </Toolbar>
+        </AppBar>
         <Basic costume={costume} />
         <Grid container={true} spacing={2}>
           <Grid size={8}>
