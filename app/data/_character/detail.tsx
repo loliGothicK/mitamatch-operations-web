@@ -116,7 +116,7 @@ export default function Detail({ name }: { name: string }) {
                   {character.name}
                 </Typography>
                 <Typography variant="subtitle1" component="div" sx={{ color: "text.secondary" }}>
-                  {character.introduction}
+                  {character.introduction.replace(String.raw`\n`, "")}
                 </Typography>
               </CardContent>
             </Box>
