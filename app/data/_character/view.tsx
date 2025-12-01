@@ -44,10 +44,12 @@ const byLegion = pipe(
       .otherwise(() => Number.POSITIVE_INFINITY),
   ),
 );
-const characterOrd = M.concatAll(O.getMonoid<Character>())([
-  byGarden,
-  byLegion,
-]);
+const characterOrd = M.concatAll(O.getMonoid<Character>())([byGarden, byLegion]);
+
+const gardenImage = (character: Character) =>
+  match(character.garden)
+    .with("", () => "url(/garden/garden_00.png)")
+    .otherwise(() => `url(/garden/${character.garden}.png)`);
 
 export default function View() {
   const characters = sort(characterOrd)(
@@ -73,7 +75,28 @@ export default function View() {
                   image={`/lily/${character.name}.jpg`}
                   alt={character.name}
                 />
-                <CardContent sx={{ flex: "1 0 auto" }}>
+                <CardContent
+                  sx={{
+                    flex: "1 0 auto",
+                    position: "relative",
+                    overflow: "hidden", // はみ出しを隠す
+                    zIndex: 1, // コンテンツ（テキスト）を前に出す
+                    padding: 3, // コンテンツのパディング
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      backgroundImage: gardenImage(character),
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      opacity: 0.2,
+                      zIndex: -1,
+                    },
+                  }}
+                >
                   <Typography component="div" variant="h5">
                     {character.firstName}
                   </Typography>

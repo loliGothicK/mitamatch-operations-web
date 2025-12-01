@@ -2,6 +2,10 @@ import { z } from "zod";
 
 import costumeData from "./character.json";
 
+/**
+ * Rune Names
+ * see: https://en.wikipedia.org/wiki/Anglo-Saxon_runes
+ */
 const runeSchema = z.union([
   z.literal("feh"),
   z.literal("ur"),

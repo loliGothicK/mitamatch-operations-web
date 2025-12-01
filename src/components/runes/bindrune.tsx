@@ -26,6 +26,7 @@ interface RuneIR {
   segments: LineSegment[][];
 }
 
+// see: https://en.wikipedia.org/wiki/Anglo-Saxon_runes
 const RUNE_DEFINITION: Record<Rune, RuneIR> = {
   feh: {
     name: "Feh",
