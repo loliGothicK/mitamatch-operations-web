@@ -48,7 +48,7 @@ jobs:
         run: npx vitest --coverage.enabled true
       - name: Show coverage
         if: github.event_name == 'pull_request'
-        uses: davelosert/vitest-coverage-report-action@v2.8.3
+        uses: davelosert/vitest-coverage-report-action@v2.9.0
 
       - name: Build
         env:
