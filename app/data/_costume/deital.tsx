@@ -215,20 +215,19 @@ function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
           <Tab label="突破 3" {...a11yProps(3)} />
         </Tabs>
       </Box>
-      {awakable &&
-        (
-          // 右寄せ
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-            }}
-          >
-            覚醒
-            <Checkbox onChange={() => setIsAwakened(!isAwakened)} defaultChecked />
-          </Box>
-        )}
+      {awakable && (
+        // 右寄せ
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
+        >
+          覚醒
+          <Checkbox onChange={() => setIsAwakened(!isAwakened)} defaultChecked />
+        </Box>
+      )}
       {[0, 1, 2, 3].map((limitBreak) => {
         return (
           <CustomTabPanel key={`tab-${limitBreak}`} value={value} index={limitBreak}>

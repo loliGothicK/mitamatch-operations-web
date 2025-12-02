@@ -90,7 +90,8 @@ export function DeckBuilderPage() {
                   })
                   .concat([
                     <Tab
-                      label="Calc"
+                      key={"calculator"}
+                      label="calculator"
                       {...a11yProps(projects.length)}
                       // 適用するスタイル: 自動マージンで右に押し出す
                       sx={{ marginLeft: "auto" }}

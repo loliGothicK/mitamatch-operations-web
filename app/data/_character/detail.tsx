@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { costumeList } from "@/domain/costume/costume";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { Layout } from "@/components/Layout";
@@ -13,8 +14,10 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Chip,
   Divider,
   Grid,
+  Stack,
   Typography,
 } from "@mui/material";
 import { Lenz } from "@/domain/lenz";
@@ -42,6 +45,11 @@ const byGarden = pipe(
       .run(),
   ),
 );
+
+const gardenImage = (character: Character) =>
+  match(character.garden)
+    .with("", () => "/garden/garden_00_v.png")
+    .otherwise(() => `/garden/${character.garden}_v.png`);
 
 export default function Detail({ name }: { name: string }) {
   const costumes = costumeList
@@ -112,12 +120,55 @@ export default function Detail({ name }: { name: string }) {
             <CardMedia component="img" sx={{ width: 200 }} image={`/lily/${name}.jpg`} alt={name} />
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <CardContent sx={{ flex: "1 0 auto" }}>
-                <Typography component="div" variant="h5">
-                  {character.name}
-                </Typography>
+                <Stack spacing={2} direction="row" alignItems="center">
+                  <Image
+                    src={gardenImage(character)}
+                    alt={character.garden}
+                    width={100}
+                    height={100}
+                  />
+                  <Stack direction="column" alignItems="flex-start">
+                    <Typography component="div" variant="body1">
+                      {character.kanaName}
+                    </Typography>
+                    <Typography component="div" variant="h4">
+                      {character.name}
+                    </Typography>
+                    <Divider flexItem={true} textAlign="left" sx={{ margin: 1 }} />
+                    <Stack spacing={2} direction="row" alignItems="center">
+                      <Typography component="div" variant="h6">
+                        {`誕生日: ${character.birthday}`}
+                      </Typography>
+                      <Divider orientation="vertical" flexItem={true} sx={{ margin: 1 }} />
+                      <Typography component="div" variant="h6">
+                        {`所属レギオン: ${character.legion}`}
+                      </Typography>
+                      <Divider orientation="vertical" flexItem={true} sx={{ margin: 1 }} />
+                      <Typography component="div" variant="h6">
+                        {`学年: ${character.grade}`}
+                      </Typography>
+                    </Stack>
+                  </Stack>
+                </Stack>
+                <Divider sx={{ margin: 2 }} flexItem={true} textAlign="left">
+                  {"Introduction"}
+                </Divider>
                 <Typography variant="subtitle1" component="div" sx={{ color: "text.secondary" }}>
                   {character.introduction.replace(String.raw`\n`, "")}
                 </Typography>
+                <Divider sx={{ margin: 2 }} flexItem={true} textAlign="left">
+                  {"Information"}
+                </Divider>
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 1,
+                  }}
+                >
+                  <Chip label={`好きなもの: ${character.favorites}`} />
+                  <Chip label={`苦手なもの: ${character.hates}`} />
+                  <Chip label={`趣味: ${character.hobby}`} />
+                </Box>
               </CardContent>
             </Box>
             {character.bindRune && (
