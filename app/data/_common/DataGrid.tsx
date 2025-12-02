@@ -23,7 +23,7 @@ export function DataGrid<T extends GridValidRowModel>({
   visivility: [visivility, setVisivility],
 }: Props<T>) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', width: "100%" }}>
+    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
       <MuiDataGrid
         apiRef={apiRef}
         rows={data}

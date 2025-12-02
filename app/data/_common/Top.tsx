@@ -7,7 +7,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useRouter, useSearchParams } from "next/navigation";
-import {type ReactNode, type SyntheticEvent, useEffect, useMemo, useState} from "react";
+import { type ReactNode, type SyntheticEvent, useEffect, useMemo, useState } from "react";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { z } from "zod";
 import View from "@/data/_character/view";
@@ -40,8 +40,8 @@ function CustomTabPanel(props: TabPanelProps) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       style={{
-        display: isActive ? 'block' : 'none',
-        width: '100%'
+        display: isActive ? "block" : "none",
+        width: "100%",
       }}
       {...other}
     >
@@ -118,7 +118,7 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
           </Toolbar>
         </AppBar>
         {TABS.map((tab, index) => (
-          <CustomTabPanel index={index} value={value} key={tab.label} >
+          <CustomTabPanel index={index} value={value} key={tab.label}>
             {tabContents[index]}
           </CustomTabPanel>
         ))}

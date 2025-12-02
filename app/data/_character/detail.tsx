@@ -54,7 +54,7 @@ const gardenImage = (character: Character) =>
 export default function Detail({ name }: { name: string }) {
   const costumes = costumeList
     .filter((costume) => name.includes(Lenz.costume.general.name.lily.get(costume)))
-    .toSorted(comparator("released", "desc"));
+    .toSorted(comparator("released_at", "desc"));
   const character = characterList.find((character) => character.name === name);
   const characters = sort(byGarden)(
     characterList.filter(({ name, garden }) => !name.includes(garden) || garden.length === 0),
