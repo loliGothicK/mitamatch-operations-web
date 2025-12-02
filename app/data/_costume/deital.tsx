@@ -231,20 +231,30 @@ function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
       {[0, 1, 2, 3].map((limitBreak) => {
         return (
           <CustomTabPanel key={`tab-${limitBreak}`} value={value} index={limitBreak}>
-            {get({ limitBreak, isAwakened }).map(({ name, description }) => {
-              return (
-                <Card key={name}>
-                  <CardContent>
-                    <Typography variant="h5" component="div">
-                      {name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              );
-            })}
+            <Box
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+                display: "flex",
+                flexDirection: "column",
+                gap: 1,
+              }}
+            >
+              {get({ limitBreak, isAwakened }).map(({ name, description }) => {
+                return (
+                  <Card key={name}>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        {name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </Box>
           </CustomTabPanel>
         );
       })}
@@ -254,7 +264,15 @@ function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
 
 function ExSkill({ ex }: { ex: Ex }) {
   return (
-    <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+    <Box
+      sx={{
+        borderBottom: 1,
+        borderColor: "divider",
+        display: "flex",
+        flexDirection: "column",
+        gap: 1,
+      }}
+    >
       {ex.skills.map((skill) => (
         <Card key={skill.name}>
           <CardContent>
