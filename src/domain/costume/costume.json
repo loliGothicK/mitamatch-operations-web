@@ -117473,6 +117473,206 @@
     },
     {
       "id": 836,
+      "name": "吉村・Thi・梅/ブリリアントスピカ",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "縮地",
+        "description": "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力が小アップし、攻撃力がアップする。",
+        "note": "味方の攻撃力が30%上昇, 味方の防御力が8%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2025-12-02"
+    },
+    {
+      "id": 837,
       "name": "高島八雲/おやすみスタイル",
       "cardType": 2,
       "rareSkill": {
@@ -117671,7 +117871,7 @@
       "released_at": "2025-03-23"
     },
     {
-      "id": 837,
+      "id": 838,
       "name": "松村優珂/おやすみスタイル",
       "cardType": 2,
       "rareSkill": {
@@ -117819,7 +118019,7 @@
       "released_at": "2025-01-06"
     },
     {
-      "id": 838,
+      "id": 839,
       "name": "賀川蒔菜/おやすみスタイル",
       "cardType": 4,
       "rareSkill": {
@@ -118018,7 +118218,7 @@
       "released_at": "2025-01-06"
     },
     {
-      "id": 839,
+      "id": 840,
       "name": "森本結爾/おやすみスタイル",
       "cardType": 6,
       "rareSkill": {
@@ -118218,7 +118418,7 @@
       "released_at": "2025-01-06"
     },
     {
-      "id": 840,
+      "id": 841,
       "name": "菱田治/極光の聖装(神宿り/特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -118358,7 +118558,7 @@
       "released_at": "2024-09-10"
     },
     {
-      "id": 841,
+      "id": 842,
       "name": "菱田治/極光の聖装(神宿り/支援)",
       "cardType": 5,
       "rareSkill": {
@@ -118492,7 +118692,7 @@
       "released_at": "2024-09-10"
     },
     {
-      "id": 842,
+      "id": 843,
       "name": "菱田治/極光の聖装(神宿り/妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -118626,7 +118826,7 @@
       "released_at": "2024-09-10"
     },
     {
-      "id": 843,
+      "id": 844,
       "name": "菱田治/極光の聖装(神宿り/回復)",
       "cardType": 7,
       "rareSkill": {
@@ -118760,7 +118960,7 @@
       "released_at": "2024-09-10"
     },
     {
-      "id": 844,
+      "id": 845,
       "name": "菱田治/極光の聖装(神宿り/通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -118900,7 +119100,7 @@
       "released_at": "2024-09-10"
     },
     {
-      "id": 845,
+      "id": 846,
       "name": "菱田治/極光の聖装(神宿り/特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -119040,7 +119240,7 @@
       "released_at": "2024-09-10"
     },
     {
-      "id": 846,
+      "id": 847,
       "name": "番匠谷依奈/セイクリッドタイド",
       "cardType": 2,
       "rareSkill": {
@@ -119239,7 +119439,7 @@
       "released_at": "2025-05-11"
     },
     {
-      "id": 847,
+      "id": 848,
       "name": "六角汐里/セイクリッドタイド",
       "cardType": 4,
       "rareSkill": {
@@ -119386,7 +119586,7 @@
       "released_at": "2025-05-11"
     },
     {
-      "id": 848,
+      "id": 849,
       "name": "谷口聖/セイクリッドタイド",
       "cardType": 5,
       "rareSkill": {
@@ -119586,7 +119786,7 @@
       "released_at": "2025-05-11"
     },
     {
-      "id": 849,
+      "id": 850,
       "name": "定盛姫歌/シャイニーパレード",
       "cardType": 1,
       "rareSkill": {
@@ -119730,7 +119930,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 850,
+      "id": 851,
       "name": "番匠谷依奈/シャイニーパレード",
       "cardType": 7,
       "rareSkill": {
@@ -119867,7 +120067,7 @@
       "released_at": "2025-02-14"
     },
     {
-      "id": 851,
+      "id": 852,
       "name": "牧野美岳/シャイニーパレード",
       "cardType": 3,
       "rareSkill": {
@@ -120011,7 +120211,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 852,
+      "id": 853,
       "name": "宮川高嶺/おやすみスタイル",
       "cardType": 5,
       "rareSkill": {
@@ -120153,7 +120353,7 @@
       "released_at": "2025-02-07"
     },
     {
-      "id": 853,
+      "id": 854,
       "name": "土岐紅巴/おやすみスタイル",
       "cardType": 4,
       "rareSkill": {
@@ -120301,7 +120501,7 @@
       "released_at": "2025-02-07"
     },
     {
-      "id": 854,
+      "id": 855,
       "name": "横田悠夏/おやすみスタイル",
       "cardType": 7,
       "rareSkill": {
@@ -120500,7 +120700,7 @@
       "released_at": "2025-02-07"
     },
     {
-      "id": 855,
+      "id": 856,
       "name": "苅谷緋紅/ファンシーフラワー",
       "cardType": 4,
       "rareSkill": {
@@ -120700,7 +120900,7 @@
       "released_at": "2025-02-15"
     },
     {
-      "id": 856,
+      "id": 857,
       "name": "坪井七保/ファンシーフラワー",
       "cardType": 7,
       "rareSkill": {
@@ -120842,7 +121042,7 @@
       "released_at": "2025-02-05"
     },
     {
-      "id": 857,
+      "id": 858,
       "name": "日比野羽来/極光の聖装(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -120982,7 +121182,7 @@
       "released_at": "2024-11-03"
     },
     {
-      "id": 858,
+      "id": 859,
       "name": "日比野羽来/極光の聖装(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -121116,7 +121316,7 @@
       "released_at": "2024-11-03"
     },
     {
-      "id": 859,
+      "id": 860,
       "name": "日比野羽来/極光の聖装(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -121250,7 +121450,7 @@
       "released_at": "2024-11-03"
     },
     {
-      "id": 860,
+      "id": 861,
       "name": "日比野羽来/極光の聖装(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -121384,7 +121584,7 @@
       "released_at": "2024-11-03"
     },
     {
-      "id": 861,
+      "id": 862,
       "name": "日比野羽来/極光の聖装(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -121524,7 +121724,7 @@
       "released_at": "2024-11-03"
     },
     {
-      "id": 862,
+      "id": 863,
       "name": "日比野羽来/極光の聖装(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -121664,7 +121864,7 @@
       "released_at": "2024-11-03"
     },
     {
-      "id": 863,
+      "id": 864,
       "name": "郭神琳/嘉月の浴衣",
       "cardType": 2,
       "rareSkill": {
@@ -121812,7 +122012,7 @@
       "released_at": "2025-03-22"
     },
     {
-      "id": 864,
+      "id": 865,
       "name": "今叶星/オブシダンスーツ",
       "cardType": 4,
       "rareSkill": {
@@ -122012,7 +122212,7 @@
       "released_at": "2025-03-15"
     },
     {
-      "id": 865,
+      "id": 866,
       "name": "六角汐里/嘉月の浴衣",
       "cardType": 5,
       "rareSkill": {
@@ -122211,7 +122411,7 @@
       "released_at": "2025-03-22"
     },
     {
-      "id": 866,
+      "id": 867,
       "name": "塩崎鈴夢/プリンセスナイト",
       "cardType": 7,
       "rareSkill": {
@@ -122411,7 +122611,7 @@
       "released_at": "2025-03-08"
     },
     {
-      "id": 867,
+      "id": 868,
       "name": "多田紫恵楽/嘉月の浴衣",
       "cardType": 4,
       "rareSkill": {
@@ -122610,7 +122810,7 @@
       "released_at": "2025-03-22"
     },
     {
-      "id": 868,
+      "id": 869,
       "name": "高島八雲/プリンシパルスーツ",
       "cardType": 4,
       "rareSkill": {
@@ -122809,7 +123009,7 @@
       "released_at": "2025-06-02"
     },
     {
-      "id": 869,
+      "id": 870,
       "name": "江坂雫月/スノーフレークドロップ",
       "cardType": 7,
       "rareSkill": {
@@ -123008,7 +123208,7 @@
       "released_at": "2025-05-31"
     },
     {
-      "id": 870,
+      "id": 871,
       "name": "松村優珂/イノセンスホワイト",
       "cardType": 5,
       "rareSkill": {
@@ -123208,7 +123408,7 @@
       "released_at": "2025-06-11"
     },
     {
-      "id": 871,
+      "id": 872,
       "name": "牧野美岳/イノセンスホワイト",
       "cardType": 2,
       "rareSkill": {
@@ -123408,7 +123608,7 @@
       "released_at": "2025-06-11"
     },
     {
-      "id": 872,
+      "id": 873,
       "name": "賀川蒔菜/イノセンスホワイト",
       "cardType": 7,
       "rareSkill": {
@@ -123549,7 +123749,7 @@
       "released_at": "2025-06-11"
     },
     {
-      "id": 873,
+      "id": 874,
       "name": "森本結爾/イノセンスホワイト",
       "cardType": 4,
       "rareSkill": {
@@ -123749,7 +123949,7 @@
       "released_at": "2025-06-11"
     },
     {
-      "id": 874,
+      "id": 875,
       "name": "佐々木藍/ピュアマインド",
       "cardType": 5,
       "rareSkill": {
@@ -123890,7 +124090,7 @@
       "released_at": "2025-06-30"
     },
     {
-      "id": 875,
+      "id": 876,
       "name": "芹沢千香瑠/ピュアマインド",
       "cardType": 2,
       "rareSkill": {
@@ -124090,7 +124290,7 @@
       "released_at": "2025-06-30"
     },
     {
-      "id": 876,
+      "id": 877,
       "name": "佐野桜花/ブラックアンドホワイト",
       "cardType": 6,
       "rareSkill": {
@@ -124290,7 +124490,7 @@
       "released_at": "2025-06-30"
     },
     {
-      "id": 877,
+      "id": 878,
       "name": "ミリアム/アーセナリーローズα",
       "cardType": 7,
       "rareSkill": {
@@ -124489,7 +124689,7 @@
       "released_at": "2025-04-06"
     },
     {
-      "id": 878,
+      "id": 879,
       "name": "本間秋日/惑わしバニー",
       "cardType": 6,
       "rareSkill": {
@@ -124689,7 +124889,7 @@
       "released_at": "2025-04-21"
     },
     {
-      "id": 879,
+      "id": 880,
       "name": "石塚藤乃/惑わしバニー",
       "cardType": 2,
       "rareSkill": {
@@ -124888,7 +125088,7 @@
       "released_at": "2025-04-21"
     },
     {
-      "id": 880,
+      "id": 881,
       "name": "塩崎鈴夢/惑わしバニー",
       "cardType": 4,
       "rareSkill": {
@@ -125036,7 +125236,7 @@
       "released_at": "2025-04-21"
     },
     {
-      "id": 881,
+      "id": 882,
       "name": "坪井七保/のんびりスタイル",
       "cardType": 4,
       "rareSkill": {
@@ -125236,7 +125436,7 @@
       "released_at": "2025-04-19"
     },
     {
-      "id": 882,
+      "id": 883,
       "name": "二川二水/リリホリ!!スプラッシュ",
       "cardType": 6,
       "rareSkill": {
@@ -125435,7 +125635,7 @@
       "released_at": "2025-08-03"
     },
     {
-      "id": 883,
+      "id": 884,
       "name": "安藤鶴紗/リリホリ!!スプラッシュ",
       "cardType": 4,
       "rareSkill": {
@@ -125583,7 +125783,7 @@
       "released_at": "2025-08-03"
     },
     {
-      "id": 884,
+      "id": 885,
       "name": "郭神琳/リリホリ!!スプラッシュ",
       "cardType": 2,
       "rareSkill": {
@@ -125783,7 +125983,7 @@
       "released_at": "2025-07-20"
     },
     {
-      "id": 885,
+      "id": 886,
       "name": "ミリアム/リリホリ!!スプラッシュ",
       "cardType": 5,
       "rareSkill": {
@@ -125982,7 +126182,7 @@
       "released_at": "2025-07-23"
     },
     {
-      "id": 886,
+      "id": 887,
       "name": "土岐紅巴/リリホリ!!スプラッシュ",
       "cardType": 7,
       "rareSkill": {
@@ -126182,7 +126382,7 @@
       "released_at": "2025-07-20"
     },
     {
-      "id": 887,
+      "id": 888,
       "name": "真島百由/リリホリ!!スプラッシュ",
       "cardType": 4,
       "rareSkill": {
@@ -126326,7 +126526,7 @@
       "released_at": "2025-07-20"
     },
     {
-      "id": 888,
+      "id": 889,
       "name": "伊東閑/リリホリ!!スプラッシュ",
       "cardType": 2,
       "rareSkill": {
@@ -126526,7 +126726,7 @@
       "released_at": "2025-07-31"
     },
     {
-      "id": 889,
+      "id": 890,
       "name": "立原紗癒/リリホリ!!スプラッシュ",
       "cardType": 7,
       "rareSkill": {
@@ -126668,7 +126868,7 @@
       "released_at": "2025-07-31"
     },
     {
-      "id": 890,
+      "id": 891,
       "name": "塩崎鈴夢/リリホリ!!スプラッシュ",
       "cardType": 2,
       "rareSkill": {
@@ -126816,7 +127016,7 @@
       "released_at": "2025-07-23"
     },
     {
-      "id": 891,
+      "id": 892,
       "name": "山梨日羽梨/リリホリ!!スプラッシュ",
       "cardType": 5,
       "rareSkill": {
@@ -127016,7 +127216,7 @@
       "released_at": "2025-07-31"
     },
     {
-      "id": 892,
+      "id": 893,
       "name": "菱田治/リリホリ!!スプラッシュ",
       "cardType": 5,
       "rareSkill": {
@@ -127158,7 +127358,7 @@
       "released_at": "2025-07-20"
     },
     {
-      "id": 893,
+      "id": 894,
       "name": "坪井七保/リリホリ!!スプラッシュ",
       "cardType": 2,
       "rareSkill": {
@@ -127318,7 +127518,7 @@
       "released_at": "2025-08-14"
     },
     {
-      "id": 894,
+      "id": 895,
       "name": "谷口聖/リリホリ!!スプラッシュ",
       "cardType": 4,
       "rareSkill": {
@@ -127466,7 +127666,7 @@
       "released_at": "2025-07-20"
     },
     {
-      "id": 895,
+      "id": 896,
       "name": "江坂雫月/リリホリ!!スプラッシュ",
       "cardType": 4,
       "rareSkill": {
@@ -127738,7 +127938,7 @@
       "released_at": "2025-08-14"
     },
     {
-      "id": 896,
+      "id": 897,
       "name": "鳥居美歩/リリホリ!!スプラッシュ",
       "cardType": 7,
       "rareSkill": {
@@ -128010,7 +128210,7 @@
       "released_at": "2025-08-14"
     },
     {
-      "id": 897,
+      "id": 898,
       "name": "楓・J・ヌーベル/プレシャスメイド",
       "cardType": 7,
       "rareSkill": {
@@ -128210,7 +128410,7 @@
       "released_at": "2025-05-21"
     },
     {
-      "id": 898,
+      "id": 899,
       "name": "宮川高嶺/セイクリッドロザリオ",
       "cardType": 6,
       "rareSkill": {
@@ -128410,7 +128610,7 @@
       "released_at": "2025-05-15"
     },
     {
-      "id": 899,
+      "id": 900,
       "name": "天野天葉/ノクターンミラージュ",
       "cardType": 6,
       "rareSkill": {
@@ -128610,7 +128810,7 @@
       "released_at": "2025-05-07"
     },
     {
-      "id": 900,
+      "id": 901,
       "name": "伊東閑/プレシャスメイド",
       "cardType": 5,
       "rareSkill": {
@@ -128752,7 +128952,7 @@
       "released_at": "2025-05-21"
     },
     {
-      "id": 901,
+      "id": 902,
       "name": "立原紗癒/プレシャスメイド",
       "cardType": 4,
       "rareSkill": {
@@ -128952,7 +129152,7 @@
       "released_at": "2025-05-21"
     },
     {
-      "id": 902,
+      "id": 903,
       "name": "相澤一葉/ミラージュマリアージュ",
       "cardType": 6,
       "rareSkill": {
@@ -129152,7 +129352,7 @@
       "released_at": "2025-06-06"
     },
     {
-      "id": 903,
+      "id": 904,
       "name": "丹羽灯莉/ミラージュマリアージュ",
       "cardType": 4,
       "rareSkill": {
@@ -129352,7 +129552,7 @@
       "released_at": "2025-06-19"
     },
     {
-      "id": 904,
+      "id": 905,
       "name": "森辰姫/ミラージュマリアージュ",
       "cardType": 2,
       "rareSkill": {
@@ -129552,7 +129752,7 @@
       "released_at": "2025-06-21"
     },
     {
-      "id": 905,
+      "id": 906,
       "name": "石塚藤乃/ミラージュマリアージュ",
       "cardType": 6,
       "rareSkill": {
@@ -129751,7 +129951,7 @@
       "released_at": "2025-06-14"
     },
     {
-      "id": 906,
+      "id": 907,
       "name": "多田紫恵楽/ミラージュマリアージュ",
       "cardType": 6,
       "rareSkill": {
@@ -129892,7 +130092,7 @@
       "released_at": "2025-06-21"
     },
     {
-      "id": 907,
+      "id": 908,
       "name": "毛綱乃彩/ミラージュマリアージュ",
       "cardType": 7,
       "rareSkill": {
@@ -130092,7 +130292,7 @@
       "released_at": "2025-06-21"
     },
     {
-      "id": 908,
+      "id": 909,
       "name": "江川樟美/ドリーミィパレード(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -130232,7 +130432,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 909,
+      "id": 910,
       "name": "江川樟美/ドリーミィパレード(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -130366,7 +130566,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 910,
+      "id": 911,
       "name": "江川樟美/ドリーミィパレード(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -130500,7 +130700,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 911,
+      "id": 912,
       "name": "江川樟美/ドリーミィパレード(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -130634,7 +130834,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 912,
+      "id": 913,
       "name": "江川樟美/ドリーミィパレード(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -130774,7 +130974,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 913,
+      "id": 914,
       "name": "江川樟美/ドリーミィパレード(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -130914,7 +131114,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 914,
+      "id": 915,
       "name": "六角汐里/マジェスティナイツ(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -131053,7 +131253,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 915,
+      "id": 916,
       "name": "六角汐里/マジェスティナイツ(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -131186,7 +131386,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 916,
+      "id": 917,
       "name": "六角汐里/マジェスティナイツ(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -131319,7 +131519,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 917,
+      "id": 918,
       "name": "六角汐里/マジェスティナイツ(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -131452,7 +131652,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 918,
+      "id": 919,
       "name": "六角汐里/マジェスティナイツ(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -131591,7 +131791,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 919,
+      "id": 920,
       "name": "六角汐里/マジェスティナイツ(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -131730,7 +131930,7 @@
       "released_at": "2025-01-20"
     },
     {
-      "id": 920,
+      "id": 921,
       "name": "松村優珂/マジェスティナイツ(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -131870,7 +132070,7 @@
       "released_at": "2025-01-23"
     },
     {
-      "id": 921,
+      "id": 922,
       "name": "松村優珂/マジェスティナイツ(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -132004,7 +132204,7 @@
       "released_at": "2025-01-23"
     },
     {
-      "id": 922,
+      "id": 923,
       "name": "松村優珂/マジェスティナイツ(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -132138,7 +132338,7 @@
       "released_at": "2025-01-23"
     },
     {
-      "id": 923,
+      "id": 924,
       "name": "松村優珂/マジェスティナイツ(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -132272,7 +132472,7 @@
       "released_at": "2025-01-23"
     },
     {
-      "id": 924,
+      "id": 925,
       "name": "松村優珂/マジェスティナイツ(通常範囲)",
       "cardType": 2,
       "rareSkill": {
@@ -132412,7 +132612,7 @@
       "released_at": "2025-01-23"
     },
     {
-      "id": 925,
+      "id": 926,
       "name": "松村優珂/マジェスティナイツ(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -132552,7 +132752,7 @@
       "released_at": "2025-01-23"
     },
     {
-      "id": 926,
+      "id": 927,
       "name": "塩崎鈴夢/マジェスティナイツ(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -132692,7 +132892,7 @@
       "released_at": "2025-01-25"
     },
     {
-      "id": 927,
+      "id": 928,
       "name": "塩崎鈴夢/マジェスティナイツ(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -132826,7 +133026,7 @@
       "released_at": "2025-01-25"
     },
     {
-      "id": 928,
+      "id": 929,
       "name": "塩崎鈴夢/マジェスティナイツ(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -132960,7 +133160,7 @@
       "released_at": "2025-01-25"
     },
     {
-      "id": 929,
+      "id": 930,
       "name": "塩崎鈴夢/マジェスティナイツ(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -133094,7 +133294,7 @@
       "released_at": "2025-01-25"
     },
     {
-      "id": 930,
+      "id": 931,
       "name": "塩崎鈴夢/マジェスティナイツ(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -133234,7 +133434,7 @@
       "released_at": "2025-01-25"
     },
     {
-      "id": 931,
+      "id": 932,
       "name": "塩崎鈴夢/マジェスティナイツ(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -133374,7 +133574,7 @@
       "released_at": "2025-01-25"
     },
     {
-      "id": 932,
+      "id": 933,
       "name": "二川二水/ドリーミィパレード(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -133513,7 +133713,7 @@
       "released_at": "2025-01-31"
     },
     {
-      "id": 933,
+      "id": 934,
       "name": "二川二水/ドリーミィパレード(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -133646,7 +133846,7 @@
       "released_at": "2025-01-31"
     },
     {
-      "id": 934,
+      "id": 935,
       "name": "二川二水/ドリーミィパレード(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -133779,7 +133979,7 @@
       "released_at": "2025-01-31"
     },
     {
-      "id": 935,
+      "id": 936,
       "name": "二川二水/ドリーミィパレード(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -133912,7 +134112,7 @@
       "released_at": "2025-01-31"
     },
     {
-      "id": 936,
+      "id": 937,
       "name": "二川二水/ドリーミィパレード(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -134051,7 +134251,7 @@
       "released_at": "2025-01-31"
     },
     {
-      "id": 937,
+      "id": 938,
       "name": "二川二水/ドリーミィパレード(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -134190,7 +134390,7 @@
       "released_at": "2025-01-31"
     },
     {
-      "id": 938,
+      "id": 939,
       "name": "吉村・Thi・梅/ドリーミィパレード(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -134330,7 +134530,7 @@
       "released_at": "2025-02-05"
     },
     {
-      "id": 939,
+      "id": 940,
       "name": "吉村・Thi・梅/ドリーミィパレード(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -134464,7 +134664,7 @@
       "released_at": "2025-02-05"
     },
     {
-      "id": 940,
+      "id": 941,
       "name": "吉村・Thi・梅/ドリーミィパレード(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -134598,7 +134798,7 @@
       "released_at": "2025-02-05"
     },
     {
-      "id": 941,
+      "id": 942,
       "name": "吉村・Thi・梅/ドリーミィパレード(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -134732,7 +134932,7 @@
       "released_at": "2025-02-05"
     },
     {
-      "id": 942,
+      "id": 943,
       "name": "吉村・Thi・梅/ドリーミィパレード(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -134872,7 +135072,7 @@
       "released_at": "2025-02-05"
     },
     {
-      "id": 943,
+      "id": 944,
       "name": "吉村・Thi・梅/ドリーミィパレード(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -135012,7 +135212,7 @@
       "released_at": "2025-02-05"
     },
     {
-      "id": 944,
+      "id": 945,
       "name": "一柳梨璃/CONSTELLAT10N",
       "cardType": 2,
       "rareSkill": {
@@ -135160,7 +135360,7 @@
       "released_at": "2025-04-07"
     },
     {
-      "id": 945,
+      "id": 946,
       "name": "一柳結梨/CONSTELLAT10N",
       "cardType": 6,
       "rareSkill": {
@@ -135302,7 +135502,7 @@
       "released_at": "2025-03-30"
     },
     {
-      "id": 946,
+      "id": 947,
       "name": "今叶星/カレイドルルーディア",
       "cardType": 7,
       "rareSkill": {
@@ -135444,7 +135644,7 @@
       "released_at": "2025-08-31"
     },
     {
-      "id": 947,
+      "id": 948,
       "name": "宮川高嶺/カレイドルルーディア",
       "cardType": 2,
       "rareSkill": {
@@ -135716,7 +135916,7 @@
       "released_at": "2025-08-31"
     },
     {
-      "id": 948,
+      "id": 949,
       "name": "土岐紅巴/カレイドルルーディア",
       "cardType": 7,
       "rareSkill": {
@@ -135858,7 +136058,7 @@
       "released_at": "2025-09-30"
     },
     {
-      "id": 949,
+      "id": 950,
       "name": "丹羽灯莉/カレイドルルーディア",
       "cardType": 6,
       "rareSkill": {
@@ -136130,7 +136330,7 @@
       "released_at": "2025-09-30"
     },
     {
-      "id": 950,
+      "id": 951,
       "name": "定盛姫歌/カレイドルルーディア",
       "cardType": 2,
       "rareSkill": {
@@ -136278,7 +136478,7 @@
       "released_at": "2025-09-30"
     },
     {
-      "id": 951,
+      "id": 952,
       "name": "横田悠夏/カレイドルルーディア",
       "cardType": 6,
       "rareSkill": {
@@ -136419,7 +136619,7 @@
       "released_at": "2025-09-03"
     },
     {
-      "id": 952,
+      "id": 953,
       "name": "本間秋日/カレイドルルーディア",
       "cardType": 7,
       "rareSkill": {
@@ -136561,7 +136761,7 @@
       "released_at": "2025-10-31"
     },
     {
-      "id": 953,
+      "id": 954,
       "name": "石塚藤乃/カレイドルルーディア",
       "cardType": 3,
       "rareSkill": {
@@ -136832,7 +137032,7 @@
       "released_at": "2025-09-03"
     },
     {
-      "id": 954,
+      "id": 955,
       "name": "塩崎鈴夢/カレイドルルーディア",
       "cardType": 5,
       "rareSkill": {
@@ -136974,7 +137174,7 @@
       "released_at": "2025-10-31"
     },
     {
-      "id": 955,
+      "id": 956,
       "name": "川村楪/御台場標準制服楪ver",
       "cardType": 7,
       "rareSkill": {
@@ -137116,7 +137316,7 @@
       "released_at": "2025-09-20"
     },
     {
-      "id": 956,
+      "id": 957,
       "name": "幸恵/テンプルレギオン隊服(通常範囲)",
       "cardType": 2,
       "rareSkill": {
@@ -137267,7 +137467,7 @@
       "released_at": "2025-09-22"
     },
     {
-      "id": 957,
+      "id": 958,
       "name": "毛綱乃彩/スヴァンフヴィート隊服",
       "cardType": 6,
       "rareSkill": {
@@ -137467,7 +137667,7 @@
       "released_at": "2025-09-22"
     },
     {
-      "id": 958,
+      "id": 959,
       "name": "日比野羽来/イルミン特別隊服",
       "cardType": 4,
       "rareSkill": {
@@ -137667,7 +137867,7 @@
       "released_at": "2025-09-20"
     },
     {
-      "id": 959,
+      "id": 960,
       "name": "谷口聖/戦技交流会制服",
       "cardType": 4,
       "rareSkill": {
@@ -137815,7 +138015,7 @@
       "released_at": "2025-09-22"
     },
     {
-      "id": 960,
+      "id": 961,
       "name": "日葵/イルミン特別隊服",
       "cardType": 5,
       "rareSkill": {
@@ -138087,7 +138287,7 @@
       "released_at": "2025-09-20"
     },
     {
-      "id": 961,
+      "id": 962,
       "name": "松村優珂/スプーキーハーベスター",
       "cardType": 5,
       "rareSkill": {
@@ -138229,7 +138429,7 @@
       "released_at": "2025-10-11"
     },
     {
-      "id": 962,
+      "id": 963,
       "name": "苅谷緋紅/スプーキーハーベスター",
       "cardType": 4,
       "rareSkill": {
@@ -138501,7 +138701,7 @@
       "released_at": "2025-10-11"
     },
     {
-      "id": 963,
+      "id": 964,
       "name": "坪井七保/スプーキーハーベスター",
       "cardType": 7,
       "rareSkill": {
@@ -138773,7 +138973,7 @@
       "released_at": "2025-10-11"
     },
     {
-      "id": 964,
+      "id": 965,
       "name": "鳥居美歩/スプーキーハーベスター",
       "cardType": 4,
       "rareSkill": {
@@ -138921,7 +139121,7 @@
       "released_at": "2025-10-11"
     },
     {
-      "id": 965,
+      "id": 966,
       "name": "石塚藤乃/フルールヴィクトワール",
       "cardType": 2,
       "rareSkill": {
@@ -139192,7 +139392,7 @@
       "released_at": "2025-10-31"
     },
     {
-      "id": 966,
+      "id": 967,
       "name": "外崎杏花/カレイドルルーディア",
       "cardType": 4,
       "rareSkill": {
@@ -139392,7 +139592,7 @@
       "released_at": "2025-10-31"
     },
     {
-      "id": 967,
+      "id": 968,
       "name": "白井夢結/ルクスィオース",
       "cardType": 6,
       "rareSkill": {
@@ -139534,7 +139734,7 @@
       "released_at": "2025-11-11"
     },
     {
-      "id": 968,
+      "id": 969,
       "name": "番匠谷依奈/ルクスィオース",
       "cardType": 4,
       "rareSkill": {
@@ -139805,7 +140005,7 @@
       "released_at": "2025-11-11"
     },
     {
-      "id": 969,
+      "id": 970,
       "name": "竹腰千華/ルクスィオース",
       "cardType": 5,
       "rareSkill": {
@@ -140077,7 +140277,7 @@
       "released_at": "2025-11-11"
     },
     {
-      "id": 970,
+      "id": 971,
       "name": "飯島恋花/パッションサマー",
       "cardType": 2,
       "rareSkill": {
@@ -140276,7 +140476,7 @@
       "released_at": "2025-07-11"
     },
     {
-      "id": 971,
+      "id": 972,
       "name": "初鹿野瑤/パッションサマー",
       "cardType": 7,
       "rareSkill": {
@@ -140476,7 +140676,7 @@
       "released_at": "2025-07-11"
     },
     {
-      "id": 972,
+      "id": 973,
       "name": "遠藤亜羅椰/パッションサマー",
       "cardType": 7,
       "rareSkill": {
@@ -140675,7 +140875,7 @@
       "released_at": "2025-07-03"
     },
     {
-      "id": 973,
+      "id": 974,
       "name": "秦祀/パッションサマー",
       "cardType": 6,
       "rareSkill": {
@@ -140875,7 +141075,7 @@
       "released_at": "2025-07-28"
     },
     {
-      "id": 974,
+      "id": 975,
       "name": "横田悠夏/パッションサマー",
       "cardType": 4,
       "rareSkill": {
@@ -141074,7 +141274,7 @@
       "released_at": "2025-07-16"
     },
     {
-      "id": 975,
+      "id": 976,
       "name": "牧野美岳/パッションサマー",
       "cardType": 6,
       "rareSkill": {
@@ -141216,7 +141416,7 @@
       "released_at": "2025-07-11"
     },
     {
-      "id": 976,
+      "id": 977,
       "name": "丹羽灯莉/パッションサマー",
       "cardType": 5,
       "rareSkill": {
@@ -141364,7 +141564,7 @@
       "released_at": "2025-08-16"
     },
     {
-      "id": 977,
+      "id": 978,
       "name": "江川樟美/パッションサマー",
       "cardType": 7,
       "rareSkill": {
@@ -141564,7 +141764,7 @@
       "released_at": "2025-08-08"
     },
     {
-      "id": 978,
+      "id": 979,
       "name": "渡邉茜/パッションサマー",
       "cardType": 4,
       "rareSkill": {
@@ -141764,7 +141964,7 @@
       "released_at": "2025-08-08"
     },
     {
-      "id": 979,
+      "id": 980,
       "name": "松村優珂/パッションサマー",
       "cardType": 6,
       "rareSkill": {
@@ -141906,7 +142106,7 @@
       "released_at": "2025-08-06"
     },
     {
-      "id": 980,
+      "id": 981,
       "name": "苅谷緋紅/パッションサマー",
       "cardType": 2,
       "rareSkill": {
@@ -142054,7 +142254,7 @@
       "released_at": "2025-08-10"
     },
     {
-      "id": 981,
+      "id": 982,
       "name": "毛綱乃彩/パッションサマー",
       "cardType": 5,
       "rareSkill": {
@@ -142196,7 +142396,7 @@
       "released_at": "2025-08-08"
     },
     {
-      "id": 982,
+      "id": 983,
       "name": "天野天葉/涼風の浴衣",
       "cardType": 2,
       "rareSkill": {
@@ -142344,7 +142544,7 @@
       "released_at": "2025-09-11"
     },
     {
-      "id": 983,
+      "id": 984,
       "name": "番匠谷依奈/涼風の浴衣",
       "cardType": 5,
       "rareSkill": {
@@ -142543,7 +142743,7 @@
       "released_at": "2025-09-11"
     },
     {
-      "id": 984,
+      "id": 985,
       "name": "田中壱/涼風の浴衣",
       "cardType": 4,
       "rareSkill": {
@@ -142743,7 +142943,7 @@
       "released_at": "2025-09-11"
     },
     {
-      "id": 985,
+      "id": 986,
       "name": "高須賀月詩/おやすみスタイル",
       "cardType": 7,
       "rareSkill": {
@@ -143014,7 +143214,7 @@
       "released_at": "2025-09-17"
     },
     {
-      "id": 986,
+      "id": 987,
       "name": "槇若菜/ブリッツアングリフ",
       "cardType": 7,
       "rareSkill": {
@@ -143214,7 +143414,7 @@
       "released_at": "2025-09-08"
     },
     {
-      "id": 987,
+      "id": 988,
       "name": "賀川蒔菜/SPYチャイナフォーム",
       "cardType": 5,
       "rareSkill": {
@@ -143413,7 +143613,1040 @@
       "released_at": "2025-09-04"
     },
     {
-      "id": 988,
+      "id": 989,
+      "name": "二川二水/恋するウィンターコーデ",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "鷹の目",
+        "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "effectTime": 0
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 350
+          },
+          {
+            "jobSkillType": 2,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 2,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 4,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2025-12-02"
+    },
+    {
+      "id": 990,
+      "name": "船田純/恋するウィンターコーデ",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "ルナティックトランサー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。",
+        "note": "味方の攻撃力が30%上昇, 味方の防御力が30%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2025-12-02"
+    },
+    {
+      "id": 991,
+      "name": "船田初/恋するウィンターコーデ",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "ルナティックトランサー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。",
+        "note": "味方の攻撃力が30%上昇, 味方の防御力が30%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2025-11-29"
+    },
+    {
+      "id": 992,
+      "name": "山梨日羽梨/恋するウィンターコーデ",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "レジスタS",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 350
+          },
+          {
+            "jobSkillType": 3,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2025-11-29"
+    },
+    {
+      "id": 993,
+      "name": "菱田治/恋するウィンターコーデ",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "ゼノンパラドキサS",
+        "description": "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の攻撃力/防御力が大幅にアップする。",
+        "note": "味方の攻撃力が50%上昇, 味方の防御力が50%上昇",
+        "effectTime": 55
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2025-12-02"
+    },
+    {
+      "id": 994,
       "name": "一柳梨璃/トリックファントム",
       "cardType": 5,
       "rareSkill": {
@@ -143613,7 +144846,7 @@
       "released_at": "2025-10-18"
     },
     {
-      "id": 989,
+      "id": 995,
       "name": "楓・J・ヌーベル/トリックファントム",
       "cardType": 2,
       "rareSkill": {
@@ -143813,7 +145046,7 @@
       "released_at": "2025-10-18"
     },
     {
-      "id": 990,
+      "id": 996,
       "name": "二川二水/トリックファントム",
       "cardType": 7,
       "rareSkill": {
@@ -144012,7 +145245,7 @@
       "released_at": "2025-10-18"
     },
     {
-      "id": 991,
+      "id": 997,
       "name": "郭神琳/トリックファントム",
       "cardType": 6,
       "rareSkill": {
@@ -144154,7 +145387,7 @@
       "released_at": "2025-10-18"
     },
     {
-      "id": 992,
+      "id": 998,
       "name": "王雨嘉/トリックファントム",
       "cardType": 4,
       "rareSkill": {
@@ -144354,7 +145587,7 @@
       "released_at": "2025-10-18"
     },
     {
-      "id": 993,
+      "id": 999,
       "name": "飯島恋花/トリックファントム",
       "cardType": 6,
       "rareSkill": {
@@ -144553,7 +145786,7 @@
       "released_at": "2025-10-18"
     },
     {
-      "id": 994,
+      "id": 1000,
       "name": "安藤鶴紗/キトゥンメイド",
       "cardType": 5,
       "rareSkill": {
@@ -144753,7 +145986,7 @@
       "released_at": "2025-10-17"
     },
     {
-      "id": 995,
+      "id": 1001,
       "name": "相澤一葉/アンティークロリータ",
       "cardType": 2,
       "rareSkill": {
@@ -144953,7 +146186,7 @@
       "released_at": "2025-11-20"
     },
     {
-      "id": 996,
+      "id": 1002,
       "name": "佐々木藍/アンティークロリータ",
       "cardType": 7,
       "rareSkill": {
@@ -145153,7 +146386,7 @@
       "released_at": "2025-11-20"
     },
     {
-      "id": 997,
+      "id": 1003,
       "name": "芹沢千香瑠/アンティークロリータ",
       "cardType": 4,
       "rareSkill": {
@@ -145301,7 +146534,7 @@
       "released_at": "2025-11-20"
     },
     {
-      "id": 998,
+      "id": 1004,
       "name": "真島百由/セイクリッドロザリオ",
       "cardType": 7,
       "rareSkill": {
@@ -145573,7 +146806,7 @@
       "released_at": "2025-11-06"
     },
     {
-      "id": 999,
+      "id": 1005,
       "name": "槇若菜/ノクターンミラージュ",
       "cardType": 6,
       "rareSkill": {
@@ -145773,7 +147006,7 @@
       "released_at": "2025-11-13"
     },
     {
-      "id": 1000,
+      "id": 1006,
       "name": "楓・J・ヌーベル/マジカルフォーム",
       "cardType": 6,
       "rareSkill": {
@@ -146045,7 +147278,7 @@
       "released_at": "2025-08-19"
     },
     {
-      "id": 1001,
+      "id": 1007,
       "name": "二川二水/マジカルフォーム",
       "cardType": 4,
       "rareSkill": {
@@ -146316,7 +147549,7 @@
       "released_at": "2025-08-22"
     },
     {
-      "id": 1002,
+      "id": 1008,
       "name": "郭神琳/マジカルフォーム",
       "cardType": 7,
       "rareSkill": {
@@ -146588,7 +147821,7 @@
       "released_at": "2025-08-19"
     },
     {
-      "id": 1003,
+      "id": 1009,
       "name": "王雨嘉/マジカルフォーム",
       "cardType": 2,
       "rareSkill": {
@@ -146860,7 +148093,7 @@
       "released_at": "2025-08-19"
     },
     {
-      "id": 1004,
+      "id": 1010,
       "name": "ミリアム/マジカルフォーム",
       "cardType": 5,
       "rareSkill": {
@@ -147131,7 +148364,7 @@
       "released_at": "2025-08-22"
     },
     {
-      "id": 1005,
+      "id": 1011,
       "name": "相澤一葉/リリホリ!!スプラッシュ",
       "cardType": 5,
       "rareSkill": {
@@ -147269,7 +148502,7 @@
       "released_at": "2025-08-14"
     },
     {
-      "id": 1006,
+      "id": 1012,
       "name": "本間秋日/リリホリ!!スプラッシュ",
       "cardType": 5,
       "rareSkill": {
@@ -147407,7 +148640,7 @@
       "released_at": "2025-07-20"
     },
     {
-      "id": 1007,
+      "id": 1013,
       "name": "松村優珂/Still Alive",
       "cardType": 4,
       "rareSkill": {
@@ -147555,7 +148788,7 @@
       "released_at": "2025-08-06"
     },
     {
-      "id": 1008,
+      "id": 1014,
       "name": "竹腰千華/ローエングリン隊服(通常範囲)",
       "cardType": 2,
       "rareSkill": {
@@ -147707,7 +148940,7 @@
       "released_at": "2025-11-11"
     },
     {
-      "id": 1009,
+      "id": 1015,
       "name": "幸恵/テンプルレギオン隊服(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -147858,7 +149091,7 @@
       "released_at": "2025-09-22"
     },
     {
-      "id": 1010,
+      "id": 1016,
       "name": "槇若菜/百合ヶ丘標準制服(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -148002,7 +149235,7 @@
       "released_at": "2024-03-03"
     },
     {
-      "id": 1011,
+      "id": 1017,
       "name": "岡田綺更/百合ヶ丘標準制服(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -148142,7 +149375,7 @@
       "released_at": "2024-06-03"
     },
     {
-      "id": 1012,
+      "id": 1018,
       "name": "毛綱乃彩/百合ヶ丘標準制服(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -148286,7 +149519,7 @@
       "released_at": "2024-04-03"
     },
     {
-      "id": 1013,
+      "id": 1019,
       "name": "竹腰千華/ローエングリン隊服(特殊範囲)",
       "cardType": 4,
       "rareSkill": {
@@ -148438,7 +149671,7 @@
       "released_at": "2025-11-11"
     },
     {
-      "id": 1014,
+      "id": 1020,
       "name": "幸恵/テンプルレギオン隊服(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -148577,7 +149810,7 @@
       "released_at": "2025-09-22"
     },
     {
-      "id": 1015,
+      "id": 1021,
       "name": "槇若菜/百合ヶ丘標準制服(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -148715,7 +149948,7 @@
       "released_at": "2024-03-03"
     },
     {
-      "id": 1016,
+      "id": 1022,
       "name": "岡田綺更/百合ヶ丘標準制服(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -148849,7 +150082,7 @@
       "released_at": "2024-06-03"
     },
     {
-      "id": 1017,
+      "id": 1023,
       "name": "毛綱乃彩/百合ヶ丘標準制服(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -148987,7 +150220,7 @@
       "released_at": "2024-04-03"
     },
     {
-      "id": 1018,
+      "id": 1024,
       "name": "竹腰千華/ローエングリン隊服(支援)",
       "cardType": 5,
       "rareSkill": {
@@ -149127,7 +150360,7 @@
       "released_at": "2025-11-11"
     },
     {
-      "id": 1019,
+      "id": 1025,
       "name": "幸恵/テンプルレギオン隊服(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -149266,7 +150499,7 @@
       "released_at": "2025-09-22"
     },
     {
-      "id": 1020,
+      "id": 1026,
       "name": "槇若菜/百合ヶ丘標準制服(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -149404,7 +150637,7 @@
       "released_at": "2024-03-03"
     },
     {
-      "id": 1021,
+      "id": 1027,
       "name": "岡田綺更/百合ヶ丘標準制服(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -149538,7 +150771,7 @@
       "released_at": "2024-06-03"
     },
     {
-      "id": 1022,
+      "id": 1028,
       "name": "毛綱乃彩/百合ヶ丘標準制服(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -149676,7 +150909,7 @@
       "released_at": "2024-04-03"
     },
     {
-      "id": 1023,
+      "id": 1029,
       "name": "竹腰千華/ローエングリン隊服(妨害)",
       "cardType": 6,
       "rareSkill": {
@@ -149816,7 +151049,7 @@
       "released_at": "2025-11-11"
     },
     {
-      "id": 1024,
+      "id": 1030,
       "name": "幸恵/テンプルレギオン隊服(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -149955,7 +151188,7 @@
       "released_at": "2025-09-22"
     },
     {
-      "id": 1025,
+      "id": 1031,
       "name": "槇若菜/百合ヶ丘標準制服(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -150093,7 +151326,7 @@
       "released_at": "2024-03-03"
     },
     {
-      "id": 1026,
+      "id": 1032,
       "name": "岡田綺更/百合ヶ丘標準制服(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -150227,7 +151460,7 @@
       "released_at": "2024-06-03"
     },
     {
-      "id": 1027,
+      "id": 1033,
       "name": "毛綱乃彩/百合ヶ丘標準制服(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -150365,7 +151598,7 @@
       "released_at": "2024-04-03"
     },
     {
-      "id": 1028,
+      "id": 1034,
       "name": "竹腰千華/ローエングリン隊服(回復)",
       "cardType": 7,
       "rareSkill": {
@@ -150505,7 +151738,7 @@
       "released_at": "2025-11-11"
     },
     {
-      "id": 1029,
+      "id": 1035,
       "name": "幸恵/テンプルレギオン隊服(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -150656,7 +151889,7 @@
       "released_at": "2025-09-22"
     },
     {
-      "id": 1030,
+      "id": 1036,
       "name": "槇若菜/百合ヶ丘標準制服(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -150800,7 +152033,7 @@
       "released_at": "2024-03-03"
     },
     {
-      "id": 1031,
+      "id": 1037,
       "name": "岡田綺更/百合ヶ丘標準制服(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -150940,7 +152173,7 @@
       "released_at": "2024-06-03"
     },
     {
-      "id": 1032,
+      "id": 1038,
       "name": "毛綱乃彩/百合ヶ丘標準制服(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -151084,7 +152317,7 @@
       "released_at": "2024-04-03"
     },
     {
-      "id": 1033,
+      "id": 1039,
       "name": "竹腰千華/ローエングリン隊服(通常単体)",
       "cardType": 1,
       "rareSkill": {
@@ -151236,7 +152469,7 @@
       "released_at": "2025-11-11"
     },
     {
-      "id": 1034,
+      "id": 1040,
       "name": "幸恵/テンプルレギオン隊服(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -151387,7 +152620,7 @@
       "released_at": "2025-09-22"
     },
     {
-      "id": 1035,
+      "id": 1041,
       "name": "槇若菜/百合ヶ丘標準制服(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -151531,7 +152764,7 @@
       "released_at": "2024-03-03"
     },
     {
-      "id": 1036,
+      "id": 1042,
       "name": "岡田綺更/百合ヶ丘標準制服(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -151671,7 +152904,7 @@
       "released_at": "2024-06-03"
     },
     {
-      "id": 1037,
+      "id": 1043,
       "name": "毛綱乃彩/百合ヶ丘標準制服(特殊単体)",
       "cardType": 3,
       "rareSkill": {
@@ -151815,7 +153048,7 @@
       "released_at": "2024-04-03"
     },
     {
-      "id": 1038,
+      "id": 1044,
       "name": "竹腰千華/ローエングリン隊服(特殊単体)",
       "cardType": 3,
       "rareSkill": {
