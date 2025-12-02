@@ -16,7 +16,36 @@ export const comparator =
     return order === "asc" ? result : -result;
   };
 
+type PathImpl<T, Key extends keyof T> = Key extends string
+  ? T[Key] extends Record<string, any>
+    ?
+        | `${Key}.${PathImpl<T[Key], Exclude<keyof T[Key], keyof any[]>> & string}`
+        | `${Key}.${Exclude<keyof T[Key], keyof any[]> & string}`
+    : never
+  : never;
+
+type Path<T> = PathImpl<T, keyof T> | keyof T;
+
+type PathValue<T, P extends Path<T>> = P extends `${infer Key}.${infer Rest}`
+  ? Key extends keyof T
+    ? Rest extends Path<T[Key]>
+      ? PathValue<T[Key], Rest>
+      : never
+    : never
+  : P extends keyof T
+    ? T[P]
+    : never;
+
 export const projector =
-  <T extends object, K extends keyof T>(key: K) =>
-  (obj: T) =>
-    obj[key];
+  <T extends object, P extends Path<T>>(path: P) =>
+  (obj: T): PathValue<T, P> => {
+    const keys = (path as string).split(".");
+    let result: any = obj;
+
+    for (const key of keys) {
+      result = result?.[key];
+      if (result === undefined) break;
+    }
+
+    return result as PathValue<T, P>;
+  };

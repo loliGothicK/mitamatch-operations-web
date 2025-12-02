@@ -1,10 +1,10 @@
 import Paper from "@mui/material/Paper";
 import { type Costume, costumeList as dataSource } from "@/domain/costume/costume";
 
-import { DataGrid, type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
+import { type GridColDef, type GridColumnVisibilityModel, useGridApiRef } from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
 import Image from "next/image";
-import { JSX, useState } from "react";
+import { JSX, useCallback, useEffect, useMemo } from "react";
 import Link from "@/components/link";
 import { QueryConsle } from "@/data/_common/QueryConsle";
 import { Clazz, SchemaResolver } from "@/parser/query/filter";
@@ -25,6 +25,9 @@ import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
 import { atomWithReset } from "jotai/utils";
 import { useSetAtom } from "jotai";
+import { GridSortModel } from "@mui/x-data-grid";
+import { DataGrid } from "@/data/_common/DataGrid";
+import { useEffectOnce } from "react-use";
 
 const queryAtom = atomWithReset("select * from costume order by released;");
 
@@ -142,7 +145,7 @@ const columns: GridColDef<Costume>[] = [
           .with({ value: { type: "adx" } }, ({ value: { get } }) => {
             return (
               <>
-                {get({ limitBreak: 0, isAwakened: true }).map(({ name, description }) => {
+                {get({ limitBreak: 3, isAwakened: true }).map(({ name, description }) => {
                   return (
                     <Tooltip
                       key={params.row.name + name}
@@ -170,8 +173,6 @@ const columns: GridColDef<Costume>[] = [
     valueGetter: (_, costume) => Lenz.costume.general.released.get(costume),
   },
 ];
-
-const paginationModel = { page: 0, pageSize: 10 };
 
 export const schema = {
   costume: [
@@ -385,41 +386,58 @@ function Help(): JSX.Element {
 const HIDDEN_COLUMNS: GridColDef["field"][] = ["released"];
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
+  useEffectOnce(() => {
+    console.log("🔴 Datagrid mounted");
+    return () => console.log("🔴 Datagrid unmounted");
+  });
+
+  const apiRef = useGridApiRef();
   const [visivility, setVisivility, visivilityChanged] = useVisivility(
     HIDDEN_COLUMNS.reduce((model, col) => {
       model[col] = false;
       return model;
     }, visivilityAll),
   );
-  const [rows, setRows] = useState<Costume[]>(dataSource.toReversed());
   const setQuery = useSetAtom(queryAtom);
 
-  if (initialQuery) {
-    setQuery(initialQuery);
-  }
+  const replaceDataSource = useCallback(
+    (action: { type: "update"; data: Costume[] } | { type: "sort"; model: GridSortModel }) => {
+      if (action.type === "update") {
+        apiRef.current?.setRows(action.data);
+      }
+      if (action.type === "sort") {
+        apiRef.current?.setSortModel(action.model);
+      }
+    },
+    [apiRef],
+  );
+
+  const original = useMemo(() => dataSource.toReversed(), []);
+
+  useEffect(() => {
+    if (initialQuery) {
+      setQuery(initialQuery);
+    }
+  }, [initialQuery, setQuery]);
 
   return (
-    <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
+    <Paper style={{ display: "flex", width: "100%", height: 1000, flexDirection: "column" }}>
       <QueryConsle
         table={"costume"}
-        origin={dataSource.toReversed()}
+        origin={original}
         resolver={resolver}
         queryAtom={queryAtom}
         schema={schema}
         updateVisivilityAction={visivilityChanged}
-        updateDataAction={setRows}
+        updateDataAction={replaceDataSource}
         completion={completeCandidates}
         help={<Help />}
       />
       <DataGrid
-        rows={rows}
-        rowHeight={80}
+        apiRef={apiRef}
+        data={original}
         columns={columns}
-        columnVisibilityModel={visivility}
-        onColumnVisibilityModelChange={setVisivility}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10, 50, 100]}
-        sx={{ border: 0 }}
+        visivility={[visivility, setVisivility]}
       />
     </Paper>
   );

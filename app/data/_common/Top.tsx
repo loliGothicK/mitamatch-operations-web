@@ -7,7 +7,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useRouter, useSearchParams } from "next/navigation";
-import { type ReactNode, type SyntheticEvent, useState } from "react";
+import { type ReactNode, type SyntheticEvent, useMemo, useState } from "react";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { z } from "zod";
 import View from "@/data/_character/view";
@@ -30,9 +30,10 @@ function CustomTabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      style={{ display: value !== index ? "none" : "block" }} // 追加
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      <Box sx={{ p: 3 }}>{children}</Box> {/* 条件分岐を削除！ */}
     </div>
   );
 }
@@ -82,6 +83,8 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
     setValue(newValue);
   };
 
+  const tabContents = useMemo(() => TABS.map((tab) => tab.content(query)), [query]);
+
   return (
     <Layout>
       <Box sx={{ width: "100%" }}>
@@ -104,7 +107,7 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
         </AppBar>
         {TABS.map((tab, index) => (
           <CustomTabPanel index={index} value={value} key={tab.label}>
-            {tab.content(query)}
+            {tabContents[index]}
           </CustomTabPanel>
         ))}
       </Box>

@@ -8,7 +8,7 @@ import {
   OrderBy,
   Parser,
 } from "node-sql-parser";
-import type { GridColDef } from "@mui/x-data-grid";
+import type { GridColDef, GridSortModel } from "@mui/x-data-grid";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
 import { bail, type MitamaError } from "@/error/error";
 import { getApplicativeValidation, isRight, right } from "fp-ts/Either";
@@ -26,7 +26,7 @@ const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 export type ParseResult = {
   readonly where: Option<BinaryExpr>;
-  readonly orderBy: Option<OrderByExpr[]>;
+  readonly orderBy: Option<OrderByExpr>;
   readonly limit: {
     limit: Option<number>;
     offset: Option<number>;
@@ -55,8 +55,7 @@ export type BinaryExpr = {
 };
 export type OrderByExpr = {
   type: "order_by";
-  target: AtomicExpr | BinaryExpr | AtomicExprList;
-  direction: "ASC" | "DESC";
+  model: GridSortModel;
 };
 
 function parseExpr(
@@ -162,20 +161,40 @@ function parseWhere(
     );
 }
 
-function parseOrderBy(orderby: OrderBy[] | null): Validated<MitamaError, Option<OrderByExpr[]>> {
+function parseOrderBy(orderby: OrderBy[] | null): Validated<MitamaError, Option<OrderByExpr>> {
   return match(orderby)
     .with(null, () => right(option.none))
     .otherwise((orderby) =>
       pipe(
         orderby.map((clause) =>
           sequenceS(ap)({
-            type: right("order_by" as const),
-            target: parseExpr(clause.expr),
-            direction: right(clause.type),
+            field: pipe(
+              parseExpr(clause.expr),
+              either.flatMap((expr) =>
+                match(expr)
+                  .with({ type: "field", value: P.string.select() }, (col) => right(col as string))
+                  .otherwise(() =>
+                    toValidated(
+                      bail("order by", "ONLY field name is supported in ORDER BY clause."),
+                    ),
+                  ),
+              ),
+            ),
+            sort: right(
+              match(clause.type)
+                .with("ASC", () => "asc" as const)
+                .with("DESC", () => "desc" as const)
+                .otherwise(() => "desc" as const),
+            ),
           }),
         ),
         separator,
-        either.map(option.some),
+        either.map((model) =>
+          option.some({
+            type: "order_by" as const,
+            model,
+          }),
+        ),
       ),
     );
 }

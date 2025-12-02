@@ -1,11 +1,16 @@
 import Paper from "@mui/material/Paper";
 import { type Memoria, memoriaList as dataSource } from "@/domain/memoria/memoria";
 
-import { DataGrid, type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
+import {
+  type GridColDef,
+  type GridColumnVisibilityModel,
+  GridSortModel,
+  useGridApiRef,
+} from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
 import type { Attribute } from "@/parser/skill";
 import { match } from "ts-pattern";
-import { JSX, useState } from "react";
+import { JSX, useCallback, useEffect, useMemo } from "react";
 import Link from "@/components/link";
 import { QueryConsle } from "@/data/_common/QueryConsle";
 import { SchemaResolver } from "@/parser/query/filter";
@@ -15,6 +20,7 @@ import { atomWithReset } from "jotai/utils";
 import { useSetAtom } from "jotai";
 import { Box, List, ListItem, ListItemText, ListSubheader, Typography } from "@mui/material";
 import { MemoriaIcon } from "@/components/image/MemoriaIcon";
+import { DataGrid } from "@/data/_common/DataGrid";
 
 const queryAtom = atomWithReset("select * from memoria where `cost` > 18;");
 
@@ -124,8 +130,6 @@ const columns: GridColDef<Memoria>[] = [
   },
 ];
 
-const paginationModel = { page: 0, pageSize: 10 };
-
 export const schema = {
   memoria: [
     "name",
@@ -224,7 +228,7 @@ const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
   return acc;
 }, {});
 
-const enumMap: Record<string, ComleteCandidate> = {
+const completeCandidates: Record<string, ComleteCandidate> = {
   type: {
     equals: ["通常単体", "通常範囲", "特殊単体", "特殊範囲", "支援", "妨害", "回復"],
     like: {
@@ -299,36 +303,48 @@ function Help(): JSX.Element {
 }
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
+  const apiRef = useGridApiRef();
   const [visivility, setVisivility, visivilityChanged] = useVisivility(visivilityAll);
-  const [rows, setRows] = useState<Memoria[]>(dataSource.toReversed());
   const setQuery = useSetAtom(queryAtom);
 
-  if (initialQuery) {
-    setQuery(initialQuery);
-  }
+  const replaceDataSource = useCallback(
+    (action: { type: "update"; data: Memoria[] } | { type: "sort"; model: GridSortModel }) => {
+      if (action.type === "update") {
+        apiRef.current?.setRows(action.data);
+      }
+      if (action.type === "sort") {
+        apiRef.current?.setSortModel(action.model);
+      }
+    },
+    [apiRef],
+  );
+
+  const original = useMemo(() => dataSource.toReversed(), []);
+
+  useEffect(() => {
+    if (initialQuery) {
+      setQuery(initialQuery);
+    }
+  }, [initialQuery, setQuery]);
 
   return (
-    <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
+    <Paper style={{ display: "flex", width: "100%", height: 1000, flexDirection: "column" }}>
       <QueryConsle
         table={"memoria"}
-        origin={dataSource.toReversed()}
+        origin={original}
         resolver={resolver}
         queryAtom={queryAtom}
         schema={schema}
         updateVisivilityAction={visivilityChanged}
-        updateDataAction={setRows}
-        completion={enumMap}
+        updateDataAction={replaceDataSource}
+        completion={completeCandidates}
         help={<Help />}
       />
       <DataGrid
-        rows={rows}
-        rowHeight={80}
+        apiRef={apiRef}
+        data={original}
         columns={columns}
-        columnVisibilityModel={visivility}
-        onColumnVisibilityModelChange={setVisivility}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[5, 10, 50, 100]}
-        sx={{ border: 0 }}
+        visivility={[visivility, setVisivility]}
       />
     </Paper>
   );

@@ -33,6 +33,7 @@ import Info from "@/components/data/Info";
 import { match } from "ts-pattern";
 import { option } from "fp-ts";
 import Link from "@/components/link";
+import { isSome } from "fp-ts/lib/Option";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -189,7 +190,21 @@ function Basic({ costume }: { costume: Costume }) {
           <Typography component="div" variant="h5">
             {costume.name}
           </Typography>
-          <Chip label={costume.cardType} sx={{ marginLeft: "auto", marginTop: 2 }} />
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+              marginTop: 2,
+            }}
+          >
+            <Chip label={`${costume.cardType} / ${costume.rate}%`} />
+            {isSome(costume.specialSkill) &&
+              match(costume.specialSkill.value)
+                .with({ type: "ex" }, () => <Chip label="EX" />)
+                .with({ type: "adx", awakable: false }, () => <Chip label="ADX" />)
+                .with({ type: "adx", awakable: true }, () => <Chip label="ADX/覚醒" />)
+                .exhaustive()}
+          </Box>
         </CardContent>
       </Box>
     </Card>

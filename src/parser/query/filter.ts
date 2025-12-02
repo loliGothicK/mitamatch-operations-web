@@ -13,6 +13,7 @@ import { separator, transpose } from "@/fp-ts-ext/function";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { Costume } from "@/domain/costume/costume";
 import { Memoria } from "@/domain/memoria/memoria";
+import { GridSortModel } from "@mui/x-data-grid";
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
 /**
@@ -49,7 +50,7 @@ export default function build<T>(
   MitamaError,
   {
     readonly where: Option<IExpression<T>>;
-    readonly orderBy: Option<IComparator<T>>;
+    readonly orderBy: Option<GridSortModel>;
     readonly limit: (data: T[]) => T[];
   }
 > {
@@ -194,26 +195,22 @@ export default function build<T>(
           .exhaustive(),
       );
 
+  const columnValidate = (model: GridSortModel[number]) => {
+    if (model.field in resolver) {
+      return right(model);
+    } else {
+      return toValidated(
+        bail(model.field, `Cannot resolve ${model.field} with schema definition.`),
+      );
+    }
+  };
+
   return sequenceS(ap)({
     where: transpose(pipe(expr.where, option.map(cvt))),
     orderBy: transpose(
       pipe(
         expr.orderBy,
-        option.map((expr) =>
-          pipe(
-            separator(
-              expr.map(({ target, direction }) =>
-                sequenceS(ap)({
-                  target: cvt(target),
-                  direction: right(direction),
-                }),
-              ),
-            ),
-            either.map(
-              (ir) => new OrderByClause(ir.map((ir) => new OrderBy(ir.target, ir.direction))),
-            ),
-          ),
-        ),
+        option.map((orderby) => pipe(orderby.model.map(columnValidate), separator)),
       ),
     ),
     limit: right((arr: T[]): T[] => {
@@ -261,10 +258,6 @@ export interface IExpression<T> {
   apply(item: T): Lit;
 }
 
-export interface IComparator<T> {
-  compare(a: T, b: T): number;
-}
-
 /**
  * リテラル値（固定値）を表す式。
  * item (T) に依存せず、常に構築時の値を返す。
@@ -302,53 +295,5 @@ class Binary<T> implements IExpression<T> {
 
   apply(item: T): Lit {
     return this.operator(this.left.apply(item), this.right.apply(item));
-  }
-}
-
-class OrderBy<T> implements IComparator<T> {
-  constructor(
-    private target: IExpression<T>,
-    private direction: "ASC" | "DESC",
-  ) {}
-
-  compare(a: T, b: T): number {
-    const left = this.target.apply(a);
-    const right = this.target.apply(b);
-
-    if (left === right) {
-      return 0;
-    }
-
-    if (this.direction === "ASC") {
-      return left > right ? 1 : -1;
-    }
-
-    return left > right ? -1 : 1;
-  }
-}
-
-/**
- * Represents an order-by clause used to compare objects.
- * This class provides functionality for sorting objects based on multiple criteria in the order specified.
- * It implements the IComparator interface to define a custom comparison logic.
- *
- * @template T The type of objects being compared.
- *
- * @implements IComparator<T>
- */
-class OrderByClause<T> implements IComparator<T> {
-  constructor(private comparators: OrderBy<T>[]) {}
-
-  compare(a: T, b: T): number {
-    // 辞書式順序で比較
-
-    for (const comparator of this.comparators) {
-      const result = comparator.compare(a, b);
-      if (result !== 0) {
-        return result;
-      }
-    }
-
-    return 0;
   }
 }

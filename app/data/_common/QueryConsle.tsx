@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useCallback, useState } from "react";
+import { ComponentPropsWithoutRef, SetStateAction, useCallback, useState } from "react";
 import { flow, pipe } from "fp-ts/function";
 import { sqlToModel } from "@/parser/query/sql";
 import { either } from "fp-ts";
@@ -8,7 +8,7 @@ import { Box } from "@mui/system";
 import { Alert, IconButton, Modal, Snackbar, Tooltip } from "@mui/material";
 import { Lens } from "monocle-ts";
 import { ClearAll, Info, PlayArrowRounded, Share } from "@mui/icons-material";
-import { GridColDef } from "@mui/x-data-grid";
+import { GridColDef, GridSortModel } from "@mui/x-data-grid";
 import Console from "@/components/Console";
 import { isSome } from "fp-ts/Option";
 import build, { SchemaResolver } from "@/parser/query/filter";
@@ -63,7 +63,9 @@ export function QueryConsle<
   schema: Schema;
   queryAtom: WritableAtom<string, [SetStateAction<string>], void>;
   updateVisivilityAction: (whiteList: Set<GridColDef["field"]>) => void;
-  updateDataAction: Dispatch<SetStateAction<T[]>>;
+  updateDataAction: (
+    action: { type: "update"; data: T[] } | { type: "sort"; model: GridSortModel },
+  ) => void;
   help: ComponentPropsWithoutRef<typeof Modal>["children"];
   completion?: Record<string, ComleteCandidate>;
 }) {
@@ -113,10 +115,16 @@ export function QueryConsle<
           if (isRight(pred)) {
             const { where, orderBy, limit } = pred.right;
             if (isSome(where)) {
-              updateDataAction(() => limit(origin.filter(where.value.apply.bind(where.value))));
+              updateDataAction({
+                type: "update",
+                data: limit(origin.filter(where.value.apply.bind(where.value))),
+              });
             }
             if (isSome(orderBy)) {
-              updateDataAction((data) => data.toSorted(orderBy.value.compare.bind(orderBy.value)));
+              updateDataAction({
+                type: "sort",
+                model: orderBy.value,
+              });
             }
             if (!first) {
               setState(
@@ -157,7 +165,10 @@ export function QueryConsle<
     const atomicQuery = `select * from ${String(table)};`;
     setQuery(atomicQuery);
     setValue(atomicQuery);
-    updateDataAction(origin);
+    updateDataAction({
+      type: "update",
+      data: origin,
+    });
   }, [origin, table, setQuery, setValue, updateDataAction]);
 
   const [modalOpen, setModalOpen] = useState(false);
