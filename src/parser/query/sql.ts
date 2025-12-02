@@ -184,7 +184,7 @@ function parseOrderBy(orderby: OrderBy[] | null): Validated<MitamaError, Option<
               match(clause.type)
                 .with("ASC", () => "asc" as const)
                 .with("DESC", () => "desc" as const)
-                .otherwise(() => "desc" as const),
+                .otherwise(() => "asc" as const),
             ),
           }),
         ),

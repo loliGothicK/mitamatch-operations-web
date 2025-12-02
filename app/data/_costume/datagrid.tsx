@@ -28,7 +28,7 @@ import { useSetAtom } from "jotai";
 import { GridSortModel } from "@mui/x-data-grid";
 import { DataGrid } from "@/data/_common/DataGrid";
 
-const queryAtom = atomWithReset("select * from costume order by released;");
+const queryAtom = atomWithReset("select * from costume order by released desc;");
 
 const columns: GridColDef<Costume>[] = [
   {
