@@ -7,7 +7,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useRouter, useSearchParams } from "next/navigation";
-import { type ReactNode, type SyntheticEvent, useMemo, useState } from "react";
+import {type ReactNode, type SyntheticEvent, useEffect, useMemo, useState} from "react";
 import NotFound from "next/dist/client/components/builtin/not-found";
 import { z } from "zod";
 import View from "@/data/_character/view";
@@ -24,16 +24,28 @@ interface TabPanelProps {
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
+  const isActive = value === index;
+  const [hasBeenActive, setHasBeenActive] = useState(isActive);
+
+  useEffect(() => {
+    if (isActive && !hasBeenActive) {
+      setHasBeenActive(true);
+    }
+  }, [isActive, hasBeenActive]);
+
   return (
     <div
       role="tabpanel"
-      hidden={value !== index}
+      hidden={!isActive}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
-      style={{ display: value !== index ? "none" : "block" }} // 追加
+      style={{
+        display: isActive ? 'block' : 'none',
+        width: '100%'
+      }}
       {...other}
     >
-      <Box sx={{ p: 3 }}>{children}</Box> {/* 条件分岐を削除！ */}
+      {hasBeenActive && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -106,7 +118,7 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
           </Toolbar>
         </AppBar>
         {TABS.map((tab, index) => (
-          <CustomTabPanel index={index} value={value} key={tab.label}>
+          <CustomTabPanel index={index} value={value} key={tab.label} >
             {tabContents[index]}
           </CustomTabPanel>
         ))}

@@ -4,6 +4,7 @@ import costumeData from "./costume.json";
 import { match, P } from "ts-pattern";
 import { Option } from "fp-ts/Option";
 import { option } from "fp-ts";
+import { identity } from "fp-ts/function";
 
 const costumeSchema = z.object({
   id: z.number().readonly(),
@@ -78,8 +79,15 @@ const costumeSchema = z.object({
     )
     .optional()
     .nullable()
-    .readonly(),
-  released: z.iso.date().readonly(),
+    .readonly()
+    .transform((skills) =>
+      match(skills)
+        .with(P.nullish, identity)
+        .otherwise((skills) =>
+          skills.filter(({ description }) => !description.includes("ギガント級ヒュージ")),
+        ),
+    ),
+  released_at: z.iso.date().readonly(),
 });
 
 export type Ex = {

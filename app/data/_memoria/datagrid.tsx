@@ -328,7 +328,7 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   }, [initialQuery, setQuery]);
 
   return (
-    <Paper style={{ display: "flex", width: "100%", height: 1000, flexDirection: "column" }}>
+    <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
       <QueryConsle
         table={"memoria"}
         origin={original}

@@ -35,5 +35,5 @@ export const costumeLens = {
   cardType: Lens.fromPath<Costume>()(["cardType"]),
   status: Lens.fromPath<Costume>()(["status"]),
   rate: Lens.fromPath<Costume>()(["rate"]),
-  released: Lens.fromPath<Costume>()(["released"]),
+  released_at: Lens.fromPath<Costume>()(["released_at"]),
 };

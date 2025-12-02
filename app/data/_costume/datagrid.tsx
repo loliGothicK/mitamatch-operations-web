@@ -28,7 +28,7 @@ import { useSetAtom } from "jotai";
 import { GridSortModel } from "@mui/x-data-grid";
 import { DataGrid } from "@/data/_common/DataGrid";
 
-const queryAtom = atomWithReset("select * from costume order by released desc;");
+const queryAtom = atomWithReset("select * from costume order by released_at desc;");
 
 const columns: GridColDef<Costume>[] = [
   {
@@ -166,10 +166,10 @@ const columns: GridColDef<Costume>[] = [
     ),
   },
   {
-    field: "released",
-    headerName: "Released",
+    field: "released_at",
+    headerName: "Released Date",
     width: 100,
-    valueGetter: (_, costume) => Lenz.costume.general.released.get(costume),
+    valueGetter: (_, costume) => Lenz.costume.general.released_at.get(costume),
   },
 ];
 
@@ -184,7 +184,7 @@ export const schema = {
     "rareSkill.name",
     "rareSkill.desc",
     "specialSkill",
-    "released",
+    "released_at",
   ],
 };
 
@@ -228,9 +228,9 @@ const resolver: SchemaResolver<Costume> = {
       data: costume.specialSkill,
     }),
   },
-  released: {
+  released_at: {
     type: "string",
-    accessor: (costume: Costume) => Lenz.costume.general.released.get(costume),
+    accessor: (costume: Costume) => Lenz.costume.general.released_at.get(costume),
   },
 };
 
@@ -382,7 +382,7 @@ function Help(): JSX.Element {
   );
 }
 
-const HIDDEN_COLUMNS: GridColDef["field"][] = ["released"];
+const HIDDEN_COLUMNS: GridColDef["field"][] = ["released_at"];
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   const apiRef = useGridApiRef();
@@ -415,7 +415,7 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   }, [initialQuery, setQuery]);
 
   return (
-    <Paper style={{ display: "flex", width: "100%", height: 1000, flexDirection: "column" }}>
+    <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
       <QueryConsle
         table={"costume"}
         origin={original}

@@ -23,16 +23,18 @@ export function DataGrid<T extends GridValidRowModel>({
   visivility: [visivility, setVisivility],
 }: Props<T>) {
   return (
-    <MuiDataGrid
-      apiRef={apiRef}
-      rows={data}
-      rowHeight={80}
-      columns={columns}
-      columnVisibilityModel={visivility}
-      onColumnVisibilityModelChange={setVisivility}
-      initialState={{ pagination: { paginationModel } }}
-      pageSizeOptions={[5, 10, 50, 100]}
-      sx={{ border: 0 }}
-    />
+    <div style={{ display: 'flex', flexDirection: 'column', width: "100%" }}>
+      <MuiDataGrid
+        apiRef={apiRef}
+        rows={data}
+        rowHeight={80}
+        columns={columns}
+        columnVisibilityModel={visivility}
+        onColumnVisibilityModelChange={setVisivility}
+        initialState={{ pagination: { paginationModel } }}
+        pageSizeOptions={[5, 10, 50, 100]}
+        sx={{ border: 0 }}
+      />
+    </div>
   );
 }

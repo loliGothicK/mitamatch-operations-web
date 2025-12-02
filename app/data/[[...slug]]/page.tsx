@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
     .with(["memoria"], () => ["メモリア", "Memoria "])
     .with(["costume"], () => ["衣装", "Costume "])
     .with(["character"], () => ["キャラクター", "Character "])
-    .otherwise(() =>["メモリアも衣装もキャラクター", ""]);
+    .otherwise(() => ["メモリアも衣装もキャラクター", ""]);
 
   return pipe(
     defaultMetadata,
