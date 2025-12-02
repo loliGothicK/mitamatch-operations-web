@@ -27,7 +27,6 @@ import { atomWithReset } from "jotai/utils";
 import { useSetAtom } from "jotai";
 import { GridSortModel } from "@mui/x-data-grid";
 import { DataGrid } from "@/data/_common/DataGrid";
-import { useEffectOnce } from "react-use";
 
 const queryAtom = atomWithReset("select * from costume order by released;");
 
@@ -386,11 +385,6 @@ function Help(): JSX.Element {
 const HIDDEN_COLUMNS: GridColDef["field"][] = ["released"];
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
-  useEffectOnce(() => {
-    console.log("🔴 Datagrid mounted");
-    return () => console.log("🔴 Datagrid unmounted");
-  });
-
   const apiRef = useGridApiRef();
   const [visivility, setVisivility, visivilityChanged] = useVisivility(
     HIDDEN_COLUMNS.reduce((model, col) => {

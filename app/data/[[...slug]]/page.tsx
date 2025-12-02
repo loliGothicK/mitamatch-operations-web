@@ -63,17 +63,30 @@ export default async function Page({ params, searchParams }: Props) {
     .otherwise(() => <NotFound />);
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+type MetadataProps = {
+  params: Promise<{ slug: string[] | undefined }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+export async function generateMetadata({ params }: MetadataProps): Promise<Metadata> {
+  const slug = (await params).slug;
+
+  const [ja, camel] = match(slug)
+    .with(["memoria"], () => ["メモリア", "Memoria "])
+    .with(["costume"], () => ["衣装", "Costume "])
+    .with(["character"], () => ["キャラクター", "Character "])
+    .otherwise(() =>["メモリアも衣装もキャラクター", ""]);
+
   return pipe(
     defaultMetadata,
     Meta.openGraph.modify((openGraph) => ({
       ...openGraph,
-      title: "Deck Builder",
-      description: "豊富な絞り込み機能で探していたメモリアもすぐに見つかる！",
+      title: `${camel}Data`,
+      description: `豊富な絞り込み機能で探していた${ja}もすぐに見つかる！`,
     })),
     Meta.twitter.modify((twitter) => ({
       ...twitter,
-      description: "豊富な絞り込み機能で探していたメモリアもすぐに見つかる！",
+      description: `豊富な絞り込み機能で探していた${ja}もすぐに見つかる！`,
       card: "summary",
     })),
   );
