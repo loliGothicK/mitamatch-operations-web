@@ -1,4 +1,4 @@
-import { atom, getDefaultStore } from "jotai";
+import { atom } from "jotai";
 
 import type { Memoria, MemoriaId } from "@/domain/memoria/memoria";
 import { memoriaList } from "@/domain/memoria/memoria";
@@ -19,14 +19,12 @@ import type {
   VanguardSupportSearch,
 } from "@/types/searchType";
 
-import { encodeDeck } from "@/endec/serde";
 import { charmList } from "@/domain/charm/charm";
 import { costumeList } from "@/domain/costume/costume";
-import Cookies from "js-cookie";
 import { match, P } from "ts-pattern";
 import { Lenz } from "@/domain/lenz";
 import { isElementEffect, isStackEffect } from "@/parser/skill";
-import { activeProjectAtom } from "@/jotai/projectAtoms";
+import { atomWithStorage } from "jotai/utils";
 
 export const targetBeforeAtom = atom<MemoriaId[]>([]);
 export const targetAfterAtom = atom<MemoriaId[]>([]);
@@ -60,37 +58,16 @@ export const sortKind = [
 ] as const;
 export type SortKind = (typeof sortKind)[number];
 
-const deckAtom = atom<MemoriaWithConcentration[]>([]);
-export const rwDeckAtom = atom(
-  (get) => get(deckAtom),
-  (
-    get,
-    set,
-    update:
-      | MemoriaWithConcentration[]
-      | ((prev: MemoriaWithConcentration[]) => MemoriaWithConcentration[]),
-  ) => {
-    const newValue = typeof update === "function" ? update(get(deckAtom)) : update;
-    const index = getDefaultStore().get(activeProjectAtom);
-    Cookies.set(`deck-${index}`, encodeDeck(get(swAtom), newValue, get(rwLegendaryDeckAtom)));
-    set(deckAtom, newValue);
-  },
-);
+export const rwDeckAtom = atomWithStorage<MemoriaWithConcentration[]>("deck", [], undefined, {
+  getOnInit: true,
+});
 
-const legendaryDeckAtom = atom<MemoriaWithConcentration[]>([]);
-export const rwLegendaryDeckAtom = atom(
-  (get) => get(legendaryDeckAtom),
-  (
-    get,
-    set,
-    update:
-      | MemoriaWithConcentration[]
-      | ((prev: MemoriaWithConcentration[]) => MemoriaWithConcentration[]),
-  ) => {
-    const newValue = typeof update === "function" ? update(get(legendaryDeckAtom)) : update;
-    const index = getDefaultStore().get(activeProjectAtom);
-    Cookies.set(`deck-${index}`, encodeDeck(get(swAtom), get(rwDeckAtom), newValue));
-    set(legendaryDeckAtom, newValue);
+export const rwLegendaryDeckAtom = atomWithStorage<MemoriaWithConcentration[]>(
+  "legendary-deck",
+  [],
+  undefined,
+  {
+    getOnInit: true,
   },
 );
 

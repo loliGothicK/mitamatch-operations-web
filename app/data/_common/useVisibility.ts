@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { GridColDef, GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { match, P } from "ts-pattern";
 
-export const useVisivility = (all: GridColumnVisibilityModel) => {
+export const useVisibility = (all: GridColumnVisibilityModel) => {
   const [visivility, setVisivility] = useState(all);
 
   const changed = useCallback(

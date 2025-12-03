@@ -1,14 +1,12 @@
-import Paper from "@mui/material/Paper";
 import { type Costume, costumeList as dataSource } from "@/domain/costume/costume";
 
 import { type GridColDef, type GridColumnVisibilityModel, useGridApiRef } from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
 import Image from "next/image";
-import { JSX, useCallback, useEffect, useMemo } from "react";
+import { JSX, useCallback, useMemo } from "react";
 import Link from "@/components/link";
-import { QueryConsle } from "@/data/_common/QueryConsle";
 import { Clazz, SchemaResolver } from "@/parser/query/filter";
-import { useVisivility } from "@/data/_common/useVisivility";
+import { useVisibility } from "@/data/_common/useVisibility";
 import {
   Box,
   Chip,
@@ -23,12 +21,8 @@ import { match, P } from "ts-pattern";
 import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
-import { atomWithReset } from "jotai/utils";
-import { useSetAtom } from "jotai";
 import { GridSortModel } from "@mui/x-data-grid";
 import { DataGrid } from "@/data/_common/DataGrid";
-
-const queryAtom = atomWithReset("select * from costume order by released_at desc;");
 
 const columns: GridColDef<Costume>[] = [
   {
@@ -386,13 +380,12 @@ const HIDDEN_COLUMNS: GridColDef["field"][] = ["released_at"];
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   const apiRef = useGridApiRef();
-  const [visivility, setVisivility, visivilityChanged] = useVisivility(
+  const [visibility, setVisibility, visibilityChanged] = useVisibility(
     HIDDEN_COLUMNS.reduce((model, col) => {
       model[col] = false;
       return model;
     }, visivilityAll),
   );
-  const setQuery = useSetAtom(queryAtom);
 
   const replaceDataSource = useCallback(
     (action: { type: "update"; data: Costume[] } | { type: "sort"; model: GridSortModel }) => {
@@ -408,31 +401,21 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
 
   const original = useMemo(() => dataSource.toReversed(), []);
 
-  useEffect(() => {
-    if (initialQuery) {
-      setQuery(initialQuery);
-    }
-  }, [initialQuery, setQuery]);
-
   return (
-    <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
-      <QueryConsle
-        table={"costume"}
-        origin={original}
-        resolver={resolver}
-        queryAtom={queryAtom}
-        schema={schema}
-        updateVisivilityAction={visivilityChanged}
-        updateDataAction={replaceDataSource}
-        completion={completeCandidates}
-        help={<Help />}
-      />
-      <DataGrid
-        apiRef={apiRef}
-        data={original}
-        columns={columns}
-        visivility={[visivility, setVisivility]}
-      />
-    </Paper>
+    <DataGrid
+      table={"costume"}
+      origin={original}
+      resolver={resolver}
+      initialQuery={initialQuery}
+      schema={schema}
+      updateVisibilityAction={visibilityChanged}
+      updateDataAction={replaceDataSource}
+      completion={completeCandidates}
+      help={<Help />}
+      apiRef={apiRef}
+      data={original}
+      columns={columns}
+      visibility={[visibility, setVisibility]}
+    />
   );
 }

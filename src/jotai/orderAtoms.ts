@@ -1,6 +1,7 @@
 import { atom } from "jotai";
 
 import { type Order, type OrderKind, orderList } from "@/domain/order/order";
+import { atomWithStorage } from "jotai/utils";
 
 export type OrderWithPic = Order & {
   delay:
@@ -17,7 +18,9 @@ export type OrderWithPic = Order & {
 };
 
 export const timelineTitleAtom = atom("No Title");
-export const timelineAtom = atom<OrderWithPic[]>([]);
+export const timelineAtom = atomWithStorage<OrderWithPic[]>("timeline", [], undefined, {
+  getOnInit: true,
+});
 
 export const payedAtom = atom(true);
 export const filterAtom = atom<

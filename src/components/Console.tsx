@@ -71,7 +71,6 @@ export default function Console<
   value?: string;
   schema: Schema;
   completions?: readonly CompletionSource[];
-  initialeValue?: string;
   execute: () => void;
   onChange: (val: string, _: unknown) => void;
 }) {

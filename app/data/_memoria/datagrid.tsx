@@ -1,4 +1,3 @@
-import Paper from "@mui/material/Paper";
 import { type Memoria, memoriaList as dataSource } from "@/domain/memoria/memoria";
 
 import {
@@ -10,19 +9,14 @@ import {
 import { Lenz } from "@/domain/lenz";
 import type { Attribute } from "@/parser/skill";
 import { match } from "ts-pattern";
-import { JSX, useCallback, useEffect, useMemo } from "react";
+import { JSX, useCallback, useMemo } from "react";
 import Link from "@/components/link";
-import { QueryConsle } from "@/data/_common/QueryConsle";
 import { SchemaResolver } from "@/parser/query/filter";
-import { useVisivility } from "@/data/_common/useVisivility";
+import { useVisibility } from "@/data/_common/useVisibility";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
-import { atomWithReset } from "jotai/utils";
-import { useSetAtom } from "jotai";
 import { Box, List, ListItem, ListItemText, ListSubheader, Typography } from "@mui/material";
 import { MemoriaIcon } from "@/components/image/MemoriaIcon";
 import { DataGrid } from "@/data/_common/DataGrid";
-
-const queryAtom = atomWithReset("select * from memoria where `cost` > 18;");
 
 const columns: GridColDef<Memoria>[] = [
   {
@@ -223,7 +217,7 @@ const resolver: SchemaResolver<Memoria> = {
   },
 };
 
-const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
+const visibilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
   acc[col.field] = true;
   return acc;
 }, {});
@@ -304,8 +298,7 @@ function Help(): JSX.Element {
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   const apiRef = useGridApiRef();
-  const [visivility, setVisivility, visivilityChanged] = useVisivility(visivilityAll);
-  const setQuery = useSetAtom(queryAtom);
+  const [visibility, setVisibility, visibilityChanged] = useVisibility(visibilityAll);
 
   const replaceDataSource = useCallback(
     (action: { type: "update"; data: Memoria[] } | { type: "sort"; model: GridSortModel }) => {
@@ -321,31 +314,21 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
 
   const original = useMemo(() => dataSource.toReversed(), []);
 
-  useEffect(() => {
-    if (initialQuery) {
-      setQuery(initialQuery);
-    }
-  }, [initialQuery, setQuery]);
-
   return (
-    <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
-      <QueryConsle
-        table={"memoria"}
-        origin={original}
-        resolver={resolver}
-        queryAtom={queryAtom}
-        schema={schema}
-        updateVisivilityAction={visivilityChanged}
-        updateDataAction={replaceDataSource}
-        completion={completeCandidates}
-        help={<Help />}
-      />
-      <DataGrid
-        apiRef={apiRef}
-        data={original}
-        columns={columns}
-        visivility={[visivility, setVisivility]}
-      />
-    </Paper>
+    <DataGrid
+      table={"memoria"}
+      origin={original}
+      resolver={resolver}
+      initialQuery={initialQuery}
+      schema={schema}
+      updateVisibilityAction={visibilityChanged}
+      updateDataAction={replaceDataSource}
+      completion={completeCandidates}
+      help={<Help />}
+      apiRef={apiRef}
+      data={original}
+      columns={columns}
+      visibility={[visibility, setVisibility]}
+    />
   );
 }

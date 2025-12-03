@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,14 +54,16 @@ export default async function RootLayout({
 }>) {
   const nonce = (await headers()).get("x-nonce") || undefined;
   return (
-    <html lang="ja">
-      <body className={inter.className}>
-        {children}
-        <Analytics />
-        <SpeedInsights />
-      </body>
-      <GoogleTagManager gtmId={`${process.env.GTM}`} nonce={nonce} />
-      <GoogleAnalytics gaId={`${process.env.GTAG}`} nonce={nonce} />
-    </html>
+    <ClerkProvider>
+      <html lang="ja">
+        <body className={inter.className}>
+          {children}
+          <Analytics />
+          <SpeedInsights />
+        </body>
+        <GoogleTagManager gtmId={`${process.env.GTM}`} nonce={nonce} />
+        <GoogleAnalytics gaId={`${process.env.GTAG}`} nonce={nonce} />
+      </html>
+    </ClerkProvider>
   );
 }

@@ -9,7 +9,6 @@ import {
   SetStateAction,
   Suspense,
   useCallback,
-  useEffect,
   useId,
   useState,
 } from "react";
@@ -101,7 +100,6 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import Toolbar from "@mui/material/Toolbar";
 import { useTheme } from "@mui/material/styles";
-import Cookies from "js-cookie";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { Virtuoso } from "react-virtuoso";
 import { match } from "ts-pattern";
@@ -111,6 +109,7 @@ import { Calculator } from "@/deck-builder/_tabs/calculator";
 import type { ImageProps } from "next/dist/shared/lib/get-img-props";
 import type { StrictOmit } from "ts-essentials";
 import { isLeft } from "fp-ts/Either";
+import { useAsync } from "react-use";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -486,44 +485,25 @@ function UnitComponent({ index }: { index: number }) {
   const [, setRoleFilter] = useAtom(roleFilterAtom);
   const [, setCompare] = useAtom(compareModeAtom);
 
-  useEffect(() => {
-    (async () => {
-      const value = params.get("deck");
-      const title = params.get("title");
-      setTitle(title ? decodeURI(title) : "No Title");
-      const cookie = Cookies.get(`deck-${index}`);
-      if (value) {
-        const { sw, deck, legendaryDeck } = await restore({
-          target: "deck",
-          param: value,
-        });
-        setSw(sw);
-        setRoleFilter(
-          sw === "shield"
-            ? ["support", "interference", "recovery"]
-            : ["normal_single", "normal_range", "special_single", "special_range"],
-        );
-        setDeck(deck);
-        setLegendaryDeck(legendaryDeck);
-        setCompare(undefined);
-      } else if (cookie) {
-        const decodeResult = decodeDeck(cookie);
-        if (decodeResult.isOk()) {
-          const { sw, deck, legendaryDeck } = decodeResult.value;
-          setSw(sw);
-          setRoleFilter(
-            sw === "shield"
-              ? ["support", "interference", "recovery"]
-              : ["normal_single", "normal_range", "special_single", "special_range"],
-          );
-          setDeck(deck);
-          setLegendaryDeck(legendaryDeck);
-          setCompare(undefined);
-        } else {
-          throw new Error(`Failed to restore deck: \n${decodeResult.error}`);
-        }
-      }
-    })();
+  useAsync(async () => {
+    const value = params.get("deck");
+    const title = params.get("title");
+    setTitle(title ? decodeURI(title) : "No Title");
+    if (value) {
+      const { sw, deck, legendaryDeck } = await restore({
+        target: "deck",
+        param: value,
+      });
+      setSw(sw);
+      setRoleFilter(
+        sw === "shield"
+          ? ["support", "interference", "recovery"]
+          : ["normal_single", "normal_range", "special_single", "special_range"],
+      );
+      setDeck(deck);
+      setLegendaryDeck(legendaryDeck);
+      setCompare(undefined);
+    }
   }, [setTitle, setDeck, setLegendaryDeck, setRoleFilter, setSw, params, setCompare, index]);
 
   return (

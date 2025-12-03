@@ -2,42 +2,34 @@
 
 import { Provider, getDefaultStore } from "jotai";
 import Footer from "@/components/Footer";
-import { mainListItems } from "@/components/home/listItems";
-import { DarkMode, LightMode, Person, Menu as MenuIcon, Folder } from "@mui/icons-material";
+import { DarkMode, LightMode, Menu as MenuIcon } from "@mui/icons-material";
 import {
   AppBar as MuiAppBar,
   Box,
   Button,
   CssBaseline,
-  Divider,
-  Drawer as MuiDrawer,
   IconButton,
-  List,
   MenuItem,
   Stack,
   Toolbar,
   Menu,
   Typography,
-  Tooltip,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
+  Drawer as MuiDrawer,
+  List,
+  Divider,
 } from "@mui/material";
 import { createTheme, styled, useTheme } from "@mui/material/styles";
 import { ThemeProvider, useMediaQuery } from "@mui/system";
 import { type ReactNode, createContext, useContext, useEffect, useMemo, useState } from "react";
 import { redirect } from "next/navigation";
-import { defaultSession, type SessionData } from "@/session/sessionData";
 import Image from "next/image";
-import { getSession } from "@/actions/auth";
-import ProjectTreeView from "@/components/project";
 import { match } from "ts-pattern";
 import { darkTheme, lightTheme } from "@/theme/theme";
 import Grid from "@mui/material/Grid";
 import Link from "@/components/link";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
-import { useAtom } from "jotai";
-import { projectOpenAtom } from "@/jotai/projectAtoms";
+import { mainListItems } from "@/components/home/listItems";
+import User from "@/components/clerk/User";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -64,24 +56,8 @@ const MenuIcons = styled(MuiDrawer)(({ theme }) => ({
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function BasicLayout({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<Omit<SessionData, "expires">>(defaultSession);
-  const [, setProjectOpen] = useAtom(projectOpenAtom);
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
-
-  useEffect(() => {
-    (async () => {
-      const user = await getSession();
-      if (user) {
-        setUser({
-          ...user,
-          isLoggedIn: true,
-        });
-      } else {
-        setProjectOpen(false);
-      }
-    })();
-  }, [setProjectOpen]);
 
   const menuDropdown = () => {};
 
@@ -93,7 +69,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
         gridTemplateRows: "auto 1fr auto",
         gridTemplateAreas: `
         "header header header"
-        "navigation project content"
+        "navigation content content"
         "footer footer footer"
       `,
       }}
@@ -163,46 +139,13 @@ function BasicLayout({ children }: { children: ReactNode }) {
           <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
             {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
           </IconButton>
-          <IconButton onClick={() => redirect("/api/auth/discord")}>
-            {user.isLoggedIn ? (
-              user.userAvatar !== "default" ? (
-                <Image
-                  src={`https://cdn.discordapp.com/avatars/${user.userId}/${user.userAvatar}.png`}
-                  alt={"avatar"}
-                  width={20}
-                  height={20}
-                />
-              ) : (
-                <Image
-                  src={"https://cdn.discordapp.com/embed/avatars/0.png"}
-                  alt={"avatar"}
-                  width={20}
-                  height={20}
-                />
-              )
-            ) : (
-              <Person sx={{ flexGrow: 0.05 }} width={20} height={20} />
-            )}
-          </IconButton>
+          <User />
         </Toolbar>
       </AppBar>
       <MenuIcons variant="permanent" sx={{ gridArea: "navigation" }}>
-        <List component="nav">
-          {user.isLoggedIn && (
-            <Tooltip title={"Project"} key={"Project"} arrow placement={"right-end"}>
-              <ListItemButton onClick={() => setProjectOpen(true)}>
-                <ListItemIcon>
-                  <Folder />
-                </ListItemIcon>
-                <ListItemText primary={"Project"} />
-              </ListItemButton>
-            </Tooltip>
-          )}
-          {mainListItems}
-        </List>
+        <List component="nav">{mainListItems}</List>
         <Divider />
       </MenuIcons>
-      <ProjectTreeView sx={{ gridArea: "project" }} />
       <Grid
         container
         component="main"

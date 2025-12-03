@@ -3,58 +3,50 @@
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import {
-  type FormEvent,
-  SetStateAction,
-  Suspense,
-  useCallback,
-  useEffect,
-  useId,
-  useState,
-} from "react";
+import { type FormEvent, SetStateAction, Suspense, useCallback, useId, useState } from "react";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 import { Add, Assignment, DragIndicator, Edit, Remove, Share } from "@mui/icons-material";
 import {
+  alpha,
   Avatar,
   Box,
   Button,
+  Card,
   Container,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
+  FormControl,
   Grid,
   IconButton,
+  InputAdornment,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
   Menu,
   MenuItem,
+  OutlinedInput,
   Snackbar,
   Stack,
   Switch,
   TextField,
-  Typography,
-  alpha,
-  Card,
-  FormControl,
-  OutlinedInput,
-  InputAdornment,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/system";
 
-import { decodeTimeline, encodeTimeline } from "@/endec/serde";
+import { encodeTimeline } from "@/endec/serde";
 import { Layout } from "@/components/Layout";
 import Sortable from "@/components/sortable/Sortable";
 import {
-  type OrderWithPic,
   filterAtom,
   filteredOrderAtom,
+  type OrderWithPic,
   payedAtom,
   timelineAtom,
   timelineTitleAtom,
@@ -62,7 +54,6 @@ import {
 
 import { useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import Cookies from "js-cookie";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { Virtuoso } from "react-virtuoso";
 import { generateShortLink, saveShortLink } from "@/actions/permlink";
@@ -75,6 +66,7 @@ import {
 } from "@/timeline-builder/_hook";
 import { match } from "ts-pattern";
 import { identity } from "fp-ts/function";
+import { useAsync } from "react-use";
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -224,7 +216,6 @@ function TimelineItem({ order }: { order: ComputedOrder }) {
           onClick={() => {
             // remove order from timeline
             setTimeline((prev) => {
-              Cookies.set("timeline", encodeTimeline(prev.filter((o) => o.id !== order.id)));
               return prev.filter((o) => o.id !== order.id);
             });
           }}
@@ -329,18 +320,12 @@ function Timeline() {
   const handleChange = useCallback(
     (action: SetStateAction<OrderWithPic[]>) => {
       if (typeof action === "function") {
-        console.log("???");
         setTimeline((prev) => {
-          const newTimeline = normalizeTimeline(action(prev));
-          Cookies.set("timeline", encodeTimeline(newTimeline));
-          return newTimeline;
+          return normalizeTimeline(action(prev));
         });
       } else {
-        console.log("!!!");
         const newTimeline = normalizeTimeline(action);
-        console.log(newTimeline);
         setTimeline(newTimeline);
-        Cookies.set("timeline", encodeTimeline(newTimeline));
       }
     },
     [setTimeline],
@@ -349,25 +334,16 @@ function Timeline() {
   // ■ ここで計算済みデータを取得
   const computedOrders = useComputedTimeline(timeline);
 
-  useEffect(() => {
-    (async () => {
-      const value = params.get("timeline");
-      const title = params.get("title");
-      if (title)
-        setTitle(decodeURI(title)); // Null check fix
-      else setTitle("No Title");
+  useAsync(async () => {
+    const value = params.get("timeline");
+    const title = params.get("title");
+    if (title) setTitle(decodeURI(title));
+    else setTitle("No Title");
 
-      const cookie = Cookies.get("timeline");
-      if (value) {
-        const restored = await restore({ target: "timeline", param: value });
-        setTimeline(restored);
-      } else if (cookie) {
-        const decodeResult = decodeTimeline(cookie);
-        if (decodeResult.isOk()) {
-          setTimeline(decodeResult.value);
-        }
-      }
-    })();
+    if (value) {
+      const restored = await restore({ target: "timeline", param: value });
+      setTimeline(restored);
+    }
   }, [setTitle, setTimeline, params]);
 
   return (
@@ -436,11 +412,7 @@ function Source() {
           source: "auto",
         },
       };
-
-      const newTimeline = normalizeTimeline([...prev, newOrder]);
-
-      Cookies.set("timeline", encodeTimeline(newTimeline));
-      return newTimeline;
+      return normalizeTimeline([...prev, newOrder]);
     });
   };
 
