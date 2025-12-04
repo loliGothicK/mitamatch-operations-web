@@ -141,8 +141,8 @@ importers:
         specifier: 17.2.3
         version: 17.2.3
       drizzle-cuid2:
-        specifier: 2.1.0
-        version: 2.1.0(drizzle-orm@0.44.7(@neondatabase/serverless@1.0.2)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.15.6)(pg@8.16.3)(prisma@6.5.0(typescript@5.9.3)))
+        specifier: 2.2.0
+        version: 2.2.0(drizzle-orm@0.44.7(@neondatabase/serverless@1.0.2)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.15.6)(pg@8.16.3)(prisma@6.5.0(typescript@5.9.3)))
       drizzle-orm:
         specifier: 0.44.7
         version: 0.44.7(@neondatabase/serverless@1.0.2)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.15.6)(pg@8.16.3)(prisma@6.5.0(typescript@5.9.3))
@@ -3384,8 +3384,8 @@ packages:
     resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
     engines: {node: '>=12'}
 
-  drizzle-cuid2@2.1.0:
-    resolution: {integrity: sha512-pvd++DQaAgCkGaQtQiUQOdqJchbGCbMQ2BAa9eaDoLxV0ONS8RybO0SyRoL5UOvSGsOF2ZjUrAnn6Y+Z/bHelA==}
+  drizzle-cuid2@2.2.0:
+    resolution: {integrity: sha512-LvTzxJhEocN/AWgJvio/JlPMKQ7tTjeogNBRo9TauEH0gu8yaMkDWPmN8NTIO/mrD4pwH44Lt0BJQ81NTtGhAw==}
     peerDependencies:
       drizzle-orm: '>=0.28.3'
 
@@ -8466,7 +8466,7 @@ snapshots:
 
   dotenv@17.2.3: {}
 
-  drizzle-cuid2@2.1.0(drizzle-orm@0.44.7(@neondatabase/serverless@1.0.2)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.15.6)(pg@8.16.3)(prisma@6.5.0(typescript@5.9.3))):
+  drizzle-cuid2@2.2.0(drizzle-orm@0.44.7(@neondatabase/serverless@1.0.2)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.15.6)(pg@8.16.3)(prisma@6.5.0(typescript@5.9.3))):
     dependencies:
       '@paralleldrive/cuid2': 2.2.2
       drizzle-orm: 0.44.7(@neondatabase/serverless@1.0.2)(@opentelemetry/api@1.9.0)(@prisma/client@6.5.0(prisma@6.5.0(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.15.6)(pg@8.16.3)(prisma@6.5.0(typescript@5.9.3))
