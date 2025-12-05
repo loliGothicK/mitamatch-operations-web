@@ -23,13 +23,13 @@ function CardTypeIcon({
     height: size * 0.8,
   };
   const kindImage = match(cardType)
-    .with("通常単体", () => <Image src={"/NormalSingle.png"} alt={"kind"} {...wh} />)
-    .with("通常範囲", () => <Image src={"/NormalRange.png"} alt={"kind"} {...wh} />)
-    .with("特殊単体", () => <Image src={"/SpecialSingle.png"} alt={"kind"} {...wh} />)
-    .with("特殊範囲", () => <Image src={"/SpecialRange.png"} alt={"kind"} {...wh} />)
-    .with("支援", () => <Image src={"/Assist.png"} alt={"kind"} {...wh} />)
-    .with("妨害", () => <Image src={"/Interference.png"} alt={"kind"} {...wh} />)
-    .with("回復", () => <Image src={"/Recovery.png"} alt={"kind"} {...wh} />)
+    .with(1, () => <Image src={"/NormalSingle.png"} alt={"kind"} {...wh} />)
+    .with(2, () => <Image src={"/NormalRange.png"} alt={"kind"} {...wh} />)
+    .with(3, () => <Image src={"/SpecialSingle.png"} alt={"kind"} {...wh} />)
+    .with(4, () => <Image src={"/SpecialRange.png"} alt={"kind"} {...wh} />)
+    .with(5, () => <Image src={"/Assist.png"} alt={"kind"} {...wh} />)
+    .with(6, () => <Image src={"/Interference.png"} alt={"kind"} {...wh} />)
+    .with(7, () => <Image src={"/Recovery.png"} alt={"kind"} {...wh} />)
     .exhaustive();
 
   const avatar = (color: string) => (

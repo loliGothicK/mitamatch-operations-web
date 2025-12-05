@@ -1,4 +1,4 @@
-import { type Memoria, memoriaList as dataSource } from "@/domain/memoria/memoria";
+import { formatCardType, type Memoria, memoriaList as dataSource } from "@/domain/memoria/memoria";
 
 import {
   type GridColDef,
@@ -28,17 +28,7 @@ const columns: GridColDef<Memoria>[] = [
       name: Lenz.memoria.general.shortName.get(memoria),
     }),
     renderCell: (params) => (
-      <Link
-        href={`/data/memoria/${encodeURI(params.row.name.full)}?type=${match(params.row.cardType)
-          .with("通常単体", () => 1)
-          .with("通常範囲", () => 2)
-          .with("特殊単体", () => 3)
-          .with("特殊範囲", () => 4)
-          .with("支援", () => 5)
-          .with("妨害", () => 6)
-          .with("回復", () => 7)
-          .exhaustive()}`}
-      >
+      <Link href={`/data/memoria/${encodeURI(params.row.name.full)}?type=${params.row.cardType}`}>
         <MemoriaIcon memoria={params.row} size={80} />
       </Link>
     ),
@@ -151,7 +141,7 @@ const resolver: SchemaResolver<Memoria> = {
   },
   type: {
     type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.cardType.get(memoria),
+    accessor: (memoria: Memoria) => formatCardType(Lenz.memoria.general.cardType.get(memoria)),
   },
   attribute: {
     type: "string",

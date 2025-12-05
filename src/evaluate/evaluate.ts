@@ -231,14 +231,14 @@ function calculateSupportModifier(
   adxRates: AttributeRates,
 ): number {
   // 攻撃系スキルはサポート補正を受けない
-  if (memoria.cardType.includes("特殊") || memoria.cardType.includes("通常")) {
+  if (memoria.cardType < 5) {
     return 1.0;
   }
 
   return aggregateSkillEffectBoosts(
     deck,
     memoria,
-    memoria.cardType === "回復" ? "RecoveryUp" : "SupportUp",
+    memoria.cardType === 7 ? "RecoveryUp" : "SupportUp",
     adxRates,
   );
 }

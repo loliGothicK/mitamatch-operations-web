@@ -8,8 +8,8 @@ import { eq } from "drizzle-orm";
 const sql = neon(process.env.POSTGRES_URL!);
 const db = drizzle({ client: sql });
 
-export async function getUser(discordId: string) {
-  const result = await db.select().from(users).where(eq(users.discordId, discordId));
+export async function getUser(clerkUserId: string) {
+  const result = await db.select().from(users).where(eq(users.clerkUserId, clerkUserId));
 
   return result[0];
 }
@@ -34,56 +34,6 @@ export async function getTimelineFullUrl(short: string) {
   }
 
   return result[0].full;
-}
-
-export function updateToken(update: {
-  discordId: string;
-  accessToken: string;
-  refreshToken: string;
-}) {
-  const now = new Date();
-
-  return db
-    .update(users)
-    .set({
-      accessToken: update.accessToken,
-      refreshToken: update.refreshToken,
-      updatedAt: now.toISOString(),
-    })
-    .where(eq(users.discordId, update.discordId))
-    .returning({
-      id: users.id,
-    });
-}
-
-export function upsertUser(create: {
-  discordId: string;
-  email: string;
-  name: string;
-  avatar: string;
-  accessToken: string;
-  refreshToken: string;
-}) {
-  const now = new Date();
-
-  return db
-    .insert(users)
-    .values({
-      discordId: create.discordId,
-      email: create.email,
-      name: create.name,
-      avatar: create.avatar,
-      accessToken: create.accessToken,
-      refreshToken: create.refreshToken,
-      updatedAt: now.toISOString(),
-    })
-    .onConflictDoUpdate({
-      target: users.discordId,
-      set: { updatedAt: now.toISOString() },
-    })
-    .returning({
-      id: users.id,
-    });
 }
 
 export function upsertDeck(create: {

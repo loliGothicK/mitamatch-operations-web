@@ -3,6 +3,7 @@ import type { MemoriaWithConcentration } from "@/jotai/memoriaAtoms";
 import type { Attribute } from "@/parser/skill";
 import { INITIAL_ATTRIBUTE_RATES } from "../constants";
 import type { AttributeRates } from "../types";
+import { Memoria } from "@/domain/memoria/memoria";
 
 type TriggerType = "Attack/Physical" | "Attack/Magical" | "Assist" | "Recovery";
 
@@ -65,15 +66,15 @@ export function getRecoveryLegendaryRates(deck: MemoriaWithConcentration[]): Att
  * カードタイプに応じたレジェンダリー倍率を取得
  */
 export function getLegendaryRateByCardType(
-  cardType: string,
+  cardType: Memoria["cardType"],
   attribute: Attribute,
   normalRates: AttributeRates,
   specialRates: AttributeRates,
   supportRates: AttributeRates,
 ): number {
   return match(cardType)
-    .with("通常単体", "通常範囲", () => normalRates[attribute])
-    .with("特殊単体", "特殊範囲", () => specialRates[attribute])
-    .with("支援", "妨害", () => supportRates[attribute])
+    .with(1, 2, () => normalRates[attribute])
+    .with(3, 4, () => specialRates[attribute])
+    .with(5, 6, () => supportRates[attribute])
     .otherwise(() => 1.0);
 }

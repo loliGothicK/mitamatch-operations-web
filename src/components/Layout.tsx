@@ -75,7 +75,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
       }}
     >
       <AppBar position="absolute" sx={{ gridArea: "header" }}>
-        <Toolbar>
+        <Toolbar sx={{ gap: 2 }}>
           <IconButton
             edge="start"
             color="inherit"
@@ -136,6 +136,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
             </PopupState>
           </Stack>
           <Box flexGrow={0.5} />
+          <Divider orientation="vertical" flexItem />
           <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
             {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
           </IconButton>

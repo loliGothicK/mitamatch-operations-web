@@ -1,6 +1,18 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-export default clerkMiddleware();
+const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
+
+export default clerkMiddleware(
+  async (auth, req) => {
+    if (isProtectedRoute(req)) await auth.protect();
+  },
+  {
+    authorizedParties:
+      process.env.NODE_ENV === "development"
+        ? ["https://mitama.io", "http://localhost:3000"]
+        : ["https://mitama.io"],
+  },
+);
 
 // Routes Middleware should not run on
 export const config = {

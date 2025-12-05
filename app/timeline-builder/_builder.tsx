@@ -56,7 +56,7 @@ import { useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { Virtuoso } from "react-virtuoso";
-import { generateShortLink, saveShortLink } from "@/actions/permlink";
+import { saveShortLink } from "@/actions/permlink";
 import { restore } from "@/actions/restore";
 import {
   ComputedOrder,
@@ -67,6 +67,7 @@ import {
 import { match } from "ts-pattern";
 import { identity } from "fp-ts/function";
 import { useAsync } from "react-use";
+import { ulid } from "ulid";
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -564,7 +565,7 @@ function ShareButton() {
               onClick={async () => {
                 popupState.close();
                 handleClick("short");
-                const short = await generateShortLink({ full });
+                const short = ulid();
                 setUrl(
                   `https://operations.mitama.io/timeline-builder?timeline=${short}&title=${encodeURI(title)}`,
                 );

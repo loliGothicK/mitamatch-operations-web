@@ -14,7 +14,7 @@ import {
 } from "react";
 import DifferenceIcon from "@mui/icons-material/Difference";
 import type { Unit } from "@/domain/types";
-import { generateShortLink, saveShortLink } from "@/actions/permlink";
+import { saveShortLink } from "@/actions/permlink";
 import { restore } from "@/actions/restore";
 
 import {
@@ -110,6 +110,7 @@ import type { ImageProps } from "next/dist/shared/lib/get-img-props";
 import type { StrictOmit } from "ts-essentials";
 import { isLeft } from "fp-ts/Either";
 import { useAsync } from "react-use";
+import { ulid } from "ulid";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -123,15 +124,13 @@ function Icon({
   position?: number;
 }) {
   const kindImage = match(cardType)
-    .with("通常単体", () => <Image src={"/NormalSingle.png"} alt={"kind"} width={25} height={25} />)
-    .with("通常範囲", () => <Image src={"/NormalRange.png"} alt={"kind"} width={25} height={25} />)
-    .with("特殊単体", () => (
-      <Image src={"/SpecialSingle.png"} alt={"kind"} width={25} height={25} />
-    ))
-    .with("特殊範囲", () => <Image src={"/SpecialRange.png"} alt={"kind"} width={25} height={25} />)
-    .with("支援", () => <Image src={"/Assist.png"} alt={"kind"} width={25} height={25} />)
-    .with("妨害", () => <Image src={"/Interference.png"} alt={"kind"} width={25} height={25} />)
-    .with("回復", () => <Image src={"/Recovery.png"} alt={"kind"} width={25} height={25} />)
+    .with(1, () => <Image src={"/NormalSingle.png"} alt={"kind"} width={25} height={25} />)
+    .with(2, () => <Image src={"/NormalRange.png"} alt={"kind"} width={25} height={25} />)
+    .with(3, () => <Image src={"/SpecialSingle.png"} alt={"kind"} width={25} height={25} />)
+    .with(4, () => <Image src={"/SpecialRange.png"} alt={"kind"} width={25} height={25} />)
+    .with(5, () => <Image src={"/Assist.png"} alt={"kind"} width={25} height={25} />)
+    .with(6, () => <Image src={"/Interference.png"} alt={"kind"} width={25} height={25} />)
+    .with(7, () => <Image src={"/Recovery.png"} alt={"kind"} width={25} height={25} />)
     .exhaustive();
 
   const avatar = (color: string) => (
@@ -1313,7 +1312,7 @@ function ShareButton() {
               onClick={async () => {
                 popupState.close();
                 handleClick("short");
-                const short = await generateShortLink({ full });
+                const short = ulid();
                 setUrl(
                   `https://operations.mitama.io/deck-builder?deck=${short}&title=${encodeURI(title)}`,
                 );

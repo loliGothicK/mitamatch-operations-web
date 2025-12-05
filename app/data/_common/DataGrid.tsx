@@ -30,11 +30,11 @@ import queryAtom from "@/jotai/queryAtoms";
 import { useAtom } from "jotai";
 import { useEffectOnce } from "react-use";
 
-type SingleStringArrayField<T> = {
-  [K in keyof T]: Record<K, string[]>;
+type Spread<T, V> = {
+  [K in keyof T]: Record<K, V>;
 }[keyof T];
 
-type hasAtom = SingleStringArrayField<typeof queryAtom>;
+type hasAtom = Spread<typeof queryAtom, string[]>;
 
 type Props<
   T extends GridValidRowModel,

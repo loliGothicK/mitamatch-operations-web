@@ -24,7 +24,7 @@ const ActiveSkillSchema = z.object({
 });
 
 const memoriaSchema = z.object({
-  id: z.number().readonly(),
+  id: z.ulid().readonly(),
   name: z.string().readonly(),
   cardType: z
     .union([
@@ -36,17 +36,6 @@ const memoriaSchema = z.object({
       z.literal(6),
       z.literal(7),
     ])
-    .transform((type) =>
-      match(type)
-        .with(1, () => "通常単体" as const)
-        .with(2, () => "通常範囲" as const)
-        .with(3, () => "特殊単体" as const)
-        .with(4, () => "特殊範囲" as const)
-        .with(5, () => "支援" as const)
-        .with(6, () => "妨害" as const)
-        .with(7, () => "回復" as const)
-        .exhaustive(),
-    )
     .readonly(),
   attribute: z
     .union([z.literal(1), z.literal(2), z.literal(3), z.literal(4), z.literal(5)])
@@ -82,7 +71,7 @@ const memoriaSchema = z.object({
 
 /**
  * This type alias `Memoria` represents a memoria object in the application.
- * It is inferred from the `memoriaSchema` which is a zod schema object.
+ * It is inferred from the `memoriaSchema`, which is a zod schema object.
  * The `memoriaSchema` defines the structure of a memoria object, which includes:
  * - id: a number representing the unique identifier of the memoria.
  * - link: a string representing the link associated with the memoria.
@@ -116,6 +105,17 @@ export type Memoria = Omit<
 export type MemoriaId = Memoria["id"];
 export type RawLegendarySkill = NonNullable<RawMemoria["legendarySkill"]>;
 
+export const formatCardType = (type: Memoria["cardType"]) =>
+  match(type)
+    .with(1, () => "通常単体" as const)
+    .with(2, () => "通常範囲" as const)
+    .with(3, () => "特殊単体" as const)
+    .with(4, () => "特殊範囲" as const)
+    .with(5, () => "支援" as const)
+    .with(6, () => "妨害" as const)
+    .with(7, () => "回復" as const)
+    .exhaustive();
+
 export const memoriaList: Memoria[] = memoriaData.data
   .filter(({ cost }) => cost > 18)
   .map((memoria) => {
@@ -131,12 +131,12 @@ export const memoriaList: Memoria[] = memoriaData.data
     const { questSkill, gvgSkill, autoSkill, legendarySkill, name, ...raw } = zodResult.value;
     const parseSkillsResult = sequenceS(ap)({
       questSkill: parseSkill({
-        cardType: raw.cardType,
+        cardType: formatCardType(raw.cardType),
         skill: questSkill,
         memoriaName: name,
       }),
       gvgSkill: parseSkill({
-        cardType: raw.cardType,
+        cardType: formatCardType(raw.cardType),
         skill: gvgSkill,
         memoriaName: name,
       }),

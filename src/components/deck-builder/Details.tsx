@@ -14,6 +14,7 @@ import { elementFilter } from "@/types/filterType";
 import { match } from "ts-pattern";
 import { StatusKind } from "@/evaluate/types";
 import { statusKind } from "@/evaluate/constants";
+import { formatCardType, Memoria } from "@/domain/memoria/memoria";
 
 type UpDown = "UP" | "DOWN";
 type StatusPattern = `${StatusKind}/${UpDown}`;
@@ -181,7 +182,7 @@ export default function Details() {
     elementAggregate.set(element, (elementAggregate.get(element) || 0) + 1);
   }
 
-  const kindAggregate = new Map<string, number>();
+  const kindAggregate = new Map<Memoria["cardType"], number>();
   for (const kind of [...deck, ...legendaryDeck].map((memoria) => {
     return memoria.cardType;
   })) {
@@ -274,13 +275,13 @@ export default function Details() {
       <Divider />
       <Grid container spacing={1}>
         {kindAggregate.size !== 0 &&
-          ["通常単体", "通常範囲", "特殊単体", "特殊範囲", "支援", "妨害", "回復"]
+          ([1, 2, 3, 4, 5, 6, 7] as const)
             .filter((kind) => kindAggregate.get(kind) !== undefined)
             .map((kind) => {
               return (
                 <Grid size={{ xs: 4 }} key={kind}>
                   <Typography fontSize={10}>
-                    {kind} : {kindAggregate.get(kind)}
+                    {formatCardType(kind)} : {kindAggregate.get(kind)}
                   </Typography>
                 </Grid>
               );

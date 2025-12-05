@@ -38,8 +38,8 @@ const Concentration = z.union([
 
 const encodedUnit = z.object({
   sw: z.union([z.literal("sword"), z.literal("shield")]),
-  deck: z.array(z.tuple([z.number(), Concentration])),
-  legendaryDeck: z.array(z.tuple([z.number(), Concentration])),
+  deck: z.array(z.tuple([z.ulid(), Concentration])),
+  legendaryDeck: z.array(z.tuple([z.ulid(), Concentration])),
 });
 
 type EncodedUnit = z.infer<typeof encodedUnit>;
@@ -73,12 +73,12 @@ const unitParseSafe = fromThrowable(
 
 const deckMap = new Map(memoriaList.map((memoria) => [memoria.id, memoria]));
 
-const restore = (data: [number, number][]): Result<MemoriaWithConcentration[], number[]> => {
+const restore = (data: [string, number][]): Result<MemoriaWithConcentration[], string[]> => {
   const cov = data.map(([i, c]) => [deckMap.get(i), c, i] as const);
   const { left, right } = pipe(
     cov,
     partition(
-      (item): item is [Memoria, MemoriaWithConcentration["concentration"], number] =>
+      (item): item is [Memoria, MemoriaWithConcentration["concentration"], string] =>
         item[0] !== undefined,
     ),
   );

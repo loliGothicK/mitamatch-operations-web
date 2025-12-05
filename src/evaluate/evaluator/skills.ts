@@ -62,20 +62,14 @@ export function evaluateDamage(
     option.chain((effect) => fromNullable(effect.amount)),
     option.chain((amount) => {
       // レジェンダリースキル倍率
-      const isPhysical = memoria.cardType.includes("通常");
+      const isPhysical = memoria.cardType === 1 || memoria.cardType === 2;
       const legendaryRates = getAttackLegendaryRates(deck, isPhysical);
       const finalCalibration = calibration * legendaryRates[memoria.attribute];
 
       // スキル倍率の取得
       const skillRateOpt = match(memoria.cardType)
-        .when(
-          (kind) => kind.includes("単体"),
-          () => fromNullable(DAMAGE_RATES_SINGLE[amount]),
-        )
-        .when(
-          (kind) => kind.includes("範囲"),
-          () => fromNullable(DAMAGE_RATES_RANGE[amount]),
-        )
+        .with(1, () => fromNullable(DAMAGE_RATES_SINGLE[amount]))
+        .with(2, () => fromNullable(DAMAGE_RATES_RANGE[amount]))
         .otherwise(() => none);
 
       return pipe(
@@ -224,7 +218,7 @@ export function evaluateRecovery(
 ): Option<number> {
   const { memoria, deck, calibration, range, support, counterRate, stackRate } = ctx;
 
-  if (memoria.cardType !== "回復") return none;
+  if (memoria.cardType !== 7) return none;
 
   const description = Lenz.memoria.gvgSkill.description.get(memoria);
 

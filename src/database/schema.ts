@@ -1,80 +1,125 @@
-import { pgTable, uniqueIndex, text, timestamp, foreignKey, check } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  uniqueIndex,
+  text,
+  timestamp,
+  varchar,
+  integer,
+  primaryKey,
+  customType,
+} from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
-import { cuid2 } from "drizzle-cuid2/postgres";
+import { ulid as genUlid, ulidToUUID, uuidToULID } from "ulid";
+
+export const ulid = customType<{ data: string; driverData: string }>({
+  dataType() {
+    return "uuid";
+  },
+
+  // 書き込み時: ULID -> UUID
+  toDriver(data: string): string {
+    return ulidToUUID(data);
+  },
+
+  // 読み取り時: UUID -> ULID
+  fromDriver(driverData: string): string {
+    return uuidToULID(driverData);
+  },
+});
 
 export const users = pgTable(
-  "User",
+  "user",
   {
-    id: cuid2("id").defaultRandom().primaryKey().notNull(),
-    discordId: text().notNull(),
-    email: text().notNull(),
-    name: text().notNull(),
-    avatar: text().default("default").notNull(),
-    accessToken: text().notNull(),
-    refreshToken: text().notNull(),
-    createdAt: timestamp({ precision: 3, mode: "string" })
+    id: ulid("id")
+      .$defaultFn(() => ulidToUUID(genUlid()))
+      .primaryKey()
+      .notNull(),
+    // 🔑 外部連携キー: Clerk ID を格納
+    clerkUserId: varchar("clerk_user_id", { length: 255 }).unique().notNull(),
+
+    // アプリケーション固有のユーザー情報
+    name: varchar("name", { length: 255 }),
+
+    // タイムスタンプ
+    createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" }),
   },
-  (table) => [
-    uniqueIndex("User_discordId_key").using(
-      "btree",
-      table.discordId.asc().nullsLast().op("text_ops"),
-    ),
-    uniqueIndex("User_email_key").using("btree", table.email.asc().nullsLast().op("text_ops")),
-  ],
+  (table) => {
+    return {
+      // 索引定義: clerkUserIdに対してユニークインデックスを明示的に作成
+      clerkIdIndex: uniqueIndex("clerk_user_id_idx").on(table.clerkUserId),
+    };
+  },
 );
 
-export const decks = pgTable(
-  "Deck",
-  {
-    id: cuid2("id").defaultRandom().primaryKey().notNull(),
-    userId: text(),
-    short: text().unique(),
-    full: text().notNull(),
-    createdAt: timestamp({ precision: 3, mode: "string" })
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
-  },
-  (table) => [
-    uniqueIndex("Deck_userId_key").using("btree", table.userId.asc().nullsLast().op("text_ops")),
-    foreignKey({
-      columns: [table.userId],
-      foreignColumns: [users.id],
-      name: "Deck_userId_fkey",
-    })
-      .onUpdate("cascade")
-      .onDelete("set null"),
-    check("check_either", sql`("userId" IS NOT NULL) OR (short IS NOT NULL)`),
-  ],
-);
+export type User = typeof users.$inferSelect; // SELECT時の型
+export type NewUser = typeof users.$inferInsert; // INSERT時の型
 
-export const timelines = pgTable(
-  "Timeline",
+export const decks = pgTable("deck", {
+  id: ulid("id")
+    .$defaultFn(() => ulidToUUID(genUlid()))
+    .primaryKey()
+    .notNull(),
+  userId: ulid("user_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
+  short: ulid("short").unique(),
+  full: text().notNull(),
+  createdAt: timestamp({ precision: 3, mode: "string" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+  updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
+});
+
+export const timelines = pgTable("timeline", {
+  id: ulid("id")
+    .$defaultFn(() => ulidToUUID(genUlid()))
+    .primaryKey()
+    .notNull(),
+  userId: ulid("user_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
+  short: ulid("short").unique(),
+  full: text().notNull(),
+  createdAt: timestamp({ precision: 3, mode: "string" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+  updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
+});
+
+export const memoria = pgTable("memoria", {
+  id: ulid("id")
+    .$defaultFn(() => ulidToUUID(genUlid()))
+    .primaryKey()
+    .notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  cardType: integer("card_type").notNull(),
+});
+
+export type Memoria = typeof memoria.$inferSelect;
+
+export const usersToMemoria = pgTable(
+  "users_to_memoria",
   {
-    id: cuid2("id").defaultRandom().primaryKey().notNull(),
-    userId: text(),
-    short: text().unique(),
-    full: text().notNull(),
-    createdAt: timestamp({ precision: 3, mode: "string" })
+    // 外部キー 1: users.id を参照 (ユーザーが削除されたら、所持情報も削除)
+    userId: ulid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+
+    // 外部キー 2: memoria.id を参照 (Memoria定義が削除されたら、所持情報も削除)
+    memoriaId: ulid("memoria_id")
+      .notNull()
+      .references(() => memoria.id, { onDelete: "cascade" }),
+
+    // 所持情報：数量
+    limitBreak: integer("limit_break").notNull().default(0),
+    // 取得日時
+    acquiredAt: timestamp("acquired_at", { withTimezone: true, mode: "string" })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
   },
-  (table) => [
-    uniqueIndex("Timeline_userId_key").using(
-      "btree",
-      table.userId.asc().nullsLast().op("text_ops"),
-    ),
-    foreignKey({
-      columns: [table.userId],
-      foreignColumns: [users.id],
-      name: "Timeline_userId_fkey",
-    })
-      .onUpdate("cascade")
-      .onDelete("set null"),
-    check("check_either", sql`("userId" IS NOT NULL) OR (short IS NOT NULL)`),
-  ],
+  (table) => {
+    return {
+      // 複合主キー: userIdとmemoriaIdの組み合わせを一意にする
+      pk: primaryKey({ columns: [table.userId, table.memoriaId] }),
+    };
+  },
 );

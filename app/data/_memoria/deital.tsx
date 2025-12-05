@@ -23,7 +23,7 @@ import {
 } from "@mui/material";
 import { AutoSkill } from "@/parser/autoSkill";
 import { Skill } from "@/parser/skill";
-import { match } from "ts-pattern";
+import { projector } from "@/functional/proj";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -90,19 +90,8 @@ function StatusTable({ status }: { status: Memoria["status"] }) {
 }
 
 export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 | 4 | 5 | 6 | 7 }) {
-  const cardType = (type: Memoria["cardType"]) =>
-    match(type)
-      .with("通常単体", () => 1 as const)
-      .with("通常範囲", () => 2 as const)
-      .with("特殊単体", () => 3 as const)
-      .with("特殊範囲", () => 4 as const)
-      .with("支援", () => 5 as const)
-      .with("妨害", () => 6 as const)
-      .with("回復", () => 7 as const)
-      .exhaustive();
-
   const data = memoriaList.filter((memoria) => memoria.name.full === decodeURI(name));
-  const indices = data.map((memoria) => cardType(memoria.cardType));
+  const indices = data.map(projector("cardType"));
   const [value, setValue] = useState(type ? indices.findIndex((_) => _ === type) : 0);
 
   const handleChange = (_: SyntheticEvent, newValue: 1 | 2 | 3 | 4 | 5 | 6 | 7) => {

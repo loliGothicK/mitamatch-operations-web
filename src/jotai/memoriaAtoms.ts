@@ -1,6 +1,7 @@
 import { atom } from "jotai";
+import { decodeTime } from "ulid";
 
-import type { Memoria, MemoriaId } from "@/domain/memoria/memoria";
+import { formatCardType, Memoria, MemoriaId } from "@/domain/memoria/memoria";
 import { memoriaList } from "@/domain/memoria/memoria";
 import {
   type ElementFilterType,
@@ -48,7 +49,6 @@ export type MemoriaWithConcentration = Memoria & {
 
 export const sortKind = [
   "ID",
-  "NAME",
   "ATK",
   "Sp.ATK",
   "DEF",
@@ -110,14 +110,12 @@ export const filteredMemoriaAtom = atom((get) => {
   return memoriaList
     .filter((memoria) => {
       const sw = match(get(swAtom))
-        .with("shield", () => ["支援", "妨害", "回復"].includes(memoria.cardType))
-        .with("sword", () =>
-          ["通常単体", "通常範囲", "特殊単体", "特殊範囲"].includes(memoria.cardType),
-        )
+        .with("shield", () => memoria.cardType > 4)
+        .with("sword", () => memoria.cardType < 5)
         .exhaustive();
 
       const role = get(roleFilterAtom).some((filter) => {
-        return memoria.cardType === roleFilterMap[filter];
+        return formatCardType(memoria.cardType) === roleFilterMap[filter];
       });
 
       const element = get(elementFilterAtom).some((filter) => {
@@ -230,8 +228,7 @@ export const filteredMemoriaAtom = atom((get) => {
     })
     .sort((a, b) => {
       return match(get(sortKindAtom))
-        .with("ID", () => b.id - a.id)
-        .with("NAME", () => a.name.short.localeCompare(b.name.short))
+        .with("ID", () => decodeTime(b.id) - decodeTime(a.id))
         .with("ATK", () => b.status[4][0] - a.status[4][0])
         .with("Sp.ATK", () => b.status[4][1] - a.status[4][1])
         .with("DEF", () => b.status[4][2] - a.status[4][2])

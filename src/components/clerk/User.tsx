@@ -1,13 +1,17 @@
-import { ClerkLoading, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Suspense } from "react";
+import { IconButton } from "@mui/material";
 
 export default function User() {
   return (
     <Suspense>
-      <ClerkLoading></ClerkLoading>
-      <SignedOut></SignedOut>
+      <SignedOut>
+        <SignInButton>Sign in</SignInButton>
+      </SignedOut>
       <SignedIn>
-        <UserButton />
+        <IconButton sx={{ ml: 1 }} color="inherit">
+          <UserButton />
+        </IconButton>
       </SignedIn>
     </Suspense>
   );
