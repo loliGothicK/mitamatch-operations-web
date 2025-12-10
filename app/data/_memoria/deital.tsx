@@ -1,6 +1,5 @@
 "use client";
 
-import { Layout } from "@/components/Layout";
 import { type ReactNode, type SyntheticEvent, useState } from "react";
 import { type Memoria, memoriaList } from "@/domain/memoria/memoria";
 import { Box, Stack } from "@mui/system";
@@ -89,7 +88,13 @@ function StatusTable({ status }: { status: Memoria["status"] }) {
   );
 }
 
-export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 | 4 | 5 | 6 | 7 }) {
+export default function Deital({
+  name,
+  type,
+}: {
+  name: string;
+  type?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
+}) {
   const data = memoriaList.filter((memoria) => memoria.name.full === decodeURI(name));
   const indices = data.map(projector("cardType"));
   const [value, setValue] = useState(type ? indices.findIndex((_) => _ === type) : 0);
@@ -99,7 +104,6 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
   };
 
   return (
-    <Layout>
       <Box
         sx={{
           width: "80%",
@@ -147,7 +151,6 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
           </CustomTabPanel>
         ))}
       </Box>
-    </Layout>
   );
 }
 

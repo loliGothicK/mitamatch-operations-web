@@ -1,18 +1,12 @@
 import { formatCardType, type Memoria, memoriaList as dataSource } from "@/domain/memoria/memoria";
 
-import {
-  type GridColDef,
-  type GridColumnVisibilityModel,
-  GridSortModel,
-  useGridApiRef,
-} from "@mui/x-data-grid";
+import { type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
 import type { Attribute } from "@/parser/skill";
 import { match } from "ts-pattern";
-import { JSX, useCallback, useMemo } from "react";
+import { JSX, useMemo } from "react";
 import Link from "@/components/link";
 import { SchemaResolver } from "@/parser/query/filter";
-import { useVisibility } from "@/data/_common/useVisibility";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { Box, List, ListItem, ListItemText, ListSubheader, Typography } from "@mui/material";
 import { MemoriaIcon } from "@/components/image/MemoriaIcon";
@@ -287,21 +281,6 @@ function Help(): JSX.Element {
 }
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
-  const apiRef = useGridApiRef();
-  const [visibility, setVisibility, visibilityChanged] = useVisibility(visibilityAll);
-
-  const replaceDataSource = useCallback(
-    (action: { type: "update"; data: Memoria[] } | { type: "sort"; model: GridSortModel }) => {
-      if (action.type === "update") {
-        apiRef.current?.setRows(action.data);
-      }
-      if (action.type === "sort") {
-        apiRef.current?.setSortModel(action.model);
-      }
-    },
-    [apiRef],
-  );
-
   const original = useMemo(() => dataSource.toReversed(), []);
 
   return (
@@ -311,14 +290,10 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
       resolver={resolver}
       initialQuery={initialQuery}
       schema={schema}
-      updateVisibilityAction={visibilityChanged}
-      updateDataAction={replaceDataSource}
       completion={completeCandidates}
       help={<Help />}
-      apiRef={apiRef}
-      data={original}
       columns={columns}
-      visibility={[visibility, setVisibility]}
+      visibilityAll={visibilityAll}
     />
   );
 }

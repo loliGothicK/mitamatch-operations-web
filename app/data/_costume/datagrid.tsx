@@ -1,12 +1,11 @@
 import { type Costume, costumeList as dataSource } from "@/domain/costume/costume";
 
-import { type GridColDef, type GridColumnVisibilityModel, useGridApiRef } from "@mui/x-data-grid";
+import { type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
 import Image from "next/image";
-import { JSX, useCallback, useMemo } from "react";
+import { JSX, useMemo } from "react";
 import Link from "@/components/link";
 import { Clazz, SchemaResolver } from "@/parser/query/filter";
-import { useVisibility } from "@/data/_common/useVisibility";
 import {
   Box,
   Chip,
@@ -21,7 +20,6 @@ import { match, P } from "ts-pattern";
 import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
-import { GridSortModel } from "@mui/x-data-grid";
 import { DataGrid } from "@/data/_common/DataGrid";
 
 const columns: GridColDef<Costume>[] = [
@@ -228,7 +226,7 @@ const resolver: SchemaResolver<Costume> = {
   },
 };
 
-const visivilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
+const visibilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
   acc[col.field] = true;
   return acc;
 }, {});
@@ -376,29 +374,7 @@ function Help(): JSX.Element {
   );
 }
 
-const HIDDEN_COLUMNS: GridColDef["field"][] = ["released_at"];
-
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
-  const apiRef = useGridApiRef();
-  const [visibility, setVisibility, visibilityChanged] = useVisibility(
-    HIDDEN_COLUMNS.reduce((model, col) => {
-      model[col] = false;
-      return model;
-    }, visivilityAll),
-  );
-
-  const replaceDataSource = useCallback(
-    (action: { type: "update"; data: Costume[] } | { type: "sort"; model: GridSortModel }) => {
-      if (action.type === "update") {
-        apiRef.current?.setRows(action.data);
-      }
-      if (action.type === "sort") {
-        apiRef.current?.setSortModel(action.model);
-      }
-    },
-    [apiRef],
-  );
-
   const original = useMemo(() => dataSource.toReversed(), []);
 
   return (
@@ -408,14 +384,10 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
       resolver={resolver}
       initialQuery={initialQuery}
       schema={schema}
-      updateVisibilityAction={visibilityChanged}
-      updateDataAction={replaceDataSource}
       completion={completeCandidates}
       help={<Help />}
-      apiRef={apiRef}
-      data={original}
       columns={columns}
-      visibility={[visibility, setVisibility]}
+      visibilityAll={visibilityAll}
     />
   );
 }

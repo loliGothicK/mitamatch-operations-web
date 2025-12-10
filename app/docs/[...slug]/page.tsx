@@ -1,6 +1,6 @@
 "use client";
 
-import { Layout } from "@/components/Layout";
+import { Layout } from "@/components/layout/client";
 import { Documents } from "@/components/docs/Documents";
 import "@/styles/markdown.css";
 import { Breadcrumbs, Grid } from "@mui/material";

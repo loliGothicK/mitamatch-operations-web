@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import "@/components/home/home.css";
 import Image from "next/image";

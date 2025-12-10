@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { costumeList } from "@/domain/costume/costume";
 import NotFound from "next/dist/client/components/builtin/not-found";
-import { Layout } from "@/components/Layout";
 import { Character, characterList } from "@/domain/character/character";
 import {
   AppBar,
@@ -71,7 +70,6 @@ export default function Detail({ name }: { name: string }) {
       .otherwise(() => character.name);
 
     return (
-      <Layout>
         <Box
           sx={{
             width: "80%",
@@ -217,7 +215,6 @@ export default function Detail({ name }: { name: string }) {
             ))}
           </Grid>
         </Box>
-      </Layout>
     );
   }
 

@@ -31,7 +31,7 @@ export const users = pgTable(
   "user",
   {
     id: ulid("id")
-      .$defaultFn(() => ulidToUUID(genUlid()))
+      .$defaultFn(() => genUlid())
       .primaryKey()
       .notNull(),
     // 🔑 外部連携キー: Clerk ID を格納
@@ -39,6 +39,9 @@ export const users = pgTable(
 
     // アプリケーション固有のユーザー情報
     name: varchar("name", { length: 255 }),
+
+    // Role
+    role: varchar("role", { length: 255 }).default("org:member").notNull(),
 
     // タイムスタンプ
     createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
@@ -57,9 +60,31 @@ export const users = pgTable(
 export type User = typeof users.$inferSelect; // SELECT時の型
 export type NewUser = typeof users.$inferInsert; // INSERT時の型
 
+export const organization = pgTable("organization", {
+  id: ulid("id")
+    .$defaultFn(() => genUlid())
+    .primaryKey()
+    .notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true, mode: "string" })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" }),
+});
+
+export const organizationMembers = pgTable("organization_members", {
+  organizationId: ulid("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  userId: ulid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  role: varchar("role", { length: 255 }).default("org:member").notNull(),
+});
+
 export const decks = pgTable("deck", {
   id: ulid("id")
-    .$defaultFn(() => ulidToUUID(genUlid()))
+    .$defaultFn(() => genUlid())
     .primaryKey()
     .notNull(),
   userId: ulid("user_id").references(() => users.id, {
@@ -73,7 +98,7 @@ export const decks = pgTable("deck", {
 
 export const timelines = pgTable("timeline", {
   id: ulid("id")
-    .$defaultFn(() => ulidToUUID(genUlid()))
+    .$defaultFn(() => genUlid())
     .primaryKey()
     .notNull(),
   userId: ulid("user_id").references(() => users.id, {
@@ -87,7 +112,7 @@ export const timelines = pgTable("timeline", {
 
 export const memoria = pgTable("memoria", {
   id: ulid("id")
-    .$defaultFn(() => ulidToUUID(genUlid()))
+    .$defaultFn(() => genUlid())
     .primaryKey()
     .notNull(),
   name: varchar("name", { length: 255 }).notNull(),

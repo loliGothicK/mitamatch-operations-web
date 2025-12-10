@@ -5,17 +5,9 @@ import {
   GridColumnVisibilityModel,
   GridSortModel,
 } from "@mui/x-data-grid";
-import {
-  ComponentPropsWithoutRef,
-  Dispatch,
-  RefObject,
-  SetStateAction,
-  useCallback,
-  useState,
-} from "react";
-import { GridApiCommunity } from "@mui/x-data-grid/internals";
+import { ComponentPropsWithoutRef, useCallback, useState } from "react";
 import { Box } from "@mui/system";
-import { Alert, IconButton, Modal, Paper, Snackbar, Tooltip } from "@mui/material";
+import { Alert, IconButton, Modal, NoSsr, Paper, Snackbar, Tooltip } from "@mui/material";
 import { ClearAll, Info, PlayArrowRounded, Share } from "@mui/icons-material";
 import Console from "@/components/Console";
 import { ComleteCandidate, makeSchemaCompletionSource } from "@/data/_common/autocomplete";
@@ -41,19 +33,13 @@ type Props<
   Schema extends hasAtom,
   Table extends keyof Schema & keyof typeof queryAtom = keyof Schema & keyof typeof queryAtom,
 > = {
-  apiRef: RefObject<GridApiCommunity | null>;
-  data: readonly T[];
   columns: readonly GridColDef<T>[];
-  visibility: [GridColumnVisibilityModel, Dispatch<SetStateAction<GridColumnVisibilityModel>>];
+  visibilityAll: GridColumnVisibilityModel;
   table: Table;
   origin: T[];
   resolver: SchemaResolver<T>;
   schema: Schema;
   initialQuery?: string;
-  updateVisibilityAction: (whiteList: Set<GridColDef["field"]>) => void;
-  updateDataAction: (
-    action: { type: "update"; data: T[] } | { type: "sort"; model: GridSortModel },
-  ) => void;
   help: ComponentPropsWithoutRef<typeof Modal>["children"];
   completion?: Record<string, ComleteCandidate>;
 };
@@ -84,17 +70,13 @@ const style = {
 };
 
 export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
-  apiRef,
-  data,
   columns,
-  visibility: [visibility, setVisivility],
+  visibilityAll,
   table,
   origin,
   resolver,
   schema,
   initialQuery,
-  updateVisibilityAction,
-  updateDataAction,
   help,
   completion,
 }: Props<T, Schema>) {
@@ -119,13 +101,17 @@ export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
     setState({ ...state, open: false });
   };
 
+  const [rows, setRows] = useState(origin);
+  const [sortModel, setSortModel] = useState<GridSortModel>([]);
+  const [visibility, setVisibility] = useState(visibilityAll);
+
   const handleVisibilityChange = useCallback(
     (newModel: GridColumnVisibilityModel) => {
-      setTimeout(() => {
-        setVisivility(newModel);
-      }, 0);
+      requestAnimationFrame(() => {
+        setVisibility(newModel);
+      });
     },
-    [setVisivility],
+    [setVisibility],
   );
 
   const shared = useCallback(async () => {
@@ -145,22 +131,16 @@ export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
     (first = false) => {
       return pipe(
         sqlToModel(query),
-        either.map(([whiteList, result]) => {
-          updateVisibilityAction(whiteList);
+        either.map(({ visibility, ...result }) => {
+          setVisibility(visibility);
           const pred = build(result, resolver, completion);
           if (isRight(pred)) {
             const { where, orderBy, limit } = pred.right;
             if (isSome(where)) {
-              updateDataAction({
-                type: "update",
-                data: limit(origin.filter(where.value.apply.bind(where.value))),
-              });
+              setRows(limit(origin.filter(where.value.apply.bind(where.value))));
             }
             if (isSome(orderBy)) {
-              updateDataAction({
-                type: "sort",
-                model: orderBy.value,
-              });
+              setSortModel(orderBy.value);
             }
             if (!first) {
               setState(
@@ -194,26 +174,21 @@ export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
         }),
       );
     },
-    [origin, completion, query, resolver, updateVisibilityAction, updateDataAction],
+    [completion, query, resolver, origin],
   );
 
   const clearQuery = useCallback(() => {
     const atomicQuery = `select * from ${String(table)};`;
     setQuery(atomicQuery);
-    updateDataAction({
-      type: "update",
-      data: origin,
-    });
-  }, [origin, table, setQuery, updateDataAction]);
+    setRows(origin);
+  }, [origin, table, setQuery, setRows]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
   useEffectOnce(() => {
-    if (initialQuery) {
-      runQuery(true);
-    }
+    runQuery(true);
   });
 
   return (
@@ -267,18 +242,21 @@ export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
         onChange={onChange}
       />
       <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-        <MuiDataGrid
-          key={table}
-          apiRef={apiRef}
-          rows={data}
-          rowHeight={80}
-          columns={columns}
-          columnVisibilityModel={visibility}
-          onColumnVisibilityModelChange={handleVisibilityChange}
-          initialState={{ pagination: { paginationModel } }}
-          pageSizeOptions={[5, 10, 50, 100]}
-          sx={{ border: 0 }}
-        />
+        <NoSsr>
+          <MuiDataGrid
+            key={table}
+            rows={rows}
+            rowHeight={80}
+            columns={columns}
+            columnVisibilityModel={visibility}
+            sortModel={sortModel}
+            onSortModelChange={setSortModel}
+            onColumnVisibilityModelChange={handleVisibilityChange}
+            initialState={{ pagination: { paginationModel } }}
+            pageSizeOptions={[5, 10, 50, 100]}
+            sx={{ border: 0 }}
+          />
+        </NoSsr>
       </div>
     </Paper>
   );

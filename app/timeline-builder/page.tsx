@@ -3,9 +3,14 @@ import { metadata as defaultMetadata } from "@/layout";
 import { pipe } from "fp-ts/function";
 import { Meta } from "@/metadata/lens";
 import { TimelineBuilderPage } from "@/timeline-builder/_builder";
+import Layout from "@/components/layout/server";
 
 export default function Page() {
-  return <TimelineBuilderPage />;
+  return (
+    <Layout>
+      <TimelineBuilderPage />
+    </Layout>
+  );
 }
 
 type Props = {

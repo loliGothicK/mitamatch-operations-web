@@ -2,7 +2,7 @@
 
 import { Provider, getDefaultStore } from "jotai";
 import Footer from "@/components/Footer";
-import { DarkMode, LightMode, Menu as MenuIcon } from "@mui/icons-material";
+import { DarkMode, LightMode } from "@mui/icons-material";
 import {
   AppBar as MuiAppBar,
   Box,
@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import { createTheme, styled, useTheme } from "@mui/material/styles";
 import { ThemeProvider, useMediaQuery } from "@mui/system";
-import { type ReactNode, createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState, PropsWithChildren } from "react";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { match } from "ts-pattern";
@@ -28,8 +28,9 @@ import { darkTheme, lightTheme } from "@/theme/theme";
 import Grid from "@mui/material/Grid";
 import Link from "@/components/link";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
-import { mainListItems } from "@/components/home/listItems";
+import { mainListItems, userListItems } from "@/components/home/listItems";
 import User from "@/components/clerk/User";
+import { Project } from "@/components/project/Project";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -55,11 +56,11 @@ const MenuIcons = styled(MuiDrawer)(({ theme }) => ({
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
-function BasicLayout({ children }: { children: ReactNode }) {
+export type UserData = { userId: string; legions: { id: string; name: string; role: string }[] };
+
+function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserData | undefined }>) {
   const colorMode = useContext(ColorModeContext);
   const theme = useTheme();
-
-  const menuDropdown = () => {};
 
   return (
     <Box
@@ -75,18 +76,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
       }}
     >
       <AppBar position="absolute" sx={{ gridArea: "header" }}>
-        <Toolbar sx={{ gap: 2 }}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={menuDropdown}
-            sx={{
-              marginRight: "36px",
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
+        <Toolbar sx={{ gap: 1, px: 2 }} component="nav" disableGutters={true}>
           <Link href="/" sx={{ pr: 2 }}>
             <Image src="/MitamaLabLogo.png" alt="logo" width={40} height={40} priority={true} />
           </Link>
@@ -96,7 +86,6 @@ function BasicLayout({ children }: { children: ReactNode }) {
             color="inherit"
             noWrap
             sx={{
-              flexGrow: 0.5,
               fontSize: "2rem",
               fontWeight: 500,
               backgroundColor: `linear-gradient(to right, ${theme.palette.action.active}, ${theme.palette.action.disabled})`,
@@ -106,6 +95,8 @@ function BasicLayout({ children }: { children: ReactNode }) {
           >
             Mitamatch Operations
           </Typography>
+          {userData && <Project legions={userData.legions} />}
+          <Divider orientation="vertical" flexItem sx={{ ml: 1, flexGrow: 0.5 }} />
           <Stack>
             <PopupState
               variant="popover"
@@ -146,6 +137,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
       <MenuIcons variant="permanent" sx={{ gridArea: "navigation" }}>
         <List component="nav">{mainListItems}</List>
         <Divider />
+        {userData && <List component="nav">{userListItems}</List>}
       </MenuIcons>
       <Grid
         container
@@ -166,7 +158,7 @@ function BasicLayout({ children }: { children: ReactNode }) {
   );
 }
 
-export function Layout({ children }: { children: ReactNode }) {
+export function Layout({ children, userData }: PropsWithChildren<{ userData?: UserData }>) {
   const [mode, setMode] = useState<"light" | "dark">("dark");
   const colorMode = useMemo(
     () => ({
@@ -214,7 +206,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <ThemeProvider theme={theme}>
         <Provider store={defaultStore}>
           <CssBaseline />
-          <BasicLayout>{children}</BasicLayout>
+          <LayoutMain userData={userData}>{children}</LayoutMain>
         </Provider>
       </ThemeProvider>
     </ColorModeContext.Provider>

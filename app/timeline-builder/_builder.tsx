@@ -41,7 +41,6 @@ import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/system";
 
 import { encodeTimeline } from "@/endec/serde";
-import { Layout } from "@/components/Layout";
 import Sortable from "@/components/sortable/Sortable";
 import {
   filterAtom,
@@ -625,7 +624,7 @@ function ShareButton() {
   );
 }
 
-function TimelineBuilder() {
+export function TimelineBuilderPage() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   const [, setPayed] = useAtom(payedAtom);
@@ -680,13 +679,5 @@ function TimelineBuilder() {
         </Container>
       </Grid>
     </Grid>
-  );
-}
-
-export function TimelineBuilderPage() {
-  return (
-    <Layout>
-      <TimelineBuilder />
-    </Layout>
   );
 }

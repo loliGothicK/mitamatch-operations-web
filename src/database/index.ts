@@ -2,16 +2,66 @@ import "server-only";
 
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
-import { decks, timelines, users } from "@/database/schema";
+import { decks, organization, organizationMembers, timelines, users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 
 const sql = neon(process.env.POSTGRES_URL!);
 const db = drizzle({ client: sql });
 
-export async function getUser(clerkUserId: string) {
-  const result = await db.select().from(users).where(eq(users.clerkUserId, clerkUserId));
+export async function createUser(clerkUserId: string) {
+  const result = await db
+    .insert(users)
+    .values({
+      clerkUserId,
+    })
+    .returning();
 
   return result[0];
+}
+
+export async function upsertUser(clerkUserId: string) {
+  const result = await db
+    .insert(users)
+    .values({
+      clerkUserId,
+    })
+    .onConflictDoUpdate({
+      target: users.clerkUserId,
+      set: {
+        updatedAt: new Date().toISOString(),
+      },
+    })
+    .returning();
+
+  return result[0];
+}
+
+export async function getUser(clerkUserId: string) {
+  const result = await db
+    .select({ id: users.id })
+    .from(users)
+    .where(eq(users.clerkUserId, clerkUserId));
+
+  return result[0];
+}
+
+export async function getUserData(clerkUserId: string) {
+  const user = await getUser(clerkUserId);
+  const legions = await db
+    .select({
+      id: organization.id,
+      name: organization.name,
+      role: organizationMembers.role,
+    })
+    .from(users)
+    .innerJoin(organizationMembers, eq(users.id, organizationMembers.userId))
+    .innerJoin(organization, eq(organizationMembers.organizationId, organization.id))
+    .where(eq(users.clerkUserId, clerkUserId));
+
+  return {
+    userId: user.id,
+    legions,
+  };
 }
 
 // デッキの短縮URLがDBに存在する場合、デッキのフルURLを取得する

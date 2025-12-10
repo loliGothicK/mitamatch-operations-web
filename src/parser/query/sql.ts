@@ -8,10 +8,10 @@ import {
   OrderBy,
   Parser,
 } from "node-sql-parser";
-import type { GridColDef, GridSortModel } from "@mui/x-data-grid";
+import type { GridColumnVisibilityModel, GridSortModel } from "@mui/x-data-grid";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
-import { bail, type MitamaError } from "@/error/error";
-import { getApplicativeValidation, isRight, right } from "fp-ts/Either";
+import { bail, type MitamaError, ValidateResult } from "@/error/error";
+import { getApplicativeValidation, right } from "fp-ts/Either";
 import { match, P } from "ts-pattern";
 import { pipe } from "fp-ts/function";
 import { either, option } from "fp-ts";
@@ -20,6 +20,7 @@ import { sequenceS } from "fp-ts/Apply";
 import { getSemigroup } from "fp-ts/Array";
 import type { Option } from "fp-ts/Option";
 import { fromThrowable } from "neverthrow";
+import { projector } from "@/functional/proj";
 
 const parser = new Parser();
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
@@ -31,6 +32,7 @@ export type ParseResult = {
     limit: Option<number>;
     offset: Option<number>;
   };
+  readonly visibility: GridColumnVisibilityModel;
 };
 
 function isExpressionValueArray(data: any): data is ExpressionValue[] {
@@ -199,8 +201,6 @@ function parseOrderBy(orderby: OrderBy[] | null): Validated<MitamaError, Option<
     );
 }
 
-type WhiteList = Set<GridColDef["field"]>;
-
 function parseLimit(limit: Limit | null): Validated<
   MitamaError,
   {
@@ -229,7 +229,28 @@ function parseLimit(limit: Limit | null): Validated<
     );
 }
 
-export function sqlToModel(sql: string): Validated<MitamaError, [WhiteList, ParseResult]> {
+export const parseColumns = (columns: Column[]): ValidateResult<GridColumnVisibilityModel> => {
+  return pipe(
+    columns.map(projector("expr")).map(parseExpr),
+    separator,
+    either.map((exprs) => {
+      return Object.fromEntries(
+        exprs
+          .filter(
+            (
+              f,
+            ): f is {
+              type: "field";
+              value: string;
+            } => "type" in f && f.type === "field",
+          )
+          .map((f) => [f.value, true] as const),
+      );
+    }),
+  );
+};
+
+export function sqlToModel(sql: string): ValidateResult<ParseResult> {
   const ast = fromThrowable(parser.astify.bind(parser))(sql, {
     database: "MySQL",
   });
@@ -249,26 +270,8 @@ export function sqlToModel(sql: string): Validated<MitamaError, [WhiteList, Pars
         where: parseWhere(stmt.where),
         orderBy: parseOrderBy(stmt.orderby),
         limit: parseLimit(stmt.limit),
+        visibility: parseColumns(stmt.columns),
       }),
-      either.map(
-        (filter) =>
-          [
-            stmt.columns.reduce<Set<GridColDef["field"]>>((acc, col) => {
-              if (col satisfies Column) {
-                const field = parseExpr(col.expr);
-                if (isRight(field) && Array.isArray(field.right)) {
-                  for (const f of field.right) {
-                    if ("field" in f && typeof f.field === "string") {
-                      acc.add(f.field);
-                    }
-                  }
-                }
-              }
-              return acc;
-            }, new Set()) || {},
-            filter,
-          ] as const,
-      ),
     );
   } else {
     return toValidated(bail(sql, "Only SELECT statements are supported."));

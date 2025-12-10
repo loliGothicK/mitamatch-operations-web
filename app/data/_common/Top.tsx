@@ -2,46 +2,42 @@
 
 import { Datagrid as MemoriaDataGrid } from "@/data/_memoria/datagrid";
 import { Datagrid as CostumeDataGrid } from "@/data/_costume/datagrid";
-import { Layout } from "@/components/Layout";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useRouter, useSearchParams } from "next/navigation";
-import { type SyntheticEvent, useState } from "react";
+import { type SyntheticEvent, useCallback, useState } from "react";
 import View from "@/data/_character/view";
 import { AppBar, Breadcrumbs, Typography } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Link from "@/components/link";
-import { z } from "zod";
-import NotFound from "next/dist/client/components/builtin/not-found";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import { match } from "ts-pattern";
 
 const ROUTES = ["memoria", "costume", "character"] as const;
-
-const pageSchema = z.enum(ROUTES).optional();
 
 export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[number] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || undefined;
+  const [value, setValue] = useState(
+    match(dataType)
+      .with("memoria", () => 0)
+      .with("costume", () => 1)
+      .with("character", () => 2)
+      .otherwise(() => 0),
+  );
 
-  const parsed = pageSchema.safeParse(dataType);
-
-  if (!parsed.success) {
-    console.error(parsed.error);
-    return <NotFound />;
-  }
-
-  const [value, setValue] = useState(ROUTES.indexOf(parsed.data || "memoria"));
-
-  const handleChange = (_: SyntheticEvent, newValue: number) => {
-    router.push(`/data/${ROUTES[newValue]}`, { scroll: false });
-    setValue(newValue);
-  };
+  const handleChange = useCallback(
+    (_: SyntheticEvent, newValue: number) => {
+      setValue(() => newValue);
+      router.push(`/data/${ROUTES[newValue]}`, { scroll: false });
+    },
+    [router, setValue],
+  );
 
   return (
-    <Layout>
       <Box sx={{ width: "100%" }}>
         <TabContext value={value}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -59,17 +55,10 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
               </Breadcrumbs>
             </Toolbar>
           </AppBar>
-          <TabPanel value={0}>
-            <MemoriaDataGrid initialQuery={query} />
-          </TabPanel>
-          <TabPanel value={1}>
-            <CostumeDataGrid initialQuery={query} />
-          </TabPanel>
-          <TabPanel value={2}>
-            <View />
-          </TabPanel>
+          <TabPanel value={0}>{value === 0 && <MemoriaDataGrid initialQuery={query} />}</TabPanel>
+          <TabPanel value={1}>{value === 1 && <CostumeDataGrid initialQuery={query} />}</TabPanel>
+          <TabPanel value={2}>{value === 2 && <View />}</TabPanel>
         </TabContext>
       </Box>
-    </Layout>
   );
 }

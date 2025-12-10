@@ -1,6 +1,5 @@
 "use client";
 
-import { Layout } from "@/components/Layout";
 import { type ReactNode, type SyntheticEvent, useState } from "react";
 import { Box } from "@mui/system";
 import Tabs from "@mui/material/Tabs";
@@ -379,7 +378,6 @@ export default function Deital({ lily, job }: { lily: string; job: string }) {
   if (costume === undefined) return <NotFound />;
 
   return (
-    <Layout>
       <Box
         sx={{
           width: "80%",
@@ -427,6 +425,5 @@ export default function Deital({ lily, job }: { lily: string; job: string }) {
           </Grid>
         </Grid>
       </Box>
-    </Layout>
   );
 }

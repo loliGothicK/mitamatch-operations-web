@@ -100368,64 +100368,6 @@
         "description": "HP回復時、一定確率で味方前衛1体のSp.DEFを特大アップさせる。"
       },
       "labels": ["SuperAwakening"]
-    },
-    {
-      "id": "01KBQE13K847J7ECGZQSY0QWPR",
-      "name": "舞台「The Gleam of Dawn」開演！",
-      "cardType": 4,
-      "attribute": 3,
-      "status": [
-        [799, 921, 815, 916],
-        [854, 985, 870, 1330],
-        [908, 1549, 924, 1394],
-        [963, 1613, 979, 2208],
-        [1018, 2778, 1034, 2273]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "Sp.パワースマッシュB Ⅲ",
-        "description": "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "Sp.パワースマッシュB Ⅲ",
-        "description": "敵1～2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "攻:Sp.パワーUP Ⅲ",
-        "description": "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
-      },
-      "labels": []
-    },
-    {
-      "id": "01KBQE14JGVNEVGVZ8WBMFG9Z4",
-      "name": "舞台「The Gleam of Dawn」開演！",
-      "cardType": 7,
-      "attribute": 3,
-      "status": [
-        [799, 921, 815, 916],
-        [854, 985, 870, 1330],
-        [908, 1549, 924, 1394],
-        [963, 1613, 979, 2208],
-        [1018, 2778, 1034, 2273]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "Sp.パワーヒールC Ⅲ",
-        "description": "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。",
-        "sp": 22
-      },
-      "gvgSkill": {
-        "name": "Sp.パワーヒールC Ⅲ",
-        "description": "味方1～3体のHPを回復する。さらに味方のSp.ATKを小アップする。",
-        "sp": 22
-      },
-      "autoSkill": {
-        "name": "回:Sp.パワーUP Ⅲ",
-        "description": "HP回復時、一定確率で味方前衛1体のSp.ATKを特大アップさせる。"
-      },
-      "labels": []
     }
   ]
 }

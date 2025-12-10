@@ -6,7 +6,7 @@ export default function User() {
   return (
     <Suspense>
       <SignedOut>
-        <SignInButton>Sign in</SignInButton>
+        <SignInButton mode={"modal"}>Sign in</SignInButton>
       </SignedOut>
       <SignedIn>
         <IconButton sx={{ ml: 1 }} color="inherit">

@@ -1,6 +1,6 @@
 "use client";
 
-import { Layout } from "@/components/Layout";
+import { Layout } from "@/components/layout/client";
 import LabeledEdge from "@/components/flow/edge/LabeledEdge";
 import OrderNode from "@/components/flow/node/OrderNode";
 import { type Order, orderList } from "@/domain/order/order";
@@ -62,129 +62,144 @@ export default function FlowChart() {
 
   return (
     <Layout>
-      <Grid container direction={"row"} alignItems={"center"} sx={{ height: "10vh" }}>
-        <Stack direction={"row"} display={"flex"}>
-          <Stack direction={"row"}>
-            <Autocomplete
-              disablePortal
-              options={orderList.filter((order) => order.payed).map((order) => order.name)}
-              sx={{ width: 250 }}
-              renderInput={(params) => <TextField {...params} label="Select Order" />}
-              onChange={(_, value) => {
-                if (value) {
-                  setSelect(orderList.find((order) => order.name === value)!);
-                }
-              }}
-            />
-            <IconButton
-              onClick={() => {
-                const newNodes = [
-                  ...nodes,
-                  {
-                    id: getCount().toString(),
-                    type: "order",
-                    position: { x: 100, y: 100 },
-                    data: {
-                      order: select,
-                    },
-                  },
-                ];
-                setNodeStorage(newNodes);
-                setNodes(newNodes);
-              }}
-            >
-              <Add />
-            </IconButton>
-          </Stack>
-          <Stack
-            direction={"row"}
-            position={"absolute"}
-            right={100}
-            onClick={() => setModalOpen(true)}
-          >
-            <Button>{"how to use"}</Button>
-          </Stack>
-        </Stack>
-      </Grid>
-      <Divider />
-      <div
-        style={{
-          width: "85vw",
-          height: "80vh",
+      <Box
+        sx={{
+          width: "80%",
+          mx: "auto",
+          p: 3,
+          mt: 4,
+          borderRadius: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          gap: 2,
         }}
       >
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={(changes) => {
-            onNodesChange(changes);
-            setNodeStorage((prev) => {
-              for (const change of changes) {
-                if (change.type === "remove") {
-                  const idx = prev.findIndex((n) => n.id === change.id);
-                  prev.splice(idx, 1);
-                }
-              }
-              return prev;
-            });
-          }}
-          onEdgesChange={(changes) => {
-            onEdgesChange(changes);
-            setEdgeStorage((prev) => {
-              for (const change of changes) {
-                if (change.type === "remove") {
-                  const idx = prev.findIndex((e) => e.id === change.id);
-                  prev.splice(idx, 1);
-                }
-              }
-              return prev;
-            });
-          }}
-          nodeTypes={nodeTypes}
-          edgeTypes={edgeTypes}
-          onConnect={onConnect}
-          onNodeDragStop={(_, node) => {
-            setNodeStorage((prev) => {
-              const idx = prev.findIndex((n) => n.id === node.id);
-              prev[idx] = node;
-              return prev;
-            });
-          }}
-        >
-          <Background color="grey" variant={BackgroundVariant.Dots} />
-          <MiniMap nodeStrokeWidth={3} zoomable pannable />
-        </ReactFlow>
-      </div>
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 500,
-            bgcolor: "background.paper",
-            border: "2px solid #000",
-            boxShadow: 24,
-            p: 4,
+        <Grid container direction={"row"} alignItems={"center"} sx={{ height: "10vh" }}>
+          <Stack direction={"row"} display={"flex"}>
+            <Stack direction={"row"}>
+              <Autocomplete
+                disablePortal
+                options={orderList.filter((order) => order.payed).map((order) => order.name)}
+                sx={{ width: 250 }}
+                renderInput={(params) => <TextField {...params} label="Select Order" />}
+                onChange={(_, value) => {
+                  if (value) {
+                    setSelect(orderList.find((order) => order.name === value)!);
+                  }
+                }}
+              />
+              <IconButton
+                onClick={() => {
+                  const newNodes = [
+                    ...nodes,
+                    {
+                      id: getCount().toString(),
+                      type: "order",
+                      position: { x: 100, y: 100 },
+                      data: {
+                        order: select,
+                      },
+                    },
+                  ];
+                  setNodeStorage(newNodes);
+                  setNodes(newNodes);
+                }}
+              >
+                <Add />
+              </IconButton>
+            </Stack>
+            <Stack
+              direction={"row"}
+              position={"absolute"}
+              right={100}
+              onClick={() => setModalOpen(true)}
+            >
+              <Button>{"how to use"}</Button>
+            </Stack>
+          </Stack>
+        </Grid>
+        <Divider />
+        <div
+          style={{
+            width: "85vw",
+            height: "80vh",
           }}
         >
-          <Typography id={`modal-modal-title-${id}`} variant="h6" component="h2">
-            Flowchart の使い方
-          </Typography>
-          {[
-            "1. オーダーを選択して追加ボタンを押す",
-            "2. ノードをドラッグして移動",
-            "3. ノードのハンドルをドラッグしてエッジを作成",
-            "4. ノードまたはエッジをクリックして Backspace を押すと削除",
-            "5. ノードまたはエッジを右クリックすると編集メニューが表示",
-          ].map((text) => (
-            <Typography key={text} sx={{ mt: 2 }}>
-              {text}
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={(changes) => {
+              onNodesChange(changes);
+              setNodeStorage((prev) => {
+                for (const change of changes) {
+                  if (change.type === "remove") {
+                    const idx = prev.findIndex((n) => n.id === change.id);
+                    prev.splice(idx, 1);
+                  }
+                }
+                return prev;
+              });
+            }}
+            onEdgesChange={(changes) => {
+              onEdgesChange(changes);
+              setEdgeStorage((prev) => {
+                for (const change of changes) {
+                  if (change.type === "remove") {
+                    const idx = prev.findIndex((e) => e.id === change.id);
+                    prev.splice(idx, 1);
+                  }
+                }
+                return prev;
+              });
+            }}
+            nodeTypes={nodeTypes}
+            edgeTypes={edgeTypes}
+            onConnect={onConnect}
+            onNodeDragStop={(_, node) => {
+              setNodeStorage((prev) => {
+                const idx = prev.findIndex((n) => n.id === node.id);
+                prev[idx] = node;
+                return prev;
+              });
+            }}
+          >
+            <Background color="grey" variant={BackgroundVariant.Dots} />
+            <MiniMap nodeStrokeWidth={3} zoomable pannable />
+          </ReactFlow>
+        </div>
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 500,
+              bgcolor: "background.paper",
+              border: "2px solid #000",
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <Typography id={`modal-modal-title-${id}`} variant="h6" component="h2">
+              Flowchart の使い方
             </Typography>
-          ))}
-        </Box>
-      </Modal>
+            {[
+              "1. オーダーを選択して追加ボタンを押す",
+              "2. ノードをドラッグして移動",
+              "3. ノードのハンドルをドラッグしてエッジを作成",
+              "4. ノードまたはエッジをクリックして Backspace を押すと削除",
+              "5. ノードまたはエッジを右クリックすると編集メニューが表示",
+            ].map((text) => (
+              <Typography key={text} sx={{ mt: 2 }}>
+                {text}
+              </Typography>
+            ))}
+          </Box>
+        </Modal>
+      </Box>
     </Layout>
   );
 }

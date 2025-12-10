@@ -1,6 +1,6 @@
 "use client";
 
-import { Layout } from "@/components/Layout";
+import { Layout } from "@/components/layout/client";
 import { Documents } from "@/components/docs/Documents";
 import Intro from "@/mdx/index.mdx";
 import "@/styles/markdown.css";

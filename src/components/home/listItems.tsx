@@ -1,6 +1,13 @@
 import Link from "next/link";
 
-import { Assignment, DataArray, Schema, ViewCompact, ViewTimeline } from "@mui/icons-material";
+import {
+  Assignment,
+  Dashboard,
+  DataArray,
+  Schema,
+  ViewCompact,
+  ViewTimeline,
+} from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText, Tooltip } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
@@ -27,9 +34,34 @@ const links = [
   },
 ];
 
+const protectedLinks = [
+  {
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: <Dashboard />,
+  },
+];
+
 export const mainListItems = (
   <>
     {links.map(({ title, href, icon }) => {
+      return (
+        <Tooltip title={title} key={title} arrow placement={"right-end"}>
+          <Link href={href}>
+            <ListItemButton>
+              <ListItemIcon>{icon}</ListItemIcon>
+              <ListItemText primary={title} />
+            </ListItemButton>
+          </Link>
+        </Tooltip>
+      );
+    })}
+  </>
+);
+
+export const userListItems = (
+  <>
+    {protectedLinks.map(({ title, href, icon }) => {
       return (
         <Tooltip title={title} key={title} arrow placement={"right-end"}>
           <Link href={href}>

@@ -1,12 +1,23 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import { upsertUser } from "@/database";
 
 const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
 
 export default clerkMiddleware(
   async (auth, req) => {
     if (isProtectedRoute(req)) await auth.protect();
+    const { userId } = await auth();
+    if (userId && ["/signed-in", "/signed-up"].includes(req.nextUrl.pathname)) {
+      await upsertUser(userId);
+      const url = req.nextUrl.clone();
+      url.pathname = "/dashboard";
+      return NextResponse.rewrite(url);
+    }
+    return NextResponse.next();
   },
   {
+    debug: process.env.NODE_ENV === "development",
     authorizedParties:
       process.env.NODE_ENV === "development"
         ? ["https://mitama.io", "http://localhost:3000"]

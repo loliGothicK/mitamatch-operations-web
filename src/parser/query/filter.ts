@@ -43,7 +43,7 @@ function likeToRegExp(pattern: string, flags?: string): RegExp {
 }
 
 export default function build<T>(
-  expr: ParseResult,
+  expr: Omit<ParseResult, "visibility">,
   resolver: SchemaResolver<T>,
   completion?: Record<string, ComleteCandidate>,
 ): Validated<

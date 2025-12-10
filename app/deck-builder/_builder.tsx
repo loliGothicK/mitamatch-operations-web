@@ -1,7 +1,6 @@
 "use client";
 
 import { DeckBuilder } from "@/deck-builder/_tabs/builder";
-import { Layout } from "@/components/Layout";
 import { Box, Tab, Tabs } from "@mui/material";
 import { ReactNode, SyntheticEvent, useState } from "react";
 import { Calculator } from "@/deck-builder/_tabs/calculator";
@@ -43,7 +42,6 @@ export function DeckBuilderPage() {
   };
 
   return (
-    <Layout>
       <Box
         sx={{
           width: "100%",
@@ -68,6 +66,5 @@ export function DeckBuilderPage() {
           <Calculator />
         </CustomTabPanel>
       </Box>
-    </Layout>
   );
 }
