@@ -38,27 +38,27 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
   );
 
   return (
-      <Box sx={{ width: "100%" }}>
-        <TabContext value={value}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Memoria" value={0} />
-            <Tab label="Costume" value={1} />
-            <Tab label="Character" value={2} />
-          </TabList>
-          <AppBar position="static">
-            <Toolbar>
-              <Breadcrumbs separator="›" aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/data">
-                  data
-                </Link>
-                <Typography sx={{ color: "text.primary" }}>{dataType ?? "memoria"}</Typography>
-              </Breadcrumbs>
-            </Toolbar>
-          </AppBar>
-          <TabPanel value={0}>{value === 0 && <MemoriaDataGrid initialQuery={query} />}</TabPanel>
-          <TabPanel value={1}>{value === 1 && <CostumeDataGrid initialQuery={query} />}</TabPanel>
-          <TabPanel value={2}>{value === 2 && <View />}</TabPanel>
-        </TabContext>
-      </Box>
+    <Box sx={{ width: "100%" }}>
+      <TabContext value={value}>
+        <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <Tab label="Memoria" value={0} />
+          <Tab label="Costume" value={1} />
+          <Tab label="Character" value={2} />
+        </TabList>
+        <AppBar position="static">
+          <Toolbar>
+            <Breadcrumbs separator="›" aria-label="breadcrumb">
+              <Link underline="hover" color="inherit" href="/data">
+                data
+              </Link>
+              <Typography sx={{ color: "text.primary" }}>{dataType ?? "memoria"}</Typography>
+            </Breadcrumbs>
+          </Toolbar>
+        </AppBar>
+        <TabPanel value={0}>{value === 0 && <MemoriaDataGrid initialQuery={query} />}</TabPanel>
+        <TabPanel value={1}>{value === 1 && <CostumeDataGrid initialQuery={query} />}</TabPanel>
+        <TabPanel value={2}>{value === 2 && <View />}</TabPanel>
+      </TabContext>
+    </Box>
   );
 }

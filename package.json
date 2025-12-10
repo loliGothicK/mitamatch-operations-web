@@ -10,7 +10,7 @@
     "lint:fix": "pnpm dlx oxlint --fix",
     "fmt": "pnpm dlx oxfmt",
     "fmt:check": "pnpm dlx oxfmt --check &&  && pnpm dlx biome format .",
-    "pretty": "pnpm dlx oxlint --fix && pnpm dlx oxfmt --config=oxfmtrc.json && npx biome format --write .",
+    "pretty": "pnpm dlx oxlint --fix && pnpm dlx oxfmt --config=./oxfmtrc.json && npx biome format --write .",
     "test": "vitest"
   },
   "dependencies": {

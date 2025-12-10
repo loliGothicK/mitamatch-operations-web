@@ -378,52 +378,52 @@ export default function Deital({ lily, job }: { lily: string; job: string }) {
   if (costume === undefined) return <NotFound />;
 
   return (
-      <Box
-        sx={{
-          width: "80%",
-          mx: "auto",
-          p: 3,
-          mt: 4,
-          borderRadius: 1,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          gap: 2,
-        }}
-      >
-        <AppBar position="static">
-          <Toolbar>
-            <Breadcrumbs separator="›" aria-label="breadcrumb">
-              <Link underline="hover" color="inherit" href="/data">
-                data
-              </Link>
-              <Link underline="hover" color="inherit" href="/data/costume">
-                costume
-              </Link>
-              <Typography sx={{ color: "text.primary" }}>{`${lily}/${job}`}</Typography>
-            </Breadcrumbs>
-          </Toolbar>
-        </AppBar>
-        <Basic costume={costume} />
-        <Grid container={true} spacing={2}>
-          <Grid size={8}>
-            <Divider flexItem={true} textAlign="left" sx={{ py: 2 }}>
-              {"レアスキル"}
-            </Divider>
-            <RareSkill costume={costume} />
-            <DetailData costume={costume} />
-          </Grid>
-          <Grid size={4}>
-            <Image
-              src={`/costume/full/${lily}/${job}.png`}
-              alt={`${lily}/${job}`}
-              width={750}
-              height={1300}
-              priority={true}
-            />
-          </Grid>
+    <Box
+      sx={{
+        width: "80%",
+        mx: "auto",
+        p: 3,
+        mt: 4,
+        borderRadius: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        gap: 2,
+      }}
+    >
+      <AppBar position="static">
+        <Toolbar>
+          <Breadcrumbs separator="›" aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/data">
+              data
+            </Link>
+            <Link underline="hover" color="inherit" href="/data/costume">
+              costume
+            </Link>
+            <Typography sx={{ color: "text.primary" }}>{`${lily}/${job}`}</Typography>
+          </Breadcrumbs>
+        </Toolbar>
+      </AppBar>
+      <Basic costume={costume} />
+      <Grid container={true} spacing={2}>
+        <Grid size={8}>
+          <Divider flexItem={true} textAlign="left" sx={{ py: 2 }}>
+            {"レアスキル"}
+          </Divider>
+          <RareSkill costume={costume} />
+          <DetailData costume={costume} />
         </Grid>
-      </Box>
+        <Grid size={4}>
+          <Image
+            src={`/costume/full/${lily}/${job}.png`}
+            alt={`${lily}/${job}`}
+            width={750}
+            height={1300}
+            priority={true}
+          />
+        </Grid>
+      </Grid>
+    </Box>
   );
 }

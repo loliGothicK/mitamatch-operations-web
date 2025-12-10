@@ -42,29 +42,29 @@ export function DeckBuilderPage() {
   };
 
   return (
-      <Box
-        sx={{
-          width: "100%",
-          boxSizing: "border-box",
-        }}
-      >
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab key={"builder"} label={"Builder"} {...a11yProps(0)} />
-            <Tab
-              key={"calculator"}
-              label={"Calculator"}
-              {...a11yProps(1)}
-              sx={{ marginLeft: "auto" }}
-            />
-          </Tabs>
-        </Box>
-        <CustomTabPanel index={0} value={value} key={"untitled"}>
-          <DeckBuilder index={0} />
-        </CustomTabPanel>
-        <CustomTabPanel index={1} value={value} key={"calculator"}>
-          <Calculator />
-        </CustomTabPanel>
+    <Box
+      sx={{
+        width: "100%",
+        boxSizing: "border-box",
+      }}
+    >
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab key={"builder"} label={"Builder"} {...a11yProps(0)} />
+          <Tab
+            key={"calculator"}
+            label={"Calculator"}
+            {...a11yProps(1)}
+            sx={{ marginLeft: "auto" }}
+          />
+        </Tabs>
       </Box>
+      <CustomTabPanel index={0} value={value} key={"untitled"}>
+        <DeckBuilder index={0} />
+      </CustomTabPanel>
+      <CustomTabPanel index={1} value={value} key={"calculator"}>
+        <Calculator />
+      </CustomTabPanel>
+    </Box>
   );
 }

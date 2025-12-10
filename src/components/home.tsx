@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Box, Card, CardActionArea, CardContent, CardMedia, Typography } from "@mui/material";
 import "@/components/home/home.css";

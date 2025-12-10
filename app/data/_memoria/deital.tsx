@@ -88,13 +88,7 @@ function StatusTable({ status }: { status: Memoria["status"] }) {
   );
 }
 
-export default function Deital({
-  name,
-  type,
-}: {
-  name: string;
-  type?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
-}) {
+export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 | 4 | 5 | 6 | 7 }) {
   const data = memoriaList.filter((memoria) => memoria.name.full === decodeURI(name));
   const indices = data.map(projector("cardType"));
   const [value, setValue] = useState(type ? indices.findIndex((_) => _ === type) : 0);
@@ -104,53 +98,53 @@ export default function Deital({
   };
 
   return (
-      <Box
-        sx={{
-          width: "80%",
-          mx: "auto",
-          p: 3,
-          mt: 4,
-          borderRadius: 1,
-        }}
-      >
-        <Box>
-          <Stack direction={"row"} justifyContent={"left"} alignItems={"center"} gap={2}>
-            <Image
-              src={`/memoria/${data[0].name.short}.png`}
-              alt={data[0].name.short}
-              width={120}
-              height={120}
-              priority={true}
-            />
-            <Box>
-              <Typography variant="h4" component="div">
-                {data[0].name.full}
-              </Typography>
-              {data[0].labels.join("/")}
-            </Box>
-          </Stack>
-        </Box>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            {data.map((memoria, index) => (
-              <Tab key={memoria.cardType} label={memoria.cardType} {...a11yProps(index)} />
-            ))}
-          </Tabs>
-        </Box>
-        {data.map((memoria, index) => (
-          <CustomTabPanel index={index} value={value} key={memoria.cardType}>
-            <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
-              <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
-                ステータス
-              </Divider>
-              <StatusTable status={memoria.status} />
-              <SkillCard skill={memoria.skills.questSkill} title={"対ヒュージスキル"} />
-              <SkillCard skill={memoria.skills.gvgSkill} title={"レギオンマッチスキル"} />
-              <SkillCard skill={memoria.skills.autoSkill} title={"レギオンマッチ補助スキル"} />
-            </Box>
-          </CustomTabPanel>
-        ))}
+    <Box
+      sx={{
+        width: "80%",
+        mx: "auto",
+        p: 3,
+        mt: 4,
+        borderRadius: 1,
+      }}
+    >
+      <Box>
+        <Stack direction={"row"} justifyContent={"left"} alignItems={"center"} gap={2}>
+          <Image
+            src={`/memoria/${data[0].name.short}.png`}
+            alt={data[0].name.short}
+            width={120}
+            height={120}
+            priority={true}
+          />
+          <Box>
+            <Typography variant="h4" component="div">
+              {data[0].name.full}
+            </Typography>
+            {data[0].labels.join("/")}
+          </Box>
+        </Stack>
       </Box>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          {data.map((memoria, index) => (
+            <Tab key={memoria.cardType} label={memoria.cardType} {...a11yProps(index)} />
+          ))}
+        </Tabs>
+      </Box>
+      {data.map((memoria, index) => (
+        <CustomTabPanel index={index} value={value} key={memoria.cardType}>
+          <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+            <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
+              ステータス
+            </Divider>
+            <StatusTable status={memoria.status} />
+            <SkillCard skill={memoria.skills.questSkill} title={"対ヒュージスキル"} />
+            <SkillCard skill={memoria.skills.gvgSkill} title={"レギオンマッチスキル"} />
+            <SkillCard skill={memoria.skills.autoSkill} title={"レギオンマッチ補助スキル"} />
+          </Box>
+        </CustomTabPanel>
+      ))}
+    </Box>
   );
 }
 
