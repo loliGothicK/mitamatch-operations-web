@@ -7,7 +7,7 @@ import { option } from "fp-ts";
 import { identity } from "fp-ts/function";
 
 const costumeSchema = z.object({
-  id: z.number().readonly(),
+  id: z.ulid().readonly(),
   name: z.string().readonly(),
   cardType: z
     .union([
@@ -88,6 +88,7 @@ const costumeSchema = z.object({
         ),
     ),
   released_at: z.iso.date().readonly(),
+  phantasm: z.boolean().optional().readonly(),
 });
 
 export type Ex = {

@@ -38,7 +38,7 @@ const columns: GridColDef<Memoria>[] = [
     field: "type",
     headerName: "Type",
     width: 100,
-    valueGetter: (_, memoria) => Lenz.memoria.general.cardType.get(memoria),
+    valueGetter: (_, memoria) => formatCardType(Lenz.memoria.general.cardType.get(memoria)),
   },
   {
     field: "attribute",
@@ -118,12 +118,9 @@ export const schema = {
     "spatk",
     "def",
     "spdef",
-    "questSkill.name",
-    "questSkill.desc",
-    "gvgSkill.name",
-    "gvgSkill.desc",
-    "autoSkill.name",
-    "autoSkill.desc",
+    "questSkill",
+    "gvgSkill",
+    "autoSkill",
     "label",
   ],
 };
@@ -168,29 +165,26 @@ const resolver: SchemaResolver<Memoria> = {
     type: "number",
     accessor: (memoria: Memoria) => Lenz.memoria.general.spdef.get(memoria),
   },
-  "questSkill.name": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.name,
+  questSkill: {
+    type: "clazz",
+    accessor: (memoria: Memoria) => ({
+      type: "memoriaSkill",
+      data: Lenz.memoria.general.questSkill.get(memoria).raw,
+    }),
   },
-  "questSkill.desc": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.description,
+  gvgSkill: {
+    type: "clazz",
+    accessor: (memoria: Memoria) => ({
+      type: "memoriaSkill",
+      data: Lenz.memoria.general.gvgSkill.get(memoria).raw,
+    }),
   },
-  "gvgSkill.name": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.name,
-  },
-  "gvgSkill.desc": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.description,
-  },
-  "autoSkill.name": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.name,
-  },
-  "autoSkill.desc": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.description,
+  autoSkill: {
+    type: "clazz",
+    accessor: (memoria: Memoria) => ({
+      type: "memoriaSkill",
+      data: Lenz.memoria.general.gvgSkill.get(memoria).raw,
+    }),
   },
   label: {
     type: "clazz",
@@ -294,6 +288,7 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
       help={<Help />}
       columns={columns}
       visibilityAll={visibilityAll}
+      hidden={["questSkill"]}
     />
   );
 }

@@ -173,8 +173,7 @@ export const schema = {
     "spatk",
     "def",
     "spdef",
-    "rareSkill.name",
-    "rareSkill.desc",
+    "rareSkill",
     "specialSkill",
     "released_at",
   ],
@@ -205,13 +204,12 @@ const resolver: SchemaResolver<Costume> = {
     type: "number",
     accessor: (costume: Costume) => Lenz.costume.general.spdef.get(costume),
   },
-  "rareSkill.name": {
-    type: "string",
-    accessor: (costume: Costume) => costume.rareSkill.name,
-  },
-  "rareSkill.desc": {
-    type: "string",
-    accessor: (costume: Costume) => costume.rareSkill.description,
+  rareSkill: {
+    type: "clazz",
+    accessor: (costume: Costume) => ({
+      type: "rareSkill",
+      data: costume.rareSkill,
+    }),
   },
   specialSkill: {
     type: "clazz",
@@ -388,6 +386,7 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
       help={<Help />}
       columns={columns}
       visibilityAll={visibilityAll}
+      hidden={["released_at"]}
     />
   );
 }

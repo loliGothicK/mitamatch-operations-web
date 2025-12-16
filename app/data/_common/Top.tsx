@@ -45,7 +45,7 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
           <Tab label="Costume" value={1} />
           <Tab label="Character" value={2} />
         </TabList>
-        <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: "transparent" }}>
           <Toolbar>
             <Breadcrumbs separator="›" aria-label="breadcrumb">
               <Link underline="hover" color="inherit" href="/data">
@@ -55,7 +55,9 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
             </Breadcrumbs>
           </Toolbar>
         </AppBar>
-        <TabPanel value={0}>{value === 0 && <MemoriaDataGrid initialQuery={query} />}</TabPanel>
+        <TabPanel value={0} sx={{ padding: 0 }}>
+          {value === 0 && <MemoriaDataGrid initialQuery={query} />}
+        </TabPanel>
         <TabPanel value={1}>{value === 1 && <CostumeDataGrid initialQuery={query} />}</TabPanel>
         <TabPanel value={2}>{value === 2 && <View />}</TabPanel>
       </TabContext>

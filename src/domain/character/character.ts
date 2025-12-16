@@ -41,7 +41,7 @@ export type Rune = z.infer<typeof runeSchema>;
 
 const runeSpecSchema = z.object({
   rune: runeSchema,
-  variant: z.number().optional().default(0),
+  variant: z.number().optional(),
 });
 
 export type RuneSpec = z.infer<typeof runeSpecSchema>;
