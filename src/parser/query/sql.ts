@@ -8,7 +8,7 @@ import {
   OrderBy,
   Parser,
 } from "node-sql-parser";
-import type { GridColumnVisibilityModel, GridSortModel } from "@mui/x-data-grid";
+import type { GridSortModel } from "@mui/x-data-grid";
 import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
 import { bail, type MitamaError, ValidateResult } from "@/error/error";
 import { getApplicativeValidation, right } from "fp-ts/Either";
@@ -32,7 +32,7 @@ export type ParseResult = {
     limit: Option<number>;
     offset: Option<number>;
   };
-  readonly visibility: GridColumnVisibilityModel;
+  readonly visibility: Set<string>;
 };
 
 function isExpressionValueArray(data: any): data is ExpressionValue[] {
@@ -88,17 +88,22 @@ function parseExpr(
           list.value.flatMap((expr) =>
             pipe(
               parseExpr(expr),
-              either.flatMap((expr) =>
-                match(expr)
-                  .when(
-                    (e) => Array.isArray(e),
-                    (e) => right(e),
-                  )
-                  .otherwise(() =>
-                    toValidated(
-                      bail("expr_list", "binary expression in exprssion list is not supported."),
+              either.flatMap(
+                (expr): ValidateResult<AtomicExpr | AtomicExprList> =>
+                  match(expr)
+                    .with({ type: "field", value: P.string }, right)
+                    .when(
+                      (e) => Array.isArray(e),
+                      (e) => right(e),
+                    )
+                    .otherwise(() =>
+                      toValidated(
+                        bail(
+                          "expr_list",
+                          `${JSON.stringify(expr)} <- binary expression in exprssion list is not supported.`,
+                        ),
+                      ),
                     ),
-                  ),
               ),
             ),
           ),
@@ -229,12 +234,12 @@ function parseLimit(limit: Limit | null): Validated<
     );
 }
 
-export const parseColumns = (columns: Column[]): ValidateResult<GridColumnVisibilityModel> => {
+export const parseColumns = (columns: Column[]): ValidateResult<Set<string>> => {
   return pipe(
     columns.map(projector("expr")).map(parseExpr),
     separator,
     either.map((exprs) => {
-      return Object.fromEntries(
+      return new Set(
         exprs
           .filter(
             (
@@ -244,7 +249,7 @@ export const parseColumns = (columns: Column[]): ValidateResult<GridColumnVisibi
               value: string;
             } => "type" in f && f.type === "field",
           )
-          .map((f) => [f.value, true] as const),
+          .map((f) => f.value),
       );
     }),
   );

@@ -1,6 +1,6 @@
 import type { AtomicExpr, AtomicExprList, BinaryExpr, ParseResult } from "@/parser/query/sql";
 import { match } from "ts-pattern";
-import { anyhow, bail, type MitamaError } from "@/error/error";
+import { anyhow, bail, type MitamaError, ValidateResult } from "@/error/error";
 import { type Either, getApplicativeValidation, right } from "fp-ts/Either";
 import { pipe } from "fp-ts/function";
 import { either, option } from "fp-ts";
@@ -64,12 +64,12 @@ export default function build<T>(
     operator: string,
     lhs: Input,
     rhs: Input,
-  ): Either<MitamaError, (left: Lit, right: Lit) => Lit> =>
+  ): Either<MitamaError, (left: Lit | null, right: Lit | null) => Lit | null> =>
     match(operator)
       .with("=", () =>
         match(lhs)
           .with({ type: "field", value: "label" }, () =>
-            right((left: Lit, right: Lit) =>
+            right((left: Lit | null, right: Lit | null) =>
               ((left as Clazz).data as Memoria["labels"])
                 .map((label) => label.toLowerCase())
                 .includes(right as string),
@@ -78,13 +78,21 @@ export default function build<T>(
           .with({ type: "field", value: "specialSkill" }, () =>
             bail("specialSkill", "specialSkill cannot be compared, must be used LIKE operator."),
           )
-          .otherwise(() => right((left: Lit, right: Lit) => left === right)),
+          .otherwise(() => right((left: Lit | null, right: Lit | null) => left === right)),
       )
-      .with("!=", () => right((left: Lit, right: Lit) => left !== right))
-      .with(">", () => right((left: Lit, right: Lit) => left > right))
-      .with("<", () => right((left: Lit, right: Lit) => left < right))
-      .with(">=", () => right((left: Lit, right: Lit) => left >= right))
-      .with("<=", () => right((left: Lit, right: Lit) => left <= right))
+      .with("!=", () => right((left: Lit | null, right: Lit | null) => left !== right))
+      .with(">", () =>
+        right((left: Lit | null, right: Lit | null) => !(left && right) || left > right),
+      )
+      .with("<", () =>
+        right((left: Lit | null, right: Lit | null) => !(left && right) || left < right),
+      )
+      .with(">=", () =>
+        right((left: Lit | null, right: Lit | null) => !(left && right) || left >= right),
+      )
+      .with("<=", () =>
+        right((left: Lit | null, right: Lit | null) => !(left && right) || left <= right),
+      )
       .with("+", () =>
         match([lhs, rhs])
           .with([{ type: "field" }, { type: "field" }], ([lhs, rhs]) => {
@@ -93,12 +101,12 @@ export default function build<T>(
                 resolver[lhs.value as string].type === "number" &&
                 resolver[rhs.value as string].type === "number"
               ) {
-                return right((left: Lit, right: Lit) => Number(left) + Number(right));
+                return right((left: Lit | null, right: Lit | null) => Number(left) + Number(right));
               } else if (
                 resolver[lhs.value as string].type === "string" &&
                 resolver[rhs.value as string].type === "string"
               ) {
-                return right((left: Lit, right: Lit) => String(left) + String(right));
+                return right((left: Lit | null, right: Lit | null) => String(left) + String(right));
               } else {
                 return bail("+", "Invalid operands for + operator.");
               }
@@ -108,16 +116,14 @@ export default function build<T>(
           })
           .otherwise(() => bail("+", "Invalid operands for + operator.")),
       )
-      .with("AND", () => right((left: Lit, right: Lit) => Boolean(left) && Boolean(right)))
-      .with("OR", () => right((left: Lit, right: Lit) => Boolean(left) || Boolean(right)))
+      .with("AND", () =>
+        right((left: Lit | null, right: Lit | null) => Boolean(left) && Boolean(right)),
+      )
+      .with("OR", () =>
+        right((left: Lit | null, right: Lit | null) => Boolean(left) || Boolean(right)),
+      )
       .with(P.union("LIKE", "ILIKE", "NOT LIKE", "NOT ILIKE"), (operator) =>
         match([lhs, rhs])
-          .with([{ type: P.not("field") }, P.any], () =>
-            bail(
-              "LIKE",
-              "Invalid operands for LIKE operator. The left operand must be a column name.",
-            ),
-          )
           .with([P.any, { type: P.not("value") }], () =>
             bail(
               "LIKE",
@@ -139,19 +145,27 @@ export default function build<T>(
                 ),
                 either.map((like) =>
                   match(like)
-                    .with({ item: "string" }, ({ operator }) => (left: Lit, right: Lit) => {
-                      return operator(left as string, right as string);
-                    })
-                    .with({ item: "clazz" }, ({ operator }) => (left: Lit, right: Lit) => {
-                      return operator(left as Clazz, right as string);
-                    })
+                    .with(
+                      { item: "string" },
+                      ({ operator }) =>
+                        (left: Lit | null, right: Lit | null) => {
+                          return operator(left as string, right as string);
+                        },
+                    )
+                    .with(
+                      { item: "clazz" },
+                      ({ operator }) =>
+                        (left: Lit | null, right: Lit | null) => {
+                          return operator(left as Clazz, right as string);
+                        },
+                    )
                     .exhaustive(),
                 ),
               );
             },
           )
-          .with([{ type: "field" }, { type: "value" }], () => {
-            return right((left: Lit, right: Lit) => {
+          .with([{ type: P.union("field", "binary_expr") }, { type: "value" }], () => {
+            return right((left: Lit | null, right: Lit | null) => {
               const field = left as string;
               const bool = operator.endsWith("ILIKE")
                 ? likeToRegExp(right as string, "i").test(field)
@@ -161,13 +175,47 @@ export default function build<T>(
           })
           .otherwise(() => bail("LIKE", "Invalid operands for LIKE operator.")),
       )
+      .with(P.union("->>", "->"), (EXTRACTOR) =>
+        match([lhs, rhs])
+          .with([{ type: "field" }, { type: "value" }], ([lhs, rhs]) => {
+            const field = lhs.value as string;
+            const path = rhs.value as string;
+
+            if (field in resolver && resolver[field].type === "clazz") {
+              return match(field)
+                .with(P.union("rareSkill", "questSkill", "gvgSkill", "autoSkill"), (clazz) =>
+                  match(path)
+                    .with("$.name", () =>
+                      right((left: Lit | null, _: Lit | null) => {
+                        return ((left as Clazz).data as Costume["rareSkill"]).name;
+                      }),
+                    )
+                    .with("$.description", () =>
+                      right((left: Lit | null, _: Lit | null) => {
+                        return ((left as Clazz).data as Costume["rareSkill"]).description;
+                      }),
+                    )
+                    .otherwise(() =>
+                      bail(
+                        EXTRACTOR,
+                        `Invalid path (${path}) for ${EXTRACTOR} operator. Only "$.name" and "$.description" is allowd for ${clazz}.`,
+                      ),
+                    ),
+                )
+                .otherwise(() => bail(EXTRACTOR, "Invalid path for ->> operator."));
+            } else {
+              return bail(EXTRACTOR, "Invalid operands for ->> operator.");
+            }
+          })
+          .otherwise(() => bail(EXTRACTOR, "Invalid operands for ->> operator.")),
+      )
       .otherwise(() => bail("operator", `Unsupported operator: ${operator}`));
 
   const cvt = (input: Input) =>
-    match<Input, Validated<MitamaError, IExpression<T>>>(input)
+    match<Input, ValidateResult<IExpression<T>>>(input)
       .with(
         { type: "binary_expr" },
-        (binary): Validated<MitamaError, IExpression<T>> =>
+        (binary): ValidateResult<IExpression<T>> =>
           pipe(
             sequenceS(ap)({
               left: cvt(binary.lhs),
@@ -183,7 +231,7 @@ export default function build<T>(
         toValidated(bail("expr_list", "AtomicExprList is not supported yet")),
       )
       .otherwise((atomic) =>
-        match<typeof atomic, Validated<MitamaError, IExpression<T>>>(atomic)
+        match<typeof atomic, ValidateResult<IExpression<T>>>(atomic)
           .with({ type: "value" }, (lit) => right(new Literal(lit.value as Lit)))
           .with({ type: "field", value: P.string.select() }, (field) => {
             if (field in resolver) {
@@ -246,16 +294,17 @@ export type SchemaResolver<T> = Record<
 >;
 export type Clazz =
   | { type: "specialSkill"; data: Costume["specialSkill"] }
-  | { type: "labels"; data: Memoria["labels"] };
+  | { type: "rareSkill"; data: Costume["rareSkill"] }
+  | { type: "labels"; data: Memoria["labels"] }
+  | { type: "memoriaSkill"; data: { name: string; description: string } };
 type Lit = string | number | boolean | Clazz;
 
 /**
  * 実行可能な式の最小単位。
  * @param T データソースのitemの型
- * @param U この式が評価された結果の型 (number, string, booleanなど)
  */
 export interface IExpression<T> {
-  apply(item: T): Lit;
+  apply(item: T): Lit | null;
 }
 
 /**
@@ -289,11 +338,11 @@ class Field<T> implements IExpression<T> {
 class Binary<T> implements IExpression<T> {
   constructor(
     private left: IExpression<T>,
-    private operator: (left: Lit, right: Lit) => Lit,
+    private operator: (left: Lit | null, right: Lit | null) => Lit | null,
     private right: IExpression<T>,
   ) {}
 
-  apply(item: T): Lit {
+  apply(item: T): Lit | null {
     return this.operator(this.left.apply(item), this.right.apply(item));
   }
 }

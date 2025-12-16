@@ -421,8 +421,8 @@ export const BindRune = ({
   };
 
   const def = [
-    [rune1, first.variant, "#00ecfe"],
-    [rune2, second.variant, "#ff83ff"],
+    [rune1, first.variant || 0, "#00ecfe"],
+    [rune2, second.variant || 0, "#ff83ff"],
   ] as const;
 
   return (

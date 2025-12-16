@@ -1,10 +1,10 @@
 import { PropsWithChildren } from "react";
 import { Layout as ClientLayout } from "@/components/layout/client";
 import { getUserData } from "@/database";
-import { auth } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 
 export default async function Layout({ children }: PropsWithChildren<{}>) {
-  const { userId } = await auth();
-  const userData = userId ? await getUserData(userId) : undefined;
+  const user = await currentUser();
+  const userData = user ? await getUserData(user.id) : undefined;
   return <ClientLayout userData={userData}>{children}</ClientLayout>;
 }

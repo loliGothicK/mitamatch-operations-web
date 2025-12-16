@@ -9,7 +9,7 @@ export default function User() {
         <SignInButton mode={"modal"}>Sign in</SignInButton>
       </SignedOut>
       <SignedIn>
-        <IconButton sx={{ ml: 1 }} color="inherit">
+        <IconButton sx={{ ml: 1 }} color="inherit" component="div">
           <UserButton />
         </IconButton>
       </SignedIn>
