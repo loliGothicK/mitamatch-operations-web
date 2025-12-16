@@ -1,8 +1,13 @@
 import { atomWithStorage } from "jotai/utils";
+import { outdent } from "outdent";
 
 const memoriaQueryAtom = atomWithStorage<string>(
   "query[memoria]",
-  "select * from memoria where `cost` > 18;",
+  outdent`
+      select (\`image\`, \`name\`, \`type\`, \`attribute\`, \`atk\`, \`spatk\`, \`def\`, \`spdef\`, \`gvgSkill\`, \`autoSkill\`)
+      from memoria
+      where \`cost\` > 18;
+  `,
   undefined,
   {
     getOnInit: true,

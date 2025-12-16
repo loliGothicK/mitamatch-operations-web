@@ -108,6 +108,7 @@ export const sortKindAtom = atom<SortKind>("ID");
 
 export const filteredMemoriaAtom = atom((get) => {
   return memoriaList
+    .filter((memoria) => memoria.phantasm !== true)
     .filter((memoria) => {
       const sw = match(get(swAtom))
         .with("shield", () => memoria.cardType > 4)

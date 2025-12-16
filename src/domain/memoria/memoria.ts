@@ -25,6 +25,7 @@ const ActiveSkillSchema = z.object({
 
 const memoriaSchema = z.object({
   id: z.ulid().readonly(),
+  uniqueId: z.ulid().readonly(),
   name: z.string().readonly(),
   cardType: z
     .union([
@@ -67,6 +68,7 @@ const memoriaSchema = z.object({
     ])
     .optional()
     .readonly(),
+  phantasm: z.boolean().optional().readonly(),
 });
 
 /**

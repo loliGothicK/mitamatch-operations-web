@@ -5,17 +5,24 @@ import {
   GridColumnVisibilityModel,
   GridSortModel,
 } from "@mui/x-data-grid";
-import { ComponentPropsWithoutRef, useCallback, useState } from "react";
+import { ComponentPropsWithoutRef, useCallback, useEffect, useState } from "react";
 import { Box } from "@mui/system";
 import { Alert, IconButton, Modal, NoSsr, Paper, Snackbar, Tooltip } from "@mui/material";
-import { ClearAll, Info, PlayArrowRounded, Share } from "@mui/icons-material";
+import {
+  ClearAll,
+  Info,
+  PlayArrowRounded,
+  Share,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
 import Console from "@/components/Console";
 import { ComleteCandidate, makeSchemaCompletionSource } from "@/data/_common/autocomplete";
-import { flow, pipe } from "fp-ts/function";
+import { flow, identity, pipe } from "fp-ts/function";
 import build, { SchemaResolver } from "@/parser/query/filter";
 import { Lens } from "monocle-ts";
 import { sqlToModel } from "@/parser/query/sql";
-import { either } from "fp-ts";
+import { either, option } from "fp-ts";
 import { isRight } from "fp-ts/lib/Either";
 import { isSome } from "fp-ts/Option";
 import queryAtom from "@/jotai/queryAtoms";
@@ -35,6 +42,7 @@ type Props<
 > = {
   columns: readonly GridColDef<T>[];
   visibilityAll: GridColumnVisibilityModel;
+  hidden: GridColDef["field"][];
   table: Table;
   origin: T[];
   resolver: SchemaResolver<T>;
@@ -43,6 +51,7 @@ type Props<
   help: ComponentPropsWithoutRef<typeof Modal>["children"];
   completion?: Record<string, ComleteCandidate>;
 };
+
 const paginationModel = { page: 0, pageSize: 10 };
 
 type ToastState = {
@@ -69,9 +78,13 @@ const style = {
   p: 4,
 };
 
-export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
+export function DataGrid<
+  T extends GridValidRowModel & { readonly phantasm?: boolean },
+  Schema extends hasAtom,
+>({
   columns,
   visibilityAll,
+  hidden,
   table,
   origin,
   resolver,
@@ -95,15 +108,29 @@ export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
     [setQuery],
   );
 
+  const [visible, setVisible] = useState(false);
+
+  const phantasmFilter = useCallback(
+    (rows: T[]) => {
+      return visible ? rows : rows.filter((row) => row.phantasm !== true);
+    },
+    [visible],
+  );
+
   const { vertical, horizontal, open, message, severity } = state;
 
   const handleClose = () => {
     setState({ ...state, open: false });
   };
 
-  const [rows, setRows] = useState(origin);
+  const [rows, setRows] = useState(phantasmFilter(origin));
   const [sortModel, setSortModel] = useState<GridSortModel>([]);
-  const [visibility, setVisibility] = useState(visibilityAll);
+  const [visibility, setVisibility] = useState(
+    hidden.reduce((acc, col) => {
+      acc[col] = false;
+      return acc;
+    }, visibilityAll),
+  );
 
   const handleVisibilityChange = useCallback(
     (newModel: GridColumnVisibilityModel) => {
@@ -128,21 +155,32 @@ export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
   }, [query]);
 
   const runQuery = useCallback(
-    (first = false) => {
+    ({ toast }: { toast: boolean } = { toast: false }) => {
       return pipe(
         sqlToModel(query),
         either.map(({ visibility, ...result }) => {
-          setVisibility(visibility);
+          setVisibility(
+            visibility.has("*")
+              ? visibilityAll
+              : Object.keys(visibilityAll).reduce((model, col) => {
+                  model[col] = visibility.has(col);
+                  return model;
+                }, visibilityAll),
+          );
           const pred = build(result, resolver, completion);
           if (isRight(pred)) {
             const { where, orderBy, limit } = pred.right;
-            if (isSome(where)) {
-              setRows(limit(origin.filter(where.value.apply.bind(where.value))));
-            }
+            const filterFn = pipe(
+              where,
+              option.map((w) => (data: T[]) => data.filter(w.apply.bind(w))),
+              option.getOrElse(() => identity<T[]>),
+            );
+            setRows(pipe(origin, filterFn, limit, phantasmFilter));
             if (isSome(orderBy)) {
               setSortModel(orderBy.value);
             }
-            if (!first) {
+
+            if (toast) {
               setState(
                 flow(
                   openLens.set(true),
@@ -174,22 +212,30 @@ export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
         }),
       );
     },
-    [completion, query, resolver, origin],
+    [completion, query, resolver, origin, phantasmFilter, visibilityAll],
   );
+
+  const handleToggle = useCallback(() => {
+    setVisible((prev) => !prev);
+  }, [setVisible]);
 
   const clearQuery = useCallback(() => {
     const atomicQuery = `select * from ${String(table)};`;
     setQuery(atomicQuery);
-    setRows(origin);
-  }, [origin, table, setQuery, setRows]);
+    setRows(phantasmFilter(origin));
+  }, [origin, table, setQuery, setRows, phantasmFilter]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => setModalOpen(false);
 
   useEffectOnce(() => {
-    runQuery(true);
+    runQuery();
   });
+
+  useEffect(() => {
+    runQuery({ toast: false });
+  }, [runQuery]);
 
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
@@ -211,7 +257,7 @@ export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
         >
           <Box sx={style}>{help}</Box>
         </Modal>
-        <IconButton onClick={() => runQuery()} sx={{ marginRight: 1 }}>
+        <IconButton onClick={() => runQuery({ toast: true })} sx={{ marginRight: 1 }}>
           <Tooltip title={"Ctrl + Enter"} placement="top">
             <PlayArrowRounded />
           </Tooltip>
@@ -223,6 +269,9 @@ export function DataGrid<T extends GridValidRowModel, Schema extends hasAtom>({
         </IconButton>
         <IconButton onClick={shared}>
           <Share />
+        </IconButton>
+        <IconButton onClick={handleToggle} aria-label="toggle visibility">
+          {visible ? <Visibility /> : <VisibilityOff />}
         </IconButton>
         {/* 右端に寄せる */}
         <Box sx={{ display: "flex", flexGrow: 1, justifyContent: "right" }}>

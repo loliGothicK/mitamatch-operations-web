@@ -1,6 +1,6 @@
 {
-  "id": "ee789414-55f7-4671-be7e-224e976a1b41",
-  "prevId": "51c4ae24-de15-4fab-a296-81934d04c59d",
+  "id": "de064798-e24d-49b1-8bc8-90913c19473f",
+  "prevId": "ee789414-55f7-4671-be7e-224e976a1b41",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -89,6 +89,109 @@
         "card_type": {
           "name": "card_type",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cost": {
+          "name": "cost",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "atk": {
+          "name": "atk",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "spatk": {
+          "name": "spatk",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "def": {
+          "name": "def",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "spdef": {
+          "name": "spdef",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "questSkill": {
+          "name": "questSkill",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "gvgSkill": {
+          "name": "gvgSkill",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "autoSkill": {
+          "name": "autoSkill",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.order": {
+      "name": "order",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "effect": {
+          "name": "effect",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prepare_time": {
+          "name": "prepare_time",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "effect_time": {
+          "name": "effect_time",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "usually": {
+          "name": "usually",
+          "type": "boolean",
           "primaryKey": false,
           "notNull": true
         }

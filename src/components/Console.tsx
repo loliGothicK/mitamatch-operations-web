@@ -22,6 +22,8 @@ const keywordWhitelist = new Set([
   "<",
   ">=",
   "<=",
+  "->",
+  "->>",
 ]);
 
 // デフォルトの SQL 補完ソースを取得
@@ -97,7 +99,7 @@ export default function Console<
   return (
     <CodeMirror
       value={value}
-      height="50px"
+      height="75px"
       theme={githubDark}
       extensions={[
         sql({ dialect: MySQL, schema }),
