@@ -58,7 +58,7 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
         <TabPanel value={0} sx={{ padding: 0 }}>
           {value === 0 && <MemoriaDataGrid initialQuery={query} />}
         </TabPanel>
-        <TabPanel value={1}>{value === 1 && <CostumeDataGrid initialQuery={query} />}</TabPanel>
+        <TabPanel value={1} sx={{ padding: 0 }}>{value === 1 && <CostumeDataGrid initialQuery={query} />}</TabPanel>
         <TabPanel value={2}>{value === 2 && <View />}</TabPanel>
       </TabContext>
     </Box>

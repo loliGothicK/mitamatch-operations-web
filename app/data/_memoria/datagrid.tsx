@@ -8,7 +8,7 @@ import { JSX, useMemo } from "react";
 import Link from "@/components/link";
 import { SchemaResolver } from "@/parser/query/filter";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
-import { Box, List, ListItem, ListItemText, ListSubheader, Typography } from "@mui/material";
+import {Box, List, ListItem, ListItemText, ListSubheader, Tooltip, Typography} from "@mui/material";
 import { MemoriaIcon } from "@/components/image/MemoriaIcon";
 import { DataGrid } from "@/data/_common/DataGrid";
 
@@ -92,19 +92,40 @@ const columns: GridColDef<Memoria>[] = [
     field: "questSkill",
     headerName: "Quest Skill",
     width: 300,
-    valueGetter: (_, memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.name,
+    valueGetter: (_, memoria) => Lenz.memoria.general.questSkill.get(memoria).raw,
+    renderCell: (params) => (
+      <Tooltip title={Lenz.memoria.general.questSkill.get(params.row).raw.description} >
+        <Typography>
+          {Lenz.memoria.general.questSkill.get(params.row).raw.name}
+        </Typography>
+      </Tooltip>
+    ),
   },
   {
     field: "gvgSkill",
     headerName: "GVG Skill",
     width: 300,
-    valueGetter: (_, memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.name,
+    valueGetter: (_, memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw,
+    renderCell: (params) => (
+      <Tooltip title={Lenz.memoria.general.gvgSkill.get(params.row).raw.description} >
+        <Typography variant={"caption"}>
+          {Lenz.memoria.general.gvgSkill.get(params.row).raw.name}
+        </Typography>
+      </Tooltip>
+    ),
   },
   {
     field: "autoSkill",
     headerName: "Auto Skill",
     width: 300,
-    valueGetter: (_, memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.name,
+    valueGetter: (_, memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw,
+    renderCell: (params) => (
+      <Tooltip title={Lenz.memoria.general.autoSkill.get(params.row).raw.description} >
+        <Typography variant={"caption"}>
+          {Lenz.memoria.general.autoSkill.get(params.row).raw.name}
+        </Typography>
+      </Tooltip>
+    ),
   },
 ];
 
