@@ -42,7 +42,6 @@ type Props<
 > = {
   columns: readonly GridColDef<T>[];
   visibilityAll: GridColumnVisibilityModel;
-  hidden: GridColDef["field"][];
   table: Table;
   origin: T[];
   resolver: SchemaResolver<T>;
@@ -84,7 +83,6 @@ export function DataGrid<
 >({
   columns,
   visibilityAll,
-  hidden,
   table,
   origin,
   resolver,
@@ -125,12 +123,7 @@ export function DataGrid<
 
   const [rows, setRows] = useState(phantasmFilter(origin));
   const [sortModel, setSortModel] = useState<GridSortModel>([]);
-  const [visibility, setVisibility] = useState(
-    hidden.reduce((acc, col) => {
-      acc[col] = false;
-      return acc;
-    }, visibilityAll),
-  );
+  const [visibility, setVisibility] = useState(visibilityAll);
 
   const handleVisibilityChange = useCallback(
     (newModel: GridColumnVisibilityModel) => {

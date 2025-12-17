@@ -245,7 +245,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
   );
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", overflow: "hidden", width: "100vw" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", overflow: "hidden", width: "calc(100vw - 15px)" }}>
       <Box
         sx={{
           display: "flex",
@@ -255,7 +255,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
       >
         <AppBar position="absolute" sx={{ gridArea: "header" }}>
           <Toolbar
-            sx={{ gap: 1, px: 2, display: "flex", alignItems: "center" }}
+            sx={{ gap: 1, px: 2, mx: 0, display: "flex", alignItems: "center" }}
             component="nav"
             disableGutters={true}
           >

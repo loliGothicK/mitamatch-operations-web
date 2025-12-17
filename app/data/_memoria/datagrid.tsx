@@ -324,7 +324,6 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
       help={<Help />}
       columns={columns}
       visibilityAll={visibilityAll}
-      hidden={["questSkill"]}
     />
   );
 }

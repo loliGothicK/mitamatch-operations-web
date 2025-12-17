@@ -1,9 +1,8 @@
 "use client";
 
-import { type ReactNode, type SyntheticEvent, useState } from "react";
-import { type Memoria, memoriaList } from "@/domain/memoria/memoria";
+import { type SyntheticEvent, useState } from "react";
+import { formatCardType, type Memoria, memoriaList } from "@/domain/memoria/memoria";
 import { Box, Stack } from "@mui/system";
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
@@ -23,28 +22,9 @@ import {
 import { AutoSkill } from "@/parser/autoSkill";
 import { Skill } from "@/parser/skill";
 import { projector } from "@/functional/proj";
-
-interface TabPanelProps {
-  children?: ReactNode;
-  index: number;
-  value: number;
-}
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
+import TabList from "@mui/lab/TabList";
+import TabContext from "@mui/lab/TabContext";
+import TabPanel from "@mui/lab/TabPanel";
 
 function a11yProps(index: number) {
   return {
@@ -120,30 +100,45 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
             <Typography variant="h4" component="div">
               {data[0].name.full}
             </Typography>
-            {data[0].labels.join("/")}
+            {data[0].labels.map((label) => {
+              return <Chip key={label} label={label} sx={{ margin: 1 }} />;
+            })}
           </Box>
         </Stack>
       </Box>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+      <TabContext value={value}>
+        <TabList
+          onChange={handleChange}
+          aria-label="tabs"
+          sx={{
+            margin: 2,
+            borderBottom: 1,
+            borderColor: "divider",
+            backgroundColor: "background.paper",
+          }}
+        >
           {data.map((memoria, index) => (
-            <Tab key={memoria.cardType} label={memoria.cardType} {...a11yProps(index)} />
+            <Tab
+              key={memoria.cardType}
+              label={formatCardType(memoria.cardType)}
+              {...a11yProps(index)}
+            />
           ))}
-        </Tabs>
-      </Box>
-      {data.map((memoria, index) => (
-        <CustomTabPanel index={index} value={value} key={memoria.cardType}>
-          <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
-            <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
-              ステータス
-            </Divider>
-            <StatusTable status={memoria.status} />
-            <SkillCard skill={memoria.skills.questSkill} title={"対ヒュージスキル"} />
-            <SkillCard skill={memoria.skills.gvgSkill} title={"レギオンマッチスキル"} />
-            <SkillCard skill={memoria.skills.autoSkill} title={"レギオンマッチ補助スキル"} />
-          </Box>
-        </CustomTabPanel>
-      ))}
+        </TabList>
+        {data.map((memoria, index) => (
+          <TabPanel key={memoria.id} value={index} sx={{ padding: 0 }}>
+            <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+              <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
+                ステータス
+              </Divider>
+              <StatusTable status={memoria.status} />
+              <SkillCard skill={memoria.skills.questSkill} title={"対ヒュージスキル"} />
+              <SkillCard skill={memoria.skills.gvgSkill} title={"レギオンマッチスキル"} />
+              <SkillCard skill={memoria.skills.autoSkill} title={"レギオンマッチ補助スキル"} />
+            </Box>
+          </TabPanel>
+        ))}
+      </TabContext>
     </Box>
   );
 }

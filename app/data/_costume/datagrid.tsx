@@ -2,7 +2,6 @@ import { type Costume, costumeList as dataSource } from "@/domain/costume/costum
 
 import { type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { Lenz } from "@/domain/lenz";
-import Image from "next/image";
 import { JSX, useMemo } from "react";
 import Link from "@/components/link";
 import { Clazz, SchemaResolver } from "@/parser/query/filter";
@@ -21,6 +20,7 @@ import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
 import { DataGrid } from "@/data/_common/DataGrid";
+import { ImageWithFallback } from "@/components/image/ImageWithFallback";
 
 const columns: GridColDef<Costume>[] = [
   {
@@ -33,8 +33,9 @@ const columns: GridColDef<Costume>[] = [
     }),
     renderCell: (params) => (
       <Link href={`/data/costume/${Lenz.costume.general.name.normalized.URI.get(params.row)}`}>
-        <Image
+        <ImageWithFallback
           src={`/costume/icon/${Lenz.costume.general.name.normalized.full.get(params.row)}.jpg`}
+          fallback={"/memoria/CommingSoon.jpeg"}
           alt={params.value.name}
           width={80}
           height={80}
@@ -245,6 +246,9 @@ const completeCandidates: Record<string, ComleteCandidate> = {
       },
     },
   },
+  rareSkill: {
+    json: ["name", "description"],
+  },
   specialSkill: {
     like: {
       pattern: [
@@ -386,7 +390,6 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
       help={<Help />}
       columns={columns}
       visibilityAll={visibilityAll}
-      hidden={["released_at"]}
     />
   );
 }
