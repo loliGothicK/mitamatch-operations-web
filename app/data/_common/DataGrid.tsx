@@ -235,7 +235,7 @@ export function DataGrid<
 
   useEffect(() => {
     runQuery({ toast: false });
-  }, [runQuery]);
+  }, [visible]); // oxlint-disable-line exhaustive-deps
 
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
