@@ -287,7 +287,7 @@ export function DataGrid<
         value={initialQuery || query}
         schema={schema}
         completions={completion ? [makeSchemaCompletionSource(completion)] : []}
-        execute={runQuery}
+        execute={() => runQuery({ toast: true })}
         onChange={onChange}
       />
       <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>

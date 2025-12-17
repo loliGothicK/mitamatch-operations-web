@@ -1,20 +1,22 @@
-import type { AtomicExpr, AtomicExprList, BinaryExpr, ParseResult } from "@/parser/query/sql";
-import { match } from "ts-pattern";
-import { anyhow, bail, type MitamaError, ValidateResult } from "@/error/error";
-import { type Either, getApplicativeValidation, right } from "fp-ts/Either";
-import { pipe } from "fp-ts/function";
-import { either, option } from "fp-ts";
-import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
-import { sequenceS } from "fp-ts/Apply";
-import { getSemigroup } from "fp-ts/Array";
-import { P } from "ts-pattern";
-import { isSome, Option } from "fp-ts/Option";
-import { separator, transpose } from "@/fp-ts-ext/function";
-import { ComleteCandidate } from "@/data/_common/autocomplete";
-import { Costume } from "@/domain/costume/costume";
-import { Memoria } from "@/domain/memoria/memoria";
-import { GridSortModel } from "@mui/x-data-grid";
+import type {AtomicExpr, AtomicExprList, BinaryExpr, ParseResult} from "@/parser/query/sql";
+import {match, P} from "ts-pattern";
+import {anyhow, bail, type MitamaError, ValidateResult} from "@/error/error";
+import {type Either, getApplicativeValidation, right} from "fp-ts/Either";
+import {pipe} from "fp-ts/function";
+import {either, option} from "fp-ts";
+import {toValidated, type Validated} from "@/fp-ts-ext/Validated";
+import {sequenceS} from "fp-ts/Apply";
+import {getSemigroup} from "fp-ts/Array";
+import {isSome, Option} from "fp-ts/Option";
+import {separator, transpose} from "@/fp-ts-ext/function";
+import {ComleteCandidate} from "@/data/_common/autocomplete";
+import {Costume} from "@/domain/costume/costume";
+import {Memoria} from "@/domain/memoria/memoria";
+import {GridSortModel} from "@mui/x-data-grid";
+
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
+
+type Skill = { readonly name: string; readonly description: string; };
 
 /**
  * SQLのLIKE句のパターン文字列を、
@@ -187,12 +189,12 @@ export default function build<T>(
                   match(path)
                     .with("$.name", () =>
                       right((left: Lit | null, _: Lit | null) => {
-                        return ((left as Clazz).data as Costume["rareSkill"]).name;
+                        return ((left as Clazz).data as Skill).name;
                       }),
                     )
                     .with("$.description", () =>
                       right((left: Lit | null, _: Lit | null) => {
-                        return ((left as Clazz).data as Costume["rareSkill"]).description;
+                        return ((left as Clazz).data as Skill).description;
                       }),
                     )
                     .otherwise(() =>
@@ -296,7 +298,7 @@ export type Clazz =
   | { type: "specialSkill"; data: Costume["specialSkill"] }
   | { type: "rareSkill"; data: Costume["rareSkill"] }
   | { type: "labels"; data: Memoria["labels"] }
-  | { type: "memoriaSkill"; data: { name: string; description: string } };
+  | { type: "memoriaSkill"; data: { name: string; description: string; } };
 type Lit = string | number | boolean | Clazz;
 
 /**

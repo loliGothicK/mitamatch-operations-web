@@ -3,6 +3,7 @@ import { Clazz } from "@/parser/query/filter";
 
 export type ComleteCandidate = {
   equals?: string[];
+  json?: string[];
   like?:
     | {
         pattern: string[];
@@ -24,7 +25,7 @@ export const makeSchemaCompletionSource =
 
     // 1. 正規表現の修正: クォートを任意(group 3)にし、中身(group 4)を取得
     const complexMatch = textBefore.match(
-      /([`\w]+)\s*((?:NOT\s+)?(?:LIKE|ILIKE))\s*(['"]?)([^'"]*)$/i,
+      /([`\w]+)\s*((?:NOT\s+)?(?:LIKE|ILIKE)|(?:->|-->))\s*(['"]?)([^'"]*)$/i,
     );
     const simpleMatch = textBefore.match(/([`\w]+)\s*(=)\s*(['"]?\w*)$/);
 
@@ -34,6 +35,18 @@ export const makeSchemaCompletionSource =
       const operator = complexMatch[2].toUpperCase();
       const quoteChar = complexMatch[3]; // undefined or ' or "
       const contentInside = complexMatch[4];
+
+      if (operator.startsWith("->") && columnName in map && map[columnName].json !== undefined) {
+        return {
+          from: context.pos - contentInside.length,
+          options: map[columnName].json.map((val) => ({
+            label: `'$.${val}'`,
+            type: "enum",
+            boost: 10,
+          })),
+          validFor: /^(?:['"]|[^'"]*)$/,
+        };
+      }
 
       if (operator.endsWith("LIKE") && columnName in map && map[columnName].like !== undefined) {
         const lastCommaIndex = contentInside.lastIndexOf(",");
@@ -80,7 +93,6 @@ export const makeSchemaCompletionSource =
       }
     }
 
-    // --- = (EQUAL) の処理 (変更なし) ---
     if (simpleMatch) {
       const columnName = simpleMatch[1].toLowerCase().replace(/`(.+?)`$/, "$1");
       const value = simpleMatch[3];

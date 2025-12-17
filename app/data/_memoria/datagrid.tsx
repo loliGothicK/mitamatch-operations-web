@@ -210,7 +210,7 @@ const resolver: SchemaResolver<Memoria> = {
     type: "clazz",
     accessor: (memoria: Memoria) => ({
       type: "memoriaSkill",
-      data: Lenz.memoria.general.gvgSkill.get(memoria).raw,
+      data: Lenz.memoria.general.autoSkill.get(memoria).raw,
     }),
   },
   label: {
@@ -245,6 +245,15 @@ const completeCandidates: Record<string, ComleteCandidate> = {
   },
   attribute: {
     equals: ["火", "水", "風", "光", "闇"],
+  },
+  questSkill: {
+    json: ["name", "description"],
+  },
+  gvgSkill: {
+    json: ["name", "description"],
+  },
+  autoSkill: {
+    json: ["name", "description"],
   },
   label: {
     equals: ["legendary", "ultimate"],
