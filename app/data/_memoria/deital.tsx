@@ -128,13 +128,13 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
         {data.map((memoria, index) => (
           <TabPanel key={memoria.id} value={index} sx={{ padding: 0 }}>
             <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+              <SkillCard skill={memoria.skills.gvgSkill} title={"レギオンマッチスキル"} />
+              <SkillCard skill={memoria.skills.autoSkill} title={"レギオンマッチ補助スキル"} />
+              <SkillCard skill={memoria.skills.questSkill} title={"対ヒュージスキル"} />
               <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
                 ステータス
               </Divider>
               <StatusTable status={memoria.status} />
-              <SkillCard skill={memoria.skills.questSkill} title={"対ヒュージスキル"} />
-              <SkillCard skill={memoria.skills.gvgSkill} title={"レギオンマッチスキル"} />
-              <SkillCard skill={memoria.skills.autoSkill} title={"レギオンマッチ補助スキル"} />
             </Box>
           </TabPanel>
         ))}

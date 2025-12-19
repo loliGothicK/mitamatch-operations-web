@@ -3,14 +3,9 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { metadata as defaultMetadata } from "@/layout";
 import { pipe } from "fp-ts/function";
 import { Meta } from "@/metadata/lens";
-import Layout from "@/components/layout/server";
 
 export default function Page() {
-  return (
-    <Layout>
-      <DeckBuilderPage />
-    </Layout>
-  );
+  return <DeckBuilderPage />;
 }
 
 type Props = {

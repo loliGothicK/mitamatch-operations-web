@@ -2,7 +2,7 @@
 
 import { Provider, getDefaultStore } from "jotai";
 import Footer from "@/components/Footer";
-import { Add, DarkMode, LightMode, PermMedia, UnfoldMore, ViewTimeline } from "@mui/icons-material";
+import { Add, DarkMode, LightMode, UnfoldMore } from "@mui/icons-material";
 import {
   AppBar as MuiAppBar,
   Box,
@@ -48,6 +48,10 @@ import Paper from "@mui/material/Paper";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Decks } from "@/components/project/Decks";
+import { SimpleTreeView } from "@mui/x-tree-view";
+import { Timelines } from "@/components/project/Timelines";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -195,11 +199,6 @@ export type UserData = Awaited<ReturnType<typeof getUserData>>;
 export type Legion = UserData["legions"][number];
 export type User = UserData["user"];
 
-const data = [
-  { icon: <PermMedia />, label: "Decks" },
-  { icon: <ViewTimeline />, label: "Timelines" },
-];
-
 const FireNav = styled(List)<{ component?: ElementType }>({
   "& .MuiListItemButton-root": {
     paddingLeft: 24,
@@ -245,7 +244,14 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
   );
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", overflow: "hidden", width: "calc(100vw - 15px)" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+        width: "calc(100vw - 15px)",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -260,19 +266,19 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
             disableGutters={true}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <AfterSlash>
-                <Link href="/" sx={{ pr: 2 }}>
-                  <Image
-                    src="/MitamaLabLogo.png"
-                    alt="logo"
-                    width={40}
-                    height={40}
-                    priority={true}
-                  />
-                </Link>
-              </AfterSlash>
-              {userData && member && (
+              {userData && member ? (
                 <>
+                  <AfterSlash>
+                    <Link href="/" sx={{ pr: 2 }}>
+                      <Image
+                        src="/MitamaLabLogo.png"
+                        alt="logo"
+                        width={40}
+                        height={40}
+                        priority={true}
+                      />
+                    </Link>
+                  </AfterSlash>
                   <AfterSlash sx={{ ml: 2 }}>
                     <Typography variant="h6" component="div">
                       {optimisticLegion?.name || "No Legion"}
@@ -294,6 +300,21 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
                       action={(member) => setMember({ id: member.userId, name: member.name })}
                     />
                   )}
+                </>
+              ) : (
+                <>
+                  <Link href="/" sx={{ pr: 2 }}>
+                    <Image
+                      src="/MitamaLabLogo.png"
+                      alt="logo"
+                      width={40}
+                      height={40}
+                      priority={true}
+                    />
+                  </Link>
+                  <Typography variant="h6" component="div">
+                    {"Mitamatch Operations"}
+                  </Typography>
                 </>
               )}
             </Box>
@@ -403,19 +424,12 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
                     ]}
                   />
                 </ListItemButton>
-                {open &&
-                  data.map((item) => (
-                    <ListItemButton
-                      key={item.label}
-                      sx={{ py: 0, minHeight: 32, color: "rgba(255,255,255,.8)" }}
-                    >
-                      <ListItemIcon sx={{ color: "inherit" }}>{item.icon}</ListItemIcon>
-                      <ListItemText
-                        primary={item.label}
-                        slotProps={{ primary: { fontSize: 14, fontWeight: "medium" } }}
-                      />
-                    </ListItemButton>
-                  ))}
+                {userData && open && (
+                  <SimpleTreeView multiSelect={true}>
+                    <Decks />
+                    <Timelines />
+                  </SimpleTreeView>
+                )}
               </Box>
             </FireNav>
           </Paper>
@@ -431,10 +445,12 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
           </Box>
         </Box>
       </Box>
-      <Footer sx={{ gridArea: "footer" }} />
+      <Footer />
     </Box>
   );
 }
+
+const queryClient = new QueryClient();
 
 export function Layout({ children, userData }: PropsWithChildren<{ userData?: UserData }>) {
   const [mode, setMode] = useState<"light" | "dark">("dark");
@@ -482,10 +498,12 @@ export function Layout({ children, userData }: PropsWithChildren<{ userData?: Us
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <Provider store={defaultStore}>
-          <CssBaseline />
-          <LayoutMain userData={userData}>{children}</LayoutMain>
-        </Provider>
+        <QueryClientProvider client={queryClient}>
+          <Provider store={defaultStore}>
+            <CssBaseline />
+            <LayoutMain userData={userData}>{children}</LayoutMain>
+          </Provider>
+        </QueryClientProvider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

@@ -29,6 +29,20 @@
       "when": 1765613841273,
       "tag": "0003_mushy_human_cannonball",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1765999552311,
+      "tag": "0004_peaceful_lilandra",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1766063764234,
+      "tag": "0005_ordinary_the_stranger",
+      "breakpoints": true
     }
   ]
 }

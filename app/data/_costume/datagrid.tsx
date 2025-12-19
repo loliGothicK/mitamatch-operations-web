@@ -326,6 +326,18 @@ const completeCandidates: Record<string, ComleteCandidate> = {
   },
 };
 
+const TABLE_DEF: [string, string][] = [
+  ["name", "text"],
+  ["type", "text"],
+  ["atk", "integer"],
+  ["spatk", "integer"],
+  ["def", "integer"],
+  ["spdef", "integer"],
+  ["rareSkill", "json"],
+  ["specialSkill", "json"],
+  ["released_at", "timestamp"],
+];
+
 /**
  * A functional React component that provides help-related content.
  *
@@ -366,9 +378,9 @@ function Help(): JSX.Element {
       </List>
       <List dense>
         <ListSubheader>利用可能なカラム</ListSubheader>
-        {schema.costume.map((col) => (
+        {TABLE_DEF.map(([col, type]) => (
           <ListItem key={col} sx={{ py: 0 }}>
-            <ListItemText primary={`\`${col}\``} />
+            <ListItemText primary={`\`${col}\`: ${type}`} />
           </ListItem>
         ))}
       </List>

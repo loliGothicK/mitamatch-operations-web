@@ -1,15 +1,17 @@
 import {
   pgTable,
   uniqueIndex,
-  text,
   timestamp,
   varchar,
   integer,
   primaryKey,
   customType,
+  jsonb,
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { ulid as genUlid, ulidToUUID, uuidToULID } from "ulid";
+import { Unit } from "@/domain/types";
+import { OrderWithPic } from "@/jotai/orderAtoms";
 
 export const ulid = customType<{ data: string; driverData: string }>({
   dataType() {
@@ -90,8 +92,9 @@ export const decks = pgTable("deck", {
   userId: ulid("user_id").references(() => users.id, {
     onDelete: "cascade",
   }),
+  title: varchar("title", { length: 255 }).notNull().default("no title"),
   short: ulid("short").unique(),
-  full: text().notNull(),
+  unit: jsonb("unit").$type<Unit>().notNull(),
   createdAt: timestamp({ precision: 3, mode: "string" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
   updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
 });
@@ -104,8 +107,9 @@ export const timelines = pgTable("timeline", {
   userId: ulid("user_id").references(() => users.id, {
     onDelete: "cascade",
   }),
+  title: varchar("title", { length: 255 }).notNull().default("no title"),
   short: ulid("short").unique(),
-  full: text().notNull(),
+  timeline: jsonb().$type<{ timeline: OrderWithPic[] }>().notNull(),
   createdAt: timestamp({ precision: 3, mode: "string" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
   updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
 });

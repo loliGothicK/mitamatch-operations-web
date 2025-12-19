@@ -14,7 +14,6 @@ import { either } from "fp-ts";
 import { default as CharacterDetail } from "@/data/_character/detail";
 import { normalizeJobName } from "@/domain/costume/function";
 import View from "@/data/_character/view";
-import Layout from "@/components/layout/server";
 
 type Props = {
   params: Promise<{ slug?: string | string[] }>;
@@ -44,38 +43,22 @@ export default async function Page({ params, searchParams }: Props) {
   }
 
   return match(slug)
-    .with(undefined, () => (
-      <Layout>
-        <DataPage dataType={"memoria"} />
-      </Layout>
-    ))
+    .with(undefined, () => <DataPage dataType={"memoria"} />)
     .with([P.union("memoria", "costume", "character").select()], (slug) => (
-      <Layout>
-        <DataPage dataType={slug} />
-      </Layout>
+      <DataPage dataType={slug} />
     ))
     .with(["memoria", P.string], ([, name]) => (
-      <Layout>
-        <MemoriaDetail name={decodeURIComponent(name)} type={cardType.right} />
-      </Layout>
+      <MemoriaDetail name={decodeURIComponent(name)} type={cardType.right} />
     ))
     .with(["costume", P.string, P.string], ([, lily, job]) => (
-      <Layout>
-        <CostumeDetail
-          lily={decodeURIComponent(lily)}
-          job={normalizeJobName(decodeURIComponent(job))}
-        />
-      </Layout>
+      <CostumeDetail
+        lily={decodeURIComponent(lily)}
+        job={normalizeJobName(decodeURIComponent(job))}
+      />
     ))
-    .with(["character"], () => (
-      <Layout>
-        <View />
-      </Layout>
-    ))
+    .with(["character"], () => <View />)
     .with(["character", P.string.select()], (name) => (
-      <Layout>
-        <CharacterDetail name={decodeURIComponent(name)} />
-      </Layout>
+      <CharacterDetail name={decodeURIComponent(name)} />
     ))
     .otherwise(() => <NotFound />);
 }

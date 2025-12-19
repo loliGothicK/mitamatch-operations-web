@@ -111,6 +111,8 @@ import type { StrictOmit } from "ts-essentials";
 import { isLeft } from "fp-ts/Either";
 import { useAsync } from "react-use";
 import { ulid } from "ulid";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { saveDecksAction } from "@/_actions/decks";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -1275,6 +1277,16 @@ function ShareButton() {
   const [modalOpen, setModalOpen] = useState<"short" | "full" | false>(false);
   const [openTip, setOpenTip] = useState<boolean>(false);
   const [url, setUrl] = useState<string>("");
+  const queryClient = useQueryClient();
+
+  // Mutations
+  const mutation = useMutation({
+    mutationFn: async (unit: Unit & { title: string }) => saveDecksAction(unit),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["decks"] });
+    },
+  });
 
   const handleClick = (mode: "short" | "full") => {
     setModalOpen(mode);
@@ -1290,8 +1302,6 @@ function ShareButton() {
     setOpenTip(true);
     await navigator.clipboard.writeText(url);
   };
-
-  const full = encodeDeck(sw, deck, legendaryDeck);
 
   return (
     <PopupState
@@ -1316,7 +1326,8 @@ function ShareButton() {
                 setUrl(
                   `https://operations.mitama.io/deck-builder?deck=${short}&title=${encodeURI(title)}`,
                 );
-                await saveShortLink({ target: "deck", full, short });
+                await saveShortLink({ target: "deck", unit: { sw, deck, legendaryDeck }, short });
+                mutation.mutate({ sw, deck, legendaryDeck, title });
               }}
             >
               {"short link"}
@@ -1325,7 +1336,9 @@ function ShareButton() {
               onClick={() => {
                 popupState.close();
                 handleClick("full");
-                setUrl(`https://operations.mitama.io/deck-builder?deck=${full}`);
+                setUrl(
+                  `https://operations.mitama.io/deck-builder?deck=${encodeDeck(sw, deck, legendaryDeck)}`,
+                );
               }}
             >
               {"full link"}

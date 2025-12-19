@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { ClerkProvider } from "@clerk/nextjs";
+import Layout from "@/components/layout/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,11 +54,12 @@ export default async function RootLayout({
   children: ReactNode;
 }>) {
   const nonce = (await headers()).get("x-nonce") || undefined;
+
   return (
     <ClerkProvider>
       <html lang="ja">
         <body className={inter.className}>
-          {children}
+          <Layout>{children}</Layout>
           <Analytics />
           <SpeedInsights />
         </body>

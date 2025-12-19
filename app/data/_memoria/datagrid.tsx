@@ -260,6 +260,21 @@ const completeCandidates: Record<string, ComleteCandidate> = {
   },
 };
 
+export const TABLE_DEF: [string, string][] = [
+  ["name", "text"],
+  ["type", "text"],
+  ["attribute", "text"],
+  ["cost", "integer"],
+  ["atk", "integer"],
+  ["spatk", "integer"],
+  ["def", "integer"],
+  ["spdef", "integer"],
+  ["questSkill", "json"],
+  ["gvgSkill", "json"],
+  ["autoSkill", "json"],
+  ["label", "text"],
+];
+
 /**
  * A functional React component that provides help-related content.
  *
@@ -300,9 +315,9 @@ function Help(): JSX.Element {
       </List>
       <List dense>
         <ListSubheader>利用可能なカラム</ListSubheader>
-        {schema.memoria.map((col) => (
+        {TABLE_DEF.map(([col, type]) => (
           <ListItem key={col} sx={{ py: 0 }}>
-            <ListItemText primary={`\`${col}\``} />
+            <ListItemText primary={`\`${col}\`: ${type}`} />
           </ListItem>
         ))}
       </List>
