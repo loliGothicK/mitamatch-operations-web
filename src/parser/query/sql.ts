@@ -25,6 +25,11 @@ import { projector } from "@/functional/proj";
 const parser = new Parser();
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
+type Columns = {
+  readonly type: "column_ref" | "except";
+  readonly columns: Set<string>;
+};
+
 export type ParseResult = {
   readonly where: Option<BinaryExpr>;
   readonly orderBy: Option<OrderByExpr>;
@@ -32,7 +37,7 @@ export type ParseResult = {
     limit: Option<number>;
     offset: Option<number>;
   };
-  readonly visibility: Set<string>;
+  readonly visibility: Columns;
 };
 
 function isExpressionValueArray(data: any): data is ExpressionValue[] {
@@ -113,6 +118,15 @@ function parseExpr(
       }
     })
     .with({ type: "expr" }, () => toValidated(bail("expr", "unsupported expression type")))
+    .with(
+      { type: "column_ref", table: P.string, column: P.string, subFields: P.array(P.string) },
+      ({ table, column, subFields }) => {
+        return right({
+          type: "field" as const,
+          value: `${table}.${[column].concat(subFields).join(".")}`,
+        });
+      },
+    )
     .with({ type: "column_ref" }, (column) =>
       match(column)
         .with({ value: P._ }, ({ value }) => right({ type: "field" as const, value: value }))
@@ -234,30 +248,45 @@ function parseLimit(limit: Limit | null): Validated<
     );
 }
 
-export const parseColumns = (columns: Column[]): ValidateResult<Set<string>> => {
-  return pipe(
-    columns.map(projector("expr")).map(parseExpr),
-    separator,
-    either.map((exprs) => {
-      return new Set(
-        exprs
-          .filter(
-            (
-              f,
-            ): f is {
-              type: "field";
-              value: string;
-            } => "type" in f && f.type === "field",
-          )
-          .map((f) => f.value),
+export const parseColumns = (columns: Column[]): ValidateResult<Columns> => {
+  return match(columns)
+    .with([{ type: "except", expr_list: P.array().select() }], (columns) => {
+      return pipe(
+        parseColumns(columns as Column[]),
+        either.map(({ columns }) => ({
+          type: "except" as const,
+          columns,
+        })),
       );
-    }),
-  );
+    })
+    .otherwise(() =>
+      pipe(
+        columns.map(projector("expr")).map(parseExpr),
+        separator,
+        either.map((exprs) => {
+          return {
+            type: "column_ref",
+            columns: new Set(
+              exprs
+                .filter(
+                  (
+                    f,
+                  ): f is {
+                    type: "field";
+                    value: string;
+                  } => "type" in f && f.type === "field",
+                )
+                .map((f) => f.value),
+            ),
+          };
+        }),
+      ),
+    );
 };
 
 export function sqlToModel(sql: string): ValidateResult<ParseResult> {
   const ast = fromThrowable(parser.astify.bind(parser))(sql, {
-    database: "MySQL",
+    database: "BigQuery",
   });
 
   if (ast.isErr()) {
@@ -282,3 +311,8 @@ export function sqlToModel(sql: string): ValidateResult<ParseResult> {
     return toValidated(bail(sql, "Only SELECT statements are supported."));
   }
 }
+
+// function dbg<T>(x: T): T {
+//   console.log(x);
+//   return x;
+// }

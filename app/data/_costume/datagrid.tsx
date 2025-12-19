@@ -212,6 +212,14 @@ const resolver: SchemaResolver<Costume> = {
       data: costume.rareSkill,
     }),
   },
+  "rareSkill.name": {
+    type: "string",
+    accessor: (costume: Costume) => Lenz.costume.general.rareSkill.get(costume).name,
+  },
+  "rareSkill.description": {
+    type: "string",
+    accessor: (costume: Costume) => Lenz.costume.general.rareSkill.get(costume).description,
+  },
   specialSkill: {
     type: "clazz",
     accessor: (costume: Costume) => ({

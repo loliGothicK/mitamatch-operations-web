@@ -28,6 +28,7 @@ import { isSome } from "fp-ts/Option";
 import queryAtom from "@/jotai/queryAtoms";
 import { useAtom } from "jotai";
 import { useEffectOnce } from "react-use";
+import { mapWithIndex } from "fp-ts/lib/ReadonlyRecord";
 
 type Spread<T, V> = {
   [K in keyof T]: Record<K, V>;
@@ -40,15 +41,15 @@ type Props<
   Schema extends hasAtom,
   Table extends keyof Schema & keyof typeof queryAtom = keyof Schema & keyof typeof queryAtom,
 > = {
-  columns: readonly GridColDef<T>[];
-  visibilityAll: GridColumnVisibilityModel;
-  table: Table;
-  origin: T[];
-  resolver: SchemaResolver<T>;
-  schema: Schema;
-  initialQuery?: string;
-  help: ComponentPropsWithoutRef<typeof Modal>["children"];
-  completion?: Record<string, ComleteCandidate>;
+  readonly columns: readonly GridColDef<T>[];
+  readonly visibilityAll: Readonly<GridColumnVisibilityModel>;
+  readonly table: Table;
+  readonly origin: T[];
+  readonly resolver: SchemaResolver<T>;
+  readonly schema: Schema;
+  readonly initialQuery?: string;
+  readonly help: ComponentPropsWithoutRef<typeof Modal>["children"];
+  readonly completion: Record<string, ComleteCandidate>;
 };
 
 const paginationModel = { page: 0, pageSize: 10 };
@@ -152,14 +153,23 @@ export function DataGrid<
       return pipe(
         sqlToModel(query),
         either.map(({ visibility, ...result }) => {
-          setVisibility(
-            visibility.has("*")
-              ? visibilityAll
-              : Object.keys(visibilityAll).reduce((model, col) => {
-                  model[col] = visibility.has(col);
-                  return model;
-                }, visibilityAll),
-          );
+          if (visibility.type === "column_ref") {
+            setVisibility(
+              visibility.columns.has("*")
+                ? visibilityAll
+                : pipe(
+                    visibilityAll,
+                    mapWithIndex((col) => visibility.columns.has(col)),
+                  ),
+            );
+          } else {
+            setVisibility(
+              pipe(
+                visibilityAll,
+                mapWithIndex((col) => !visibility.columns.has(col)),
+              ),
+            );
+          }
           const pred = build(result, resolver, completion);
           if (isRight(pred)) {
             const { where, orderBy, limit } = pred.right;
@@ -205,7 +215,7 @@ export function DataGrid<
         }),
       );
     },
-    [completion, query, resolver, origin, phantasmFilter, visibilityAll],
+    [completion, query, resolver, origin, phantasmFilter, visibilityAll, setVisibility],
   );
 
   const handleToggle = useCallback(() => {
@@ -279,6 +289,7 @@ export function DataGrid<
         type={table}
         value={initialQuery || query}
         schema={schema}
+        completion={completion}
         completions={completion ? [makeSchemaCompletionSource(completion)] : []}
         execute={() => runQuery({ toast: true })}
         onChange={onChange}

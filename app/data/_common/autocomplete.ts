@@ -1,9 +1,14 @@
 import type { CompletionContext, CompletionSource } from "@codemirror/autocomplete";
 import { Clazz } from "@/parser/query/filter";
+import { match, P } from "ts-pattern";
+
+export type JsonData = {
+  [key: string]: readonly string[] | Readonly<JsonData>;
+};
 
 export type ComleteCandidate = {
   equals?: string[];
-  json?: string[];
+  json?: Readonly<JsonData> | readonly string[];
   like?:
     | {
         pattern: string[];
@@ -23,9 +28,8 @@ export const makeSchemaCompletionSource =
     // 検索範囲を少し広めに確保
     const textBefore = context.state.doc.sliceString(Math.max(0, context.pos - 200), context.pos);
 
-    // 1. 正規表現の修正: クォートを任意(group 3)にし、中身(group 4)を取得
     const complexMatch = textBefore.match(
-      /([`\w]+)\s*((?:NOT\s+)?(?:LIKE|ILIKE)|(?:->|-->))\s*(['"]?)([^'"]*)$/i,
+      /([`\w]+)\s*((?:NOT\s+)?(?:LIKE|ILIKE))\s*(['"]?)([^'"]*)$/i,
     );
     const simpleMatch = textBefore.match(/([`\w]+)\s*(=)\s*(['"]?\w*)$/);
 
@@ -35,18 +39,6 @@ export const makeSchemaCompletionSource =
       const operator = complexMatch[2].toUpperCase();
       const quoteChar = complexMatch[3]; // undefined or ' or "
       const contentInside = complexMatch[4];
-
-      if (operator.startsWith("->") && columnName in map && map[columnName].json !== undefined) {
-        return {
-          from: context.pos - contentInside.length,
-          options: map[columnName].json.map((val) => ({
-            label: `'$.${val}'`,
-            type: "enum",
-            boost: 10,
-          })),
-          validFor: /^(?:['"]|[^'"]*)$/,
-        };
-      }
 
       if (operator.endsWith("LIKE") && columnName in map && map[columnName].like !== undefined) {
         const lastCommaIndex = contentInside.lastIndexOf(",");
@@ -115,43 +107,94 @@ export const makeSchemaCompletionSource =
     return null;
   };
 
-export const makeColumnCompletionSource = (schema: string[]) => (context: CompletionContext) => {
-  // 1. まず CodeMirror の機能でカーソル直前がパターンに合致するか確認
-  const regex = /(^|\s|[,=(])(`?)(\w*)$/;
-  const match = context.matchBefore(regex);
+function splitArray<T>(arr: T[]) {
+  // 1. 先頭(first)と残り(middleの候補)に分ける
+  const [first, ...middle] = arr;
 
-  if (!match) {
+  // 2. 残りから末尾(last)を取り出す
+  // middleが空なら pop() は undefined を返すため、長さ1のケースも自然に解決する
+  const last = middle.pop();
+
+  return { first, middle, last };
+}
+
+const resolvePathToNode = (
+  map: Readonly<JsonData> | readonly string[] | undefined,
+  path: string[],
+): readonly string[] | null => {
+  if (map === undefined) {
     return null;
+  } else {
+    return match(path)
+      .with([], () =>
+        match(map)
+          .with(P.array(P.string), (arr) => arr)
+          .with(P.record(P.string, P.any), (obj) => Object.keys(obj))
+          .exhaustive(),
+      )
+      .with([P.string, ...P.array(P.string)], ([first, ...rest]) =>
+        match(map)
+          .with(P.array(P.string), () => null)
+          .with(P.record(P.string, P.any), (obj) => resolvePathToNode(obj[first], rest))
+          .exhaustive(),
+      )
+      .exhaustive();
   }
-
-  // 2. マッチしたテキストに対して再度正規表現を適用し、キャプチャグループを取得する
-  // match.text は例えば " `someCol" のような文字列
-  const captures = match.text.match(regex);
-  if (!captures) {
-    return null; // 理論上ここには来ないが型安全のため
-  }
-
-  // captures[1]: 区切り文字 (space, comma, etc)
-  // captures[2]: バッククォート (`?)
-  // captures[3]: カラム名部分 (\w*)
-  const hasBacktick = captures[2] === "`";
-  const partialWord = captures[3];
-
-  if (!partialWord && !hasBacktick) {
-    return null;
-  }
-
-  return {
-    from: context.pos - partialWord.length,
-    options: schema
-      .filter((name) => name.startsWith(partialWord))
-      .map((name) => ({
-        label: name,
-        type: "variable",
-        // バッククォートがない場合は補完時に自動付与する
-        apply: hasBacktick ? name : `\`${name}\``,
-        boost: 10,
-      })),
-    validFor: /^`?\w*$/,
-  };
 };
+
+export const makeColumnCompletionSource =
+  (schema: string[], map: Record<string, ComleteCandidate>) => (context: CompletionContext) => {
+    // 1. まず CodeMirror の機能でカーソル直前がパターンに合致するか確認
+    const regex = /(^|\s|[,=(])(`?)([\w.]*)$/;
+    const match = context.matchBefore(regex);
+
+    if (!match) {
+      return null;
+    }
+
+    // 2. マッチしたテキストに対して再度正規表現を適用し、キャプチャグループを取得する
+    // match.text は例えば " `someCol" のような文字列
+    const captures = match.text.match(regex);
+    if (!captures) {
+      return null; // 理論上ここには来ないが型安全のため
+    }
+
+    // captures[1]: 区切り文字 (space, comma, etc)
+    // captures[2]: バッククォート (`?)
+    // captures[3]: カラム名部分 (\w*)
+    const hasBacktick = captures[2] === "`";
+    const partialWord = captures[3];
+
+    if (!partialWord && !hasBacktick) {
+      return null;
+    }
+
+    if (partialWord.includes(".")) {
+      const { first, middle, last } = splitArray(partialWord.split("."));
+      return {
+        from: context.pos - (last ? last.length : 0),
+        options:
+          resolvePathToNode(map[first].json, middle)?.map((name) => ({
+            label: name,
+            type: "variable",
+            apply: name,
+            boost: 10,
+          })) ?? [],
+        validFor: /^`?\w*$/,
+      };
+    }
+
+    return {
+      from: context.pos - partialWord.length,
+      options: schema
+        .filter((name) => name.startsWith(partialWord))
+        .map((name) => ({
+          label: name,
+          type: "variable",
+          // バッククォートがない場合は補完時に自動付与する
+          apply: hasBacktick ? name : `\`${name}\``,
+          boost: 10,
+        })),
+      validFor: /^`?\w*$/,
+    };
+  };

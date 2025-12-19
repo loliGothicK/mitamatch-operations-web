@@ -3,9 +3,10 @@ import { githubDark } from "@uiw/codemirror-theme-github";
 import { sql, keywordCompletionSource, MySQL, schemaCompletionSource } from "@codemirror/lang-sql";
 import { autocompletion, type CompletionSource } from "@codemirror/autocomplete";
 import { makeQueryLinter } from "@/parser/query/linter";
-import { makeColumnCompletionSource } from "@/data/_common/autocomplete";
+import { ComleteCandidate, makeColumnCompletionSource } from "@/data/_common/autocomplete";
 import { option } from "fp-ts";
 import { iter } from "@/fp-ts-ext/function";
+import { projector } from "@/functional/proj";
 
 // サポートしているキーワードのホワイトリスト
 const keywordWhitelist = new Set([
@@ -17,13 +18,40 @@ const keywordWhitelist = new Set([
   "LIKE",
   "ILIKE",
   "NOT",
+  "ORDER",
+  "BY",
+  "ASC",
+  "DESC",
+  "LIMIT",
+  "OFFSET",
+  "IN",
+  "IS",
+  "NULL",
+  "BETWEEN",
+  "EXISTS",
+  "JOIN",
+  "INNER",
+  "LEFT",
+  "RIGHT",
+  "ON",
+  "GROUP",
+  "HAVING",
+  "DISTINCT",
+  "AS",
+  "COUNT",
+  "SUM",
+  "AVG",
+  "MIN",
+  "MAX",
+  "+",
+  "-",
+  "*",
+  "/",
   "=",
   ">",
   "<",
   ">=",
   "<=",
-  "->",
-  "->>",
 ]);
 
 // デフォルトの SQL 補完ソースを取得
@@ -32,6 +60,10 @@ const defaultSqlSource = keywordCompletionSource(MySQL);
 const supportedKeywordSource: CompletionSource = async (context) => {
   // 1. まずデフォルトの補完結果（キーワード、テーブル名などすべて）を取得
   const result = await defaultSqlSource(context);
+
+  console.log(
+    result?.options.filter((completion) => completion.type === "keyword").map(projector("label")),
+  );
 
   if (!result) {
     return null;
@@ -68,13 +100,15 @@ export default function Console<
   completions,
   execute,
   onChange,
+  completion,
 }: {
-  type: keyof Schema;
-  value?: string;
-  schema: Schema;
-  completions?: readonly CompletionSource[];
-  execute: () => void;
-  onChange: (val: string, _: unknown) => void;
+  readonly type: keyof Schema;
+  readonly value?: string;
+  readonly schema: Schema;
+  readonly completions?: readonly CompletionSource[];
+  readonly execute: () => void;
+  readonly onChange: (val: string, _: unknown) => void;
+  readonly completion: Readonly<Record<string, ComleteCandidate>>;
 }) {
   const customKeymap = Prec.highest(
     keymap.of([
@@ -90,7 +124,7 @@ export default function Console<
   );
   const myCompletions = autocompletion({
     override: [
-      makeColumnCompletionSource(schema[type]),
+      makeColumnCompletionSource(schema[type], completion),
       schemaCompletionSource({ dialect: MySQL, schema }),
       supportedKeywordSource,
       ...iter(option.fromNullable(completions)).flat(),
@@ -104,7 +138,7 @@ export default function Console<
       extensions={[
         sql({ dialect: MySQL, schema }),
         myCompletions,
-        makeQueryLinter(schema),
+        makeQueryLinter(schema, completion),
         customKeymap,
       ]}
       onChange={onChange}

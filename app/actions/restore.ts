@@ -36,16 +36,12 @@ export async function restore({
   if (parseResult.isOk()) {
     return parseResult.value;
   }
-  const full = await match(target)
+  return await match(target)
     .with("deck", async () => {
-      return (await getDeckFullUrl(param)) || param;
+      return (await getDeckFullUrl(param)) || decodeDeck(param)._unsafeUnwrap();
     })
     .with("timeline", async () => {
-      return (await getTimelineFullUrl(param)) || param;
+      return (await getTimelineFullUrl(param)) || decodeTimeline(param)._unsafeUnwrap();
     })
-    .exhaustive();
-  return match(target)
-    .with("deck", () => decodeDeck(full)._unsafeUnwrap())
-    .with("timeline", () => decodeTimeline(full)._unsafeUnwrap())
     .exhaustive();
 }

@@ -16,8 +16,6 @@ import { GridSortModel } from "@mui/x-data-grid";
 
 const ap = getApplicativeValidation(getSemigroup<MitamaError>());
 
-type Skill = { readonly name: string; readonly description: string };
-
 /**
  * SQLのLIKE句のパターン文字列を、
  * .test() で使用できるRegExpオブジェクトに変換します。
@@ -176,40 +174,6 @@ export default function build<T>(
             });
           })
           .otherwise(() => bail("LIKE", "Invalid operands for LIKE operator.")),
-      )
-      .with(P.union("->>", "->"), (EXTRACTOR) =>
-        match([lhs, rhs])
-          .with([{ type: "field" }, { type: "value" }], ([lhs, rhs]) => {
-            const field = lhs.value as string;
-            const path = rhs.value as string;
-
-            if (field in resolver && resolver[field].type === "clazz") {
-              return match(field)
-                .with(P.union("rareSkill", "questSkill", "gvgSkill", "autoSkill"), (clazz) =>
-                  match(path)
-                    .with("$.name", () =>
-                      right((left: Lit | null, _: Lit | null) => {
-                        return ((left as Clazz).data as Skill).name;
-                      }),
-                    )
-                    .with("$.description", () =>
-                      right((left: Lit | null, _: Lit | null) => {
-                        return ((left as Clazz).data as Skill).description;
-                      }),
-                    )
-                    .otherwise(() =>
-                      bail(
-                        EXTRACTOR,
-                        `Invalid path (${path}) for ${EXTRACTOR} operator. Only "$.name" and "$.description" is allowd for ${clazz}.`,
-                      ),
-                    ),
-                )
-                .otherwise(() => bail(EXTRACTOR, "Invalid path for ->> operator."));
-            } else {
-              return bail(EXTRACTOR, "Invalid operands for ->> operator.");
-            }
-          })
-          .otherwise(() => bail(EXTRACTOR, "Invalid operands for ->> operator.")),
       )
       .otherwise(() => bail("operator", `Unsupported operator: ${operator}`));
 

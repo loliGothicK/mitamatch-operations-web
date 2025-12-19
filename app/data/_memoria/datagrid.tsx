@@ -199,6 +199,14 @@ const resolver: SchemaResolver<Memoria> = {
       data: Lenz.memoria.general.questSkill.get(memoria).raw,
     }),
   },
+  "questSkill.name": {
+    type: "string",
+    accessor: (memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.name,
+  },
+  "questSkill.description": {
+    type: "string",
+    accessor: (memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.description,
+  },
   gvgSkill: {
     type: "clazz",
     accessor: (memoria: Memoria) => ({
@@ -206,12 +214,28 @@ const resolver: SchemaResolver<Memoria> = {
       data: Lenz.memoria.general.gvgSkill.get(memoria).raw,
     }),
   },
+  "gvgSkill.name": {
+    type: "string",
+    accessor: (memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.name,
+  },
+  "gvgSkill.description": {
+    type: "string",
+    accessor: (memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.description,
+  },
   autoSkill: {
     type: "clazz",
     accessor: (memoria: Memoria) => ({
       type: "memoriaSkill",
       data: Lenz.memoria.general.autoSkill.get(memoria).raw,
     }),
+  },
+  "autoSkill.name": {
+    type: "string",
+    accessor: (memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.name,
+  },
+  "autoSkill.description": {
+    type: "string",
+    accessor: (memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.description,
   },
   label: {
     type: "clazz",
@@ -260,7 +284,7 @@ const completeCandidates: Record<string, ComleteCandidate> = {
   },
 };
 
-export const TABLE_DEF: [string, string][] = [
+const TABLE_DEF: [string, string][] = [
   ["name", "text"],
   ["type", "text"],
   ["attribute", "text"],

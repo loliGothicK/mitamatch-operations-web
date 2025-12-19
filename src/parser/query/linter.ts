@@ -2,10 +2,15 @@ import { Diagnostic, linter } from "@codemirror/lint";
 import { EditorState } from "@codemirror/state";
 import { syntaxTree } from "@codemirror/language";
 import { SyntaxNode } from "@lezer/common";
+import { ComleteCandidate, JsonData } from "@/data/_common/autocomplete";
+import { match, P } from "ts-pattern";
 
 const ALLOWED_CMDS = new Set(["select", "with", "values", "explain"]);
 
-export const makeQueryLinter = (schema: DbSchema) =>
+export const makeQueryLinter = (
+  schema: DbSchema,
+  completion: Readonly<Record<string, ComleteCandidate>>,
+) =>
   linter((view) => {
     const state = view.state;
 
@@ -16,7 +21,7 @@ export const makeQueryLinter = (schema: DbSchema) =>
     const permissionErrors = checkCommandPermissions(state, ALLOWED_CMDS);
 
     // 3. スキーマチェック (Validation)
-    const schemaErrors = validateSchema(state, context, schema);
+    const schemaErrors = validateSchema(state, context, schema, completion);
 
     // エラーを統合して返す
     return [...permissionErrors, ...schemaErrors];
@@ -186,6 +191,7 @@ export function validateSchema(
   state: EditorState,
   ctx: QueryContext,
   schema: DbSchema,
+  completion: Readonly<Record<string, ComleteCandidate>>,
 ): Diagnostic[] {
   const diagnostics: Diagnostic[] = [];
   const normalizedSchema = normalizeSchema(schema);
@@ -246,12 +252,19 @@ export function validateSchema(
               // "AS" の直後でなければチェック
               const prev = cursor.node.prevSibling;
               if (!prev || normalize(state, prev) !== "as") {
-                validateStandaloneColumn(cursor.node, state, ctx, normalizedSchema, diagnostics);
+                validateStandaloneColumn(
+                  cursor.node,
+                  state,
+                  ctx,
+                  normalizedSchema,
+                  completion,
+                  diagnostics,
+                );
               }
             }
           }
 
-          // 3. 複合識別子 (CompositeIdentifier) の検証  <-- 追加！！
+          // 3. 複合識別子 (CompositeIdentifier) の検証
           // 構造: Identifier(Alias) -> "." -> Identifier(Col)
           if (type === "CompositeIdentifier") {
             // 中身を解析するために、現在のノードからサブカーソルを作成
@@ -291,13 +304,17 @@ export function validateSchema(
                       });
                     }
                   }
-                } else {
+                  // これはエイリアス
+                } else if (alias in schema) {
                   diagnostics.push({
                     from: innerCursor.from,
                     to: innerCursor.to,
                     severity: "error",
                     message: `エイリアス '${alias}' の定義が見つかりません。`,
                   });
+                  // これは JSON path
+                } else {
+                  validateJsonColumn(cursor.node, state, completion, diagnostics);
                 }
               }
             }
@@ -310,15 +327,80 @@ export function validateSchema(
   return diagnostics;
 }
 
+const SUB_FIELD = /^[^.]+(\.[^.]+)*$/;
+
+function validateJsonColumn(
+  node: SyntaxNode,
+  state: EditorState,
+  completion: Readonly<Record<string, ComleteCandidate>>,
+  diagnostics: Diagnostic[],
+) {
+  const colName = raw(state, node);
+
+  const linter = (
+    src: JsonData | readonly string[],
+    [head, ...rest]: string[],
+    length: number,
+  ): void => {
+    if (rest.length === 0) {
+      if (Array.isArray(src)) {
+        if (!src.includes(head)) {
+          diagnostics.push({
+            from: node.from + length,
+            to: node.from + colName.length,
+            severity: "error",
+            message: `unknown path: ${head}`,
+          });
+        }
+      } else if (!(head in src)) {
+        diagnostics.push({
+          from: node.from + length,
+          to: node.from + colName.length,
+          severity: "error",
+          message: `unknown path: ${head}`,
+        });
+      }
+    } else {
+      return match(src)
+        .with(P.array(), () => {
+          diagnostics.push({
+            from: node.from + length + head.length + 1,
+            to: node.from + colName.length + 1,
+            severity: "error",
+            message: `unknown path: ${head}`,
+          });
+        })
+        .otherwise((obj) => {
+          return linter(obj[head], rest, length + head.length + 1);
+        });
+    }
+  };
+
+  if (SUB_FIELD.test(colName)) {
+    const path = colName.split(".");
+    const field = path[0];
+    if (field in completion && completion[field].json) {
+      linter(completion[field].json, path.slice(1), field.length + 1);
+    }
+  }
+}
+
 // ヘルパー (変更なし)
 function validateStandaloneColumn(
   node: SyntaxNode,
   state: EditorState,
   ctx: QueryContext,
   schema: DbSchema,
+  completion: Readonly<Record<string, ComleteCandidate>>,
   diagnostics: Diagnostic[],
 ) {
   const colName = normalize(state, node);
+
+  if (SUB_FIELD.test(colName)) {
+    validateJsonColumn(node, state, completion, diagnostics);
+    return;
+  }
+
   const hasCTE = Array.from(ctx.activeTables).some((t) => ctx.definedCTEs.has(t));
   if (hasCTE) return;
 

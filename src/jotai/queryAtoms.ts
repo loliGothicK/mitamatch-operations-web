@@ -1,10 +1,14 @@
 import { atomWithStorage } from "jotai/utils";
 import { outdent } from "outdent";
 
+function except(cols: string[]) {
+  return `* except (${cols.map((col) => `\`${col}\``).join(", ")})`;
+}
+
 const memoriaQueryAtom = atomWithStorage<string>(
   "query[memoria]",
   outdent`
-      select (\`image\`, \`name\`, \`type\`, \`attribute\`, \`atk\`, \`spatk\`, \`def\`, \`spdef\`, \`gvgSkill\`, \`autoSkill\`)
+    select ${except(["questSkill"])}
       from memoria
       where \`cost\` > 18;
   `,
@@ -16,7 +20,11 @@ const memoriaQueryAtom = atomWithStorage<string>(
 
 const costumeQueryAtom = atomWithStorage<string>(
   "query[costume]",
-  "select * from costume order by released_at desc;",
+  outdent`
+    select ${except(["released_at"])}
+      from costume
+      order by \`released_at\` desc;
+  `,
   undefined,
   {
     getOnInit: true,
