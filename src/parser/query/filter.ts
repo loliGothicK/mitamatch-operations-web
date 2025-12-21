@@ -80,7 +80,20 @@ export default function build<T>(
           )
           .otherwise(() => right((left: Lit | null, right: Lit | null) => left === right)),
       )
-      .with("!=", () => right((left: Lit | null, right: Lit | null) => left !== right))
+      .with("!=", () =>
+        match(lhs)
+          .with({ type: "field", value: "label" }, () =>
+            right((left: Lit | null, right: Lit | null) =>
+              !((left as Clazz).data as Memoria["labels"])
+                .map((label) => label.toLowerCase())
+                .includes(right as string),
+            ),
+          )
+          .with({ type: "field", value: "specialSkill" }, () =>
+            bail("specialSkill", "specialSkill cannot be compared, must be used NOT LIKE operator."),
+          )
+          .otherwise(() => right((left: Lit | null, right: Lit | null) => left !== right)),
+      )
       .with(">", () =>
         right((left: Lit | null, right: Lit | null) => !(left && right) || left > right),
       )
