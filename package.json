@@ -9,7 +9,7 @@
     "lint": "pnpm dlx oxlint",
     "lint:fix": "pnpm dlx oxlint --fix",
     "fmt": "pnpm dlx oxfmt",
-    "fmt:check": "pnpm dlx oxfmt --check &&  && pnpm dlx biome format .",
+    "fmt:check": "pnpm dlx oxfmt --check && pnpm dlx biome format .",
     "pretty": "pnpm dlx oxlint --fix && pnpm dlx oxfmt --config=./oxfmtrc.json && npx biome format --write .",
     "test": "vitest"
   },
@@ -58,7 +58,6 @@
     "@vercel/analytics": "1.6.1",
     "@vercel/otel": "2.1.0",
     "@vercel/speed-insights": "1.3.1",
-    "clsx": "2.1.1",
     "dotenv": "17.2.3",
     "drizzle-orm": "0.45.1",
     "fp-ts": "2.16.11",
@@ -81,7 +80,6 @@
     "ts-essentials": "10.1.1",
     "ts-pattern": "5.9.0",
     "ulid": "3.0.2",
-    "unist-util-visit": "5.0.0",
     "ws": "8.18.3"
   },
   "devDependencies": {
