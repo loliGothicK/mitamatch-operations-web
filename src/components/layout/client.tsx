@@ -35,7 +35,7 @@ import {
   MouseEvent,
   ElementType,
 } from "react";
-import { redirect } from "next/navigation";
+import {redirect, usePathname} from "next/navigation";
 import Image from "next/image";
 import { match } from "ts-pattern";
 import { darkTheme, lightTheme } from "@/theme/theme";
@@ -215,6 +215,7 @@ const FireNav = styled(List)<{ component?: ElementType }>({
 
 function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserData | undefined }>) {
   const colorMode = useContext(ColorModeContext);
+  const pathname = usePathname();
   const [open, setOpen] = useState(true);
   const theme = useTheme();
   const [legion, setLegion] = useState<Legion | undefined>(userData?.legions[0]);
@@ -360,7 +361,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
           sx={{
             flexGrow: 1, // AppBar 以外の高さを全部使う
             display: "grid",
-            gridTemplateColumns: "250px minmax(0, 1fr)", // ここで横分割
+            gridTemplateColumns: userData ? "210px minmax(0, 1fr)" : "54px minmax(0, 1fr)", // ここで横分割
             overflow: "hidden", // 内部スクロールのために必要
           }}
         >
@@ -379,66 +380,67 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
               <Divider />
               {userData && <List component="nav">{userListItems}</List>}
             </MenuIcons>
-            <FireNav component="nav" disablePadding>
-              <Divider />
-              <Box
-                sx={[
-                  open ? { bgcolor: "rgba(71, 98, 130, 0.2)" } : { bgcolor: null },
-                  open ? { pb: 2 } : { pb: 0 },
-                ]}
-              >
-                <ListItemButton
-                  alignItems="flex-start"
-                  onClick={() => setOpen(!open)}
+            {userData && pathname.endsWith("builder") && (
+              <FireNav component="nav" disablePadding>
+                <Divider />
+                <Box
                   sx={[
-                    { px: 3, pt: 2.5 },
-                    open ? { pb: 0 } : { pb: 2.5 },
-                    open
-                      ? { "&:hover, &:focus": { "& svg": { opacity: 1 } } }
-                      : { "&:hover, &:focus": { "& svg": { opacity: 0 } } },
+                    open ? { bgcolor: "rgba(71, 98, 130, 0.2)" } : { bgcolor: null },
+                    open ? { pb: 2 } : { pb: 0 },
                   ]}
                 >
-                  <ListItemText
-                    primary="Project"
-                    slotProps={{
-                      primary: {
-                        fontSize: 15,
-                        fontWeight: "medium",
-                        lineHeight: "20px",
-                        mb: "2px",
-                      },
-                      secondary: {
-                        noWrap: true,
-                        fontSize: 12,
-                        lineHeight: "16px",
-                        color: open ? "rgba(0,0,0,0)" : "rgba(255,255,255,0.5)",
-                      },
-                    }}
-                    secondary="Authentication, Firestore Database, Realtime Database, Storage, Hosting, Functions, and Machine Learning"
-                    sx={{ my: 0 }}
-                  />
-                  <KeyboardArrowDown
+                  <ListItemButton
+                    alignItems="flex-start"
+                    onClick={() => setOpen(!open)}
                     sx={[
-                      { mr: -1, opacity: 0, transition: "0.2s" },
-                      open ? { transform: "rotate(-180deg)" } : { transform: "rotate(0)" },
+                      { pb: 3, pt: 2.5 },
+                      open ? { pb: 0 } : { pb: 2.5 },
+                      open
+                        ? { "&:hover, &:focus": { "& svg": { opacity: 1 } } }
+                        : { "&:hover, &:focus": { "& svg": { opacity: 0 } } },
                     ]}
-                  />
-                </ListItemButton>
-                {userData && open && (
-                  <SimpleTreeView multiSelect={true}>
-                    <Decks />
-                    <Timelines />
-                  </SimpleTreeView>
-                )}
-              </Box>
-            </FireNav>
+                  >
+                    <ListItemText
+                      primary="Project"
+                      slotProps={{
+                        primary: {
+                          fontSize: 15,
+                          fontWeight: "medium",
+                          lineHeight: "20px",
+                          mb: "2px",
+                        },
+                        secondary: {
+                          noWrap: true,
+                          fontSize: 12,
+                          lineHeight: "16px",
+                          color: open ? "rgba(0,0,0,0)" : "rgba(255,255,255,0.5)",
+                        },
+                      }}
+                      secondary="Decks & Timelines"
+                      sx={{ my: 0 }}
+                    />
+                    <KeyboardArrowDown
+                      sx={[
+                        { mr: -1, opacity: 0, transition: "0.2s" },
+                        open ? { transform: "rotate(-180deg)" } : { transform: "rotate(0)" },
+                      ]}
+                    />
+                  </ListItemButton>
+                  {userData && open && (
+                    <SimpleTreeView multiSelect={true}>
+                      <Decks />
+                      <Timelines />
+                    </SimpleTreeView>
+                  )}
+                </Box>
+              </FireNav>
+            )}
           </Paper>
           {/* メインコンテンツエリア */}
           <Box
             component="main"
             sx={{
               overflowY: "auto",
-              p: 2,
             }}
           >
             {children}

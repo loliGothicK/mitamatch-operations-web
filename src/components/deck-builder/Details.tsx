@@ -7,14 +7,27 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 import { rwDeckAtom, rwLegendaryDeckAtom } from "@/jotai/memoriaAtoms";
-import { isBuffEffect, isDebuffEffect, isStackEffect, stackKinds } from "@/parser/skill";
+import {
+  Attribute,
+  ATTRIBUTES,
+  elementEffectKinds,
+  isBuffEffect,
+  isDebuffEffect,
+  isElementEffect,
+  isStackEffect,
+  MAJOR_ATTRIBUTES,
+  MajorAttribute,
+  stackKinds,
+} from "@/parser/skill";
 import type { SupportKind } from "@/parser/autoSkill";
-import { elementFilter } from "@/types/filterType";
 
 import { match } from "ts-pattern";
 import { StatusKind } from "@/evaluate/types";
 import { statusKind } from "@/evaluate/constants";
 import { formatCardType, Memoria } from "@/domain/memoria/memoria";
+import { Chip } from "@mui/material";
+import { Box } from "@mui/system";
+import { useMemo } from "react";
 
 type UpDown = "UP" | "DOWN";
 type StatusPattern = `${StatusKind}/${UpDown}`;
@@ -66,6 +79,24 @@ export function stackPatternToJapanese(pattern: (typeof stackKinds)[number]): st
     .with("barrier", () => "バリア")
     .with("anima", () => "アニマ")
     .with("meteor", () => "メテオ")
+    .exhaustive();
+}
+
+export function attributePatternToJapanese(pattern: Attribute): string {
+  return match(pattern)
+    .with("Fire", () => "火")
+    .with("Water", () => "水")
+    .with("Wind", () => "風")
+    .with("Light", () => "光")
+    .with("Dark", () => "闇")
+    .exhaustive();
+}
+
+export function elementPatternToJapanese(pattern: (typeof elementEffectKinds)[number]): string {
+  return match(pattern)
+    .with("minima", () => "ミニマ")
+    .with("spread", () => "スプレッド")
+    .with("enhance", () => "エンハンス")
     .exhaustive();
 }
 
@@ -132,158 +163,235 @@ export function supportPatternToJapanese(pattern: SupportPattern): string {
 }
 
 export function intoSupportPattern(kind: SupportKind): SupportPattern {
-  return match(kind.type)
+  return match<typeof kind.type, SupportPattern>(kind.type)
     .with("DamageUp", () => "DamageUp")
     .with("SupportUp", () => "SupportUp")
     .with("RecoveryUp", () => "RecoveryUp")
     .with("MatchPtUp", () => "MatchPtUp")
     .with("MpCostDown", () => "MpCostDown")
     .with("RangeUp", () => "RangeUp")
-    .with("UP", () => intoStatusPattern({ status: kind.status!, upDown: "UP" }))
-    .with("DOWN", () => intoStatusPattern({ status: kind.status!, upDown: "DOWN" }))
-    .exhaustive() as SupportPattern;
+    .with("UP", () => `${kind.status!}/UP`)
+    .with("DOWN", () => `${kind.status!}/DOWN`)
+    .exhaustive();
+}
+
+function DataChip({
+  effect,
+  count,
+  attribute,
+}: {
+  readonly effect: string;
+  readonly count: number;
+  attribute?: MajorAttribute;
+}) {
+  const color =
+    attribute &&
+    match(attribute)
+      .with("Fire", () => "error" as const)
+      .with("Water", () => "info" as const)
+      .with("Wind", () => "success" as const)
+      .otherwise(() => "primary" as const);
+  return <Chip label={`${effect}: ${count}`} size={"small"} color={color} />;
 }
 
 export default function Details() {
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
 
-  const skills = deck.concat(legendaryDeck).map((memoria) => memoria.skills.gvgSkill);
+  const unit = useMemo(() => [...legendaryDeck, ...deck], [legendaryDeck, deck]);
 
-  const skillAggregate = new Map<StatusPattern, number>();
-  for (const pattern of skills.flatMap((skill) => {
-    return skill.effects
-      .filter((eff) => isBuffEffect(eff) || isDebuffEffect(eff))
-      .map((eff) => {
-        return intoStatusPattern({
-          status: eff.status,
-          upDown: eff.type === "buff" ? "UP" : "DOWN",
-        });
-      });
-  })) {
-    skillAggregate.set(pattern, (skillAggregate.get(pattern) || 0) + 1);
-  }
+  const skills = useMemo(
+    () => deck.concat(legendaryDeck).map((memoria) => memoria.skills.gvgSkill),
+    [deck, legendaryDeck],
+  );
 
-  const supports = [...deck, ...legendaryDeck].map((memoria) => memoria.skills.autoSkill);
+  const skillAggregate = useMemo(
+    () =>
+      skills
+        .flatMap((skill) =>
+          skill.effects
+            .filter((eff) => isBuffEffect(eff) || isDebuffEffect(eff))
+            .map((eff) =>
+              intoStatusPattern({
+                status: eff.status,
+                upDown: eff.type === "buff" ? "UP" : "DOWN",
+              }),
+            ),
+        )
+        .reduce(
+          (m, pattern) => m.set(pattern, (m.get(pattern) || 0) + 1),
+          new Map<StatusPattern, number>(),
+        ),
+    [skills],
+  );
 
-  const supportAggregate = new Map<SupportPattern, number>();
-  for (const pattern of supports.flatMap((support) => {
-    return support.effects.map((eff) => {
-      return intoSupportPattern(eff);
-    });
-  })) {
-    supportAggregate.set(pattern, (supportAggregate.get(pattern) || 0) + 1);
-  }
+  const supportAggregate = useMemo(
+    () =>
+      unit
+        .map((memoria) => memoria.skills.autoSkill)
+        .flatMap((support) =>
+          support.effects.map((eff) => {
+            return intoSupportPattern(eff);
+          }),
+        )
+        .reduce(
+          (m, pattern) => m.set(pattern, (m.get(pattern) || 0) + 1),
+          new Map<SupportPattern, number>(),
+        ),
+    [unit],
+  );
 
-  const elementAggregate = new Map<string, number>();
-  for (const element of [...deck, ...legendaryDeck].map((memoria) => {
-    return memoria.attribute;
-  })) {
-    elementAggregate.set(element, (elementAggregate.get(element) || 0) + 1);
-  }
+  const attributeAggregate = useMemo(
+    () =>
+      unit
+        .flatMap((memoria) => memoria.attribute)
+        .reduce(
+          (m, pattern) => m.set(pattern, (m.get(pattern) || 0) + 1),
+          new Map<Attribute, number>(),
+        ),
+    [unit],
+  );
 
-  const kindAggregate = new Map<Memoria["cardType"], number>();
-  for (const kind of [...deck, ...legendaryDeck].map((memoria) => {
-    return memoria.cardType;
-  })) {
-    kindAggregate.set(kind, (kindAggregate.get(kind) || 0) + 1);
-  }
+  const kindAggregate = useMemo(
+    () =>
+      unit.reduce(
+        (m, memoria) => m.set(memoria.cardType, (m.get(memoria.cardType) || 0) + 1),
+        new Map<Memoria["cardType"], number>(),
+      ),
+    [unit],
+  );
 
-  const stackAggregate = new Map<(typeof stackKinds)[number], number>();
-  for (const pattern of skills.flatMap((skill) => skill.effects.filter(isStackEffect()))) {
-    const { kind, times } = pattern;
-    stackAggregate.set(kind, (stackAggregate.get(kind) || 0) + times);
-  }
+  const stackAggregate = useMemo(
+    () =>
+      skills
+        .flatMap((skill) => skill.effects.filter(isStackEffect()))
+        .reduce(
+          (m, { kind }) => m.set(kind, (m.get(kind) || 0) + 1),
+          new Map<(typeof stackKinds)[number], number>(),
+        ),
+    [skills],
+  );
+
+  const elementAggregate = useMemo(
+    () =>
+      skills
+        .flatMap((skill) => skill.effects.filter(isElementEffect()))
+        .map(({ kind, element }) => ({ kind, element }))
+        .reduce(
+          (m, { kind, element }) => {
+            m[element].set(kind, (m[element].get(kind) || 0) + 1);
+            return m;
+          },
+          {
+            Fire: new Map<(typeof elementEffectKinds)[number], number>(),
+            Water: new Map<(typeof elementEffectKinds)[number], number>(),
+            Wind: new Map<(typeof elementEffectKinds)[number], number>(),
+          },
+        ),
+    [skills],
+  );
 
   return (
-    <Grid container spacing={1} alignItems={"left"} direction={"column"} sx={{ marginTop: 5 }}>
-      <Typography variant="body1">スキル</Typography>
-      <Divider />
-      <Grid container>
+    <Grid container spacing={1} alignItems={"left"} direction={"column"}>
+      <Divider textAlign={"left"}>
+        <Typography variant="body1">スキル</Typography>
+      </Divider>
+      <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 1 }}>
         {skillAggregate.size !== 0 &&
           statusPattern
             .filter((pattern) => skillAggregate.get(pattern) !== undefined)
             .map((pattern) => {
               return (
-                <Grid size={{ xs: 4 }} key={pattern}>
-                  <Typography fontSize={10}>
-                    {statusPatternToJapanese(pattern)} : {skillAggregate.get(pattern)}
-                  </Typography>
-                </Grid>
+                <DataChip
+                  key={pattern}
+                  effect={statusPatternToJapanese(pattern)}
+                  count={skillAggregate.get(pattern)!}
+                />
               );
             })}
-      </Grid>
-      <Typography variant="body1" marginTop={2}>
-        スタック
-      </Typography>
-      <Divider />
-      <Grid container spacing={1}>
-        {supportAggregate.size !== 0 &&
+      </Box>
+      <Divider textAlign={"left"}>
+        <Typography variant="body1">スタック</Typography>
+      </Divider>
+      <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 1 }}>
+        {stackAggregate.size !== 0 &&
           stackKinds
             .filter((pattern) => stackAggregate.get(pattern) !== undefined)
             .map((pattern) => {
               return (
-                <Grid size={{ xs: 4 }} key={pattern}>
-                  <Typography fontSize={10}>
-                    {stackPatternToJapanese(pattern)} : {stackAggregate.get(pattern)}
-                  </Typography>
-                </Grid>
+                <DataChip
+                  key={pattern}
+                  effect={stackPatternToJapanese(pattern)}
+                  count={stackAggregate.get(pattern)!}
+                />
               );
             })}
-      </Grid>
-
-      <Typography variant="body1" marginTop={2}>
-        補助スキル
-      </Typography>
-      <Divider />
-      <Grid container spacing={1}>
+      </Box>
+      <Divider textAlign={"left"}>
+        <Typography variant="body1">エレメント</Typography>
+      </Divider>
+      <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 1 }}>
+        {MAJOR_ATTRIBUTES.flatMap((attribute) =>
+          elementEffectKinds
+            .filter((kind) => elementAggregate[attribute].get(kind) !== undefined)
+            .map((kind) => (
+              <DataChip
+                key={`${attribute}-${kind}`}
+                effect={elementPatternToJapanese(kind)}
+                count={elementAggregate[attribute].get(kind)!}
+                attribute={attribute}
+              />
+            )),
+        )}
+      </Box>
+      <Divider textAlign={"left"}>
+        <Typography variant="body1">補助スキル</Typography>
+      </Divider>
+      <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 1 }}>
         {supportAggregate.size !== 0 &&
           supportPattern
             .filter((pattern) => supportAggregate.get(pattern) !== undefined)
             .map((pattern) => {
               return (
-                <Grid size={{ xs: 4 }} key={pattern}>
-                  <Typography fontSize={10}>
-                    {supportPatternToJapanese(pattern)} : {supportAggregate.get(pattern)}
-                  </Typography>
-                </Grid>
+                <DataChip
+                  key={pattern}
+                  effect={supportPatternToJapanese(pattern)}
+                  count={supportAggregate.get(pattern)!}
+                />
               );
             })}
-      </Grid>
-      <Typography variant="body1" marginTop={2}>
-        属性
-      </Typography>
-      <Divider />
-      <Grid container spacing={1}>
-        {elementAggregate.size !== 0 &&
-          elementFilter
-            .map((kind) => elementFilterMap[kind])
-            .filter((kind) => elementAggregate.get(kind) !== undefined)
-            .map((kind) => {
+      </Box>
+      <Divider textAlign={"left"}>
+        <Typography variant="body1">属性</Typography>
+      </Divider>
+      <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: 1 }}>
+        {attributeAggregate.size !== 0 &&
+          ATTRIBUTES.filter((pattern) => attributeAggregate.get(pattern) !== undefined).map(
+            (pattern) => {
               return (
-                <Grid size={{ xs: 4 }} key={kind}>
-                  <Typography fontSize={10}>
-                    {kind} : {elementAggregate.get(kind)}
-                  </Typography>
-                </Grid>
+                <DataChip
+                  key={pattern}
+                  effect={attributePatternToJapanese(pattern)}
+                  count={attributeAggregate.get(pattern)!}
+                />
               );
-            })}
-      </Grid>
-      <Typography variant="body1" marginTop={2}>
-        内訳
-      </Typography>
-      <Divider />
+            },
+          )}
+      </Box>
+      <Divider textAlign={"left"}>
+        <Typography variant="body1">カードタイプ</Typography>
+      </Divider>
       <Grid container spacing={1}>
         {kindAggregate.size !== 0 &&
           ([1, 2, 3, 4, 5, 6, 7] as const)
             .filter((kind) => kindAggregate.get(kind) !== undefined)
             .map((kind) => {
               return (
-                <Grid size={{ xs: 4 }} key={kind}>
-                  <Typography fontSize={10}>
-                    {formatCardType(kind)} : {kindAggregate.get(kind)}
-                  </Typography>
-                </Grid>
+                <DataChip
+                  key={kind}
+                  effect={formatCardType(kind)}
+                  count={kindAggregate.get(kind)!}
+                />
               );
             })}
       </Grid>

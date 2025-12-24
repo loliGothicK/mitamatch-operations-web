@@ -1,7 +1,7 @@
 import type { Attribute } from "@/parser/skill";
 import type { Trigger } from "@/parser/autoSkill";
-import { toValidated, type Validated } from "@/fp-ts-ext/Validated";
-import { bail, type MitamaError, CallPath } from "@/error/error";
+import { toValidated } from "@/fp-ts-ext/Validated";
+import { bail, type MitamaError, CallPath, ValidateResult } from "@/error/error";
 import { pipe } from "fp-ts/function";
 import { either } from "fp-ts";
 import { separator } from "@/fp-ts-ext/function";
@@ -35,7 +35,7 @@ const parseAttribute = (
     path: CallPath.empty,
   },
 ) =>
-  match<string, Validated<MitamaError, Attribute>>(element)
+  match<string, ValidateResult<Attribute>>(element)
     .with("火", () => right("Fire"))
     .with("水", () => right("Water"))
     .with("風", () => right("Wind"))
@@ -54,7 +54,7 @@ const parseTrigger = (
     path: CallPath.empty,
   },
 ) =>
-  match<string, Validated<MitamaError, LegendarySkillTrigger>>(trigger)
+  match<string, ValidateResult<LegendarySkillTrigger>>(trigger)
     .with("通常攻撃時", () => right("Attack/Physical"))
     .with("特殊攻撃時", () => right("Attack/Magical"))
     .with("支援/妨害メモリア使用時", () => right("Assist"))
@@ -71,7 +71,7 @@ const parseTrigger = (
 export function parseLegendary(
   skills: RawLegendarySkill,
   memoriaName: string,
-): Validated<MitamaError, Legendary> {
+): ValidateResult<Legendary> {
   const ap = getApplicativeValidation(getSemigroup<MitamaError>());
   const path = new CallPath(["parseLegendary"]);
   const toEither = (target: string) =>

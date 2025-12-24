@@ -1,18 +1,5 @@
-"use client";
-
-import { Layout } from "@/components/layout/client";
-import { Documents } from "@/components/docs/Documents";
-import Intro from "@/mdx/index.mdx";
-import "@/styles/markdown.css";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return (
-    <Layout>
-      <Documents>
-        <article className={"mitamatch-markdown"}>
-          <Intro />
-        </article>
-      </Documents>
-    </Layout>
-  );
+  return redirect("/docs/deck-builder");
 }

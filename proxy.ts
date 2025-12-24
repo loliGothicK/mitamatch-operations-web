@@ -18,7 +18,6 @@ export default clerkMiddleware(
     return NextResponse.next();
   },
   {
-    debug: process.env.NODE_ENV === "development",
     authorizedParties:
       process.env.NODE_ENV === "development"
         ? ["https://mitama.io", "http://localhost:3000"]

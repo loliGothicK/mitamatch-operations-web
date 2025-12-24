@@ -16,7 +16,6 @@ import {
   assistSupportFilterAtom,
   basicStatusFilterAtom,
   elementStatusFilterAtom,
-  labelFilterAtom,
   otherSkillFilterAtom,
   otherSupportFilterAtom,
   recoverySupportFilterAtom,
@@ -32,37 +31,10 @@ import {
   allVanguardSupportSearch,
   elementalSkillPatternToJapanese,
   intoElementalSkillPattern,
-  labelSearch,
   otherSupportSearch,
 } from "@/types/searchType";
 import { type SyntheticEvent, useState } from "react";
 import { match } from "ts-pattern";
-
-function LabelCheckbox() {
-  const [filter, setFilter] = useAtom(labelFilterAtom);
-
-  return (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
-      {labelSearch.map((flag) => {
-        return (
-          <CheckBoxItem
-            key={flag}
-            name={flag}
-            checked={filter.includes(flag)}
-            handleChange={() => {
-              setFilter((prev) => {
-                if (filter.includes(flag)) {
-                  return prev.filter((v) => v !== flag);
-                }
-                return [...prev, flag];
-              });
-            }}
-          />
-        );
-      })}
-    </Box>
-  );
-}
 
 function BasicStatusCheckbox() {
   const [filter, setFilter] = useAtom(basicStatusFilterAtom);
@@ -156,19 +128,23 @@ function OtherSkillCheckbox() {
             key={intoElementalSkillPattern(flag)}
             name={elementalSkillPatternToJapanese(intoElementalSkillPattern(flag))}
             checked={filter.some(
-              (v) => typeof v !== "string" && v.element === flag.element && v.kind === flag.kind,
+              (v) =>
+                typeof v !== "string" && v.attribute === flag.attribute && v.kind === flag.kind,
             )}
             handleChange={() => {
               setFilter((prev) => {
                 if (
                   filter.some(
                     (v) =>
-                      typeof v !== "string" && v.element === flag.element && v.kind === flag.kind,
+                      typeof v !== "string" &&
+                      v.attribute === flag.attribute &&
+                      v.kind === flag.kind,
                   )
                 ) {
                   return prev.filter(
                     (v) =>
-                      typeof v !== "string" && (v.element !== flag.element || v.kind !== flag.kind),
+                      typeof v !== "string" &&
+                      (v.attribute !== flag.attribute || v.kind !== flag.kind),
                   );
                 }
                 return [...prev, flag];
@@ -388,38 +364,34 @@ export default function Search() {
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} variant={"scrollable"} scrollButtons="auto">
-            <Tab label="ラベル" value="1" />
-            <Tab label="基礎ステータス（スキル）" value="2" />
-            <Tab label="属性ステータス（スキル）" value="3" />
-            <Tab label="その他（スキル）" value="4" />
-            <Tab label="前衛（補助スキル）" value="5" />
-            <Tab label="支援妨害（補助スキル）" value="6" />
-            <Tab label="回復（補助スキル）" value="7" />
-            <Tab label="その他（補助スキル）" value="8" />
+            <Tab label="基礎ステータス（スキル）" value="1" />
+            <Tab label="属性ステータス（スキル）" value="2" />
+            <Tab label="その他（スキル）" value="3" />
+            <Tab label="前衛（補助スキル）" value="4" />
+            <Tab label="支援妨害（補助スキル）" value="5" />
+            <Tab label="回復（補助スキル）" value="6" />
+            <Tab label="その他（補助スキル）" value="7" />
           </TabList>
         </Box>
         <TabPanel value="1">
-          <LabelCheckbox />
-        </TabPanel>
-        <TabPanel value="2">
           <BasicStatusCheckbox />
         </TabPanel>
-        <TabPanel value="3">
+        <TabPanel value="2">
           <ElementStatusCheckbox />
         </TabPanel>
-        <TabPanel value="4">
+        <TabPanel value="3">
           <OtherSkillCheckbox />
         </TabPanel>
-        <TabPanel value="5">
+        <TabPanel value="4">
           <VanguardSupportCheckbox />
         </TabPanel>
-        <TabPanel value="6">
+        <TabPanel value="5">
           <AssistSupportCheckbox />
         </TabPanel>
-        <TabPanel value="7">
+        <TabPanel value="6">
           <RecoverySupportCheckbox />
         </TabPanel>
-        <TabPanel value="8">
+        <TabPanel value="7">
           <OtherSupportCheckbox />
         </TabPanel>
       </TabContext>

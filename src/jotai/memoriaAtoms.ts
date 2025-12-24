@@ -6,14 +6,14 @@ import { memoriaList } from "@/domain/memoria/memoria";
 import {
   type ElementFilterType,
   type RoleFilterType,
-  elementFilter,
   roleFilterMap,
+  LabelFilterType,
+  labelFilter
 } from "@/types/filterType";
 import type {
   AssistSupportSearch,
   BasicStatusSearch,
   ElementStatusSearch,
-  LabelSearch,
   OtherSkillSearch,
   OtherSupportSearch,
   RecoverySupportSearch,
@@ -24,7 +24,7 @@ import { charmList } from "@/domain/charm/charm";
 import { costumeList } from "@/domain/costume/costume";
 import { match, P } from "ts-pattern";
 import { Lenz } from "@/domain/lenz";
-import { isElementEffect, isStackEffect } from "@/parser/skill";
+import { ATTRIBUTES, isElementEffect, isStackEffect } from "@/parser/skill";
 import { atomWithStorage } from "jotai/utils";
 
 export const targetBeforeAtom = atom<MemoriaId[]>([]);
@@ -74,8 +74,8 @@ export const rwLegendaryDeckAtom = atomWithStorage<MemoriaWithConcentration[]>(
 export const unitTitleAtom = atom("No Title");
 export const swAtom = atom<"sword" | "shield">("shield");
 export const roleFilterAtom = atom<RoleFilterType[]>(["support", "interference", "recovery"]);
-export const elementFilterAtom = atom<ElementFilterType[]>([...elementFilter]);
-export const labelFilterAtom = atom<LabelSearch[]>([]);
+export const elementFilterAtom = atom<ElementFilterType[]>([...ATTRIBUTES]);
+export const labelFilterAtom = atom<LabelFilterType[]>([...labelFilter]);
 
 export const currentRoleFilterAtom = atom((get) => {
   const sw = get(swAtom);
@@ -94,7 +94,6 @@ export const recoverySupportFilterAtom = atom<RecoverySupportSearch[]>([]);
 export const otherSupportFilterAtom = atom<OtherSupportSearch[]>([]);
 
 export const resetFilterAtom = atom(null, (_, set) => {
-  set(labelFilterAtom, []);
   set(basicStatusFilterAtom, []);
   set(elementStatusFilterAtom, []);
   set(otherSkillFilterAtom, []);
@@ -123,8 +122,11 @@ export const filteredMemoriaAtom = atom((get) => {
         return memoria.attribute === filter;
       });
 
-      const label = get(labelFilterAtom).every((filter) => {
-        return memoria.labels.includes(filter);
+      const label = get(labelFilterAtom).some((filter) => {
+        return match(filter)
+          .with("Legendary", () => memoria.labels.includes("Legendary"))
+          .with("Ultimate", () => memoria.labels.includes("Ultimate"))
+          .with("Normal", () => (["Legendary", "Ultimate"] as const).every((lbl) => !memoria.labels.includes(lbl)));
       });
 
       const basicStatus = get(basicStatusFilterAtom).every((filter) => {
@@ -165,10 +167,10 @@ export const filteredMemoriaAtom = atom((get) => {
             P.union("heal", "charge", "counter", "s-counter"),
             (filter) => !!Lenz.memoria.gvgSkill.kinds.get(memoria)?.some((kind) => kind === filter),
           )
-          .otherwise(({ element, kind }) =>
+          .otherwise(({ attribute, kind }) =>
             Lenz.memoria.gvgSkill.kinds.get(memoria)?.some((k) =>
               match(k)
-                .with({ element, kind }, () => true)
+                .with({ element: attribute, kind }, () => true)
                 .otherwise(() => false),
             ),
           );

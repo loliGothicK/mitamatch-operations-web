@@ -1,5 +1,6 @@
 import createMdx from "@next/mdx";
 import { withSentryConfig } from "@sentry/nextjs";
+import { withContentCollections } from "@content-collections/next";
 
 /** @types {import('next').NextConfig} */
 const nextConfig = {
@@ -51,7 +52,7 @@ const withMdx = createMdx({
   },
 });
 
-export default withSentryConfig(withMdx(nextConfig), {
+const config = withSentryConfig(withMdx(nextConfig), {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
 
@@ -83,3 +84,5 @@ export default withSentryConfig(withMdx(nextConfig), {
     automaticVercelMonitors: true,
   },
 });
+
+export default withContentCollections(config);

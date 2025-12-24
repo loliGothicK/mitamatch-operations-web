@@ -1,4 +1,4 @@
-export const elementFilter = ["Fire", "Water", "Wind", "Light", "Dark"] as const;
+import { Attribute } from "@/parser/skill";
 
 export const roleFilter = [
   "normal_single",
@@ -24,6 +24,8 @@ export const roleFilterMap = {
   recovery: "回復",
 } as const;
 
-export type ElementFilterType = (typeof elementFilter)[number];
+export type ElementFilterType = Attribute;
 export type RoleFilterType = (typeof roleFilter)[number];
 export type FilterType = RoleFilterType | ElementFilterType;
+export const labelFilter = ["Legendary", "Ultimate", "Normal"] as const;
+export type LabelFilterType = (typeof labelFilter)[number];

@@ -67,7 +67,7 @@ export type OrderByExpr = {
 
 function parseExpr(
   expr: ExpressionValue | ExprList,
-): Validated<MitamaError, AtomicExpr | AtomicExprList | BinaryExpr> {
+): ValidateResult<AtomicExpr | AtomicExprList | BinaryExpr> {
   return match(expr)
     .with(
       {
@@ -75,7 +75,7 @@ function parseExpr(
       },
       ({ type }) => toValidated(bail(type, "unsupported expression type")),
     )
-    .with({ type: "binary_expr" }, (binary): Validated<MitamaError, BinaryExpr> => {
+    .with({ type: "binary_expr" }, (binary): ValidateResult<BinaryExpr> => {
       if (isBinary(binary)) {
         return sequenceS(ap)({
           type: right("binary_expr" as const),
@@ -154,7 +154,7 @@ function parseBinary(
   operator: string,
   lhs: ExpressionValue | ExprList,
   rhs: ExpressionValue | ExprList,
-): Validated<MitamaError, BinaryExpr> {
+): ValidateResult<BinaryExpr> {
   return sequenceS(ap)({
     type: right("binary_expr" as const),
     lhs: parseExpr(lhs),
@@ -163,9 +163,7 @@ function parseBinary(
   });
 }
 
-function parseWhere(
-  where: Binary | SqlFunction | null,
-): Validated<MitamaError, Option<BinaryExpr>> {
+function parseWhere(where: Binary | SqlFunction | null): ValidateResult<Option<BinaryExpr>> {
   return match(where)
     .with(null, () => right(option.none))
     .otherwise((where) =>
@@ -182,7 +180,7 @@ function parseWhere(
     );
 }
 
-function parseOrderBy(orderby: OrderBy[] | null): Validated<MitamaError, Option<OrderByExpr>> {
+function parseOrderBy(orderby: OrderBy[] | null): ValidateResult<Option<OrderByExpr>> {
   return match(orderby)
     .with(null, () => right(option.none))
     .otherwise((orderby) =>

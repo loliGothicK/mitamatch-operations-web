@@ -1,16 +1,14 @@
 import {
-  type Elemental,
+  type AttributeSkill,
   type ElementalKind,
   type Attribute,
   elementalKind,
-  elements,
+  ATTRIBUTES,
   type stackKinds,
   type elementEffectKinds,
 } from "@/parser/skill";
 import { match } from "ts-pattern";
 
-export const labelSearch = ["Legendary", "Ultimate"] as const;
-export type LabelSearch = (typeof labelSearch)[number];
 export const basicStatus = ["ATK", "DEF", "Sp.ATK", "Sp.DEF", "Life"] as const;
 export type BasicStatus = (typeof basicStatus)[number];
 export const elementStatus = [
@@ -55,12 +53,15 @@ export type OtherSkillSearch =
   | "counter"
   | "s-counter"
   | "heal"
-  | Elemental
+  | AttributeSkill
   | (typeof elementEffectKinds)[number]
   | (typeof stackKinds)[number];
-export type ElementalSkillPattern = `${Elemental["element"]}/${Elemental["kind"]}`;
-export function intoElementalSkillPattern({ element, kind }: Elemental): ElementalSkillPattern {
-  return `${element}/${kind}`;
+export type ElementalSkillPattern = `${AttributeSkill["attribute"]}/${AttributeSkill["kind"]}`;
+export function intoElementalSkillPattern({
+  attribute,
+  kind,
+}: AttributeSkill): ElementalSkillPattern {
+  return `${attribute}/${kind}`;
 }
 export function elementalSkillPatternToJapanese(pattern: ElementalSkillPattern) {
   const [element, kind] = pattern.split("/");
@@ -92,7 +93,7 @@ export function allOtherSkillSearch(): OtherSkillSearch[] {
     "spread",
     "enhance",
     "minima",
-    ...elementalKind.flatMap((kind) => elements.map((element) => ({ kind, element }))),
+    ...elementalKind.flatMap((kind) => ATTRIBUTES.map((attribute) => ({ kind, attribute }))),
   ];
 }
 

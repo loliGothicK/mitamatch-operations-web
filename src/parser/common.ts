@@ -1,7 +1,7 @@
 import { match, P } from "ts-pattern";
 import { type Either, right } from "fp-ts/Either";
 import { bail, type MitamaError, CallPath } from "@/error/error";
-import type { Attribute } from "@/parser/skill";
+import type { Attribute, MajorAttribute } from "@/parser/skill";
 import { Amount, StatusKind } from "@/evaluate/types";
 
 export const parseIntSafe = (
@@ -34,22 +34,39 @@ export const parseFloatSafe = (
       });
 };
 
-export const parseElement = (
-  element: string,
+export const parseAttribute = (
+  attribute: string,
   meta: { path: CallPath; memoriaName?: string } = {
     path: CallPath.empty,
   },
 ): Either<MitamaError, Attribute> =>
-  match<string, Either<MitamaError, Attribute>>(element)
+  match<string, Either<MitamaError, Attribute>>(attribute)
     .with("火", () => right("Fire"))
     .with("水", () => right("Water"))
     .with("風", () => right("Wind"))
     .with("光", () => right("Light"))
     .with("闇", () => right("Dark"))
     .otherwise((src) =>
-      bail(src, "given text doesn't match any element", {
+      bail(src, "given text doesn't match any attribute", {
         ...meta,
-        path: meta.path.join("parseElement"),
+        path: meta.path.join("parseAttribute"),
+      }),
+    );
+
+export const parseMajorAttribute = (
+  attribute: string,
+  meta: { path: CallPath; memoriaName?: string } = {
+    path: CallPath.empty,
+  },
+): Either<MitamaError, MajorAttribute> =>
+  match<string, Either<MitamaError, MajorAttribute>>(attribute)
+    .with("火", () => right("Fire"))
+    .with("水", () => right("Water"))
+    .with("風", () => right("Wind"))
+    .otherwise((src) =>
+      bail(src, "given text doesn't match any najor attribute", {
+        ...meta,
+        path: meta.path.join("parseMajorAttribute"),
       }),
     );
 

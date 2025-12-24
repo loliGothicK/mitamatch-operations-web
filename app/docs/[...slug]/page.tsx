@@ -1,91 +1,64 @@
-"use client";
+import {allDocs} from "content-collections";
+import {notFound} from "next/navigation";
+import {Box, Typography} from "@mui/material";
+import {Metadata} from "next";
+import {MdxViewer} from "@/docs/_mdx/mdx";
 
-import { Layout } from "@/components/layout/client";
-import { Documents } from "@/components/docs/Documents";
-import "@/styles/markdown.css";
-import { Breadcrumbs, Grid } from "@mui/material";
-import { takeLeft } from "fp-ts/Array";
-import { Suspense, lazy } from "react";
-import { destroy, init } from "tocbot";
-import Link from "@/components/link";
-import { useEffectOnce } from "react-use";
-
-const Toc = () => {
-  useEffectOnce(() => {
-    init({
-      tocSelector: ".toc", //　目次を追加する class 名
-      contentSelector: ".mitamatch-markdown", // 目次を取得するコンテンツの class 名
-      headingSelector: "h2", // 目次として取得する見出しタグ
-      headingsOffset: 70, // ヘッダーのオフセット
-      scrollSmoothOffset: -70, // スクロール時のオフセット
-    });
-
-    // 不要となったtocbotインスタンスを削除
-    return () => destroy();
+/**
+ * ビルド時に全ページを静的に生成する（SSG）
+ * これがないとリクエストのたびにサーバーでレンダリングされ、遅くなる
+ */
+export async function generateStaticParams() {
+  return allDocs.map((doc) => {
+    // "/docs/foo/bar" -> ["foo", "bar"] に変換
+    const slugParts = doc.slug.split("/").filter((p) => p !== "" && p !== "docs");
+    return { slug: slugParts };
   });
+}
+
+/**
+ * メタデータ（ブラウザのタブ名など）を動的に生成
+ */
+export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const doc = getDocFromParams(slug);
+  if (!doc) return {};
+
+  return {
+    title: `${doc.title} | Mitamatch Operations`,
+    description: "Mitamatch Operations References",
+  };
+}
+
+/**
+ * URLパラメータからドキュメントを探すヘルパー
+ */
+function getDocFromParams(slug: string[]) {
+  return allDocs.find((d) => d.slug === `/${slug.join("/")}`);
+}
+
+export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
+  const { slug } = await params;
+  const doc = getDocFromParams(slug);
+
+  if (!doc) {
+    notFound();
+  }
 
   return (
-    <nav
-      className="toc"
-      style={{
-        position: "sticky",
-        top: 70,
-        maxHeight: "calc(100vh - 70px)",
-        overflowY: "auto",
-      }}
-    />
-  );
-};
+    <Box component="article" sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}>
+      {/* 記事タイトル */}
+      <Typography variant="h1" gutterBottom sx={{ fontSize: '2.5rem', fontWeight: 700 }}>
+        {doc.title}
+      </Typography>
 
-export default function Page({ params }: { params: Promise<{ slug: string[] }> }) {
-  let slug: string[] = [];
-
-  const DocComponent = lazy(async () => {
-    slug = (await params).slug;
-    return slug.length === 1
-      ? import(`@/mdx/${slug[0]}/index.mdx`)
-      : import(`@/mdx/${slug.join("/")}.mdx`);
-  });
-
-  return (
-    <Layout>
-      <Documents>
-        <Suspense>
-          <Grid container direction={"row-reverse"}>
-            <Grid
-              minHeight={"100vh"}
-              size={{ md: 3 }}
-              sx={{ display: { xs: "none", lg: "block" } }}
-            >
-              <Toc />
-            </Grid>
-            <Grid size={{ xs: 12, md: 9 }}>
-              <Link prefetch={true} href="/docs">
-                Docs
-              </Link>
-              {slug.length > 0 && (
-                <Breadcrumbs separator={"›"} aria-label="breadcrumb">
-                  {slug.length > 1 ? (
-                    slug
-                      .slice(0, slug.length - 1)
-                      .map((title, index) => (
-                        <Link key={title} href={`/docs/${takeLeft(index + 1)(slug).join("/")}`}>
-                          {title}
-                        </Link>
-                      ))
-                      .concat(<>{slug[slug.length - 1]}</>)
-                  ) : (
-                    <> {slug[0]}</>
-                  )}
-                </Breadcrumbs>
-              )}
-              <article className="mitamatch-markdown">
-                <DocComponent />
-              </article>
-            </Grid>
-          </Grid>
-        </Suspense>
-      </Documents>
-    </Layout>
+      {/* MDX本文のレンダリング */}
+      {/* ここで mdx-components.tsx が自動的に適用されます */}
+      <MdxViewer code={doc.mdx} />
+    </Box>
   );
 }

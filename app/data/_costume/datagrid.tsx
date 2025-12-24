@@ -358,7 +358,14 @@ function Help(): JSX.Element {
         クエリ構文ヘルプ
       </Typography>
       <Typography variant="body1" component={"p"}>
-        MySQLライクなクエリを使用してデータをフィルタリング、ソートできます。
+        <Link
+          href={
+            "https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?_gl=1*1r0yeqs*_up*MQ..&gclid=CjwKCAiA9aPKBhBhEiwAyz82J38ShbwRPZ9EEBoTkEJ7mm9mE0JT59BxPhmMKBMf6eJaHMq6NqcmohoCItcQAvD_BwE&gclsrc=aw.ds"
+          }
+        >
+          {"GoogleSQL"}
+        </Link>
+        （for BigQuery）ライクなクエリを使用してデータをフィルタリング、ソートできます。
       </Typography>
       <List dense>
         <ListSubheader>サポートされているキーワード</ListSubheader>

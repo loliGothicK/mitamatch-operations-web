@@ -32,6 +32,8 @@ import {
   Share,
   Close,
   Settings,
+  Sort,
+  Launch,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -113,6 +115,8 @@ import { useAsync } from "react-use";
 import { ulid } from "ulid";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveDecksAction } from "@/_actions/decks";
+import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
+import Link from "@/components/link";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -511,13 +515,14 @@ function UnitComponent({ index }: { index: number }) {
     <Box
       sx={{
         backgroundColor: theme.palette.background.paper,
-        minHeight: "60vh",
+        minWidth: 600,
+        minHeight: "100%",
         maxWidth: "600px",
         padding: 2,
       }}
     >
       <LegendaryDeck />
-      <Divider sx={{ margin: 2 }} />
+      <Divider sx={{ margin: 3 }} />
       <Deck />
     </Box>
   );
@@ -855,7 +860,18 @@ function VirtualizedList() {
     setCondidateConcentration(undefined);
   }, [setTargetBefore, setTargetAfter, setOpen, setCondidateConcentration]);
 
-  return (
+  return memoria.length === 0 ? (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        bgcolor: theme.palette.background.paper,
+      }}
+    >
+      <Typography>No Memoria Found</Typography>
+    </Box>
+  ) : (
     <>
       <Virtuoso
         style={{ height: "60vh" }}
@@ -931,6 +947,14 @@ function VirtualizedList() {
                   </Typography>
                 </Stack>
               </CardContent>
+              <IconButton sx={{ position: "absolute", right: 0 }}>
+                <Link
+                  href={`https://operations.mitama.io/data/memoria/${memoria[index].name.full}?type=${memoria[index].cardType}`}
+                  target={"_blank"}
+                >
+                  <Launch />
+                </Link>
+              </IconButton>
             </Card>
           );
         }}
@@ -1027,12 +1051,15 @@ function SortMenu() {
     >
       {(popupState) => (
         <>
-          <Button {...bindTrigger(popupState)}>sorted by {sort}</Button>
+          <Button {...bindTrigger(popupState)}>
+            <Sort />
+          </Button>
           <Menu {...bindMenu(popupState)}>
             {sortKind.map((kind) => {
               return (
                 <MenuItem
                   key={kind}
+                  selected={kind === sort}
                   onClick={() => {
                     popupState.close();
                     setSort(kind);
@@ -1050,16 +1077,18 @@ function SortMenu() {
 }
 
 function Source() {
+  const theme = useTheme();
+
   return (
-    <Grid container direction={"column"} alignItems={"center"} minHeight={"70vh"}>
-      <Grid minHeight={"60vh"} minWidth={"100%"}>
-        <ToggleButtons />
-        <FilterModal />
-        <SearchModal />
-        <SortMenu />
-        <VirtualizedList />
-      </Grid>
-    </Grid>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.paper,
+        minHeight: "60vh",
+        padding: 2,
+      }}
+    >
+      <VirtualizedList />
+    </Box>
   );
 }
 
@@ -1420,46 +1449,73 @@ export function DeckBuilder({ index }: { index: number }) {
   const [, setCompare] = useAtom(compareModeAtom);
 
   return (
-    <Grid
-      container
-      direction={"row"}
+    <Box
       sx={{
-        width: "100%",
-        boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
+      <Ribbon>
+        <RibbonGroup>
+          <ToggleButtons />
+        </RibbonGroup>
+        <RibbonGroup label={"Deck"}>
+          <Tooltip title="clear all" placement={"top"}>
+            <Button
+              onClick={() => {
+                setDeck([]);
+                setLegendaryDeck([]);
+                setCompare(undefined);
+              }}
+            >
+              <ClearAll />
+            </Button>
+          </Tooltip>
+          <DiffModal />
+          <ShareButton />
+          <CalcSettings />
+        </RibbonGroup>
+        <RibbonGroup label={"Source"}>
+          <FilterModal />
+          <SearchModal />
+          <SortMenu />
+        </RibbonGroup>
+      </Ribbon>
       <Grid
-        size={{ xs: 12, md: 4, lg: 3 }}
-        direction={"column"}
-        alignItems={"center"}
+        container
+        direction={"row"}
         sx={{
-          padding: 2,
+          width: "100%",
+          mt: 4,
+          boxSizing: "border-box",
         }}
       >
-        <Details />
+        <Grid
+          size={{ xs: 12, md: 4, lg: 3 }}
+          direction={"column"}
+          alignItems={"center"}
+          sx={{
+            padding: 2,
+          }}
+        >
+          <Details />
+        </Grid>
+        <Grid size={{ xs: 12, md: 8, lg: 5 }} sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
+          <Suspense>
+            <UnitComponent index={index} />
+          </Suspense>
+        </Grid>
+        <Grid size={{ xs: 12, md: 12, lg: 4 }}>
+          <Source />
+        </Grid>
       </Grid>
-      <Grid size={{ xs: 12, md: 8, lg: 5 }} alignItems={"center"}>
-        <Tooltip title="clear all" placement={"top"}>
-          <Button
-            onClick={() => {
-              setDeck([]);
-              setLegendaryDeck([]);
-              setCompare(undefined);
-            }}
-          >
-            <ClearAll />
-          </Button>
-        </Tooltip>
-        <DiffModal />
-        <ShareButton />
-        <CalcSettings />
-        <Suspense>
-          <UnitComponent index={index} />
-        </Suspense>
-      </Grid>
-      <Grid size={{ xs: 12, md: 12, lg: 4 }} py={2}>
-        <Source />
-      </Grid>
-    </Grid>
+    </Box>
   );
 }

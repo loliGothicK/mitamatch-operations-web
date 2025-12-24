@@ -6,7 +6,7 @@ import { sequenceS } from "fp-ts/Apply";
 import { getSemigroup } from "fp-ts/Array";
 import type { Costume } from "@/domain/costume/costume";
 import type { Attribute } from "@/parser/skill";
-import { parseElement, parseIntSafe } from "@/parser/common";
+import { parseAttribute, parseIntSafe } from "@/parser/common";
 import { anyhow, MitamaError, ValidateResult } from "@/error/error";
 import { toValidated } from "@/fp-ts-ext/Validated";
 import { PATTERNS, INITIAL_ATTRIBUTE_RATES } from "../constants";
@@ -50,7 +50,7 @@ export function parseEffectUp(
     either.fromOption(() => [anyhow(description, `Does not match ${PATTERNS.EFFECT_UP}`)]),
     either.flatMap(([, attribute, rate]) =>
       sequenceS(ap)({
-        attribute: toValidated(parseElement(attribute)),
+        attribute: toValidated(parseAttribute(attribute)),
         effect: sequenceS(ap)({
           type: right("skill" as const),
           value: pipe(
@@ -75,7 +75,7 @@ export function parseRateUp(
     either.fromOption(() => [anyhow(description, `Does not match ${PATTERNS.TRIGGER_RATE_UP}`)]),
     either.flatMap(([, attribute, rate]) =>
       sequenceS(ap)({
-        attribute: toValidated(parseElement(attribute)),
+        attribute: toValidated(parseAttribute(attribute)),
         effect: sequenceS(ap)({
           type: right("autoSkill" as const),
           value: pipe(
