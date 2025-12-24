@@ -35,7 +35,7 @@ import {
   MouseEvent,
   ElementType,
 } from "react";
-import {redirect, usePathname} from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
 import { match } from "ts-pattern";
 import { darkTheme, lightTheme } from "@/theme/theme";

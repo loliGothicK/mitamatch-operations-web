@@ -8,7 +8,7 @@ import {
   type RoleFilterType,
   roleFilterMap,
   LabelFilterType,
-  labelFilter
+  labelFilter,
 } from "@/types/filterType";
 import type {
   AssistSupportSearch,
@@ -122,12 +122,18 @@ export const filteredMemoriaAtom = atom((get) => {
         return memoria.attribute === filter;
       });
 
-      const label = get(labelFilterAtom).some((filter) => {
-        return match(filter)
-          .with("Legendary", () => memoria.labels.includes("Legendary"))
-          .with("Ultimate", () => memoria.labels.includes("Ultimate"))
-          .with("Normal", () => (["Legendary", "Ultimate"] as const).every((lbl) => !memoria.labels.includes(lbl)));
-      });
+      const label = match(get(labelFilterAtom))
+        .with([], () => false)
+        .with(labelFilter, () => true)
+        .otherwise((filters) =>
+          filters.some((filter) => {
+            return match(filter)
+              .with("Normal", () =>
+                (["Legendary", "Ultimate"] as const).every((lbl) => !memoria.labels.includes(lbl)),
+              )
+              .otherwise((filter) => memoria.labels.includes(filter));
+          }),
+        );
 
       const basicStatus = get(basicStatusFilterAtom).every((filter) => {
         return Lenz.memoria.gvgSkill.effects.get(memoria).some((eff) =>

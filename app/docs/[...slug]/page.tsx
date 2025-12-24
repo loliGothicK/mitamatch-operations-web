@@ -1,8 +1,8 @@
-import {allDocs} from "content-collections";
-import {notFound} from "next/navigation";
-import {Box, Typography} from "@mui/material";
-import {Metadata} from "next";
-import {MdxViewer} from "@/docs/_mdx/mdx";
+import { allDocs } from "content-collections";
+import { notFound } from "next/navigation";
+import { Box, Typography } from "@mui/material";
+import { Metadata } from "next";
+import { MdxViewer } from "@/docs/_mdx/mdx";
 
 /**
  * ビルド時に全ページを静的に生成する（SSG）
@@ -19,7 +19,11 @@ export async function generateStaticParams() {
 /**
  * メタデータ（ブラウザのタブ名など）を動的に生成
  */
-export async function generateMetadata({ params }: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const doc = getDocFromParams(slug);
   if (!doc) return {};
@@ -46,13 +50,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   }
 
   return (
-    <Box component="article" sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    }}>
+    <Box
+      component="article"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {/* 記事タイトル */}
-      <Typography variant="h1" gutterBottom sx={{ fontSize: '2.5rem', fontWeight: 700 }}>
+      <Typography variant="h1" gutterBottom sx={{ fontSize: "2.5rem", fontWeight: 700 }}>
         {doc.title}
       </Typography>
 

@@ -1502,12 +1502,15 @@ export function DeckBuilder({ index }: { index: number }) {
         >
           <Details />
         </Grid>
-        <Grid size={{ xs: 12, md: 8, lg: 5 }} sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}>
+        <Grid
+          size={{ xs: 12, md: 8, lg: 5 }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Suspense>
             <UnitComponent index={index} />
           </Suspense>

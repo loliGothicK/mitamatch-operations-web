@@ -1,9 +1,9 @@
 // app/docs/layout.tsx (例)
-import { allDocs } from 'content-collections'; // 生成されたデータをインポート
-import { buildDocsTree } from '@/lib/docs-tree';
-import { DocsSidebar } from '@/components/mdx/DocsSidebar';
-import {Box, Paper} from '@mui/material';
-import {ReactNode} from "react"; // Grid2推奨ですが一旦Gridで
+import { allDocs } from "content-collections"; // 生成されたデータをインポート
+import { buildDocsTree } from "@/lib/docs-tree";
+import { DocsSidebar } from "@/components/mdx/DocsSidebar";
+import { Box, Paper } from "@mui/material";
+import { ReactNode } from "react"; // Grid2推奨ですが一旦Gridで
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
   // 1. データを変換
@@ -30,7 +30,7 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           height: "100%",
         }}
       >
-        <Box position="sticky" top={20} sx={{ maxHeight: 'calc(100vh - 40px)', overflowY: 'auto' }}>
+        <Box position="sticky" top={20} sx={{ maxHeight: "calc(100vh - 40px)", overflowY: "auto" }}>
           <DocsSidebar tree={tree} />
         </Box>
       </Paper>

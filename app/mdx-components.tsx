@@ -1,5 +1,5 @@
-import type { MDXComponents } from 'mdx/types';
-import YouTube from '@/components/mdx/YouTube';
+import type { MDXComponents } from "mdx/types";
+import YouTube from "@/components/mdx/YouTube";
 import Image from "next/image";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {

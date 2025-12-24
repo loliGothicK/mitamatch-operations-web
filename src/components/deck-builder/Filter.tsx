@@ -6,8 +6,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 
 import { CheckBoxItem } from "@/components/deck-builder/CheckBoxItem";
-import {currentRoleFilterAtom, elementFilterAtom, labelFilterAtom, roleFilterAtom} from "@/jotai/memoriaAtoms";
-import {type FilterType, labelFilter, roleFilterMap} from "@/types/filterType";
+import {
+  currentRoleFilterAtom,
+  elementFilterAtom,
+  labelFilterAtom,
+  roleFilterAtom,
+} from "@/jotai/memoriaAtoms";
+import { type FilterType, labelFilter, roleFilterMap } from "@/types/filterType";
 import { elementFilterMap } from "@/components/deck-builder/Details";
 import { ATTRIBUTES } from "@/parser/skill";
 
@@ -144,7 +149,7 @@ function LabelCheckbox() {
               checked={labels.includes(filter)}
               handleChange={() => {
                 setLabels((prev) => {
-                  if (filter.includes(filter)) {
+                  if (labels.includes(filter)) {
                     return prev.filter((v) => v !== filter);
                   }
                   return [...prev, filter];

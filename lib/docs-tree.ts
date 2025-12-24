@@ -21,17 +21,17 @@ export function buildDocsTree(docs: Doc[]): TreeNode[] {
     // "/docs/category/page" -> ["docs", "category", "page"]
     // 先頭の空文字やルート(docs)を除去するかはプロジェクト構成による
     // ここでは "/docs" 以下のパスを階層として扱います
-    const parts = doc.slug.split('/').filter(p => p !== '' && p !== 'docs');
+    const parts = doc.slug.split("/").filter((p) => p !== "" && p !== "docs");
 
     let currentLevel = root;
-    let currentPath = '/docs';
+    let currentPath = "/docs";
 
     for (let i = 0; i < parts.length; i++) {
       const part = parts[i];
       currentPath += `/${part}`;
 
       // 既存のノードを探す
-      let node = currentLevel.find(n => n.slug === currentPath);
+      let node = currentLevel.find((n) => n.slug === currentPath);
 
       if (!node) {
         // ノードが存在しない場合、新しく作る

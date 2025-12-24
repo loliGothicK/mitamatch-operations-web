@@ -1,17 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Link from "@/components/link";
-import { usePathname } from 'next/navigation';
-import {
-  List,
-  ListItemButton,
-  ListItemText,
-  Collapse,
-  Box
-} from '@mui/material';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { TreeNode } from '@/lib/docs-tree';
+import { usePathname } from "next/navigation";
+import { List, ListItemButton, ListItemText, Collapse, Box } from "@mui/material";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { TreeNode } from "@/lib/docs-tree";
 
 // 再帰的にレンダリングするアイテムコンポーネント
 const SidebarItem = ({ node, level = 0 }: { node: TreeNode; level?: number }) => {
@@ -35,17 +29,17 @@ const SidebarItem = ({ node, level = 0 }: { node: TreeNode; level?: number }) =>
   return (
     <>
       <ListItemButton
-        component={node.url ? Link : 'div'} // URLがなければただのボタン
-        href={node.url || '#'}
+        component={node.url ? Link : "div"} // URLがなければただのボタン
+        href={node.url || "#"}
         selected={isActive}
         onClick={hasChildren ? handleClick : undefined}
         sx={{
           pl: 2 + level * 2, // インデント処理
-          borderLeft: isActive ? '3px solid #1976d2' : '3px solid transparent' // アクティブ表示のデザイン例
+          borderLeft: isActive ? "3px solid #1976d2" : "3px solid transparent", // アクティブ表示のデザイン例
         }}
       >
         <ListItemText primary={node.title} />
-        {hasChildren ? (open ? <ExpandLess /> : <ExpandMore />) : null}
+        {hasChildren ? open ? <ExpandLess /> : <ExpandMore /> : null}
       </ListItemButton>
 
       {hasChildren && (
@@ -64,7 +58,7 @@ const SidebarItem = ({ node, level = 0 }: { node: TreeNode; level?: number }) =>
 // メインのコンポーネント
 export const DocsSidebar = ({ tree }: { tree: TreeNode[] }) => {
   return (
-    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       <List component="nav">
         {tree.map((node) => (
           <SidebarItem key={node.slug} node={node} />
