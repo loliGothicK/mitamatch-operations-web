@@ -361,7 +361,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
           sx={{
             flexGrow: 1, // AppBar 以外の高さを全部使う
             display: "grid",
-            gridTemplateColumns: userData ? "210px minmax(0, 1fr)" : "54px minmax(0, 1fr)", // ここで横分割
+            gridTemplateColumns: userData && pathname.endsWith("builder") ? "210px minmax(0, 1fr)" : "54px minmax(0, 1fr)", // ここで横分割
             overflow: "hidden", // 内部スクロールのために必要
           }}
         >

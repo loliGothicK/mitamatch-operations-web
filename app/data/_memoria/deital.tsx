@@ -19,8 +19,6 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { AutoSkill } from "@/parser/autoSkill";
-import { Skill } from "@/parser/skill";
 import { projector } from "@/functional/proj";
 import TabList from "@mui/lab/TabList";
 import TabContext from "@mui/lab/TabContext";
@@ -128,9 +126,10 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
         {data.map((memoria, index) => (
           <TabPanel key={memoria.id} value={index} sx={{ padding: 0 }}>
             <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
-              <SkillCard skill={memoria.skills.gvgSkill} title={"レギオンマッチスキル"} />
-              <SkillCard skill={memoria.skills.autoSkill} title={"レギオンマッチ補助スキル"} />
-              <SkillCard skill={memoria.skills.questSkill} title={"対ヒュージスキル"} />
+              <SkillCard skill={memoria.skills.gvgSkill.raw} title={"レギオンマッチスキル"} />
+              <SkillCard skill={memoria.skills.autoSkill.raw} title={"レギオンマッチ補助スキル"} />
+              {memoria.legendarySkill && <SkillCard skill={memoria.legendarySkill[4]} title={"レジェンダリースキル"} />}
+              <SkillCard skill={memoria.skills.questSkill.raw} title={"対ヒュージスキル"} />
               <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
                 ステータス
               </Divider>
@@ -143,7 +142,7 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
   );
 }
 
-function SkillCard({ skill, title }: { skill: Skill | AutoSkill; title: string }) {
+function SkillCard({ skill, title }: { skill: { readonly name: string; readonly description: string; }; title: string }) {
   return (
     <>
       <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>
@@ -153,7 +152,7 @@ function SkillCard({ skill, title }: { skill: Skill | AutoSkill; title: string }
         <CardContent>
           <Box display="flex" alignItems="flex-start">
             <Typography variant="h5" component="div" sx={{ margin: 2 }}>
-              {skill.raw.name}
+              {skill.name}
             </Typography>
             {"sp" in skill && (
               <Chip label={`消費MP ${skill.sp}`} sx={{ marginLeft: "auto", marginTop: 2 }} />
@@ -161,7 +160,7 @@ function SkillCard({ skill, title }: { skill: Skill | AutoSkill; title: string }
           </Box>
           <Divider sx={{ margin: 2 }} />
           <Typography variant="body2" color="text.secondary" sx={{ margin: 2 }}>
-            {skill.raw.description}
+            {skill.description}
           </Typography>
         </CardContent>
       </Card>

@@ -12,6 +12,7 @@ const docs = defineCollection({
     title: z.string(),
     slug: z.string(),
     section: z.number(),
+    content: z.string(),
   }),
   transform: async (document, context) => {
     // MDXをコンパイルする際にプラグインを適用
