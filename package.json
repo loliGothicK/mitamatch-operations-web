@@ -62,7 +62,7 @@
     "drizzle-orm": "0.45.1",
     "fp-ts": "2.16.11",
     "image-size": "^2.0.2",
-    "jotai": "2.16.0",
+    "jotai": "2.16.1",
     "material-ui-popup-state": "5.3.6",
     "monocle-ts": "2.3.13",
     "neverthrow": "8.2.0",
