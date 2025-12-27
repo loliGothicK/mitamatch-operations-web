@@ -39,6 +39,7 @@ export default function Ribbon({ children }: { children: ReactNode[] }) {
         flexWrap: "wrap", // 画面幅が狭いときに折り返す（簡易レスポンシブ）
         minWidth: "100%",
         borderRadius: 1,
+        backgroundColor: "background.paper",
       }}
     >
       <Stack

@@ -1052,7 +1052,7 @@ function SortMenu() {
       {(popupState) => (
         <>
           <Button {...bindTrigger(popupState)}>
-            <Sort />
+            <Sort color={"secondary"} />
           </Button>
           <Menu {...bindMenu(popupState)}>
             {sortKind.map((kind) => {
@@ -1093,6 +1093,7 @@ function Source() {
 }
 
 function ToggleButtons() {
+  const theme = useTheme();
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
@@ -1114,7 +1115,9 @@ function ToggleButtons() {
         setCompare(undefined);
       }}
     >
-      {sw === "shield" ? "後衛" : "前衛"}
+      <Typography color={theme.palette.secondary.main}>
+        {sw === "shield" ? "後衛" : "前衛"}
+      </Typography>
     </Button>
   );
 }
@@ -1133,7 +1136,7 @@ function FilterModal() {
     <>
       <Tooltip title={"filter"} placement={"top"}>
         <Button onClick={handleOpen}>
-          <FilterAlt />
+          <FilterAlt color={"secondary"} />
         </Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
@@ -1165,7 +1168,7 @@ function SearchModal() {
     <>
       <Tooltip title={"search"} placement={"top"}>
         <Button onClick={handleOpen}>
-          <SearchOutlined />
+          <SearchOutlined color={"secondary"} />
         </Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
@@ -1252,7 +1255,7 @@ function DiffModal() {
     <>
       <Tooltip title={"diff"} placement={"top"}>
         <Button onClick={handleOpen}>
-          <DifferenceIcon />
+          <DifferenceIcon color={"secondary"} />
         </Button>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
@@ -1343,7 +1346,7 @@ function ShareButton() {
         <>
           <Button {...bindTrigger(popupState)}>
             <Tooltip title={"share"} placement={"top"}>
-              <Share />
+              <Share color={"secondary"} />
             </Tooltip>
           </Button>
           <Menu {...bindMenu(popupState)}>
@@ -1421,7 +1424,7 @@ function CalcSettings() {
     <>
       <Tooltip title={"calc settings"} placement={"top"}>
         <IconButton onClick={() => setOpen(true)}>
-          <Settings />
+          <Settings color={"secondary"} />
         </IconButton>
       </Tooltip>
       <Dialog open={open} onClose={() => setOpen(false)}>
@@ -1470,7 +1473,7 @@ export function DeckBuilder({ index }: { index: number }) {
                 setCompare(undefined);
               }}
             >
-              <ClearAll />
+              <ClearAll color={"secondary"} />
             </Button>
           </Tooltip>
           <DiffModal />
