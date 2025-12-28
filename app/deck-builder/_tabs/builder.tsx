@@ -9,7 +9,7 @@ import {
   SetStateAction,
   Suspense,
   useCallback,
-  useId,
+  useId, useMemo,
   useState,
 } from "react";
 import DifferenceIcon from "@mui/icons-material/Difference";
@@ -1238,11 +1238,11 @@ function DiffModal() {
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const uniqueId = useId();
-  const current = {
+  const current = useMemo(() => ({
     sw,
     deck,
     legendaryDeck,
-  };
+  }), [sw, deck, legendaryDeck]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -1314,9 +1314,9 @@ function ShareButton() {
   // Mutations
   const mutation = useMutation({
     mutationFn: async (unit: Unit & { title: string }) => saveDecksAction(unit),
-    onSuccess: () => {
+    onSuccess: async () => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ["decks"] });
+      await queryClient.invalidateQueries({ queryKey: ["decks"] });
     },
   });
 
@@ -1330,7 +1330,7 @@ function ShareButton() {
   const handleCloseTip = (): void => {
     setOpenTip(false);
   };
-  const handleClickButton = async (): Promise<void> => {
+  const handleClickButton = async () => {
     setOpenTip(true);
     await navigator.clipboard.writeText(url);
   };

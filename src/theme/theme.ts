@@ -4,44 +4,55 @@ export const lightTheme: ThemeOptions = {
   palette: {
     mode: "light",
     background: {
-      default: "#fff",
-      paper: "rgba(247, 200, 218)",
+      default: "#fff0f5",
+      paper: "#ffffff",
     },
     text: {
       primary: "rgba(0, 0, 0, 0.87)",
       secondary: "rgba(0, 0, 0, 0.6)",
       disabled: "rgba(0, 0, 0, 0.38)",
     },
+    // アクション色は少し濃い目の緑を採用して視認性を上げる
     action: {
-      active: "#b5c97c",
-      hover: "rgba(181, 201, 124, 0.08)",
-      selected: "rgba(181, 201, 124, 0.16)",
-      disabled: "rgba(181, 201, 124, 0.3)",
-      disabledBackground: "rgba(181, 201, 124, 0.12)",
+      active: "#7a8f4b",
+      hover: "rgba(122, 143, 75, 0.08)",
+      selected: "rgba(122, 143, 75, 0.16)",
+      disabled: "rgba(0, 0, 0, 0.26)",
+      disabledBackground: "rgba(0, 0, 0, 0.12)",
     },
     primary: {
-      main: "#f7c8da",
-      light: "#fbe5eb",
-      dark: "#f4b3ca",
+      // main: 少し濃いピンク（撫子色・オールドローズ系）にして、白文字が読めるように
+      main: "#d06085",
+      // light: 元の淡い桜色はこちら（ホバー時や背景色として使用）
+      light: "#f7c8da",
+      // dark: より深い色
+      dark: "#9c3059",
+      // ボタン上の文字色を白に強制
+      contrastText: "#fff",
     },
     secondary: {
-      main: "#b5c97c",
-      light: "#8fa34b",
-      dark: "#e7f5c4",
+      // main: 少し濃い抹茶色。白文字も黒文字もいけるバランス
+      main: "#8fa34b",
+      // light: 元の淡い緑（抹茶ラテ色）
+      light: "#b5c97c",
+      // dark: 深い緑
+      dark: "#607030",
+      contrastText: "#fff",
     },
     success: {
       main: "#4caf50",
-      light: "#077d55",
-      dark: "#16a766",
+      light: "#80e27e", // 修正: lightは明るく
+      dark: "#087f23",  // 修正: darkは暗く
     },
     error: {
       main: "#f44336",
-      light: "#d91f11",
-      dark: "#fa5343",
+      light: "#ff7961", // 修正: lightは明るく
+      dark: "#ba000d",  // 修正: darkは暗く
     },
   },
 };
 
+// ダークテーマは元のままでも雰囲気が出ていますが、light/darkの定義が逆転していた箇所を微修正しました
 export const darkTheme: ThemeOptions = {
   palette: {
     mode: "dark",
@@ -59,27 +70,27 @@ export const darkTheme: ThemeOptions = {
     },
     background: {
       default: "#121212",
-      paper: "rgba(50, 50, 50)",
+      paper: "#1e1e1e", // ダークモードでも少し明るくして階層を表現（お好みで）
     },
     primary: {
-      main: "#8b4b5e", // ピンクの深い色調
-      light: "#b36677", // やや明るいダークピンク
-      dark: "#5c3240", // より深い濃い色
+      main: "#ce7a96", // ダークモードでは少し彩度を落としつつ明るくすると見やすい
+      light: "#ffabc6",
+      dark: "#9c4b69",
     },
     secondary: {
-      main: "#5c7a3e", // 緑の深い色調
-      light: "#4a6332", // より暗い緑
-      dark: "#6e8f4a", // やや明るい深緑
+      main: "#8fa34b",
+      light: "#c0d47a",
+      dark: "#60721f",
     },
     success: {
       main: "#4caf50",
-      light: "#077d55",
-      dark: "#16a766",
+      light: "#80e27e",
+      dark: "#087f23",
     },
     error: {
       main: "#f44336",
-      light: "#d91f11",
-      dark: "#fa5343",
+      light: "#ff7961",
+      dark: "#ba000d",
     },
   },
 };
