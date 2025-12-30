@@ -74,7 +74,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-use": "17.6.0",
-    "react-virtuoso": "4.18.0",
+    "react-virtuoso": "4.18.1",
     "reactflow": "11.11.4",
     "rehype-slug": "6.0.0",
     "remark-gfm": "4.0.1",
