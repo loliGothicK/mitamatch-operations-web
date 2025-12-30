@@ -25,6 +25,7 @@ const toShort = (name: string) =>
 function MemoriaCard({
   memoria,
   onConcentrationChange,
+  onClick,
   onContextMenu,
 }: {
   memoria: {
@@ -33,6 +34,7 @@ function MemoriaCard({
     limitBreak: number;
   };
   onConcentrationChange: (concentration: number) => void;
+  onClick?: () => void;
   onContextMenu?: (e: MouseEvent<HTMLDivElement>) => void;
 }) {
   const [concentration, setConcentration] = useState(memoria.limitBreak);
@@ -40,6 +42,7 @@ function MemoriaCard({
     <Box
       position={"relative"}
       sx={{ width: 100, height: 100, cursor: "pointer" }}
+      onClick={onClick}
       onContextMenu={(event) => {
         event.preventDefault();
         onContextMenu?.(event);
@@ -204,6 +207,7 @@ export function Memoria({}: Props) {
                     prev.map((m) => (m.id === memoria.id ? { ...m, limitBreak: value } : m)),
                   );
                 }}
+                onClick={() => setInfo(() => uniqueMemoriaList.get(memoria.id))}
                 onContextMenu={() => setEdit((prev) => prev.filter((m) => m.id !== memoria.id))}
               />
             ))}

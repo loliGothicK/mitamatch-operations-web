@@ -1,7 +1,7 @@
 import { atom } from "jotai";
 import { decodeTime } from "ulid";
 
-import { formatCardType, Memoria, MemoriaId } from "@/domain/memoria/memoria";
+import {formatCardType, Memoria, MemoriaId, uniqueMemoriaList} from "@/domain/memoria/memoria";
 import { memoriaList } from "@/domain/memoria/memoria";
 import {
   type ElementFilterType,
@@ -25,7 +25,9 @@ import { costumeList } from "@/domain/costume/costume";
 import { match, P } from "ts-pattern";
 import { Lenz } from "@/domain/lenz";
 import { ATTRIBUTES, isElementEffect, isStackEffect } from "@/parser/skill";
-import { atomWithStorage } from "jotai/utils";
+import { loadable, atomWithStorage } from "jotai/utils";
+import { atomWithQuery } from "jotai-tanstack-query";
+import {getListAction} from "@/_actions/memoria";
 
 export const targetBeforeAtom = atom<MemoriaId[]>([]);
 export const targetAfterAtom = atom<MemoriaId[]>([]);
@@ -76,6 +78,12 @@ export const swAtom = atom<"sword" | "shield">("shield");
 export const roleFilterAtom = atom<RoleFilterType[]>(["support", "interference", "recovery"]);
 export const elementFilterAtom = atom<ElementFilterType[]>([...ATTRIBUTES]);
 export const labelFilterAtom = atom<LabelFilterType[]>([...labelFilter]);
+export const ownedFilterAtom = atom(false);
+const owningAtom = atomWithQuery<{ id: string; name: string; }[]>(() => ({
+  queryKey: ["memoria"],
+  queryFn: getListAction,
+}));
+const owningAtomLoadable = loadable(owningAtom);
 
 export const currentRoleFilterAtom = atom((get) => {
   const sw = get(swAtom);
@@ -106,8 +114,30 @@ export const resetFilterAtom = atom(null, (_, set) => {
 export const sortKindAtom = atom<SortKind>("ID");
 
 export const filteredMemoriaAtom = atom((get) => {
-  return memoriaList
-    .filter((memoria) => memoria.phantasm !== true)
+  const isOwnedFilterEnabled = get(ownedFilterAtom);
+
+  let source: Memoria[] = [];
+
+  if (isOwnedFilterEnabled) {
+    // 2. ONの場合のみ、LoadableなAtomを見に行く
+    const value = get(owningAtomLoadable);
+
+    if (value.state !== 'hasData') {
+      return {
+        isLoaing: true,
+        data: [],
+      };
+    }
+
+    // 4. データがある場合のみ展開。
+    //    uniqueMemoriaList.get(id)! は危険なので ?. にして空配列フォールバックを入れる
+    source = value.data.data!.flatMap(({ id }) => uniqueMemoriaList.get(id)?.cards ?? []);
+
+  } else {
+    // 5. OFFの場合は既存のリストを使用（ここではフェッチは発生しない）
+    source = memoriaList.filter((memoria) => memoria.phantasm !== true);
+  }
+  const result = source
     .filter((memoria) => {
       const sw = match(get(swAtom))
         .with("shield", () => memoria.cardType > 4)
@@ -252,4 +282,9 @@ export const filteredMemoriaAtom = atom((get) => {
         )
         .exhaustive();
     });
+
+  return {
+    isLoaing: false,
+    data: result,
+  };
 });

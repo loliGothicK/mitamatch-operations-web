@@ -64,7 +64,7 @@ import {
   CardMedia,
   CardContent,
   TextField,
-  InputAdornment,
+  InputAdornment, CircularProgress,
 } from "@mui/material";
 import type { SelectChangeEvent, Theme } from "@mui/material";
 import { blue, green, purple, red, yellow } from "@mui/material/colors";
@@ -484,7 +484,7 @@ function LegendaryDeck() {
   );
 }
 
-function UnitComponent({ index }: { index: number }) {
+function UnitComponent() {
   const params = useSearchParams();
   const theme = useTheme();
   const [, setTitle] = useAtom(unitTitleAtom);
@@ -513,7 +513,7 @@ function UnitComponent({ index }: { index: number }) {
       setLegendaryDeck(legendaryDeck);
       setCompare(undefined);
     }
-  }, [setTitle, setDeck, setLegendaryDeck, setRoleFilter, setSw, params, setCompare, index]);
+  }, [setTitle, setDeck, setLegendaryDeck, setRoleFilter, setSw, params, setCompare]);
 
   return (
     <Box
@@ -834,7 +834,7 @@ function Compare({
 
 function VirtualizedList() {
   const theme = useTheme();
-  const [memoria] = useAtom(filteredMemoriaAtom);
+  const [{ isLoaing, data }] = useAtom(filteredMemoriaAtom);
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [open, setOpen] = useState(false);
@@ -864,7 +864,11 @@ function VirtualizedList() {
     setCondidateConcentration(undefined);
   }, [setTargetBefore, setTargetAfter, setOpen, setCondidateConcentration]);
 
-  return memoria.length === 0 ? (
+  if (isLoaing) {
+    return <CircularProgress />
+  }
+
+  return data.length === 0 ? (
     <Box
       sx={{
         display: "flex",
@@ -879,8 +883,8 @@ function VirtualizedList() {
     <>
       <Virtuoso
         style={{ height: "60vh" }}
-        totalCount={memoria.length}
-        computeItemKey={(index) => memoria[index].id}
+        totalCount={data.length}
+        computeItemKey={(index) => data[index].id}
         itemContent={(index) => {
           return (
             <Card
@@ -904,28 +908,28 @@ function VirtualizedList() {
                   if (compare !== undefined) {
                     setOpen(true);
                     setCandidate({
-                      ...memoria[index],
+                      ...data[index],
                       concentration: condidateConcentration ?? 4,
                     });
                     return;
                   }
-                  if (memoria[index].labels.includes("Legendary")) {
-                    setLegendaryDeck((prev) => addMemoria(prev, memoria[index]));
+                  if (data[index].labels.includes("Legendary")) {
+                    setLegendaryDeck((prev) => addMemoria(prev, data[index]));
                   } else {
-                    setDeck((prev) => addMemoria(prev, memoria[index]));
+                    setDeck((prev) => addMemoria(prev, data[index]));
                   }
                 }}
               >
                 <Add color={"warning"} />
               </IconButton>
               <Icon
-                cardType={memoria[index].cardType}
-                attribute={memoria[index].attribute}
+                cardType={data[index].cardType}
+                attribute={data[index].attribute}
                 position={70}
               />
-              <Tooltip title={memoria[index].name.short} placement={"top"}>
+              <Tooltip title={data[index].name.short} placement={"top"}>
                 <CardMedia sx={{ width: 100, height: 100 }}>
-                  <MemoriaImage name={memoria[index].name} preload={true} />
+                  <MemoriaImage name={data[index].name} preload={true} />
                 </CardMedia>
               </Tooltip>
               <CardContent>
@@ -937,7 +941,7 @@ function VirtualizedList() {
                     sx={{ display: "block" }}
                     color="text.primary"
                   >
-                    {Lenz.memoria.gvgSkill.name.get(memoria[index])}
+                    {Lenz.memoria.gvgSkill.name.get(data[index])}
                   </Typography>
                   <Divider sx={{ margin: 1 }} />
                   <Typography
@@ -947,13 +951,13 @@ function VirtualizedList() {
                     sx={{ display: "block" }}
                     color="text.primary"
                   >
-                    {Lenz.memoria.autoSkill.name.get(memoria[index])}
+                    {Lenz.memoria.autoSkill.name.get(data[index])}
                   </Typography>
                 </Stack>
               </CardContent>
               <IconButton sx={{ position: "absolute", right: 0 }}>
                 <Link
-                  href={`https://operations.mitama.io/data/memoria/${memoria[index].name.full}?type=${memoria[index].cardType}`}
+                  href={`https://operations.mitama.io/data/memoria/${data[index].name.full}?type=${data[index].cardType}`}
                   target={"_blank"}
                 >
                   <Launch />
@@ -1126,7 +1130,7 @@ function ToggleButtons() {
   );
 }
 
-function FilterModal() {
+function FilterModal({ signedIn }: { signedIn: boolean; }) {
   const [open, setOpen] = useState(false);
   const uniqueId = useId();
   const handleOpen = () => {
@@ -1148,7 +1152,7 @@ function FilterModal() {
           <Typography id={`modal-title-${uniqueId}`} variant="h6" component="h2">
             Filter
           </Typography>
-          <Filter />
+          <Filter signedIn={signedIn} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Close</Button>
@@ -1453,7 +1457,7 @@ function CalcSettings() {
   );
 }
 
-export function DeckBuilder({ index }: { index: number }) {
+export function DeckBuilder({ user }: { user: { id: string; name: string; } | undefined; }) {
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setCompare] = useAtom(compareModeAtom);
@@ -1488,7 +1492,7 @@ export function DeckBuilder({ index }: { index: number }) {
           <CalcSettings />
         </RibbonGroup>
         <RibbonGroup label={"Source"}>
-          <FilterModal />
+          <FilterModal signedIn={!!user} />
           <SearchModal />
           <SortMenu />
         </RibbonGroup>
@@ -1522,7 +1526,7 @@ export function DeckBuilder({ index }: { index: number }) {
           }}
         >
           <Suspense>
-            <UnitComponent index={index} />
+            <UnitComponent />
           </Suspense>
         </Grid>
         <Grid size={{ xs: 12, md: 12, lg: 4 }}>

@@ -28,7 +28,7 @@ function a11yProps(index: number) {
   };
 }
 
-export function DeckBuilderPage() {
+export function DeckBuilderPage({ user }: { user: { id: string; name: string; } | undefined; }) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
@@ -54,7 +54,7 @@ export function DeckBuilderPage() {
         </Tabs>
       </Box>
       <CustomTabPanel index={0} value={value} key={"untitled"}>
-        <DeckBuilder index={0} />
+        <DeckBuilder user={user} />
       </CustomTabPanel>
       <CustomTabPanel index={1} value={value} key={"calculator"}>
         <Calculator />

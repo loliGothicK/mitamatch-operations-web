@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { UserData } from "@/components/layout/client";
+import {UserData} from "@/types/user";
 
 const style = {
   position: "absolute",
