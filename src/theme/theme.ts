@@ -42,12 +42,12 @@ export const lightTheme: ThemeOptions = {
     success: {
       main: "#4caf50",
       light: "#80e27e", // 修正: lightは明るく
-      dark: "#087f23",  // 修正: darkは暗く
+      dark: "#087f23", // 修正: darkは暗く
     },
     error: {
       main: "#f44336",
       light: "#ff7961", // 修正: lightは明るく
-      dark: "#ba000d",  // 修正: darkは暗く
+      dark: "#ba000d", // 修正: darkは暗く
     },
   },
 };

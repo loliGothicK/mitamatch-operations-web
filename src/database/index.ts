@@ -2,14 +2,28 @@ import "server-only";
 
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
-import { decks, organization, organizationMembers, timelines, users } from "@/database/schema";
-import { eq, inArray } from "drizzle-orm";
+import {
+  decks,
+  memoria,
+  organization,
+  organizationMembers,
+  timelines,
+  users,
+  usersToMemoria,
+} from "@/database/schema";
+import { and, eq, inArray } from "drizzle-orm";
 import { User } from "@clerk/backend";
 import { Unit } from "@/domain/types";
 import { OrderWithPic } from "@/jotai/orderAtoms";
+import { sql } from "drizzle-orm";
 
-const sql = neon(process.env.POSTGRES_URL!);
-const db = drizzle({ client: sql });
+const db = drizzle({
+  client: neon(
+    process.env.NODE_ENV === "development"
+      ? process.env.POSTGRES_DEVELOP_BRANCH_URL!
+      : process.env.POSTGRES_URL!,
+  ),
+});
 
 export async function upsertUser(user: User) {
   if (!user) return undefined;
@@ -96,6 +110,42 @@ export async function getUserData(clerkUserId: string) {
     user,
     legions: legionsWithMembers,
   };
+}
+
+export async function getMemoriaByUserId(userId: string) {
+  return db
+    .select({
+      id: memoria.id,
+      name: memoria.name,
+      limitBreak: usersToMemoria.limitBreak,
+    })
+    .from(usersToMemoria)
+    .where(eq(usersToMemoria.userId, userId))
+    .innerJoin(memoria, eq(usersToMemoria.memoriaId, memoria.id));
+}
+
+export async function upsertMemoria(userId: string, targets: { id: string; limitBreak: number }[]) {
+  if (targets.length === 0) return;
+
+  return db
+    .insert(usersToMemoria)
+    .values(targets.map(({ id, limitBreak }) => ({ userId, memoriaId: id, limitBreak })))
+    .onConflictDoUpdate({
+      target: [usersToMemoria.userId, usersToMemoria.memoriaId],
+      set: {
+        limitBreak: sql`excluded.limit_break`,
+      },
+    });
+}
+
+export async function deleteMemoria(userId: string, targets: { id: string; limitBreak: number }[]) {
+  if (targets.length === 0) return;
+
+  const targetIds = targets.map((t) => t.id);
+
+  return db
+    .delete(usersToMemoria)
+    .where(and(eq(usersToMemoria.userId, userId), inArray(usersToMemoria.memoriaId, targetIds)));
 }
 
 export async function getDecksByClerkUserId(clerkUserId: string) {

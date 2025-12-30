@@ -8,8 +8,7 @@ import { neon } from "@neondatabase/serverless";
 import { sql } from "drizzle-orm";
 
 // 1. Neon接続
-const queryFn = neon(process.env.POSTGRES_URL!);
-const db = drizzle(queryFn);
+const db = drizzle(neon(process.env.POSTGRES_URL!));
 
 // 2. 入力JSONの検証スキーマ（加工前の形）
 const memoriaColumnSchema = z.object({

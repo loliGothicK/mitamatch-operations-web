@@ -212,7 +212,6 @@ function TimelineItem({ order }: { order: ComputedOrder }) {
             color: "rgba(255, 50, 50, 0.9)",
             bgcolor: "rgba(0, 0, 0, 0.05)",
           }}
-          aria-label={`remove ${order.name}`}
           onClick={() => {
             // remove order from timeline
             setTimeline((prev) => {
@@ -230,7 +229,6 @@ function TimelineItem({ order }: { order: ComputedOrder }) {
             color: "secondary",
             bgcolor: "rgba(0, 0, 0, 0.05)",
           }}
-          aria-label={`remove ${order.name}`}
           onClick={handleClickOpen}
         >
           <Edit />

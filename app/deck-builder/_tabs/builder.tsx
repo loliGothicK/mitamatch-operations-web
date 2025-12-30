@@ -9,7 +9,8 @@ import {
   SetStateAction,
   Suspense,
   useCallback,
-  useId, useMemo,
+  useId,
+  useMemo,
   useState,
 } from "react";
 import DifferenceIcon from "@mui/icons-material/Difference";
@@ -162,7 +163,7 @@ function Icon({
     .exhaustive();
 }
 
-function ConcentrationIcon({
+export function ConcentrationIcon({
   concentration,
   handleConcentration,
 }: {
@@ -208,13 +209,16 @@ function ConcentrationIcon({
 function MemoriaImage({
   name,
   ...option
-}: { name: string } & StrictOmit<ImageProps, "src" | "alt" | "width" | "height" | "onError">) {
-  const [imageSource, setImageSource] = useState(`/memoria/${name}.png`);
+}: { name: Memoria["name"] } & StrictOmit<
+  ImageProps,
+  "src" | "alt" | "width" | "height" | "onError"
+>) {
+  const [imageSource, setImageSource] = useState(`/memoria/${name.short}.png`);
 
   return (
     <Image
       src={imageSource}
-      alt={name}
+      alt={name.full}
       width={100}
       height={100}
       onError={() => {
@@ -298,7 +302,7 @@ function MemoriaItem({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? Number.POSITIVE_INFINITY : "auto",
+    zIndex: isDragging ? 100 : "auto",
   };
 
   const skeleton = (w: number, h: number) => `
@@ -362,7 +366,7 @@ function MemoriaItem({
               arrow
             >
               <MemoriaImage
-                name={memoria.name.short}
+                name={memoria.name}
                 placeholder={"blur"}
                 blurDataURL={toBase64(skeleton(100, 100))}
                 onContextMenu={onContextMenu ? undefined : handleContextMenu}
@@ -921,7 +925,7 @@ function VirtualizedList() {
               />
               <Tooltip title={memoria[index].name.short} placement={"top"}>
                 <CardMedia sx={{ width: 100, height: 100 }}>
-                  <MemoriaImage name={memoria[index].name.short} />
+                  <MemoriaImage name={memoria[index].name} preload={true} />
                 </CardMedia>
               </Tooltip>
               <CardContent>
@@ -1238,11 +1242,14 @@ function DiffModal() {
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const uniqueId = useId();
-  const current = useMemo(() => ({
-    sw,
-    deck,
-    legendaryDeck,
-  }), [sw, deck, legendaryDeck]);
+  const current = useMemo(
+    () => ({
+      sw,
+      deck,
+      legendaryDeck,
+    }),
+    [sw, deck, legendaryDeck],
+  );
 
   const handleOpen = () => {
     setOpen(true);

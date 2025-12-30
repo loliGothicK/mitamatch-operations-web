@@ -42,8 +42,7 @@ import { darkTheme, lightTheme } from "@/theme/theme";
 import Link from "@/components/link";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { mainListItems, userListItems } from "@/components/home/listItems";
-import User from "@/components/clerk/User";
-import { getUserData } from "@/database";
+import { default as ClerkUser } from "@/components/clerk/User";
 import Paper from "@mui/material/Paper";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -52,6 +51,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Decks } from "@/components/project/Decks";
 import { SimpleTreeView } from "@mui/x-tree-view";
 import { Timelines } from "@/components/project/Timelines";
+import type { UserData, Legion, User } from "@/types/user";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -194,10 +194,6 @@ const IconSelectWithAction = <T,>({
     </>
   );
 };
-
-export type UserData = Awaited<ReturnType<typeof getUserData>>;
-export type Legion = UserData["legions"][number];
-export type User = UserData["user"];
 
 const FireNav = styled(List)<{ component?: ElementType }>({
   "& .MuiListItemButton-root": {
@@ -354,14 +350,17 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
             <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
               {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
             </IconButton>
-            <User />
+            <ClerkUser />
           </Toolbar>
         </AppBar>
         <Box
           sx={{
             flexGrow: 1, // AppBar 以外の高さを全部使う
             display: "grid",
-            gridTemplateColumns: userData && pathname.endsWith("builder") ? "210px minmax(0, 1fr)" : "54px minmax(0, 1fr)", // ここで横分割
+            gridTemplateColumns:
+              userData && pathname.endsWith("builder")
+                ? "210px minmax(0, 1fr)"
+                : "54px minmax(0, 1fr)", // ここで横分割
             overflow: "hidden", // 内部スクロールのために必要
           }}
         >

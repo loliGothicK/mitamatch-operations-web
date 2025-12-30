@@ -11,6 +11,9 @@ import { sequenceS } from "fp-ts/Apply";
 import { type Legendary, parseLegendary } from "@/parser/legendary";
 import { outdent } from "outdent";
 import { match } from "ts-pattern";
+import { intoGroupMap } from "@/functional/intoGroupMap";
+import { pipe } from "fp-ts/function";
+import { map } from "fp-ts/lib/Map";
 
 const statusSchema = z.tuple([z.number(), z.number(), z.number(), z.number()]);
 const PassiveSkillSchema = z.object({
@@ -160,3 +163,20 @@ export const memoriaList: Memoria[] = memoriaData.data
       },
     };
   });
+
+export type UniqueMemoria = {
+  id: Memoria["uniqueId"];
+  name: Memoria["name"];
+  cards: [Memoria, ...Memoria[]];
+};
+
+export const uniqueMemoriaList = pipe(
+  intoGroupMap((memoria: Memoria) => memoria.uniqueId)(memoriaList.toReversed()),
+  map((list) => {
+    return {
+      id: list[0].uniqueId,
+      name: list[0].name,
+      cards: list,
+    };
+  }),
+);

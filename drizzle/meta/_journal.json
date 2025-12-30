@@ -43,6 +43,13 @@
       "when": 1766063764234,
       "tag": "0005_ordinary_the_stranger",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1767068208127,
+      "tag": "0006_green_mentallo",
+      "breakpoints": true
     }
   ]
 }

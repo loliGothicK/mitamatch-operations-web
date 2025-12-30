@@ -95,7 +95,9 @@ export const decks = pgTable("deck", {
   title: varchar("title", { length: 255 }).notNull().default("no title"),
   short: ulid("short").unique(),
   unit: jsonb("unit").$type<Unit>().notNull(),
-  createdAt: timestamp({ precision: 3, mode: "string" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+  createdAt: timestamp({ precision: 3, mode: "string" })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
   updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
 });
 
@@ -110,7 +112,9 @@ export const timelines = pgTable("timeline", {
   title: varchar("title", { length: 255 }).notNull().default("no title"),
   short: ulid("short").unique(),
   timeline: jsonb().$type<{ timeline: OrderWithPic[] }>().notNull(),
-  createdAt: timestamp({ precision: 3, mode: "string" }).default(sql`CURRENT_TIMESTAMP`).notNull(),
+  createdAt: timestamp({ precision: 3, mode: "string" })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
   updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
 });
 
@@ -157,8 +161,8 @@ export const order = pgTable("order", {
   name: varchar("name", { length: 255 }).notNull(),
 });
 
-export const ordersToMemoria = pgTable(
-  "orders_to_memoria",
+export const usersToOrder = pgTable(
+  "users_to_order",
   {
     // 外部キー 1: users.id を参照 (ユーザーが削除されたら、所持情報も削除)
     userId: ulid("user_id")
@@ -172,7 +176,7 @@ export const ordersToMemoria = pgTable(
   },
   (table) => {
     return {
-      // 複合主キー: userIdとmemoriaIdの組み合わせを一意にする
+      // 複合主キー: userIdとorderIdの組み合わせを一意にする
       pk: primaryKey({ columns: [table.userId, table.orderId] }),
     };
   },

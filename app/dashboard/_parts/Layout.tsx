@@ -1,9 +1,9 @@
 "use client";
 
-import { DeckBuilder } from "@/deck-builder/_tabs/builder";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { ReactNode, SyntheticEvent, useState } from "react";
-import { Calculator } from "@/deck-builder/_tabs/calculator";
+import { User } from "@/types/user";
+import { Memoria } from "@/dashboard/_parts/Memoria";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -28,8 +28,8 @@ function a11yProps(index: number) {
   };
 }
 
-export function DeckBuilderPage() {
-  const [value, setValue] = useState(0);
+export function Dashboard({ user }: { user: User }) {
+  const [value, setValue] = useState(1);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(() => newValue);
@@ -44,20 +44,19 @@ export function DeckBuilderPage() {
     >
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab key={"builder"} label={"Builder"} {...a11yProps(0)} />
-          <Tab
-            key={"calculator"}
-            label={"Calculator"}
-            {...a11yProps(1)}
-            sx={{ marginLeft: "auto" }}
-          />
+          <Tab key={"overview"} label={"overview"} {...a11yProps(0)} />
+          <Tab key={"memoria"} label={"memoria"} {...a11yProps(1)} />
         </Tabs>
       </Box>
-      <CustomTabPanel index={0} value={value} key={"untitled"}>
-        <DeckBuilder index={0} />
+      <CustomTabPanel index={0} value={value} key={"overview"}>
+        <Typography variant="h6" component="div">
+          {"Overview"}
+        </Typography>
       </CustomTabPanel>
-      <CustomTabPanel index={1} value={value} key={"calculator"}>
-        <Calculator />
+      <CustomTabPanel index={1} value={value} key={"memoria"}>
+        <Typography variant="h6" component="div">
+          <Memoria user={user} />
+        </Typography>
       </CustomTabPanel>
     </Box>
   );

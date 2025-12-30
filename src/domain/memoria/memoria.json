@@ -9631,66 +9631,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB5YKGQGXS2342ZSV10K9B",
-      "uniqueId": "01KCH7YTN0T8MGAAQ7KESEA4CG",
-      "name": "蒼き月の御使い",
-      "cardType": 4,
-      "attribute": 2,
-      "status": [
-        [1609, 1856, 1592, 1877],
-        [1746, 2016, 1729, 2187],
-        [1882, 2327, 1865, 2348],
-        [2019, 2487, 2002, 2808],
-        [2156, 3448, 2139, 2969]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "スマッシュD LG",
-        "description": "敵2体に特殊大ダメージを与える。",
-        "sp": 24
-      },
-      "gvgSkill": {
-        "name": "スマッシュD LG",
-        "description": "敵2体に特殊大ダメージを与える。",
-        "sp": 24
-      },
-      "autoSkill": {
-        "name": "攻:Sp.パワーUP Ⅱ",
-        "description": "前衛から攻撃時、一定確率で自身のSp.ATKを大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB5YKGQGXS2342ZSV10K9B",
-      "uniqueId": "01KCH7YTN0T8MGAAQ7KESEA4CG",
-      "name": "蒼き月の御使い",
-      "cardType": 4,
-      "attribute": 2,
-      "status": [
-        [3098, 3622, 3082, 3632],
-        [3423, 4004, 3407, 4164],
-        [3749, 4537, 3733, 4547],
-        [4075, 4919, 4059, 5229],
-        [4401, 6102, 4385, 5612]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "Sp.パワースマッシュD LG",
-        "description": "敵2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "Sp.パワースマッシュD LG",
-        "description": "敵2体に特殊大ダメージを与え、自身のSp.ATKをアップさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP/Sp.パワーUP Ⅴ",
-        "description": "前衛から攻撃時、一定確率で自身のSp.ATKを極大アップさせる。さらに、攻撃ダメージを極大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB60J0GASJEN3Z04V8DE0J",
       "uniqueId": "01KCH7YVM8XC90E1NK5T4J58HS",
       "name": "プランセス",
@@ -9717,36 +9657,6 @@
       "autoSkill": {
         "name": "攻:パワーUP Ⅱ",
         "description": "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB60J0GASJEN3Z04V8DE0J",
-      "uniqueId": "01KCH7YVM8XC90E1NK5T4J58HS",
-      "name": "プランセス",
-      "cardType": 2,
-      "attribute": 3,
-      "status": [
-        [2333, 1979, 2330, 1994],
-        [2550, 2164, 2697, 2179],
-        [2917, 2349, 2914, 2364],
-        [3134, 2534, 3431, 2549],
-        [4152, 2719, 3649, 2734]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "ストライクD LG",
-        "description": "敵2体に通常大ダメージを与える。",
-        "sp": 24
-      },
-      "gvgSkill": {
-        "name": "ストライクD LG",
-        "description": "敵2体に通常大ダメージを与える。",
-        "sp": 24
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP/パワーUP Ⅲ",
-        "description": "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
       },
       "labels": ["Legendary"]
     },
@@ -9781,66 +9691,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB63FRP2JVN9C9DX9NPMMZ",
-      "uniqueId": "01KCH7YWKGFS0P79QEM4BBRA5Q",
-      "name": "獅子奮迅",
-      "cardType": 5,
-      "attribute": 1,
-      "status": [
-        [1585, 1579, 1836, 1868],
-        [1719, 1713, 2144, 2026],
-        [1853, 1847, 2301, 2333],
-        [1987, 1981, 2758, 2490],
-        [2121, 2115, 2916, 3448]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "WガードアシストD LG",
-        "description": "味方2体のDEFとSp.DEFを大アップさせる。",
-        "sp": 24
-      },
-      "gvgSkill": {
-        "name": "WガードアシストD LG",
-        "description": "味方2体のDEFとSp.DEFを大アップさせる。",
-        "sp": 24
-      },
-      "autoSkill": {
-        "name": "援:Sp.ガードUP Ⅱ",
-        "description": "支援/妨害時、一定確率で味方前衛1体のSp.DEFを大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB63FRP2JVN9C9DX9NPMMZ",
-      "uniqueId": "01KCH7YWKGFS0P79QEM4BBRA5Q",
-      "name": "獅子奮迅",
-      "cardType": 5,
-      "attribute": 1,
-      "status": [
-        [3075, 3071, 3644, 3632],
-        [3400, 3396, 4176, 4014],
-        [3726, 3722, 4559, 4547],
-        [4052, 4048, 5241, 4929],
-        [4378, 4374, 5624, 6112]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "WガードアシストE LG",
-        "description": "味方2～3体のDEFとSp.DEFを大アップさせる。",
-        "sp": 30
-      },
-      "gvgSkill": {
-        "name": "WガードアシストE LG",
-        "description": "味方2～3体のDEFとSp.DEFを大アップさせる。",
-        "sp": 30
-      },
-      "autoSkill": {
-        "name": "援:支援UP/Sp.ガードUP Ⅴ",
-        "description": "支援/妨害時、一定確率で味方前衛1体のSp.DEFを極大アップさせる。さらに、支援/妨害効果を極大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB65E8KAM7YT1DWZ9XCK8J",
       "uniqueId": "01KCH7YXJRCYPXAYB42XYFP33E",
       "name": "誠実なる守護者",
@@ -9867,36 +9717,6 @@
       "autoSkill": {
         "name": "攻:パワーUP Ⅱ",
         "description": "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB65E8KAM7YT1DWZ9XCK8J",
-      "uniqueId": "01KCH7YXJRCYPXAYB42XYFP33E",
-      "name": "誠実なる守護者",
-      "cardType": 1,
-      "attribute": 2,
-      "status": [
-        [2336, 1990, 2315, 1976],
-        [2553, 2175, 2682, 2161],
-        [2920, 2360, 2899, 2346],
-        [3137, 2545, 3416, 2531],
-        [4155, 2730, 3634, 2716]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "パワーストライクA LG",
-        "description": "敵1体に通常超特大ダメージを与え、自身のATKをアップさせる。",
-        "sp": 18
-      },
-      "gvgSkill": {
-        "name": "パワーストライクA LG",
-        "description": "敵1体に通常超特大ダメージを与え、自身のATKをアップさせる。",
-        "sp": 18
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP/パワーUP Ⅲ",
-        "description": "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
       },
       "labels": ["Legendary"]
     },
@@ -9931,66 +9751,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB68C0W2WRWGX1PV23GT90",
-      "uniqueId": "01KCH7YYJ06W6NBGW506Y9AXMJ",
-      "name": "神の子",
-      "cardType": 7,
-      "attribute": 3,
-      "status": [
-        [1606, 1600, 1861, 1893],
-        [1743, 1737, 2021, 2203],
-        [1879, 1873, 2332, 2364],
-        [2016, 2010, 2492, 2824],
-        [2153, 2147, 3453, 2985]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "ヒールE LG",
-        "description": "味方2～3体のHPを回復する。",
-        "sp": 22
-      },
-      "gvgSkill": {
-        "name": "ヒールE LG",
-        "description": "味方2～3体のHPを回復する。",
-        "sp": 22
-      },
-      "autoSkill": {
-        "name": "回:ガードUP Ⅱ",
-        "description": "HP回復時、一定確率で味方前衛1体のDEFを大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB68C0W2WRWGX1PV23GT90",
-      "uniqueId": "01KCH7YYJ06W6NBGW506Y9AXMJ",
-      "name": "神の子",
-      "cardType": 7,
-      "attribute": 3,
-      "status": [
-        [3075, 3071, 3644, 3632],
-        [3400, 3396, 4026, 4164],
-        [3726, 3722, 4559, 4547],
-        [4052, 4048, 4941, 5229],
-        [4378, 4374, 6124, 5612]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "ヒールE LG",
-        "description": "味方2～3体のHPを回復する。",
-        "sp": 22
-      },
-      "gvgSkill": {
-        "name": "リカバーヒールE LG",
-        "description": "味方2～3体のHPを回復する。さらに自身のMPを60回復する。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "回:回復UP/ガードUP V",
-        "description": "HP回復時、一定確率で味方前衛1体のDEFを極大アップさせる。さらに、HPの回復量を極大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB6AAG8CF4V25YJKYSAWPB",
       "uniqueId": "01KCH7YZH8E9PA4VAJX6MJ6PRS",
       "name": "リトル・アークメイジ",
@@ -10021,36 +9781,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB6AAG8CF4V25YJKYSAWPB",
-      "uniqueId": "01KCH7YZH8E9PA4VAJX6MJ6PRS",
-      "name": "リトル・アークメイジ",
-      "cardType": 6,
-      "attribute": 2,
-      "status": [
-        [1965, 1994, 2307, 2305],
-        [2150, 2179, 2524, 2672],
-        [2335, 2364, 2891, 2889],
-        [2520, 2549, 3108, 3406],
-        [2705, 2734, 4126, 3624]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "WガードフォールD LG",
-        "description": "敵2体のDEFとSp.DEFを大ダウンさせる。",
-        "sp": 24
-      },
-      "gvgSkill": {
-        "name": "WガードフォールD LG",
-        "description": "敵2体のDEFとSp.DEFを大ダウンさせる。",
-        "sp": 24
-      },
-      "autoSkill": {
-        "name": "援:支援UP/ガードDOWN Ⅲ",
-        "description": "支援/妨害時、一定確率で敵前衛1体のDEFを特大ダウンさせる。さらに、支援/妨害効果を特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB6D88GP2RXNCPX02QCFAD",
       "uniqueId": "01KCH7Z0GGA7VPD7F9NZXG6XRF",
       "name": "指先と白いペン",
@@ -10092,66 +9822,6 @@
         [1211, 809, 1201, 844],
         [1266, 856, 1756, 891],
         [2422, 904, 1812, 939]
-      ],
-      "cost": 17,
-      "questSkill": {
-        "name": "ヒールD Ⅲ",
-        "description": "味方2体のHPを回復する。",
-        "sp": 18
-      },
-      "gvgSkill": {
-        "name": "ヒールD Ⅲ",
-        "description": "味方2体のHPを回復する。",
-        "sp": 18
-      },
-      "autoSkill": {
-        "name": "回:パワーUP Ⅱ",
-        "description": "HP回復時、一定確率で味方前衛1体のATKを大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB6D88GP2RXNCPX02QCFAD",
-      "uniqueId": "01KCH7Z0GGA7VPD7F9NZXG6XRF",
-      "name": "指先と白いペン",
-      "cardType": 2,
-      "attribute": 1,
-      "status": [
-        [1578, 1348, 1551, 1355],
-        [1693, 1447, 1916, 1454],
-        [2059, 1545, 2032, 1552],
-        [2175, 1644, 2648, 1651],
-        [3391, 1743, 2764, 1750]
-      ],
-      "cost": 17,
-      "questSkill": {
-        "name": "パワーストライクB Ⅲ",
-        "description": "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "パワーストライクB Ⅲ",
-        "description": "敵1～2体に通常大ダメージを与え、自身のATKをアップさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "攻:パワーUP Ⅱ",
-        "description": "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB6E7GTF2WZZ4ZXA4GWPKP",
-      "uniqueId": "01KCH7Z0GGA7VPD7F9NZXG6XRF",
-      "name": "指先と白いペン",
-      "cardType": 7,
-      "attribute": 1,
-      "status": [
-        [1578, 1348, 1551, 1355],
-        [1693, 1447, 1916, 1454],
-        [2059, 1545, 2032, 1552],
-        [2175, 1644, 2648, 1651],
-        [3391, 1743, 2764, 1750]
       ],
       "cost": 17,
       "questSkill": {
@@ -10201,36 +9871,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB6G60ZXQQ7FEVY34F09MW",
-      "uniqueId": "01KCH7Z1FRE46N089P2HYVK8KT",
-      "name": "戦場のコンダクター",
-      "cardType": 3,
-      "attribute": 1,
-      "status": [
-        [1996, 2337, 1996, 2308],
-        [2181, 2554, 2181, 2675],
-        [2366, 2921, 2366, 2892],
-        [2551, 3138, 2551, 3409],
-        [2736, 4156, 2736, 3627]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "Sp.パワースマッシュA LG",
-        "description": "敵1体に特殊超特大ダメージを与え、自身のSp.ATKをアップさせる。",
-        "sp": 18
-      },
-      "gvgSkill": {
-        "name": "Sp.パワースマッシュA LG",
-        "description": "敵1体に特殊超特大ダメージを与え、自身のSp.ATKをアップさせる。",
-        "sp": 18
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP/Sp.パワーUP Ⅲ",
-        "description": "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。さらに、攻撃ダメージを特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB6K3RH2KGCJWGMGAAF72E",
       "uniqueId": "01KCH7Z2F0W3JA0VQNYM04J0QH",
       "name": "猪突猛進！",
@@ -10257,66 +9897,6 @@
       "autoSkill": {
         "name": "攻:パワーUP Ⅱ",
         "description": "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB6K3RH2KGCJWGMGAAF72E",
-      "uniqueId": "01KCH7Z2F0W3JA0VQNYM04J0QH",
-      "name": "猪突猛進！",
-      "cardType": 2,
-      "attribute": 1,
-      "status": [
-        [1872, 1590, 1855, 1609],
-        [2032, 1727, 2165, 1746],
-        [2343, 1863, 2326, 1882],
-        [2503, 2000, 2786, 2019],
-        [3464, 2137, 2947, 2156]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "ストライクD LG",
-        "description": "敵2体に通常大ダメージを与える。",
-        "sp": 24
-      },
-      "gvgSkill": {
-        "name": "ストライクD LG",
-        "description": "敵2体に通常大ダメージを与える。",
-        "sp": 24
-      },
-      "autoSkill": {
-        "name": "攻:パワーUP Ⅱ",
-        "description": "前衛から攻撃時、一定確率で自身のATKを大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB6K3RH2KGCJWGMGAAF72E",
-      "uniqueId": "01KCH7Z2F0W3JA0VQNYM04J0QH",
-      "name": "猪突猛進！",
-      "cardType": 2,
-      "attribute": 1,
-      "status": [
-        [3631, 3098, 3624, 3109],
-        [4013, 3423, 4156, 3434],
-        [4546, 3749, 4539, 3760],
-        [4928, 4075, 5221, 4086],
-        [6111, 4401, 5604, 4412]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "パワーストライクD LG",
-        "description": "敵2体に通常大ダメージを与え、自身のATKをアップさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "パワーストライクD LG",
-        "description": "敵2体に通常大ダメージを与え、自身のATKをアップさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP/パワーUP Ⅴ",
-        "description": "前衛から攻撃時、一定確率で自身のATKを極大アップさせる。さらに、攻撃ダメージを極大アップさせる。"
       },
       "labels": ["Legendary"]
     },
@@ -10351,36 +9931,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB6N288K3SEG6KSN4Z8H2Z",
-      "uniqueId": "01KCH7Z3E8006VW6G3BJ0YZKRX",
-      "name": "ワンマンアーミー",
-      "cardType": 5,
-      "attribute": 3,
-      "status": [
-        [2308, 1992, 2308, 1977],
-        [2525, 2327, 2525, 2162],
-        [2892, 2512, 2742, 2347],
-        [3109, 2997, 2959, 2532],
-        [4127, 3182, 3177, 2717]
-      ],
-      "cost": 18,
-      "questSkill": {
-        "name": "WパワーアシストD LG",
-        "description": "味方2体のATKとSp.ATKを大アップさせる。",
-        "sp": 24
-      },
-      "gvgSkill": {
-        "name": "WパワーアシストD LG",
-        "description": "味方2体のATKとSp.ATKを大アップさせる。",
-        "sp": 24
-      },
-      "autoSkill": {
-        "name": "援:支援UP/パワーUP Ⅲ",
-        "description": "支援/妨害時、一定確率で味方前衛1体のATKを特大アップさせる。さらに、支援/妨害効果を特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB6R00NXV2RS0RZ0BFCXF3",
       "uniqueId": "01KCH7Z4DGYRS43H5VQX15X0ZS",
       "name": "フラガラッハの光",
@@ -10407,66 +9957,6 @@
       "autoSkill": {
         "name": "回:回復UP/副援:支援UP Ⅱ",
         "description": "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB6R00NXV2RS0RZ0BFCXF3",
-      "uniqueId": "01KCH7Z4DGYRS43H5VQX15X0ZS",
-      "name": "フラガラッハの光",
-      "cardType": 7,
-      "attribute": 4,
-      "status": [
-        [2002, 2009, 2355, 2359],
-        [2179, 2186, 2713, 2567],
-        [2356, 2363, 2921, 2925],
-        [2533, 2540, 3279, 3283],
-        [2711, 2718, 3888, 3892]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "WガードヒールE LG",
-        "description": "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "WガードヒールE LG",
-        "description": "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "回:回復UP/副援:支援UP Ⅱ",
-        "description": "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB6R00NXV2RS0RZ0BFCXF3",
-      "uniqueId": "01KCH7Z4DGYRS43H5VQX15X0ZS",
-      "name": "フラガラッハの光",
-      "cardType": 7,
-      "attribute": 4,
-      "status": [
-        [4647, 4633, 5431, 5444],
-        [5157, 5143, 6179, 6042],
-        [5666, 5652, 6777, 6790],
-        [6175, 6161, 7525, 7538],
-        [6685, 6671, 8523, 8536]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "WガードヒールE LG+",
-        "description": "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFをアップする。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "WガードヒールE LG+",
-        "description": "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFをアップする。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "回:回復UP/副援:支援UP Ⅴ",
-        "description": "HP回復時、一定確率でHPの回復量を極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
       },
       "labels": ["Legendary"]
     },
@@ -10501,36 +9991,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB6SYG40JFPD8NFT02E3KQ",
-      "uniqueId": "01KCH7Z5CR76E9SCSJDBYPJAS2",
-      "name": "猛る獅子の剣",
-      "cardType": 2,
-      "attribute": 5,
-      "status": [
-        [3071, 2599, 3051, 2621],
-        [3368, 2852, 3498, 2874],
-        [3814, 3104, 3794, 3126],
-        [4111, 3357, 4391, 3379],
-        [5208, 3610, 4688, 3632]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "ガードブレイクD LG",
-        "description": "敵2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "ガードブレイクD LG",
-        "description": "敵2体に通常大ダメージを与え、敵のDEFをダウンさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP/ガードDOWN Ⅲ",
-        "description": "攻撃時、一定確率で敵のDEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB6WW8FQXH6VCRY6YTCCYC",
       "uniqueId": "01KCH7Z6C0XW6AS3HKMR4YZQJ4",
       "name": "ナイトガンスリンガー",
@@ -10557,66 +10017,6 @@
       "autoSkill": {
         "name": "攻:ダメージUP Ⅲ",
         "description": "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB6WW8FQXH6VCRY6YTCCYC",
-      "uniqueId": "01KCH7Z6C0XW6AS3HKMR4YZQJ4",
-      "name": "ナイトガンスリンガー",
-      "cardType": 4,
-      "attribute": 4,
-      "status": [
-        [1994, 2373, 2003, 2371],
-        [2171, 2581, 2180, 2729],
-        [2348, 2939, 2357, 2937],
-        [2525, 3147, 2534, 3445],
-        [2703, 4156, 2712, 3654]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "Sp.ガードバーストD LG",
-        "description": "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "Sp.ガードバーストD LG",
-        "description": "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP Ⅲ",
-        "description": "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB6WW8FQXH6VCRY6YTCCYC",
-      "uniqueId": "01KCH7Z6C0XW6AS3HKMR4YZQJ4",
-      "name": "ナイトガンスリンガー",
-      "cardType": 4,
-      "attribute": 4,
-      "status": [
-        [4636, 5432, 4622, 5429],
-        [5146, 6030, 5132, 6177],
-        [5655, 6778, 5641, 6775],
-        [6164, 7376, 6150, 7673],
-        [6674, 8774, 6660, 8271]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "Sp.マイトバーストD LG+",
-        "description": "敵2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "Sp.マイトバーストD LG+",
-        "description": "敵2体に特殊大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP/Sp.ガードDOWN Ⅴ",
-        "description": "攻撃時、一定確率で敵のSp.DEFを極大ダウンさせる。さらに、攻撃ダメージを極大アップさせる。"
       },
       "labels": ["Legendary"]
     },
@@ -10651,36 +10051,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB6YTRRS62FY6HJR02GV4Q",
-      "uniqueId": "01KCH7Z7B8DE7TS4AR1VS2PCAD",
-      "name": "月夜に吠える天狼",
-      "cardType": 6,
-      "attribute": 3,
-      "status": [
-        [3074, 3074, 2606, 2591],
-        [3371, 3521, 2859, 2844],
-        [3817, 3817, 3111, 3096],
-        [4114, 4414, 3364, 3349],
-        [5211, 4711, 3617, 3602]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "WパワーフォールE LG",
-        "description": "敵2～3体のATKとSp.ATKを大ダウンさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "WパワーフォールE LG",
-        "description": "敵2～3体のATKとSp.ATKを大ダウンさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "援:支援UP/パワーDOWN Ⅲ",
-        "description": "支援/妨害時、一定確率で敵前衛1体のATKを特大ダウンさせる。さらに、支援/妨害効果を特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB71RGZH5PN48ETBHXSQST",
       "uniqueId": "01KCH7Z8AG4NVJVZ7AR9T6YZXY",
       "name": "聞こえし者",
@@ -10707,66 +10077,6 @@
       "autoSkill": {
         "name": "攻:ダメージUP Ⅲ",
         "description": "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB71RGZH5PN48ETBHXSQST",
-      "uniqueId": "01KCH7Z8AG4NVJVZ7AR9T6YZXY",
-      "name": "聞こえし者",
-      "cardType": 1,
-      "attribute": 3,
-      "status": [
-        [2368, 2013, 2345, 2028],
-        [2726, 2190, 2553, 2205],
-        [3084, 2367, 2761, 2382],
-        [3592, 2544, 2969, 2559],
-        [4601, 2722, 3178, 2737]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "パワーストライクA LG+",
-        "description": "敵1体に通常超特大ダメージを与え、自身のATKを大アップさせる。",
-        "sp": 20
-      },
-      "gvgSkill": {
-        "name": "パワーストライクA LG+",
-        "description": "敵1体に通常超特大ダメージを与え、自身のATKを大アップさせる。",
-        "sp": 20
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP Ⅲ",
-        "description": "攻撃時、一定確率で攻撃ダメージを特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB71RGZH5PN48ETBHXSQST",
-      "uniqueId": "01KCH7Z8AG4NVJVZ7AR9T6YZXY",
-      "name": "聞こえし者",
-      "cardType": 1,
-      "attribute": 3,
-      "status": [
-        [5423, 4613, 5455, 4637],
-        [6171, 5123, 6053, 5147],
-        [6919, 5632, 6651, 5656],
-        [7817, 6141, 7249, 6165],
-        [9215, 6651, 7847, 6675]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "マイトストライクA LG+",
-        "description": "敵1体に通常超特大ダメージを与え、自身のATKとDEFを大アップさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "マイトストライクA LG+",
-        "description": "敵1体に通常超特大ダメージを与え、自身のATKとDEFを大アップさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP/パワーUP Ⅴ",
-        "description": "前衛から攻撃時、一定確率で自身のATKを極大アップさせる。さらに、攻撃ダメージを極大アップさせる。"
       },
       "labels": ["Legendary"]
     },
@@ -10801,36 +10111,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB73Q0DJVMSY1ZZQZ999C5",
-      "uniqueId": "01KCH7Z99RA3YWG4KM27HXV23W",
-      "name": "堅固なる守り",
-      "cardType": 5,
-      "attribute": 1,
-      "status": [
-        [2591, 2620, 3042, 3040],
-        [2844, 2873, 3489, 3337],
-        [3096, 3125, 3785, 3783],
-        [3349, 3378, 4232, 4230],
-        [3602, 3631, 4929, 4927]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "WガードアシストE LG",
-        "description": "味方2～3体のDEFとSp.DEFを大アップさせる。",
-        "sp": 30
-      },
-      "gvgSkill": {
-        "name": "WガードアシストE LG",
-        "description": "味方2～3体のDEFとSp.DEFを大アップさせる。",
-        "sp": 30
-      },
-      "autoSkill": {
-        "name": "援:支援UP/ガードUP Ⅲ",
-        "description": "支援/妨害時、一定確率で味方前衛1体のDEFを特大アップさせる。さらに、支援/妨害効果を特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB75NGZV815K8ASR0CB7TF",
       "uniqueId": "01KCH7ZA905TB659NTEM4E21D3",
       "name": "つきしーMAX!!",
@@ -10857,66 +10137,6 @@
       "autoSkill": {
         "name": "回:回復UP/副援:支援UP Ⅱ",
         "description": "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB75NGZV815K8ASR0CB7TF",
-      "uniqueId": "01KCH7ZA905TB659NTEM4E21D3",
-      "name": "つきしーMAX!!",
-      "cardType": 7,
-      "attribute": 2,
-      "status": [
-        [2018, 2010, 2340, 2366],
-        [2195, 2187, 2698, 2574],
-        [2372, 2364, 2906, 2932],
-        [2549, 2541, 3264, 3290],
-        [2727, 2719, 3873, 3899]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "WガードヒールE LG",
-        "description": "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "WガードヒールE LG",
-        "description": "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFを小アップする。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "回:回復UP/副援:支援UP Ⅱ",
-        "description": "HP回復時、一定確率でHPの回復量を大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果をアップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB75NGZV815K8ASR0CB7TF",
-      "uniqueId": "01KCH7ZA905TB659NTEM4E21D3",
-      "name": "つきしーMAX!!",
-      "cardType": 7,
-      "attribute": 2,
-      "status": [
-        [4637, 4629, 5423, 5446],
-        [5147, 5139, 6171, 6044],
-        [5656, 5648, 6769, 6792],
-        [6165, 6157, 7517, 7540],
-        [6675, 6667, 8515, 8538]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "WガードヒールE LG+",
-        "description": "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFをアップする。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "WガードヒールE LG+",
-        "description": "味方2～3体のHPを回復する。さらに味方のDEFとSp.DEFをアップする。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "回:回復UP/副援:支援UP Ⅴ",
-        "description": "HP回復時、一定確率でHPの回復量を極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を超特大アップさせる。"
       },
       "labels": ["Legendary"]
     },
@@ -10951,36 +10171,6 @@
       "labels": ["Legendary"]
     },
     {
-      "id": "01KBQB77M08TDANK1GA7HW6TZZ",
-      "uniqueId": "01KCH7ZB88DANWJEDBJAC7GD3Z",
-      "name": "神の子は、水面に踊る",
-      "cardType": 4,
-      "attribute": 1,
-      "status": [
-        [2622, 3072, 2622, 3043],
-        [2875, 3369, 2875, 3490],
-        [3127, 3815, 3127, 3786],
-        [3380, 4112, 3380, 4383],
-        [3633, 5209, 3633, 4680]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "Sp.ガードバーストD LG",
-        "description": "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "Sp.ガードバーストD LG",
-        "description": "敵2体に特殊大ダメージを与え、敵のSp.DEFをダウンさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "攻:ダメージUP/Sp.ガードDOWN Ⅲ",
-        "description": "攻撃時、一定確率で敵のSp.DEFを特大ダウンさせる。さらに、攻撃ダメージを特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
       "id": "01KBQB79JGFQN0JNFGEE9T2XCF",
       "uniqueId": "01KCH7ZC7GFHVS7Q0X52F6D664",
       "name": "雹嵐の如く",
@@ -11007,36 +10197,6 @@
       "autoSkill": {
         "name": "援:支援UP Ⅲ",
         "description": "支援/妨害時、一定確率で支援/妨害効果を特大アップさせる。"
-      },
-      "labels": ["Legendary"]
-    },
-    {
-      "id": "01KBQB79JGFQN0JNFGEE9T2XCF",
-      "uniqueId": "01KCH7ZC7GFHVS7Q0X52F6D664",
-      "name": "雹嵐の如く",
-      "cardType": 6,
-      "attribute": 1,
-      "status": [
-        [3068, 3058, 2612, 2620],
-        [3515, 3355, 2865, 2873],
-        [3811, 3801, 3117, 3125],
-        [4408, 4098, 3370, 3378],
-        [4705, 5195, 3623, 3631]
-      ],
-      "cost": 21,
-      "questSkill": {
-        "name": "WパワーフォールE LG",
-        "description": "敵2～3体のATKとSp.ATKを大ダウンさせる。",
-        "sp": 26
-      },
-      "gvgSkill": {
-        "name": "WパワーフォールE LG",
-        "description": "敵2～3体のATKとSp.ATKを大ダウンさせる。",
-        "sp": 26
-      },
-      "autoSkill": {
-        "name": "援:支援UP/Sp.パワーDOWN Ⅲ",
-        "description": "支援/妨害時、一定確率で敵前衛1体のSp.ATKを特大ダウンさせる。さらに、支援/妨害効果を特大アップさせる。"
       },
       "labels": ["Legendary"]
     },
