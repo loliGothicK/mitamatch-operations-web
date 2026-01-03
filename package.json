@@ -11,7 +11,9 @@
     "fmt": "pnpm dlx oxfmt",
     "fmt:check": "pnpm dlx oxfmt --check && pnpm dlx biome format .",
     "pretty": "pnpm dlx oxlint --fix && pnpm dlx oxfmt --config=./oxfmtrc.json && npx biome format --write .",
-    "test": "vitest"
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "package:update": "npx ncu -u && pnpm install"
   },
   "dependencies": {
     "@base-ui/react": "1.0.0",
@@ -88,9 +90,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.11",
-    "@content-collections/core": "^0.13.0",
-    "@content-collections/mdx": "^0.2.2",
-    "@content-collections/next": "^0.2.10",
+    "@content-collections/core": "0.13.0",
+    "@content-collections/mdx": "0.2.2",
+    "@content-collections/next": "0.2.10",
     "@jest/globals": "30.2.0",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.9.1",
