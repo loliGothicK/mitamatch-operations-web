@@ -34,7 +34,7 @@ import {
   Close,
   Settings,
   Sort,
-  Launch,
+  Launch, Save,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -64,7 +64,7 @@ import {
   CardMedia,
   CardContent,
   TextField,
-  InputAdornment, CircularProgress,
+  InputAdornment, CircularProgress, Snackbar, Alert,
 } from "@mui/material";
 import type { SelectChangeEvent, Theme } from "@mui/material";
 import { blue, green, purple, red, yellow } from "@mui/material/colors";
@@ -118,6 +118,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveDecksAction } from "@/_actions/decks";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import Link from "@/components/link";
+import {useHotkeys} from "react-hotkeys-hook";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -1457,6 +1458,52 @@ function CalcSettings() {
   );
 }
 
+function SaveDeck() {
+  const [title] = useAtom(unitTitleAtom);
+  const [sw] = useAtom(swAtom);
+  const [deck] = useAtom(rwDeckAtom);
+  const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const queryClient = useQueryClient();
+
+  // Mutations
+  const mutation = useMutation({
+    mutationFn: async (unit: Unit & { title: string }) => saveDecksAction(unit),
+    onSuccess: async () => {
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["decks"] });
+      handleOpen();
+    },
+  });
+
+  useHotkeys('ctrl+s, cmd+s', (event) => {
+    event.preventDefault();
+    mutation.mutate({ sw, deck, legendaryDeck, title });
+  });
+
+  return (
+    <>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success">
+          Saved!
+        </Alert>
+      </Snackbar>
+      <Button color={"secondary"} onClick={() => mutation.mutate({ sw, deck, legendaryDeck, title })}>
+        <Tooltip title={"Ctrl+S"} placement={"top"}>
+          <Save />
+        </Tooltip>
+      </Button>
+    </>
+  );
+}
+
 export function DeckBuilder({ user }: { user: { id: string; name: string; } | undefined; }) {
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
@@ -1489,6 +1536,7 @@ export function DeckBuilder({ user }: { user: { id: string; name: string; } | un
           </Tooltip>
           <DiffModal />
           <ShareButton />
+          <SaveDeck />
           <CalcSettings />
         </RibbonGroup>
         <RibbonGroup label={"Source"}>
