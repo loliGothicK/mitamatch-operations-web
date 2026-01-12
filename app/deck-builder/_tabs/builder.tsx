@@ -34,7 +34,8 @@ import {
   Close,
   Settings,
   Sort,
-  Launch, Save,
+  Launch,
+  Save,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -64,7 +65,10 @@ import {
   CardMedia,
   CardContent,
   TextField,
-  InputAdornment, CircularProgress, Snackbar, Alert,
+  InputAdornment,
+  CircularProgress,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import type { SelectChangeEvent, Theme } from "@mui/material";
 import { blue, green, purple, red, yellow } from "@mui/material/colors";
@@ -118,7 +122,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveDecksAction } from "@/_actions/decks";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import Link from "@/components/link";
-import {useHotkeys} from "react-hotkeys-hook";
+import { useHotkeys } from "react-hotkeys-hook";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -866,7 +870,7 @@ function VirtualizedList() {
   }, [setTargetBefore, setTargetAfter, setOpen, setCondidateConcentration]);
 
   if (isLoaing) {
-    return <CircularProgress />
+    return <CircularProgress />;
   }
 
   return data.length === 0 ? (
@@ -1131,7 +1135,7 @@ function ToggleButtons() {
   );
 }
 
-function FilterModal({ signedIn }: { signedIn: boolean; }) {
+function FilterModal({ signedIn }: { signedIn: boolean }) {
   const [open, setOpen] = useState(false);
   const uniqueId = useId();
   const handleOpen = () => {
@@ -1483,7 +1487,7 @@ function SaveDeck() {
     },
   });
 
-  useHotkeys('ctrl+s, cmd+s', (event) => {
+  useHotkeys("ctrl+s, cmd+s", (event) => {
     event.preventDefault();
     mutation.mutate({ sw, deck, legendaryDeck, title });
   });
@@ -1495,7 +1499,10 @@ function SaveDeck() {
           Saved!
         </Alert>
       </Snackbar>
-      <Button color={"secondary"} onClick={() => mutation.mutate({ sw, deck, legendaryDeck, title })}>
+      <Button
+        color={"secondary"}
+        onClick={() => mutation.mutate({ sw, deck, legendaryDeck, title })}
+      >
         <Tooltip title={"Ctrl+S"} placement={"top"}>
           <Save />
         </Tooltip>
@@ -1504,7 +1511,7 @@ function SaveDeck() {
   );
 }
 
-export function DeckBuilder({ user }: { user: { id: string; name: string; } | undefined; }) {
+export function DeckBuilder({ user }: { user: { id: string; name: string } | undefined }) {
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setCompare] = useAtom(compareModeAtom);

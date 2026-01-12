@@ -28,7 +28,7 @@ function a11yProps(index: number) {
   };
 }
 
-export function DeckBuilderPage({ user }: { user: { id: string; name: string; } | undefined; }) {
+export function DeckBuilderPage({ user }: { user: { id: string; name: string } | undefined }) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {

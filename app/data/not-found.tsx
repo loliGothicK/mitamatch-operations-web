@@ -1,5 +1,4 @@
 "use client"; // Error boundaries must be Client Components
-
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 

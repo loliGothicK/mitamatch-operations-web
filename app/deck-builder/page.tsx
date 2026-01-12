@@ -3,8 +3,8 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { metadata as defaultMetadata } from "@/layout";
 import { pipe } from "fp-ts/function";
 import { Meta } from "@/metadata/lens";
-import {currentUser} from "@clerk/nextjs/server";
-import {getUser} from "@/database";
+import { currentUser } from "@clerk/nextjs/server";
+import { getUser } from "@/database";
 
 export default async function Page() {
   const clerkUser = await currentUser();

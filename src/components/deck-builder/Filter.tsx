@@ -9,7 +9,8 @@ import { CheckBoxItem } from "@/components/deck-builder/CheckBoxItem";
 import {
   currentRoleFilterAtom,
   elementFilterAtom,
-  labelFilterAtom, ownedFilterAtom,
+  labelFilterAtom,
+  ownedFilterAtom,
   roleFilterAtom,
 } from "@/jotai/memoriaAtoms";
 import { type FilterType, labelFilter, roleFilterMap } from "@/types/filterType";
@@ -171,9 +172,7 @@ export default function Filter({ signedIn }: { signedIn: boolean }) {
       {signedIn && (
         <Box sx={{ mb: 2 }}>
           <FormControlLabel
-            control={
-              <Checkbox checked={owned} onChange={() => setOwned((prev) => !prev)} />
-            }
+            control={<Checkbox checked={owned} onChange={() => setOwned((prev) => !prev)} />}
             label="所持メモリア"
           />
         </Box>

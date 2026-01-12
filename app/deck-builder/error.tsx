@@ -1,5 +1,4 @@
 "use client"; // Error boundaries must be Client Components
-
 import { useEffect } from "react";
 import { captureException } from "@sentry/nextjs";
 

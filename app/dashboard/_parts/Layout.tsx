@@ -54,8 +54,11 @@ export function Dashboard({ user }: { user: User }) {
         </Typography>
       </CustomTabPanel>
       <CustomTabPanel index={1} value={value} key={"memoria"}>
+        <Memoria user={user} />
+      </CustomTabPanel>
+      <CustomTabPanel index={1} value={value} key={"memoria"}>
         <Typography variant="h6" component="div">
-          <Memoria user={user} />
+          {"Legion"}
         </Typography>
       </CustomTabPanel>
     </Box>
