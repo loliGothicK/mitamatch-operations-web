@@ -39,7 +39,7 @@ const columns: GridColDef<Memoria>[] = [
   {
     field: "name",
     headerName: "Name",
-    width: 200,
+    width: 300,
     valueGetter: (_, memoria) => Lenz.memoria.general.fullName.get(memoria),
   },
   {

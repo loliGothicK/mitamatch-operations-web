@@ -47,7 +47,7 @@ const columns: GridColDef<Costume>[] = [
   {
     field: "name",
     headerName: "Name",
-    width: 200,
+    width: 300,
     valueGetter: (_, costume) => Lenz.costume.general.name.full.get(costume),
   },
   {
