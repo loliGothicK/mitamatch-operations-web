@@ -16,7 +16,7 @@
     "package:update": "npx ncu -u && pnpm install"
   },
   "dependencies": {
-    "@base-ui/react": "1.0.0",
+    "@base-ui/react": "1.1.0",
     "@clerk/backend": "2.29.0",
     "@clerk/nextjs": "6.36.5",
     "@codemirror/autocomplete": "6.20.0",
