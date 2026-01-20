@@ -171,12 +171,14 @@ export type UniqueMemoria = {
 };
 
 export const uniqueMemoriaList = pipe(
-  intoGroupMap((memoria: Memoria) => memoria.uniqueId)(memoriaList.toReversed()),
-  map((list) => {
+  intoGroupMap((memoria: Memoria) => memoria.uniqueId)(
+    memoriaList.filter((card) => card.phantasm !== true).toReversed(),
+  ),
+  map((group) => {
     return {
-      id: list[0].uniqueId,
-      name: list[0].name,
-      cards: list,
+      id: group[0].uniqueId,
+      name: group[0].name,
+      cards: group,
     };
   }),
 );
