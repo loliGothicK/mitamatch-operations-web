@@ -103,7 +103,9 @@ const columns: GridColDef<Memoria>[] = [
     valueGetter: (_, memoria) => Lenz.memoria.general.questSkill.get(memoria).raw,
     renderCell: (params) => (
       <Tooltip title={Lenz.memoria.general.questSkill.get(params.row).raw.description}>
-        <Typography>{Lenz.memoria.general.questSkill.get(params.row).raw.name}</Typography>
+          <Typography variant={"caption"}>
+            {Lenz.memoria.general.questSkill.get(params.row).raw.name}
+          </Typography>
       </Tooltip>
     ),
   },
