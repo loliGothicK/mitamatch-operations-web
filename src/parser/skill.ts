@@ -530,7 +530,7 @@ function parseElementEffect(
       return right(["enhance" as const, "minima" as const]);
     }
     if (name.includes("スプレシア")) {
-        return right(["spread" as const, "minima" as const]);
+      return right(["spread" as const, "minima" as const]);
     }
     return bail(name, "given text doesn't match resonance type", {
       path: path.join("parseElementEffect.parseResonanceType"),
