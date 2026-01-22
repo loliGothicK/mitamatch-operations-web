@@ -106140,7 +106140,8 @@
         "name": "攻:ダメージUP/副攻:水風ガードDOWN Ⅵ",
         "description": "攻撃時、一定確率で敵の水属性防御力・風属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"]
+      "labels": ["SuperAwakening"],
+      "phantasm": true
     },
     {
       "id": "01KFBA7CDGEC3TWB3RAXXDG5J1",
