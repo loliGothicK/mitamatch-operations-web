@@ -79,7 +79,7 @@ export const roleFilterAtom = atom<RoleFilterType[]>(["support", "interference",
 export const elementFilterAtom = atom<ElementFilterType[]>([...ATTRIBUTES]);
 export const labelFilterAtom = atom<LabelFilterType[]>([...labelFilter]);
 export const ownedFilterAtom = atom(false);
-const owningAtom = atomWithQuery<{ id: string; name: string; limitBreak: number; }[]>(() => ({
+const owningAtom = atomWithQuery<{ id: string; name: string; limitBreak: number }[]>(() => ({
   queryKey: ["memoria"],
   queryFn: getListAction,
 }));
@@ -131,10 +131,17 @@ export const filteredMemoriaAtom = atom((get) => {
 
     // 4. データがある場合のみ展開。
     //    uniqueMemoriaList.get(id)! は危険なので ?. にして空配列フォールバックを入れる
-    source = value.data.data!.flatMap(({ id, limitBreak }) => uniqueMemoriaList.get(id)?.cards.map((card) => ({ ...card, concentration: limitBreak as Concentration })) ?? []);
+    source = value.data.data!.flatMap(
+      ({ id, limitBreak }) =>
+        uniqueMemoriaList
+          .get(id)
+          ?.cards.map((card) => ({ ...card, concentration: limitBreak as Concentration })) ?? [],
+    );
   } else {
     // 5. OFFの場合は既存のリストを使用（ここではフェッチは発生しない）
-    source = memoriaList.filter((memoria) => memoria.phantasm !== true).map((memoria) => ({ ...memoria, concentration: 4 }));
+    source = memoriaList
+      .filter((memoria) => memoria.phantasm !== true)
+      .map((memoria) => ({ ...memoria, concentration: 4 }));
   }
   const result = source
     .filter((memoria) => {

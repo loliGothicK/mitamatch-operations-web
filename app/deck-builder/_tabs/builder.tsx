@@ -854,11 +854,24 @@ function VirtualizedList() {
     undefined,
   );
 
-  const addMemoria = (
-    prev: MemoriaWithConcentration[],
-    newMemoria: MemoriaWithConcentration,
-  ) => {
+  const addMemoria = (prev: MemoriaWithConcentration[], newMemoria: MemoriaWithConcentration) => {
     return [...prev, newMemoria];
+  };
+
+  const handleAddMemoria = (index: number) => {
+    if (compare !== undefined) {
+      setOpen(true);
+      setCandidate({
+        ...data[index],
+        concentration: condidateConcentration ?? 4,
+      });
+      return;
+    }
+    if (data[index].labels.includes("Legendary")) {
+      setLegendaryDeck((prev) => addMemoria(prev, data[index]));
+    } else {
+      setDeck((prev) => addMemoria(prev, data[index]));
+    }
   };
 
   const onDialogClose = useCallback(() => {
@@ -899,6 +912,10 @@ function VirtualizedList() {
                     ? "rgba(255, 255, 255, 0.1)"
                     : alpha(theme.palette.primary.main, 0.2),
               }}
+              onContextMenu={(event) => {
+                event.preventDefault();
+                handleAddMemoria(index);
+              }}
               key={index}
             >
               <IconButton
@@ -908,21 +925,7 @@ function VirtualizedList() {
                   bgcolor: "rgba(0, 0, 0, 0.2)",
                 }}
                 aria-label="add"
-                onClick={() => {
-                  if (compare !== undefined) {
-                    setOpen(true);
-                    setCandidate({
-                      ...data[index],
-                      concentration: condidateConcentration ?? 4,
-                    });
-                    return;
-                  }
-                  if (data[index].labels.includes("Legendary")) {
-                    setLegendaryDeck((prev) => addMemoria(prev, data[index]));
-                  } else {
-                    setDeck((prev) => addMemoria(prev, data[index]));
-                  }
-                }}
+                onClick={() => handleAddMemoria(index)}
               >
                 <Add color={"warning"} />
               </IconButton>
@@ -933,13 +936,11 @@ function VirtualizedList() {
               />
               <Tooltip title={data[index].name.short} placement={"top"}>
                 <CardMedia sx={{ width: 100, height: 100 }}>
-                  <Box
-                      position={"relative"}
-                      sx={{ width: 100, height: 100, cursor: "pointer" }}
-                  >
+                  <Box position={"relative"} sx={{ width: 100, height: 100, cursor: "pointer" }}>
                     <ConcentrationIcon
-                        key={data[index].id}
-                        concentration={data[index].concentration} handleConcentration={true}
+                      key={data[index].id}
+                      concentration={data[index].concentration}
+                      handleConcentration={true}
                     />
                     <MemoriaImage name={data[index].name} preload={true} />
                   </Box>
