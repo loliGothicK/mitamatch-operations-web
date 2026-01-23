@@ -1,6 +1,54 @@
 {
   "data": [
     {
+      "id": 188,
+      "name": "蒼淵の波濤",
+      "status": [1546, 2289, 1569, 2218],
+      "effect": "水属性効果増Lv.5",
+      "description": "水属性のメモリアのスキル効果が超特大増加する(70%）。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": false,
+      "kind": "Elemental/Water",
+      "usually": true
+    },
+    {
+      "id": 187,
+      "name": "烈風の聖盾",
+      "status": [1545, 1541, 2259, 2276],
+      "effect": "風属性効果減少Lv.5",
+      "description": "敵の使用した風属性のスキル効果が極大減少(70%)。",
+      "prepare_time": 10,
+      "active_time": 110,
+      "payed": false,
+      "kind": "Shield",
+      "usually": true
+    },
+    {
+      "id": 186,
+      "name": "深蒼海の神裁",
+      "status": [1894, 2709, 1878, 2669],
+      "effect": "水属性効果増Lv.5",
+      "description": "水属性のメモリアのスキル効果が超特大増加する(70%）。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": true,
+      "kind": "Elemental/Water",
+      "usually": true
+    },
+    {
+      "id": 185,
+      "name": "煌天封界",
+      "status": [1891, 1871, 2697, 2686],
+      "effect": "風属性効果減少Lv.5",
+      "description": "敵の使用した風属性のスキル効果が極大減少(70%)。",
+      "prepare_time": 10,
+      "active_time": 110,
+      "payed": true,
+      "kind": "Shield",
+      "usually": true
+    },
+    {
       "id": 184,
       "name": "風淵の裂波",
       "status": [2262, 2263, 1546, 1543],
@@ -178,7 +226,7 @@
       "active_time": 130,
       "payed": true,
       "kind": "Elemental/Water",
-      "usually": true
+      "usually": false
     },
     {
       "id": 169,
@@ -190,7 +238,7 @@
       "active_time": 130,
       "payed": false,
       "kind": "Elemental/Water",
-      "usually": true
+      "usually": false
     },
     {
       "id": 168,
@@ -202,7 +250,7 @@
       "active_time": 105,
       "payed": true,
       "kind": "Shield",
-      "usually": true
+      "usually": false
     },
     {
       "id": 167,
@@ -214,7 +262,7 @@
       "active_time": 105,
       "payed": false,
       "kind": "Shield",
-      "usually": true
+      "usually": false
     },
     {
       "id": 166,

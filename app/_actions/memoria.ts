@@ -6,7 +6,7 @@ import { deleteMemoria, getMemoriaByUserId, getUser, upsertMemoria } from "@/dat
 // クライアントコンポーネントの useQuery に渡すためのラッパー
 export async function getListAction() {
   const { userId } = await auth();
-  if (!userId) throw new Error("Unauthorized");
+  if (!userId) return [];
   const { id } = await getUser(userId);
 
   return getMemoriaByUserId(id);

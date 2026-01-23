@@ -84,7 +84,7 @@ export function Memoria({}: Props) {
     () => [
       ...pipe(
         uniqueMemoriaList,
-        filterWithIndex((id, _) => edit.map(projector("id")).includes(id) === false),
+        filterWithIndex((id, _) => !edit.map(projector("id")).includes(id)),
       ).values(),
     ],
     [edit],
@@ -112,9 +112,7 @@ export function Memoria({}: Props) {
               mutation.mutate({
                 update: edit,
                 remove:
-                  registered?.filter(
-                    ({ id }) => edit.map(projector("id")).includes(id) === false,
-                  ) || [],
+                  registered?.filter(({ id }) => !edit.map(projector("id")).includes(id)) || [],
               });
               setOpen(true);
             }}

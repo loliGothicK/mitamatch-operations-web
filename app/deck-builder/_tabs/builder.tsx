@@ -856,10 +856,9 @@ function VirtualizedList() {
 
   const addMemoria = (
     prev: MemoriaWithConcentration[],
-    newMemoria: Memoria,
-    concentration: Concentration | undefined = condidateConcentration,
+    newMemoria: MemoriaWithConcentration,
   ) => {
-    return [...prev, { ...newMemoria, concentration: concentration ?? 4 }];
+    return [...prev, newMemoria];
   };
 
   const onDialogClose = useCallback(() => {
@@ -934,7 +933,16 @@ function VirtualizedList() {
               />
               <Tooltip title={data[index].name.short} placement={"top"}>
                 <CardMedia sx={{ width: 100, height: 100 }}>
-                  <MemoriaImage name={data[index].name} preload={true} />
+                  <Box
+                      position={"relative"}
+                      sx={{ width: 100, height: 100, cursor: "pointer" }}
+                  >
+                    <ConcentrationIcon
+                        key={data[index].id}
+                        concentration={data[index].concentration} handleConcentration={true}
+                    />
+                    <MemoriaImage name={data[index].name} preload={true} />
+                  </Box>
                 </CardMedia>
               </Tooltip>
               <CardContent>
