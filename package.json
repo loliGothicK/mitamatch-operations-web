@@ -108,7 +108,7 @@
     "@types/react-dom": "19.2.3",
     "@types/ws": "8.18.1",
     "@vitejs/plugin-react": "5.1.2",
-    "@vitest/coverage-v8": "4.0.17",
+    "@vitest/coverage-v8": "4.0.18",
     "drizzle-kit": "0.31.8",
     "happy-dom": "20.3.4",
     "import-in-the-middle": "2.0.5",
@@ -118,7 +118,7 @@
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "vite-tsconfig-paths": "6.0.4",
-    "vitest": "4.0.17",
+    "vitest": "4.0.18",
     "zod": "4.3.6"
   },
   "volta": {
