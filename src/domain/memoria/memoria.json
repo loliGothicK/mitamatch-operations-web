@@ -105888,8 +105888,7 @@
         "name": "攻:ダメージUP/副攻:水風ガードDOWN Ⅵ",
         "description": "攻撃時、一定確率で敵の水属性防御力・風属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KFBA74KGQPZGNFB4B824XKFR",
@@ -105919,8 +105918,7 @@
         "name": "援:支援UP/副援:水風パワーDOWN Ⅵ",
         "description": "支援/妨害時、一定確率で敵前衛1体の水属性攻撃力・風属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KFBA75JRMSPZD1RYDF3S8JQB",
@@ -105950,8 +105948,7 @@
         "name": "回:回復UP/副援:支援UP Ⅵ",
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KFBA76J0Y40BV5CM91P0GDY6",
@@ -106003,8 +106000,7 @@
           "name": "[レギオンマッチ]水風特:ダメージUP Ⅴ",
           "description": "水/風属性の特殊攻撃時に攻撃ダメージを6%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KFBA78GG4H1ABFVD39384D8F",
@@ -106056,8 +106052,7 @@
           "name": "[レギオンマッチ]水風援:支援UP Ⅴ",
           "description": "水/風属性の支援/妨害メモリア使用時に支援/妨害効果を6%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KFBA79FR3BPXHPXXT11ZEHJ1",
@@ -106109,8 +106104,7 @@
           "name": "[レギオンマッチ]水風援:支援UP Ⅴ",
           "description": "水/風属性の支援/妨害メモリア使用時に支援/妨害効果を6%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KFBA7AF09HMXMR1E09QX049J",
