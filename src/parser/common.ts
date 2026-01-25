@@ -28,7 +28,7 @@ export const parseFloatSafe = (
   const float = Number.parseFloat(num);
   return !Number.isNaN(float)
     ? right(float)
-    : bail(num, "given text doesn't match number", {
+    : bail(num, `${num} is not a number.`, {
         ...meta,
         path: meta.path.join("parseFloatSafe"),
       });

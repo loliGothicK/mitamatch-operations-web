@@ -3,14 +3,15 @@ import type { Trigger } from "@/parser/autoSkill";
 import { toValidated } from "@/fp-ts-ext/Validated";
 import { bail, type MitamaError, CallPath, ValidateResult } from "@/error/error";
 import { pipe } from "fp-ts/function";
-import { either } from "fp-ts";
-import { separator } from "@/fp-ts-ext/function";
+import { either, option } from "fp-ts";
+import { separator, transpose, transposeArray } from "@/fp-ts-ext/function";
 import { getApplicativeValidation, right } from "fp-ts/Either";
 import { getSemigroup } from "fp-ts/Array";
 import { sequenceS } from "fp-ts/Apply";
 import { match } from "ts-pattern";
 import { parseFloatSafe } from "@/parser/common";
 import type { RawLegendarySkill } from "@/domain/memoria/memoria";
+import { Option } from "fp-ts/Option";
 
 export type LegendarySkillTrigger =
   | Exclude<Trigger, "Attack">
@@ -21,13 +22,15 @@ export type LegendarySkill = {
   readonly attributes: Attribute[];
   readonly trigger: LegendarySkillTrigger;
   readonly rates: readonly [number, number, number, number, number];
+  readonly criticalRates: Option<readonly [number, number, number, number, number]>;
 };
 export type Legendary = {
   readonly raw: RawLegendarySkill;
   readonly skill: LegendarySkill;
 };
 
-const LEGENDAEY_SKILL = /(.+?)属性の(.+?時)に.+?を(\d+?.*?\d*?)%アップさせる。/;
+const LEGENDAEY_SKILL =
+  /(.+?)属性の(.+?時)に.+?を(\d+?.*?\d*?)%アップさせる。(?:さらにクリティカル発動確率を(\d+?.*?\d*?)%アップさせる。)*/;
 
 const parseAttribute = (
   element: string,
@@ -88,7 +91,7 @@ export function parseLegendary(
       pipe(
         skill.description.match(LEGENDAEY_SKILL),
         toEither(skill.description),
-        either.flatMap(([, attributes, trigger, rate]) =>
+        either.flatMap(([, attributes, trigger, rate, critRate]) =>
           sequenceS(ap)({
             attributes: separator(
               attributes
@@ -97,6 +100,14 @@ export function parseLegendary(
             ),
             trigger: parseTrigger(trigger, { path, memoriaName }),
             rate: toValidated(parseFloatSafe(rate, { path, memoriaName })),
+            criticalRate: toValidated(
+              transpose(
+                pipe(
+                  option.fromNullable(critRate),
+                  option.map((critRate) => parseFloatSafe(critRate, { path, memoriaName })),
+                ),
+              ),
+            ),
           }),
         ),
       ),
@@ -114,6 +125,14 @@ export function parseLegendary(
           number,
           number,
         ],
+        criticalRates: pipe(
+          parsed.map((skill) => skill.criticalRate),
+          transposeArray,
+          option.map(
+            (cirtRates) =>
+              cirtRates as unknown as readonly [number, number, number, number, number],
+          ),
+        ),
       },
     })),
   );
