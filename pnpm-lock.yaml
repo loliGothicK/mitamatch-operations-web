@@ -149,9 +149,6 @@ importers:
       fp-ts:
         specifier: 2.16.11
         version: 2.16.11
-      image-size:
-        specifier: ^2.0.2
-        version: 2.0.2
       jotai:
         specifier: 2.16.2
         version: 2.16.2(@babel/core@7.28.5)(@babel/template@7.27.2)(@types/react@19.2.9)(react@19.2.3)
@@ -177,7 +174,7 @@ importers:
         specifier: 0.8.0
         version: 0.8.0
       path:
-        specifier: ^0.12.7
+        specifier: 0.12.7
         version: 0.12.7
       pg:
         specifier: 8.17.2
@@ -3754,11 +3751,6 @@ packages:
 
   hyphenate-style-name@1.1.0:
     resolution: {integrity: sha512-WDC/ui2VVRrz3jOVi+XtjqkDjiVjTtFaAGiW37k6b+ohyQ5wYDOGkvCZa8+H0nx3gyvv0+BST9xuOgIyGQ00gw==}
-
-  image-size@2.0.2:
-    resolution: {integrity: sha512-IRqXKlaXwgSMAMtpNzZa1ZAe8m+Sa1770Dhk8VkSsP9LS+iHD62Zd8FQKs8fbPiagBE7BzoFX23cxFnwshpV6w==}
-    engines: {node: '>=16.x'}
-    hasBin: true
 
   import-fresh@3.3.1:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
@@ -8925,8 +8917,6 @@ snapshots:
       - supports-color
 
   hyphenate-style-name@1.1.0: {}
-
-  image-size@2.0.2: {}
 
   import-fresh@3.3.1:
     dependencies:
