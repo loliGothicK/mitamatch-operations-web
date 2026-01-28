@@ -1,20 +1,11 @@
-import { clerkMiddleware, createRouteMatcher, clerkClient } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { upsertUser } from "@/database";
 
 const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
 
 export default clerkMiddleware(
   async (auth, req) => {
     if (isProtectedRoute(req)) await auth.protect();
-    const { userId } = await auth();
-    const client = await clerkClient();
-    if (userId && ["/signed-in", "/signed-up"].includes(req.nextUrl.pathname)) {
-      await upsertUser(await client.users.getUser(userId));
-      const url = req.nextUrl.clone();
-      url.pathname = "/dashboard";
-      return NextResponse.rewrite(url);
-    }
     return NextResponse.next();
   },
   {

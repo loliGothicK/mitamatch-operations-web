@@ -12,7 +12,6 @@ import {
   usersToMemoria,
 } from "@/database/schema";
 import { and, eq, inArray } from "drizzle-orm";
-import { User } from "@clerk/backend";
 import { Unit } from "@/domain/types";
 import { OrderWithPic } from "@/jotai/orderAtoms";
 import { sql } from "drizzle-orm";
@@ -25,7 +24,7 @@ const db = drizzle({
   ),
 });
 
-export async function upsertUser(user: User) {
+export async function upsertUser(user: { id: string; username: string | null; } | undefined) {
   if (!user) return undefined;
 
   const result = await db
