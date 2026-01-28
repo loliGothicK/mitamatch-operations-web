@@ -923,6 +923,7 @@ function VirtualizedList() {
                   position: "absolute",
                   left: 0,
                   bgcolor: "rgba(0, 0, 0, 0.2)",
+                  zIndex: 1,
                 }}
                 aria-label="add"
                 onClick={() => handleAddMemoria(index)}
