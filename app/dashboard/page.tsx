@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 
 export default async function Page() {
   const clerkUser = await currentUser();
-  if (!clerkUser) redirect("/signed-in");
+  if (!clerkUser) redirect("/");
   const user = await getUser(clerkUser.id);
   return <Dashboard user={user} />;
 }
