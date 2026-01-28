@@ -74,7 +74,9 @@ export const rwLegendaryDeckAtom = atomWithStorage<MemoriaWithConcentration[]>(
 );
 
 export const unitTitleAtom = atom("No Title");
-export const swAtom = atom<"sword" | "shield">("shield");
+export const swAtom = atomWithStorage<"sword" | "shield">("sw", "shield", undefined, {
+  getOnInit: true,
+});
 export const roleFilterAtom = atom<RoleFilterType[]>(["support", "interference", "recovery"]);
 export const elementFilterAtom = atom<ElementFilterType[]>([...ATTRIBUTES]);
 export const labelFilterAtom = atom<LabelFilterType[]>([...labelFilter]);
