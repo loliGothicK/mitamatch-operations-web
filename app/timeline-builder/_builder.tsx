@@ -3,7 +3,7 @@
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { type FormEvent, SetStateAction, Suspense, useCallback, useId, useState } from "react";
+import { type SubmitEvent, SetStateAction, Suspense, useCallback, useId, useState } from "react";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 import { Add, Assignment, DragIndicator, Edit, Remove, Share } from "@mui/icons-material";
@@ -240,9 +240,9 @@ function TimelineItem({ order }: { order: ComputedOrder }) {
         slotProps={{
           paper: {
             component: "form",
-            onSubmit: (event: FormEvent<HTMLFormElement>) => {
+            onSubmit: (event: SubmitEvent<HTMLDivElement>) => {
               event.preventDefault();
-              const formData = new FormData(event.currentTarget);
+              const formData = new FormData(event.target);
               const formJson = Object.fromEntries(formData.entries());
               setTimeline((prev) => {
                 return prev.map((o) =>
