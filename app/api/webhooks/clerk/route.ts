@@ -27,11 +27,11 @@ export async function POST(req: Request) {
   // Webhookインスタンスの作成
   const wh = new Webhook(WEBHOOK_SECRET);
 
-  let evt: WebhookEvent;
+  let event: WebhookEvent;
 
   // 署名の検証 (ここが失敗するとエラーが投げられる)
   try {
-    evt = wh.verify(body, {
+    event = wh.verify(body, {
       "svix-id": svix_id,
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
@@ -44,13 +44,13 @@ export async function POST(req: Request) {
   }
 
   // イベントタイプごとの処理
-  const eventType = evt.type;
+  const eventType = event.type;
 
   if (eventType === "user.created" || eventType === "user.updated") {
-    const { id, username } = evt.data;
+    const { id, username } = event.data;
 
     // ここでDB同期を実行
-    // 注意: evt.data の型は Clerk の User オブジェクトそのものです
+    // 注意: event.data の型は Clerk の User オブジェクトそのものです
     try {
       await upsertUser({
         id,

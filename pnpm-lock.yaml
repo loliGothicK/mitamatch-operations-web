@@ -204,7 +204,7 @@ importers:
         specifier: 4.0.1
         version: 4.0.1
       svix:
-        specifier: ^1.84.1
+        specifier: 1.84.1
         version: 1.84.1
       tocbot:
         specifier: 4.36.4
