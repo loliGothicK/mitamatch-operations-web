@@ -24,7 +24,7 @@ const db = drizzle({
   ),
 });
 
-export async function upsertUser(user: { id: string; username: string | null; } | undefined) {
+export async function upsertUser(user: { id: string; username: string | null } | undefined) {
   if (!user) return undefined;
 
   const result = await db
