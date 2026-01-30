@@ -12,8 +12,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@clerk/backend':
-        specifier: 2.29.6
-        version: 2.29.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: 2.29.7
+        version: 2.29.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@clerk/nextjs':
         specifier: 6.37.0
         version: 6.37.0(next@16.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -587,8 +587,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@clerk/backend@2.29.6':
-    resolution: {integrity: sha512-92I3/BA2d7zOl1y8IaKdDTYXm0UCskkhamhLT5fkOV+2oyxWQ2In/yK8FhO73pPyeCi2K/ZoXMSO4gBcoF9AAg==}
+  '@clerk/backend@2.29.7':
+    resolution: {integrity: sha512-OSfFQ85L0FV2wSzqlr0hRvluIu3Z5ClgLiBE6Qx7XjSGyJoqEvP5OP4fl5Nt5icgGvH0EwA1dljPGyQpaqbQEw==}
     engines: {node: '>=18.17.0'}
 
   '@clerk/clerk-react@5.60.0':
@@ -5603,7 +5603,7 @@ snapshots:
   '@biomejs/cli-win32-x64@2.3.13':
     optional: true
 
-  '@clerk/backend@2.29.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@clerk/backend@2.29.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@clerk/shared': 3.44.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@clerk/types': 4.101.14(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -5622,7 +5622,7 @@ snapshots:
 
   '@clerk/nextjs@6.37.0(next@16.1.6(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@clerk/backend': 2.29.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@clerk/backend': 2.29.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@clerk/clerk-react': 5.60.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@clerk/shared': 3.44.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@clerk/types': 4.101.14(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
