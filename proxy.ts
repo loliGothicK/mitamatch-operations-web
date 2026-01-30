@@ -16,8 +16,8 @@ export default clerkMiddleware(
   {
     authorizedParties:
       process.env.NODE_ENV === "development"
-        ? ["https://mitama.io", "http://localhost:3000"]
-        : ["https://mitama.io"],
+        ? ["https://mitama.io", "https://operations.mitama.io", "http://localhost:3000"]
+        : ["https://mitama.io", "https://operations.mitama.io"],
   },
 );
 
