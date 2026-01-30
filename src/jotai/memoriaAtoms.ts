@@ -25,7 +25,7 @@ import { costumeList } from "@/domain/costume/costume";
 import { match, P } from "ts-pattern";
 import { Lenz } from "@/domain/lenz";
 import { ATTRIBUTES, isElementEffect, isStackEffect } from "@/parser/skill";
-import { loadable, atomWithStorage } from "jotai/utils";
+import { atomWithStorage } from "jotai/utils";
 import { atomWithQuery } from "jotai-tanstack-query";
 import { getListAction } from "@/_actions/memoria";
 
@@ -85,7 +85,6 @@ const owningAtom = atomWithQuery<{ id: string; name: string; limitBreak: number 
   queryKey: ["memoria"],
   queryFn: getListAction,
 }));
-export const owningAtomLoadable = loadable(owningAtom);
 
 export const currentRoleFilterAtom = atom((get) => {
   const sw = get(swAtom);
@@ -118,27 +117,18 @@ export const sortKindAtom = atom<SortKind>("ID");
 export const filteredMemoriaAtom = atom((get) => {
   const isOwnedFilterEnabled = get(ownedFilterAtom);
 
-  let source: MemoriaWithConcentration[] = [];
+  let source: MemoriaWithConcentration[];
 
   if (isOwnedFilterEnabled) {
     // 2. ONの場合のみ、LoadableなAtomを見に行く
-    const value = get(owningAtomLoadable);
-
-    if (value.state !== "hasData") {
-      return {
-        isLoaing: true,
-        data: [],
-      };
-    }
-
-    // 4. データがある場合のみ展開。
-    //    uniqueMemoriaList.get(id)! は危険なので ?. にして空配列フォールバックを入れる
-    source = value.data.data!.flatMap(
-      ({ id, limitBreak }) =>
-        uniqueMemoriaList
-          .get(id)
-          ?.cards.map((card) => ({ ...card, concentration: limitBreak as Concentration })) ?? [],
-    );
+    const value = get(owningAtom);
+    source =
+      value.data?.flatMap(
+        ({ id, limitBreak }) =>
+          uniqueMemoriaList
+            .get(id)
+            ?.cards.map((card) => ({ ...card, concentration: limitBreak as Concentration })) ?? [],
+      ) || [];
   } else {
     // 5. OFFの場合は既存のリストを使用（ここではフェッチは発生しない）
     source = memoriaList

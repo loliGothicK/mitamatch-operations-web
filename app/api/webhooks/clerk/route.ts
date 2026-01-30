@@ -10,7 +10,6 @@ const WEBHOOK_SECRET =
     : process.env.CLERK_WEBHOOK_SECRET!;
 
 export async function POST(req: Request) {
-
   // ヘッダーの取得
   const headerPayload = await headers();
   const svix_id = headerPayload.get("svix-id");

@@ -13,7 +13,8 @@
     "pretty": "pnpm dlx oxlint --fix && pnpm dlx oxfmt --config=./oxfmtrc.json && npx biome format --write .",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
-    "package:update": "npx ncu -u && pnpm install"
+    "package:update": "npx ncu -u && pnpm install",
+    "seed": "npx tsx scripts/seed.ts"
   },
   "dependencies": {
     "@base-ui/react": "1.1.0",
