@@ -217,7 +217,10 @@ export function upsertDeck(create: {
       updatedAt: now.toISOString(),
     })
     .onConflictDoUpdate({
-      target: decks.short,
+      target: [
+        decks.short,
+        decks.userId,
+      ],
       set: {
         title: create.title,
         unit: create.unit,

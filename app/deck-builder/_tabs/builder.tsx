@@ -1510,6 +1510,7 @@ function SaveDeck() {
         </Alert>
       </Snackbar>
       <Button
+        disabled={true}
         color={"secondary"}
         onClick={() => mutation.mutate({ sw, deck, legendaryDeck, title })}
       >
