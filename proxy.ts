@@ -6,6 +6,11 @@ const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
 export default clerkMiddleware(
   async (auth, req) => {
     if (isProtectedRoute(req)) await auth.protect();
+    if (["/signed-in", "/signed-up"].includes(req.nextUrl.pathname)) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/dashboard";
+      return NextResponse.rewrite(url);
+    }
     return NextResponse.next();
   },
   {

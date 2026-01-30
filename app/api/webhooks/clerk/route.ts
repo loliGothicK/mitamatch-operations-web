@@ -4,8 +4,12 @@ import { WebhookEvent } from "@clerk/nextjs/server";
 import { upsertUser } from "@/database"; // あなたのDBロジック
 import { NextResponse } from "next/server";
 
+const WEBHOOK_SECRET =
+  process.env.NODE_ENV === "development"
+    ? process.env.CLERK_WEBHOOK_DEV_SECRET!
+    : process.env.CLERK_WEBHOOK_SECRET!;
+
 export async function POST(req: Request) {
-  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET!;
 
   // ヘッダーの取得
   const headerPayload = await headers();
@@ -49,8 +53,7 @@ export async function POST(req: Request) {
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, username } = event.data;
 
-    // ここでDB同期を実行
-    // 注意: event.data の型は Clerk の User オブジェクトそのものです
+    // DB同期を実行
     try {
       await upsertUser({
         id,
