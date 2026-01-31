@@ -152,6 +152,7 @@ export async function getDecksByClerkUserId(clerkUserId: string) {
 
   return db
     .select({
+      short: decks.short,
       title: decks.title,
       unit: decks.unit,
     })
@@ -217,10 +218,7 @@ export function upsertDeck(create: {
       updatedAt: now.toISOString(),
     })
     .onConflictDoUpdate({
-      target: [
-        decks.short,
-        decks.userId,
-      ],
+      target: decks.short,
       set: {
         title: create.title,
         unit: create.unit,

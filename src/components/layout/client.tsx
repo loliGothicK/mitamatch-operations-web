@@ -426,7 +426,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
                     />
                   </ListItemButton>
                   {userData && open && (
-                    <SimpleTreeView multiSelect={true}>
+                    <SimpleTreeView multiSelect={false}>
                       <Decks />
                       <Timelines />
                     </SimpleTreeView>

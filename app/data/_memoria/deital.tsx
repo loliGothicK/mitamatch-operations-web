@@ -128,8 +128,8 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
             <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
               <SkillCard skill={memoria.skills.gvgSkill.raw} title={"レギオンマッチスキル"} />
               <SkillCard skill={memoria.skills.autoSkill.raw} title={"レギオンマッチ補助スキル"} />
-              {memoria.legendarySkill && (
-                <SkillCard skill={memoria.legendarySkill[4]} title={"レジェンダリースキル"} />
+              {memoria.skills.legendary !== undefined && (
+                <SkillCard skill={memoria.skills.legendary.raw[4]} title={"レジェンダリースキル"} />
               )}
               <SkillCard skill={memoria.skills.questSkill.raw} title={"対ヒュージスキル"} />
               <Divider flexItem={true} textAlign="left" sx={{ margin: 5 }}>

@@ -93,7 +93,7 @@ export const decks = pgTable("deck", {
     onDelete: "cascade",
   }),
   title: varchar("title", { length: 255 }).notNull().default("no title"),
-  short: ulid("short").unique(),
+  short: ulid("short").unique().notNull(),
   unit: jsonb("unit").$type<Unit>().notNull(),
   createdAt: timestamp({ precision: 3, mode: "string" })
     .default(sql`CURRENT_TIMESTAMP`)
