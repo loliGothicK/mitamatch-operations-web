@@ -125,7 +125,7 @@
   "volta": {
     "node": "24.13.0"
   },
-  "packageManager": "pnpm@10.29.1",
+  "packageManager": "pnpm@10.29.2",
   "pnpm": {
     "ignoredBuiltDependencies": [
       "@biomejs/biome",
