@@ -5,8 +5,8 @@ import { TreeItem } from "@mui/x-tree-view";
 import { getTimelinesAction } from "@/_actions/timelines";
 import { Folder } from "@mui/icons-material";
 import { Stack, Typography } from "@mui/material";
-import {useAtom} from "jotai";
-import {timelineAtom} from "@/jotai/orderAtoms";
+import { useAtom } from "jotai";
+import { timelineAtom } from "@/jotai/orderAtoms";
 
 export function Timelines() {
   const [, setTimeline] = useAtom(timelineAtom);

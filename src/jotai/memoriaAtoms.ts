@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import { decodeTime } from "ulid";
+import { decodeTime, ULID } from "ulid";
 
 import { formatCardType, Memoria, MemoriaId, uniqueMemoriaList } from "@/domain/memoria/memoria";
 import { memoriaList } from "@/domain/memoria/memoria";
@@ -28,6 +28,10 @@ import { ATTRIBUTES, isElementEffect, isStackEffect } from "@/parser/skill";
 import { atomWithStorage } from "jotai/utils";
 import { atomWithQuery } from "jotai-tanstack-query";
 import { getListAction } from "@/_actions/memoria";
+
+export const openAtom = atomWithStorage<ULID | undefined>("open", undefined, undefined, {
+  getOnInit: true,
+});
 
 export const targetBeforeAtom = atom<MemoriaId[]>([]);
 export const targetAfterAtom = atom<MemoriaId[]>([]);

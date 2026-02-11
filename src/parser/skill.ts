@@ -506,6 +506,14 @@ function parseStack(
       (name) => name.includes("ルミナス"),
       () => parseStackEffect(["anima", "barrier"])(description, memoriaName, branch("luminous")),
     )
+    .when(
+      (name) => name.includes("セラフィア"),
+      () => parseStackEffect(["anima", "eden"])(description, memoriaName, branch("seraphia")),
+    )
+    .when(
+      (name) => name.includes("アルカナ"),
+      () => parseStackEffect(["meteor", "anima"])(description, memoriaName, branch("arcana")),
+    )
     .otherwise(() => right([]));
 }
 
