@@ -31,7 +31,7 @@ export const makeSchemaCompletionSource =
     const complexMatch = textBefore.match(
       /([`\w]+)\s*((?:NOT\s+)?(?:LIKE|ILIKE))\s*(['"]?)([^'"]*)$/i,
     );
-    const simpleMatch = textBefore.match(/([`\w]+)\s*(=)\s*(['"]?\w*)$/);
+    const simpleMatch = textBefore.match(/([`\w]+)\s*(=|!=)\s*(['"]?\w*)$/);
 
     // --- LIKE / ILIKE の処理 ---
     if (complexMatch) {
