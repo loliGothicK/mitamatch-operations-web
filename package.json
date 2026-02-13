@@ -113,7 +113,7 @@
     "drizzle-kit": "0.31.9",
     "happy-dom": "20.6.1",
     "import-in-the-middle": "2.0.6",
-    "oxfmt": "0.31.0",
+    "oxfmt": "0.32.0",
     "require-in-the-middle": "8.0.1",
     "ts-node": "11.0.0-beta.1",
     "tsx": "4.21.0",
