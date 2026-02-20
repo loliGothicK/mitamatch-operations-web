@@ -91,7 +91,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.3",
-    "@content-collections/core": "0.14.0",
+    "@content-collections/core": "0.14.1",
     "@content-collections/mdx": "0.2.2",
     "@content-collections/next": "0.2.11",
     "@jest/globals": "30.2.0",
