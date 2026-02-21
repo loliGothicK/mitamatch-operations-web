@@ -90,7 +90,7 @@
     "ws": "8.19.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.3",
+    "@biomejs/biome": "2.4.4",
     "@content-collections/core": "0.14.1",
     "@content-collections/mdx": "0.2.2",
     "@content-collections/next": "0.2.11",
