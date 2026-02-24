@@ -13,7 +13,7 @@ import {
 init({
   dsn: "https://d811f383ea900362accb6a63e57d4302@o4507108758192128.ingest.us.sentry.io/4507108760223744",
 
-  // Adjust this value in production, or use tracesSampler for greater control
+  // Adjust this value in production or use tracesSampler for greater control
   tracesSampleRate: 1,
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
@@ -25,6 +25,7 @@ init({
 
   tracePropagationTargets: [
     /^https:\/\/mitama\.io\/.*/,
+    /^https:\/\/operations.mitama\.io\/.*/,
     /^https:\/\/mitamatch-operations-web.vercel.app\/.*/,
   ],
 

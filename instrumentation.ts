@@ -1,14 +1,12 @@
-import { registerOTel } from "@vercel/otel";
-import { captureRequestError } from "@sentry/nextjs";
-
-export const onRequestError = captureRequestError;
+import * as Sentry from "@sentry/nextjs";
 
 export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
-    await import("./instrumentation.node");
-  } else {
-    registerOTel({
-      serviceName: "mitamatch-operations",
-    });
+    await import("./sentry.server.config");
+  }
+  if (process.env.NEXT_RUNTIME === "edge") {
+    await import("./sentry.edge.config");
   }
 }
+
+export const onRequestError = Sentry.captureRequestError;

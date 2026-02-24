@@ -51,7 +51,7 @@
     "@opentelemetry/sdk-node": "0.212.0",
     "@opentelemetry/sdk-trace-base": "2.5.1",
     "@opentelemetry/semantic-conventions": "1.39.0",
-    "@sentry/nextjs": "10.39.0",
+    "@sentry/nextjs": "10",
     "@sentry/node": "10.39.0",
     "@sentry/opentelemetry-node": "7.120.4",
     "@sentry/profiling-node": "10.39.0",
