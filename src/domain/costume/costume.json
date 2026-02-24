@@ -112826,7 +112826,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "アストラルガーダー",
-        "description": "[ブーステッドスキル]一定時間、自身のメモリアスキル効果を60%アップする",
+        "description": "[ブーステッドスキル]一定時間、自身のメモリアスキル効果を60%アップする。",
         "note": "メモリアスキル効果が60%上昇",
         "effectTime": 60
       },
@@ -125079,7 +125079,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "アストラルガーダー",
-        "description": "[ブーステッドスキル]一定時間、自身のメモリアスキル効果を60%アップする",
+        "description": "[ブーステッドスキル]一定時間、自身のメモリアスキル効果を60%アップする。",
         "note": "メモリアスキル効果が60%上昇",
         "effectTime": 60
       },
@@ -148538,6 +148538,157 @@
       "released_at": "2026-01-20"
     },
     {
+      "id": "01KHXBZNE0NYHH82H4BT2P0KHP",
+      "name": "ミリアム/英傑華衣(通常範囲)",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "フェイズトランセンデンス",
+        "description": "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
+    },
+    {
       "id": "01KFBA82W819MKZBK3MFW60Y05",
       "name": "相澤一葉/英傑華衣",
       "cardType": 2,
@@ -148684,6 +148835,148 @@
         }
       ],
       "released_at": "2026-01-20"
+    },
+    {
+      "id": "01KHXBZPD88ZGK01K88R6QXVB4",
+      "name": "佐々木藍/英傑華衣",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "ルナティックトランサー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。",
+        "note": "味方の攻撃力が30%上昇, 味方の防御力が30%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 350
+          },
+          {
+            "jobSkillType": 3,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
     },
     {
       "id": "01KFBA83VG7SG9N62735B3GW0F",
@@ -149023,6 +149316,826 @@
       "released_at": "2026-01-20"
     },
     {
+      "id": "01KHXBZQCGBYDM5BYE627HRCM1",
+      "name": "芹沢千香瑠/英傑華衣",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "ヘリオスフィア",
+        "description": "一定時間、敵全体の攻撃力/防御力をダウンする。",
+        "note": "敵全体の攻撃力が10%低下, 敵全体の防御力が10%低下",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-01"
+    },
+    {
+      "id": "01KHXBZRBRQYDNN1W5QAWPYDZR",
+      "name": "今叶星/英傑華衣",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "レジスタ",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。",
+        "note": "味方全体の攻撃力が10%上昇, 味方全体の防御力が10%上昇",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-02-17"
+    },
+    {
+      "id": "01KHXBZSB08B53PARWE82HGN66",
+      "name": "宮川高嶺/英傑華衣",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "ゼノンパラドキサ",
+        "description": "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の防御力がアップし、攻撃力が小アップする。",
+        "note": "味方の攻撃力が8%上昇, 味方の防御力が30%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 350
+          },
+          {
+            "jobSkillType": 3,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-17"
+    },
+    {
+      "id": "01KHXBZTA82T13QW559AWNMR97",
+      "name": "土岐紅巴/英傑華衣",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "テスタメント",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。",
+        "note": "効果の0.2%適用",
+        "effectTime": 40
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-03"
+    },
+    {
       "id": "01KFBA85T0SCNMV5SZB2Y6D7MG",
       "name": "松村優珂/英傑華衣",
       "cardType": 4,
@@ -149171,6 +150284,1039 @@
       "released_at": "2026-01-23"
     },
     {
+      "id": "01KHXBZV9G8G354H625EP1FE6H",
+      "name": "牧野美岳/英傑華衣",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "レジスタ",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。",
+        "note": "味方全体の攻撃力が10%上昇, 味方全体の防御力が10%上昇",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 10
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 10
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 10
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 20
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 50
+          },
+          {
+            "jobSkillType": 1,
+            "value": 100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 50
+          },
+          {
+            "jobSkillType": 1,
+            "value": 100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 25
+          },
+          {
+            "jobSkillType": 11,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-16"
+    },
+    {
+      "id": "01KHXBZW8R6G8V0M4ZRQFD3SAD",
+      "name": "賀川蒔菜/英傑華衣(通常範囲)",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
+    },
+    {
+      "id": "01KHXBZX805ZT09H5EHPJMM81G",
+      "name": "本間秋日/英傑華衣",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "ヘリオスフィア",
+        "description": "一定時間、敵全体の攻撃力/防御力をダウンする。",
+        "note": "敵全体の攻撃力が10%低下, 敵全体の防御力が10%低下",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-17"
+    },
+    {
+      "id": "01KHXBZY78APDZ1PGGMZZJNJ7Q",
+      "name": "森本結爾/英傑華衣",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "ファンタズム",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。",
+        "note": "最大確率20%",
+        "effectTime": 40
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-02-01"
+    },
+    {
+      "id": "01KHXBZZ6GXJD6KWQRRMSVTR5Q",
+      "name": "塩崎鈴夢/英傑華衣",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "ルナティックトランサー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。",
+        "note": "味方の攻撃力が30%上昇, 味方の防御力が30%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-02-17"
+    },
+    {
       "id": "01KFBA86S8YNFSETYZ5XSXDRSD",
       "name": "苅谷緋紅/英傑華衣",
       "cardType": 7,
@@ -149307,6 +151453,420 @@
         }
       ],
       "released_at": "2026-01-20"
+    },
+    {
+      "id": "01KHXC005RVQCN3ZP21XXBBX6S",
+      "name": "坪井七保/英傑華衣",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "スキャルドアクセル",
+        "description": "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の攻撃力が大アップし、防御力が特大アップする。",
+        "note": "味方の攻撃力が50%上昇, 味方の防御力が60%上昇",
+        "effectTime": 55
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 350
+          },
+          {
+            "jobSkillType": 3,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-03"
+    },
+    {
+      "id": "01KHXC0150DXX1AJQXNE63WJD1",
+      "name": "鳥居美歩/英傑華衣",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "悪魔の右手",
+        "description": "[異能]味方全体の攻撃力を大幅に上昇させ、敵全体の防御力を大幅に低下させる。※「ラプラス」より攻撃力増加量/防御力減少量が大きい。",
+        "note": "味方全体の攻撃力が30%上昇, 敵全体の防御力が30%低下",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-02-01"
     },
     {
       "id": "01KCKJX828CY8JDH1N4B6DHH16",
@@ -156085,6 +158645,1927 @@
       "released_at": "2026-01-11"
     },
     {
+      "id": "01KHXC0248217JWXV2CFWH62T1",
+      "name": "丹羽灯莉/ショコラメイド",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "天の秤目",
+        "description": "一定時間、敵1体の防御力をダウンする。",
+        "note": "敵の防御が40%低下",
+        "effectTime": 80
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-14"
+    },
+    {
+      "id": "01KHXC033GVZVT084AVTD0PD05",
+      "name": "高須賀月詩/ショコラメイド",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-10"
+    },
+    {
+      "id": "01KHXC042RG7TGW8E07AJ2569B",
+      "name": "渡邉茜/ショコラメイド",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "テスタメントS",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。",
+        "note": "効果の0.2%適用",
+        "effectTime": 40
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 350
+          },
+          {
+            "jobSkillType": 5,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-10"
+    },
+    {
+      "id": "01KHXC05202D8C9WRZQC427C48",
+      "name": "森辰姫/ショコラメイド",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "ルナティックトランサーS",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップする。",
+        "note": "味方の攻撃力が50%上昇, 味方の防御力が50%上昇",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-02-10"
+    },
+    {
+      "id": "01KHXC06184KSRGCJ37RN85HF4",
+      "name": "秦祀/ショコラメイド",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "ゼノンパラドキサS",
+        "description": "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、自身の攻撃力/防御力が大幅にアップする。",
+        "note": "味方の攻撃力が50%上昇, 味方の防御力が50%上昇",
+        "effectTime": 55
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-14"
+    },
+    {
+      "id": "01KHXC070GA85ZKNGMGM1RKFBH",
+      "name": "苅谷緋紅/ショコラメイド",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "テスタメント",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他のリリィ・ヒュージ1体にも適用される。",
+        "note": "効果の0.2%適用",
+        "effectTime": 40
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-01"
+    },
+    {
+      "id": "01KHXC07ZR1NX9D3Q4PV6M6RB1",
+      "name": "一柳梨璃/With Lilie(通常範囲)",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "カリスマ",
+        "description": "一定時間、味方全体の攻撃力を10秒毎にアップする。",
+        "note": "味方全体の攻撃力が4%上昇",
+        "effectTime": 45
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-01"
+    },
+    {
+      "id": "01KHXC08Z090HNQ4ZD86DMQWCA",
+      "name": "白井夢結/With Lilie",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "ルナティックトランサー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。",
+        "note": "味方の攻撃力が30%上昇, 味方の防御力が30%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 350
+          },
+          {
+            "jobSkillType": 2,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 2,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 4,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-13"
+    },
+    {
+      "id": "01KHXC09Y8KHXWYHFJF5P5Q1FJ",
+      "name": "相澤一葉/With Lilie",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "レジスタ",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。",
+        "note": "味方全体の攻撃力が10%上昇, 味方全体の防御力が10%上昇",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 10
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 10
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 10
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 20
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 50
+          },
+          {
+            "jobSkillType": 1,
+            "value": 100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 50
+          },
+          {
+            "jobSkillType": 1,
+            "value": 100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 25
+          },
+          {
+            "jobSkillType": 9,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 3,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-13"
+    },
+    {
+      "id": "01KHXC0AXG76KTWA7PP47KZYX1",
+      "name": "今叶星/With Lilie",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "レジスタ",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。",
+        "note": "味方全体の攻撃力が10%上昇, 味方全体の防御力が10%上昇",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 350
+          },
+          {
+            "jobSkillType": 3,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-13"
+    },
+    {
+      "id": "01KHXC0BWRMPEC1QN1C1DF325H",
+      "name": "一柳梨璃/With Lilie(特殊範囲)",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "カリスマ",
+        "description": "一定時間、味方全体の攻撃力を10秒毎にアップする。",
+        "note": "味方全体の攻撃力が4%上昇",
+        "effectTime": 45
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-01"
+    },
+    {
       "id": "01KFBA87RG2VZ6RXH1KARX9M89",
       "name": "郭神琳/英傑華衣(特殊範囲)",
       "cardType": 4,
@@ -156387,6 +160868,157 @@
         }
       ],
       "released_at": "2026-01-20"
+    },
+    {
+      "id": "01KHXC0CW05QXJSTS61H1DP6ZM",
+      "name": "ミリアム/英傑華衣(特殊範囲)",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "フェイズトランセンデンス",
+        "description": "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
     },
     {
       "id": "01KCKJY2E0W4A9B8S1RKM81S42",
@@ -156824,6 +161456,157 @@
       "released_at": "2024-06-03"
     },
     {
+      "id": "01KHXC0DV8A2SVZE96MK5EHFW1",
+      "name": "賀川蒔菜/英傑華衣(特殊範囲)",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
+    },
+    {
       "id": "01KCKJY5BRH3SSJDK8H5YX5EWQ",
       "name": "毛綱乃彩/百合ヶ丘標準制服(特殊範囲)",
       "cardType": 4,
@@ -157120,6 +161903,140 @@
       "released_at": "2025-11-11"
     },
     {
+      "id": "01KHXC0ETGDEND49WHQZ5QKR42",
+      "name": "一柳梨璃/With Lilie(支援)",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "カリスマ",
+        "description": "一定時間、味方全体の攻撃力を10秒毎にアップする。",
+        "note": "味方全体の攻撃力が4%上昇",
+        "effectTime": 45
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-01"
+    },
+    {
       "id": "01KFBA89Q0A095DC63X83WN5CA",
       "name": "郭神琳/英傑華衣(支援)",
       "cardType": 5,
@@ -157398,6 +162315,145 @@
         }
       ],
       "released_at": "2026-01-20"
+    },
+    {
+      "id": "01KHXC0FSR7GJPBKTH1JHS40AK",
+      "name": "ミリアム/英傑華衣(支援)",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "フェイズトランセンデンス",
+        "description": "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
     },
     {
       "id": "01KCKJY7A80ZJWY3HN4Y99PYME",
@@ -157811,6 +162867,145 @@
       "released_at": "2024-06-03"
     },
     {
+      "id": "01KHXC0GS0XD04SSYTWQS49TGV",
+      "name": "賀川蒔菜/英傑華衣(支援)",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
+    },
+    {
       "id": "01KCKJYA80BBHZW2V1N7SM7F6Q",
       "name": "毛綱乃彩/百合ヶ丘標準制服(支援)",
       "cardType": 5,
@@ -158087,6 +163282,140 @@
         }
       ],
       "released_at": "2025-11-11"
+    },
+    {
+      "id": "01KHXC0HR8DPM5F87BWAHKNMDD",
+      "name": "一柳梨璃/With Lilie(妨害)",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "カリスマ",
+        "description": "一定時間、味方全体の攻撃力を10秒毎にアップする。",
+        "note": "味方全体の攻撃力が4%上昇",
+        "effectTime": 45
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-01"
     },
     {
       "id": "01KFBA8BNGKXDGDYB18989364Z",
@@ -158367,6 +163696,145 @@
         }
       ],
       "released_at": "2026-01-20"
+    },
+    {
+      "id": "01KHXC0JQG17541X9AD7HPDAJZ",
+      "name": "ミリアム/英傑華衣(妨害)",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "フェイズトランセンデンス",
+        "description": "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
     },
     {
       "id": "01KCKJYC6G2JPF4AKM3NXRZTSV",
@@ -158780,6 +164248,145 @@
       "released_at": "2024-06-03"
     },
     {
+      "id": "01KHXC0KPRRYF1A6EAZAYVY39S",
+      "name": "賀川蒔菜/英傑華衣(妨害)",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
+    },
+    {
       "id": "01KCKJYF48AT8D1HN2ZHCDVKGE",
       "name": "毛綱乃彩/百合ヶ丘標準制服(妨害)",
       "cardType": 6,
@@ -159056,6 +164663,140 @@
         }
       ],
       "released_at": "2025-11-11"
+    },
+    {
+      "id": "01KHXC0MP03S9D6Z63W51X3ZCM",
+      "name": "一柳梨璃/With Lilie(回復)",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "カリスマ",
+        "description": "一定時間、味方全体の攻撃力を10秒毎にアップする。",
+        "note": "味方全体の攻撃力が4%上昇",
+        "effectTime": 45
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-01"
     },
     {
       "id": "01KFBA8DM0ESMSZWW34Z1NS4XQ",
@@ -159336,6 +165077,145 @@
         }
       ],
       "released_at": "2026-01-20"
+    },
+    {
+      "id": "01KHXC0NN82G60HZ7FEZMP9HYR",
+      "name": "ミリアム/英傑華衣(回復)",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "フェイズトランセンデンス",
+        "description": "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
     },
     {
       "id": "01KCKJYH2R7JQYR4BA63PR7XNE",
@@ -159749,6 +165629,145 @@
       "released_at": "2024-06-03"
     },
     {
+      "id": "01KHXC0PMGTKCQVFM5P55Z2VS8",
+      "name": "賀川蒔菜/英傑華衣(回復)",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅢ",
+          "description": "自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
+    },
+    {
       "id": "01KCKJYM0GS1W7SVCA86VNK7JG",
       "name": "毛綱乃彩/百合ヶ丘標準制服(回復)",
       "cardType": 7,
@@ -160025,6 +166044,146 @@
         }
       ],
       "released_at": "2025-11-11"
+    },
+    {
+      "id": "01KHXC0QKR7X0YKW61S1WM68R8",
+      "name": "一柳梨璃/With Lilie(通常単体)",
+      "cardType": 1,
+      "rareSkill": {
+        "name": "カリスマ",
+        "description": "一定時間、味方全体の攻撃力を10秒毎にアップする。",
+        "note": "味方全体の攻撃力が4%上昇",
+        "effectTime": 45
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-01"
     },
     {
       "id": "01KFBA8FJGGM6KNSQFQ4YVR49Q",
@@ -160329,6 +166488,157 @@
         }
       ],
       "released_at": "2026-01-20"
+    },
+    {
+      "id": "01KHXC0RK0Z8S2QZWW0ZNCYB6J",
+      "name": "ミリアム/英傑華衣(通常単体)",
+      "cardType": 1,
+      "rareSkill": {
+        "name": "フェイズトランセンデンス",
+        "description": "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
     },
     {
       "id": "01KCKJYNZ0ZJSNS1JJS54PYJ9V",
@@ -160766,6 +167076,157 @@
       "released_at": "2024-06-03"
     },
     {
+      "id": "01KHXC0SJ8BTJ8SCWFEF1ENXAZ",
+      "name": "賀川蒔菜/英傑華衣(通常単体)",
+      "cardType": 1,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
+    },
+    {
       "id": "01KCKJYRWR7VJRPM1ZXQX910F8",
       "name": "毛綱乃彩/百合ヶ丘標準制服(通常単体)",
       "cardType": 1,
@@ -161060,6 +167521,146 @@
         }
       ],
       "released_at": "2025-11-11"
+    },
+    {
+      "id": "01KHXC0THGEJ6FX9ZHWH8BZQ20",
+      "name": "一柳梨璃/With Lilie(特殊単体)",
+      "cardType": 3,
+      "rareSkill": {
+        "name": "カリスマ",
+        "description": "一定時間、味方全体の攻撃力を10秒毎にアップする。",
+        "note": "味方全体の攻撃力が4%上昇",
+        "effectTime": 45
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-02-01"
     },
     {
       "id": "01KFBA8HH04VCYDTZN4PVNG0SG",
@@ -161364,6 +167965,157 @@
         }
       ],
       "released_at": "2026-01-20"
+    },
+    {
+      "id": "01KHXC0VGRH8EHWG07XZBN8Q7V",
+      "name": "ミリアム/英傑華衣(特殊単体)",
+      "cardType": 3,
+      "rareSkill": {
+        "name": "フェイズトランセンデンス",
+        "description": "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
     },
     {
       "id": "01KCKJYTV8Q43HFNJT95KVCNA5",
@@ -161799,6 +168551,157 @@
         }
       ],
       "released_at": "2024-06-03"
+    },
+    {
+      "id": "01KHXC0WG0FSABG4Z2ZX6405KX",
+      "name": "賀川蒔菜/英傑華衣(特殊単体)",
+      "cardType": 3,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 800
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-01-31"
     },
     {
       "id": "01KCKJYXS0Q1PKDYHTHZT6NRBV",
