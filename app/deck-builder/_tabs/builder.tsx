@@ -117,12 +117,13 @@ import type { ImageProps } from "next/dist/shared/lib/get-img-props";
 import type { StrictOmit } from "ts-essentials";
 import { isLeft } from "fp-ts/Either";
 import { useAsync } from "react-use";
-import { ulid } from "ulid";
+import { ULID, ulid } from "ulid";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveDecksAction } from "@/_actions/decks";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import Link from "@/components/link";
 import { useHotkeys } from "react-hotkeys-hook";
+import { openAtom } from "@/jotai/editor";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -1478,6 +1479,8 @@ function SaveDeck() {
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [open, setOpen] = useState(false);
+  const [edit] = useAtom(openAtom);
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -1485,11 +1488,18 @@ function SaveDeck() {
     setOpen(false);
   };
 
+  const hash = (): ULID => {
+    if (edit !== undefined && edit.type === "deck") {
+      return edit.hash;
+    }
+    return ulid();
+  };
+
   const queryClient = useQueryClient();
 
   // Mutations
   const mutation = useMutation({
-    mutationFn: async (unit: Unit & { title: string }) => saveDecksAction(unit),
+    mutationFn: async (unit: Unit & { short?: ULID; title?: string }) => saveDecksAction(unit),
     onSuccess: async () => {
       // Invalidate and refetch
       await queryClient.invalidateQueries({ queryKey: ["decks"] });
@@ -1512,7 +1522,7 @@ function SaveDeck() {
       <Button
         disabled={true}
         color={"secondary"}
-        onClick={() => mutation.mutate({ sw, deck, legendaryDeck, title })}
+        onClick={() => mutation.mutate({ sw, deck, legendaryDeck, title, short: hash() })}
       >
         <Tooltip title={"Ctrl+S"} placement={"top"}>
           <Save />

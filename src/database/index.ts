@@ -200,6 +200,13 @@ export async function getTimelineFullUrl(short: string) {
   return result[0].timeline.timeline;
 }
 
+export function uupdateTitle(short: string, title: string) {
+  return db.update(decks).set({ title }).where(eq(decks.short, short)).returning({
+    title: decks.title,
+    short: decks.short,
+  });
+}
+
 export function upsertDeck(create: {
   short: string;
   unit: Unit;
