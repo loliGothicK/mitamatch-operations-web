@@ -105,7 +105,7 @@
     "@types/js-cookie": "3.0.6",
     "@types/mdx": "2.0.13",
     "@types/pg": "8.16.0",
-    "@types/react": "19.2.13",
+    "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@types/ws": "8.18.1",
     "@vitejs/plugin-react": "5.1.4",
