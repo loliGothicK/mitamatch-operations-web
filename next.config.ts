@@ -53,7 +53,7 @@ const withMdx = createMdx({
 });
 
 export default withSentryConfig(
-  withContentCollections(withMdx(nextConfig), {
+  withContentCollections(withMdx(nextConfig)), {
     // For all available options, see:
     // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
@@ -72,8 +72,7 @@ export default withSentryConfig(
 
     // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers.
     // This can increase your server load as well as your hosting bill.
-    // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
-    // side errors will fail.
+    // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-side errors will fail.
     tunnelRoute: "/monitoring",
 
     webpack: {
@@ -89,5 +88,5 @@ export default withSentryConfig(
         removeDebugLogging: true,
       },
     },
-  }),
+  },
 );
