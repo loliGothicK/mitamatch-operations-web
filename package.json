@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@base-ui/react": "1.2.0",
-    "@clerk/backend": "2.32.2",
+    "@clerk/backend": "2.33.0",
     "@clerk/nextjs": "6.38.3",
     "@codemirror/autocomplete": "6.20.0",
     "@codemirror/lang-sql": "6.10.0",
