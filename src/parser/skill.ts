@@ -551,7 +551,7 @@ function parseElementEffect(
   };
   const parseRate = (description: string): ValidateResult<number> => {
     return pipe(
-      fromNullable(description.match(/スキル効果が(\d+\.\d+)倍/)),
+      fromNullable(description.match(/スキル効果が(\d+\.*\d*)倍/)),
       option.map(([, rate]) =>
         parseIntSafe(rate, {
           path: path.join("parseElementEffect.parseRate"),
