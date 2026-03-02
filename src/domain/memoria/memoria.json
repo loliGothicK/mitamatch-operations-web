@@ -6508,8 +6508,7 @@
         "name": "攻:Sp.パワーUP Ⅰ",
         "description": "前衛から攻撃時、一定確率で自身のSp.ATKをアップさせる。"
       },
-      "labels": [],
-      "phantasm": true
+      "labels": []
     },
     {
       "id": "01KBQB5YKGQGXS2342ZSV10K9B",
@@ -104970,8 +104969,7 @@
         "name": "攻:ダメージUP/副攻:水風ガードDOWN Ⅵ",
         "description": "攻撃時、一定確率で敵の水属性防御力・風属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KJFD1JDBAYD3F8DPA8R2HWK0",
@@ -105001,8 +104999,7 @@
         "name": "攻:ダメージUP/副攻:水風ガードDOWN Ⅵ",
         "description": "攻撃時、一定確率で敵の水属性防御力・風属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KJFD1KCK1GV4PZX0F5NGD982",
@@ -105032,8 +105029,7 @@
         "name": "援:支援UP/副援:水風パワーUP Ⅵ",
         "description": "支援/妨害時、一定確率で味方前衛1体の水属性攻撃力・風属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KJFD1MBVMA91M6H3XZNDBRQ6",
@@ -105063,8 +105059,7 @@
         "name": "回:回復UP/副援:支援UP Ⅵ",
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KJFD1NB3PY4TGCENAHVR0RN8",
@@ -105116,8 +105111,7 @@
           "name": "[レギオンマッチ]水風通:ダメージUP/クリ率UP Ⅴ",
           "description": "水/風属性の通常攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KJFD1Q9KW2P57PBXPFWJNSKP",
@@ -105169,8 +105163,7 @@
           "name": "[レギオンマッチ]水風特:ダメージUP/クリ率UP Ⅴ",
           "description": "水/風属性の特殊攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KJFD1R8V0FWDEY6FCS7VVYBT",
@@ -105222,8 +105215,7 @@
           "name": "[レギオンマッチ]水風援:支援UP/クリ率UP Ⅴ",
           "description": "水/風属性の支援/妨害メモリア使用時に支援/妨害効果を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KJFD1S83FZFE821G197W8F0Q",
