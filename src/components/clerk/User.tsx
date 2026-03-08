@@ -1,18 +1,18 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { Show, SignInButton, UserButton } from "@clerk/nextjs";
 import { Suspense } from "react";
 import { IconButton } from "@mui/material";
 
 export default function User() {
   return (
     <Suspense>
-      <SignedOut>
+      <Show when={"signed-out"}>
         <SignInButton mode={"modal"}>Sign in</SignInButton>
-      </SignedOut>
-      <SignedIn>
+      </Show>
+      <Show when={"signed-in"}>
         <IconButton sx={{ ml: 1 }} color="inherit" component="div">
           <UserButton />
         </IconButton>
-      </SignedIn>
+      </Show>
     </Suspense>
   );
 }
