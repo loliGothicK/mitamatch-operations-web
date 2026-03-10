@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "b": "next build",
     "build": "next build",
     "start": "next start",
     "lint": "pnpm dlx oxlint",

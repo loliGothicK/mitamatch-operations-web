@@ -148,9 +148,7 @@ const IconSelectWithAction = <T,>({
       selected={index === selectedIndex}
       onClick={() => handleOptionClick(index)}
     >
-      <Typography>
-        {option as string}
-      </Typography>
+      <Typography>{option as string}</Typography>
     </MenuItem>
   ));
 

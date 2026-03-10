@@ -23,17 +23,17 @@ Sentry([Sentry / Analytics])
     %% Environments
     subgraph Prod["Production Environment (Vercel)"]
         NextProd["Next.js (App Router)"]
-        
+
         subgraph ServerProd["Server (RSC / API)"]
             API_Prod["API Routes (Webhooks etc)"]
             Action_Prod["Server Actions / Data Fetch"]
         end
-        
+
         subgraph ClientProd["Client (React 19)"]
             UI_Prod["UI (Deck / Timeline)"]
             State_Prod["Jotai (Global State)\nTanStack Query (Cache)"]
         end
-        
+
         NextProd --- ServerProd
         NextProd --- ClientProd
     end
