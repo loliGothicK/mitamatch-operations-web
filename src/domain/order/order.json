@@ -1,6 +1,54 @@
 {
   "data": [
     {
+      "id": 192,
+      "name": "恒星の覚醒妨害",
+      "status": [1893, 1892, 2691, 2674],
+      "effect": "補助スキル発動率減少Lv.5",
+      "description": "味方全体のレギオンマッチ補助スキル発動率が極大減少(75%）。",
+      "prepare_time": 10,
+      "active_time": 100,
+      "payed": true,
+      "kind": "TriggerRateFluctuation",
+      "usually": true
+    },
+    {
+      "id": 191,
+      "name": "覚醒の恒星",
+      "status": [2701, 2684, 1880, 1903],
+      "effect": "補助スキル発動率増加Lv.5",
+      "description": "味方全体のレギオンマッチ補助スキル発動率が極大増加(75%）。",
+      "prepare_time": 10,
+      "active_time": 100,
+      "payed": true,
+      "kind": "TriggerRateFluctuation",
+      "usually": true
+    },
+    {
+      "id": 190,
+      "name": "天月の覚醒妨害",
+      "status": [1579, 1562, 2266, 2256],
+      "effect": "補助スキル発動率減少Lv.5",
+      "description": "味方全体のレギオンマッチ補助スキル発動率が極大減少(75%）。",
+      "prepare_time": 10,
+      "active_time": 100,
+      "payed": false,
+      "kind": "TriggerRateFluctuation",
+      "usually": true
+    },
+    {
+      "id": 189,
+      "name": "覚醒の天月",
+      "status": [2265, 2236, 1578, 1575],
+      "effect": "補助スキル発動率増加Lv.5",
+      "description": "味方全体のレギオンマッチ補助スキル発動率が極大増加(75%）。",
+      "prepare_time": 10,
+      "active_time": 100,
+      "payed": false,
+      "kind": "TriggerRateFluctuation",
+      "usually": true
+    },
+    {
       "id": 188,
       "name": "蒼淵の波濤",
       "status": [1546, 2289, 1569, 2218],
@@ -526,7 +574,7 @@
       "active_time": 90,
       "payed": true,
       "kind": "TriggerRateFluctuation",
-      "usually": true
+      "usually": false
     },
     {
       "id": 144,
@@ -538,7 +586,7 @@
       "active_time": 90,
       "payed": false,
       "kind": "TriggerRateFluctuation",
-      "usually": true
+      "usually": false
     },
     {
       "id": 143,
@@ -550,7 +598,7 @@
       "active_time": 90,
       "payed": false,
       "kind": "TriggerRateFluctuation",
-      "usually": true
+      "usually": false
     },
     {
       "id": 142,
@@ -562,7 +610,7 @@
       "active_time": 80,
       "payed": true,
       "kind": "Other",
-      "usually": true
+      "usually": false
     },
     {
       "id": 141,
