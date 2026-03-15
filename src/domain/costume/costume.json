@@ -161087,7 +161087,8 @@
           "requiresAwakening": false
         }
       ],
-      "released_at": "2026-03-30"
+      "released_at": "2026-03-30",
+      "phantasm": true
     },
     {
       "id": "01KKBEFC6VPPN3NJ10D193P3GP",
