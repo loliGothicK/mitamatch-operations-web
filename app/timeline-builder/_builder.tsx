@@ -55,7 +55,6 @@ import { useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { Virtuoso } from "react-virtuoso";
-import { saveShortLink } from "@/actions/permlink";
 import { restore } from "@/actions/restore";
 import {
   ComputedOrder,
@@ -66,7 +65,9 @@ import {
 import { match } from "ts-pattern";
 import { identity } from "fp-ts/function";
 import { useAsync } from "react-use";
-import { ulid } from "ulid";
+import { ULID, ulid } from "ulid";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { saveTimelinesAction } from "@/_actions/timelines";
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -527,6 +528,17 @@ function ShareButton() {
   const [modalOpen, setModalOpen] = useState<"short" | "full" | false>(false);
   const [openTip, setOpenTip] = useState<boolean>(false);
   const [url, setUrl] = useState<string>("");
+  const queryClient = useQueryClient();
+
+  // Mutations
+  const mutation = useMutation({
+    mutationFn: async (timelines: { timeline: OrderWithPic[]; short?: ULID }) =>
+      saveTimelinesAction(timelines),
+    onSuccess: async () => {
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["decks"] });
+    },
+  });
 
   const handleClick = (mode: "short" | "full") => {
     setModalOpen(mode);
@@ -564,7 +576,7 @@ function ShareButton() {
                 setUrl(
                   `https://operations.mitama.io/timeline-builder?timeline=${short}&title=${encodeURI(title)}`,
                 );
-                await saveShortLink({ target: "timeline", timeline, short });
+                mutation.mutate({ timeline, short });
               }}
             >
               {"short link"}
