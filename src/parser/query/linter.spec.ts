@@ -26,6 +26,7 @@ const TEST_SCHEMA: DbSchema = {
   ORDERS: ["ID", "USER_ID", "AMOUNT"],
 };
 const ALLOWED = new Set(["select", "with"]);
+const TEST_COMPLETION = {};
 
 // State生成ヘルパー
 const mkState = (doc: string) => EditorState.create({ doc, extensions: [sql()] });
@@ -69,7 +70,7 @@ describe("SQL Linter Logic", () => {
       const doc = "SELECT * FROM GHOST_TABLE";
       const state = mkState(doc);
       const ctx = analyzeQueryStructure(state); // コンテキストを作成して
-      const errs = validateSchema(state, ctx, TEST_SCHEMA); // 検証に渡す
+      const errs = validateSchema(state, ctx, TEST_SCHEMA, TEST_COMPLETION); // 検証に渡す
 
       expect(errs).toHaveLength(1);
       expect(errs[0].message).toContain("存在しません");
@@ -79,7 +80,7 @@ describe("SQL Linter Logic", () => {
       const doc = "SELECT u.INVALID_COL FROM USERS u";
       const state = mkState(doc);
       const ctx = analyzeQueryStructure(state);
-      const errs = validateSchema(state, ctx, TEST_SCHEMA);
+      const errs = validateSchema(state, ctx, TEST_SCHEMA, TEST_COMPLETION);
 
       printTree(state);
 
@@ -94,7 +95,7 @@ describe("SQL Linter Logic", () => {
       `;
       const state = mkState(doc);
       const ctx = analyzeQueryStructure(state);
-      const errs = validateSchema(state, ctx, TEST_SCHEMA);
+      const errs = validateSchema(state, ctx, TEST_SCHEMA, TEST_COMPLETION);
 
       expect(errs).toHaveLength(0); // CTE由来のカラムはチェックしないのでOK
     });

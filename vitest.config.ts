@@ -1,9 +1,18 @@
 import { defineConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
-import react from "@vitejs/plugin-react";
+import { fileURLToPath } from "node:url";
 
 export default defineConfig({
-  plugins: [tsconfigPaths(), react()],
+  plugins: [tsconfigPaths()],
+  esbuild: {
+    jsx: "automatic",
+    jsxImportSource: "react",
+  },
+  resolve: {
+    alias: {
+      "server-only": fileURLToPath(new URL("./src/test/shims/server-only.ts", import.meta.url)),
+    },
+  },
   test: {
     environment: "happy-dom",
     globals: true,

@@ -21,7 +21,6 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*", "./app/*", "./docs/*"],
       "@/lib/*": ["./lib/*"],
