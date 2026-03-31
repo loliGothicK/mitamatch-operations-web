@@ -154,6 +154,7 @@ function Icon({
         left: position,
         position: "absolute",
         bgcolor: color,
+        zIndex: 1,
       }}
     >
       {kindImage}
