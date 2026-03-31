@@ -2760,7 +2760,8 @@
       "subColor": "3EB395",
       "bindRune": [
         {
-          "rune": "cen"
+          "rune": "cen",
+          "variant": 2
         },
         {
           "rune": "gyfu"
