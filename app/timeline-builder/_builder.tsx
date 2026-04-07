@@ -7,6 +7,7 @@ import { type SubmitEvent, SetStateAction, Suspense, useCallback, useId, useStat
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
 import { Add, Assignment, DragIndicator, Edit, Remove, Share } from "@mui/icons-material";
+import HelpOutline from "@mui/icons-material/HelpOutline";
 import {
   alpha,
   Avatar,
@@ -68,6 +69,7 @@ import { useAsync } from "react-use";
 import { ULID, ulid } from "ulid";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveTimelinesAction } from "@/_actions/timelines";
+import { TimelineBuilderTour } from "@/timeline-builder/_tour";
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -638,11 +640,14 @@ export function TimelineBuilderPage() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   const [, setPayed] = useAtom(payedAtom);
+  const [replayKey, setReplayKey] = useState(0);
 
   return (
     <Grid container spacing={2} size={{ xs: 12 }} direction={"row"} alignItems={"left"} margin={2}>
+      <TimelineBuilderTour replayKey={replayKey} />
       <Grid size={{ xs: 12, md: 8, lg: 8 }} alignItems={"center"} mt={5}>
         <Container
+          data-tour="timeline-canvas"
           maxWidth={false}
           sx={{
             bgcolor:
@@ -660,6 +665,7 @@ export function TimelineBuilderPage() {
       </Grid>
       <Grid size={{ xs: 12, md: 4, lg: 4 }}>
         <Box
+          data-tour="timeline-controls"
           flexDirection="row"
           justifyContent="flex-end"
           display="flex"
@@ -672,8 +678,14 @@ export function TimelineBuilderPage() {
           <Typography>無課金</Typography>
           <Switch defaultChecked onChange={() => setPayed((prev) => !prev)} />
           <Typography>課金</Typography>
+          <Tooltip title="Tour">
+            <IconButton onClick={() => setReplayKey((prev) => prev + 1)}>
+              <HelpOutline />
+            </IconButton>
+          </Tooltip>
         </Box>
         <Container
+          data-tour="timeline-source"
           maxWidth={false}
           sx={{
             bgcolor:

@@ -1547,6 +1547,7 @@ export function DeckBuilder({ user }: { user: { id: string; name: string } | und
         justifyContent: "center",
       }}
     >
+      <Box data-tour="deck-toolbar" sx={{ width: "100%" }}>
       <Ribbon>
         <RibbonGroup>
           <ToggleButtons />
@@ -1574,6 +1575,7 @@ export function DeckBuilder({ user }: { user: { id: string; name: string } | und
           <SortMenu />
         </RibbonGroup>
       </Ribbon>
+      </Box>
       <Grid
         container
         direction={"row"}
@@ -1590,6 +1592,7 @@ export function DeckBuilder({ user }: { user: { id: string; name: string } | und
           sx={{
             padding: 2,
           }}
+          data-tour="deck-details"
         >
           <Details />
         </Grid>
@@ -1601,12 +1604,13 @@ export function DeckBuilder({ user }: { user: { id: string; name: string } | und
             alignItems: "center",
             justifyContent: "center",
           }}
+          data-tour="deck-unit"
         >
           <Suspense>
             <UnitComponent />
           </Suspense>
         </Grid>
-        <Grid size={{ xs: 12, md: 12, lg: 4 }}>
+        <Grid size={{ xs: 12, md: 12, lg: 4 }} data-tour="deck-source">
           <Source />
         </Grid>
       </Grid>
