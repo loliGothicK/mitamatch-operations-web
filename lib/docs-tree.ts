@@ -46,11 +46,18 @@ export function buildDocsTree(docs: Doc[]): TreeNode[] {
       // 最後のパーツ（＝現在のdocに対応するノード）の場合、情報を埋める
       if (i === parts.length - 1) {
         node.title = doc.title;
-        node.url = `/docs/${doc.slug}`;
+        node.url = `/docs${doc.slug}`;
       }
 
       // 次の階層へ潜る
       currentLevel = node.children;
+    }
+  }
+
+  for (const node of root) {
+    const gettingStarted = node.children.find((child) => child.slug.endsWith("/getting-started"));
+    if (gettingStarted?.url) {
+      node.url = gettingStarted.url;
     }
   }
 

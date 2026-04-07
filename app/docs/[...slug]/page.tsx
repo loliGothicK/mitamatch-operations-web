@@ -1,5 +1,5 @@
 import { allDocs } from "content-collections";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { Box, Typography } from "@mui/material";
 import { Metadata } from "next";
 import { MdxViewer } from "@/docs/_mdx/mdx";
@@ -41,11 +41,23 @@ function getDocFromParams(slug: string[]) {
   return allDocs.find((d) => d.slug === `/${slug.join("/")}`);
 }
 
+function getGettingStartedDoc(slug: string[]) {
+  if (slug.length !== 1) {
+    return undefined;
+  }
+
+  return allDocs.find((d) => d.slug === `/${slug[0]}/getting-started`);
+}
+
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
   const doc = getDocFromParams(slug);
 
   if (!doc) {
+    const gettingStartedDoc = getGettingStartedDoc(slug);
+    if (gettingStartedDoc) {
+      redirect(`/docs${gettingStartedDoc.slug}`);
+    }
     notFound();
   }
 

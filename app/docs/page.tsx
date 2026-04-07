@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function Page() {
-  return redirect("/docs/deck-builder");
+  return redirect("/docs/deck-builder/getting-started");
 }
