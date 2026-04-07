@@ -102,6 +102,18 @@ export const effectiveRoleFilterAtom = atom((get) => {
   return filtered.length === 0 ? currentRoleFilter : filtered;
 });
 
+export const selectedCurrentRoleFilterAtom = atom((get) => {
+  const filter = get(roleFilterAtom);
+  const currentRoleFilter = get(currentRoleFilterAtom);
+  const filtered = filter.filter((value) => currentRoleFilter.includes(value));
+
+  if (filtered.length > 0) {
+    return filtered;
+  }
+
+  return filter.length > 0 ? currentRoleFilter : [];
+});
+
 export const basicStatusFilterAtom = atom<BasicStatusSearch[]>([]);
 export const elementStatusFilterAtom = atom<ElementStatusSearch[]>([]);
 export const otherSkillFilterAtom = atom<OtherSkillSearch[]>([]);

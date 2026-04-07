@@ -9,10 +9,10 @@ import { CheckBoxItem } from "@/components/deck-builder/CheckBoxItem";
 import {
   currentRoleFilterAtom,
   elementFilterAtom,
-  effectiveRoleFilterAtom,
   labelFilterAtom,
   ownedFilterAtom,
   roleFilterAtom,
+  selectedCurrentRoleFilterAtom,
 } from "@/jotai/memoriaAtoms";
 import { type FilterType, labelFilter, roleFilterMap } from "@/types/filterType";
 import { elementFilterMap } from "@/components/deck-builder/Details";
@@ -20,8 +20,8 @@ import { ATTRIBUTES } from "@/parser/skill";
 
 function RoleCheckbox() {
   const [, setFilter] = useAtom(roleFilterAtom);
-  const [effectiveFilter] = useAtom(effectiveRoleFilterAtom);
   const [currentRoleFilter] = useAtom(currentRoleFilterAtom);
+  const [selectedCurrentRoleFilter] = useAtom(selectedCurrentRoleFilterAtom);
 
   return (
     <div>
@@ -29,13 +29,14 @@ function RoleCheckbox() {
         label={"役割"}
         control={
           <Checkbox
-            checked={effectiveFilter.length === currentRoleFilter.length}
+            checked={selectedCurrentRoleFilter.length === currentRoleFilter.length}
             indeterminate={
-              effectiveFilter.length > 0 && effectiveFilter.length < currentRoleFilter.length
+              selectedCurrentRoleFilter.length > 0 &&
+              selectedCurrentRoleFilter.length < currentRoleFilter.length
             }
             onChange={() => {
               setFilter((prev) => {
-                if (effectiveFilter.length === currentRoleFilter.length) {
+                if (selectedCurrentRoleFilter.length === currentRoleFilter.length) {
                   return prev.filter(
                     (v) => !(currentRoleFilter as readonly FilterType[]).includes(v),
                   );
@@ -55,10 +56,10 @@ function RoleCheckbox() {
             <CheckBoxItem
               key={flag}
               name={roleFilterMap[flag]}
-              checked={effectiveFilter.includes(flag)}
+              checked={selectedCurrentRoleFilter.includes(flag)}
               handleChange={() => {
                 setFilter((prev) => {
-                  if (effectiveFilter.includes(flag)) {
+                  if (selectedCurrentRoleFilter.includes(flag)) {
                     return prev.filter((v) => v !== flag);
                   }
                   return [...prev, flag];
