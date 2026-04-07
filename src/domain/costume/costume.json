@@ -400,6 +400,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -6172,6 +6173,7 @@
       "rareSkill": {
         "name": "鷹の目S",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -8069,6 +8071,7 @@
       "rareSkill": {
         "name": "なるべく諦めない！",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -14139,6 +14142,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -17598,6 +17602,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -22020,6 +22025,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -22756,6 +22762,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -26305,6 +26312,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -29456,6 +29464,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -32594,6 +32603,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -39246,6 +39256,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -39702,6 +39713,7 @@
       "rareSkill": {
         "name": "茶柱が立ったわ",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -52038,6 +52050,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -55036,6 +55049,7 @@
       "rareSkill": {
         "name": "なるべく諦めない！",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -64504,6 +64518,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -78114,6 +78129,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -79384,6 +79400,7 @@
       "rareSkill": {
         "name": "なるべく諦めない！",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -81512,6 +81529,7 @@
       "rareSkill": {
         "name": "マグスホークアイ",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -82670,6 +82688,7 @@
       "rareSkill": {
         "name": "鷹の目S",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -85171,6 +85190,7 @@
       "rareSkill": {
         "name": "鷹の目S",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -101835,6 +101855,7 @@
       "rareSkill": {
         "name": "マグスホークアイ",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -101974,6 +101995,7 @@
       "rareSkill": {
         "name": "マグスホークアイ",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -102107,6 +102129,7 @@
       "rareSkill": {
         "name": "マグスホークアイ",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -102240,6 +102263,7 @@
       "rareSkill": {
         "name": "マグスホークアイ",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -102373,6 +102397,7 @@
       "rareSkill": {
         "name": "マグスホークアイ",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -102512,6 +102537,7 @@
       "rareSkill": {
         "name": "マグスホークアイ",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -106476,6 +106502,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -108607,6 +108634,7 @@
       "rareSkill": {
         "name": "鷹の目S",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -118862,6 +118890,7 @@
       "rareSkill": {
         "name": "鷹の目S",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -124000,6 +124029,7 @@
       "rareSkill": {
         "name": "ターゲッティング",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目S」より延長時間が長い。",
+        "note": "オーダー時間を30秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -126626,6 +126656,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -134764,6 +134795,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -134903,6 +134935,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -135036,6 +135069,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -135169,6 +135203,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -135302,6 +135337,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -135441,6 +135477,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -144803,6 +144840,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -147827,6 +147865,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -152475,6 +152514,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -155977,6 +156017,7 @@
       "rareSkill": {
         "name": "鷹の目",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。",
+        "note": "オーダー時間を20秒延長する",
         "effectTime": 0
       },
       "jobSkills": [
@@ -157879,6 +157920,7 @@
       "rareSkill": {
         "name": "エルシアホークアイ",
         "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目S」より延長時間が長い。",
+        "note": "オーダー時間を30秒延長する",
         "effectTime": 0
       },
       "jobSkills": [

@@ -8,6 +8,13 @@
       "when": 1767224732839,
       "tag": "0000_robust_praxagora",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1775563416231,
+      "tag": "0001_nifty_arclight",
+      "breakpoints": true
     }
   ]
 }

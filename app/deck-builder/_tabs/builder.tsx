@@ -24,20 +24,22 @@ import {
   ArrowRightAlt,
   Assignment,
   ClearAll,
-  FilterAlt,
   Image as ImageIcon,
   Layers,
   LayersOutlined,
   Remove,
   Reply,
   ReplyOutlined,
-  SearchOutlined,
   Share,
   Close,
+  PlayArrowRounded,
   Settings,
-  Sort,
   Launch,
   Save,
+  DataObject,
+  Bookmark,
+  Bookmarks,
+  DeleteOutline,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -50,6 +52,7 @@ import {
   DialogContent,
   Divider,
   FormControl,
+  FormControlLabel,
   Grid,
   IconButton,
   ImageListItem,
@@ -77,8 +80,6 @@ import { blue, green, purple, red, yellow } from "@mui/material/colors";
 
 import { decodeDeck, encodeDeck } from "@/endec/serde";
 import Details from "@/components/deck-builder/Details";
-import Filter from "@/components/deck-builder/Filter";
-import Search from "@/components/deck-builder/Search";
 import Sortable from "@/components/sortable/Sortable";
 import type { Memoria } from "@/domain/memoria/memoria";
 import {
@@ -88,13 +89,12 @@ import {
   charmAtom,
   compareModeAtom,
   costumeAtom,
+  deckBuilderQueryAtom,
   defAtom,
   filteredMemoriaAtom,
-  roleFilterAtom,
   rwDeckAtom,
   rwLegendaryDeckAtom,
-  sortKind,
-  sortKindAtom,
+  ownedFilterAtom,
   spDefAtom,
   statusAtom,
   swAtom,
@@ -120,26 +120,32 @@ import type { StrictOmit } from "ts-essentials";
 import { isLeft } from "fp-ts/Either";
 import { useAsync } from "react-use";
 import { ULID, ulid } from "ulid";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { saveDecksAction } from "@/_actions/decks";
+import {
+  deleteQueryPresetAction,
+  getQueryPresetsAction,
+  saveQueryPresetAction,
+} from "@/_actions/query-presets";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import Link from "@/components/link";
 import { useHotkeys } from "react-hotkeys-hook";
 import { openAtom } from "@/jotai/editor";
 import { DeckShareCard } from "@/deck-builder/_share-card";
 import { copyNodeAsImage } from "@/components/share/copyImage";
+import Console from "@/components/Console";
+import { makeSchemaCompletionSource } from "@/data/_common/autocomplete";
+import {
+  getDefaultDeckBuilderQuery,
+  formatMitamaErrors,
+  MemoriaQueryHelp,
+  memoriaQueryCompletion,
+  memoriaQuerySchema,
+  shouldResetDeckBuilderQueryForSw,
+  validateMemoriaQuery,
+} from "@/domain/memoria/query";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
-const FRONTLINE_ROLE_FILTER = [
-  "normal_single",
-  "normal_range",
-  "special_single",
-  "special_range",
-] as const;
-const BACKLINE_ROLE_FILTER = ["support", "interference", "recovery"] as const;
-
-const getRoleFilterByUnit = (sw: "sword" | "shield") =>
-  sw === "shield" ? [...BACKLINE_ROLE_FILTER] : [...FRONTLINE_ROLE_FILTER];
 
 const getUnitMemorias = (
   legendaryDeck: MemoriaWithConcentration[],
@@ -545,8 +551,8 @@ function UnitComponent() {
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setSw] = useAtom(swAtom);
-  const [, setRoleFilter] = useAtom(roleFilterAtom);
   const [, setCompare] = useAtom(compareModeAtom);
+  const [query, setQuery] = useAtom(deckBuilderQueryAtom);
 
   useAsync(async () => {
     const value = params.get("deck");
@@ -558,12 +564,14 @@ function UnitComponent() {
         param: value,
       });
       setSw(sw);
-      setRoleFilter(getRoleFilterByUnit(sw));
+      if (shouldResetDeckBuilderQueryForSw(query, sw)) {
+        setQuery(getDefaultDeckBuilderQuery(sw));
+      }
       setDeck(deck);
       setLegendaryDeck(legendaryDeck);
       setCompare(undefined);
     }
-  }, [setTitle, setDeck, setLegendaryDeck, setRoleFilter, setSw, params, setCompare]);
+  }, [params, query, setCompare, setDeck, setLegendaryDeck, setQuery, setSw, setTitle]);
 
   return (
     <Box
@@ -862,7 +870,7 @@ function Compare({
 
 function VirtualizedList() {
   const theme = useTheme();
-  const [{ isLoaing: isLoading, data }] = useAtom(filteredMemoriaAtom);
+  const [{ isLoaing: isLoading, data, error }] = useAtom(filteredMemoriaAtom);
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [open, setOpen] = useState(false);
@@ -906,6 +914,14 @@ function VirtualizedList() {
 
   if (isLoading) {
     return <CircularProgress />;
+  }
+
+  if (error) {
+    return (
+      <Alert severity="error" sx={{ whiteSpace: "pre-wrap" }}>
+        {error}
+      </Alert>
+    );
   }
 
   return data.length === 0 ? (
@@ -1074,42 +1090,6 @@ function VirtualizedList() {
   );
 }
 
-function SortMenu() {
-  const [sort, setSort] = useAtom(sortKindAtom);
-  return (
-    <PopupState
-      variant="popover"
-      popupId="demo-popup-menu"
-      disableAutoFocus={false}
-      parentPopupState={null}
-    >
-      {(popupState) => (
-        <>
-          <Button {...bindTrigger(popupState)}>
-            <Sort color={"secondary"} />
-          </Button>
-          <Menu {...bindMenu(popupState)}>
-            {sortKind.map((kind) => {
-              return (
-                <MenuItem
-                  key={kind}
-                  selected={kind === sort}
-                  onClick={() => {
-                    popupState.close();
-                    setSort(kind);
-                  }}
-                >
-                  {kind}
-                </MenuItem>
-              );
-            })}
-          </Menu>
-        </>
-      )}
-    </PopupState>
-  );
-}
-
 function Source() {
   const theme = useTheme();
 
@@ -1131,18 +1111,17 @@ function ToggleButtons() {
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [sw, setSw] = useAtom(swAtom);
-  const [, setRoleFilter] = useAtom(roleFilterAtom);
   const [, setCompare] = useAtom(compareModeAtom);
+  const [query, setQuery] = useAtom(deckBuilderQueryAtom);
 
   return (
     <Button
       onClick={() => {
-        if (sw === "shield") {
-          setSw("sword");
-        } else {
-          setSw("shield");
+        const nextSw = sw === "shield" ? "sword" : "shield";
+        setSw(nextSw);
+        if (shouldResetDeckBuilderQueryForSw(query, nextSw)) {
+          setQuery(getDefaultDeckBuilderQuery(nextSw));
         }
-        setRoleFilter(getRoleFilterByUnit(sw === "shield" ? "sword" : "shield"));
         setDeck([]);
         setLegendaryDeck([]);
         setCompare(undefined);
@@ -1155,67 +1134,309 @@ function ToggleButtons() {
   );
 }
 
-function FilterModal({ signedIn }: { signedIn: boolean }) {
+type QueryPreset = {
+  id: string;
+  title: string;
+  query: string;
+  ownedOnly: number;
+  updatedAt: string;
+};
+
+function QueryModal({
+  signedIn,
+  canPersist,
+}: {
+  signedIn: boolean;
+  canPersist: boolean;
+}) {
+  const [query, setQuery] = useAtom(deckBuilderQueryAtom);
+  const [ownedOnly, setOwnedOnly] = useAtom(ownedFilterAtom);
+  const [sw] = useAtom(swAtom);
   const [open, setOpen] = useState(false);
+  const [draftQuery, setDraftQuery] = useState(query);
+  const [toast, setToast] = useState<string | false>(false);
+  const [toastSeverity, setToastSeverity] = useState<"error" | "success" | "warning">("error");
+  const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [presetTitle, setPresetTitle] = useState("");
   const uniqueId = useId();
+  const queryClient = useQueryClient();
+
+  const savePresetMutation = useMutation({
+    mutationFn: async ({
+      title,
+      query,
+      ownedOnly,
+    }: {
+      title: string;
+      query: string;
+      ownedOnly: boolean;
+    }) => saveQueryPresetAction({ title, query, ownedOnly }),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["query-presets"] });
+      setToastSeverity("success");
+      setToast("Preset saved.");
+      setPresetTitle("");
+      setSaveDialogOpen(false);
+    },
+  });
+
   const handleOpen = () => {
+    setDraftQuery(query);
+    setPresetTitle("");
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  const handleApply = () => {
+    const validated = validateMemoriaQuery(draftQuery);
+    if (validated._tag === "Left") {
+      setToastSeverity("error");
+      setToast(formatMitamaErrors(validated.left));
+      return;
+    }
+    setQuery(draftQuery);
+    setOpen(false);
+  };
+  const handleOpenSaveDialog = () => {
+    const validated = validateMemoriaQuery(draftQuery);
+    if (validated._tag === "Left") {
+      setToastSeverity("error");
+      setToast(formatMitamaErrors(validated.left));
+      return;
+    }
+    setSaveDialogOpen(true);
+  };
+  const handleSavePreset = () => {
+    const title = presetTitle.trim();
+    if (title.length === 0) {
+      setToastSeverity("warning");
+      setToast("Preset name is required.");
+      return;
+    }
+    savePresetMutation.mutate({
+      title,
+      query: draftQuery,
+      ownedOnly,
+    });
+  };
+
+  useHotkeys(
+    "ctrl+enter",
+    (event) => {
+      event.preventDefault();
+      if (!open) {
+        return;
+      }
+      handleApply();
+    },
+    { enabled: open },
+  );
+
+  useHotkeys(
+    "ctrl+s, cmd+s",
+    (event) => {
+      event.preventDefault();
+      if (!open || !signedIn || !canPersist) {
+        return;
+      }
+      handleOpenSaveDialog();
+    },
+    { enabled: open },
+  );
 
   return (
     <>
-      <Tooltip title={"filter"} placement={"top"}>
+      <Tooltip title={"query"} placement={"top"}>
         <Button onClick={handleOpen}>
-          <FilterAlt color={"secondary"} />
+          <DataObject color={"secondary"} />
         </Button>
       </Tooltip>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
         <DialogContent>
-          <Typography id={`modal-title-${uniqueId}`} variant="h6" component="h2">
-            Filter
+          <Typography id={`modal-title-${uniqueId}`} variant="h6" component="h2" gutterBottom>
+            Source Query
           </Typography>
-          <Filter signedIn={signedIn} />
+          <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
+            <Tooltip title="Ctrl+Enter" placement="top">
+              <Button onClick={handleApply} startIcon={<PlayArrowRounded />}>
+                Run Query
+              </Button>
+            </Tooltip>
+            {signedIn && (
+              <Tooltip title="Ctrl+S" placement="top">
+                <span>
+                  <Button
+                    onClick={handleOpenSaveDialog}
+                    startIcon={<Save />}
+                    disabled={!canPersist || savePresetMutation.isPending}
+                  >
+                    Save Preset
+                  </Button>
+                </span>
+              </Tooltip>
+            )}
+          </Stack>
+          {signedIn && (
+            <FormControlLabel
+              control={
+                <Checkbox checked={ownedOnly} onChange={(_, checked) => setOwnedOnly(checked)} />
+              }
+              label="所持メモリアのみ"
+            />
+          )}
+          <Console
+            type={"memoria"}
+            value={draftQuery}
+            schema={memoriaQuerySchema}
+            completion={memoriaQueryCompletion}
+            completions={[makeSchemaCompletionSource(memoriaQueryCompletion)]}
+            execute={handleApply}
+            onChange={(value) => {
+              setDraftQuery(value);
+            }}
+          />
+          <Box sx={{ mt: 2 }}>
+            <MemoriaQueryHelp />
+          </Box>
+          {signedIn && (
+            !canPersist && (
+              <Alert severity="warning" sx={{ mt: 2 }}>
+                Database user is not initialized on this branch yet, so presets cannot be saved.
+              </Alert>
+            )
+          )}
         </DialogContent>
         <DialogActions>
+          <Button onClick={() => setDraftQuery(getDefaultDeckBuilderQuery(sw))}>
+            初期化
+          </Button>
           <Button onClick={handleClose}>Close</Button>
+          <Button onClick={handleApply}>Apply</Button>
         </DialogActions>
       </Dialog>
+      <Dialog open={saveDialogOpen} onClose={() => setSaveDialogOpen(false)} fullWidth maxWidth="sm">
+        <DialogContent>
+          <Typography variant="h6" component="h2" gutterBottom>
+            Save Preset
+          </Typography>
+          <TextField
+            autoFocus
+            fullWidth
+            label="Preset name"
+            value={presetTitle}
+            onChange={(event) => setPresetTitle(event.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setSaveDialogOpen(false)}>Cancel</Button>
+          <Button
+            onClick={handleSavePreset}
+            disabled={!canPersist || savePresetMutation.isPending}
+            startIcon={<Bookmark />}
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        open={toast !== false}
+        onClose={() => setToast(false)}
+      >
+        <Alert severity={toastSeverity} sx={{ whiteSpace: "pre-wrap" }}>
+          {toast || ""}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
 
-function SearchModal() {
-  const [open, setOpen] = useState(false);
-  const uniqueId = useId();
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+function QueryPresetsMenu({
+  signedIn,
+  canPersist,
+}: {
+  signedIn: boolean;
+  canPersist: boolean;
+}) {
+  const [, setQuery] = useAtom(deckBuilderQueryAtom);
+  const [, setOwnedOnly] = useAtom(ownedFilterAtom);
+  const [toast, setToast] = useState<string | false>(false);
+  const queryClient = useQueryClient();
+  const presetsQuery = useQuery<QueryPreset[]>({
+    queryKey: ["query-presets"],
+    queryFn: getQueryPresetsAction,
+    enabled: signedIn && canPersist,
+  });
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => deleteQueryPresetAction(id),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["query-presets"] });
+    },
+  });
+
+  if (!signedIn) {
+    return null;
+  }
 
   return (
-    <>
-      <Tooltip title={"search"} placement={"top"}>
-        <Button onClick={handleOpen}>
-          <SearchOutlined color={"secondary"} />
-        </Button>
-      </Tooltip>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogContent>
-          <Typography id={`modal-title-${uniqueId}`} variant="h6" component="h2">
-            Search
-          </Typography>
-          <Search />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
-    </>
+    <PopupState
+      variant="popover"
+      popupId="deck-query-presets-menu"
+      disableAutoFocus={false}
+      parentPopupState={null}
+    >
+      {(popupState) => (
+        <>
+          <Tooltip title={"presets"} placement={"top"}>
+            <Button {...bindTrigger(popupState)} disabled={!canPersist}>
+              <Bookmarks color={"secondary"} />
+            </Button>
+          </Tooltip>
+          <Menu {...bindMenu(popupState)}>
+            {!canPersist && <MenuItem disabled>Database user is not initialized yet</MenuItem>}
+            {(presetsQuery.data ?? []).length === 0 && <MenuItem disabled>No presets</MenuItem>}
+            {(presetsQuery.data ?? []).map((preset) => (
+              <MenuItem
+                key={preset.id}
+                onClick={() => {
+                  setQuery(preset.query);
+                  setOwnedOnly(preset.ownedOnly === 1);
+                  setToast(`Applied preset: ${preset.title}`);
+                  popupState.close();
+                }}
+                sx={{ display: "flex", justifyContent: "space-between", gap: 1 }}
+              >
+                <Stack direction="column" sx={{ minWidth: 220 }}>
+                  <Typography variant="body2">{preset.title}</Typography>
+                  <Typography variant="caption" color="text.secondary" noWrap>
+                    {preset.query}
+                  </Typography>
+                </Stack>
+                <IconButton
+                  size="small"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    deleteMutation.mutate(preset.id);
+                  }}
+                >
+                  <DeleteOutline fontSize="small" />
+                </IconButton>
+              </MenuItem>
+            ))}
+          </Menu>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            autoHideDuration={2500}
+            open={toast !== false}
+            onClose={() => setToast(false)}
+          >
+            <Alert severity="success">{toast || ""}</Alert>
+          </Snackbar>
+        </>
+      )}
+    </PopupState>
   );
 }
 
@@ -1568,7 +1789,13 @@ function SaveDeck() {
   );
 }
 
-export function DeckBuilder({ user }: { user: { id: string; name: string } | undefined }) {
+export function DeckBuilder({
+  signedIn,
+  canPersistQueryPresets,
+}: {
+  signedIn: boolean;
+  canPersistQueryPresets: boolean;
+}) {
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setCompare] = useAtom(compareModeAtom);
@@ -1604,10 +1831,9 @@ export function DeckBuilder({ user }: { user: { id: string; name: string } | und
             <SaveDeck />
             <CalcSettings />
           </RibbonGroup>
-          <RibbonGroup label={"Source"}>
-            <FilterModal signedIn={!!user} />
-            <SearchModal />
-            <SortMenu />
+          <RibbonGroup label={"Query"}>
+            <QueryModal signedIn={signedIn} canPersist={canPersistQueryPresets} />
+            <QueryPresetsMenu signedIn={signedIn} canPersist={canPersistQueryPresets} />
           </RibbonGroup>
         </Ribbon>
       </Box>

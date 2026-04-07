@@ -10,7 +10,7 @@ export default async function Page() {
   const clerkUser = await currentUser();
   const user = clerkUser ? await getUser(clerkUser.id) : undefined;
 
-  return <DeckBuilderPage user={user} />;
+  return <DeckBuilderPage user={user} signedIn={!!clerkUser} />;
 }
 
 type Props = {

@@ -1,12 +1,10 @@
 import { atom } from "jotai";
-import { decodeTime } from "ulid";
 
-import { formatCardType, Memoria, MemoriaId, uniqueMemoriaList } from "@/domain/memoria/memoria";
+import { Memoria, MemoriaId, uniqueMemoriaList } from "@/domain/memoria/memoria";
 import { memoriaList } from "@/domain/memoria/memoria";
 import {
   type ElementFilterType,
   type RoleFilterType,
-  roleFilterMap,
   LabelFilterType,
   labelFilter,
 } from "@/types/filterType";
@@ -19,15 +17,18 @@ import type {
   RecoverySupportSearch,
   VanguardSupportSearch,
 } from "@/types/searchType";
-
 import { charmList } from "@/domain/charm/charm";
 import { costumeList } from "@/domain/costume/costume";
-import { match, P } from "ts-pattern";
-import { Lenz } from "@/domain/lenz";
-import { ATTRIBUTES, isElementEffect, isStackEffect } from "@/parser/skill";
+import { match } from "ts-pattern";
+import { ATTRIBUTES } from "@/parser/skill";
 import { atomWithStorage } from "jotai/utils";
 import { atomWithQuery } from "jotai-tanstack-query";
 import { getListAction } from "@/_actions/memoria";
+import {
+  formatMitamaErrors,
+  getDefaultDeckBuilderQuery,
+  runMemoriaQuery,
+} from "@/domain/memoria/query";
 
 export const targetBeforeAtom = atom<MemoriaId[]>([]);
 export const targetAfterAtom = atom<MemoriaId[]>([]);
@@ -81,6 +82,14 @@ export const roleFilterAtom = atom<RoleFilterType[]>(["support", "interference",
 export const elementFilterAtom = atom<ElementFilterType[]>([...ATTRIBUTES]);
 export const labelFilterAtom = atom<LabelFilterType[]>([...labelFilter]);
 export const ownedFilterAtom = atom(false);
+export const deckBuilderQueryAtom = atomWithStorage<string>(
+  "query[deck-builder]",
+  getDefaultDeckBuilderQuery("shield"),
+  undefined,
+  {
+    getOnInit: true,
+  },
+);
 const owningAtom = atomWithQuery<{ id: string; name: string; limitBreak: number }[]>(() => ({
   queryKey: ["memoria"],
   queryFn: getListAction,
@@ -134,7 +143,11 @@ export const resetFilterAtom = atom(null, (_, set) => {
 
 export const sortKindAtom = atom<SortKind>("ID");
 
-export const filteredMemoriaAtom = atom((get) => {
+export const filteredMemoriaAtom = atom<{
+  isLoaing: boolean;
+  data: MemoriaWithConcentration[];
+  error?: string;
+}>((get) => {
   const isOwnedFilterEnabled = get(ownedFilterAtom);
 
   let source: MemoriaWithConcentration[];
@@ -150,159 +163,28 @@ export const filteredMemoriaAtom = atom((get) => {
             ?.cards.map((card) => ({ ...card, concentration: limitBreak as Concentration })) ?? [],
       ) || [];
   } else {
-    // 5. OFFの場合は既存のリストを使用（ここではフェッチは発生しない）
     source = memoriaList
       .filter((memoria) => memoria.phantasm !== true)
       .map((memoria) => ({ ...memoria, concentration: 4 }));
   }
-  const result = source
-    .filter((memoria) => {
-      const sw = match(get(swAtom))
-        .with("shield", () => memoria.cardType > 4)
-        .with("sword", () => memoria.cardType < 5)
-        .exhaustive();
+  const queried = runMemoriaQuery(source, get(deckBuilderQueryAtom));
+  if (queried._tag === "Left") {
+    return {
+      isLoaing: false,
+      data: [] as MemoriaWithConcentration[],
+      error: formatMitamaErrors(queried.left),
+    };
+  }
 
-      const role = get(effectiveRoleFilterAtom).some((filter) => {
-        return formatCardType(memoria.cardType) === roleFilterMap[filter];
-      });
-
-      const element = get(elementFilterAtom).some((filter) => {
-        return memoria.attribute === filter;
-      });
-
-      const label = match(get(labelFilterAtom))
-        .with([], () => false)
-        .with(labelFilter, () => true)
-        .otherwise((filters) =>
-          filters.some((filter) => {
-            return match(filter)
-              .with("Normal", () =>
-                (["Legendary", "Ultimate"] as const).every((lbl) => !memoria.labels.includes(lbl)),
-              )
-              .otherwise((filter) => memoria.labels.includes(filter));
-          }),
-        );
-
-      const basicStatus = get(basicStatusFilterAtom).every((filter) => {
-        return Lenz.memoria.gvgSkill.effects.get(memoria).some((eff) =>
-          match(eff)
-            .with({ status: filter.status }, ({ type }) =>
-              match(filter.upDown)
-                .with("UP", () => type === "buff")
-                .with("DOWN", () => type === "debuff")
-                .exhaustive(),
-            )
-            .otherwise(() => false),
-        );
-      });
-
-      const elementStatus = get(elementStatusFilterAtom).every((filter) => {
-        return Lenz.memoria.gvgSkill.effects.get(memoria).some((eff) =>
-          match(eff)
-            .with({ status: filter.status }, ({ type }) =>
-              match(filter.upDown)
-                .with("UP", () => type === "buff")
-                .with("DOWN", () => type === "debuff")
-                .exhaustive(),
-            )
-            .otherwise(() => false),
-        );
-      });
-
-      const otherSkill = get(otherSkillFilterAtom).every((filter) => {
-        return match(filter)
-          .with(P.union("anima", "barrier", "meteor", "eden"), (filter) =>
-            Lenz.memoria.gvgSkill.effects.get(memoria).some(isStackEffect(filter)),
-          )
-          .with(P.union("minima", "spread", "enhance"), (filter) =>
-            Lenz.memoria.gvgSkill.effects.get(memoria).some(isElementEffect(filter)),
-          )
-          .with(
-            P.union("heal", "charge", "counter", "s-counter"),
-            (filter) => !!Lenz.memoria.gvgSkill.kinds.get(memoria)?.some((kind) => kind === filter),
-          )
-          .otherwise(({ attribute, kind }) =>
-            Lenz.memoria.gvgSkill.kinds.get(memoria)?.some((k) =>
-              match(k)
-                .with({ element: attribute, kind }, () => true)
-                .otherwise(() => false),
-            ),
-          );
-      });
-
-      const vanguardSupport = get(vanguardSupportFilterAtom).every((filter) => {
-        if (typeof filter === "string") {
-          return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => x.type === filter);
-        }
-        return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
-          return x.status === filter.status && x.type === filter.upDown;
-        });
-      });
-
-      const assistSupport = get(assistSupportFilterAtom).every((filter) => {
-        if (typeof filter === "string") {
-          return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => x.type === filter);
-        }
-        return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
-          return x.status === filter.status && x.type === filter.upDown;
-        });
-      });
-
-      const recoverySupport = get(recoverySupportFilterAtom).every((filter) => {
-        if (typeof filter === "string") {
-          return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => x.type === filter);
-        }
-        return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
-          return x.status === filter.status && x.type === filter.upDown;
-        });
-      });
-
-      const otherSupport = get(otherSupportFilterAtom).every((filter) => {
-        return Lenz.memoria.autoSkill.effects.get(memoria).some((x) => {
-          return x.type === filter;
-        });
-      });
-
-      return (
-        sw &&
-        role &&
-        element &&
-        label &&
-        basicStatus &&
-        elementStatus &&
-        otherSkill &&
-        vanguardSupport &&
-        assistSupport &&
-        recoverySupport &&
-        otherSupport &&
-        !get(rwDeckAtom).some(
-          ({ name }) => Lenz.memoria.general.shortName.get(memoria) === name.short,
-        ) &&
-        !get(rwLegendaryDeckAtom).some(
-          ({ name }) => Lenz.memoria.general.shortName.get(memoria) === name.short,
-        )
-      );
-    })
-    .sort((a, b) => {
-      return match(get(sortKindAtom))
-        .with("ID", () => decodeTime(b.id) - decodeTime(a.id))
-        .with("ATK", () => b.status[4][0] - a.status[4][0])
-        .with("Sp.ATK", () => b.status[4][1] - a.status[4][1])
-        .with("DEF", () => b.status[4][2] - a.status[4][2])
-        .with("Sp.DEF", () => b.status[4][3] - a.status[4][3])
-        .with(
-          "ATK+Sp.ATK",
-          () => b.status[4][0] + b.status[4][1] - (a.status[4][0] + a.status[4][1]),
-        )
-        .with(
-          "DEF+Sp.DEF",
-          () => b.status[4][2] + b.status[4][3] - (a.status[4][2] + a.status[4][3]),
-        )
-        .exhaustive();
-    });
+  const result = queried.right.filter(
+    (memoria: Memoria) =>
+      !get(rwDeckAtom).some(({ name }) => name.short === memoria.name.short) &&
+      !get(rwLegendaryDeckAtom).some(({ name }) => name.short === memoria.name.short),
+  );
 
   return {
     isLoaing: false,
     data: result,
+    error: undefined as string | undefined,
   };
 });

@@ -1,24 +1,20 @@
-import { formatCardType, type Memoria, memoriaList as dataSource } from "@/domain/memoria/memoria";
-
+import { useMemo } from "react";
+import { Tooltip, Typography } from "@mui/material";
 import { type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
-import { Lenz } from "@/domain/lenz";
-import type { Attribute } from "@/parser/skill";
-import { match } from "ts-pattern";
-import { JSX, useMemo } from "react";
+import { decodeTime } from "ulid";
 import Link from "@/components/link";
-import { SchemaResolver } from "@/parser/query/filter";
-import { ComleteCandidate } from "@/data/_common/autocomplete";
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  ListSubheader,
-  Tooltip,
-  Typography,
-} from "@mui/material";
-import { MemoriaIcon } from "@/components/image/MemoriaIcon";
 import { DataGrid } from "@/data/_common/DataGrid";
+import { Lenz } from "@/domain/lenz";
+import {
+  MemoriaQueryHelp,
+  memoriaQueryCompletion,
+  memoriaQueryResolver,
+  memoriaQuerySchema,
+} from "@/domain/memoria/query";
+import { formatCardType, type Memoria, memoriaList as dataSource } from "@/domain/memoria/memoria";
+import { MemoriaIcon } from "@/components/image/MemoriaIcon";
+import { match } from "ts-pattern";
+import type { Attribute } from "@/parser/skill";
 
 const columns: GridColDef<Memoria>[] = [
   {
@@ -97,6 +93,13 @@ const columns: GridColDef<Memoria>[] = [
     valueGetter: (_, memoria: Memoria) => Lenz.memoria.general.spdef.get(memoria),
   },
   {
+    field: "released_at",
+    headerName: "Released",
+    width: 180,
+    type: "dateTime",
+    valueGetter: (_, memoria: Memoria) => new Date(decodeTime(memoria.id)),
+  },
+  {
     field: "questSkill",
     headerName: "Quest Skill",
     width: 300,
@@ -137,226 +140,10 @@ const columns: GridColDef<Memoria>[] = [
   },
 ];
 
-export const schema = {
-  memoria: [
-    "name",
-    "type",
-    "attribute",
-    "cost",
-    "atk",
-    "spatk",
-    "def",
-    "spdef",
-    "questSkill",
-    "gvgSkill",
-    "autoSkill",
-    "label",
-  ],
-};
-
-const resolver: SchemaResolver<Memoria> = {
-  name: {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.fullName.get(memoria),
-  },
-  type: {
-    type: "string",
-    accessor: (memoria: Memoria) => formatCardType(Lenz.memoria.general.cardType.get(memoria)),
-  },
-  attribute: {
-    type: "string",
-    accessor: (memoria: Memoria) =>
-      match(Lenz.memoria.general.attribute.get(memoria))
-        .with("Fire", () => "火")
-        .with("Water", () => "水")
-        .with("Wind", () => "風")
-        .with("Light", () => "光")
-        .with("Dark", () => "闇")
-        .exhaustive(),
-  },
-  cost: {
-    type: "number",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.cost.get(memoria),
-  },
-  atk: {
-    type: "number",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.atk.get(memoria),
-  },
-  spatk: {
-    type: "number",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.spatk.get(memoria),
-  },
-  def: {
-    type: "number",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.def.get(memoria),
-  },
-  spdef: {
-    type: "number",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.spdef.get(memoria),
-  },
-  questSkill: {
-    type: "clazz",
-    accessor: (memoria: Memoria) => ({
-      type: "memoriaSkill",
-      data: Lenz.memoria.general.questSkill.get(memoria).raw,
-    }),
-  },
-  "questSkill.name": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.name,
-  },
-  "questSkill.description": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.questSkill.get(memoria).raw.description,
-  },
-  gvgSkill: {
-    type: "clazz",
-    accessor: (memoria: Memoria) => ({
-      type: "memoriaSkill",
-      data: Lenz.memoria.general.gvgSkill.get(memoria).raw,
-    }),
-  },
-  "gvgSkill.name": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.name,
-  },
-  "gvgSkill.description": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.gvgSkill.get(memoria).raw.description,
-  },
-  autoSkill: {
-    type: "clazz",
-    accessor: (memoria: Memoria) => ({
-      type: "memoriaSkill",
-      data: Lenz.memoria.general.autoSkill.get(memoria).raw,
-    }),
-  },
-  "autoSkill.name": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.name,
-  },
-  "autoSkill.description": {
-    type: "string",
-    accessor: (memoria: Memoria) => Lenz.memoria.general.autoSkill.get(memoria).raw.description,
-  },
-  label: {
-    type: "clazz",
-    accessor: (memoria: Memoria) => ({
-      type: "labels",
-      data: Lenz.memoria.general.labels.get(memoria),
-    }),
-  },
-};
-
 const visibilityAll = columns.reduce<GridColumnVisibilityModel>((acc, col) => {
   acc[col.field] = true;
   return acc;
 }, {});
-
-const completeCandidates: Record<string, ComleteCandidate> = {
-  type: {
-    equals: ["通常単体", "通常範囲", "特殊単体", "特殊範囲", "支援", "妨害", "回復"],
-    like: {
-      pattern: ["前衛", "後衛", "通常", "特殊"],
-      item: "string",
-      operator: (item: string, pattern: string): boolean => {
-        return match(pattern)
-          .with("前衛", () => ["通常単体", "通常範囲", "特殊単体", "特殊範囲"].includes(item))
-          .with("後衛", () => ["支援", "妨害", "回復"].includes(item))
-          .with("通常", () => ["通常単体", "通常範囲"].includes(item))
-          .with("特殊", () => ["特殊単体", "特殊範囲"].includes(item))
-          .run();
-      },
-    },
-  },
-  attribute: {
-    equals: ["火", "水", "風", "光", "闇"],
-  },
-  questSkill: {
-    json: ["name", "description"],
-  },
-  gvgSkill: {
-    json: ["name", "description"],
-  },
-  autoSkill: {
-    json: ["name", "description"],
-  },
-  label: {
-    equals: ["legendary", "ultimate"],
-  },
-};
-
-const TABLE_DEF: [string, string][] = [
-  ["name", "text"],
-  ["type", "text"],
-  ["attribute", "text"],
-  ["cost", "integer"],
-  ["atk", "integer"],
-  ["spatk", "integer"],
-  ["def", "integer"],
-  ["spdef", "integer"],
-  ["questSkill", "json"],
-  ["gvgSkill", "json"],
-  ["autoSkill", "json"],
-  ["label", "text"],
-];
-
-/**
- * A functional React component that provides help-related content.
- *
- * @return {JSX.Element} The rendered JSX element representing the help section.
- */
-function Help(): JSX.Element {
-  return (
-    <Box sx={{ p: 2 }}>
-      <Typography variant="h6" gutterBottom>
-        クエリ構文ヘルプ
-      </Typography>
-      <Typography variant="body1" component={"p"}>
-        <Link
-          href={
-            "https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax?_gl=1*1r0yeqs*_up*MQ..&gclid=CjwKCAiA9aPKBhBhEiwAyz82J38ShbwRPZ9EEBoTkEJ7mm9mE0JT59BxPhmMKBMf6eJaHMq6NqcmohoCItcQAvD_BwE&gclsrc=aw.ds"
-          }
-        >
-          {"GoogleSQL"}
-        </Link>
-        （for BigQuery）ライクなクエリを使用してデータをフィルタリング、ソートできます。
-      </Typography>
-      <List dense>
-        <ListSubheader>サポートされているキーワード</ListSubheader>
-        <ListItem>
-          <ListItemText
-            primary="SELECT"
-            secondary="表示するカラムを選択します。例: SELECT `name`, `atk`"
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemText
-            primary="WHERE"
-            secondary="データをフィルタリングします。例: WHERE `cost` > 18 AND `type` = '支援'"
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemText
-            primary="ORDER BY"
-            secondary="データをソートします。例: ORDER BY `atk` DESC"
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary="LIMIT" secondary="表示する行数を制限します。例: LIMIT 10" />
-        </ListItem>
-      </List>
-      <List dense>
-        <ListSubheader>利用可能なカラム</ListSubheader>
-        {TABLE_DEF.map(([col, type]) => (
-          <ListItem key={col} sx={{ py: 0 }}>
-            <ListItemText primary={`\`${col}\`: ${type}`} />
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-}
 
 export function Datagrid({ initialQuery }: { initialQuery?: string }) {
   const original = useMemo(() => dataSource.toReversed(), []);
@@ -365,11 +152,11 @@ export function Datagrid({ initialQuery }: { initialQuery?: string }) {
     <DataGrid
       table={"memoria"}
       origin={original}
-      resolver={resolver}
+      resolver={memoriaQueryResolver}
       initialQuery={initialQuery}
-      schema={schema}
-      completion={completeCandidates}
-      help={<Help />}
+      schema={memoriaQuerySchema}
+      completion={memoriaQueryCompletion}
+      help={<MemoriaQueryHelp />}
       columns={columns}
       visibilityAll={visibilityAll}
     />

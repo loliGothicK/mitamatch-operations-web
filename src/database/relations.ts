@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm/relations";
-import { users, decks, timelines, usersToMemoria, memoria } from "@/database/schema";
+import { users, decks, timelines, usersToMemoria, memoria, queryPresets } from "@/database/schema";
 
 export const deckRelations = relations(decks, ({ one }) => ({
   user: one(users, {
@@ -11,11 +11,19 @@ export const deckRelations = relations(decks, ({ one }) => ({
 export const userRelations = relations(users, ({ many }) => ({
   decks: many(decks),
   timelines: many(timelines),
+  queryPresets: many(queryPresets),
 }));
 
 export const timelineRelations = relations(timelines, ({ one }) => ({
   user: one(users, {
     fields: [timelines.userId],
+    references: [users.id],
+  }),
+}));
+
+export const queryPresetRelations = relations(queryPresets, ({ one }) => ({
+  user: one(users, {
+    fields: [queryPresets.userId],
     references: [users.id],
   }),
 }));

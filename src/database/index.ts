@@ -7,6 +7,7 @@ import {
   memoria,
   organization,
   organizationMembers,
+  queryPresets,
   timelines,
   users,
   usersToMemoria,
@@ -178,6 +179,21 @@ export async function getTimelinesByClerkUserId(clerkUserId: string) {
     );
 }
 
+export async function getQueryPresetsByClerkUserId(clerkUserId: string) {
+  const user = await getUser(clerkUserId);
+
+  return db
+    .select({
+      id: queryPresets.id,
+      title: queryPresets.title,
+      query: queryPresets.query,
+      ownedOnly: queryPresets.ownedOnly,
+      updatedAt: queryPresets.updatedAt,
+    })
+    .from(queryPresets)
+    .where(eq(queryPresets.userId, user.id));
+}
+
 // デッキの短縮URLがDBに存在する場合、デッキのフルURLを取得する
 export async function getDeckFullUrl(short: string) {
   const result = await db.select().from(decks).where(eq(decks.short, short));
@@ -264,4 +280,43 @@ export function upsertTimeline(create: {
     .returning({
       id: timelines.id,
     });
+}
+
+export function upsertQueryPreset(create: {
+  id?: string;
+  userId: string;
+  title: string;
+  query: string;
+  ownedOnly: boolean;
+}) {
+  const now = new Date().toISOString();
+
+  return db
+    .insert(queryPresets)
+    .values({
+      id: create.id,
+      userId: create.userId,
+      title: create.title,
+      query: create.query,
+      ownedOnly: create.ownedOnly ? 1 : 0,
+      updatedAt: now,
+    })
+    .onConflictDoUpdate({
+      target: queryPresets.id,
+      set: {
+        title: create.title,
+        query: create.query,
+        ownedOnly: create.ownedOnly ? 1 : 0,
+        updatedAt: now,
+      },
+    })
+    .returning({
+      id: queryPresets.id,
+    });
+}
+
+export function deleteQueryPreset(id: string, userId: string) {
+  return db
+    .delete(queryPresets)
+    .where(and(eq(queryPresets.id, id), eq(queryPresets.userId, userId)));
 }

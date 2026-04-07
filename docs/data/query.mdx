@@ -38,17 +38,25 @@ section: 1
 
 ### Memoria
 
+特殊範囲かつエンハンスかつ範囲がDであるメモリアを絞り込みたい場合:
+
 ```sql
-SELECT EXCEPT (`questkill`) FROM memoria
-WHERE `type` = '支援' AND `cost` >= 20;
+SELECT * -- 全てのカラムを表示する
+  FROM memoria
+  WHERE `type` LIKE '特殊' -- カードタイプが特殊単体か特殊範囲 (LIKEの特別な使い方)
+    and `gvgSkill.name` LIKE "%エンハ%D%" -- レギオンマッチスキル名に "エンハ" と "D" を含む (LIKEを部分一致として使う)
+  ORDER BY `released_at` DESC; -- リリース日の逆順
 ```
 
 ### Costume
 
+覚醒可能ADX衣装を絞り込みたい場合:
+
 ```sql
-SELECT (`name`, `type`, `rareSkill`, `released_at`) FROM costume
-WHERE `specialSkill` LIKE 'ADX,覚醒'
-ORDER BY `released_at` DESC;
+SELECT (`name`, `type`, `rareSkill`, `released_at`) -- 表示カラムの選択
+  FROM costume
+  WHERE `specialSkill` LIKE 'ADX,覚醒' -- 衣装のスキルに対する LIKE の特別な用法
+  ORDER BY `released_at` DESC; -- リリース日の逆順
 ```
 
 ## 補足

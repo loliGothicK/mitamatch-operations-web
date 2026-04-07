@@ -30,7 +30,13 @@ function a11yProps(index: number) {
   };
 }
 
-export function DeckBuilderPage({ user }: { user: { id: string; name: string } | undefined }) {
+export function DeckBuilderPage({
+  user,
+  signedIn,
+}: {
+  user: { id: string; name: string } | undefined;
+  signedIn: boolean;
+}) {
   const [value, setValue] = useState(0);
   const [replayKey, setReplayKey] = useState(0);
 
@@ -70,7 +76,7 @@ export function DeckBuilderPage({ user }: { user: { id: string; name: string } |
         </Box>
       </Box>
       <CustomTabPanel index={0} value={value} key={"untitled"}>
-        <DeckBuilder user={user} />
+        <DeckBuilder signedIn={signedIn} canPersistQueryPresets={!!user} />
       </CustomTabPanel>
       <CustomTabPanel index={1} value={value} key={"calculator"}>
         <Calculator />

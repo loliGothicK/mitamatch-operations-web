@@ -118,6 +118,23 @@ export const timelines = pgTable("timeline", {
   updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
 });
 
+export const queryPresets = pgTable("query_preset", {
+  id: ulid("id")
+    .$defaultFn(() => genUlid())
+    .primaryKey()
+    .notNull(),
+  userId: ulid("user_id").references(() => users.id, {
+    onDelete: "cascade",
+  }),
+  title: varchar("title", { length: 255 }).notNull(),
+  query: varchar("query", { length: 10_000 }).notNull(),
+  ownedOnly: integer("owned_only").notNull().default(0),
+  createdAt: timestamp({ precision: 3, mode: "string" })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp({ precision: 3, mode: "string" }).notNull(),
+});
+
 export const memoria = pgTable("memoria", {
   id: ulid("id")
     .$defaultFn(() => genUlid())
