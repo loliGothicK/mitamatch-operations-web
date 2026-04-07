@@ -130,6 +130,64 @@ import { DeckShareCard } from "@/deck-builder/_share-card";
 import { copyNodeAsImage } from "@/components/share/copyImage";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
+const FRONTLINE_ROLE_FILTER = [
+  "normal_single",
+  "normal_range",
+  "special_single",
+  "special_range",
+] as const;
+const BACKLINE_ROLE_FILTER = ["support", "interference", "recovery"] as const;
+
+const getRoleFilterByUnit = (sw: "sword" | "shield") =>
+  sw === "shield" ? [...BACKLINE_ROLE_FILTER] : [...FRONTLINE_ROLE_FILTER];
+
+const getUnitMemorias = (
+  legendaryDeck: MemoriaWithConcentration[],
+  deck: MemoriaWithConcentration[],
+) => legendaryDeck.concat(deck);
+
+const isLegendaryMemoria = (memoria: MemoriaWithConcentration) =>
+  memoria.labels.includes("Legendary");
+
+const hasStackDescription = (memoria?: MemoriaWithConcentration) =>
+  memoria?.skills.gvgSkill.raw.description.includes("スタック") ?? false;
+
+const getNextConcentration = (concentration: number): Concentration =>
+  (concentration > 0 ? concentration - 1 : 4) as Concentration;
+
+const updateMemoriaConcentration = (
+  memorias: MemoriaWithConcentration[],
+  shortName: string,
+  concentration: Concentration,
+) =>
+  memorias.map((memoria) =>
+    memoria.name.short === shortName ? { ...memoria, concentration } : memoria,
+  );
+
+const replaceMemoriaById = (
+  memorias: MemoriaWithConcentration[],
+  targetId: string | undefined,
+  replacement: MemoriaWithConcentration,
+) => memorias.map((memoria) => (memoria.id === targetId ? replacement : memoria));
+
+const removeMemoriaByShortName = (memorias: MemoriaWithConcentration[], shortName: string) =>
+  memorias.filter((memoria) => memoria.name.short !== shortName);
+
+const getStackSettings = (memoria: MemoriaWithConcentration, sw: "sword" | "shield") => {
+  const effect = match(sw)
+    .with("sword", () => Lenz.memoria.gvgSkill.effects.get(memoria).find(isStackEffect("meteor")))
+    .with("shield", () =>
+      Lenz.memoria.gvgSkill.effects
+        .get(memoria)
+        .find((eff) => isStackEffect("eden")(eff) || isStackEffect("anima")(eff)),
+    )
+    .exhaustive();
+
+  return {
+    rate: effect?.rate,
+    times: effect?.times,
+  };
+};
 
 function Icon({
   cardType,
@@ -143,12 +201,22 @@ function Icon({
   const iconSize = 28;
 
   const kindImage = match(cardType)
-    .with(1, () => <Image src={"/NormalSingle.png"} alt={"kind"} width={iconSize} height={iconSize} />)
-    .with(2, () => <Image src={"/NormalRange.png"} alt={"kind"} width={iconSize} height={iconSize} />)
-    .with(3, () => <Image src={"/SpecialSingle.png"} alt={"kind"} width={iconSize} height={iconSize} />)
-    .with(4, () => <Image src={"/SpecialRange.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(1, () => (
+      <Image src={"/NormalSingle.png"} alt={"kind"} width={iconSize} height={iconSize} />
+    ))
+    .with(2, () => (
+      <Image src={"/NormalRange.png"} alt={"kind"} width={iconSize} height={iconSize} />
+    ))
+    .with(3, () => (
+      <Image src={"/SpecialSingle.png"} alt={"kind"} width={iconSize} height={iconSize} />
+    ))
+    .with(4, () => (
+      <Image src={"/SpecialRange.png"} alt={"kind"} width={iconSize} height={iconSize} />
+    ))
     .with(5, () => <Image src={"/Assist.png"} alt={"kind"} width={iconSize} height={iconSize} />)
-    .with(6, () => <Image src={"/Interference.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(6, () => (
+      <Image src={"/Interference.png"} alt={"kind"} width={iconSize} height={iconSize} />
+    ))
     .with(7, () => <Image src={"/Recovery.png"} alt={"kind"} width={iconSize} height={iconSize} />)
     .exhaustive();
 
@@ -284,31 +352,14 @@ function MemoriaItem({
     id,
   });
 
-  const changeValue = (prev: MemoriaWithConcentration[]) => {
-    return prev.map((memoria) => {
-      if (memoria.name.short === name.short) {
-        return {
-          ...memoria,
-          concentration: (concentrationValue > 0 ? concentrationValue - 1 : 4) as Concentration,
-        };
-      }
-      return memoria;
-    });
-  };
-
   const handleConcentration = () => {
-    if (concentrationValue > 0) {
-      setConcentration((concentrationValue - 1) as Concentration);
-    } else {
-      setConcentration(4);
-    }
+    const nextConcentration = getNextConcentration(concentrationValue);
+    setConcentration(nextConcentration);
     if (onConcentrationChange) {
-      onConcentrationChange(
-        concentrationValue > 0 ? ((concentrationValue - 1) as Concentration) : 4,
-      );
+      onConcentrationChange(nextConcentration);
     } else {
-      setDeck(changeValue);
-      setLegendaryDeck(changeValue);
+      setDeck((prev) => updateMemoriaConcentration(prev, name.short, nextConcentration));
+      setLegendaryDeck((prev) => updateMemoriaConcentration(prev, name.short, nextConcentration));
     }
   };
 
@@ -408,12 +459,8 @@ function MemoriaItem({
                       }}
                       aria-label={"remove"}
                       onClick={() => {
-                        setDeck((prev) =>
-                          prev.filter((memoria) => memoria.name.short !== name.short),
-                        );
-                        setLegendaryDeck((prev) =>
-                          prev.filter((memoria) => memoria.name.short !== name.short),
-                        );
+                        setDeck((prev) => removeMemoriaByShortName(prev, name.short));
+                        setLegendaryDeck((prev) => removeMemoriaByShortName(prev, name.short));
                       }}
                     >
                       <Remove />
@@ -457,11 +504,15 @@ function MemoriaItem({
   );
 }
 
-function Deck() {
-  const [deck, setDeck] = useAtom(rwDeckAtom);
-
+function MemoriaGrid({
+  memorias,
+  onChangeOrder,
+}: {
+  memorias: MemoriaWithConcentration[];
+  onChangeOrder: Dispatch<SetStateAction<MemoriaWithConcentration[]>>;
+}) {
   return (
-    <Sortable items={deck} onChangeOrder={setDeck}>
+    <Sortable items={memorias} onChangeOrder={onChangeOrder}>
       <Grid
         container
         direction={"row"}
@@ -469,7 +520,7 @@ function Deck() {
         spacing={2}
         sx={{ maxWidth: 600, minHeight: 100 }}
       >
-        {deck.map((memoria) => {
+        {memorias.map((memoria) => {
           return <MemoriaItem memoria={memoria} key={memoria.id} preload={true} />;
         })}
       </Grid>
@@ -477,24 +528,14 @@ function Deck() {
   );
 }
 
+function Deck() {
+  const [deck, setDeck] = useAtom(rwDeckAtom);
+  return <MemoriaGrid memorias={deck} onChangeOrder={setDeck} />;
+}
+
 function LegendaryDeck() {
   const [deck, setDeck] = useAtom(rwLegendaryDeckAtom);
-
-  return (
-    <Sortable items={deck} onChangeOrder={setDeck}>
-      <Grid
-        container
-        direction={"row"}
-        alignItems={"left"}
-        spacing={2}
-        sx={{ maxWidth: 600, minHeight: 100 }}
-      >
-        {deck.map((memoria) => {
-          return <MemoriaItem memoria={memoria} key={memoria.id} preload={true} />;
-        })}
-      </Grid>
-    </Sortable>
-  );
+  return <MemoriaGrid memorias={deck} onChangeOrder={setDeck} />;
 }
 
 function UnitComponent() {
@@ -517,11 +558,7 @@ function UnitComponent() {
         param: value,
       });
       setSw(sw);
-      setRoleFilter(
-        sw === "shield"
-          ? ["support", "interference", "recovery"]
-          : ["normal_single", "normal_range", "special_single", "special_range"],
-      );
+      setRoleFilter(getRoleFilterByUnit(sw));
       setDeck(deck);
       setLegendaryDeck(legendaryDeck);
       setCompare(undefined);
@@ -547,7 +584,7 @@ function UnitComponent() {
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
-const MenuProps = {
+const selectMenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
@@ -564,7 +601,7 @@ function getStyles(name: string, personName: string[], theme: Theme) {
   };
 }
 
-export default function MultipleSelect({
+function MultipleSelect({
   times,
   kind,
   targets,
@@ -574,15 +611,15 @@ export default function MultipleSelect({
   targets: MemoriaWithConcentration[];
 }) {
   const theme = useTheme();
-  const [personName, setPersonName] = useState<string[]>([]);
+  const [selectedNames, setSelectedNames] = useState<string[]>([]);
   const [, setStackBeforeTargets] = useAtom(targetBeforeAtom);
   const [, setStackAfterTargets] = useAtom(targetAfterAtom);
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const uniqueId = useId();
-  const unit = legendaryDeck.concat(deck);
+  const unit = getUnitMemorias(legendaryDeck, deck);
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  const handleChange = (event: SelectChangeEvent<typeof selectedNames>) => {
     const {
       target: { value },
     } = event;
@@ -591,7 +628,7 @@ export default function MultipleSelect({
         ? value.split(",").map((name) => unit.find((memoria) => memoria.name.short === name)!.id)
         : value.map((name) => unit.find((memoria) => memoria.name.short === name)!.id),
     );
-    setPersonName(
+    setSelectedNames(
       // On autofill, we get a stringified value.
       typeof value === "string" ? value.split(",") : value,
     );
@@ -603,18 +640,20 @@ export default function MultipleSelect({
         <InputLabel id={`targets-${uniqueId}`}>スタック適用対象</InputLabel>
         <Select
           multiple
-          value={personName}
+          value={selectedNames}
           onChange={handleChange}
           input={<OutlinedInput label="Target" />}
-          MenuProps={MenuProps}
+          MenuProps={selectMenuProps}
           variant={"outlined"}
         >
           {targets.map((memoria) => (
             <MenuItem
               key={memoria.name.short}
               value={memoria.name.short}
-              disabled={!(personName.length < times || personName.includes(memoria.name.short))}
-              style={getStyles(memoria.name.short, personName, theme)}
+              disabled={
+                !(selectedNames.length < times || selectedNames.includes(memoria.name.short))
+              }
+              style={getStyles(memoria.name.short, selectedNames, theme)}
             >
               {memoria.name.short}
             </MenuItem>
@@ -653,32 +692,8 @@ function Compare({
     return <Typography>Something went wrong!</Typography>;
   }
 
-  const [stackRateBefore, stackTimesBefore] = match(sw)
-    .with("sword", () => {
-      const stack = Lenz.memoria.gvgSkill.effects.get(compare).find(isStackEffect("meteor"));
-      return [stack?.rate, stack?.times];
-    })
-    .with("shield", () => {
-      const stack = Lenz.memoria.gvgSkill.effects
-        .get(compare)
-        .find((eff) => isStackEffect("eden")(eff) || isStackEffect("anima")(eff));
-
-      return [stack?.rate, stack?.times];
-    })
-    .exhaustive();
-  const [stackRateAfter, stackTimesAfter] = match(sw)
-    .with("sword", () => {
-      const stack = Lenz.memoria.gvgSkill.effects.get(compare).find(isStackEffect("meteor"));
-      return [stack?.rate, stack?.times];
-    })
-    .with("shield", () => {
-      const stack = Lenz.memoria.gvgSkill.effects
-        .get(compare)
-        .find((eff) => isStackEffect("eden")(eff) || isStackEffect("anima")(eff));
-
-      return [stack?.rate, stack?.times];
-    })
-    .exhaustive();
+  const compareStack = getStackSettings(compare, sw);
+  const candidateStack = getStackSettings(candidate, sw);
 
   const diff = calcDiff(
     candidate,
@@ -695,11 +710,11 @@ function Compare({
       stack: stack
         ? {
             before: {
-              rate: stackRateBefore!,
+              rate: compareStack.rate!,
               targets: targetBefore,
             },
             after: {
-              rate: stackRateAfter!,
+              rate: candidateStack.rate!,
               targets: targetAfter,
             },
           }
@@ -751,11 +766,11 @@ function Compare({
             </Stack>
             {Lenz.memoria.gvgSkill.description.get(compare).includes("スタック") && (
               <MultipleSelect
-                times={stackTimesBefore!}
+                times={compareStack.times!}
                 kind={"before"}
-                targets={legendaryDeck
-                  .concat(deck)
-                  .filter((m) => ![compare.id, candidate.id].includes(m.id))}
+                targets={getUnitMemorias(legendaryDeck, deck).filter(
+                  (m) => ![compare.id, candidate.id].includes(m.id),
+                )}
               />
             )}
           </Stack>
@@ -781,11 +796,11 @@ function Compare({
             </Stack>
             {Lenz.memoria.gvgSkill.description.get(candidate).includes("スタック") && (
               <MultipleSelect
-                times={stackTimesAfter!}
+                times={candidateStack.times!}
                 kind={"after"}
-                targets={legendaryDeck
-                  .concat(deck)
-                  .filter((m) => ![compare.id, candidate.id].includes(m.id))}
+                targets={getUnitMemorias(legendaryDeck, deck).filter(
+                  (m) => ![compare.id, candidate.id].includes(m.id),
+                )}
               />
             )}
           </Stack>
@@ -847,7 +862,7 @@ function Compare({
 
 function VirtualizedList() {
   const theme = useTheme();
-  const [{ isLoaing, data }] = useAtom(filteredMemoriaAtom);
+  const [{ isLoaing: isLoading, data }] = useAtom(filteredMemoriaAtom);
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [open, setOpen] = useState(false);
@@ -858,7 +873,7 @@ function VirtualizedList() {
   const [, setTargetBefore] = useAtom(targetBeforeAtom);
   const [, setTargetAfter] = useAtom(targetAfterAtom);
   const uniqueId = useId();
-  const [condidateConcentration, setCondidateConcentration] = useState<Concentration | undefined>(
+  const [candidateConcentration, setCandidateConcentration] = useState<Concentration | undefined>(
     undefined,
   );
 
@@ -871,11 +886,11 @@ function VirtualizedList() {
       setOpen(true);
       setCandidate({
         ...data[index],
-        concentration: condidateConcentration ?? 4,
+        concentration: candidateConcentration ?? 4,
       });
       return;
     }
-    if (data[index].labels.includes("Legendary")) {
+    if (isLegendaryMemoria(data[index])) {
       setLegendaryDeck((prev) => addMemoria(prev, data[index]));
     } else {
       setDeck((prev) => addMemoria(prev, data[index]));
@@ -886,10 +901,10 @@ function VirtualizedList() {
     setTargetBefore([]);
     setTargetAfter([]);
     setOpen(false);
-    setCondidateConcentration(undefined);
-  }, [setTargetBefore, setTargetAfter, setOpen, setCondidateConcentration]);
+    setCandidateConcentration(undefined);
+  }, [setTargetBefore, setTargetAfter]);
 
-  if (isLoaing) {
+  if (isLoading) {
     return <CircularProgress />;
   }
 
@@ -1001,11 +1016,7 @@ function VirtualizedList() {
             </Typography>
             <Tooltip title="カウンター" placement="left">
               <Checkbox
-                disabled={
-                  ![compare, candidate].some((m) =>
-                    m?.skills.gvgSkill.raw.description.includes("スタック"),
-                  )
-                }
+                disabled={![compare, candidate].some((memoria) => hasStackDescription(memoria))}
                 icon={<ReplyOutlined style={{ transform: "rotate(90deg)" }} />}
                 checkedIcon={<Reply style={{ transform: "rotate(90deg)" }} />}
                 onChange={(_, checked) => setCounter(() => checked)}
@@ -1013,11 +1024,7 @@ function VirtualizedList() {
             </Tooltip>
             <Tooltip title="スタック" placement="left">
               <Checkbox
-                disabled={
-                  ![compare, candidate].some((m) =>
-                    m?.skills.gvgSkill.raw.description.includes("スタック"),
-                  )
-                }
+                disabled={![compare, candidate].some((memoria) => hasStackDescription(memoria))}
                 icon={<LayersOutlined />}
                 checkedIcon={<Layers />}
                 onChange={(_, checked) => setStack(() => checked)}
@@ -1026,14 +1033,10 @@ function VirtualizedList() {
             <Button
               color="inherit"
               onClick={() => {
-                if (candidate?.labels.includes("Legendary")) {
-                  setLegendaryDeck((prev) =>
-                    [...prev].map((memoria) => (memoria.id === compare?.id ? candidate : memoria)),
-                  );
+                if (candidate && isLegendaryMemoria(candidate)) {
+                  setLegendaryDeck((prev) => replaceMemoriaById(prev, compare?.id, candidate));
                 } else {
-                  setDeck((prev) =>
-                    [...prev].map((memoria) => (memoria.id === compare?.id ? candidate! : memoria)),
-                  );
+                  setDeck((prev) => replaceMemoriaById(prev, compare?.id, candidate!));
                 }
                 setOpen(false);
                 setCandidate(undefined);
@@ -1053,7 +1056,7 @@ function VirtualizedList() {
         >
           {compare?.labels.includes("Legendary") === candidate?.labels.includes("Legendary") ? (
             <DialogContent>
-              <Compare counter={counter} stack={stack} setAction={setCondidateConcentration} />
+              <Compare counter={counter} stack={stack} setAction={setCandidateConcentration} />
             </DialogContent>
           ) : (
             <DialogContent>
@@ -1136,11 +1139,10 @@ function ToggleButtons() {
       onClick={() => {
         if (sw === "shield") {
           setSw("sword");
-          setRoleFilter(["normal_single", "normal_range", "special_single", "special_range"]);
         } else {
           setSw("shield");
-          setRoleFilter(["support", "interference", "recovery"]);
         }
+        setRoleFilter(getRoleFilterByUnit(sw === "shield" ? "sword" : "shield"));
         setDeck([]);
         setLegendaryDeck([]);
         setCompare(undefined);
@@ -1384,9 +1386,7 @@ function ShareButton() {
     >
       {(popupState) => (
         <>
-          <Box
-            sx={{ position: "fixed", left: -10000, top: 0, pointerEvents: "none", zIndex: -1 }}
-          >
+          <Box sx={{ position: "fixed", left: -10000, top: 0, pointerEvents: "none", zIndex: -1 }}>
             <div ref={shareCardRef}>
               <DeckShareCard title={title} deck={deck} legendaryDeck={legendaryDeck} />
             </div>
@@ -1583,33 +1583,33 @@ export function DeckBuilder({ user }: { user: { id: string; name: string } | und
       }}
     >
       <Box data-tour="deck-toolbar" sx={{ width: "100%" }}>
-      <Ribbon>
-        <RibbonGroup>
-          <ToggleButtons />
-        </RibbonGroup>
-        <RibbonGroup label={"Deck"}>
-          <Tooltip title="clear all" placement={"top"}>
-            <Button
-              onClick={() => {
-                setDeck([]);
-                setLegendaryDeck([]);
-                setCompare(undefined);
-              }}
-            >
-              <ClearAll color={"secondary"} />
-            </Button>
-          </Tooltip>
-          <DiffModal />
-          <ShareButton />
-          <SaveDeck />
-          <CalcSettings />
-        </RibbonGroup>
-        <RibbonGroup label={"Source"}>
-          <FilterModal signedIn={!!user} />
-          <SearchModal />
-          <SortMenu />
-        </RibbonGroup>
-      </Ribbon>
+        <Ribbon>
+          <RibbonGroup>
+            <ToggleButtons />
+          </RibbonGroup>
+          <RibbonGroup label={"Deck"}>
+            <Tooltip title="clear all" placement={"top"}>
+              <Button
+                onClick={() => {
+                  setDeck([]);
+                  setLegendaryDeck([]);
+                  setCompare(undefined);
+                }}
+              >
+                <ClearAll color={"secondary"} />
+              </Button>
+            </Tooltip>
+            <DiffModal />
+            <ShareButton />
+            <SaveDeck />
+            <CalcSettings />
+          </RibbonGroup>
+          <RibbonGroup label={"Source"}>
+            <FilterModal signedIn={!!user} />
+            <SearchModal />
+            <SortMenu />
+          </RibbonGroup>
+        </Ribbon>
       </Box>
       <Grid
         container

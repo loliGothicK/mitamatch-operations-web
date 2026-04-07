@@ -1,6 +1,12 @@
 "use client";
 
-import { Children, isValidElement, type HTMLAttributes, type ReactElement, type ReactNode } from "react";
+import {
+  Children,
+  isValidElement,
+  type HTMLAttributes,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 
 type CodeProps = {
   children?: ReactNode;

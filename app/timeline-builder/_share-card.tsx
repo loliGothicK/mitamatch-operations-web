@@ -5,13 +5,7 @@ import { Box, Chip, Divider, Stack, Typography } from "@mui/material";
 import { alpha, useTheme } from "@mui/material/styles";
 import { formatTime, useComputedTimeline } from "@/timeline-builder/_hook";
 
-function PicPanel({
-  pic,
-  sub,
-}: {
-  pic?: string;
-  sub?: string;
-}) {
+function PicPanel({ pic, sub }: { pic?: string; sub?: string }) {
   const theme = useTheme();
 
   return (
@@ -166,12 +160,7 @@ export function TimelineShareCard({
                   columnGap: 10,
                 }}
               >
-                <Stack
-                  direction="row"
-                  spacing={1.5}
-                  alignItems="center"
-                  sx={{ minWidth: 0 }}
-                >
+                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ minWidth: 0 }}>
                   <Chip
                     label={`${index + 1}`}
                     size="small"

@@ -504,7 +504,7 @@ function parseStack(
     )
     .when(
       (name) => name.includes("グロリア"),
-      () => parseStackEffect(["eden", "barrier"])(description, memoriaName, branch("gloria"))
+      () => parseStackEffect(["eden", "barrier"])(description, memoriaName, branch("gloria")),
     )
     .when(
       (name) => name.includes("ルミナス") || name.includes("イージス"),

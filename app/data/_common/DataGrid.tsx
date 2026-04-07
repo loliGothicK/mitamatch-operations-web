@@ -296,7 +296,10 @@ export function DataGrid<
           onChange={onChange}
         />
       </Box>
-      <div style={{ display: "flex", flexDirection: "column", width: "100%" }} data-tour="data-grid">
+      <div
+        style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        data-tour="data-grid"
+      >
         <NoSsr>
           <MuiDataGrid
             key={table}

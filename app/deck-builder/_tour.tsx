@@ -30,7 +30,8 @@ const steps: Step[] = [
   },
   {
     target: '[data-tour="deck-source"]',
-    content: "右側の候補一覧からメモリアを追加します。Filter や Search の結果もここに反映されます。",
+    content:
+      "右側の候補一覧からメモリアを追加します。Filter や Search の結果もここに反映されます。",
     placement: "left",
   },
 ];

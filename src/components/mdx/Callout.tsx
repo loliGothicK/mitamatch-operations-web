@@ -1,11 +1,18 @@
 "use client";
 
-import { Children, cloneElement, isValidElement, type HTMLAttributes, type ReactElement, type ReactNode } from "react";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type HTMLAttributes,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import InfoOutlined from "@mui/icons-material/InfoOutlined";
 import LightbulbOutlined from "@mui/icons-material/LightbulbOutlined";
 import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
 import ReportProblemOutlined from "@mui/icons-material/ReportProblemOutlined";
-import {match} from "ts-pattern";
+import { match } from "ts-pattern";
 
 type CalloutKind = "note" | "tip" | "important" | "warning" | "caution";
 
@@ -21,7 +28,9 @@ function normalizeChildren(children: ReactNode): ReactNode[] {
 
 function extractLeadingText(children: ReactNode) {
   const nodes = normalizeChildren(children);
-  const firstTextIndex = nodes.findIndex((node) => typeof node === "string" && node.trim().length > 0);
+  const firstTextIndex = nodes.findIndex(
+    (node) => typeof node === "string" && node.trim().length > 0,
+  );
   const first = firstTextIndex >= 0 ? nodes[firstTextIndex] : null;
 
   if (typeof first !== "string") {

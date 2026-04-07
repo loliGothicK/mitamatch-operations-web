@@ -124,13 +124,7 @@ function MemoriaCard({ memoria }: { memoria: ShareMemoria }) {
   );
 }
 
-function DeckRow({
-  title,
-  memories,
-}: {
-  title: string;
-  memories: ShareMemoria[];
-}) {
+function DeckRow({ title, memories }: { title: string; memories: ShareMemoria[] }) {
   const theme = useTheme();
 
   return (
@@ -166,7 +160,7 @@ export function DeckShareCard({
   title,
   deck,
   legendaryDeck,
-}: Omit<Unit, 'sw'> & { title: string }) {
+}: Omit<Unit, "sw"> & { title: string }) {
   const theme = useTheme();
 
   return (

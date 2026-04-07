@@ -68,7 +68,7 @@ function MemoriaCard({
   );
 }
 
-export function Memoria({}: Props) {
+export function Memoria(_props: Props) {
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState<UniqueMemoria | undefined>(undefined);

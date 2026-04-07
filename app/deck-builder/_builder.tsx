@@ -48,14 +48,19 @@ export function DeckBuilderPage({ user }: { user: { id: string; name: string } |
       <DeckBuilderTour replayKey={replayKey} />
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Box sx={{ display: "flex", alignItems: "center" }} data-tour="deck-tabs">
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" sx={{ flexGrow: 1 }}>
-          <Tab key={"builder"} label={"Builder"} {...a11yProps(0)} />
-          <Tab
-            key={"calculator"}
-            label={"Calculator"}
-            {...a11yProps(1)}
-            sx={{ marginLeft: "auto" }}
-          />
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+            sx={{ flexGrow: 1 }}
+          >
+            <Tab key={"builder"} label={"Builder"} {...a11yProps(0)} />
+            <Tab
+              key={"calculator"}
+              label={"Calculator"}
+              {...a11yProps(1)}
+              sx={{ marginLeft: "auto" }}
+            />
           </Tabs>
           <Tooltip title="Tour">
             <IconButton onClick={() => setReplayKey((prev) => prev + 1)}>

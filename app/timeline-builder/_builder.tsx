@@ -3,10 +3,26 @@
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { type SubmitEvent, SetStateAction, Suspense, useCallback, useId, useRef, useState } from "react";
+import {
+  type SubmitEvent,
+  SetStateAction,
+  Suspense,
+  useCallback,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
-import { Add, Assignment, DragIndicator, Edit, Image as ImageIcon, Remove, Share } from "@mui/icons-material";
+import {
+  Add,
+  Assignment,
+  DragIndicator,
+  Edit,
+  Image as ImageIcon,
+  Remove,
+  Share,
+} from "@mui/icons-material";
 import HelpOutline from "@mui/icons-material/HelpOutline";
 import {
   alpha,
@@ -574,9 +590,7 @@ function ShareButton() {
     >
       {(popupState) => (
         <>
-          <Box
-            sx={{ position: "fixed", left: -10000, top: 0, pointerEvents: "none", zIndex: -1 }}
-          >
+          <Box sx={{ position: "fixed", left: -10000, top: 0, pointerEvents: "none", zIndex: -1 }}>
             <div ref={shareCardRef}>
               <TimelineShareCard title={title} timeline={timeline} />
             </div>

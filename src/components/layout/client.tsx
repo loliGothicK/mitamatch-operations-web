@@ -327,19 +327,21 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
                   <>
                     <Button {...bindTrigger(popupState)}>{"Docs"}</Button>
                     <Menu {...bindMenu(popupState)}>
-                      {(["Data", "Deck Builder", "Timeline Builder", "Flowchart"] as const).map((kind) => {
-                        return (
-                          <MenuItem
-                            key={kind}
-                            onClick={() => {
-                              popupState.close();
-                              redirect(`/docs/${kind.toLowerCase().split(" ").join("-")}`);
-                            }}
-                          >
-                            {kind}
-                          </MenuItem>
-                        );
-                      })}
+                      {(["Data", "Deck Builder", "Timeline Builder", "Flowchart"] as const).map(
+                        (kind) => {
+                          return (
+                            <MenuItem
+                              key={kind}
+                              onClick={() => {
+                                popupState.close();
+                                redirect(`/docs/${kind.toLowerCase().split(" ").join("-")}`);
+                              }}
+                            >
+                              {kind}
+                            </MenuItem>
+                          );
+                        },
+                      )}
                     </Menu>
                   </>
                 )}

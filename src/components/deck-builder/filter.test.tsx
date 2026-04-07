@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 
 vi.mock("@/_actions/memoria", () => ({
-  getListAction: vi.fn(async () => []),
+  getListAction: vi.fn<() => Promise<[]>>(async () => []),
 }));
 
 import Filter from "./Filter";

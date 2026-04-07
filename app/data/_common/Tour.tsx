@@ -20,8 +20,7 @@ const gridSteps: Step[] = [
   },
   {
     target: '[data-tour="data-grid-toolbar"]',
-    content:
-      "ここからクエリ実行、クエリ初期化、共有、表示切り替え、ヘルプ表示を行います。",
+    content: "ここからクエリ実行、クエリ初期化、共有、表示切り替え、ヘルプ表示を行います。",
     placement: "bottom-start",
   },
   {
@@ -36,7 +35,13 @@ const gridSteps: Step[] = [
   },
 ];
 
-export function DataPageTour({ tab, replayKey }: { tab: "memoria" | "costume" | "character"; replayKey: number }) {
+export function DataPageTour({
+  tab,
+  replayKey,
+}: {
+  tab: "memoria" | "costume" | "character";
+  replayKey: number;
+}) {
   const theme = useTheme();
   const [run, setRun] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
@@ -55,7 +60,7 @@ export function DataPageTour({ tab, replayKey }: { tab: "memoria" | "costume" | 
       setRun(true);
       window.localStorage.setItem(STORAGE_KEY, "true");
     }
-  }, []);
+  }, [tab]);
 
   useEffect(() => {
     if (tab === "character") {

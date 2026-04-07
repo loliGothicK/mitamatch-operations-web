@@ -75,10 +75,7 @@ export function filterSupportedKeywordCompletions(
       return {
         ...completion,
         label: upperLabel,
-        apply:
-          typeof completion.apply === "string"
-            ? completion.apply.toUpperCase()
-            : upperLabel,
+        apply: typeof completion.apply === "string" ? completion.apply.toUpperCase() : upperLabel,
       };
     });
 }
