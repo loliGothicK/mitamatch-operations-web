@@ -1,10 +1,8 @@
-import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { ClerkProvider } from "@clerk/nextjs";
 import Layout from "@/components/layout/server";
 
@@ -53,8 +51,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const nonce = (await headers()).get("x-nonce") || undefined;
-
   return (
     <ClerkProvider>
       <html lang="ja">
@@ -63,8 +59,6 @@ export default async function RootLayout({
           <Analytics />
           <SpeedInsights />
         </body>
-        <GoogleTagManager gtmId={`${process.env.GTM}`} nonce={nonce} />
-        <GoogleAnalytics gaId={`${process.env.GTAG}`} nonce={nonce} />
       </html>
     </ClerkProvider>
   );

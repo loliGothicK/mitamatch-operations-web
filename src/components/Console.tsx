@@ -1,12 +1,11 @@
 import CodeMirror, { keymap, Prec } from "@uiw/react-codemirror";
 import { githubDark } from "@uiw/codemirror-theme-github";
 import { sql, keywordCompletionSource, MySQL, schemaCompletionSource } from "@codemirror/lang-sql";
-import { autocompletion, type CompletionSource } from "@codemirror/autocomplete";
+import { autocompletion, type Completion, type CompletionSource } from "@codemirror/autocomplete";
 import { makeQueryLinter } from "@/parser/query/linter";
 import { ComleteCandidate, makeColumnCompletionSource } from "@/data/_common/autocomplete";
 import { option } from "fp-ts";
 import { iter } from "@/fp-ts-ext/function";
-import { projector } from "@/functional/proj";
 
 // サポートしているキーワードのホワイトリスト
 const keywordWhitelist = new Set([
@@ -57,30 +56,43 @@ const keywordWhitelist = new Set([
 // デフォルトの SQL 補完ソースを取得
 const defaultSqlSource = keywordCompletionSource(MySQL);
 
+export function filterSupportedKeywordCompletions(
+  options: readonly Completion[],
+): readonly Completion[] {
+  return options
+    .filter((completion) => {
+      if (completion.type === "keyword") {
+        return keywordWhitelist.has(completion.label.toUpperCase());
+      }
+      return true;
+    })
+    .map((completion) => {
+      if (completion.type !== "keyword") {
+        return completion;
+      }
+
+      const upperLabel = completion.label.toUpperCase();
+      return {
+        ...completion,
+        label: upperLabel,
+        apply:
+          typeof completion.apply === "string"
+            ? completion.apply.toUpperCase()
+            : upperLabel,
+      };
+    });
+}
+
 const supportedKeywordSource: CompletionSource = async (context) => {
   // 1. まずデフォルトの補完結果（キーワード、テーブル名などすべて）を取得
   const result = await defaultSqlSource(context);
-
-  console.log(
-    result?.options.filter((completion) => completion.type === "keyword").map(projector("label")),
-  );
 
   if (!result) {
     return null;
   }
 
   // 2. 補完オプション (result.options) をフィルタリング
-  const filteredOptions = result.options.filter((completion) => {
-    // 補完のタイプが 'keyword' の場合のみチェック
-    if (completion.type === "keyword") {
-      // ホワイトリストに存在するか確認 (大文字に変換して比較)
-      return keywordWhitelist.has(completion.label.toUpperCase());
-    }
-
-    // キーワード以外 (テーブル名、カラム名、'type: "enum"' など) は
-    // フィルタリングせず、そのまま通す
-    return true;
-  });
+  const filteredOptions = filterSupportedKeywordCompletions(result.options);
 
   // 3. フィルター後の結果を返す
   return {
@@ -136,7 +148,7 @@ export default function Console<
       height="75px"
       theme={githubDark}
       extensions={[
-        sql({ dialect: MySQL, schema }),
+        sql({ dialect: MySQL, schema, upperCaseKeywords: true }),
         myCompletions,
         makeQueryLinter(schema, completion),
         customKeymap,

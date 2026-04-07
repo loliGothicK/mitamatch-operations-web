@@ -1,0 +1,56 @@
+---
+title: "Query"
+slug: "/data/query"
+section: 1
+---
+
+## クエリ一覧の使い方
+
+`Memoria` と `Costume` タブでは、クエリエディタから一覧を絞り込みできます。
+クエリは GoogleSQL ライクな構文で解釈され、`SELECT`、`WHERE`、`ORDER BY`、`LIMIT` が使えます。
+
+## 画面構成
+
+- 上部ツールバー
+  クエリ実行、クエリ初期化、共有、ファンタズム表示切り替え、ヘルプ表示を行います。
+- クエリエディタ
+  SQL ライクな構文で条件を入力します。補完にも対応しています。
+- Data Grid
+  フィルタ結果が表形式で表示されます。列の表示切り替えやソートも可能です。
+
+## できること
+
+- `SELECT`
+  表示する列を切り替えます。exceptが使えます。
+- `WHERE`
+  数値条件、文字列条件、JSON ライクなスキル条件で絞り込みます。
+- `ORDER BY`
+  一覧の並び順を変更します。
+- `LIMIT`
+  表示件数を制限します。
+- `Share`
+  現在のクエリを URL にしてクリップボードへコピーします。
+
+## クエリ例
+
+### Memoria
+
+```sql
+SELECT EXCEPT (`questkill`) FROM memoria
+WHERE `type` = '支援' AND `cost` >= 20;
+```
+
+### Costume
+
+```sql
+SELECT (`name`, `type`, `rareSkill`, `released_at`) FROM costume
+WHERE `specialSkill` LIKE 'ADX,覚醒'
+ORDER BY `released_at` DESC;
+```
+
+## 補足
+
+- DataGrid からの操作とクエリからの操作は意味が異なります、クエリは DataGrid が扱うデータそのものを制限するため、クエリで絞り込んだ場合はデータ DataGrid 上で非表示になっているわけではなくそもそも存在しない扱いです。
+- 詳細な利用可能カラムは各タブのヘルプモーダルから確認できます。
+- `Memoria` と `Costume` では使える列や検索候補が異なります。
+- `Character` タブはクエリ一覧ではなくカード一覧です。

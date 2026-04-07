@@ -8,8 +8,7 @@ function except(cols: string[]) {
 const memoriaQueryAtom = atomWithStorage<string>(
   "query[memoria]",
   outdent`
-    select ${except(["questSkill"])}
-      from memoria
+    SELECT ${except(["questSkill"])} FROM memoria
       where \`cost\` > 18;
   `,
   undefined,
@@ -21,9 +20,8 @@ const memoriaQueryAtom = atomWithStorage<string>(
 const costumeQueryAtom = atomWithStorage<string>(
   "query[costume]",
   outdent`
-    select ${except(["released_at"])}
-      from costume
-      order by \`released_at\` desc;
+    SELECT ${except(["released_at"])} FROM costume
+      ORDER BY \`released_at\` DESC;
   `,
   undefined,
   {
