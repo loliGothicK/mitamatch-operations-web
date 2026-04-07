@@ -1142,13 +1142,7 @@ type QueryPreset = {
   updatedAt: string;
 };
 
-function QueryModal({
-  signedIn,
-  canPersist,
-}: {
-  signedIn: boolean;
-  canPersist: boolean;
-}) {
+function QueryModal({ signedIn, canPersist }: { signedIn: boolean; canPersist: boolean }) {
   const [query, setQuery] = useAtom(deckBuilderQueryAtom);
   const [ownedOnly, setOwnedOnly] = useAtom(ownedFilterAtom);
   const [sw] = useAtom(swAtom);
@@ -1299,29 +1293,29 @@ function QueryModal({
           <Box sx={{ mt: 2 }}>
             <MemoriaQueryHelp />
           </Box>
-          {signedIn && (
-            !canPersist && (
-              <Alert severity="warning" sx={{ mt: 2 }}>
-                Database user is not initialized on this branch yet, so presets cannot be saved.
-              </Alert>
-            )
+          {signedIn && !canPersist && (
+            <Alert severity="warning" sx={{ mt: 2 }}>
+              Database user is not initialized on this branch yet, so presets cannot be saved.
+            </Alert>
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setDraftQuery(getDefaultDeckBuilderQuery(sw))}>
-            初期化
-          </Button>
+          <Button onClick={() => setDraftQuery(getDefaultDeckBuilderQuery(sw))}>初期化</Button>
           <Button onClick={handleClose}>Close</Button>
           <Button onClick={handleApply}>Apply</Button>
         </DialogActions>
       </Dialog>
-      <Dialog open={saveDialogOpen} onClose={() => setSaveDialogOpen(false)} fullWidth maxWidth="sm">
+      <Dialog
+        open={saveDialogOpen}
+        onClose={() => setSaveDialogOpen(false)}
+        fullWidth
+        maxWidth="sm"
+      >
         <DialogContent>
           <Typography variant="h6" component="h2" gutterBottom>
             Save Preset
           </Typography>
           <TextField
-            autoFocus
             fullWidth
             label="Preset name"
             value={presetTitle}
@@ -1353,13 +1347,7 @@ function QueryModal({
   );
 }
 
-function QueryPresetsMenu({
-  signedIn,
-  canPersist,
-}: {
-  signedIn: boolean;
-  canPersist: boolean;
-}) {
+function QueryPresetsMenu({ signedIn, canPersist }: { signedIn: boolean; canPersist: boolean }) {
   const [, setQuery] = useAtom(deckBuilderQueryAtom);
   const [, setOwnedOnly] = useAtom(ownedFilterAtom);
   const [toast, setToast] = useState<string | false>(false);

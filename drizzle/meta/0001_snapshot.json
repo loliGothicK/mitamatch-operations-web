@@ -59,12 +59,8 @@
           "name": "deck_user_id_user_id_fk",
           "tableFrom": "deck",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -74,9 +70,7 @@
         "deck_short_unique": {
           "name": "deck_short_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "short"
-          ]
+          "columns": ["short"]
         }
       },
       "policies": {},
@@ -201,12 +195,8 @@
           "name": "organization_members_organization_id_organization_id_fk",
           "tableFrom": "organization_members",
           "tableTo": "organization",
-          "columnsFrom": [
-            "organization_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -214,12 +204,8 @@
           "name": "organization_members_user_id_user_id_fk",
           "tableFrom": "organization_members",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -285,12 +271,8 @@
           "name": "query_preset_user_id_user_id_fk",
           "tableFrom": "query_preset",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -356,12 +338,8 @@
           "name": "timeline_user_id_user_id_fk",
           "tableFrom": "timeline",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -371,9 +349,7 @@
         "timeline_short_unique": {
           "name": "timeline_short_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "short"
-          ]
+          "columns": ["short"]
         }
       },
       "policies": {},
@@ -446,9 +422,7 @@
         "user_clerk_user_id_unique": {
           "name": "user_clerk_user_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "clerk_user_id"
-          ]
+          "columns": ["clerk_user_id"]
         }
       },
       "policies": {},
@@ -492,12 +466,8 @@
           "name": "users_to_memoria_user_id_user_id_fk",
           "tableFrom": "users_to_memoria",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -505,12 +475,8 @@
           "name": "users_to_memoria_memoria_id_memoria_id_fk",
           "tableFrom": "users_to_memoria",
           "tableTo": "memoria",
-          "columnsFrom": [
-            "memoria_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["memoria_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -518,10 +484,7 @@
       "compositePrimaryKeys": {
         "users_to_memoria_user_id_memoria_id_pk": {
           "name": "users_to_memoria_user_id_memoria_id_pk",
-          "columns": [
-            "user_id",
-            "memoria_id"
-          ]
+          "columns": ["user_id", "memoria_id"]
         }
       },
       "uniqueConstraints": {},
@@ -552,12 +515,8 @@
           "name": "users_to_order_user_id_user_id_fk",
           "tableFrom": "users_to_order",
           "tableTo": "user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -565,12 +524,8 @@
           "name": "users_to_order_order_id_order_id_fk",
           "tableFrom": "users_to_order",
           "tableTo": "order",
-          "columnsFrom": [
-            "order_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["order_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -578,10 +533,7 @@
       "compositePrimaryKeys": {
         "users_to_order_user_id_order_id_pk": {
           "name": "users_to_order_user_id_order_id_pk",
-          "columns": [
-            "user_id",
-            "order_id"
-          ]
+          "columns": ["user_id", "order_id"]
         }
       },
       "uniqueConstraints": {},
