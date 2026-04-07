@@ -327,7 +327,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
                   <>
                     <Button {...bindTrigger(popupState)}>{"Docs"}</Button>
                     <Menu {...bindMenu(popupState)}>
-                      {(["Deck Builder", "Timeline Builder", "Flowchart"] as const).map((kind) => {
+                      {(["Data", "Deck Builder", "Timeline Builder", "Flowchart"] as const).map((kind) => {
                         return (
                           <MenuItem
                             key={kind}

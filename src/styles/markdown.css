@@ -1,35 +1,112 @@
 .mitamatch-markdown {
-    h1 {
-        font-size: 3.0em;
-        border-bottom: 1px solid;
-    }
-    h2 {
-        font-size: 1.5em;
-        border-bottom: 1px solid;
-    }
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    th {
-        border-bottom: 1px solid;
-        padding: 0.5em;
-    }
-    td {
-        padding: 0.5em;
-    }
-    tr {
-        border-bottom: 1px dashed;
-        padding: 0.5em;
-    }
-    tr:last-child {
-        border-bottom: none;
-        padding: 0.5em;
-    }
-    .aspect-video {
-        aspect-ratio: 16/9;
-    }
-    .w-full {
-        width: 100%;
-    }
+  color: inherit;
+  line-height: 1.75;
+}
+
+.mitamatch-markdown > * {
+  width: 100%;
+}
+
+.mitamatch-markdown h1 {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.35);
+}
+
+.mitamatch-markdown h2 {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.25);
+}
+
+.mitamatch-markdown h3 {
+  font-size: 1.25rem;
+  margin: 1.75rem 0 0.75rem;
+}
+
+.mitamatch-markdown p,
+.mitamatch-markdown ul,
+.mitamatch-markdown ol,
+.mitamatch-markdown table,
+.mitamatch-markdown blockquote,
+.mitamatch-markdown pre {
+  margin: 0 0 1rem;
+}
+
+.mitamatch-markdown ul,
+.mitamatch-markdown ol {
+  padding-left: 1.5rem;
+}
+
+.mitamatch-markdown li + li {
+  margin-top: 0.35rem;
+}
+
+.mitamatch-markdown blockquote {
+  margin-left: 0;
+  padding: 0.9rem 1rem;
+  border-left: 4px solid #1976d2;
+  background: rgba(25, 118, 210, 0.08);
+  border-radius: 0 8px 8px 0;
+}
+
+.mitamatch-markdown code {
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 0.92em;
+  padding: 0.15rem 0.35rem;
+  border-radius: 6px;
+  background: rgba(127, 127, 127, 0.12);
+}
+
+.mitamatch-markdown pre {
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(20, 20, 20, 0.92);
+}
+
+.mitamatch-markdown pre code {
+  padding: 0;
+  background: transparent;
+  color: #f5f5f5;
+}
+
+.mitamatch-markdown table {
+  border-collapse: collapse;
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+  border: 1px solid rgba(127, 127, 127, 0.2);
+  border-radius: 10px;
+}
+
+.mitamatch-markdown th,
+.mitamatch-markdown td {
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.mitamatch-markdown thead tr {
+  background: rgba(127, 127, 127, 0.08);
+}
+
+.mitamatch-markdown tbody tr {
+  border-top: 1px solid rgba(127, 127, 127, 0.14);
+}
+
+.mitamatch-markdown a {
+  text-underline-offset: 0.18em;
+}
+
+.mitamatch-markdown .aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+.mitamatch-markdown .w-full {
+  width: 100%;
 }

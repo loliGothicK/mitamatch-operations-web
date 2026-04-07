@@ -29,6 +29,7 @@ export default function Home() {
               alt={"Mitamatch Operations"}
               width={1500}
               height={500}
+              loading="eager"
             />
           </Box>
           <Box className="animation-circle circle-1" />

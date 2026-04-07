@@ -52,10 +52,15 @@ export default async function Page({ params }: { params: Promise<{ slug: string[
   return (
     <Box
       component="article"
+      className="mitamatch-markdown"
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        maxWidth: 960,
+        width: "100%",
+        margin: "0 auto",
+        padding: 3,
       }}
     >
       {/* 記事タイトル */}

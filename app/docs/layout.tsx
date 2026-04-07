@@ -4,6 +4,7 @@ import { buildDocsTree } from "@/lib/docs-tree";
 import { DocsSidebar } from "@/components/mdx/DocsSidebar";
 import { Box, Paper } from "@mui/material";
 import { ReactNode } from "react"; // Grid2推奨ですが一旦Gridで
+import "@/styles/markdown.css";
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
   // 1. データを変換
@@ -15,7 +16,6 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
         flexGrow: 1, // AppBar 以外の高さを全部使う
         display: "grid",
         gridTemplateColumns: "210px minmax(0, 1fr)", // ここで横分割
-        overflow: "hidden", // 内部スクロールのために必要
       }}
     >
       {/* サイドバー */}
@@ -25,7 +25,6 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           display: "flex",
           flexDirection: "row",
           borderRight: "1px solid rgba(0,0,0,0.12)",
-          overflow: "hidden",
           minHeight: "100vh",
           height: "100%",
         }}
