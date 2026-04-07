@@ -9,6 +9,7 @@ import { CheckBoxItem } from "@/components/deck-builder/CheckBoxItem";
 import {
   currentRoleFilterAtom,
   elementFilterAtom,
+  effectiveRoleFilterAtom,
   labelFilterAtom,
   ownedFilterAtom,
   roleFilterAtom,
@@ -18,7 +19,8 @@ import { elementFilterMap } from "@/components/deck-builder/Details";
 import { ATTRIBUTES } from "@/parser/skill";
 
 function RoleCheckbox() {
-  const [filter, setFilter] = useAtom(roleFilterAtom);
+  const [, setFilter] = useAtom(roleFilterAtom);
+  const [effectiveFilter] = useAtom(effectiveRoleFilterAtom);
   const [currentRoleFilter] = useAtom(currentRoleFilterAtom);
 
   return (
@@ -27,11 +29,13 @@ function RoleCheckbox() {
         label={"役割"}
         control={
           <Checkbox
-            checked={filter.length === currentRoleFilter.length}
-            indeterminate={filter.length > 0 && filter.length < currentRoleFilter.length}
+            checked={effectiveFilter.length === currentRoleFilter.length}
+            indeterminate={
+              effectiveFilter.length > 0 && effectiveFilter.length < currentRoleFilter.length
+            }
             onChange={() => {
               setFilter((prev) => {
-                if (filter.length === currentRoleFilter.length) {
+                if (effectiveFilter.length === currentRoleFilter.length) {
                   return prev.filter(
                     (v) => !(currentRoleFilter as readonly FilterType[]).includes(v),
                   );
@@ -51,10 +55,10 @@ function RoleCheckbox() {
             <CheckBoxItem
               key={flag}
               name={roleFilterMap[flag]}
-              checked={filter.includes(flag)}
+              checked={effectiveFilter.includes(flag)}
               handleChange={() => {
                 setFilter((prev) => {
-                  if (filter.includes(flag)) {
+                  if (effectiveFilter.includes(flag)) {
                     return prev.filter((v) => v !== flag);
                   }
                   return [...prev, flag];

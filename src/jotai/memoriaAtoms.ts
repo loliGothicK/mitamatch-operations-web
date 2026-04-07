@@ -94,6 +94,14 @@ export const currentRoleFilterAtom = atom((get) => {
     .exhaustive();
 });
 
+export const effectiveRoleFilterAtom = atom((get) => {
+  const filter = get(roleFilterAtom);
+  const currentRoleFilter = get(currentRoleFilterAtom);
+  const filtered = filter.filter((value) => currentRoleFilter.includes(value));
+
+  return filtered.length === 0 ? currentRoleFilter : filtered;
+});
+
 export const basicStatusFilterAtom = atom<BasicStatusSearch[]>([]);
 export const elementStatusFilterAtom = atom<ElementStatusSearch[]>([]);
 export const otherSkillFilterAtom = atom<OtherSkillSearch[]>([]);
@@ -142,7 +150,7 @@ export const filteredMemoriaAtom = atom((get) => {
         .with("sword", () => memoria.cardType < 5)
         .exhaustive();
 
-      const role = get(roleFilterAtom).some((filter) => {
+      const role = get(effectiveRoleFilterAtom).some((filter) => {
         return formatCardType(memoria.cardType) === roleFilterMap[filter];
       });
 
