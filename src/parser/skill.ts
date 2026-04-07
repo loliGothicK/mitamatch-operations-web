@@ -499,24 +499,20 @@ function parseStack(
       () => parseStackEffect(["meteor", "barrier"])(description, memoriaName, branch("comet")),
     )
     .when(
-      (name) => name.includes("エーテル"),
+      (name) => name.includes("エーテル") || name.includes("アルカナ"),
       () => parseStackEffect(["anima", "meteor"])(description, memoriaName, branch("ether")),
     )
     .when(
-      (name) => name.includes("ルミナス"),
+      (name) => name.includes("グロリア"),
+      () => parseStackEffect(["eden", "barrier"])(description, memoriaName, branch("gloria"))
+    )
+    .when(
+      (name) => name.includes("ルミナス") || name.includes("イージス"),
       () => parseStackEffect(["anima", "barrier"])(description, memoriaName, branch("luminous")),
     )
     .when(
       (name) => name.includes("セラフィア"),
       () => parseStackEffect(["anima", "eden"])(description, memoriaName, branch("seraphia")),
-    )
-    .when(
-      (name) => name.includes("アルカナ"),
-      () => parseStackEffect(["meteor", "anima"])(description, memoriaName, branch("arcana")),
-    )
-    .when(
-      (name) => name.includes("イージス"),
-      () => parseStackEffect(["anima", "barrier"])(description, memoriaName, branch("aigis")),
     )
     .otherwise(() => right([]));
 }
