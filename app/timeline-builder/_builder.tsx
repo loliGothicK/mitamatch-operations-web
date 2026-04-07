@@ -3,10 +3,10 @@
 import { useAtom } from "jotai";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { type SubmitEvent, SetStateAction, Suspense, useCallback, useId, useState } from "react";
+import { type SubmitEvent, SetStateAction, Suspense, useCallback, useId, useRef, useState } from "react";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 
-import { Add, Assignment, DragIndicator, Edit, Remove, Share } from "@mui/icons-material";
+import { Add, Assignment, DragIndicator, Edit, Image as ImageIcon, Remove, Share } from "@mui/icons-material";
 import HelpOutline from "@mui/icons-material/HelpOutline";
 import {
   alpha,
@@ -70,6 +70,8 @@ import { ULID, ulid } from "ulid";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveTimelinesAction } from "@/_actions/timelines";
 import { TimelineBuilderTour } from "@/timeline-builder/_tour";
+import { TimelineShareCard } from "@/timeline-builder/_share-card";
+import { copyNodeAsImage } from "@/components/share/copyImage";
 
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
@@ -530,7 +532,9 @@ function ShareButton() {
   const [modalOpen, setModalOpen] = useState<"short" | "full" | false>(false);
   const [openTip, setOpenTip] = useState<boolean>(false);
   const [url, setUrl] = useState<string>("");
+  const [toast, setToast] = useState<string | false>(false);
   const queryClient = useQueryClient();
+  const shareCardRef = useRef<HTMLDivElement>(null);
 
   // Mutations
   const mutation = useMutation({
@@ -556,6 +560,10 @@ function ShareButton() {
     setOpenTip(true);
     await navigator.clipboard.writeText(url);
   };
+  const handleCopyImage = async () => {
+    const result = await copyNodeAsImage(shareCardRef, `${title || "timeline"}.png`);
+    setToast(result === "copied" ? "Image copied." : "Image downloaded.");
+  };
 
   return (
     <PopupState
@@ -566,10 +574,26 @@ function ShareButton() {
     >
       {(popupState) => (
         <>
+          <Box
+            sx={{ position: "fixed", left: -10000, top: 0, pointerEvents: "none", zIndex: -1 }}
+          >
+            <div ref={shareCardRef}>
+              <TimelineShareCard title={title} timeline={timeline} />
+            </div>
+          </Box>
           <Button {...bindTrigger(popupState)}>
             <Share />
           </Button>
           <Menu {...bindMenu(popupState)}>
+            <MenuItem
+              onClick={async () => {
+                popupState.close();
+                await handleCopyImage();
+              }}
+            >
+              <ImageIcon fontSize="small" sx={{ mr: 1 }} />
+              {"copy image"}
+            </MenuItem>
             <MenuItem
               onClick={async () => {
                 popupState.close();
@@ -630,6 +654,13 @@ function ShareButton() {
               <Button onClick={handleClose}>Close</Button>
             </DialogActions>
           </Dialog>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            autoHideDuration={2500}
+            open={toast !== false}
+            onClose={() => setToast(false)}
+            message={toast || ""}
+          />
         </>
       )}
     </PopupState>

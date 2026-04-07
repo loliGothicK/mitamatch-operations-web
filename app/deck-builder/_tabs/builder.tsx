@@ -11,6 +11,7 @@ import {
   useCallback,
   useId,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import DifferenceIcon from "@mui/icons-material/Difference";
@@ -24,6 +25,7 @@ import {
   Assignment,
   ClearAll,
   FilterAlt,
+  Image as ImageIcon,
   Layers,
   LayersOutlined,
   Remove,
@@ -124,6 +126,8 @@ import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import Link from "@/components/link";
 import { useHotkeys } from "react-hotkeys-hook";
 import { openAtom } from "@/jotai/editor";
+import { DeckShareCard } from "@/deck-builder/_share-card";
+import { copyNodeAsImage } from "@/components/share/copyImage";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -1337,7 +1341,9 @@ function ShareButton() {
   const [modalOpen, setModalOpen] = useState<"short" | "full" | false>(false);
   const [openTip, setOpenTip] = useState<boolean>(false);
   const [url, setUrl] = useState<string>("");
+  const [toast, setToast] = useState<string | false>(false);
   const queryClient = useQueryClient();
+  const shareCardRef = useRef<HTMLDivElement>(null);
 
   // Mutations
   const mutation = useMutation({
@@ -1362,6 +1368,10 @@ function ShareButton() {
     setOpenTip(true);
     await navigator.clipboard.writeText(url);
   };
+  const handleCopyImage = async () => {
+    const result = await copyNodeAsImage(shareCardRef, `${title || "deck"}.png`);
+    setToast(result === "copied" ? "Image copied." : "Image downloaded.");
+  };
 
   return (
     <PopupState
@@ -1372,12 +1382,28 @@ function ShareButton() {
     >
       {(popupState) => (
         <>
+          <Box
+            sx={{ position: "fixed", left: -10000, top: 0, pointerEvents: "none", zIndex: -1 }}
+          >
+            <div ref={shareCardRef}>
+              <DeckShareCard title={title} sw={sw} deck={deck} legendaryDeck={legendaryDeck} />
+            </div>
+          </Box>
           <Button {...bindTrigger(popupState)}>
             <Tooltip title={"share"} placement={"top"}>
               <Share color={"secondary"} />
             </Tooltip>
           </Button>
           <Menu {...bindMenu(popupState)}>
+            <MenuItem
+              onClick={async () => {
+                popupState.close();
+                await handleCopyImage();
+              }}
+            >
+              <ImageIcon fontSize="small" sx={{ mr: 1 }} />
+              {"copy image"}
+            </MenuItem>
             <MenuItem
               onClick={async () => {
                 popupState.close();
@@ -1439,6 +1465,13 @@ function ShareButton() {
               <Button onClick={handleClose}>Close</Button>
             </DialogActions>
           </Dialog>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            autoHideDuration={2500}
+            open={toast !== false}
+            onClose={() => setToast(false)}
+            message={toast || ""}
+          />
         </>
       )}
     </PopupState>
