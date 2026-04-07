@@ -242,7 +242,7 @@ export function DataGrid<
 
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
-      <Box display={"flex"} sx={{ justifyContent: "left" }}>
+      <Box display={"flex"} sx={{ justifyContent: "left" }} data-tour="data-grid-toolbar">
         <Snackbar
           anchorOrigin={{ vertical, horizontal }}
           autoHideDuration={2000}
@@ -285,16 +285,18 @@ export function DataGrid<
           </Tooltip>
         </Box>
       </Box>
-      <Console
-        type={table}
-        value={initialQuery || query}
-        schema={schema}
-        completion={completion}
-        completions={completion ? [makeSchemaCompletionSource(completion)] : []}
-        execute={() => runQuery({ toast: true })}
-        onChange={onChange}
-      />
-      <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      <Box data-tour="data-query-editor">
+        <Console
+          type={table}
+          value={initialQuery || query}
+          schema={schema}
+          completion={completion}
+          completions={completion ? [makeSchemaCompletionSource(completion)] : []}
+          execute={() => runQuery({ toast: true })}
+          onChange={onChange}
+        />
+      </Box>
+      <div style={{ display: "flex", flexDirection: "column", width: "100%" }} data-tour="data-grid">
         <NoSsr>
           <MuiDataGrid
             key={table}
