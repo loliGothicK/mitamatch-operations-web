@@ -19,8 +19,8 @@ function CardTypeIcon({
   left: number;
 }) {
   const wh = {
-    width: size * 0.8,
-    height: size * 0.8,
+    width: size * 0.82,
+    height: size * 0.82,
   };
   const kindImage = match(cardType)
     .with(1, () => <Image src={"/NormalSingle.png"} alt={"kind"} {...wh} />)
@@ -38,6 +38,7 @@ function CardTypeIcon({
         width: size,
         height: size,
         left,
+        top: -1,
         position: "absolute",
         bgcolor: color,
       }}
@@ -68,8 +69,8 @@ export function MemoriaIcon({
       <CardTypeIcon
         cardType={cardType}
         attribute={attribute}
-        size={size ? size * 0.3 : 30}
-        left={size ? size * 0.7 : 70}
+        size={size ? size * 0.34 : 34}
+        left={size ? size * 0.63 : 63}
       />
       <ImageWithFallback
         src={`/memoria/${name.short}.png`}

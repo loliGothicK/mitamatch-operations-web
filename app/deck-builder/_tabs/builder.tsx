@@ -140,22 +140,24 @@ function Icon({
   attribute: Memoria["attribute"];
   position?: number;
 }) {
+  const iconSize = 28;
+
   const kindImage = match(cardType)
-    .with(1, () => <Image src={"/NormalSingle.png"} alt={"kind"} width={25} height={25} />)
-    .with(2, () => <Image src={"/NormalRange.png"} alt={"kind"} width={25} height={25} />)
-    .with(3, () => <Image src={"/SpecialSingle.png"} alt={"kind"} width={25} height={25} />)
-    .with(4, () => <Image src={"/SpecialRange.png"} alt={"kind"} width={25} height={25} />)
-    .with(5, () => <Image src={"/Assist.png"} alt={"kind"} width={25} height={25} />)
-    .with(6, () => <Image src={"/Interference.png"} alt={"kind"} width={25} height={25} />)
-    .with(7, () => <Image src={"/Recovery.png"} alt={"kind"} width={25} height={25} />)
+    .with(1, () => <Image src={"/NormalSingle.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(2, () => <Image src={"/NormalRange.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(3, () => <Image src={"/SpecialSingle.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(4, () => <Image src={"/SpecialRange.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(5, () => <Image src={"/Assist.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(6, () => <Image src={"/Interference.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(7, () => <Image src={"/Recovery.png"} alt={"kind"} width={iconSize} height={iconSize} />)
     .exhaustive();
 
   const avatar = (color: string) => (
     <Avatar
       sx={{
-        width: 30,
-        height: 30,
-        left: position,
+        width: 34,
+        height: 34,
+        left: position === undefined ? undefined : position - 3,
         position: "absolute",
         bgcolor: color,
         zIndex: 1,
@@ -1386,7 +1388,7 @@ function ShareButton() {
             sx={{ position: "fixed", left: -10000, top: 0, pointerEvents: "none", zIndex: -1 }}
           >
             <div ref={shareCardRef}>
-              <DeckShareCard title={title} sw={sw} deck={deck} legendaryDeck={legendaryDeck} />
+              <DeckShareCard title={title} deck={deck} legendaryDeck={legendaryDeck} />
             </div>
           </Box>
           <Button {...bindTrigger(popupState)}>
