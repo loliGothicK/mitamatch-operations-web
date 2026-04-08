@@ -1,0 +1,292 @@
+---
+title: "Query Reference"
+slug: "/data/query-ref"
+section: 2
+---
+
+## クエリ一覧の使い方
+
+`Memoria` と `Costume` タブでは、クエリエディタから一覧を絞り込みできます。
+クエリは GoogleSQL ライクな構文で解釈され、`SELECT`、`WHERE`、`ORDER BY`、`LIMIT` が使えます。
+
+## 画面構成
+
+- 上部ツールバー
+  クエリ実行、クエリ初期化、共有、ヘルプ表示を行います。
+- クエリエディタ
+  SQL ライクな構文で条件を入力します。補完にも対応しています。
+- グリッド
+  フィルタ結果がグリッドで表示されます。列の表示切り替えやソートも利用可能です（グリッドの機能）。
+
+> [!IMPORTANT]
+> グリッドからの操作とクエリからの操作は意味が異なります、クエリはグリッドが扱うデータそのものを制限するため、クエリで絞り込んだ場合はグリッド上で非表示になっているわけではなくそもそも存在しない扱いです。
+
+## できること
+
+- `SELECT`
+  表示する列を切り替えます。`EXCEPT` 句が使えます。
+- `WHERE`
+  数値条件、文字列条件、JSON ライクなスキル条件で絞り込みます。
+- `ORDER BY`
+  一覧の並び順を変更します。
+- `LIMIT`
+  表示件数を制限します。
+- `Share`
+  現在のクエリを URL にしてクリップボードへコピーします。
+
+## 利用可能なカラム一覧
+
+### Memoria
+
+| カラム名      | 型        | 説明                                                                     | `.` アクセス | 特殊 LIKE |
+| ------------- | --------- | ------------------------------------------------------------------------ | ------------ | --------- |
+| `name`        | text      | メモリア名                                                               | -            | -         |
+| `type`        | text      | カードタイプ（通常単体、通常範囲、特殊単体、特殊範囲、支援、妨害、回復） | -            | ✓         |
+| `attribute`   | text      | 属性（火、水、風、光、闇）                                               | -            | -         |
+| `cost`        | integer   | コスト                                                                   | -            | -         |
+| `atk`         | integer   | 通攻                                                                     | -            | -         |
+| `spatk`       | integer   | 特攻                                                                     | -            | -         |
+| `def`         | integer   | 通防                                                                     | -            | -         |
+| `spdef`       | integer   | 特防                                                                     | -            | -         |
+| `released_at` | timestamp | リリース日時                                                             | -            | -         |
+| `questSkill`  | json      | 対ヒュージスキル                                                         | ✓            | ✓         |
+| `gvgSkill`    | json      | レギオンマッチスキル                                                     | ✓            | ✓         |
+| `autoSkill`   | json      | レギオンマッチ補助スキル                                                 | ✓            | ✓         |
+| `label`       | -         | ラベル（legendary、ultimate）                                            | -            | -         |
+
+#### Memoria スキルカラムの詳細
+
+**`questSkill`、`gvgSkill`、`autoSkill` は以下の情報にアクセス可能：**
+
+- `questSkill.name` / `gvgSkill.name` / `autoSkill.name` → スキル名
+- `questSkill.description` / `gvgSkill.description` / `autoSkill.description` → スキルの説明
+
+### Costume
+
+| カラム名       | 型        | 説明                                                                   | `.` アクセス | 特殊 LIKE |
+| -------------- | --------- | ---------------------------------------------------------------------- | ------------ | --------- |
+| `name`         | text      | キャラ名/衣装名                                                        | -            | -         |
+| `type`         | text      | 衣装タイプ（通常単体、通常範囲、特殊単体、特殊範囲、支援、妨害、回復） | -            | ✓         |
+| `atk`          | integer   | 通攻                                                                   | -            | -         |
+| `spatk`        | integer   | 特攻                                                                   | -            | -         |
+| `def`          | integer   | 通防                                                                   | -            | -         |
+| `spdef`        | integer   | 特防                                                                   | -            | -         |
+| `rareSkill`    | json      | レアスキル情報                                                         | ✓            | -         |
+| `specialSkill` | json      | スペシャルスキル情報（EX/ADX）                                         | -            | ✓         |
+| `released_at`  | timestamp | リリース日時                                                           | -            | -         |
+
+#### Costume スキルカラムの詳細
+
+**`rareSkill` は以下の情報にアクセス可能：**
+
+- `rareSkill.name` → レアスキル名
+- `rareSkill.description` → レアスキルの説明
+
+**`specialSkill` の特殊 LIKE パターン：**
+
+`specialSkill` は `=` では使えず、必ず `LIKE` を使う必要があります。以下のパターンで複合検索が可能です：
+
+| パターン                                             | 説明                       |
+| ---------------------------------------------------- | -------------------------- |
+| `'EX'`                                               | EX スペシャルスキルを持つ  |
+| `'ADX'`                                              | ADX スペシャルスキルを持つ |
+| `'覚醒'`                                             | ADX で覚醒可能             |
+| `'火'` / `'水'` / `'風'` / `'光'` / `'闇'`           | 指定属性スキル効果を持つ   |
+| `'対火'` / `'対水'` / `'対風'` / `'対光'` / `'対闇'` | 指定属性に対する耐性を持つ |
+
+**複数パターンの組み合わせ：** カンマ区切りで複数指定できます（すべてを満たす必要があります）
+
+```sql
+WHERE `specialSkill` LIKE 'ADX,覚醒'  -- ADX で覚醒可能な衣装
+WHERE `specialSkill` LIKE 'EX,火'    -- EX で火属性効果を持つ衣装
+```
+
+## Memoria の `type` LIKE 特別パターン
+
+`type` カラムではカード分類を簡潔に検索できる特殊パターンがあります：
+
+| パターン | マッチするタイプ                       |
+| -------- | -------------------------------------- |
+| `'前衛'` | 通常単体、通常範囲、特殊単体、特殊範囲 |
+| `'後衛'` | 支援、妨害、回復                       |
+| `'通常'` | 通常単体、通常範囲                     |
+| `'特殊'` | 特殊単体、特殊範囲                     |
+
+```sql
+WHERE `type` LIKE '前衛'  -- 前衛カード全て
+WHERE `type` LIKE '特殊'  -- 特殊系カード全て
+```
+
+## クエリ例
+
+### Memoria の例
+
+#### 例 1: 特殊かつコスト25以上のメモリア
+
+```sql
+SELECT `name`, `type`, `cost`, `spatk` FROM memoria
+  WHERE `type` LIKE '特殊'
+    AND `cost` >= 25
+  ORDER BY `released_at` DESC;
+```
+
+#### 例 2: エンハンス系スキルを持つメモリア
+
+```sql
+SELECT * FROM memoria
+  WHERE `gvgSkill.name` LIKE '%エンハ%'
+  ORDER BY `cost` DESC;
+```
+
+#### 例 3: 複合スキル検索（エンハンス系かつ範囲がDのメモリア）
+
+```sql
+SELECT `name`, `gvgSkill.name`, `attribute` FROM memoria
+  WHERE `type` LIKE '特殊'
+    AND `gvgSkill.name` LIKE '%エンハ%D%'
+  ORDER BY `released_at` DESC;
+```
+
+> [!NOTE]
+> `%` は「任意の文字列」を表すワイルドカード。`%エンハ%D%` は「(任意の文字)エンハ(任意の文字)D(任意の文字)」という意味
+
+### Costume の例
+
+#### 例 1: 覚醒可能な ADX 衣装
+
+```sql
+SELECT `name`, `type`, `specialSkill`, `released_at` FROM costume
+  WHERE `specialSkill` LIKE 'ADX,覚醒'
+  ORDER BY `released_at` DESC;
+```
+
+> [!IMPORTANT]
+> **注意：** `specialSkill` は必ず `LIKE` を使用。複数条件はカンマ区切り
+
+#### 例 2: EX スキルで火属性効果増加を持つ衣装
+
+```sql
+SELECT `name`, `rareSkill.name`, `specialSkill` FROM costume
+  WHERE `specialSkill` LIKE 'EX,火'
+  ORDER BY `released_at` DESC;
+```
+
+#### 例 3: 特定属性に対する耐性を持つ衣装
+
+```sql
+SELECT `name`, `type` FROM costume
+  WHERE `specialSkill` LIKE '対水'
+  LIMIT 15;
+```
+
+読み方：「水属性のダメージ/妨害に対する耐性を持つ衣装。最初の 15 件」
+
+#### 例 4: EXの通常支援衣装
+
+```sql
+SELECT `name`, `atk`, `rareSkill.name` FROM costume
+  WHERE `specialSkill` LIKE 'EX'
+    AND `type` = '支援'
+    AND `atk` >= `spatk`
+  ORDER BY `atk` DESC;
+```
+
+#### 例 5: 後衛でレアスキルがファンタズムSである江川樟美の衣装
+
+```sql
+SELECT `name`, `type` FROM costume
+  WHERE `type` LIKE '後衛'
+    AND `rareSkill.name` = 'ファンタズムS'
+    AND `name` LIKE "江川樟美%"
+  ORDER BY `released_at` DESC;
+```
+
+## 補足
+
+- 詳細な利用可能カラムは各タブのヘルプモーダルから確認できます。
+- `Memoria` と `Costume` では使える列や検索候補が異なります。
+
+### 普通じゃない書き方の説明
+
+#### `.` でスキル情報にアクセス
+
+スキル情報（`questSkill`、`gvgSkill`、`autoSkill`、`rareSkill`）の詳細にアクセスするには、ドット `.` を使います：
+
+```sql
+-- スキル名で検索
+WHERE `gvgSkill.name` LIKE '%ヒール%'
+
+-- スキルの説明で検索
+WHERE `questSkill.description` LIKE '%ダメージ%'
+```
+
+#### LIKE の基本と応用
+
+**基本的なワイルドカード：**
+
+- `%` = 0 文字以上の任意の文字
+- `_` = ちょうど 1 文字
+
+```sql
+-- 完全一致
+WHERE `name` = 'アナ'
+
+-- 部分一致（「アナ」を含む）
+WHERE `name` LIKE '%アナ%'
+
+-- 特定の文字列で始まる
+WHERE `name` LIKE 'アナ%'
+
+-- 特定の文字列で終わる
+WHERE `name` LIKE '%アナ'
+```
+
+**スキル LIKE（Memoria の type、Costume の specialSkill）：**
+
+`type` と `specialSkill` では、LIKE に**カスタマイズされた判定ロジック**が適用されます。
+
+```sql
+-- type の特殊パターン
+WHERE `type` LIKE '前衛'    -- 自動的に複数のタイプにマッチ
+WHERE `type` LIKE '特殊'    -- 特殊単体と特殊範囲にマッチ
+
+-- specialSkill の複合パターン
+WHERE `specialSkill` LIKE 'ADX,覚醒'  -- ADX AND 覚醒の両方を含む
+WHERE `specialSkill` LIKE 'EX,火'     -- EX AND 火属性効果の両方
+```
+
+#### EXCEPT で不要なカラムを除外
+
+表示カラムが多すぎる場合、必要なもの以外を除外できます：
+
+```sql
+-- questSkill を除いた全カラムを表示
+SELECT * EXCEPT (`questSkill`) FROM memoria;
+
+-- 複数のカラムを除外
+SELECT * EXCEPT (`questSkill`, `released_at`) FROM memoria;
+```
+
+#### 複雑な条件の書き方
+
+括弧 `()` を使って優先順位を明確にします：
+
+```sql
+-- 複合条件
+WHERE (`type` LIKE '前衛' OR `type` LIKE '後衛')
+  AND `cost` > 5
+  AND (`attribute` = '火' OR `attribute` = '水');
+```
+
+### エラーが出た時
+
+| エラーメッセージ                                                  | 原因                            | 対処方法                           |
+| ----------------------------------------------------------------- | ------------------------------- | ---------------------------------- |
+| `Cannot resolve XXX with schema definition`                       | 存在しないカラム名              | カラム名をヘルプで確認             |
+| `specialSkill cannot be compared, must be used LIKE operator`     | `specialSkill` に `=` を使った  | `LIKE` に変更                      |
+| `specialSkill cannot be compared, must be used NOT LIKE operator` | `specialSkill` に `!=` を使った | `NOT LIKE` に変更                  |
+| `Invalid operands for LIKE operator`                              | LIKE の使い方が不正             | 左辺は必ずカラム名、右辺は値を確認 |
+
+---
+
+**質問や不明な点があれば、ヘルプモーダル（右上の `?` ボタン）を確認するか、[クエリの書き方ガイド](/data/query-101)を参照してください。**
