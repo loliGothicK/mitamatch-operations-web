@@ -195,12 +195,12 @@
 
 .mitamatch-markdown table {
   border-collapse: collapse;
+  table-layout: fixed;
   width: 100%;
-  display: block;
-  overflow-x: auto;
   border: 1px solid var(--mitamatch-border-soft);
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
 }
 
 .mitamatch-markdown th,
@@ -208,6 +208,12 @@
   padding: 0.75rem 0.9rem;
   text-align: left;
   vertical-align: top;
+  border-right: 1px solid var(--mitamatch-border-soft);
+}
+
+.mitamatch-markdown th:last-child,
+.mitamatch-markdown td:last-child {
+  border-right: none;
 }
 
 .mitamatch-markdown thead tr {
@@ -216,6 +222,10 @@
     rgba(208, 96, 133, 0.14),
     rgba(143, 163, 75, 0.14)
   );
+}
+
+.mitamatch-markdown thead th {
+  border-bottom: 1px solid var(--mitamatch-border-soft);
 }
 
 .mitamatch-markdown tbody tr {
