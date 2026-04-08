@@ -25,7 +25,32 @@ const gridSteps: Step[] = [
   },
   {
     target: '[data-tour="data-query-editor"]',
-    content: "GoogleSQL ライクなクエリを入力して、一覧を絞り込みできます。",
+    content: (
+      <div>
+        <p>GoogleSQL ライクなクエリを入力して、一覧を絞り込みできます。</p>
+        <p style={{ marginTop: "0.5em", fontSize: "0.9em" }}>
+          詳しい使い方は{" "}
+          <a
+            href="/data/query-beginner-guide"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline", cursor: "pointer" }}
+          >
+            クエリの書き方ガイド
+          </a>
+          または{" "}
+          <a
+            href="/data/query-ref"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline", cursor: "pointer" }}
+          >
+            Query Reference
+          </a>
+          を参照してください。
+        </p>
+      </div>
+    ) as any,
     placement: "bottom",
   },
   {

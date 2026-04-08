@@ -15,7 +15,23 @@ const steps: Step[] = [
   },
   {
     target: '[data-tour="deck-toolbar"]',
-    content: "デッキ操作、共有、比較、絞り込み、検索、ソートはこのツールバーから行います。",
+    content: (
+      <div>
+        <p>デッキ操作、共有、比較、絞り込み、検索、ソートはこのツールバーから行います。</p>
+        <p style={{ marginTop: "0.5em", fontSize: "0.9em" }}>
+          絞り込み・検索時のクエリについては{" "}
+          <a
+            href="/data/query-beginner-guide"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "underline", cursor: "pointer" }}
+          >
+            クエリの書き方ガイド
+          </a>
+          を参照してください。
+        </p>
+      </div>
+    ) as any,
     placement: "bottom",
   },
   {
