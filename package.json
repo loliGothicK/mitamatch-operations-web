@@ -119,7 +119,7 @@
     "@vitejs/plugin-react": "6.0.1",
     "@vitest/coverage-v8": "4.1.4",
     "drizzle-kit": "0.31.10",
-    "happy-dom": "20.8.9",
+    "happy-dom": "20.9.0",
     "import-in-the-middle": "3.0.0",
     "oxfmt": "0.45.0",
     "require-in-the-middle": "8.0.1",
