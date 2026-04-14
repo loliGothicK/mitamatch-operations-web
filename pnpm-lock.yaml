@@ -289,8 +289,8 @@ importers:
         specifier: 0.31.10
         version: 0.31.10
       happy-dom:
-        specifier: 20.8.9
-        version: 20.8.9
+        specifier: 20.9.0
+        version: 20.9.0
       import-in-the-middle:
         specifier: 3.0.0
         version: 3.0.0
@@ -314,7 +314,7 @@ importers:
         version: 6.1.1(typescript@6.0.2)(vite@7.3.2(@types/node@25.0.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.2))
       vitest:
         specifier: 4.1.4
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.0.3)(@vitest/coverage-v8@4.1.4)(happy-dom@20.8.9)(vite@7.3.2(@types/node@25.0.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.2))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.0.3)(@vitest/coverage-v8@4.1.4)(happy-dom@20.9.0)(vite@7.3.2(@types/node@25.0.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.2))
       zod:
         specifier: 4.3.6
         version: 4.3.6
@@ -5642,8 +5642,8 @@ packages:
   h3@1.15.11:
     resolution: {integrity: sha512-L3THSe2MPeBwgIZVSH5zLdBBU90TOxarvhK9d04IDY2AmVS8j2Jz2LIWtwsGOU3lu2I5jCN7FNvVfY2+XyF+mg==}
 
-  happy-dom@20.8.9:
-    resolution: {integrity: sha512-Tz23LR9T9jOGVZm2x1EPdXqwA37G/owYMxRwU0E4miurAtFsPMQ1d2Jc2okUaSjZqAFz2oEn3FLXC5a0a+siyA==}
+  happy-dom@20.9.0:
+    resolution: {integrity: sha512-GZZ9mKe8r646NUAf/zemnGbjYh4Bt8/MqASJY+pSm5ZDtc3YQox+4gsLI7yi1hba6o+eCsGxpHn5+iEVn31/FQ==}
     engines: {node: '>=20.0.0'}
 
   has-flag@4.0.0:
@@ -12179,7 +12179,7 @@ snapshots:
       obug: 2.1.1
       std-env: 4.0.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.0.3)(@vitest/coverage-v8@4.1.4)(happy-dom@20.8.9)(vite@7.3.2(@types/node@25.0.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.2))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.0.3)(@vitest/coverage-v8@4.1.4)(happy-dom@20.9.0)(vite@7.3.2(@types/node@25.0.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.2))
 
   '@vitest/expect@4.1.4':
     dependencies:
@@ -13814,7 +13814,7 @@ snapshots:
       uncrypto: 0.1.3
     optional: true
 
-  happy-dom@20.8.9:
+  happy-dom@20.9.0:
     dependencies:
       '@types/node': 25.0.3
       '@types/whatwg-mimetype': 3.0.2
@@ -17196,7 +17196,7 @@ snapshots:
       tsx: 4.21.0
       yaml: 2.8.2
 
-  vitest@4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.0.3)(@vitest/coverage-v8@4.1.4)(happy-dom@20.8.9)(vite@7.3.2(@types/node@25.0.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.2)):
+  vitest@4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.0.3)(@vitest/coverage-v8@4.1.4)(happy-dom@20.9.0)(vite@7.3.2(@types/node@25.0.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.2)):
     dependencies:
       '@vitest/expect': 4.1.4
       '@vitest/mocker': 4.1.4(vite@7.3.2(@types/node@25.0.3)(jiti@2.6.1)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.2))
@@ -17222,7 +17222,7 @@ snapshots:
       '@opentelemetry/api': 1.9.1
       '@types/node': 25.0.3
       '@vitest/coverage-v8': 4.1.4(vitest@4.1.4)
-      happy-dom: 20.8.9
+      happy-dom: 20.9.0
     transitivePeerDependencies:
       - msw
 
