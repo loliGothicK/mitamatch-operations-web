@@ -120,8 +120,8 @@ importers:
         specifier: 10.49.0
         version: 10.49.0(@opentelemetry/exporter-trace-otlp-http@0.215.0(@opentelemetry/api@1.9.1))
       '@tanstack/react-query':
-        specifier: 5.99.1
-        version: 5.99.1(react@19.2.5)
+        specifier: 5.99.2
+        version: 5.99.2(react@19.2.5)
       '@uiw/codemirror-theme-github':
         specifier: 4.25.9
         version: 4.25.9(@codemirror/language@6.12.3)(@codemirror/state@6.6.0)(@codemirror/view@6.39.8)
@@ -154,7 +154,7 @@ importers:
         version: 2.19.1(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.14)(react@19.2.5)
       jotai-tanstack-query:
         specifier: 0.11.0
-        version: 0.11.0(@tanstack/query-core@5.99.1)(@tanstack/react-query@5.99.1(react@19.2.5))(jotai@2.19.1(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)
+        version: 0.11.0(@tanstack/query-core@5.99.2)(@tanstack/react-query@5.99.2(react@19.2.5))(jotai@2.19.1(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.14)(react@19.2.5))(react@19.2.5)
       material-ui-popup-state:
         specifier: 5.3.7
         version: 5.3.7(@mui/material@7.3.10(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.5))(@types/react@19.2.14)(react@19.2.5))(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5))(@types/react@19.2.14)(react@19.2.5)
@@ -3805,11 +3805,11 @@ packages:
   '@tanstack/query-core@5.90.16':
     resolution: {integrity: sha512-MvtWckSVufs/ja463/K4PyJeqT+HMlJWtw6PrCpywznd2NSgO3m4KwO9RqbFqGg6iDE8vVMFWMeQI4Io3eEYww==}
 
-  '@tanstack/query-core@5.99.1':
-    resolution: {integrity: sha512-5E8xwxyWvr22yt7zvzP3KOZ5TUElOdVA45NP3/Ao1m9mvc9i18NLTDe9m3M00BH2DR5J20cv7xckMPlhKNs+vQ==}
+  '@tanstack/query-core@5.99.2':
+    resolution: {integrity: sha512-1HunU0bXVsR1ZJMZbcOPE6VtaBJxsW809RE9xPe4Gz7MlB0GWwQvuTPhMoEmQ/hIzFKJ/DWAuttIe7BOaWx0tA==}
 
-  '@tanstack/react-query@5.99.1':
-    resolution: {integrity: sha512-akg5GdwW70lvJvCqVHZ7tizGyc+TATjUzKX9RuF1xknhEe/1leofXk7YLYbrbRsuhNbHJBAayaQUMvvOFZ5L5g==}
+  '@tanstack/react-query@5.99.2':
+    resolution: {integrity: sha512-vM91UEe45QUS9ED6OklsVL15i8qKcRqNwpWzPTVWvRPRSEgDudDgHpvyTjcdlwHcrKNa80T+xXYcchT2noPnZA==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -11686,11 +11686,11 @@ snapshots:
 
   '@tanstack/query-core@5.90.16': {}
 
-  '@tanstack/query-core@5.99.1': {}
+  '@tanstack/query-core@5.99.2': {}
 
-  '@tanstack/react-query@5.99.1(react@19.2.5)':
+  '@tanstack/react-query@5.99.2(react@19.2.5)':
     dependencies:
-      '@tanstack/query-core': 5.99.1
+      '@tanstack/query-core': 5.99.2
       react: 19.2.5
 
   '@testing-library/dom@10.4.1':
@@ -14225,12 +14225,12 @@ snapshots:
   jiti@2.6.1:
     optional: true
 
-  jotai-tanstack-query@0.11.0(@tanstack/query-core@5.99.1)(@tanstack/react-query@5.99.1(react@19.2.5))(jotai@2.19.1(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.14)(react@19.2.5))(react@19.2.5):
+  jotai-tanstack-query@0.11.0(@tanstack/query-core@5.99.2)(@tanstack/react-query@5.99.2(react@19.2.5))(jotai@2.19.1(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.14)(react@19.2.5))(react@19.2.5):
     dependencies:
-      '@tanstack/query-core': 5.99.1
+      '@tanstack/query-core': 5.99.2
       jotai: 2.19.1(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.14)(react@19.2.5)
     optionalDependencies:
-      '@tanstack/react-query': 5.99.1(react@19.2.5)
+      '@tanstack/react-query': 5.99.2(react@19.2.5)
       react: 19.2.5
 
   jotai@2.19.1(@babel/core@7.29.0)(@babel/template@7.28.6)(@types/react@19.2.14)(react@19.2.5):
