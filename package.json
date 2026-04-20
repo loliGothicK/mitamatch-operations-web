@@ -24,7 +24,7 @@
     "domain:update:costume": "npx tsx scripts/update-domain-json.ts costume"
   },
   "dependencies": {
-    "@base-ui/react": "1.4.0",
+    "@base-ui/react": "1.4.1",
     "@clerk/backend": "3.2.13",
     "@clerk/nextjs": "7.2.3",
     "@codemirror/autocomplete": "6.20.1",
