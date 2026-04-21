@@ -207,8 +207,8 @@ importers:
         specifier: 4.0.1
         version: 4.0.1
       svix:
-        specifier: 1.90.0
-        version: 1.90.0
+        specifier: 1.91.1
+        version: 1.91.1
       tocbot:
         specifier: 4.36.4
         version: 4.36.4
@@ -7565,8 +7565,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  svix@1.90.0:
-    resolution: {integrity: sha512-ljkZuyy2+IBEoESkIpn8sLM+sxJHQcPxlZFxU+nVDhltNfUMisMBzWX/UR8SjEnzoI28ZjCzMbmYAPwSTucoMw==}
+  svix@1.91.1:
+    resolution: {integrity: sha512-Vn8nuer+o3NhGLHJNW3CPxls3te8YLr0xC3ImfcksG7taC/A+o8+PcVAK4sj1LJs4kM9HdmkXBnS3WU4E0YHHA==}
 
   synckit@0.11.11:
     resolution: {integrity: sha512-MeQTA1r0litLUf0Rp/iisCaL8761lKAZHaimlbGK4j0HysC4PLfqygQj9srcs0m2RdtDYnF8UuYyKpbjHYp7Jw==}
@@ -16672,7 +16672,7 @@ snapshots:
       sax: 1.6.0
     optional: true
 
-  svix@1.90.0:
+  svix@1.91.1:
     dependencies:
       standardwebhooks: 1.0.0
       uuid: 10.0.0
