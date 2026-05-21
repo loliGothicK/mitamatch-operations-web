@@ -45,7 +45,7 @@
     "@mui/lab": "7.0.1-beta.25",
     "@mui/material": "7.3.11",
     "@mui/system": "7.3.11",
-    "@mui/x-data-grid": "8.28.6",
+    "@mui/x-data-grid": "8.28.7",
     "@mui/x-tree-view": "8.28.5",
     "@neondatabase/serverless": "1.1.0",
     "@next/mdx": "16.2.6",
