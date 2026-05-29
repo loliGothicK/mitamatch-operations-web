@@ -8,11 +8,7 @@
   --mitamatch-border: rgba(208, 96, 133, 0.22);
   --mitamatch-border-soft: rgba(143, 163, 75, 0.2);
   --mitamatch-inline-code: rgba(208, 96, 133, 0.1);
-  --mitamatch-surface: linear-gradient(
-    135deg,
-    rgba(208, 96, 133, 0.06),
-    rgba(143, 163, 75, 0.08)
-  );
+  --mitamatch-surface: linear-gradient(135deg, rgba(208, 96, 133, 0.06), rgba(143, 163, 75, 0.08));
 }
 
 .mitamatch-markdown > * {
@@ -217,11 +213,7 @@
 }
 
 .mitamatch-markdown thead tr {
-  background: linear-gradient(
-    90deg,
-    rgba(208, 96, 133, 0.14),
-    rgba(143, 163, 75, 0.14)
-  );
+  background: linear-gradient(90deg, rgba(208, 96, 133, 0.14), rgba(143, 163, 75, 0.14));
 }
 
 .mitamatch-markdown thead th {

@@ -1,0 +1,7 @@
+allowBuilds:
+  '@clerk/shared': set this to true or false
+  '@sentry-internal/node-cpu-profiler': set this to true or false
+  '@sentry/cli': set this to true or false
+  esbuild: set this to true or false
+  protobufjs: set this to true or false
+  sharp: set this to true or false

@@ -256,7 +256,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
           height: "100vh",
         }}
       >
-        <AppBar position="absolute" sx={{ gridArea: "header" }}>
+        <AppBar position="absolute">
           <Toolbar
             sx={{ gap: 1, px: 2, mx: 0, display: "flex", alignItems: "center" }}
             component="nav"

@@ -1,6 +1,30 @@
 {
   "data": [
     {
+      "id": 194,
+      "name": "灼洸碧焔",
+      "status": [2698, 1904, 2669, 1901],
+      "effect": "[火水]属性効果増加Lv.5",
+      "description": "火属性と水属性のメモリアスキル効果が極大増加する(70%）。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": true,
+      "kind": "Elemental/Special",
+      "usually": true
+    },
+    {
+      "id": 193,
+      "name": "青焔の炎舞",
+      "status": [2262, 1546, 2263, 1543],
+      "effect": "[火水]属性効果増加Lv.5",
+      "description": "火属性と水属性のメモリアスキル効果が極大増加する(70%）。",
+      "prepare_time": 20,
+      "active_time": 130,
+      "payed": false,
+      "kind": "Elemental/Special",
+      "usually": true
+    },
+    {
       "id": 192,
       "name": "恒星の覚醒妨害",
       "status": [1893, 1892, 2691, 2674],
@@ -250,7 +274,7 @@
       "active_time": 65,
       "payed": true,
       "kind": "Elemental/Special",
-      "usually": true
+      "usually": false
     },
     {
       "id": 171,
@@ -262,7 +286,7 @@
       "active_time": 65,
       "payed": false,
       "kind": "Elemental/Special",
-      "usually": true
+      "usually": false
     },
     {
       "id": 170,
