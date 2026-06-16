@@ -1,6 +1,6 @@
 overrides:
   "@codemirror/state": "6.6.0"
-  "@codemirror/view": "6.42.0"
+  "@codemirror/view": "6.43.1"
   "@codemirror/language": "6.12.3"
   "@codemirror/commands": "6.10.3"
   "@codemirror/autocomplete": "6.20.3"
