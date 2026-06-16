@@ -29,7 +29,9 @@ export default function DocsLayout({ children }: { children: ReactNode }) {
           height: "100%",
         }}
       >
-        <Box sx={{ position: "sticky", top: 20, maxHeight: "calc(100vh - 40px)", overflowY: "auto" }}>
+        <Box
+          sx={{ position: "sticky", top: 20, maxHeight: "calc(100vh - 40px)", overflowY: "auto" }}
+        >
           <DocsSidebar tree={tree} />
         </Box>
       </Paper>

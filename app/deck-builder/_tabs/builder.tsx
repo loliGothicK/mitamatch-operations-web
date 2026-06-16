@@ -757,7 +757,12 @@ function Compare({
   return (
     <Grid
       container
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
     >
       <Grid container>
         <Grid size={{ xs: 5 }}>
@@ -1841,7 +1846,12 @@ export function DeckBuilder({
         </Grid>
         <Grid
           size={{ xs: 12, md: 8, lg: 5 }}
-          sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
           data-tour="deck-unit"
         >
           <Suspense>

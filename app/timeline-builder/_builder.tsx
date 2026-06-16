@@ -695,7 +695,7 @@ export function TimelineBuilderPage() {
       sx={{ alignItems: "flex-start", m: 2 }}
     >
       <TimelineBuilderTour replayKey={replayKey} />
-        <Grid size={{ xs: 12, md: 8, lg: 8 }} sx={{ alignItems: "center", mt: 5 }}>
+      <Grid size={{ xs: 12, md: 8, lg: 8 }} sx={{ alignItems: "center", mt: 5 }}>
         <Container
           data-tour="timeline-canvas"
           maxWidth={false}
@@ -716,7 +716,13 @@ export function TimelineBuilderPage() {
       <Grid size={{ xs: 12, md: 4, lg: 4 }}>
         <Box
           data-tour="timeline-controls"
-          sx={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", pr: 20 }}
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            pr: 20,
+          }}
         >
           <ShareButton />
           <FilterMenu />

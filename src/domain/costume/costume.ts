@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-import costumeData from "./costume.json";
+import costumeData from "@/domain/costume/costume.json";
 import { match, P } from "ts-pattern";
 import { Option } from "fp-ts/Option";
 import { option } from "fp-ts";
 import { identity } from "fp-ts/function";
 import { outdent } from "outdent";
-import {fromThrowable} from "neverthrow";
+import { fromThrowable } from "neverthrow";
 
 const costumeSchema = z.object({
   id: z.ulid().readonly(),

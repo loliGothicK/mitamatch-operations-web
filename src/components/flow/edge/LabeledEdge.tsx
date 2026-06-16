@@ -113,9 +113,7 @@ export default function LabeledEdge({
             component: "form",
             onSubmit: (event: FormEvent<HTMLDivElement>) => {
               event.preventDefault();
-              const formData = new FormData(
-                event.currentTarget as unknown as HTMLFormElement,
-              );
+              const formData = new FormData(event.currentTarget as unknown as HTMLFormElement);
               const formJson = Object.fromEntries(formData.entries());
               setComment(formJson.comment as string);
               setDialogOpen(false);

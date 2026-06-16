@@ -90,10 +90,7 @@ export function TimelineShareCard({
             boxShadow: `0 14px 30px ${alpha(theme.palette.common.black, 0.12)}`,
           }}
         >
-          <Stack
-            direction="row"
-            sx={{ justifyContent: "space-between", alignItems: "center" }}
-          >
+          <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center" }}>
             <Box>
               <Typography variant="h4" sx={{ fontWeight: 900 }}>
                 {title || "No Title"}
@@ -186,9 +183,7 @@ export function TimelineShareCard({
                     }}
                   />
                   <Box sx={{ minWidth: 0, flexGrow: 1 }}>
-                    <Typography sx={{ fontWeight: 800, fontSize: 17 }}>
-                      {order.name}
-                    </Typography>
+                    <Typography sx={{ fontWeight: 800, fontSize: 17 }}>{order.name}</Typography>
                     <Typography sx={{ fontSize: 13, color: "text.secondary" }}>
                       {order.effect}
                     </Typography>
@@ -213,9 +208,7 @@ export function TimelineShareCard({
                     <Typography sx={{ fontSize: 18, fontWeight: 900 }}>
                       {formatTime(order.prepareStartTime)}
                     </Typography>
-                    <Typography sx={{ fontSize: 12, color: "text.secondary" }}>
-                      →
-                    </Typography>
+                    <Typography sx={{ fontSize: 12, color: "text.secondary" }}>→</Typography>
                     <Typography sx={{ fontSize: 18, fontWeight: 900 }}>
                       {formatTime(order.endTime)}
                     </Typography>

@@ -193,9 +193,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
             component: "form",
             onSubmit: (event: FormEvent<HTMLDivElement>) => {
               event.preventDefault();
-              const formData = new FormData(
-                event.currentTarget as unknown as HTMLFormElement,
-              );
+              const formData = new FormData(event.currentTarget as unknown as HTMLFormElement);
               const formJson = Object.fromEntries(formData.entries());
               setPic(formJson.pic as string);
               setOrder(orderList.find((o) => o.name === formJson.order));

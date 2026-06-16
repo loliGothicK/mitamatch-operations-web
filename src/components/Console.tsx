@@ -102,15 +102,15 @@ export default function Console<
     [p: string]: string[];
   },
 >({
-    type,
-    value,
-    schema,
-    completions,
-    execute,
-    onChange,
-    completion,
-    height = "75px", // Propsで上書き可能にする
-  }: {
+  type,
+  value,
+  schema,
+  completions,
+  execute,
+  onChange,
+  completion,
+  height = "75px", // Propsで上書き可能にする
+}: {
   readonly type: keyof Schema;
   readonly value?: string;
   readonly schema: Schema;
@@ -120,7 +120,6 @@ export default function Console<
   readonly completion: Readonly<Record<string, ComleteCandidate>>;
   readonly height?: string;
 }) {
-
   // extensionsをメモ化し、依存配列（schema, completion, etc.）が変わった時のみ再計算する
   const extensions = useMemo(() => {
     const customKeymap = Prec.highest(

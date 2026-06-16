@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import memoriaData from "./memoria.json";
+import memoriaData from "@/domain/memoria/memoria.json";
 import { parseSkill, type Skill } from "@/parser/skill";
 import { parseAutoSkill, type AutoSkill } from "@/parser/autoSkill";
 import { fromThrowable } from "neverthrow";

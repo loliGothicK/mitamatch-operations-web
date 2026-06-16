@@ -108,10 +108,7 @@ export default function FlowChart() {
               <Add />
             </IconButton>
           </Stack>
-          <Box
-            sx={{ position: "absolute", right: 100 }}
-            onClick={() => setModalOpen(true)}
-          >
+          <Box sx={{ position: "absolute", right: 100 }} onClick={() => setModalOpen(true)}>
             <Button>{"how to use"}</Button>
           </Box>
         </Box>
