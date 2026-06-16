@@ -1,17 +1,16 @@
+import React, { useMemo } from "react";
 import CodeMirror, { keymap, Prec } from "@uiw/react-codemirror";
 import { githubDark } from "@uiw/codemirror-theme-github";
 import { sql, keywordCompletionSource, MySQL, schemaCompletionSource } from "@codemirror/lang-sql";
-import { defaultHighlightStyle, syntaxHighlighting } from "@codemirror/language";
 import { autocompletion, type Completion, type CompletionSource } from "@codemirror/autocomplete";
 import { makeQueryLinter } from "@/parser/query/linter";
 import { ComleteCandidate, makeColumnCompletionSource } from "@/data/_common/autocomplete";
-import { option } from "fp-ts";
-import { iter } from "@/fp-ts-ext/function";
 
 // サポートしているキーワードのホワイトリスト
 const keywordWhitelist = new Set([
   "SELECT",
   "FROM",
+  "EXCEPT",
   "WHERE",
   "AND",
   "OR",
@@ -91,7 +90,6 @@ const supportedKeywordSource: CompletionSource = async (context) => {
 
   // 2. 補完オプション (result.options) をフィルタリング
   const filteredOptions = filterSupportedKeywordCompletions(result.options);
-
   // 3. フィルター後の結果を返す
   return {
     ...result, // from, to などの情報はそのまま使う
@@ -104,14 +102,15 @@ export default function Console<
     [p: string]: string[];
   },
 >({
-  type,
-  value,
-  schema,
-  completions,
-  execute,
-  onChange,
-  completion,
-}: {
+    type,
+    value,
+    schema,
+    completions,
+    execute,
+    onChange,
+    completion,
+    height = "75px", // Propsで上書き可能にする
+  }: {
   readonly type: keyof Schema;
   readonly value?: string;
   readonly schema: Schema;
@@ -119,39 +118,46 @@ export default function Console<
   readonly execute: () => void;
   readonly onChange: (val: string, _: unknown) => void;
   readonly completion: Readonly<Record<string, ComleteCandidate>>;
+  readonly height?: string;
 }) {
-  const customKeymap = Prec.highest(
-    keymap.of([
-      {
-        // クエリの実行ショートカットキー
-        key: "Ctrl-Enter",
-        run() {
-          execute();
-          return true;
+
+  // extensionsをメモ化し、依存配列（schema, completion, etc.）が変わった時のみ再計算する
+  const extensions = useMemo(() => {
+    const customKeymap = Prec.highest(
+      keymap.of([
+        {
+          key: "Ctrl-Enter",
+          run() {
+            execute();
+            return true;
+          },
         },
-      },
-    ]),
-  );
-  const myCompletions = autocompletion({
-    override: [
-      makeColumnCompletionSource(schema[type], completion),
-      schemaCompletionSource({ dialect: MySQL, schema }),
-      supportedKeywordSource,
-      ...iter(option.fromNullable(completions)).flat(),
-    ],
-  });
+      ]),
+    );
+
+    const myCompletions = autocompletion({
+      override: [
+        makeColumnCompletionSource(schema[type], completion),
+        schemaCompletionSource({ dialect: MySQL, schema }),
+        supportedKeywordSource,
+        ...(completions ?? []), // fp-tsの過剰な抽象化を排除
+      ],
+    });
+
+    return [
+      sql({ dialect: MySQL, schema, upperCaseKeywords: true }),
+      myCompletions,
+      makeQueryLinter(schema, completion),
+      customKeymap,
+    ];
+  }, [schema, type, completion, completions, execute]); // 依存関係を明記
+
   return (
     <CodeMirror
       value={value}
-      height="75px"
+      height={height}
       theme={githubDark}
-      extensions={[
-        sql({ dialect: MySQL, schema, upperCaseKeywords: true }),
-        syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-        myCompletions,
-        makeQueryLinter(schema, completion),
-        customKeymap,
-      ]}
+      extensions={extensions}
       onChange={onChange}
     />
   );
