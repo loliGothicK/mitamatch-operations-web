@@ -39,7 +39,7 @@ import {
   DataObject,
   Bookmark,
   Bookmarks,
-  DeleteOutline,
+  DeleteOutlined,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -522,9 +522,8 @@ function MemoriaGrid({
       <Grid
         container
         direction={"row"}
-        alignItems={"left"}
         spacing={2}
-        sx={{ maxWidth: 600, minHeight: 100 }}
+        sx={{ maxWidth: 600, minHeight: 100, alignItems: "flex-start" }}
       >
         {memorias.map((memoria) => {
           return <MemoriaItem memoria={memoria} key={memoria.id} preload={true} />;
@@ -593,10 +592,12 @@ function UnitComponent() {
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const selectMenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+  slotProps: {
+    paper: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
     },
   },
 };
@@ -754,7 +755,10 @@ function Compare({
   };
 
   return (
-    <Grid container direction={"column"} alignItems="center" justifyContent="space-between">
+    <Grid
+      container
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between" }}
+    >
       <Grid container>
         <Grid size={{ xs: 5 }}>
           <Stack direction={"column"}>
@@ -766,7 +770,7 @@ function Compare({
                   onContextMenu={false}
                 />
               </Grid>
-              <Stack direction={"column"} paddingLeft={5}>
+              <Stack direction={"column"} sx={{ pl: 5 }}>
                 <Typography variant="body2">{`${Lenz.memoria.general.shortName.get(compare)}`}</Typography>
                 <Typography variant="body2">{`${Lenz.memoria.gvgSkill.name.get(compare)}`}</Typography>
                 <Typography variant="body2">{`${Lenz.memoria.autoSkill.name.get(compare)}`}</Typography>
@@ -783,7 +787,7 @@ function Compare({
             )}
           </Stack>
         </Grid>
-        <Grid size={{ xs: 2 }} paddingTop={4}>
+        <Grid size={{ xs: 2 }} sx={{ pt: 4 }}>
           <ArrowRightAlt fontSize={"large"} />
         </Grid>
         <Grid size={{ xs: 5 }}>
@@ -796,7 +800,7 @@ function Compare({
                   onContextMenu={false}
                 />
               </Grid>
-              <Stack direction={"column"} paddingLeft={5}>
+              <Stack direction={"column"} sx={{ pl: 5 }}>
                 <Typography variant="body2">{`${Lenz.memoria.general.shortName.get(candidate)}`}</Typography>
                 <Typography variant="body2">{`${Lenz.memoria.gvgSkill.name.get(candidate)}`}</Typography>
                 <Typography variant="body2">{`${Lenz.memoria.autoSkill.name.get(candidate)}`}</Typography>
@@ -817,7 +821,7 @@ function Compare({
       <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
         ステータス
       </Divider>
-      <Grid container={true} width={"100%"}>
+      <Grid container={true} sx={{ width: "100%" }}>
         {intoRow([
           "ATK",
           [compare.status[compare.concentration][0], candidate.status[compare.concentration][0]],
@@ -840,7 +844,7 @@ function Compare({
           ? "ダメージ"
           : "回復"}
       </Divider>
-      <Grid container={true} width={"100%"}>
+      <Grid container={true} sx={{ width: "100%" }}>
         {/* damage */}
         {diff.right.expectedToalDamage[1] - diff.right.expectedToalDamage[0] !== 0 &&
           intoRow(["ダメージ", diff.right.expectedToalDamage])}
@@ -851,7 +855,7 @@ function Compare({
       <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
         {"バフ"}
       </Divider>
-      <Grid container={true} width={"100%"}>
+      <Grid container={true} sx={{ width: "100%" }}>
         {[...diff.right.expectedTotalBuff.entries()]
           .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
           .map(([type, value]) => intoRow([type, value]))}
@@ -859,7 +863,7 @@ function Compare({
       <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
         {"デバフ"}
       </Divider>
-      <Grid container={true} width={"100%"}>
+      <Grid container={true} sx={{ width: "100%" }}>
         {[...diff.right.expectedTotalDebuff.entries()]
           .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
           .map(([type, value]) => intoRow([type, value]))}
@@ -976,7 +980,7 @@ function VirtualizedList() {
               />
               <Tooltip title={data[index].name.short} placement={"top"}>
                 <CardMedia sx={{ width: 100, height: 100 }}>
-                  <Box position={"relative"} sx={{ width: 100, height: 100, cursor: "pointer" }}>
+                  <Box sx={{ position: "relative", width: 100, height: 100, cursor: "pointer" }}>
                     <ConcentrationIcon
                       key={data[index].id}
                       concentration={data[index].concentration}
@@ -990,9 +994,7 @@ function VirtualizedList() {
                 <Stack direction={"column"} sx={{ paddingLeft: 2 }}>
                   <Typography
                     component="span"
-                    fontWeight="bold"
-                    fontSize={12}
-                    sx={{ display: "block" }}
+                    sx={{ display: "block", fontWeight: "bold", fontSize: 12 }}
                     color="text.primary"
                   >
                     {Lenz.memoria.gvgSkill.name.get(data[index])}
@@ -1000,9 +1002,7 @@ function VirtualizedList() {
                   <Divider sx={{ margin: 1 }} />
                   <Typography
                     component="span"
-                    fontWeight="bold"
-                    fontSize={12}
-                    sx={{ display: "block" }}
+                    sx={{ display: "block", fontWeight: "bold", fontSize: 12 }}
                     color="text.primary"
                   >
                     {Lenz.memoria.autoSkill.name.get(data[index])}
@@ -1409,7 +1409,7 @@ function QueryPresetsMenu({ signedIn, canPersist }: { signedIn: boolean; canPers
                     deleteMutation.mutate(preset.id);
                   }}
                 >
-                  <DeleteOutline fontSize="small" />
+                  <DeleteOutlined fontSize="small" />
                 </IconButton>
               </MenuItem>
             ))}
@@ -1447,9 +1447,8 @@ function Diff(props: { origin: Unit; current: Unit }) {
         <Grid
           container
           direction={"row"}
-          alignItems={"left"}
           spacing={2}
-          sx={{ maxWidth: 600, minHeight: 100 }}
+          sx={{ maxWidth: 600, minHeight: 100, alignItems: "flex-start" }}
         >
           {incoming.map((memoria) => {
             return <MemoriaItem memoria={memoria} key={memoria.id} disable={true} />;
@@ -1459,9 +1458,8 @@ function Diff(props: { origin: Unit; current: Unit }) {
         <Grid
           container
           direction={"row"}
-          alignItems={"left"}
           spacing={2}
-          sx={{ maxWidth: 600, minHeight: 100 }}
+          sx={{ maxWidth: 600, minHeight: 100, alignItems: "flex-start" }}
         >
           {outgoing.map((memoria) => {
             return <MemoriaItem memoria={memoria} key={memoria.id} disable={true} />;
@@ -1836,23 +1834,14 @@ export function DeckBuilder({
       >
         <Grid
           size={{ xs: 12, md: 4, lg: 3 }}
-          direction={"column"}
-          alignItems={"center"}
-          sx={{
-            padding: 2,
-          }}
+          sx={{ display: "flex", flexDirection: "column", alignItems: "center", p: 2 }}
           data-tour="deck-details"
         >
           <Details />
         </Grid>
         <Grid
           size={{ xs: 12, md: 8, lg: 5 }}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}
           data-tour="deck-unit"
         >
           <Suspense>

@@ -56,7 +56,7 @@ export function Decks() {
   });
 
   const label = (
-    <Stack direction="row" spacing={1} alignItems="center">
+    <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
       <Folder />
       <Typography>Decks</Typography>
     </Stack>
@@ -70,9 +70,9 @@ export function Decks() {
             <Modal open={openRenameMenu} onClose={() => setOpenRenameMenu(false)}>
               <Stack
                 direction="column"
-                alignItems="center"
-                justifyContent="center"
                 sx={{
+                  alignItems: "center",
+                  justifyContent: "center",
                   position: "absolute",
                   top: "50%",
                   left: "50%",
@@ -89,7 +89,7 @@ export function Decks() {
                   variant="outlined"
                   onChange={(e) => setNewTitle(e.target.value)}
                 />
-                <Stack direction="row" spacing={2} mt={2}>
+                <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
                   <button
                     onClick={() => {
                       setOpenRenameMenu(false);

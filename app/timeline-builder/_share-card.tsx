@@ -12,8 +12,6 @@ function PicPanel({ pic, sub }: { pic?: string; sub?: string }) {
     <Stack
       direction="row"
       spacing={1}
-      alignItems="center"
-      justifyContent="space-between"
       sx={{
         minHeight: 72,
         minWidth: 240,
@@ -25,6 +23,8 @@ function PicPanel({ pic, sub }: { pic?: string; sub?: string }) {
           0.08,
         )})`,
         border: `1px solid ${alpha(theme.palette.secondary.main, 0.16)}`,
+        alignItems: "center",
+        justifyContent: "space-between",
       }}
     >
       {pic ? (
@@ -39,7 +39,7 @@ function PicPanel({ pic, sub }: { pic?: string; sub?: string }) {
           {pic}
         </Typography>
       ) : (
-        <Typography fontSize={13} color="text.disabled" fontWeight={700}>
+        <Typography sx={{ fontSize: 13, color: "text.disabled", fontWeight: 700 }}>
           PIC unset
         </Typography>
       )}
@@ -90,9 +90,12 @@ export function TimelineShareCard({
             boxShadow: `0 14px 30px ${alpha(theme.palette.common.black, 0.12)}`,
           }}
         >
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
+          <Stack
+            direction="row"
+            sx={{ justifyContent: "space-between", alignItems: "center" }}
+          >
             <Box>
-              <Typography variant="h4" fontWeight={900}>
+              <Typography variant="h4" sx={{ fontWeight: 900 }}>
                 {title || "No Title"}
               </Typography>
               <Typography color="text.secondary">Timeline Builder</Typography>
@@ -120,27 +123,27 @@ export function TimelineShareCard({
           <Stack
             direction="row"
             spacing={2}
-            alignItems="center"
             sx={{
               px: 1,
               pb: 1.5,
               display: "grid",
               gridTemplateColumns: "minmax(0, 1fr) 240px 220px",
               columnGap: 10,
+              alignItems: "center",
             }}
           >
             <Box sx={{ minWidth: 0 }}>
-              <Typography fontSize={12} fontWeight={800} color="text.secondary">
+              <Typography sx={{ fontSize: 12, fontWeight: 800, color: "text.secondary" }}>
                 Order
               </Typography>
             </Box>
             <Box sx={{ minWidth: 240 }}>
-              <Typography fontSize={12} fontWeight={800} color="text.secondary">
+              <Typography sx={{ fontSize: 12, fontWeight: 800, color: "text.secondary" }}>
                 PIC / SUB
               </Typography>
             </Box>
             <Box sx={{ ml: "auto", minWidth: 220 }}>
-              <Typography fontSize={12} fontWeight={800} color="text.secondary">
+              <Typography sx={{ fontSize: 12, fontWeight: 800, color: "text.secondary" }}>
                 Start / End
               </Typography>
             </Box>
@@ -151,16 +154,16 @@ export function TimelineShareCard({
               <Stack
                 direction="row"
                 spacing={1.25}
-                alignItems="center"
                 sx={{
                   py: 1.4,
                   px: 1,
                   display: "grid",
                   gridTemplateColumns: "minmax(0, 1fr) 240px 220px",
                   columnGap: 10,
+                  alignItems: "center",
                 }}
               >
-                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ minWidth: 0 }}>
+                <Stack direction="row" spacing={1.5} sx={{ alignItems: "center", minWidth: 0 }}>
                   <Chip
                     label={`${index + 1}`}
                     size="small"
@@ -183,10 +186,10 @@ export function TimelineShareCard({
                     }}
                   />
                   <Box sx={{ minWidth: 0, flexGrow: 1 }}>
-                    <Typography fontWeight={800} fontSize={17}>
+                    <Typography sx={{ fontWeight: 800, fontSize: 17 }}>
                       {order.name}
                     </Typography>
-                    <Typography fontSize={13} color="text.secondary">
+                    <Typography sx={{ fontSize: 13, color: "text.secondary" }}>
                       {order.effect}
                     </Typography>
                   </Box>
@@ -203,14 +206,17 @@ export function TimelineShareCard({
                     backgroundColor: alpha(theme.palette.primary.main, 0.05),
                   }}
                 >
-                  <Stack direction="row" alignItems="baseline" justifyContent="space-between">
-                    <Typography fontSize={18} fontWeight={900}>
+                  <Stack
+                    direction="row"
+                    sx={{ alignItems: "baseline", justifyContent: "space-between" }}
+                  >
+                    <Typography sx={{ fontSize: 18, fontWeight: 900 }}>
                       {formatTime(order.prepareStartTime)}
                     </Typography>
-                    <Typography fontSize={12} color="text.secondary">
+                    <Typography sx={{ fontSize: 12, color: "text.secondary" }}>
                       →
                     </Typography>
-                    <Typography fontSize={18} fontWeight={900}>
+                    <Typography sx={{ fontSize: 18, fontWeight: 900 }}>
                       {formatTime(order.endTime)}
                     </Typography>
                   </Stack>

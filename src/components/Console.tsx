@@ -1,6 +1,7 @@
 import CodeMirror, { keymap, Prec } from "@uiw/react-codemirror";
 import { githubDark } from "@uiw/codemirror-theme-github";
 import { sql, keywordCompletionSource, MySQL, schemaCompletionSource } from "@codemirror/lang-sql";
+import { defaultHighlightStyle, syntaxHighlighting } from "@codemirror/language";
 import { autocompletion, type Completion, type CompletionSource } from "@codemirror/autocomplete";
 import { makeQueryLinter } from "@/parser/query/linter";
 import { ComleteCandidate, makeColumnCompletionSource } from "@/data/_common/autocomplete";
@@ -146,6 +147,7 @@ export default function Console<
       theme={githubDark}
       extensions={[
         sql({ dialect: MySQL, schema, upperCaseKeywords: true }),
+        syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
         myCompletions,
         makeQueryLinter(schema, completion),
         customKeymap,

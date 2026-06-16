@@ -118,14 +118,14 @@ export default function Detail({ name }: { name: string }) {
           <CardMedia component="img" sx={{ width: 200 }} image={`/lily/${name}.jpg`} alt={name} />
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flex: "1 0 auto" }}>
-              <Stack spacing={2} direction="row" alignItems="center">
+              <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
                 <Image
                   src={gardenImage(character)}
                   alt={character.garden}
                   width={100}
                   height={100}
                 />
-                <Stack direction="column" alignItems="flex-start">
+                <Stack direction="column" sx={{ alignItems: "flex-start" }}>
                   <Typography component="div" variant="body1">
                     {character.kanaName}
                   </Typography>
@@ -133,7 +133,7 @@ export default function Detail({ name }: { name: string }) {
                     {character.name}
                   </Typography>
                   <Divider flexItem={true} textAlign="left" sx={{ margin: 1 }} />
-                  <Stack spacing={2} direction="row" alignItems="center">
+                  <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
                     <Typography component="div" variant="h6">
                       {`誕生日: ${character.birthday}`}
                     </Typography>
@@ -183,7 +183,7 @@ export default function Detail({ name }: { name: string }) {
         </Divider>
         <Grid container={true} spacing={2} sx={{ width: "100%" }}>
           {costumes.map((costume) => (
-            <Grid size={2.4} key={costume.name} p={1}>
+            <Grid size={2.4} key={costume.name} sx={{ p: 1 }}>
               <Card
                 key={costume.name}
                 sx={{

@@ -137,7 +137,7 @@ function DeckRow({ title, memories }: { title: string; memories: ShareMemoria[] 
         boxShadow: `0 16px 36px ${alpha(theme.palette.common.black, 0.18)}`,
       }}
     >
-      <Typography variant="subtitle1" fontWeight={700} sx={{ mb: 1.5 }}>
+      <Typography variant="subtitle1" sx={{ mb: 1.5, fontWeight: 700 }}>
         {title}
       </Typography>
       <Box
@@ -175,7 +175,7 @@ export function DeckShareCard({
         )} 22%)`,
       }}
     >
-      <Stack spacing={3} alignItems="center">
+      <Stack spacing={3} sx={{ alignItems: "center" }}>
         <Box
           sx={{
             width: DECK_WIDTH,
@@ -186,7 +186,7 @@ export function DeckShareCard({
             boxShadow: `0 10px 28px ${alpha(theme.palette.common.black, 0.12)}`,
           }}
         >
-          <Typography variant="h5" fontWeight={800}>
+          <Typography variant="h5" sx={{ fontWeight: 800 }}>
             {title || "No Title"}
           </Typography>
         </Box>

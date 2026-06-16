@@ -21,7 +21,7 @@ export default function Info({
     >
       {icon || <InfoOutlined color="primary" />}
       <Box>
-        <Typography variant="subtitle2" fontWeight="bold">
+        <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
           {children}
         </Typography>
       </Box>

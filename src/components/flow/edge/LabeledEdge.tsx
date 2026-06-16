@@ -108,14 +108,18 @@ export default function LabeledEdge({
       <Dialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
-        PaperProps={{
-          component: "form",
-          onSubmit: (event: FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            setComment(formJson.comment as string);
-            setDialogOpen(false);
+        slotProps={{
+          paper: {
+            component: "form",
+            onSubmit: (event: FormEvent<HTMLDivElement>) => {
+              event.preventDefault();
+              const formData = new FormData(
+                event.currentTarget as unknown as HTMLFormElement,
+              );
+              const formJson = Object.fromEntries(formData.entries());
+              setComment(formJson.comment as string);
+              setDialogOpen(false);
+            },
           },
         }}
       >

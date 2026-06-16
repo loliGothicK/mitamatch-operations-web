@@ -5,6 +5,8 @@ import { match, P } from "ts-pattern";
 import { Option } from "fp-ts/Option";
 import { option } from "fp-ts";
 import { identity } from "fp-ts/function";
+import { outdent } from "outdent";
+import {fromThrowable} from "neverthrow";
 
 const costumeSchema = z.object({
   id: z.ulid().readonly(),
@@ -121,7 +123,15 @@ export type Costume = Omit<z.infer<typeof costumeSchema>, "jobSkills" | "special
 };
 
 export const costumeList: Costume[] = costumeData.data.map((costume) => {
-  const { jobSkills, specialSkills, ...parsed } = costumeSchema.parse(costume);
+  const zodResult = fromThrowable(costumeSchema.parse)(costume);
+  if (zodResult.isErr()) {
+    throw new Error(outdent`
+        Costume parse failed with:
+          source => ${costume.name}
+          error => ${zodResult.error}
+    `);
+  }
+  const { jobSkills, specialSkills, ...parsed } = zodResult.value;
   return {
     ...parsed,
     ...skillsToStatus(jobSkills),

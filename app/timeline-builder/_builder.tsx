@@ -23,7 +23,7 @@ import {
   Remove,
   Share,
 } from "@mui/icons-material";
-import HelpOutline from "@mui/icons-material/HelpOutline";
+import HelpOutlined from "@mui/icons-material/HelpOutlined";
 import {
   alpha,
   Avatar,
@@ -92,9 +92,9 @@ import { copyNodeAsImage } from "@/components/share/copyImage";
 function Info({ order }: { order: OrderWithPic }) {
   if (order.pic && order.sub && order.delay) {
     return (
-      <Stack direction={"row"} alignItems={"center"} spacing={1}>
+      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
         <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant="body2" sx={{ fontSize: 10 }}>
           [ {order.pic} / {order.sub} ]
         </Typography>
       </Stack>
@@ -102,9 +102,9 @@ function Info({ order }: { order: OrderWithPic }) {
   }
   if (order.pic && order.sub) {
     return (
-      <Stack direction={"row"} alignItems={"center"} spacing={1}>
+      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
         <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant="body2" sx={{ fontSize: 10 }}>
           [ {order.pic} / {order.sub} ]
         </Typography>
       </Stack>
@@ -112,9 +112,9 @@ function Info({ order }: { order: OrderWithPic }) {
   }
   if (order.sub && order.delay) {
     return (
-      <Stack direction={"row"} alignItems={"center"} spacing={1}>
+      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
         <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant="body2" sx={{ fontSize: 10 }}>
           [ {order.sub} ]
         </Typography>
       </Stack>
@@ -122,9 +122,9 @@ function Info({ order }: { order: OrderWithPic }) {
   }
   if (order.pic && order.delay) {
     return (
-      <Stack direction={"row"} alignItems={"center"} spacing={1}>
+      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
         <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant="body2" sx={{ fontSize: 10 }}>
           [ {order.pic} ]
         </Typography>
       </Stack>
@@ -132,9 +132,9 @@ function Info({ order }: { order: OrderWithPic }) {
   }
   if (order.pic) {
     return (
-      <Stack direction={"row"} alignItems={"center"} spacing={1}>
+      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
         <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant="body2" sx={{ fontSize: 10 }}>
           [ {order.pic} ]
         </Typography>
       </Stack>
@@ -142,9 +142,9 @@ function Info({ order }: { order: OrderWithPic }) {
   }
   if (order.sub) {
     return (
-      <Stack direction={"row"} alignItems={"center"} spacing={1}>
+      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
         <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" fontSize={10}>
+        <Typography variant="body2" sx={{ fontSize: 10 }}>
           [ {order.sub} ]
         </Typography>
       </Stack>
@@ -152,7 +152,7 @@ function Info({ order }: { order: OrderWithPic }) {
   }
   if (order.delay) {
     return (
-      <Stack direction={"row"} alignItems={"center"} spacing={1}>
+      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
         <Typography variant="body1">{order.name}</Typography>
       </Stack>
     );
@@ -209,11 +209,11 @@ function TimelineItem({ order }: { order: ComputedOrder }) {
           </span>
         </Typography>
       </Divider>
-      <Stack direction={"row"} padding={0} alignItems={"center"}>
+      <Stack direction={"row"} spacing={0} sx={{ p: 0, alignItems: "center" }}>
         <div {...attributes} {...listeners}>
           <DragIndicator sx={{ color: "dimgrey", touchAction: "none" }} />
         </div>
-        <Stack direction={"row"} padding={0} alignItems={"center"}>
+        <Stack direction={"row"} spacing={0} sx={{ p: 0, alignItems: "center" }}>
           <Tooltip title={order.description} placement="top">
             <ListItem key={order.id} sx={{ padding: 0 }}>
               <ListItemAvatar>
@@ -383,7 +383,7 @@ function Timeline() {
 
           {/* 最後の終了時間表示 */}
           <Divider textAlign={"left"}>
-            <Typography fontSize={12} sx={{ fontWeight: "bold" }}>
+            <Typography sx={{ fontSize: 12, fontWeight: "bold" }}>
               {computedOrders.length > 0
                 ? formatTime(computedOrders[computedOrders.length - 1].endTime)
                 : "15:00"}
@@ -470,14 +470,13 @@ function Source() {
                 height={100}
                 priority={index < 8}
               />
-              <Stack marginLeft={2}>
+              <Stack sx={{ ml: 2 }}>
                 <Typography variant="body1">{orders[index].name}</Typography>
                 <Divider />
                 <Typography variant="body2">{orders[index].effect}</Typography>
                 <Typography
                   variant="body2"
-                  fontSize={10}
-                  sx={{ display: { xs: "none", md: "none", lg: "block" } }}
+                  sx={{ fontSize: 10, display: { xs: "none", md: "none", lg: "block" } }}
                 >
                   {orders[index].description}
                 </Typography>
@@ -688,9 +687,15 @@ export function TimelineBuilderPage() {
   const [replayKey, setReplayKey] = useState(0);
 
   return (
-    <Grid container spacing={2} size={{ xs: 12 }} direction={"row"} alignItems={"left"} margin={2}>
+    <Grid
+      container
+      spacing={2}
+      size={{ xs: 12 }}
+      direction={"row"}
+      sx={{ alignItems: "flex-start", m: 2 }}
+    >
       <TimelineBuilderTour replayKey={replayKey} />
-      <Grid size={{ xs: 12, md: 8, lg: 8 }} alignItems={"center"} mt={5}>
+        <Grid size={{ xs: 12, md: 8, lg: 8 }} sx={{ alignItems: "center", mt: 5 }}>
         <Container
           data-tour="timeline-canvas"
           maxWidth={false}
@@ -711,11 +716,7 @@ export function TimelineBuilderPage() {
       <Grid size={{ xs: 12, md: 4, lg: 4 }}>
         <Box
           data-tour="timeline-controls"
-          flexDirection="row"
-          justifyContent="flex-end"
-          display="flex"
-          alignItems={"center"}
-          paddingRight={20}
+          sx={{ display: "flex", flexDirection: "row", justifyContent: "flex-end", alignItems: "center", pr: 20 }}
         >
           <ShareButton />
           <FilterMenu />
@@ -725,7 +726,7 @@ export function TimelineBuilderPage() {
           <Typography>課金</Typography>
           <Tooltip title="Tour">
             <IconButton onClick={() => setReplayKey((prev) => prev + 1)}>
-              <HelpOutline />
+              <HelpOutlined />
             </IconButton>
           </Tooltip>
         </Box>

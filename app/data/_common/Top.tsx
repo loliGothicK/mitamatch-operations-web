@@ -15,7 +15,7 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { match } from "ts-pattern";
-import HelpOutline from "@mui/icons-material/HelpOutline";
+import HelpOutlined from "@mui/icons-material/HelpOutlined";
 
 const ROUTES = ["memoria", "costume", "character"] as const;
 
@@ -60,7 +60,7 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
             <Box sx={{ marginLeft: "auto" }}>
               <Tooltip title="Tour">
                 <IconButton onClick={() => setReplayKey((prev) => prev + 1)}>
-                  <HelpOutline />
+                  <HelpOutlined />
                 </IconButton>
               </Tooltip>
             </Box>

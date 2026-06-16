@@ -242,7 +242,7 @@ export function DataGrid<
 
   return (
     <Paper style={{ display: "flex", width: "100%", flexDirection: "column" }}>
-      <Box display={"flex"} sx={{ justifyContent: "left" }} data-tour="data-grid-toolbar">
+      <Box sx={{ display: "flex", justifyContent: "left" }} data-tour="data-grid-toolbar">
         <Snackbar
           anchorOrigin={{ vertical, horizontal }}
           autoHideDuration={2000}

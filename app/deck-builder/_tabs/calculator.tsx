@@ -373,7 +373,7 @@ export function Calculator() {
               setCostumeFilter(value as (typeof costumeFilterOptions)[number][]);
             }}
           />
-          <Grid container direction={"row"} justifyContent={"center"} alignItems={"center"}>
+          <Grid container direction={"row"} sx={{ justifyContent: "center", alignItems: "center" }}>
             <Grid
               size={{
                 xs:

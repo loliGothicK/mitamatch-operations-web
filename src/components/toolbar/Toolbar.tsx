@@ -11,7 +11,7 @@ export const RibbonGroup: React.FC<{ children: ReactNode; label?: string }> = ({
 }) => {
   return (
     <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-      <Stack direction="row" spacing={0.5} alignItems="center">
+      <Stack direction="row" spacing={0.5} sx={{ alignItems: "center" }}>
         {children}
       </Stack>
       {/* ラベルが必要な場合のみ表示（Ribbon的な名残が必要なら） */}
@@ -44,11 +44,10 @@ export default function Ribbon({ children }: { children: ReactNode[] }) {
     >
       <Stack
         direction="row"
-        alignItems="center"
         // ここが魔法の intersperse です
         divider={<Divider orientation="vertical" flexItem />}
         spacing={0.5} // アイテム間の余白
-        sx={{ p: 0.5 }}
+        sx={{ p: 0.5, alignItems: "center" }}
       >
         {children}
       </Stack>

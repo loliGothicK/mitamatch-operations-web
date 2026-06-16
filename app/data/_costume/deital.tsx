@@ -144,7 +144,7 @@ function RareSkill({ costume: { rareSkill } }: { costume: Costume }) {
     >
       <Card sx={{ margin: "auto" }} variant="outlined" square={true}>
         <CardContent>
-          <Box display="flex" alignItems="flex-start" sx={{ margin: 2 }}>
+          <Box sx={{ display: "flex", alignItems: "flex-start", m: 2 }}>
             <Typography variant="h5" component="div" sx={{ margin: 2 }}>
               {rareSkill.name}
             </Typography>

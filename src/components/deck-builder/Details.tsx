@@ -292,7 +292,7 @@ export default function Details() {
   );
 
   return (
-    <Grid container spacing={1} alignItems={"left"} direction={"column"}>
+    <Grid container spacing={1} sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
       <Divider textAlign={"left"}>
         <Typography variant="body1">スキル</Typography>
       </Divider>

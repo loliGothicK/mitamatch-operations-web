@@ -4,7 +4,7 @@ import { DeckBuilder } from "@/deck-builder/_tabs/builder";
 import { Box, IconButton, Tab, Tabs, Tooltip } from "@mui/material";
 import { ReactNode, SyntheticEvent, useState } from "react";
 import { Calculator } from "@/deck-builder/_tabs/calculator";
-import HelpOutline from "@mui/icons-material/HelpOutline";
+import HelpOutlined from "@mui/icons-material/HelpOutlined";
 import { DeckBuilderTour } from "@/deck-builder/_tour";
 
 interface TabPanelProps {
@@ -70,7 +70,7 @@ export function DeckBuilderPage({
           </Tabs>
           <Tooltip title="Tour">
             <IconButton onClick={() => setReplayKey((prev) => prev + 1)}>
-              <HelpOutline />
+              <HelpOutlined />
             </IconButton>
           </Tooltip>
         </Box>

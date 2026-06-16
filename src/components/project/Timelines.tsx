@@ -17,7 +17,7 @@ export function Timelines() {
   });
 
   const label = (
-    <Stack direction="row" spacing={1} alignItems="center">
+    <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
       <Folder />
       <Typography>Timelines</Typography>
     </Stack>

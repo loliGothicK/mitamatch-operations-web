@@ -104,13 +104,21 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
             )}
             <CardContent>
               {order ? (
-                <Typography variant="body1" fontSize={10} color="text.secondary" component="div">
+                <Typography
+                  variant="body1"
+                  sx={{ fontSize: 10, color: "text.secondary" }}
+                  component="div"
+                >
                   {order.name}
                 </Typography>
               ) : (
                 <Skeleton width={100} />
               )}
-              <Typography variant="body1" fontSize={12} color="text.secondary" component="div">
+              <Typography
+                variant="body1"
+                sx={{ fontSize: 12, color: "text.secondary" }}
+                component="div"
+              >
                 {pic}
               </Typography>
             </CardContent>
@@ -180,15 +188,19 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
       <Dialog
         open={open}
         onClose={handleClose}
-        PaperProps={{
-          component: "form",
-          onSubmit: (event: FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            setPic(formJson.pic as string);
-            setOrder(orderList.find((o) => o.name === formJson.order));
-            handleClose();
+        slotProps={{
+          paper: {
+            component: "form",
+            onSubmit: (event: FormEvent<HTMLDivElement>) => {
+              event.preventDefault();
+              const formData = new FormData(
+                event.currentTarget as unknown as HTMLFormElement,
+              );
+              const formJson = Object.fromEntries(formData.entries());
+              setPic(formJson.pic as string);
+              setOrder(orderList.find((o) => o.name === formJson.order));
+              handleClose();
+            },
           },
         }}
       >

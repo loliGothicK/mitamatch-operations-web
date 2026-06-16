@@ -347,7 +347,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
                 )}
               </PopupState>
             </Stack>
-            <Box flexGrow={0.5} />
+            <Box sx={{ flexGrow: 0.5 }} />
             <Divider orientation="vertical" flexItem />
             <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
               {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
@@ -405,16 +405,20 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
                       primary="Project"
                       slotProps={{
                         primary: {
-                          fontSize: 15,
-                          fontWeight: "medium",
-                          lineHeight: "20px",
-                          mb: "2px",
+                          sx: {
+                            fontSize: 15,
+                            fontWeight: "medium",
+                            lineHeight: "20px",
+                            mb: "2px",
+                          },
                         },
                         secondary: {
                           noWrap: true,
-                          fontSize: 12,
-                          lineHeight: "16px",
-                          color: open ? "rgba(0,0,0,0)" : "rgba(255,255,255,0.5)",
+                          sx: {
+                            fontSize: 12,
+                            lineHeight: "16px",
+                            color: open ? "rgba(0,0,0,0)" : "rgba(255,255,255,0.5)",
+                          },
                         },
                       }}
                       secondary="Decks & Timelines"

@@ -74,8 +74,8 @@ export default function FlowChart() {
         gap: 2,
       }}
     >
-      <Grid container direction={"row"} alignItems={"center"} sx={{ height: "10vh" }}>
-        <Stack direction={"row"} display={"flex"}>
+      <Grid container direction={"row"} sx={{ height: "10vh", alignItems: "center" }}>
+        <Box sx={{ display: "flex" }}>
           <Stack direction={"row"}>
             <Autocomplete
               disablePortal
@@ -108,15 +108,13 @@ export default function FlowChart() {
               <Add />
             </IconButton>
           </Stack>
-          <Stack
-            direction={"row"}
-            position={"absolute"}
-            right={100}
+          <Box
+            sx={{ position: "absolute", right: 100 }}
             onClick={() => setModalOpen(true)}
           >
             <Button>{"how to use"}</Button>
-          </Stack>
-        </Stack>
+          </Box>
+        </Box>
       </Grid>
       <Divider />
       <div

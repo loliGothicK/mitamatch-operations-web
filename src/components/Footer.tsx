@@ -47,7 +47,7 @@ export default function Footer({ ...props }) {
           }}
         >
           <Box sx={{ GridArea: "logo" }}>
-            <Stack justifyContent="center" alignItems="center">
+            <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
               <Image
                 src={theme.palette.mode === "dark" ? "/MO_DARK.png" : "/MO_LIGHT.png"}
                 alt={"mode"}
@@ -58,7 +58,7 @@ export default function Footer({ ...props }) {
             </Stack>
           </Box>
           <Box sx={{ gridArea: "docs" }}>
-            <Stack justifyContent="center" alignItems="center">
+            <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
               <Typography>{"Docs"}</Typography>
               {["deck-builder", "timeline-builder", "flowchart"].map((link) => (
                 <Link
@@ -73,7 +73,7 @@ export default function Footer({ ...props }) {
             </Stack>
           </Box>
           <Box sx={{ GridArea: "tools" }}>
-            <Stack justifyContent="center" alignItems="center">
+            <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
               <Typography>{"Tools"}</Typography>
               {content.tools.map((link) => {
                 return (
@@ -90,7 +90,7 @@ export default function Footer({ ...props }) {
             </Stack>
           </Box>
           <Box sx={{ GridArea: "donate" }}>
-            <Stack justifyContent="center" alignItems="center">
+            <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
               <Typography>{"Donate"}</Typography>
               <Link
                 href={"https://www.paypal.me/loligothick"}
@@ -147,7 +147,7 @@ export default function Footer({ ...props }) {
         </Box>
         <Divider sx={{ margin: 2, width: "100%" }} />
         <Grid container direction={"row"} sx={{ paddingBottom: 10 }}>
-          <Grid flexGrow={0.9}>
+          <Grid sx={{ flexGrow: 0.9 }}>
             <Typography
               color={theme.palette.text.secondary}
               component="p"

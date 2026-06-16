@@ -22,8 +22,8 @@ export default function Home() {
           minHeight: "50vh",
         }}
       >
-        <Box className="hero-image" width={1500} height={500}>
-          <Box zIndex={2}>
+        <Box className="hero-image" sx={{ width: 1500, height: 500 }}>
+          <Box sx={{ zIndex: 2 }}>
             <Image
               src={theme.palette.mode === "dark" ? "/MO_DARK.png" : "/MO_LIGHT.png"}
               alt={"Mitamatch Operations"}

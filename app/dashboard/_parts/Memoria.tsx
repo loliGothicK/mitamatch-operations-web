@@ -40,8 +40,7 @@ function MemoriaCard({
   const [concentration, setConcentration] = useState(memoria.limitBreak);
   return (
     <Box
-      position={"relative"}
-      sx={{ width: 100, height: 100, cursor: "pointer" }}
+      sx={{ position: "relative", width: 100, height: 100, cursor: "pointer" }}
       onClick={onClick}
       onContextMenu={(event) => {
         event.preventDefault();

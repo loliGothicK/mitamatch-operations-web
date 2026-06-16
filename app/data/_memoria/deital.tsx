@@ -86,7 +86,11 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
       }}
     >
       <Box>
-        <Stack direction={"row"} justifyContent={"left"} alignItems={"center"} gap={2}>
+        <Stack
+          direction={"row"}
+          spacing={2}
+          sx={{ justifyContent: "flex-start", alignItems: "center" }}
+        >
           <Image
             src={`/memoria/${data[0].name.short}.png`}
             alt={data[0].name.short}
@@ -125,7 +129,7 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
         </TabList>
         {data.map((memoria, index) => (
           <TabPanel key={memoria.id} value={index} sx={{ padding: 0 }}>
-            <Box display={"flex"} flexDirection={"column"} alignItems={"center"}>
+            <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
               <SkillCard skill={memoria.skills.gvgSkill.raw} title={"レギオンマッチスキル"} />
               <SkillCard skill={memoria.skills.autoSkill.raw} title={"レギオンマッチ補助スキル"} />
               {memoria.skills.legendary !== undefined && (
@@ -158,7 +162,7 @@ function SkillCard({
       </Divider>
       <Card sx={{ width: "90%", margin: "auto" }} variant="outlined" square={true}>
         <CardContent>
-          <Box display="flex" alignItems="flex-start">
+          <Box sx={{ display: "flex", alignItems: "flex-start" }}>
             <Typography variant="h5" component="div" sx={{ margin: 2 }}>
               {skill.name}
             </Typography>

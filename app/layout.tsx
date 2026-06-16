@@ -1,12 +1,9 @@
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import Layout from "@/components/layout/server";
-
-const inter = Inter({ subsets: ["latin"] });
 
 const siteName = "Mitamatch Operations";
 const description =
@@ -54,7 +51,12 @@ export default async function RootLayout({
   return (
     <ClerkProvider>
       <html lang="ja">
-        <body className={inter.className}>
+        <body
+          style={{
+            fontFamily:
+              'Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
+          }}
+        >
           <Layout>{children}</Layout>
           <Analytics />
           <SpeedInsights />
