@@ -99935,8 +99935,7 @@
         "name": "攻:ダメージUP/副援:支援UP Ⅵ",
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWD064T8C64B75NF8QC2M",
@@ -99966,8 +99965,7 @@
         "name": "援:支援UP/副援:火水パワーUP Ⅵ",
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWDZES8SW0YVDR9VY4B64",
@@ -99997,8 +99995,7 @@
         "name": "援:支援UP/副援:火水パワーDOWN Ⅵ",
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・水属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWEYPW23T21SRJ5RNC5PM",
@@ -100028,8 +100025,7 @@
         "name": "攻:ダメージUP/副援:支援UP Ⅵ",
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWGX6D2QXC3NG8T1BKAFZ",
@@ -100059,8 +100055,7 @@
         "name": "援:支援UP/副援:火水パワーUP Ⅵ",
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWHWETW7SFWZZHGA2J5TY",
@@ -100090,8 +100085,7 @@
         "name": "回:回復UP/副援:支援UP Ⅵ",
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWJVPVGAE8E19XVNCGFKC",
@@ -100121,8 +100115,7 @@
         "name": "攻:ダメージUP/副攻:火水ガードDOWN Ⅵ",
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWMT6K2MQ9565HX81HCQT",
@@ -100152,8 +100145,7 @@
         "name": "援:支援UP/副援:火水パワーDOWN Ⅵ",
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・水属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWNSE7ZJ5YABKNM1RR613",
@@ -100183,8 +100175,7 @@
         "name": "回:回復UP/副援:支援UP Ⅵ",
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWPRP1727H0NMVX5EE3H0",
@@ -100214,8 +100205,7 @@
         "name": "攻:ダメージUP/副援:支援UP Ⅵ",
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWRQ6SR81YK5T8AMC9JYX",
@@ -100245,8 +100235,7 @@
         "name": "攻:ダメージUP/副援:支援UP Ⅵ",
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWSPEX6QZ4ERD19J424NY",
@@ -100276,8 +100265,7 @@
         "name": "援:支援UP/副援:火水パワーUP Ⅵ",
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWTNPN3N78VP4TANEJRZ1",
@@ -100307,8 +100295,7 @@
         "name": "攻:ダメージUP/副援:支援UP Ⅵ",
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWWM674APDBZBNJ4H8VY0",
@@ -100338,8 +100325,7 @@
         "name": "援:支援UP/副援:水ガードUP Ⅵ",
         "description": "支援/妨害時、一定確率で味方前衛1体の水属性防御力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWXKEZVGCCQX2SDY1P4TW",
@@ -100369,8 +100355,7 @@
         "name": "援:支援UP/副援:火水パワーDOWN Ⅵ",
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・水属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     },
     {
       "id": "01KVDEWYJPZM93P7XZA2EHMFYG",
@@ -100400,8 +100385,7 @@
         "name": "回:回復UP/副援:支援UP Ⅵ",
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
-      "labels": ["SuperAwakening"],
-      "phantasm": true
+      "labels": ["SuperAwakening"]
     }
   ]
 }
