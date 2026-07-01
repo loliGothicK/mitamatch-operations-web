@@ -99,7 +99,7 @@
     "zod-validation-error": "^5.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.1",
+    "@biomejs/biome": "2.5.2",
     "@content-collections/core": "0.15.2",
     "@content-collections/mdx": "0.2.2",
     "@content-collections/next": "0.2.11",
