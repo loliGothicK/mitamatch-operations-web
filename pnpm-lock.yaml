@@ -159,11 +159,11 @@ importers:
         specifier: ^1.11.13
         version: 1.11.13
       jotai:
-        specifier: 2.20.1
-        version: 2.20.1(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7)
+        specifier: 2.20.2
+        version: 2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7)
       jotai-tanstack-query:
         specifier: 0.11.0
-        version: 0.11.0(@tanstack/query-core@5.101.1)(@tanstack/react-query@5.101.2(react@19.2.7))(jotai@2.20.1(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
+        version: 0.11.0(@tanstack/query-core@5.101.1)(@tanstack/react-query@5.101.2(react@19.2.7))(jotai@2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
       material-ui-popup-state:
         specifier: 5.3.7
         version: 5.3.7(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
@@ -4026,8 +4026,8 @@ packages:
       react:
         optional: true
 
-  jotai@2.20.1:
-    resolution: {integrity: sha512-dnuKfU/GLi8B28RRMjQ3AfoN7kfzP8o41+AX2FmITZqEMY8PHnjABq+VkEooomLwYaGjda+pgy0yFSjaHX/ZPg==}
+  jotai@2.20.2:
+    resolution: {integrity: sha512-aHB4CNb9qRcyf0mwSB6EO5bCGAjx8cTwFgOFCE2leOnTzqACbnSWG8XoWB3LxCT1Qoj03I1OWAHszDmN4uHb/w==}
     engines: {node: '>=12.20.0'}
     peerDependencies:
       '@babel/core': '>=7.0.0'
@@ -9063,15 +9063,15 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jotai-tanstack-query@0.11.0(@tanstack/query-core@5.101.1)(@tanstack/react-query@5.101.2(react@19.2.7))(jotai@2.20.1(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7):
+  jotai-tanstack-query@0.11.0(@tanstack/query-core@5.101.1)(@tanstack/react-query@5.101.2(react@19.2.7))(jotai@2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7):
     dependencies:
       '@tanstack/query-core': 5.101.1
-      jotai: 2.20.1(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7)
+      jotai: 2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7)
     optionalDependencies:
       '@tanstack/react-query': 5.101.2(react@19.2.7)
       react: 19.2.7
 
-  jotai@2.20.1(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7):
+  jotai@2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7):
     optionalDependencies:
       '@babel/core': 7.29.7
       '@babel/template': 7.29.7
