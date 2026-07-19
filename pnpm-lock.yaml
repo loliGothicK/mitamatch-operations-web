@@ -21,11 +21,11 @@ importers:
         specifier: 1.6.0
         version: 1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@clerk/backend':
-        specifier: 3.8.2
-        version: 3.8.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        specifier: 3.11.7
+        version: 3.11.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@clerk/nextjs':
         specifier: 7.5.20
-        version: 7.5.20(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 7.5.20(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@codemirror/autocomplete':
         specifier: 6.20.3
         version: 6.20.3
@@ -55,43 +55,43 @@ importers:
         version: 3.2.2(react@19.2.7)
       '@emotion/react':
         specifier: 11.14.0
-        version: 11.14.0(@types/react@19.2.17)(react@19.2.7)
+        version: 11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
       '@emotion/styled':
         specifier: 11.14.1
-        version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+        version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
       '@lezer/common':
         specifier: 1.5.2
         version: 1.5.2
       '@mdx-js/loader':
         specifier: 3.1.1
-        version: 3.1.1(webpack@5.98.0(esbuild@0.25.12))
+        version: 3.1.1(supports-color@8.1.1)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31))
       '@mdx-js/react':
         specifier: 3.1.1
         version: 3.1.1(@types/react@19.2.17)(react@19.2.7)
       '@mui/icons-material':
         specifier: 9.1.1
-        version: 9.1.1(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+        version: 9.1.1(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
       '@mui/lab':
         specifier: 9.0.0-beta.5
-        version: 9.0.0-beta.5(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 9.0.0-beta.5(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@mui/material':
         specifier: 9.1.1
-        version: 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@mui/system':
         specifier: 9.1.1
-        version: 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+        version: 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)
       '@mui/x-data-grid':
         specifier: 9.5.0
-        version: 9.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 9.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@mui/x-tree-view':
         specifier: 9.4.0
-        version: 9.4.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 9.4.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@neondatabase/serverless':
         specifier: 1.1.0
         version: 1.1.0
       '@next/mdx':
         specifier: 16.2.10
-        version: 16.2.10(@mdx-js/loader@3.1.1(webpack@5.98.0(esbuild@0.25.12)))(@mdx-js/react@3.1.1(@types/react@19.2.17)(react@19.2.7))
+        version: 16.2.10(@mdx-js/loader@3.1.1(supports-color@8.1.1)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31)))(@mdx-js/react@3.1.1(@types/react@19.2.17)(react@19.2.7))
       '@opentelemetry/api':
         specifier: 1.9.1
         version: 1.9.1
@@ -109,7 +109,7 @@ importers:
         version: 0.220.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-node':
         specifier: 0.220.0
-        version: 0.220.0(@opentelemetry/api@1.9.1)
+        version: 0.220.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1)
       '@opentelemetry/sdk-trace-base':
         specifier: 2.9.0
         version: 2.9.0(@opentelemetry/api@1.9.1)
@@ -118,16 +118,16 @@ importers:
         version: 1.43.0
       '@sentry/nextjs':
         specifier: '10'
-        version: 10.59.0(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(webpack@5.98.0(esbuild@0.25.12))
+        version: 10.59.0(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(supports-color@8.1.1)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31))
       '@sentry/node':
         specifier: 10.59.0
-        version: 10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))
+        version: 10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(supports-color@8.1.1)
       '@sentry/opentelemetry-node':
         specifier: 7.120.4
         version: 7.120.4(@opentelemetry/api@1.9.1)(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/semantic-conventions@1.43.0)
       '@sentry/profiling-node':
         specifier: 10.59.0
-        version: 10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))
+        version: 10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(supports-color@8.1.1)
       '@tanstack/react-query':
         specifier: 5.101.2
         version: 5.101.2(react@19.2.7)
@@ -139,13 +139,13 @@ importers:
         version: 4.25.11(@babel/runtime@7.29.7)(@codemirror/autocomplete@6.20.3)(@codemirror/language@6.12.4)(@codemirror/lint@6.9.7)(@codemirror/search@6.5.11)(@codemirror/state@6.7.1)(@codemirror/theme-one-dark@6.1.3)(@codemirror/view@6.43.6)(codemirror@6.0.2)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@vercel/analytics':
         specifier: 2.0.1
-        version: 2.0.1(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
+        version: 2.0.1(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
       '@vercel/otel':
         specifier: 2.1.3
-        version: 2.1.3(@opentelemetry/api-logs@0.220.0)(@opentelemetry/api@1.9.1)(@opentelemetry/instrumentation@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-logs@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))
+        version: 2.1.3(@opentelemetry/api-logs@0.220.0)(@opentelemetry/api@1.9.1)(@opentelemetry/instrumentation@0.220.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1))(@opentelemetry/resources@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-logs@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))
       '@vercel/speed-insights':
         specifier: 2.0.0
-        version: 2.0.0(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
+        version: 2.0.0(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)
       dotenv:
         specifier: 17.4.2
         version: 17.4.2
@@ -160,13 +160,13 @@ importers:
         version: 1.11.13
       jotai:
         specifier: 2.20.2
-        version: 2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7)
+        version: 2.20.2(@babel/core@7.29.7(supports-color@8.1.1))(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7)
       jotai-tanstack-query:
         specifier: 0.11.0
-        version: 0.11.0(@tanstack/query-core@5.101.1)(@tanstack/react-query@5.101.2(react@19.2.7))(jotai@2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
+        version: 0.11.0(@tanstack/query-core@5.101.2)(@tanstack/react-query@5.101.2(react@19.2.7))(jotai@2.20.2(@babel/core@7.29.7(supports-color@8.1.1))(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
       material-ui-popup-state:
         specifier: 5.3.7
-        version: 5.3.7(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+        version: 5.3.7(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
       monocle-ts:
         specifier: 2.3.13
         version: 2.3.13(fp-ts@2.16.11)
@@ -175,7 +175,7 @@ importers:
         version: 8.2.0
       next:
         specifier: 16.2.10
-        version: 16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       node-sql-parser:
         specifier: 5.4.0
         version: 5.4.0
@@ -214,7 +214,7 @@ importers:
         version: 6.0.0
       remark-gfm:
         specifier: 4.0.1
-        version: 4.0.1
+        version: 4.0.1(supports-color@8.1.1)
       svix:
         specifier: 1.96.1
         version: 1.96.1
@@ -245,13 +245,13 @@ importers:
         version: 0.15.2(typescript@6.0.3)
       '@content-collections/mdx':
         specifier: 0.2.2
-        version: 0.2.2(@content-collections/core@0.15.2(typescript@6.0.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 0.2.2(@content-collections/core@0.15.2(typescript@6.0.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(supports-color@8.1.1)
       '@content-collections/next':
         specifier: 0.2.11
-        version: 0.2.11(@content-collections/core@0.15.2(typescript@6.0.3))(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
+        version: 0.2.11(@content-collections/core@0.15.2(typescript@6.0.3))(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       '@jest/globals':
         specifier: 30.4.1
-        version: 30.4.1
+        version: 30.4.1(supports-color@8.1.1)
       '@testing-library/dom':
         specifier: 10.4.1
         version: 10.4.1
@@ -311,7 +311,7 @@ importers:
         version: 0.59.0
       require-in-the-middle:
         specifier: 8.0.1
-        version: 8.0.1
+        version: 8.0.1(supports-color@8.1.1)
       ts-node:
         specifier: 11.0.0-beta.1
         version: 11.0.0-beta.1(@types/node@25.0.3)(typescript@6.0.3)
@@ -323,7 +323,7 @@ importers:
         version: 6.0.3
       vite-tsconfig-paths:
         specifier: 6.1.1
-        version: 6.1.1(typescript@6.0.3)
+        version: 6.1.1(supports-color@8.1.1)(typescript@6.0.3)
       vitest:
         specifier: 4.1.10
         version: 4.1.10(@opentelemetry/api@1.9.1)(@types/node@25.0.3)(@vitest/coverage-v8@4.1.10)(happy-dom@20.10.6)
@@ -659,10 +659,6 @@ packages:
     resolution: {integrity: sha512-il2wyzS2I10Gv8v+ECEKQqDfaW7gCD2BWUZp37LOMFBn6/DJ7FhHfe4XwgQLUDBkHyk2LxyTt3Lbg5GnpNJPUQ==}
     engines: {node: '>=20.9.0'}
 
-  '@clerk/backend@3.8.2':
-    resolution: {integrity: sha512-E/o2t3sEyRfB0/YvKd29cHHT/qxdvUwO35AHOFIcCwZ3GxcbfPjyvytsJf+ozwJd+3H89ROy5zcSEPPGnZa/zA==}
-    engines: {node: '>=20.9.0'}
-
   '@clerk/nextjs@7.5.20':
     resolution: {integrity: sha512-ZyrRuYw9dAz7EnxDf0meb2O/rKlGJ6oB5UKcYu+BGqzORz5HK4i8zEhhjjF4PnTkRNl90eUDR2rxPWtgI2Q9wQ==}
     engines: {node: '>=20.9.0'}
@@ -677,18 +673,6 @@ packages:
     peerDependencies:
       react: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
       react-dom: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
-
-  '@clerk/shared@4.20.0':
-    resolution: {integrity: sha512-5t3YEnjwEwaect59N0Ycb5aDBbVGe3hICmy21X+n00IR1skmSTXPmPk/67bTktgEbGHxot2RGqhQbi2bFQV6AA==}
-    engines: {node: '>=20.9.0'}
-    peerDependencies:
-      react: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
-      react-dom: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-dom:
-        optional: true
 
   '@clerk/shared@4.25.5':
     resolution: {integrity: sha512-pb+pA+88OACHSuE0JhsnV7Qzl1j9UhI9KrXivS831x1BJOtNYORnDqRg3xss2SPFcC46clE9S5QqkRQqv1lSsg==}
@@ -2655,9 +2639,6 @@ packages:
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
-
-  '@tanstack/query-core@5.101.1':
-    resolution: {integrity: sha512-Y6Y92dkXtNqx67m2pMSxUsA3zOCwv862JexZRP8/EPwvKXMPu9m8rv43spiXWzOUIggQ3SQApttALStzhA8B4g==}
 
   '@tanstack/query-core@5.101.2':
     resolution: {integrity: sha512-hH5MLoJhF7KaIGd7q3xTXGXvslI+GYlM1Z/35aSHHWaCJWB7XvTSHYuV3eM7tw+aE0mT/xMro4M4Q9rCGHT0lw==}
@@ -5418,10 +5399,10 @@ snapshots:
       semifies: 1.0.0
       source-map: 0.6.1
 
-  '@apm-js-collab/tracing-hooks@0.10.0':
+  '@apm-js-collab/tracing-hooks@0.10.0(supports-color@8.1.1)':
     dependencies:
       '@apm-js-collab/code-transformer': 0.15.0
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@8.1.1)
       module-details-from-path: 1.0.4
     transitivePeerDependencies:
       - supports-color
@@ -5446,20 +5427,20 @@ snapshots:
 
   '@babel/compat-data@7.29.7': {}
 
-  '@babel/core@7.29.7':
+  '@babel/core@7.29.7(supports-color@8.1.1)':
     dependencies:
       '@babel/code-frame': 7.29.7
       '@babel/generator': 7.29.7
       '@babel/helper-compilation-targets': 7.29.7
-      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.29.7)
+      '@babel/helper-module-transforms': 7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)
       '@babel/helpers': 7.29.7
       '@babel/parser': 7.29.7
       '@babel/template': 7.29.7
-      '@babel/traverse': 7.29.7
+      '@babel/traverse': 7.29.7(supports-color@8.1.1)
       '@babel/types': 7.29.7
       '@jridgewell/remapping': 2.3.5
       convert-source-map: 2.0.0
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@8.1.1)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -5494,26 +5475,26 @@ snapshots:
 
   '@babel/helper-globals@7.29.7': {}
 
-  '@babel/helper-module-imports@7.27.1':
+  '@babel/helper-module-imports@7.27.1(supports-color@8.1.1)':
     dependencies:
-      '@babel/traverse': 7.29.0
+      '@babel/traverse': 7.29.0(supports-color@8.1.1)
       '@babel/types': 7.29.0
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/helper-module-imports@7.29.7':
+  '@babel/helper-module-imports@7.29.7(supports-color@8.1.1)':
     dependencies:
-      '@babel/traverse': 7.29.7
+      '@babel/traverse': 7.29.7(supports-color@8.1.1)
       '@babel/types': 7.29.7
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/helper-module-transforms@7.29.7(@babel/core@7.29.7)':
+  '@babel/helper-module-transforms@7.29.7(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1)':
     dependencies:
-      '@babel/core': 7.29.7
-      '@babel/helper-module-imports': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
+      '@babel/helper-module-imports': 7.29.7(supports-color@8.1.1)
       '@babel/helper-validator-identifier': 7.29.7
-      '@babel/traverse': 7.29.7
+      '@babel/traverse': 7.29.7(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -5536,89 +5517,89 @@ snapshots:
     dependencies:
       '@babel/types': 7.29.7
 
-  '@babel/plugin-syntax-async-generators@7.8.4(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-async-generators@7.8.4(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-bigint@7.8.3(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-bigint@7.8.3(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-class-properties@7.12.13(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-class-properties@7.12.13(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-class-static-block@7.14.5(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-class-static-block@7.14.5(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-import-attributes@7.27.1(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-import-attributes@7.27.1(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-import-meta@7.10.4(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-import-meta@7.10.4(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-json-strings@7.8.3(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-json-strings@7.8.3(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-logical-assignment-operators@7.10.4(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-logical-assignment-operators@7.10.4(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-nullish-coalescing-operator@7.8.3(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-nullish-coalescing-operator@7.8.3(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-numeric-separator@7.10.4(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-numeric-separator@7.10.4(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-object-rest-spread@7.8.3(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-object-rest-spread@7.8.3(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-optional-catch-binding@7.8.3(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-optional-catch-binding@7.8.3(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-optional-chaining@7.8.3(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-optional-chaining@7.8.3(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-private-property-in-object@7.14.5(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-private-property-in-object@7.14.5(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-top-level-await@7.14.5(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-top-level-await@7.14.5(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
-  '@babel/plugin-syntax-typescript@7.28.6(@babel/core@7.29.7)':
+  '@babel/plugin-syntax-typescript@7.28.6(@babel/core@7.29.7(supports-color@8.1.1))':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/helper-plugin-utils': 7.28.6
 
   '@babel/runtime@7.28.4': {}
@@ -5635,7 +5616,7 @@ snapshots:
       '@babel/parser': 7.29.7
       '@babel/types': 7.29.7
 
-  '@babel/traverse@7.29.0':
+  '@babel/traverse@7.29.0(supports-color@8.1.1)':
     dependencies:
       '@babel/code-frame': 7.29.7
       '@babel/generator': 7.29.7
@@ -5643,11 +5624,11 @@ snapshots:
       '@babel/parser': 7.29.7
       '@babel/template': 7.29.7
       '@babel/types': 7.29.7
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@babel/traverse@7.29.7':
+  '@babel/traverse@7.29.7(supports-color@8.1.1)':
     dependencies:
       '@babel/code-frame': 7.29.7
       '@babel/generator': 7.29.7
@@ -5655,7 +5636,7 @@ snapshots:
       '@babel/parser': 7.29.7
       '@babel/template': 7.29.7
       '@babel/types': 7.29.7
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -5749,21 +5730,12 @@ snapshots:
       - react
       - react-dom
 
-  '@clerk/backend@3.8.2(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
-    dependencies:
-      '@clerk/shared': 4.20.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      standardwebhooks: 1.0.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - react
-      - react-dom
-
-  '@clerk/nextjs@7.5.20(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@clerk/nextjs@7.5.20(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@clerk/backend': 3.11.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@clerk/react': 6.12.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@clerk/shared': 4.25.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      next: 16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      next: 16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
       server-only: 0.0.1
@@ -5775,16 +5747,6 @@ snapshots:
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
       tslib: 2.8.1
-
-  '@clerk/shared@4.20.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
-    dependencies:
-      '@tanstack/query-core': 5.101.1
-      dequal: 2.0.3
-      glob-to-regexp: 0.4.1
-      js-cookie: 3.0.7
-    optionalDependencies:
-      react: 19.2.7
-      react-dom: 19.2.7(react@19.2.7)
 
   '@clerk/shared@4.25.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
@@ -5877,22 +5839,22 @@ snapshots:
     dependencies:
       '@content-collections/core': 0.15.2(typescript@6.0.3)
 
-  '@content-collections/mdx@0.2.2(@content-collections/core@0.15.2(typescript@6.0.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@content-collections/mdx@0.2.2(@content-collections/core@0.15.2(typescript@6.0.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(supports-color@8.1.1)':
     dependencies:
       '@content-collections/core': 0.15.2(typescript@6.0.3)
       esbuild: 0.25.12
-      mdx-bundler: 10.1.1(esbuild@0.25.12)
+      mdx-bundler: 10.1.1(esbuild@0.25.12)(supports-color@8.1.1)
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
       unified: 11.0.5
     transitivePeerDependencies:
       - supports-color
 
-  '@content-collections/next@0.2.11(@content-collections/core@0.15.2(typescript@6.0.3))(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))':
+  '@content-collections/next@0.2.11(@content-collections/core@0.15.2(typescript@6.0.3))(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))':
     dependencies:
       '@content-collections/core': 0.15.2(typescript@6.0.3)
       '@content-collections/integrations': 0.5.0(@content-collections/core@0.15.2(typescript@6.0.3))
-      next: 16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      next: 16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
@@ -5937,9 +5899,9 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@emotion/babel-plugin@11.13.5':
+  '@emotion/babel-plugin@11.13.5(supports-color@8.1.1)':
     dependencies:
-      '@babel/helper-module-imports': 7.27.1
+      '@babel/helper-module-imports': 7.27.1(supports-color@8.1.1)
       '@babel/runtime': 7.29.2
       '@emotion/hash': 0.9.2
       '@emotion/memoize': 0.9.0
@@ -5969,10 +5931,10 @@ snapshots:
 
   '@emotion/memoize@0.9.0': {}
 
-  '@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)':
+  '@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
-      '@emotion/babel-plugin': 11.13.5
+      '@emotion/babel-plugin': 11.13.5(supports-color@8.1.1)
       '@emotion/cache': 11.14.0
       '@emotion/serialize': 1.3.3
       '@emotion/use-insertion-effect-with-fallbacks': 1.2.0(react@19.2.7)
@@ -5995,12 +5957,12 @@ snapshots:
 
   '@emotion/sheet@1.4.0': {}
 
-  '@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)':
+  '@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)':
     dependencies:
       '@babel/runtime': 7.28.4
-      '@emotion/babel-plugin': 11.13.5
+      '@emotion/babel-plugin': 11.13.5(supports-color@8.1.1)
       '@emotion/is-prop-valid': 1.4.0
-      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)
+      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
       '@emotion/serialize': 1.3.3
       '@emotion/use-insertion-effect-with-fallbacks': 1.2.0(react@19.2.7)
       '@emotion/utils': 1.4.2
@@ -6030,10 +5992,10 @@ snapshots:
       '@esbuild-kit/core-utils': 3.3.2
       get-tsconfig: 4.13.0
 
-  '@esbuild-plugins/node-resolve@0.2.2(esbuild@0.25.12)':
+  '@esbuild-plugins/node-resolve@0.2.2(esbuild@0.25.12)(supports-color@8.1.1)':
     dependencies:
       '@types/resolve': 1.20.6
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@8.1.1)
       esbuild: 0.25.12
       escape-string-regexp: 4.0.0
       resolve: 1.22.11
@@ -6449,10 +6411,10 @@ snapshots:
     dependencies:
       '@jest/get-type': 30.1.0
 
-  '@jest/expect@30.4.1':
+  '@jest/expect@30.4.1(supports-color@8.1.1)':
     dependencies:
       expect: 30.4.1
-      jest-snapshot: 30.4.1
+      jest-snapshot: 30.4.1(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -6467,10 +6429,10 @@ snapshots:
 
   '@jest/get-type@30.1.0': {}
 
-  '@jest/globals@30.4.1':
+  '@jest/globals@30.4.1(supports-color@8.1.1)':
     dependencies:
       '@jest/environment': 30.4.1
-      '@jest/expect': 30.4.1
+      '@jest/expect': 30.4.1(supports-color@8.1.1)
       '@jest/types': 30.4.1
       jest-mock: 30.4.1
     transitivePeerDependencies:
@@ -6501,12 +6463,12 @@ snapshots:
       graceful-fs: 4.2.11
       natural-compare: 1.4.0
 
-  '@jest/transform@30.4.1':
+  '@jest/transform@30.4.1(supports-color@8.1.1)':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@jest/types': 30.4.1
       '@jridgewell/trace-mapping': 0.3.31
-      babel-plugin-istanbul: 7.0.1
+      babel-plugin-istanbul: 7.0.1(supports-color@8.1.1)
       chalk: 4.1.2
       convert-source-map: 2.0.0
       fast-json-stable-stringify: 2.1.0
@@ -6583,9 +6545,9 @@ snapshots:
 
   '@marijn/find-cluster-break@1.0.2': {}
 
-  '@mdx-js/esbuild@3.1.1(esbuild@0.25.12)':
+  '@mdx-js/esbuild@3.1.1(esbuild@0.25.12)(supports-color@8.1.1)':
     dependencies:
-      '@mdx-js/mdx': 3.1.1
+      '@mdx-js/mdx': 3.1.1(supports-color@8.1.1)
       '@types/unist': 3.0.3
       esbuild: 0.25.12
       source-map: 0.7.6
@@ -6594,16 +6556,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@mdx-js/loader@3.1.1(webpack@5.98.0(esbuild@0.25.12))':
+  '@mdx-js/loader@3.1.1(supports-color@8.1.1)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31))':
     dependencies:
-      '@mdx-js/mdx': 3.1.1
+      '@mdx-js/mdx': 3.1.1(supports-color@8.1.1)
       source-map: 0.7.6
     optionalDependencies:
-      webpack: 5.98.0(esbuild@0.25.12)
+      webpack: 5.98.0(esbuild@0.25.12)(postcss@8.4.31)
     transitivePeerDependencies:
       - supports-color
 
-  '@mdx-js/mdx@3.1.1':
+  '@mdx-js/mdx@3.1.1(supports-color@8.1.1)':
     dependencies:
       '@types/estree': 1.0.8
       '@types/estree-jsx': 1.0.5
@@ -6615,14 +6577,14 @@ snapshots:
       estree-util-is-identifier-name: 3.0.0
       estree-util-scope: 1.0.0
       estree-walker: 3.0.3
-      hast-util-to-jsx-runtime: 2.3.6
+      hast-util-to-jsx-runtime: 2.3.6(supports-color@8.1.1)
       markdown-extensions: 2.0.0
       recma-build-jsx: 1.0.0
       recma-jsx: 1.0.1(acorn@8.16.0)
       recma-stringify: 1.0.0
-      rehype-recma: 1.0.0
-      remark-mdx: 3.1.1
-      remark-parse: 11.0.0
+      rehype-recma: 1.0.0(supports-color@8.1.1)
+      remark-mdx: 3.1.1(supports-color@8.1.1)
+      remark-parse: 11.0.0(supports-color@8.1.1)
       remark-rehype: 11.1.2
       source-map: 0.7.6
       unified: 11.0.5
@@ -6641,19 +6603,19 @@ snapshots:
 
   '@mui/core-downloads-tracker@9.1.1': {}
 
-  '@mui/icons-material@9.1.1(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)':
+  '@mui/icons-material@9.1.1(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)':
     dependencies:
       '@babel/runtime': 7.29.2
-      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react: 19.2.7
     optionalDependencies:
       '@types/react': 19.2.17
 
-  '@mui/lab@9.0.0-beta.5(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@mui/lab@9.0.0-beta.5(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@babel/runtime': 7.29.2
-      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@mui/system': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@mui/system': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)
       '@mui/types': 9.1.1(@types/react@19.2.17)
       '@mui/utils': 9.1.1(@types/react@19.2.17)(react@19.2.7)
       clsx: 2.1.1
@@ -6661,15 +6623,15 @@ snapshots:
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
     optionalDependencies:
-      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)
-      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
+      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
       '@types/react': 19.2.17
 
-  '@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@babel/runtime': 7.29.2
       '@mui/core-downloads-tracker': 9.1.1
-      '@mui/system': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@mui/system': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)
       '@mui/types': 9.1.1(@types/react@19.2.17)
       '@mui/utils': 9.1.1(@types/react@19.2.17)(react@19.2.7)
       '@popperjs/core': 2.11.8
@@ -6682,8 +6644,8 @@ snapshots:
       react-is: 19.2.6
       react-transition-group: 4.4.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     optionalDependencies:
-      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)
-      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
+      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
       '@types/react': 19.2.17
 
   '@mui/private-theming@9.1.1(@types/react@19.2.17)(react@19.2.7)':
@@ -6695,7 +6657,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.17
 
-  '@mui/styled-engine@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)':
+  '@mui/styled-engine@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(react@19.2.7)':
     dependencies:
       '@babel/runtime': 7.29.7
       '@emotion/cache': 11.14.0
@@ -6705,14 +6667,14 @@ snapshots:
       prop-types: 15.8.1
       react: 19.2.7
     optionalDependencies:
-      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)
-      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
+      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
 
-  '@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)':
+  '@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)':
     dependencies:
       '@babel/runtime': 7.29.2
       '@mui/private-theming': 9.1.1(@types/react@19.2.17)(react@19.2.7)
-      '@mui/styled-engine': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(react@19.2.7)
+      '@mui/styled-engine': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(react@19.2.7)
       '@mui/types': 9.1.1(@types/react@19.2.17)
       '@mui/utils': 9.1.1(@types/react@19.2.17)(react@19.2.7)
       clsx: 2.1.1
@@ -6720,8 +6682,8 @@ snapshots:
       prop-types: 15.8.1
       react: 19.2.7
     optionalDependencies:
-      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)
-      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
+      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
       '@types/react': 19.2.17
 
   '@mui/types@9.1.1(@types/react@19.2.17)':
@@ -6766,11 +6728,11 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.2.17
 
-  '@mui/x-data-grid@9.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@mui/x-data-grid@9.5.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@babel/runtime': 7.29.7
-      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@mui/system': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@mui/system': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)
       '@mui/utils': 9.0.1(@types/react@19.2.17)(react@19.2.7)
       '@mui/x-internals': 9.1.0(@types/react@19.2.17)(react@19.2.7)
       '@mui/x-virtualizer': 9.0.0-alpha.8(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -6780,8 +6742,8 @@ snapshots:
       react-dom: 19.2.7(react@19.2.7)
       use-sync-external-store: 1.6.0(react@19.2.7)
     optionalDependencies:
-      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)
-      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
+      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
     transitivePeerDependencies:
       - '@types/react'
 
@@ -6795,12 +6757,12 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@mui/x-tree-view@9.4.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@mui/x-tree-view@9.4.0(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@mui/system@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@babel/runtime': 7.29.7
       '@base-ui/utils': 0.2.9(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@mui/system': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@mui/system': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)
       '@mui/utils': 9.0.1(@types/react@19.2.17)(react@19.2.7)
       '@mui/x-internals': 9.1.0(@types/react@19.2.17)(react@19.2.7)
       '@types/react-transition-group': 4.4.12(@types/react@19.2.17)
@@ -6810,8 +6772,8 @@ snapshots:
       react-dom: 19.2.7(react@19.2.7)
       react-transition-group: 4.4.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     optionalDependencies:
-      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)
-      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7)
+      '@emotion/react': 11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
+      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1)
     transitivePeerDependencies:
       - '@types/react'
 
@@ -6829,11 +6791,11 @@ snapshots:
 
   '@next/env@16.2.10': {}
 
-  '@next/mdx@16.2.10(@mdx-js/loader@3.1.1(webpack@5.98.0(esbuild@0.25.12)))(@mdx-js/react@3.1.1(@types/react@19.2.17)(react@19.2.7))':
+  '@next/mdx@16.2.10(@mdx-js/loader@3.1.1(supports-color@8.1.1)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31)))(@mdx-js/react@3.1.1(@types/react@19.2.17)(react@19.2.7))':
     dependencies:
       source-map: 0.7.6
     optionalDependencies:
-      '@mdx-js/loader': 3.1.1(webpack@5.98.0(esbuild@0.25.12))
+      '@mdx-js/loader': 3.1.1(supports-color@8.1.1)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31))
       '@mdx-js/react': 3.1.1(@types/react@19.2.17)(react@19.2.7)
 
   '@next/swc-darwin-arm64@16.2.10':
@@ -6995,21 +6957,21 @@ snapshots:
       '@opentelemetry/sdk-trace': 2.9.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/semantic-conventions': 1.41.1
 
-  '@opentelemetry/instrumentation@0.214.0(@opentelemetry/api@1.9.1)':
+  '@opentelemetry/instrumentation@0.214.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1)':
     dependencies:
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/api-logs': 0.214.0
       import-in-the-middle: 3.0.2
-      require-in-the-middle: 8.0.1
+      require-in-the-middle: 8.0.1(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@opentelemetry/instrumentation@0.220.0(@opentelemetry/api@1.9.1)':
+  '@opentelemetry/instrumentation@0.220.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1)':
     dependencies:
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/api-logs': 0.220.0
       import-in-the-middle: 3.0.2
-      require-in-the-middle: 8.0.1
+      require-in-the-middle: 8.0.1(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -7067,7 +7029,7 @@ snapshots:
       '@opentelemetry/core': 2.9.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/resources': 2.9.0(@opentelemetry/api@1.9.1)
 
-  '@opentelemetry/sdk-node@0.220.0(@opentelemetry/api@1.9.1)':
+  '@opentelemetry/sdk-node@0.220.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1)':
     dependencies:
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/api-logs': 0.220.0
@@ -7085,7 +7047,7 @@ snapshots:
       '@opentelemetry/exporter-trace-otlp-http': 0.220.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/exporter-trace-otlp-proto': 0.220.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/exporter-zipkin': 2.9.0(@opentelemetry/api@1.9.1)
-      '@opentelemetry/instrumentation': 0.220.0(@opentelemetry/api@1.9.1)
+      '@opentelemetry/instrumentation': 0.220.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1)
       '@opentelemetry/otlp-exporter-base': 0.220.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/otlp-grpc-exporter-base': 0.220.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/propagator-b3': 2.9.0(@opentelemetry/api@1.9.1)
@@ -7404,11 +7366,11 @@ snapshots:
       '@sentry/replay': 10.59.0
       '@sentry/replay-canvas': 10.59.0
 
-  '@sentry/bundler-plugin-core@5.3.0':
+  '@sentry/bundler-plugin-core@5.3.0(supports-color@8.1.1)':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@sentry/babel-plugin-component-annotate': 5.3.0
-      '@sentry/cli': 2.58.6
+      '@sentry/cli': 2.58.6(supports-color@8.1.1)
       dotenv: 16.6.1
       find-up: 5.0.0
       glob: 13.0.6
@@ -7441,9 +7403,9 @@ snapshots:
   '@sentry/cli-win32-x64@2.58.6':
     optional: true
 
-  '@sentry/cli@2.58.6':
+  '@sentry/cli@2.58.6(supports-color@8.1.1)':
     dependencies:
-      https-proxy-agent: 5.0.1
+      https-proxy-agent: 5.0.1(supports-color@8.1.1)
       node-fetch: 2.7.0
       progress: 2.0.3
       proxy-from-env: 1.1.0
@@ -7474,20 +7436,20 @@ snapshots:
     dependencies:
       '@sentry/core': 10.59.0
 
-  '@sentry/nextjs@10.59.0(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(webpack@5.98.0(esbuild@0.25.12))':
+  '@sentry/nextjs@10.59.0(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)(supports-color@8.1.1)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31))':
     dependencies:
       '@opentelemetry/api': 1.9.1
       '@rollup/plugin-commonjs': 28.0.1(rollup@4.62.2)
       '@sentry/browser-utils': 10.59.0
-      '@sentry/bundler-plugin-core': 5.3.0
+      '@sentry/bundler-plugin-core': 5.3.0(supports-color@8.1.1)
       '@sentry/conventions': 0.12.0
       '@sentry/core': 10.59.0
-      '@sentry/node': 10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))
+      '@sentry/node': 10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(supports-color@8.1.1)
       '@sentry/opentelemetry': 10.59.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))
       '@sentry/react': 10.59.0(react@19.2.7)
       '@sentry/vercel-edge': 10.59.0
-      '@sentry/webpack-plugin': 5.3.0(webpack@5.98.0(esbuild@0.25.12))
-      next: 16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@sentry/webpack-plugin': 5.3.0(supports-color@8.1.1)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31))
+      next: 16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       rollup: 4.62.2
       stacktrace-parser: 0.1.11
     transitivePeerDependencies:
@@ -7500,7 +7462,7 @@ snapshots:
       - vite
       - webpack
 
-  '@sentry/node-core@10.59.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.8.0(@opentelemetry/api@1.9.1))(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/instrumentation@0.214.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))':
+  '@sentry/node-core@10.59.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.8.0(@opentelemetry/api@1.9.1))(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/instrumentation@0.214.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))':
     dependencies:
       '@sentry/conventions': 0.12.0
       '@sentry/core': 10.59.0
@@ -7510,7 +7472,7 @@ snapshots:
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/core': 2.8.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/exporter-trace-otlp-http': 0.220.0(@opentelemetry/api@1.9.1)
-      '@opentelemetry/instrumentation': 0.214.0(@opentelemetry/api@1.9.1)
+      '@opentelemetry/instrumentation': 0.214.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1)
       '@opentelemetry/sdk-trace-base': 2.9.0(@opentelemetry/api@1.9.1)
 
   '@sentry/node-cpu-profiler@2.4.2':
@@ -7518,17 +7480,17 @@ snapshots:
       detect-libc: 2.1.2
       node-abi: 3.85.0
 
-  '@sentry/node@10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))':
+  '@sentry/node@10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(supports-color@8.1.1)':
     dependencies:
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/core': 2.8.0(@opentelemetry/api@1.9.1)
-      '@opentelemetry/instrumentation': 0.214.0(@opentelemetry/api@1.9.1)
+      '@opentelemetry/instrumentation': 0.214.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1)
       '@opentelemetry/sdk-trace-base': 2.9.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/semantic-conventions': 1.43.0
       '@sentry/core': 10.59.0
-      '@sentry/node-core': 10.59.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.8.0(@opentelemetry/api@1.9.1))(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/instrumentation@0.214.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))
+      '@sentry/node-core': 10.59.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.8.0(@opentelemetry/api@1.9.1))(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/instrumentation@0.214.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))
       '@sentry/opentelemetry': 10.59.0(@opentelemetry/api@1.9.1)(@opentelemetry/core@2.8.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))
-      '@sentry/server-utils': 10.59.0
+      '@sentry/server-utils': 10.59.0(supports-color@8.1.1)
       import-in-the-middle: 3.0.2
     transitivePeerDependencies:
       - '@opentelemetry/exporter-trace-otlp-http'
@@ -7561,10 +7523,10 @@ snapshots:
       '@sentry/conventions': 0.12.0
       '@sentry/core': 10.59.0
 
-  '@sentry/profiling-node@10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))':
+  '@sentry/profiling-node@10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(supports-color@8.1.1)':
     dependencies:
       '@sentry/core': 10.59.0
-      '@sentry/node': 10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))
+      '@sentry/node': 10.59.0(@opentelemetry/exporter-trace-otlp-http@0.220.0(@opentelemetry/api@1.9.1))(supports-color@8.1.1)
       '@sentry/node-cpu-profiler': 2.4.2
     transitivePeerDependencies:
       - '@opentelemetry/exporter-trace-otlp-http'
@@ -7587,11 +7549,11 @@ snapshots:
       '@sentry/browser-utils': 10.59.0
       '@sentry/core': 10.59.0
 
-  '@sentry/server-utils@10.59.0':
+  '@sentry/server-utils@10.59.0(supports-color@8.1.1)':
     dependencies:
       '@apm-js-collab/code-transformer': 0.15.0
       '@apm-js-collab/code-transformer-bundler-plugins': 0.5.0
-      '@apm-js-collab/tracing-hooks': 0.10.0
+      '@apm-js-collab/tracing-hooks': 0.10.0(supports-color@8.1.1)
       '@sentry/conventions': 0.12.0
       '@sentry/core': 10.59.0
       magic-string: 0.30.21
@@ -7610,10 +7572,10 @@ snapshots:
       '@opentelemetry/resources': 2.9.0(@opentelemetry/api@1.9.1)
       '@sentry/core': 10.59.0
 
-  '@sentry/webpack-plugin@5.3.0(webpack@5.98.0(esbuild@0.25.12))':
+  '@sentry/webpack-plugin@5.3.0(supports-color@8.1.1)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31))':
     dependencies:
-      '@sentry/bundler-plugin-core': 5.3.0
-      webpack: 5.98.0(esbuild@0.25.12)
+      '@sentry/bundler-plugin-core': 5.3.0(supports-color@8.1.1)
+      webpack: 5.98.0(esbuild@0.25.12)(postcss@8.4.31)
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -7635,8 +7597,6 @@ snapshots:
   '@swc/helpers@0.5.15':
     dependencies:
       tslib: 2.8.1
-
-  '@tanstack/query-core@5.101.1': {}
 
   '@tanstack/query-core@5.101.2': {}
 
@@ -7963,24 +7923,24 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vercel/analytics@2.0.1(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
+  '@vercel/analytics@2.0.1(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
     optionalDependencies:
-      next: 16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      next: 16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react: 19.2.7
 
-  '@vercel/otel@2.1.3(@opentelemetry/api-logs@0.220.0)(@opentelemetry/api@1.9.1)(@opentelemetry/instrumentation@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/resources@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-logs@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))':
+  '@vercel/otel@2.1.3(@opentelemetry/api-logs@0.220.0)(@opentelemetry/api@1.9.1)(@opentelemetry/instrumentation@0.220.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1))(@opentelemetry/resources@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-logs@0.220.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-metrics@2.9.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.9.0(@opentelemetry/api@1.9.1))':
     dependencies:
       '@opentelemetry/api': 1.9.1
       '@opentelemetry/api-logs': 0.220.0
-      '@opentelemetry/instrumentation': 0.220.0(@opentelemetry/api@1.9.1)
+      '@opentelemetry/instrumentation': 0.220.0(@opentelemetry/api@1.9.1)(supports-color@8.1.1)
       '@opentelemetry/resources': 2.9.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-logs': 0.220.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-metrics': 2.9.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-trace-base': 2.9.0(@opentelemetry/api@1.9.1)
 
-  '@vercel/speed-insights@2.0.0(next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
+  '@vercel/speed-insights@2.0.0(next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(react@19.2.7)':
     optionalDependencies:
-      next: 16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      next: 16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react: 19.2.7
 
   '@vitejs/plugin-react@6.0.3':
@@ -8140,9 +8100,9 @@ snapshots:
 
   acorn@8.17.0: {}
 
-  agent-base@6.0.2:
+  agent-base@6.0.2(supports-color@8.1.1):
     dependencies:
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -8197,12 +8157,12 @@ snapshots:
 
   astring@1.9.0: {}
 
-  babel-plugin-istanbul@7.0.1:
+  babel-plugin-istanbul@7.0.1(supports-color@8.1.1):
     dependencies:
       '@babel/helper-plugin-utils': 7.28.6
       '@istanbuljs/load-nyc-config': 1.1.0
       '@istanbuljs/schema': 0.1.3
-      istanbul-lib-instrument: 6.0.3
+      istanbul-lib-instrument: 6.0.3(supports-color@8.1.1)
       test-exclude: 6.0.0
     transitivePeerDependencies:
       - supports-color
@@ -8213,24 +8173,24 @@ snapshots:
       cosmiconfig: 7.1.0
       resolve: 1.22.11
 
-  babel-preset-current-node-syntax@1.2.0(@babel/core@7.29.7):
+  babel-preset-current-node-syntax@1.2.0(@babel/core@7.29.7(supports-color@8.1.1)):
     dependencies:
-      '@babel/core': 7.29.7
-      '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.29.7)
-      '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.29.7)
-      '@babel/plugin-syntax-class-properties': 7.12.13(@babel/core@7.29.7)
-      '@babel/plugin-syntax-class-static-block': 7.14.5(@babel/core@7.29.7)
-      '@babel/plugin-syntax-import-attributes': 7.27.1(@babel/core@7.29.7)
-      '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.29.7)
-      '@babel/plugin-syntax-json-strings': 7.8.3(@babel/core@7.29.7)
-      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.29.7)
-      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.29.7)
-      '@babel/plugin-syntax-numeric-separator': 7.10.4(@babel/core@7.29.7)
-      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.29.7)
-      '@babel/plugin-syntax-optional-catch-binding': 7.8.3(@babel/core@7.29.7)
-      '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.29.7)
-      '@babel/plugin-syntax-private-property-in-object': 7.14.5(@babel/core@7.29.7)
-      '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.29.7)
+      '@babel/core': 7.29.7(supports-color@8.1.1)
+      '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-class-properties': 7.12.13(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-class-static-block': 7.14.5(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-import-attributes': 7.27.1(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-json-strings': 7.8.3(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-numeric-separator': 7.10.4(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-optional-catch-binding': 7.8.3(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-private-property-in-object': 7.14.5(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.29.7(supports-color@8.1.1))
 
   bail@2.0.2: {}
 
@@ -8421,9 +8381,11 @@ snapshots:
       d3-selection: 3.0.0
       d3-transition: 3.0.1(d3-selection@3.0.0)
 
-  debug@4.4.3:
+  debug@4.4.3(supports-color@8.1.1):
     dependencies:
       ms: 2.1.3
+    optionalDependencies:
+      supports-color: 8.1.1
 
   decode-named-character-reference@1.2.0:
     dependencies:
@@ -8794,7 +8756,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
 
-  hast-util-to-estree@3.1.3:
+  hast-util-to-estree@3.1.3(supports-color@8.1.1):
     dependencies:
       '@types/estree': 1.0.8
       '@types/estree-jsx': 1.0.5
@@ -8804,9 +8766,9 @@ snapshots:
       estree-util-attach-comments: 3.0.0
       estree-util-is-identifier-name: 3.0.0
       hast-util-whitespace: 3.0.0
-      mdast-util-mdx-expression: 2.0.1
-      mdast-util-mdx-jsx: 3.2.0
-      mdast-util-mdxjs-esm: 2.0.1
+      mdast-util-mdx-expression: 2.0.1(supports-color@8.1.1)
+      mdast-util-mdx-jsx: 3.2.0(supports-color@8.1.1)
+      mdast-util-mdxjs-esm: 2.0.1(supports-color@8.1.1)
       property-information: 7.1.0
       space-separated-tokens: 2.0.2
       style-to-js: 1.1.21
@@ -8815,7 +8777,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  hast-util-to-jsx-runtime@2.3.6:
+  hast-util-to-jsx-runtime@2.3.6(supports-color@8.1.1):
     dependencies:
       '@types/estree': 1.0.8
       '@types/hast': 3.0.4
@@ -8824,9 +8786,9 @@ snapshots:
       devlop: 1.1.0
       estree-util-is-identifier-name: 3.0.0
       hast-util-whitespace: 3.0.0
-      mdast-util-mdx-expression: 2.0.1
-      mdast-util-mdx-jsx: 3.2.0
-      mdast-util-mdxjs-esm: 2.0.1
+      mdast-util-mdx-expression: 2.0.1(supports-color@8.1.1)
+      mdast-util-mdx-jsx: 3.2.0(supports-color@8.1.1)
+      mdast-util-mdxjs-esm: 2.0.1(supports-color@8.1.1)
       property-information: 7.1.0
       space-separated-tokens: 2.0.2
       style-to-js: 1.1.21
@@ -8851,10 +8813,10 @@ snapshots:
 
   html-to-image@1.11.13: {}
 
-  https-proxy-agent@5.0.1:
+  https-proxy-agent@5.0.1(supports-color@8.1.1):
     dependencies:
-      agent-base: 6.0.2
-      debug: 4.4.3
+      agent-base: 6.0.2(supports-color@8.1.1)
+      debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -8926,9 +8888,9 @@ snapshots:
 
   istanbul-lib-coverage@3.2.2: {}
 
-  istanbul-lib-instrument@6.0.3:
+  istanbul-lib-instrument@6.0.3(supports-color@8.1.1):
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/parser': 7.29.7
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
@@ -9031,19 +8993,19 @@ snapshots:
 
   jest-regex-util@30.4.0: {}
 
-  jest-snapshot@30.4.1:
+  jest-snapshot@30.4.1(supports-color@8.1.1):
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/generator': 7.29.1
-      '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.29.7)
-      '@babel/plugin-syntax-typescript': 7.28.6(@babel/core@7.29.7)
+      '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.29.7(supports-color@8.1.1))
+      '@babel/plugin-syntax-typescript': 7.28.6(@babel/core@7.29.7(supports-color@8.1.1))
       '@babel/types': 7.29.7
       '@jest/expect-utils': 30.4.1
       '@jest/get-type': 30.1.0
       '@jest/snapshot-utils': 30.4.1
-      '@jest/transform': 30.4.1
+      '@jest/transform': 30.4.1(supports-color@8.1.1)
       '@jest/types': 30.4.1
-      babel-preset-current-node-syntax: 1.2.0(@babel/core@7.29.7)
+      babel-preset-current-node-syntax: 1.2.0(@babel/core@7.29.7(supports-color@8.1.1))
       chalk: 4.1.2
       expect: 30.4.1
       graceful-fs: 4.2.11
@@ -9089,17 +9051,17 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jotai-tanstack-query@0.11.0(@tanstack/query-core@5.101.1)(@tanstack/react-query@5.101.2(react@19.2.7))(jotai@2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7):
+  jotai-tanstack-query@0.11.0(@tanstack/query-core@5.101.2)(@tanstack/react-query@5.101.2(react@19.2.7))(jotai@2.20.2(@babel/core@7.29.7(supports-color@8.1.1))(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7))(react@19.2.7):
     dependencies:
-      '@tanstack/query-core': 5.101.1
-      jotai: 2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7)
+      '@tanstack/query-core': 5.101.2
+      jotai: 2.20.2(@babel/core@7.29.7(supports-color@8.1.1))(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7)
     optionalDependencies:
       '@tanstack/react-query': 5.101.2(react@19.2.7)
       react: 19.2.7
 
-  jotai@2.20.2(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7):
+  jotai@2.20.2(@babel/core@7.29.7(supports-color@8.1.1))(@babel/template@7.29.7)(@types/react@19.2.17)(react@19.2.7):
     optionalDependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
       '@babel/template': 7.29.7
       '@types/react': 19.2.17
       react: 19.2.7
@@ -9179,10 +9141,10 @@ snapshots:
 
   markdown-table@3.0.4: {}
 
-  material-ui-popup-state@5.3.7(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react@19.2.7):
+  material-ui-popup-state@5.3.7(@mui/material@9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(@types/react@19.2.17)(react@19.2.7):
     dependencies:
       '@babel/runtime': 7.28.6
-      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react@19.2.7))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@mui/material': 9.1.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react@19.2.7)(supports-color@8.1.1))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@types/prop-types': 15.7.15
       classnames: 2.5.1
       prop-types: 15.8.1
@@ -9197,14 +9159,14 @@ snapshots:
       unist-util-is: 6.0.1
       unist-util-visit-parents: 6.0.2
 
-  mdast-util-from-markdown@2.0.2:
+  mdast-util-from-markdown@2.0.2(supports-color@8.1.1):
     dependencies:
       '@types/mdast': 4.0.4
       '@types/unist': 3.0.3
       decode-named-character-reference: 1.2.0
       devlop: 1.1.0
       mdast-util-to-string: 4.0.0
-      micromark: 4.0.2
+      micromark: 4.0.2(supports-color@8.1.1)
       micromark-util-decode-numeric-character-reference: 2.0.2
       micromark-util-decode-string: 2.0.1
       micromark-util-normalize-identifier: 2.0.1
@@ -9214,12 +9176,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-frontmatter@2.0.1:
+  mdast-util-frontmatter@2.0.1(supports-color@8.1.1):
     dependencies:
       '@types/mdast': 4.0.4
       devlop: 1.1.0
       escape-string-regexp: 5.0.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
       micromark-extension-frontmatter: 2.0.0
     transitivePeerDependencies:
@@ -9233,67 +9195,67 @@ snapshots:
       mdast-util-find-and-replace: 3.0.2
       micromark-util-character: 2.1.1
 
-  mdast-util-gfm-footnote@2.1.0:
+  mdast-util-gfm-footnote@2.1.0(supports-color@8.1.1):
     dependencies:
       '@types/mdast': 4.0.4
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
       micromark-util-normalize-identifier: 2.0.1
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-gfm-strikethrough@2.0.0:
+  mdast-util-gfm-strikethrough@2.0.0(supports-color@8.1.1):
     dependencies:
       '@types/mdast': 4.0.4
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-gfm-table@2.0.0:
+  mdast-util-gfm-table@2.0.0(supports-color@8.1.1):
     dependencies:
       '@types/mdast': 4.0.4
       devlop: 1.1.0
       markdown-table: 3.0.4
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-gfm-task-list-item@2.0.0:
+  mdast-util-gfm-task-list-item@2.0.0(supports-color@8.1.1):
     dependencies:
       '@types/mdast': 4.0.4
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-gfm@3.1.0:
+  mdast-util-gfm@3.1.0(supports-color@8.1.1):
     dependencies:
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       mdast-util-gfm-autolink-literal: 2.0.1
-      mdast-util-gfm-footnote: 2.1.0
-      mdast-util-gfm-strikethrough: 2.0.0
-      mdast-util-gfm-table: 2.0.0
-      mdast-util-gfm-task-list-item: 2.0.0
+      mdast-util-gfm-footnote: 2.1.0(supports-color@8.1.1)
+      mdast-util-gfm-strikethrough: 2.0.0(supports-color@8.1.1)
+      mdast-util-gfm-table: 2.0.0(supports-color@8.1.1)
+      mdast-util-gfm-task-list-item: 2.0.0(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-mdx-expression@2.0.1:
+  mdast-util-mdx-expression@2.0.1(supports-color@8.1.1):
     dependencies:
       '@types/estree-jsx': 1.0.5
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-mdx-jsx@3.2.0:
+  mdast-util-mdx-jsx@3.2.0(supports-color@8.1.1):
     dependencies:
       '@types/estree-jsx': 1.0.5
       '@types/hast': 3.0.4
@@ -9301,7 +9263,7 @@ snapshots:
       '@types/unist': 3.0.3
       ccount: 2.0.1
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
       parse-entities: 4.0.2
       stringify-entities: 4.0.4
@@ -9310,23 +9272,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-mdx@3.0.0:
+  mdast-util-mdx@3.0.0(supports-color@8.1.1):
     dependencies:
-      mdast-util-from-markdown: 2.0.2
-      mdast-util-mdx-expression: 2.0.1
-      mdast-util-mdx-jsx: 3.2.0
-      mdast-util-mdxjs-esm: 2.0.1
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
+      mdast-util-mdx-expression: 2.0.1(supports-color@8.1.1)
+      mdast-util-mdx-jsx: 3.2.0(supports-color@8.1.1)
+      mdast-util-mdxjs-esm: 2.0.1(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-mdxjs-esm@2.0.1:
+  mdast-util-mdxjs-esm@2.0.1(supports-color@8.1.1):
     dependencies:
       '@types/estree-jsx': 1.0.5
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
       devlop: 1.1.0
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       mdast-util-to-markdown: 2.1.2
     transitivePeerDependencies:
       - supports-color
@@ -9366,15 +9328,15 @@ snapshots:
 
   mdn-data@2.0.14: {}
 
-  mdx-bundler@10.1.1(esbuild@0.25.12):
+  mdx-bundler@10.1.1(esbuild@0.25.12)(supports-color@8.1.1):
     dependencies:
       '@babel/runtime': 7.29.2
-      '@esbuild-plugins/node-resolve': 0.2.2(esbuild@0.25.12)
+      '@esbuild-plugins/node-resolve': 0.2.2(esbuild@0.25.12)(supports-color@8.1.1)
       '@fal-works/esbuild-plugin-global-externals': 2.1.2
-      '@mdx-js/esbuild': 3.1.1(esbuild@0.25.12)
+      '@mdx-js/esbuild': 3.1.1(esbuild@0.25.12)(supports-color@8.1.1)
       esbuild: 0.25.12
       gray-matter: 4.0.3
-      remark-frontmatter: 5.0.0
+      remark-frontmatter: 5.0.0(supports-color@8.1.1)
       remark-mdx-frontmatter: 4.0.0
       uuid: 9.0.1
       vfile: 6.0.3
@@ -9634,10 +9596,10 @@ snapshots:
 
   micromark-util-types@2.0.2: {}
 
-  micromark@4.0.2:
+  micromark@4.0.2(supports-color@8.1.1):
     dependencies:
       '@types/debug': 4.1.12
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@8.1.1)
       decode-named-character-reference: 1.2.0
       devlop: 1.1.0
       micromark-core-commonmark: 2.0.3
@@ -9710,7 +9672,7 @@ snapshots:
     optionalDependencies:
       '@rollup/rollup-linux-x64-gnu': 4.54.0
 
-  next@16.2.10(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  next@16.2.10(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(babel-plugin-macros@3.1.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
       '@next/env': 16.2.10
       '@swc/helpers': 0.5.15
@@ -9719,7 +9681,7 @@ snapshots:
       postcss: 8.4.31
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
-      styled-jsx: 5.1.6(@babel/core@7.29.7)(react@19.2.7)
+      styled-jsx: 5.1.6(@babel/core@7.29.7(supports-color@8.1.1))(babel-plugin-macros@3.1.0)(react@19.2.7)
     optionalDependencies:
       '@next/swc-darwin-arm64': 16.2.10
       '@next/swc-darwin-x64': 16.2.10
@@ -10094,11 +10056,11 @@ snapshots:
       indent-string: 4.0.0
       strip-indent: 3.0.0
 
-  rehype-recma@1.0.0:
+  rehype-recma@1.0.0(supports-color@8.1.1):
     dependencies:
       '@types/estree': 1.0.8
       '@types/hast': 3.0.4
-      hast-util-to-estree: 3.1.3
+      hast-util-to-estree: 3.1.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -10110,21 +10072,21 @@ snapshots:
       hast-util-to-string: 3.0.1
       unist-util-visit: 5.0.0
 
-  remark-frontmatter@5.0.0:
+  remark-frontmatter@5.0.0(supports-color@8.1.1):
     dependencies:
       '@types/mdast': 4.0.4
-      mdast-util-frontmatter: 2.0.1
+      mdast-util-frontmatter: 2.0.1(supports-color@8.1.1)
       micromark-extension-frontmatter: 2.0.0
       unified: 11.0.5
     transitivePeerDependencies:
       - supports-color
 
-  remark-gfm@4.0.1:
+  remark-gfm@4.0.1(supports-color@8.1.1):
     dependencies:
       '@types/mdast': 4.0.4
-      mdast-util-gfm: 3.1.0
+      mdast-util-gfm: 3.1.0(supports-color@8.1.1)
       micromark-extension-gfm: 3.0.0
-      remark-parse: 11.0.0
+      remark-parse: 11.0.0(supports-color@8.1.1)
       remark-stringify: 11.0.0
       unified: 11.0.5
     transitivePeerDependencies:
@@ -10139,17 +10101,17 @@ snapshots:
       unified: 11.0.5
       yaml: 2.9.0
 
-  remark-mdx@3.1.1:
+  remark-mdx@3.1.1(supports-color@8.1.1):
     dependencies:
-      mdast-util-mdx: 3.0.0
+      mdast-util-mdx: 3.0.0(supports-color@8.1.1)
       micromark-extension-mdxjs: 3.0.0
     transitivePeerDependencies:
       - supports-color
 
-  remark-parse@11.0.0:
+  remark-parse@11.0.0(supports-color@8.1.1):
     dependencies:
       '@types/mdast': 4.0.4
-      mdast-util-from-markdown: 2.0.2
+      mdast-util-from-markdown: 2.0.2(supports-color@8.1.1)
       micromark-util-types: 2.0.2
       unified: 11.0.5
     transitivePeerDependencies:
@@ -10173,9 +10135,9 @@ snapshots:
 
   require-from-string@2.0.2: {}
 
-  require-in-the-middle@8.0.1:
+  require-in-the-middle@8.0.1(supports-color@8.1.1):
     dependencies:
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@8.1.1)
       module-details-from-path: 1.0.4
     transitivePeerDependencies:
       - supports-color
@@ -10389,12 +10351,13 @@ snapshots:
     dependencies:
       inline-style-parser: 0.2.7
 
-  styled-jsx@5.1.6(@babel/core@7.29.7)(react@19.2.7):
+  styled-jsx@5.1.6(@babel/core@7.29.7(supports-color@8.1.1))(babel-plugin-macros@3.1.0)(react@19.2.7):
     dependencies:
       client-only: 0.0.1
       react: 19.2.7
     optionalDependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@8.1.1)
+      babel-plugin-macros: 3.1.0
 
   stylis@4.2.0: {}
 
@@ -10420,15 +10383,16 @@ snapshots:
 
   tapable@2.3.3: {}
 
-  terser-webpack-plugin@5.6.1(esbuild@0.25.12)(webpack@5.98.0(esbuild@0.25.12)):
+  terser-webpack-plugin@5.6.1(esbuild@0.25.12)(postcss@8.4.31)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.3
       terser: 5.49.0
-      webpack: 5.98.0(esbuild@0.25.12)
+      webpack: 5.98.0(esbuild@0.25.12)(postcss@8.4.31)
     optionalDependencies:
       esbuild: 0.25.12
+      postcss: 8.4.31
 
   terser@5.49.0:
     dependencies:
@@ -10589,9 +10553,9 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite-tsconfig-paths@6.1.1(typescript@6.0.3):
+  vite-tsconfig-paths@6.1.1(supports-color@8.1.1)(typescript@6.0.3):
     dependencies:
-      debug: 4.4.3
+      debug: 4.4.3(supports-color@8.1.1)
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@6.0.3)
     transitivePeerDependencies:
@@ -10641,7 +10605,7 @@ snapshots:
 
   webpack-sources@3.5.1: {}
 
-  webpack@5.98.0(esbuild@0.25.12):
+  webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.9
@@ -10663,7 +10627,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 4.3.3
       tapable: 2.3.3
-      terser-webpack-plugin: 5.6.1(esbuild@0.25.12)(webpack@5.98.0(esbuild@0.25.12))
+      terser-webpack-plugin: 5.6.1(esbuild@0.25.12)(postcss@8.4.31)(webpack@5.98.0(esbuild@0.25.12)(postcss@8.4.31))
       watchpack: 2.5.2
       webpack-sources: 3.5.1
     transitivePeerDependencies:
