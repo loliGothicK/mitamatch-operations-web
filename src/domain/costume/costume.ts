@@ -123,7 +123,7 @@ export type Costume = Omit<z.infer<typeof costumeSchema>, "jobSkills" | "special
 };
 
 export const costumeList: Costume[] = costumeData.data.map((costume) => {
-  const zodResult = fromThrowable(costumeSchema.parse)(costume);
+  const zodResult = fromThrowable((x) => costumeSchema.parse(x))(costume);
   if (zodResult.isErr()) {
     throw new Error(outdent`
         Costume parse failed with:

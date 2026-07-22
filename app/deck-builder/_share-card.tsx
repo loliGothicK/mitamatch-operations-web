@@ -6,7 +6,7 @@ import { alpha, useTheme } from "@mui/material/styles";
 import { blue, green, purple, red, yellow } from "@mui/material/colors";
 import { match } from "ts-pattern";
 
-type ShareMemoria = Unit["deck"][number] | Unit["legendaryDeck"][number];
+type ShareMemoria = Unit["deck"][number];
 const DECK_WIDTH = 600;
 
 const roleIconMap = {

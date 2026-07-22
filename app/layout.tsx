@@ -3,6 +3,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 import Layout from "@/components/layout/server";
 
 const siteName = "Mitamatch Operations";
@@ -57,7 +58,9 @@ export default async function RootLayout({
               'Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
           }}
         >
-          <Layout>{children}</Layout>
+          <AppRouterCacheProvider>
+            <Layout>{children}</Layout>
+          </AppRouterCacheProvider>
           <Analytics />
           <SpeedInsights />
         </body>

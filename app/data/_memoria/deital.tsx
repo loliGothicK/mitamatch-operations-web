@@ -167,7 +167,7 @@ function SkillCard({
               {skill.name}
             </Typography>
             {"sp" in skill && (
-              <Chip label={`消費MP ${skill.sp}`} sx={{ marginLeft: "auto", marginTop: 2 }} />
+              <Chip label={`消費MP ${String(skill.sp)}`} sx={{ marginLeft: "auto", marginTop: 2 }} />
             )}
           </Box>
           <Divider sx={{ margin: 2 }} />

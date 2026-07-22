@@ -80,29 +80,31 @@ const ColorModeContext = createContext({ toggleColorMode: () => {} });
 const AfterSlash = ({ sx, children }: PropsWithChildren<{ sx?: SxProps }>) => {
   return (
     <Box
-      sx={{
-        ...sx,
-        mr: 2,
-        position: "relative",
-        color: "parimary.main",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        // ここが重要：擬似要素で斜め部分を作る
-        "&::after": {
-          content: '""',
-          position: "absolute",
-          right: -20, // 角度に合わせて調整
-          width: 2, // 斜め部分の幅
-          height: "50%",
-          background: (theme) => theme.palette.secondary.main,
-          transform: "skewX(-20deg)", // 斜めにする角度
-          transformOrigin: "top",
-          zIndex: -1, // テキストの後ろへ
+      sx={[
+        {
+          mr: 2,
+          position: "relative",
+          color: "parimary.main",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          // ここが重要：擬似要素で斜め部分を作る
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            right: -20, // 角度に合わせて調整
+            width: 2, // 斜め部分の幅
+            height: "50%",
+            background: (theme) => theme.palette.secondary.main,
+            transform: "skewX(-20deg)", // 斜めにする角度
+            transformOrigin: "top",
+            zIndex: -1, // テキストの後ろへ
+          },
+          // Box自体は四角形なので、右側のはみ出しを制御するために必要ならz-index調整
+          zIndex: 1,
         },
-        // Box自体は四角形なので、右側のはみ出しを制御するために必要ならz-index調整
-        zIndex: 1,
-      }}
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     >
       {children}
     </Box>
@@ -154,7 +156,7 @@ const IconSelectWithAction = <T,>({
 
   return (
     <>
-      <Tooltip title={`選択中: ${options[selectedIndex]}`}>
+      <Tooltip title={`選択中: ${String(options[selectedIndex])}`}>
         <IconButton onClick={handleClick} size="small">
           <UnfoldMore />
         </IconButton>

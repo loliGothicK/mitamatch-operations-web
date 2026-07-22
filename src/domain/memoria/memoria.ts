@@ -125,7 +125,7 @@ export const memoriaList: Memoria[] = memoriaData.data
   .filter(({ cost }) => cost > 18)
   .map((memoria) => {
     const ap = getApplicativeValidation(getSemigroup<MitamaError>());
-    const zodResult = fromThrowable(memoriaSchema.parse)(memoria);
+    const zodResult = fromThrowable((x) => memoriaSchema.parse(x))(memoria);
     if (zodResult.isErr()) {
       throw new Error(outdent`
       Memoria parse failed with:

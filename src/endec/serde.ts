@@ -63,7 +63,7 @@ const jsonParseSafe = fromThrowable(
   `,
 );
 const unitParseSafe = fromThrowable(
-  encodedUnit.parse,
+  (x) => encodedUnit.parse(x),
   (e) => outdent`
     Error in \`JSON.parse\`:
 
@@ -110,7 +110,7 @@ export function decodeDeck(encoded: string): Result<Unit, string> {
         ...(restoreLegendaryDeckResult.isErr() ? restoreLegendaryDeckResult.error : []),
         ...(restoreDeckResult.isErr() ? restoreDeckResult.error : []),
       ];
-      return err(`${notFound} are not found in memoria.json`);
+      return err(`${notFound.join(", ")} are not found in memoria.json`);
     });
 }
 
@@ -180,7 +180,7 @@ type TimelineItem = z.infer<typeof timelineItemSchemaV2>;
 type Timeline = z.infer<typeof timelineSchema>;
 
 const timelineParseSafe = fromThrowable(
-  backwardsCompatibleSchema.parse,
+  (x) => backwardsCompatibleSchema.parse(x),
   (e) => outdent`
     Error in \`backwardsCompatibleSchema.parse\`:
 
@@ -207,7 +207,7 @@ const restoreTimeline = (data: Timeline): Result<OrderWithPic[], string> => {
     ),
   );
   return left.length > 0
-    ? err(`${left.map(({ id }) => id)} are not found in order.json`)
+    ? err(`${left.map(({ id }) => id).join(", ")} are not found in order.json`)
     : ok(
         right.map(({ order, xs: { pic, sub, delay } }) => ({
           ...order,
