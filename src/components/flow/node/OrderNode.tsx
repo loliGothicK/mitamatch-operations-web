@@ -1,4 +1,5 @@
-import { type FormEvent, type MouseEvent, useId, useState } from "react";
+import type React from "react";
+import { type MouseEvent, useId, useState } from "react";
 
 import { useAtom } from "jotai";
 
@@ -191,7 +192,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
         slotProps={{
           paper: {
             component: "form",
-            onSubmit: (event: FormEvent<HTMLDivElement>) => {
+            onSubmit: (event: React.SyntheticEvent<HTMLFormElement>) => {
               event.preventDefault();
               const formData = new FormData(event.currentTarget as unknown as HTMLFormElement);
               const formJson = Object.fromEntries(formData.entries());

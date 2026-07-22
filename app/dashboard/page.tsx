@@ -4,13 +4,11 @@ import { pipe } from "fp-ts/function";
 import { Meta } from "@/metadata/lens";
 import { Dashboard } from "@/dashboard/_parts/Layout";
 import { getUser } from "@/database";
-import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function Page() {
-  const clerkUser = await currentUser();
-  if (!clerkUser) redirect("/");
-  const user = await getUser(clerkUser.id);
+  const { userId } = await auth.protect();
+  const user = await getUser(userId);
   return <Dashboard user={user} />;
 }
 

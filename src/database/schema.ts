@@ -51,12 +51,10 @@ export const users = pgTable(
       .notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true, mode: "string" }),
   },
-  (table) => {
-    return {
-      // 索引定義: clerkUserIdに対してユニークインデックスを明示的に作成
-      clerkIdIndex: uniqueIndex("clerk_user_id_idx").on(table.clerkUserId),
-    };
-  },
+  (table) => [
+    // 索引定義: clerkUserIdに対してユニークインデックスを明示的に作成
+    uniqueIndex("clerk_user_id_idx").on(table.clerkUserId),
+  ],
 );
 
 export type User = typeof users.$inferSelect; // SELECT時の型
@@ -165,12 +163,10 @@ export const usersToMemoria = pgTable(
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
   },
-  (table) => {
-    return {
-      // 複合主キー: userIdとmemoriaIdの組み合わせを一意にする
-      pk: primaryKey({ columns: [table.userId, table.memoriaId] }),
-    };
-  },
+  (table) => [
+    // 複合主キー: userIdとmemoriaIdの組み合わせを一意にする
+    primaryKey({ columns: [table.userId, table.memoriaId] }),
+  ],
 );
 
 export const order = pgTable("order", {
@@ -191,10 +187,8 @@ export const usersToOrder = pgTable(
       .notNull()
       .references(() => order.id, { onDelete: "cascade" }),
   },
-  (table) => {
-    return {
-      // 複合主キー: userIdとorderIdの組み合わせを一意にする
-      pk: primaryKey({ columns: [table.userId, table.orderId] }),
-    };
-  },
+  (table) => [
+    // 複合主キー: userIdとorderIdの組み合わせを一意にする
+    primaryKey({ columns: [table.userId, table.orderId] }),
+  ],
 );
