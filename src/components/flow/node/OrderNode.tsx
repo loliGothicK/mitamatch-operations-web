@@ -192,9 +192,9 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
         slotProps={{
           paper: {
             component: "form",
-            onSubmit: (event: React.SyntheticEvent<HTMLFormElement>) => {
+            onSubmit: (event: React.SyntheticEvent) => {
               event.preventDefault();
-              const formData = new FormData(event.currentTarget as unknown as HTMLFormElement);
+              const formData = new FormData(event.currentTarget as HTMLFormElement);
               const formJson = Object.fromEntries(formData.entries());
               setPic(formJson.pic as string);
               setOrder(orderList.find((o) => o.name === formJson.order));

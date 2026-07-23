@@ -1,4 +1,5 @@
-import { data } from "@/domain/memoria/memoria.json";
+import memoriaData from "@/domain/memoria/memoria.json";
+const data = memoriaData.data;
 
 import { isDamageEffect, parseSkill } from "./skill";
 import { isLeft, right } from "fp-ts/Either";
@@ -16,7 +17,7 @@ const cardType = (type: number) =>
     .run();
 
 // integration test
-test.each(data)(".parseSkill($name)", (memoria) => {
+test.each(data)(".parseSkill($name)", (memoria: any) => {
   const skill = parseSkill({
     memoriaName: memoria.name,
     cardType: cardType(memoria.cardType),
@@ -39,9 +40,9 @@ test.each(data)(".parseSkill($name)", (memoria) => {
 });
 
 // test for 極大ダメージ
-test.each(data.filter(({ gvgSkill }) => gvgSkill.description.includes("極大ダメージ")))(
+test.each(data.filter(({ gvgSkill }: any) => gvgSkill.description.includes("極大ダメージ")))(
   ".parseSkill($name)/極大ダメージ",
-  (memoria) => {
+  (memoria: any) => {
     expect(
       parseSkill({
         memoriaName: memoria.name,

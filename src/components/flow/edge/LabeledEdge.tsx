@@ -112,9 +112,9 @@ export default function LabeledEdge({
         slotProps={{
           paper: {
             component: "form",
-            onSubmit: (event: React.SyntheticEvent<HTMLFormElement>) => {
+            onSubmit: (event: React.SyntheticEvent) => {
               event.preventDefault();
-              const formData = new FormData(event.currentTarget as unknown as HTMLFormElement);
+              const formData = new FormData(event.currentTarget as HTMLFormElement);
               const formJson = Object.fromEntries(formData.entries());
               setComment(formJson.comment as string);
               setDialogOpen(false);
