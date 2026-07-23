@@ -2,8 +2,10 @@
 
 import { Box, Tab, Tabs, Typography } from "@mui/material";
 import { ReactNode, SyntheticEvent, useState } from "react";
-import { User } from "@/types/user";
+import { UserData } from "@/types/user";
 import { Memoria } from "@/dashboard/_parts/Memoria";
+import { LegionManagement } from "@/dashboard/_parts/Legion";
+import { OrderRegistration } from "@/dashboard/_parts/Order";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -28,8 +30,9 @@ function a11yProps(index: number) {
   };
 }
 
-export function Dashboard({ user }: { user: User }) {
+export function Dashboard({ userData }: { userData: UserData }) {
   const [value, setValue] = useState(1);
+  const user = userData.user;
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(() => newValue);
@@ -46,6 +49,8 @@ export function Dashboard({ user }: { user: User }) {
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab key={"overview"} label={"overview"} {...a11yProps(0)} />
           <Tab key={"memoria"} label={"memoria"} {...a11yProps(1)} />
+          <Tab key={"order"} label={"order"} {...a11yProps(2)} />
+          <Tab key={"legion"} label={"legion"} {...a11yProps(3)} />
         </Tabs>
       </Box>
       <CustomTabPanel index={0} value={value} key={"overview"}>
@@ -56,10 +61,11 @@ export function Dashboard({ user }: { user: User }) {
       <CustomTabPanel index={1} value={value} key={"memoria"}>
         <Memoria user={user} />
       </CustomTabPanel>
-      <CustomTabPanel index={2} value={value} key={"legion"}>
-        <Typography variant="h6" component="div">
-          {"Legion"}
-        </Typography>
+      <CustomTabPanel index={2} value={value} key={"order"}>
+        <OrderRegistration user={user} />
+      </CustomTabPanel>
+      <CustomTabPanel index={3} value={value} key={"legion"}>
+        <LegionManagement userData={userData} />
       </CustomTabPanel>
     </Box>
   );

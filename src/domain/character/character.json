@@ -482,7 +482,7 @@
       "kanaName": "ましまもゆ",
       "firstName": "百由",
       "voiceActor": "水瀬いのり",
-      "legion": "なし",
+      "legion": "サングリーズル",
       "garden": "百合ヶ丘女学院高等学校",
       "grade": "2年",
       "birthday": "2026-09-19T00:00:00+09:00",
@@ -2158,7 +2158,7 @@
       "kanaName": "はやかわやひろ",
       "firstName": "弥宏",
       "voiceActor": "大西亜玖璃",
-      "legion": "なし",
+      "legion": "一柳隊",
       "garden": "百合ヶ丘女学院高等学校",
       "grade": "2年",
       "birthday": "2026-02-17T00:00:00+09:00",
@@ -2183,7 +2183,7 @@
       "kanaName": "とみながしん",
       "firstName": "真",
       "voiceActor": "小泉萌香",
-      "legion": "なし",
+      "legion": "一柳隊",
       "garden": "百合ヶ丘女学院高等学校",
       "grade": "2年",
       "birthday": "2026-08-06T00:00:00+09:00",
@@ -2765,6 +2765,31 @@
         },
         {
           "rune": "gyfu"
+        }
+      ]
+    },
+    {
+      "name": "アルテア・アレッサンドリーニ",
+      "kanaName": "Altea Alessandrini",
+      "firstName": "アルテア",
+      "voiceActor": "天麻ゆうき",
+      "legion": "第1飛空艇団ミカエル",
+      "garden": "",
+      "grade": "2年",
+      "birthday": "2026-08-31T00:00:00+09:00",
+      "bloodType": "A",
+      "favorites": "なし",
+      "hates": "甘すぎるお菓子",
+      "hobby": "サッカー、チェス、音楽鑑賞（クラシック）",
+      "introduction": "レギオン「第1飛空艇団ミカエル」の団長。組む相手を選り好みすることや敵を力でねじ伏せる戦闘スタイルから「メルクリウスの暴君」と呼ばれている。\\n御台場女学校の月岡椛と特に親しく、過去に「騎士としてミンネを捧げるなら椛のようなタイプ」と発言し物議を醸した。",
+      "keyColor": "FC93A9",
+      "subColor": "FCE592",
+      "bindRune": [
+        {
+          "rune": "rada"
+        },
+        {
+          "rune": "sygil"
         }
       ]
     }

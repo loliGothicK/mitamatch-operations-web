@@ -3,13 +3,13 @@ import { metadata as defaultMetadata } from "@/layout";
 import { pipe } from "fp-ts/function";
 import { Meta } from "@/metadata/lens";
 import { Dashboard } from "@/dashboard/_parts/Layout";
-import { getUser } from "@/database";
+import { getUserData } from "@/database";
 import { auth } from "@clerk/nextjs/server";
 
 export default async function Page() {
   const { userId } = await auth.protect();
-  const user = await getUser(userId);
-  return <Dashboard user={user} />;
+  const userData = await getUserData(userId);
+  return <Dashboard userData={userData} />;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -6,7 +6,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getListAction, updateMemoriaAction } from "@/_actions/memoria";
 import { Alert, Button, Divider, Grid, Paper, Snackbar, Stack, Typography } from "@mui/material";
 import { ImageWithFallback } from "@/components/image/ImageWithFallback";
-import { useMemo, useState, type MouseEvent } from "react";
+import { useMemo, useState, useEffect, type MouseEvent } from "react";
 import { formatCardType, UniqueMemoria, uniqueMemoriaList } from "@/domain/memoria/memoria";
 import { projector } from "@/functional/proj";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
@@ -74,10 +74,14 @@ export function Memoria(_props: Props) {
 
   const { data: registered } = useQuery({
     queryKey: ["memoria"],
-    queryFn: getListAction,
+    queryFn: () => getListAction(),
   });
 
-  const [edit, setEdit] = useState(registered || []);
+  const [edit, setEdit] = useState<{ id: string; name: string; limitBreak: number }[]>(registered || []);
+
+  useEffect(() => {
+    if (registered) setEdit(registered);
+  }, [registered]);
 
   const NotYetRegistered = useMemo(
     () => [

@@ -11,13 +11,14 @@ import {
   timelines,
   users,
   usersToMemoria,
+  usersToOrder,
 } from "@/database/schema";
 import { and, eq, inArray } from "drizzle-orm";
 import { Unit } from "@/domain/types";
 import { OrderWithPic } from "@/jotai/orderAtoms";
 import { sql } from "drizzle-orm";
 
-const db = drizzle({
+export const db = drizzle({
   client: neon(
     process.env.NODE_ENV === "development"
       ? process.env.POSTGRES_DEVELOP_BRANCH_URL!
@@ -319,4 +320,64 @@ export function deleteQueryPreset(id: string, userId: string) {
   return db
     .delete(queryPresets)
     .where(and(eq(queryPresets.id, id), eq(queryPresets.userId, userId)));
+}
+
+// --- Legion Management Functions ---
+
+// 1. Get all memoria owned by members of a legion (Admin only - authority check should be done in actions)
+export async function getLegionMemberMemoria(legionId: string) {
+  const members = await db
+    .select({
+      userId: users.id,
+      name: users.name,
+      memoriaId: usersToMemoria.memoriaId,
+      limitBreak: usersToMemoria.limitBreak,
+    })
+    .from(organizationMembers)
+    .innerJoin(users, eq(users.id, organizationMembers.userId))
+    .innerJoin(usersToMemoria, eq(usersToMemoria.userId, users.id))
+    .where(eq(organizationMembers.organizationId, legionId));
+  return members;
+}
+
+// 2. Get all orders owned by members of a legion
+export async function getLegionMemberOrders(legionId: string) {
+  const members = await db
+    .select({
+      userId: users.id,
+      name: users.name,
+      orderId: usersToOrder.orderId,
+    })
+    .from(organizationMembers)
+    .innerJoin(users, eq(users.id, organizationMembers.userId))
+    .innerJoin(usersToOrder, eq(usersToOrder.userId, users.id))
+    .where(eq(organizationMembers.organizationId, legionId));
+  return members;
+}
+
+
+export async function getOrdersByUserId(userId: string) {
+  return db
+    .select({
+      id: usersToOrder.orderId,
+    })
+    .from(usersToOrder)
+    .where(eq(usersToOrder.userId, userId));
+}
+
+export async function upsertOrder(userId: string, targetIds: number[]) {
+  if (targetIds.length === 0) return;
+
+  return db
+    .insert(usersToOrder)
+    .values(targetIds.map((id) => ({ userId, orderId: id })))
+    .onConflictDoNothing();
+}
+
+export async function deleteOrder(userId: string, targetIds: number[]) {
+  if (targetIds.length === 0) return;
+
+  return db
+    .delete(usersToOrder)
+    .where(and(eq(usersToOrder.userId, userId), inArray(usersToOrder.orderId, targetIds)));
 }

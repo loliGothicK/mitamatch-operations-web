@@ -192,3 +192,23 @@ export const usersToOrder = pgTable(
     primaryKey({ columns: [table.userId, table.orderId] }),
   ],
 );
+
+export const organizationInvites = pgTable("organization_invites", {
+  id: ulid("id")
+    .$defaultFn(() => genUlid())
+    .primaryKey()
+    .notNull(),
+  organizationId: ulid("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  userId: ulid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  status: varchar("status", { length: 20 }).notNull().default("pending"), // pending, accepted, declined
+  createdAt: timestamp("created_at", { precision: 3, mode: "string" })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updated_at", { precision: 3, mode: "string" }).notNull(),
+});
+
+

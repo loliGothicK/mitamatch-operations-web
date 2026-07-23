@@ -30,11 +30,13 @@ function a11yProps(index: number) {
   };
 }
 
+import { UserData } from "@/types/user";
+
 export function DeckBuilderPage({
-  user,
+  userData,
   signedIn,
 }: {
-  user: { id: string; name: string } | undefined;
+  userData: UserData | undefined;
   signedIn: boolean;
 }) {
   const [value, setValue] = useState(0);
@@ -76,7 +78,7 @@ export function DeckBuilderPage({
         </Box>
       </Box>
       <CustomTabPanel index={0} value={value} key={"untitled"}>
-        <DeckBuilder signedIn={signedIn} canPersistQueryPresets={!!user} />
+        <DeckBuilder signedIn={signedIn} userData={userData} />
       </CustomTabPanel>
       <CustomTabPanel index={1} value={value} key={"calculator"}>
         <Calculator />

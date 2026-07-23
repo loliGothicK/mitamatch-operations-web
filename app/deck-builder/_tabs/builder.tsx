@@ -100,6 +100,7 @@ import {
   swAtom,
   targetBeforeAtom,
   targetAfterAtom,
+  targetUserIdAtom,
   type Concentration,
   unitTitleAtom,
 } from "@/jotai/memoriaAtoms";
@@ -144,6 +145,7 @@ import {
   shouldResetDeckBuilderQueryForSw,
   validateMemoriaQuery,
 } from "@/domain/memoria/query";
+import { UserData } from "@/types/user";
 
 const COMMING_SOON = "/memoria/CommingSoon.jpeg";
 
@@ -1147,6 +1149,35 @@ type QueryPreset = {
   updatedAt: string;
 };
 
+export function MemberSwitcher({ userData }: { userData: UserData }) {
+  const [targetUserId, setTargetUserId] = useAtom(targetUserIdAtom);
+  
+  // Find all members from legions where the user is an admin
+  const adminLegions = userData.legions.filter(l => l.role === "org:admin");
+  const members = Array.from(new Map(
+    adminLegions.flatMap(l => l.members ? l.members : []).map(m => [m.userId, m])
+  ).values());
+
+  return (
+    <FormControl size="small" variant="standard" sx={{ minWidth: 120 }}>
+      <Select
+        value={targetUserId ?? "self"}
+        onChange={(e) => setTargetUserId(e.target.value === "self" ? undefined : e.target.value)}
+        displayEmpty
+      >
+        <MenuItem value="self">
+          <em>(Self)</em>
+        </MenuItem>
+        {members.map((m) => (
+          <MenuItem key={m.userId} value={m.userId}>
+            {m.name}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  );
+}
+
 function QueryModal({ signedIn, canPersist }: { signedIn: boolean; canPersist: boolean }) {
   const [query, setQuery] = useAtom(deckBuilderQueryAtom);
   const [ownedOnly, setOwnedOnly] = useAtom(ownedFilterAtom);
@@ -1782,11 +1813,12 @@ function SaveDeck() {
 
 export function DeckBuilder({
   signedIn,
-  canPersistQueryPresets,
+  userData,
 }: {
   signedIn: boolean;
-  canPersistQueryPresets: boolean;
+  userData: UserData | undefined;
 }) {
+  const canPersistQueryPresets = !!userData;
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setCompare] = useAtom(compareModeAtom);
@@ -1826,6 +1858,11 @@ export function DeckBuilder({
             <QueryModal signedIn={signedIn} canPersist={canPersistQueryPresets} />
             <QueryPresetsMenu signedIn={signedIn} canPersist={canPersistQueryPresets} />
           </RibbonGroup>
+          {userData && userData.legions.some(l => l.role === "org:admin") && (
+            <RibbonGroup label={"Legion"}>
+              <MemberSwitcher userData={userData} />
+            </RibbonGroup>
+          )}
         </Ribbon>
       </Box>
       <Grid

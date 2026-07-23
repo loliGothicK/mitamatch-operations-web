@@ -26,6 +26,7 @@ import {
 import HelpOutlined from "@mui/icons-material/HelpOutlined";
 import {
   alpha,
+  Autocomplete,
   Avatar,
   Box,
   Button,
@@ -160,13 +161,18 @@ function Info({ order }: { order: OrderWithPic }) {
   return <Typography variant="body1">{order.name}</Typography>;
 }
 
-function TimelineItem({ order }: { order: ComputedOrder }) {
+export const TimelineItem = ({ order, userData }: { order: ComputedOrder; userData?: UserData }) => {
   const [, setTimeline] = useAtom(timelineAtom);
   const { isDragging, setNodeRef, attributes, listeners, transform, transition } = useSortable({
     id: order.id,
   });
   const [open, setOpen] = useState(false);
   const uniqueId = useId();
+
+  // Get a list of all unique member names from all legions the user belongs to
+  const memberNames = Array.from(new Set(
+    userData?.legions.flatMap(l => l.members ? l.members.map(m => m.name) : []) || []
+  ));
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -303,24 +309,62 @@ function TimelineItem({ order }: { order: ComputedOrder }) {
             fullWidth
             variant="standard"
           />
-          <TextField
-            defaultValue={order.pic}
-            margin="dense"
-            id={`pic-${uniqueId}`}
-            name="pic"
-            label="PIC"
-            fullWidth
-            variant="standard"
-          />
-          <TextField
-            defaultValue={order.sub}
-            margin="dense"
-            id={`sub-${uniqueId}`}
-            name="sub"
-            label="Sub PIC"
-            fullWidth
-            variant="standard"
-          />
+          {memberNames.length > 0 ? (
+            <Autocomplete
+              freeSolo
+              options={memberNames}
+              defaultValue={order.pic}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  margin="dense"
+                  id={`pic-${uniqueId}`}
+                  name="pic"
+                  label="PIC"
+                  fullWidth
+                  variant="standard"
+                />
+              )}
+            />
+          ) : (
+            <TextField
+              defaultValue={order.pic}
+              margin="dense"
+              id={`pic-${uniqueId}`}
+              name="pic"
+              label="PIC"
+              fullWidth
+              variant="standard"
+            />
+          )}
+          {memberNames.length > 0 ? (
+            <Autocomplete
+              freeSolo
+              options={memberNames}
+              defaultValue={order.sub}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  margin="dense"
+                  id={`sub-${uniqueId}`}
+                  name="sub"
+                  label="Sub PIC"
+                  fullWidth
+                  variant="standard"
+                />
+              )}
+            />
+          ) : (
+            <TextField
+              defaultValue={order.sub}
+              margin="dense"
+              id={`sub-${uniqueId}`}
+              name="sub"
+              label="Sub PIC"
+              fullWidth
+              variant="standard"
+            />
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
@@ -331,7 +375,7 @@ function TimelineItem({ order }: { order: ComputedOrder }) {
   );
 }
 
-function Timeline() {
+function Timeline({ userData }: { userData?: UserData }) {
   const [, setTitle] = useAtom(timelineTitleAtom);
   const [timeline, setTimeline] = useAtom(timelineAtom);
   const params = useSearchParams();
@@ -378,7 +422,7 @@ function Timeline() {
         <List sx={{ width: "100%", maxWidth: "65vh", overflow: "auto" }}>
           {computedOrders.map((order) => (
             // TimelineItemに計算済みの start (wait開始時間) を渡す
-            <TimelineItem key={order.id} order={order} />
+            <TimelineItem key={order.id} order={order} userData={userData} />
           ))}
 
           {/* 最後の終了時間表示 */}
@@ -680,7 +724,9 @@ function ShareButton() {
   );
 }
 
-export function TimelineBuilderPage() {
+import { UserData } from "@/types/user";
+
+export function TimelineBuilderPage({ userData }: { userData?: UserData }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   const [, setPayed] = useAtom(payedAtom);
@@ -709,7 +755,7 @@ export function TimelineBuilderPage() {
           }}
         >
           <Suspense>
-            <Timeline />
+            <Timeline userData={userData} />
           </Suspense>
         </Container>
       </Grid>

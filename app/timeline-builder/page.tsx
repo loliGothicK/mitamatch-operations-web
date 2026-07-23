@@ -4,8 +4,13 @@ import { pipe } from "fp-ts/function";
 import { Meta } from "@/metadata/lens";
 import { TimelineBuilderPage } from "@/timeline-builder/_builder";
 
-export default function Page() {
-  return <TimelineBuilderPage />;
+import { currentUser } from "@clerk/nextjs/server";
+import { getUserData } from "@/database";
+
+export default async function Page() {
+  const clerkUser = await currentUser();
+  const userData = clerkUser ? await getUserData(clerkUser.id) : undefined;
+  return <TimelineBuilderPage userData={userData} />;
 }
 
 type Props = {

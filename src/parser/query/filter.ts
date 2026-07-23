@@ -123,7 +123,10 @@ export default function build<T>(
                 resolver[lhs.value as string].type === "string" &&
                 resolver[rhs.value as string].type === "string"
               ) {
-                return right((left: Lit | null, right: Lit | null) => String(left as string) + String(right as string));
+                return right(
+                  (left: Lit | null, right: Lit | null) =>
+                    String(left as string) + String(right as string),
+                );
               } else {
                 return bail("+", "Invalid operands for + operator.");
               }

@@ -16,29 +16,29 @@ allowBuilds:
   sharp: true
 minimumReleaseAgeExclude:
   - "@clerk/backend@3.7.1"
-  - '@clerk/nextjs@7.5.3 || 7.5.22'
+  - "@clerk/nextjs@7.5.3 || 7.5.22"
   - "@clerk/react@6.10.0"
   - "@clerk/shared@4.18.0"
   - "@content-collections/core@0.15.2"
-  - '@oxfmt/binding-android-arm-eabi@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-android-arm64@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-darwin-arm64@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-darwin-x64@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-freebsd-x64@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-arm-gnueabihf@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-arm-musleabihf@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-arm64-gnu@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-arm64-musl@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-ppc64-gnu@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-riscv64-gnu@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-riscv64-musl@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-s390x-gnu@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-x64-gnu@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-linux-x64-musl@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-openharmony-arm64@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-win32-arm64-msvc@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-win32-ia32-msvc@0.55.0 || 0.60.0'
-  - '@oxfmt/binding-win32-x64-msvc@0.55.0 || 0.60.0'
+  - "@oxfmt/binding-android-arm-eabi@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-android-arm64@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-darwin-arm64@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-darwin-x64@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-freebsd-x64@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-arm-gnueabihf@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-arm-musleabihf@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-arm64-gnu@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-arm64-musl@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-ppc64-gnu@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-riscv64-gnu@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-riscv64-musl@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-s390x-gnu@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-x64-gnu@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-linux-x64-musl@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-openharmony-arm64@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-win32-arm64-msvc@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-win32-ia32-msvc@0.55.0 || 0.60.0"
+  - "@oxfmt/binding-win32-x64-msvc@0.55.0 || 0.60.0"
   - "@sentry/core@10.58.0"
   - "@sentry/node-core@10.58.0"
   - "@sentry/node@10.58.0"
@@ -47,4 +47,4 @@ minimumReleaseAgeExclude:
   - "@sentry/server-utils@10.58.0"
   - happy-dom@20.10.4 || 20.11.1
   - oxfmt@0.55.0 || 0.60.0
-  - '@vitejs/plugin-react@6.0.4'
+  - "@vitejs/plugin-react@6.0.4"

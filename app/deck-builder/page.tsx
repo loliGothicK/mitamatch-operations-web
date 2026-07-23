@@ -4,13 +4,13 @@ import { metadata as defaultMetadata } from "@/layout";
 import { pipe } from "fp-ts/function";
 import { Meta } from "@/metadata/lens";
 import { currentUser } from "@clerk/nextjs/server";
-import { getUser } from "@/database";
+import { getUserData } from "@/database";
 
 export default async function Page() {
   const clerkUser = await currentUser();
-  const user = clerkUser ? await getUser(clerkUser.id) : undefined;
+  const userData = clerkUser ? await getUserData(clerkUser.id) : undefined;
 
-  return <DeckBuilderPage user={user} signedIn={!!clerkUser} />;
+  return <DeckBuilderPage userData={userData} signedIn={!!clerkUser} />;
 }
 
 type Props = {

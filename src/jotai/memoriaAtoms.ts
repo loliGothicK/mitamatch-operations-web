@@ -90,9 +90,11 @@ export const deckBuilderQueryAtom = atomWithStorage<string>(
     getOnInit: true,
   },
 );
-const owningAtom = atomWithQuery<{ id: string; name: string; limitBreak: number }[]>(() => ({
-  queryKey: ["memoria"],
-  queryFn: getListAction,
+export const targetUserIdAtom = atom<string | undefined>(undefined);
+
+const owningAtom = atomWithQuery<{ id: string; name: string; limitBreak: number }[]>((get) => ({
+  queryKey: ["memoria", get(targetUserIdAtom) ?? "self"],
+  queryFn: () => getListAction(get(targetUserIdAtom)),
 }));
 
 export const currentRoleFilterAtom = atom((get) => {

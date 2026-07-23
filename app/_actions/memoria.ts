@@ -3,13 +3,26 @@
 import { auth } from "@clerk/nextjs/server";
 import { deleteMemoria, getMemoriaByUserId, getUser, upsertMemoria } from "@/database";
 
-// クライアントコンポーネントの useQuery に渡すためのラッパー
-export async function getListAction() {
-  const { userId } = await auth();
-  if (!userId) return [];
-  const { id } = await getUser(userId);
+import { getUserData } from "@/database";
 
-  return getMemoriaByUserId(id);
+// クライアントコンポーネントの useQuery に渡すためのラッパー
+export async function getListAction(targetUserId?: string) {
+  const { userId: clerkUserId } = await auth();
+  if (!clerkUserId) return [];
+  const { id: internalUserId } = await getUser(clerkUserId);
+
+  const fetchId = targetUserId ?? internalUserId;
+
+  if (fetchId !== internalUserId) {
+    const callerData = await getUserData(clerkUserId);
+    // Check if there's any common legion where caller is admin
+    const isAdmin = callerData.legions.some(l => 
+      l.role === "org:admin" && l.members && l.members.some(m => m.userId === fetchId)
+    );
+    if (!isAdmin) throw new Error("Forbidden: Not an admin of a shared legion");
+  }
+
+  return getMemoriaByUserId(fetchId);
 }
 
 export async function updateMemoriaAction({

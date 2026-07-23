@@ -61,7 +61,7 @@ export default function Detail({ name }: { name: string }) {
 
   const index = characters.indexOf(name);
 
-  if (costumes.length !== 0 && character !== undefined) {
+  if (character !== undefined) {
     const dir = match(character.firstName)
       .with(
         P.union("ミリアム", "来夢", "幸恵", "百合亜", "聖恋", "佳世", "日葵"),

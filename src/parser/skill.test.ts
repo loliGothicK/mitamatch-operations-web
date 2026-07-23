@@ -24,19 +24,17 @@ test.each(data)(".parseSkill($name)", (memoria: any) => {
     skill: memoria.gvgSkill,
   });
 
-  describe("should be parsed without error", () => {
-    expect(skill).toEqual(right(expect.anything()));
-  });
+  // should be parsed without error
+  expect(skill).toEqual(right(expect.anything()));
 
   // for refinement
   if (isLeft(skill)) {
     return;
   }
 
-  describe("damage effect should exists only one exactly", () => {
-    const damageEffects = skill.right.effects.filter(isDamageEffect);
-    expect(damageEffects.length).toBe(["支援", "妨害", "回復"].includes(memoria.cardType) ? 0 : 1);
-  });
+  // damage effect should exists only one exactly
+  const damageEffects = skill.right.effects.filter(isDamageEffect);
+  expect(damageEffects.length).toBe(["支援", "妨害", "回復"].includes(cardType(memoria.cardType)) ? 0 : 1);
 });
 
 // test for 極大ダメージ

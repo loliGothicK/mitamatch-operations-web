@@ -3,26 +3,17 @@ import { parseAmount, parseStatus } from "@/parser/common";
 import { right, left } from "fp-ts/Either";
 
 describe("parseAmount", () => {
-  it.each(["小アップ", "小ダウン", "小ダメージ", "小回復"])(
-    'should parse "small" amount correctly',
-    (amount) => {
-      expect(parseAmount(amount)).toEqual(right("small"));
-    },
-  );
+  it.each(["小アップ", "小ダウン", "小ダメージ", "小回復"])('should parse "small" amount correctly', (amount) => {
+    expect(parseAmount(amount)).toEqual(right("small"));
+  });
 
-  it.each(["アップ", "ダウン", "ダメージ", "回復"])(
-    'should parse "medium" amount correctly',
-    (amount) => {
-      expect(parseAmount(amount)).toEqual(right("medium"));
-    },
-  );
+  it.each(["アップ", "ダウン", "ダメージ", "回復"])('should parse "medium" amount correctly', (amount) => {
+    expect(parseAmount(amount)).toEqual(right("medium"));
+  });
 
-  it.each(["大アップ", "大ダウン", "大ダメージ", "大回復"])(
-    'should parse "large" amount correctly',
-    (amount) => {
-      expect(parseAmount(amount)).toEqual(right("large"));
-    },
-  );
+  it.each(["大アップ", "大ダウン", "大ダメージ", "大回復"])('should parse "large" amount correctly', (amount) => {
+    expect(parseAmount(amount)).toEqual(right("large"));
+  });
 
   it.each(["特大アップ", "特大ダウン", "特大ダメージ", "特大回復"])(
     'should parse "extra-large" amount correctly',

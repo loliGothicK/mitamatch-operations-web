@@ -2,7 +2,13 @@
 
 import { Provider, getDefaultStore } from "jotai";
 import Footer from "@/components/Footer";
-import { Add, DarkMode, LightMode, UnfoldMore } from "@mui/icons-material";
+import {
+  Add,
+  DarkMode,
+  KeyboardArrowDown,
+  LightMode,
+  UnfoldMore,
+} from "@mui/icons-material";
 import {
   AppBar as MuiAppBar,
   Box,
@@ -19,6 +25,11 @@ import {
   Divider,
   Tooltip,
   ListItemIcon,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
 } from "@mui/material";
 import { createTheme, styled, useTheme } from "@mui/material/styles";
 import { SxProps, ThemeProvider, useMediaQuery } from "@mui/system";
@@ -28,6 +39,7 @@ import {
   useEffect,
   useMemo,
   useState,
+  startTransition,
   PropsWithChildren,
   useOptimistic,
   useCallback,
@@ -35,7 +47,7 @@ import {
   MouseEvent,
   ElementType,
 } from "react";
-import { redirect, usePathname } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { match } from "ts-pattern";
 import { darkTheme, lightTheme } from "@/theme/theme";
@@ -44,14 +56,15 @@ import PopupState, { bindMenu, bindTrigger } from "material-ui-popup-state";
 import { mainListItems, userListItems } from "@/components/home/listItems";
 import { default as ClerkUser } from "@/components/clerk/User";
 import Paper from "@mui/material/Paper";
+import { createLegionAction } from "@/_actions/legion";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Decks } from "@/components/project/Decks";
 import { SimpleTreeView } from "@mui/x-tree-view";
 import { Timelines } from "@/components/project/Timelines";
-import type { UserData, Legion, User } from "@/types/user";
+import type { UserData, Legion } from "@/types/user";
+import { NotificationsMenu } from "@/components/layout/NotificationsMenu";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -115,12 +128,12 @@ const IconSelectWithAction = <T,>({
   options,
   selectorAction,
   action,
-  onCreateAction,
+  onRequestCreate,
 }: {
   options: T[];
   selectorAction: (value: T) => Key;
   action: (value: T) => void;
-  onCreateAction?: (value: T) => void;
+  onRequestCreate?: () => void;
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -142,6 +155,9 @@ const IconSelectWithAction = <T,>({
 
   const handleCreateNew = () => {
     handleClose();
+    if (onRequestCreate) {
+      onRequestCreate();
+    }
   };
 
   const items = options.map(selectorAction).map((option, index) => (
@@ -180,7 +196,7 @@ const IconSelectWithAction = <T,>({
       >
         {/* 新規作成アクション */}
         {/* 重要: 選択状態(selected)を持たせない */}
-        {onCreateAction
+        {onRequestCreate
           ? [
               ...items,
               <Divider key={"divider"} sx={{ my: 0.5 }} />,
@@ -196,6 +212,8 @@ const IconSelectWithAction = <T,>({
     </>
   );
 };
+
+
 
 const FireNav = styled(List)<{ component?: ElementType }>({
   "& .MuiListItemButton-root": {
@@ -217,30 +235,41 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
   const [open, setOpen] = useState(true);
   const theme = useTheme();
   const [legion, setLegion] = useState<Legion | undefined>(userData?.legions[0]);
-  const [member, setMember] = useState<User | undefined>(userData?.user);
 
   const [optimisticLegion, addOptimistic] = useOptimistic(
     legion,
     (_, optimisticValue: Legion) => optimisticValue, // 単純な置換の例
   );
 
+  useEffect(() => {
+    setLegion(userData?.legions[0]);
+  }, [userData]);
+
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
+  const [newLegionName, setNewLegionName] = useState("");
+  const router = useRouter();
+
   const action = useCallback(
     async (newL: Legion) => {
-      addOptimistic(newL);
+      startTransition(() => {
+        addOptimistic(newL);
+      });
       setLegion(newL);
     },
     [addOptimistic],
   );
 
-  const onLegionCreate = useCallback(
-    async (newL: Legion) => {
-      // 1. 即座にUIを書き換える
-      addOptimistic(newL);
-      setLegion(newL);
-      // 2. Server Actionを実行（DB更新）
-    },
-    [addOptimistic],
-  );
+  const onLegionCreateSubmit = async () => {
+    if (!newLegionName) return;
+    try {
+      await createLegionAction(newLegionName);
+      setCreateDialogOpen(false);
+      setNewLegionName("");
+      router.refresh();
+    } catch (e) {
+      console.error("Failed to create legion", e);
+    }
+  };
 
   return (
     <Box
@@ -265,7 +294,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
             disableGutters={true}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              {userData && member ? (
+              {userData ? (
                 <>
                   <AfterSlash>
                     <Link href="/" sx={{ pr: 2 }}>
@@ -278,27 +307,20 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
                       />
                     </Link>
                   </AfterSlash>
-                  <AfterSlash sx={{ ml: 2 }}>
-                    <Typography variant="h6" component="div">
-                      {optimisticLegion?.name || "No Legion"}
-                    </Typography>
-                    <IconSelectWithAction
-                      options={userData.legions}
-                      selectorAction={(legion) => legion.name}
-                      action={action}
-                      onCreateAction={onLegionCreate}
-                    />
-                  </AfterSlash>
-                  <Typography variant="h6" component="div" sx={{ ml: 2 }}>
-                    {member.name}
+                    <AfterSlash sx={{ ml: 2, display: "flex", alignItems: "center" }}>
+                      <Typography variant="h6" component="div">
+                        {optimisticLegion?.name || "No Legion"}
+                      </Typography>
+                      <IconSelectWithAction
+                        options={userData.legions}
+                        selectorAction={(legion) => legion.name}
+                        action={action}
+                        onRequestCreate={() => setCreateDialogOpen(true)}
+                      />
+                      </AfterSlash>
+                    <Typography variant="h6" component="div" sx={{ ml: 2 }}>
+                    {userData.user.name}
                   </Typography>
-                  {legion?.members && (
-                    <IconSelectWithAction
-                      options={legion?.members}
-                      selectorAction={(member) => member.name}
-                      action={(member) => setMember({ id: member.userId, name: member.name })}
-                    />
-                  )}
                 </>
               ) : (
                 <>
@@ -354,6 +376,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
             <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
               {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
             </IconButton>
+            <NotificationsMenu />
             <ClerkUser />
           </Toolbar>
         </AppBar>
@@ -455,6 +478,28 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
         </Box>
       </Box>
       <Footer />
+
+      <Dialog open={createDialogOpen} onClose={() => setCreateDialogOpen(false)}>
+        <DialogTitle>レギオン（組織）の新規作成</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="レギオン名"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={newLegionName}
+            onChange={(e) => setNewLegionName(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setCreateDialogOpen(false)}>キャンセル</Button>
+          <Button onClick={onLegionCreateSubmit} disabled={!newLegionName} variant="contained">
+            作成
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
