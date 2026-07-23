@@ -1151,12 +1151,14 @@ type QueryPreset = {
 
 export function MemberSwitcher({ userData }: { userData: UserData }) {
   const [targetUserId, setTargetUserId] = useAtom(targetUserIdAtom);
-  
+
   // Find all members from legions where the user is an admin
-  const adminLegions = userData.legions.filter(l => l.role === "org:admin");
-  const members = Array.from(new Map(
-    adminLegions.flatMap(l => l.members ? l.members : []).map(m => [m.userId, m])
-  ).values());
+  const adminLegions = userData.legions.filter((l) => l.role === "org:admin");
+  const members = Array.from(
+    new Map(
+      adminLegions.flatMap((l) => (l.members ? l.members : [])).map((m) => [m.userId, m]),
+    ).values(),
+  );
 
   return (
     <FormControl size="small" variant="standard" sx={{ minWidth: 120 }}>
@@ -1858,7 +1860,7 @@ export function DeckBuilder({
             <QueryModal signedIn={signedIn} canPersist={canPersistQueryPresets} />
             <QueryPresetsMenu signedIn={signedIn} canPersist={canPersistQueryPresets} />
           </RibbonGroup>
-          {userData && userData.legions.some(l => l.role === "org:admin") && (
+          {userData && userData.legions.some((l) => l.role === "org:admin") && (
             <RibbonGroup label={"Legion"}>
               <MemberSwitcher userData={userData} />
             </RibbonGroup>

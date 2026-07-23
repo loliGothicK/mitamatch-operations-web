@@ -32,7 +32,7 @@ describe("InviteMemberDialog", () => {
 
     // Find the autocomplete input
     const input = screen.getByLabelText("Usernames");
-    
+
     // Simulate typing a username and pressing Enter to add it to the Autocomplete chip
     fireEvent.change(input, { target: { value: "testuser" } });
     fireEvent.keyDown(input, { key: "Enter", code: "Enter" });

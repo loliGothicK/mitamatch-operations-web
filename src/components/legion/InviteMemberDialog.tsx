@@ -26,7 +26,9 @@ export function InviteMemberDialog({
 }) {
   const [isPending, startTransition] = useTransition();
   const [usernames, setUsernames] = useState<string[]>([]);
-  const [results, setResults] = useState<{ username: string; success: boolean; error?: string }[] | null>(null);
+  const [results, setResults] = useState<
+    { username: string; success: boolean; error?: string }[] | null
+  >(null);
 
   const handleClose = () => {
     if (isPending) return;
@@ -37,7 +39,7 @@ export function InviteMemberDialog({
 
   const handleInvite = () => {
     if (usernames.length === 0) return;
-    
+
     startTransition(async () => {
       try {
         const res = await inviteUsersByUsernameAction(legionId, usernames);
@@ -53,9 +55,10 @@ export function InviteMemberDialog({
       <DialogTitle>Invite Members</DialogTitle>
       <DialogContent>
         <Typography variant="body2" sx={{ mb: 2 }}>
-          Enter the Clerk Usernames of the members you want to invite. You can enter multiple usernames.
+          Enter the Clerk Usernames of the members you want to invite. You can enter multiple
+          usernames.
         </Typography>
-        
+
         <Autocomplete
           multiple
           freeSolo
@@ -75,7 +78,9 @@ export function InviteMemberDialog({
 
         {results && (
           <Box sx={{ mt: 3 }}>
-            <Typography variant="subtitle2" sx={{ mb: 1 }}>Result:</Typography>
+            <Typography variant="subtitle2" sx={{ mb: 1 }}>
+              Result:
+            </Typography>
             {results.map((r, i) => (
               <Typography key={i} variant="body2" color={r.success ? "success.main" : "error.main"}>
                 {r.username}: {r.success ? "Invited successfully" : r.error}
@@ -89,7 +94,11 @@ export function InviteMemberDialog({
           {results ? "Close" : "Cancel"}
         </Button>
         {!results && (
-          <Button onClick={handleInvite} variant="contained" disabled={usernames.length === 0 || isPending}>
+          <Button
+            onClick={handleInvite}
+            variant="contained"
+            disabled={usernames.length === 0 || isPending}
+          >
             {isPending ? <CircularProgress size={24} /> : "Send Invites"}
           </Button>
         )}

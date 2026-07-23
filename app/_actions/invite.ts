@@ -70,7 +70,11 @@ export async function inviteUsersByUsernameAction(legionId: string, usernames: s
         .limit(1);
 
       if (internalUsers.length === 0) {
-        results.push({ username, success: false, error: "User has not registered in this app yet" });
+        results.push({
+          username,
+          success: false,
+          error: "User has not registered in this app yet",
+        });
         continue;
       }
       const targetInternalUserId = internalUsers[0].id;
@@ -79,11 +83,20 @@ export async function inviteUsersByUsernameAction(legionId: string, usernames: s
       const existingMembers = await db
         .select()
         .from(organizationMembers)
-        .where(and(eq(organizationMembers.organizationId, legionId), eq(organizationMembers.userId, targetInternalUserId)))
+        .where(
+          and(
+            eq(organizationMembers.organizationId, legionId),
+            eq(organizationMembers.userId, targetInternalUserId),
+          ),
+        )
         .limit(1);
 
       if (existingMembers.length > 0) {
-        results.push({ username, success: false, error: "User is already a member of this legion" });
+        results.push({
+          username,
+          success: false,
+          error: "User is already a member of this legion",
+        });
         continue;
       }
 
@@ -95,8 +108,8 @@ export async function inviteUsersByUsernameAction(legionId: string, usernames: s
           and(
             eq(organizationInvites.organizationId, legionId),
             eq(organizationInvites.userId, targetInternalUserId),
-            eq(organizationInvites.status, "pending")
-          )
+            eq(organizationInvites.status, "pending"),
+          ),
         )
         .limit(1);
 
@@ -162,18 +175,21 @@ export async function acceptInviteAction(inviteId: string) {
     .from(users)
     .where(eq(users.clerkUserId, userId))
     .limit(1);
-    
+
   if (!internalUser.length) throw new Error("User not found");
 
   const invite = await db
     .select()
     .from(organizationInvites)
-    .where(and(eq(organizationInvites.id, inviteId), eq(organizationInvites.userId, internalUser[0].id)))
+    .where(
+      and(eq(organizationInvites.id, inviteId), eq(organizationInvites.userId, internalUser[0].id)),
+    )
     .limit(1);
 
   if (!invite.length) throw new Error("Invite not found");
 
-  await db.update(organizationInvites)
+  await db
+    .update(organizationInvites)
     .set({ status: "accepted" })
     .where(eq(organizationInvites.id, inviteId));
 
@@ -196,12 +212,15 @@ export async function declineInviteAction(inviteId: string) {
     .from(users)
     .where(eq(users.clerkUserId, userId))
     .limit(1);
-    
+
   if (!internalUser.length) throw new Error("User not found");
 
-  await db.update(organizationInvites)
+  await db
+    .update(organizationInvites)
     .set({ status: "declined" })
-    .where(and(eq(organizationInvites.id, inviteId), eq(organizationInvites.userId, internalUser[0].id)));
+    .where(
+      and(eq(organizationInvites.id, inviteId), eq(organizationInvites.userId, internalUser[0].id)),
+    );
 
   revalidatePath("/");
   return { success: true };

@@ -161,7 +161,13 @@ function Info({ order }: { order: OrderWithPic }) {
   return <Typography variant="body1">{order.name}</Typography>;
 }
 
-export const TimelineItem = ({ order, userData }: { order: ComputedOrder; userData?: UserData }) => {
+export const TimelineItem = ({
+  order,
+  userData,
+}: {
+  order: ComputedOrder;
+  userData?: UserData;
+}) => {
   const [, setTimeline] = useAtom(timelineAtom);
   const { isDragging, setNodeRef, attributes, listeners, transform, transition } = useSortable({
     id: order.id,
@@ -170,9 +176,11 @@ export const TimelineItem = ({ order, userData }: { order: ComputedOrder; userDa
   const uniqueId = useId();
 
   // Get a list of all unique member names from all legions the user belongs to
-  const memberNames = Array.from(new Set(
-    userData?.legions.flatMap(l => l.members ? l.members.map(m => m.name) : []) || []
-  ));
+  const memberNames = Array.from(
+    new Set(
+      userData?.legions.flatMap((l) => (l.members ? l.members.map((m) => m.name) : [])) || [],
+    ),
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -373,7 +381,7 @@ export const TimelineItem = ({ order, userData }: { order: ComputedOrder; userDa
       </Dialog>
     </div>
   );
-}
+};
 
 function Timeline({ userData }: { userData?: UserData }) {
   const [, setTitle] = useAtom(timelineTitleAtom);

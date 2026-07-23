@@ -355,7 +355,6 @@ export async function getLegionMemberOrders(legionId: string) {
   return members;
 }
 
-
 export async function getOrdersByUserId(userId: string) {
   return db
     .select({

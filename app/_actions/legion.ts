@@ -1,12 +1,7 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
-import {
-  getUserData,
-  getLegionMemberMemoria,
-  getLegionMemberOrders,
-  db,
-} from "@/database";
+import { getUserData, getLegionMemberMemoria, getLegionMemberOrders, db } from "@/database";
 import { organization, organizationMembers, users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 
@@ -24,8 +19,6 @@ async function requireLegionAdmin(legionId: string) {
   return userData.user;
 }
 
-
-
 export async function getLegionMemberMemoriaAction(legionId: string) {
   await requireLegionAdmin(legionId);
   return getLegionMemberMemoria(legionId);
@@ -35,7 +28,6 @@ export async function getLegionMemberOrdersAction(legionId: string) {
   await requireLegionAdmin(legionId);
   return getLegionMemberOrders(legionId);
 }
-
 
 export async function createLegionAction(name: string) {
   const { userId: clerkUserId } = await auth();
@@ -51,10 +43,7 @@ export async function createLegionAction(name: string) {
   if (!user.length) throw new Error("User not found in database");
   const internalUserId = user[0].id;
 
-  const newOrg = await db
-    .insert(organization)
-    .values({ name })
-    .returning({ id: organization.id });
+  const newOrg = await db.insert(organization).values({ name }).returning({ id: organization.id });
 
   if (!newOrg.length) throw new Error("Failed to create organization");
   const orgId = newOrg[0].id;

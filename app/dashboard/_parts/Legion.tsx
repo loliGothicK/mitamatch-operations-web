@@ -16,14 +16,11 @@ import { useState } from "react";
 import { InviteMemberDialog } from "@/components/legion/InviteMemberDialog";
 
 export function LegionManagement({ userData }: { userData: UserData }) {
-  const [selectedLegionId, setSelectedLegionId] = useState<string>(
-    userData.legions[0]?.id || "",
-  );
+  const [selectedLegionId, setSelectedLegionId] = useState<string>(userData.legions[0]?.id || "");
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
 
   const selectedLegion = userData.legions.find((l) => l.id === selectedLegionId);
   const isAdmin = selectedLegion?.role === "org:admin";
-
 
   if (userData.legions.length === 0) {
     return (
@@ -85,7 +82,8 @@ export function LegionManagement({ userData }: { userData: UserData }) {
                   Invite Member
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                  Invite members using their Clerk Usernames. You can invite multiple members at once.
+                  Invite members using their Clerk Usernames. You can invite multiple members at
+                  once.
                 </Typography>
                 <Button variant="contained" onClick={() => setInviteDialogOpen(true)}>
                   Open Invite Menu

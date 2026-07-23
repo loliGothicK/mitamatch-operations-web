@@ -6,9 +6,7 @@ import { orderList } from "@/domain/order/order";
 
 // 1. Server Actionsのモック
 vi.mock("@/_actions/order", () => ({
-  getOrderListAction: vi.fn(async () => [
-    { id: 1 },
-  ]),
+  getOrderListAction: vi.fn(async () => [{ id: 1 }]),
   updateOrderAction: vi.fn(async () => {}),
 }));
 
@@ -18,7 +16,7 @@ const renderComponent = () =>
   render(
     <QueryClientProvider client={queryClient}>
       <OrderRegistration user={{ id: "test", name: "test", image: "" }} />
-    </QueryClientProvider>
+    </QueryClientProvider>,
   );
 
 test("OrderRegistration - renders without crashing", async () => {
@@ -38,7 +36,7 @@ test("OrderRegistration - shows only paid orders and handles clicking", async ()
   expect(firstOrderImage.length).toBeGreaterThan(0);
 
   fireEvent.click(firstOrderImage[0]);
-  
+
   expect(await screen.findAllByText(paidOrders[0].name)).toBeDefined();
   expect(screen.getByText("効果")).toBeInTheDocument();
   expect(screen.getByText("説明")).toBeInTheDocument();

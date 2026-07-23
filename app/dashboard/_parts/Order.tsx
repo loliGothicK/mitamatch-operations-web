@@ -120,9 +120,7 @@ export function OrderRegistration(_props: Props) {
           <Paper sx={{ minHeight: "80vh", width: "100%", display: "flex", flexWrap: "wrap" }}>
             {info && (
               <Stack direction={"column"} sx={{ p: 2 }}>
-                <Typography variant={"subtitle1"}>
-                  {info.name}
-                </Typography>
+                <Typography variant={"subtitle1"}>{info.name}</Typography>
                 <ImageWithFallback
                   key={info.id}
                   src={`/order/${info.name}.png`}

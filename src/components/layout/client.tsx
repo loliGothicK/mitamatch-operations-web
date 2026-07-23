@@ -2,13 +2,7 @@
 
 import { Provider, getDefaultStore } from "jotai";
 import Footer from "@/components/Footer";
-import {
-  Add,
-  DarkMode,
-  KeyboardArrowDown,
-  LightMode,
-  UnfoldMore,
-} from "@mui/icons-material";
+import { Add, DarkMode, KeyboardArrowDown, LightMode, UnfoldMore } from "@mui/icons-material";
 import {
   AppBar as MuiAppBar,
   Box,
@@ -213,8 +207,6 @@ const IconSelectWithAction = <T,>({
   );
 };
 
-
-
 const FireNav = styled(List)<{ component?: ElementType }>({
   "& .MuiListItemButton-root": {
     paddingLeft: 24,
@@ -307,18 +299,18 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
                       />
                     </Link>
                   </AfterSlash>
-                    <AfterSlash sx={{ ml: 2, display: "flex", alignItems: "center" }}>
-                      <Typography variant="h6" component="div">
-                        {optimisticLegion?.name || "No Legion"}
-                      </Typography>
-                      <IconSelectWithAction
-                        options={userData.legions}
-                        selectorAction={(legion) => legion.name}
-                        action={action}
-                        onRequestCreate={() => setCreateDialogOpen(true)}
-                      />
-                      </AfterSlash>
-                    <Typography variant="h6" component="div" sx={{ ml: 2 }}>
+                  <AfterSlash sx={{ ml: 2, display: "flex", alignItems: "center" }}>
+                    <Typography variant="h6" component="div">
+                      {optimisticLegion?.name || "No Legion"}
+                    </Typography>
+                    <IconSelectWithAction
+                      options={userData.legions}
+                      selectorAction={(legion) => legion.name}
+                      action={action}
+                      onRequestCreate={() => setCreateDialogOpen(true)}
+                    />
+                  </AfterSlash>
+                  <Typography variant="h6" component="div" sx={{ ml: 2 }}>
                     {userData.user.name}
                   </Typography>
                 </>

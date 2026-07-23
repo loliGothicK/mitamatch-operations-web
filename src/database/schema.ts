@@ -210,5 +210,3 @@ export const organizationInvites = pgTable("organization_invites", {
     .notNull(),
   updatedAt: timestamp("updated_at", { precision: 3, mode: "string" }).notNull(),
 });
-
-

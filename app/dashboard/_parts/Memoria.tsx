@@ -77,7 +77,9 @@ export function Memoria(_props: Props) {
     queryFn: () => getListAction(),
   });
 
-  const [edit, setEdit] = useState<{ id: string; name: string; limitBreak: number }[]>(registered || []);
+  const [edit, setEdit] = useState<{ id: string; name: string; limitBreak: number }[]>(
+    registered || [],
+  );
 
   useEffect(() => {
     if (registered) setEdit(registered);

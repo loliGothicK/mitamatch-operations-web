@@ -15,7 +15,11 @@ vi.mock("@/_actions/legion", () => ({
   createLegionAction: vi.fn(),
 }));
 
-import { getPendingInvitesAction, acceptInviteAction, declineInviteAction } from "@/_actions/invite";
+import {
+  getPendingInvitesAction,
+  acceptInviteAction,
+  declineInviteAction,
+} from "@/_actions/invite";
 import { NotificationsMenu } from "./NotificationsMenu";
 
 describe("NotificationsMenu", () => {
@@ -36,7 +40,7 @@ describe("NotificationsMenu", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <NotificationsMenu />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // Wait for the query to finish (badge should not display a number if 0, depending on implementation, but let's check the bell button)
@@ -62,7 +66,7 @@ describe("NotificationsMenu", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <NotificationsMenu />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // Open menu
@@ -98,7 +102,7 @@ describe("NotificationsMenu", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <NotificationsMenu />
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     // Open menu

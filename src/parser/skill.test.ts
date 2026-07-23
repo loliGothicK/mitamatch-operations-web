@@ -34,7 +34,9 @@ test.each(data)(".parseSkill($name)", (memoria: any) => {
 
   // damage effect should exists only one exactly
   const damageEffects = skill.right.effects.filter(isDamageEffect);
-  expect(damageEffects.length).toBe(["支援", "妨害", "回復"].includes(cardType(memoria.cardType)) ? 0 : 1);
+  expect(damageEffects.length).toBe(
+    ["支援", "妨害", "回復"].includes(cardType(memoria.cardType)) ? 0 : 1,
+  );
 });
 
 // test for 極大ダメージ

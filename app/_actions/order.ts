@@ -12,8 +12,8 @@ export async function getOrderListAction(targetUserId?: string) {
 
   if (fetchId !== internalUserId) {
     const callerData = await getUserData(clerkUserId);
-    const isAdmin = callerData.legions.some(l => 
-      l.role === "org:admin" && l.members && l.members.some(m => m.userId === fetchId)
+    const isAdmin = callerData.legions.some(
+      (l) => l.role === "org:admin" && l.members && l.members.some((m) => m.userId === fetchId),
     );
     if (!isAdmin) throw new Error("Forbidden: Not an admin of a shared legion");
   }
