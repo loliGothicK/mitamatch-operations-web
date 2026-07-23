@@ -9,9 +9,10 @@ import {
   Button,
   Autocomplete,
   TextField,
-  Box,
   Typography,
   CircularProgress,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { inviteUsersByUsernameAction } from "@/_actions/invite";
 
@@ -26,14 +27,20 @@ export function InviteMemberDialog({
 }) {
   const [isPending, startTransition] = useTransition();
   const [usernames, setUsernames] = useState<string[]>([]);
-  const [results, setResults] = useState<
-    { username: string; success: boolean; error?: string }[] | null
-  >(null);
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "error";
+  }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
   const handleClose = () => {
     if (isPending) return;
     setUsernames([]);
-    setResults(null);
+    setSnackbar({ ...snackbar, open: false });
     onClose();
   };
 
@@ -43,9 +50,29 @@ export function InviteMemberDialog({
     startTransition(async () => {
       try {
         const res = await inviteUsersByUsernameAction(legionId, usernames);
-        setResults(res.results);
+        const successes = res.results.filter((r) => r.success);
+        const failures = res.results.filter((r) => !r.success);
+
+        if (failures.length > 0) {
+          const errorMsg = failures.map((f) => `${f.username} (${f.error})`).join(", ");
+          setSnackbar({
+            open: true,
+            message: `Failed for some users: ${errorMsg}`,
+            severity: "error",
+          });
+        } else {
+          setSnackbar({
+            open: true,
+            message: `Successfully invited ${successes.length} user(s).`,
+            severity: "success",
+          });
+          // Close dialog after successful invite
+          setTimeout(() => {
+            handleClose();
+          }, 1500);
+        }
       } catch (e: any) {
-        setResults([{ username: "System", success: false, error: e.message }]);
+        setSnackbar({ open: true, message: e.message, severity: "error" });
       }
     });
   };
@@ -65,7 +92,7 @@ export function InviteMemberDialog({
           options={[] as string[]}
           value={usernames}
           onChange={(_, newValue) => setUsernames(newValue)}
-          disabled={isPending || results !== null}
+          disabled={isPending}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -75,34 +102,34 @@ export function InviteMemberDialog({
             />
           )}
         />
-
-        {results && (
-          <Box sx={{ mt: 3 }}>
-            <Typography variant="subtitle2" sx={{ mb: 1 }}>
-              Result:
-            </Typography>
-            {results.map((r, i) => (
-              <Typography key={i} variant="body2" color={r.success ? "success.main" : "error.main"}>
-                {r.username}: {r.success ? "Invited successfully" : r.error}
-              </Typography>
-            ))}
-          </Box>
-        )}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} disabled={isPending}>
-          {results ? "Close" : "Cancel"}
+          Cancel
         </Button>
-        {!results && (
-          <Button
-            onClick={handleInvite}
-            variant="contained"
-            disabled={usernames.length === 0 || isPending}
-          >
-            {isPending ? <CircularProgress size={24} /> : "Send Invites"}
-          </Button>
-        )}
+        <Button
+          onClick={handleInvite}
+          variant="contained"
+          disabled={usernames.length === 0 || isPending}
+        >
+          {isPending ? <CircularProgress size={24} /> : "Invite"}
+        </Button>
       </DialogActions>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Dialog>
   );
 }

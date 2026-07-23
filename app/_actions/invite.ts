@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server";
-import { db, getUserData } from "@/database";
-import { organizationInvites, users, organization, organizationMembers } from "@/database/schema";
-import { and, eq } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
+import {auth, clerkClient} from "@clerk/nextjs/server";
+import {db, getUserData} from "@/database";
+import {organization, organizationInvites, organizationMembers, users} from "@/database/schema";
+import {and, eq} from "drizzle-orm";
+import {revalidatePath} from "next/cache";
 
 // ユーザーがAdminであるかチェック
 async function requireLegionAdmin(legionId: string) {
@@ -42,8 +42,6 @@ export async function inviteUserAction(legionId: string, targetInternalUserId: s
 
   return { success: true };
 }
-
-import { clerkClient } from "@clerk/nextjs/server";
 
 export async function inviteUsersByUsernameAction(legionId: string, usernames: string[]) {
   await requireLegionAdmin(legionId);
@@ -124,7 +122,7 @@ export async function inviteUsersByUsernameAction(legionId: string, usernames: s
         userId: targetInternalUserId,
         status: "pending",
         updatedAt: new Date().toISOString(),
-      });
+      }).returning();
 
       results.push({ username, success: true });
     } catch (e: any) {
@@ -147,7 +145,7 @@ export async function getPendingInvitesAction() {
 
   if (internalUser.length === 0) return [];
 
-  const invites = await db
+  return await db
     .select({
       id: organizationInvites.id,
       organizationId: organization.id,
@@ -162,8 +160,6 @@ export async function getPendingInvitesAction() {
         eq(organizationInvites.status, "pending"),
       ),
     );
-
-  return invites;
 }
 
 export async function acceptInviteAction(inviteId: string) {
@@ -191,13 +187,14 @@ export async function acceptInviteAction(inviteId: string) {
   await db
     .update(organizationInvites)
     .set({ status: "accepted" })
-    .where(eq(organizationInvites.id, inviteId));
+    .where(eq(organizationInvites.id, inviteId))
+    .returning();
 
   await db.insert(organizationMembers).values({
     organizationId: invite[0].organizationId,
     userId: internalUser[0].id,
     role: "org:member",
-  });
+  }).returning();
 
   revalidatePath("/");
   return { success: true };
