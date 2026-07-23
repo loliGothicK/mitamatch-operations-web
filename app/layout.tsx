@@ -50,7 +50,7 @@ export default async function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
+    <ClerkProvider>
       <html lang="ja">
         <body
           style={{
