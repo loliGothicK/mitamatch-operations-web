@@ -116,8 +116,6 @@ import { match } from "ts-pattern";
 import { Lenz } from "@/domain/lenz";
 import { isStackEffect } from "@/parser/skill";
 import { Calculator } from "@/deck-builder/_tabs/calculator";
-import type { ImageProps } from "next/dist/shared/lib/get-img-props";
-import type { StrictOmit } from "ts-essentials";
 import { isLeft } from "fp-ts/Either";
 import { useAsync } from "react-use";
 import { ULID, ulid } from "ulid";
@@ -146,8 +144,7 @@ import {
   validateMemoriaQuery,
 } from "@/domain/memoria/query";
 import { UserData } from "@/types/user";
-
-const COMMING_SOON = "/memoria/CommingSoon.jpeg";
+import { MemoriaIcon } from "@/components/image/MemoriaIcon";
 
 const getUnitMemorias = (
   legendaryDeck: MemoriaWithConcentration[],
@@ -295,31 +292,6 @@ export function ConcentrationIcon({
   );
 }
 
-function MemoriaImage({
-  name,
-  ...option
-}: { name: Memoria["name"] } & StrictOmit<
-  ImageProps,
-  "src" | "alt" | "width" | "height" | "onError"
->) {
-  const [imageSource, setImageSource] = useState(`/memoria/${name.short}.png`);
-
-  return (
-    <Image
-      src={imageSource}
-      alt={name.full}
-      width={100}
-      height={100}
-      onError={() => {
-        if (imageSource !== COMMING_SOON) {
-          setImageSource(COMMING_SOON);
-        }
-      }}
-      {...option}
-    />
-  );
-}
-
 function MemoriaItem({
   memoria,
   remove,
@@ -437,8 +409,8 @@ function MemoriaItem({
               placement={"top"}
               arrow
             >
-              <MemoriaImage
-                name={memoria.name}
+              <MemoriaIcon
+                memoria={memoria}
                 placeholder={"blur"}
                 blurDataURL={toBase64(skeleton(100, 100))}
                 onContextMenu={onContextMenu ? undefined : handleContextMenu}
@@ -973,7 +945,7 @@ function VirtualizedList() {
                   position: "absolute",
                   left: 0,
                   bgcolor: "rgba(0, 0, 0, 0.2)",
-                  zIndex: 1,
+                  zIndex: 5,
                 }}
                 aria-label="add"
                 onClick={() => handleAddMemoria(index)}
@@ -993,7 +965,7 @@ function VirtualizedList() {
                       concentration={data[index].concentration}
                       handleConcentration={true}
                     />
-                    <MemoriaImage name={data[index].name} preload={true} />
+                    <MemoriaIcon memoria={data[index]} preload={true} />
                   </Box>
                 </CardMedia>
               </Tooltip>

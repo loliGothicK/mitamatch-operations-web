@@ -200,7 +200,7 @@ export default function Detail({ name }: { name: string }) {
                   <CardMedia
                     component="img"
                     sx={{ width: 150 }}
-                    image={`/costume/icon/${dir}/${Lenz.costume.general.name.normalized.job.get(costume)}.jpg`}
+                    image={`/costume/icon/${costume.uniqueId}.png`}
                     alt={name}
                   />
                 </Link>

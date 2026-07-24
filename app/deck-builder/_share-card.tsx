@@ -109,7 +109,7 @@ function MemoriaCard({ memoria }: { memoria: ShareMemoria }) {
         <ConcentrationBadge concentration={memoria.concentration} />
         <Box
           component="img"
-          src={`/memoria/${memoria.name.short}.png`}
+          src={`/memoria/${memoria.id}.png`}
           alt={memoria.name.full}
           sx={{
             width: 100,

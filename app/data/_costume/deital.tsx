@@ -172,10 +172,7 @@ function Basic({ costume }: { costume: Costume }) {
       <CardMedia
         component="img"
         sx={{ width: 150 }}
-        image={`/costume/icon/${Lenz.costume.general.name.lily.get(costume)}/${Lenz.costume.general.name.job
-          .get(costume)
-          .replace("*", "")
-          .replace(/\((.+)\/(.+)\)/g, "($1)($2)")}.jpg`}
+        image={`/costume/icon/${costume.uniqueId}.png`}
         alt="Live from space album cover"
       />
       <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -410,7 +407,7 @@ export default function Deital({ lily, job }: { lily: string; job: string }) {
         </Grid>
         <Grid size={4}>
           <Image
-            src={`/costume/full/${lily}/${job}.png`}
+            src={`/costume/standing/${costume.uniqueId}.png`}
             alt={`${lily}/${job}`}
             width={750}
             height={1300}

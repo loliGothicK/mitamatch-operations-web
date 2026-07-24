@@ -92,7 +92,7 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
           sx={{ justifyContent: "flex-start", alignItems: "center" }}
         >
           <Image
-            src={`/memoria/${data[0].name.short}.png`}
+            src={`/memoria/${data[0].uniqueId}.png`}
             alt={data[0].name.short}
             width={120}
             height={120}

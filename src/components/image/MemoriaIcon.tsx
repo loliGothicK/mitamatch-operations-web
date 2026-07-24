@@ -1,63 +1,13 @@
 import type { Memoria } from "@/domain/memoria/memoria";
-import { match } from "ts-pattern";
 import Image from "next/image";
-import { Avatar, Box } from "@mui/material";
-import { blue, green, purple, red, yellow } from "@mui/material/colors";
+import { Box } from "@mui/material";
 import { ImageWithFallback } from "@/components/image/ImageWithFallback";
 import { ImageProps } from "next/dist/shared/lib/get-img-props";
 import { StrictOmit } from "ts-essentials";
-
-function CardTypeIcon({
-  cardType,
-  attribute,
-  size,
-  left,
-}: {
-  cardType: Memoria["cardType"];
-  attribute: Memoria["attribute"];
-  size: number;
-  left: number;
-}) {
-  const wh = {
-    width: size * 0.82,
-    height: size * 0.82,
-  };
-  const kindImage = match(cardType)
-    .with(1, () => <Image src={"/NormalSingle.png"} alt={"kind"} {...wh} />)
-    .with(2, () => <Image src={"/NormalRange.png"} alt={"kind"} {...wh} />)
-    .with(3, () => <Image src={"/SpecialSingle.png"} alt={"kind"} {...wh} />)
-    .with(4, () => <Image src={"/SpecialRange.png"} alt={"kind"} {...wh} />)
-    .with(5, () => <Image src={"/Assist.png"} alt={"kind"} {...wh} />)
-    .with(6, () => <Image src={"/Interference.png"} alt={"kind"} {...wh} />)
-    .with(7, () => <Image src={"/Recovery.png"} alt={"kind"} {...wh} />)
-    .exhaustive();
-
-  const avatar = (color: string) => (
-    <Avatar
-      sx={{
-        width: size,
-        height: size,
-        left,
-        top: -1,
-        position: "absolute",
-        bgcolor: color,
-      }}
-    >
-      {kindImage}
-    </Avatar>
-  );
-
-  return match(attribute)
-    .with("Fire", () => avatar(red[500]))
-    .with("Water", () => avatar(blue[500]))
-    .with("Wind", () => avatar(green[500]))
-    .with("Light", () => avatar(yellow[500]))
-    .with("Dark", () => avatar(purple[500]))
-    .exhaustive();
-}
+import { CardTypeIcon } from "@/components/image/cardType";
 
 export function MemoriaIcon({
-  memoria: { name, cardType, attribute },
+  memoria: { uniqueId, name, cardType, attribute, labels },
   size,
   ...option
 }: { memoria: Memoria; size?: number } & StrictOmit<
@@ -66,14 +16,55 @@ export function MemoriaIcon({
 >) {
   return (
     <Box sx={{ position: "relative" }}>
-      <CardTypeIcon
-        cardType={cardType}
-        attribute={attribute}
-        size={size ? size * 0.34 : 34}
-        left={size ? size * 0.63 : 63}
-      />
+      <Box
+        sx={{
+          position: "absolute",
+          zIndex: 3,
+        }}
+      >
+        <CardTypeIcon
+          cardType={cardType}
+          attribute={attribute}
+          size={size ? size * 0.34 : 34}
+          left={size ? size * 0.63 : 63}
+        />
+      </Box>
+      {labels.includes("Legendary") && (
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            zIndex: 3,
+          }}
+        >
+          <Image src={"/assets/LegendaryIcon.png"} alt={"LegendaryIcon"} width={25} height={25} />
+        </Box>
+      )}
+      <Box
+        sx={{
+          position: "absolute",
+          zIndex: 2,
+        }}
+      >
+        {labels.includes("Ultimate") ? (
+          <Image
+            src={"/assets/IconRarity08LImage.png"}
+            alt={"frame"}
+            width={size ?? 100}
+            height={size ?? 100}
+          />
+        ) : (
+          <Image
+            src={"/assets/IconRarity06LImage.png"}
+            alt={"frame"}
+            width={size ?? 100}
+            height={size ?? 100}
+          />
+        )}
+      </Box>
       <ImageWithFallback
-        src={`/memoria/${name.short}.png`}
+        src={`/memoria/${uniqueId}.png`}
         fallback={"/memoria/CommingSoon.jpeg"}
         alt={name.full}
         width={size ?? 100}

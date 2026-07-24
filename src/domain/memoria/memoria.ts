@@ -60,7 +60,7 @@ const memoriaSchema = z.object({
   questSkill: ActiveSkillSchema.readonly(),
   gvgSkill: ActiveSkillSchema.readonly(),
   autoSkill: PassiveSkillSchema.readonly(),
-  labels: z.array(z.enum(["Legendary", "Ultimate", "SuperAwakening"])).readonly(),
+  labels: z.array(z.enum(["Legendary", "Ultimate"])).readonly(),
   legendarySkill: z
     .tuple([
       PassiveSkillSchema,
@@ -71,6 +71,7 @@ const memoriaSchema = z.object({
     ])
     .optional()
     .readonly(),
+  awk: z.enum(["None", "Awakening", "SuperAwakening"]).readonly(),
   phantasm: z.boolean().optional().readonly(),
 });
 
@@ -166,6 +167,7 @@ export const memoriaList: Memoria[] = memoriaData.data
 
 export type UniqueMemoria = {
   id: Memoria["uniqueId"];
+  uniqueId: Memoria["uniqueId"];
   name: Memoria["name"];
   cards: [Memoria, ...Memoria[]];
 };
@@ -177,6 +179,7 @@ export const uniqueMemoriaList = pipe(
   map((group) => {
     return {
       id: group[0].uniqueId,
+      uniqueId: group[0].uniqueId,
       name: group[0].name,
       cards: group,
     };

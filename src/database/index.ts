@@ -117,6 +117,7 @@ export async function getMemoriaByUserId(userId: string) {
   return db
     .select({
       id: memoria.id,
+      uniqueId: memoria.uniqueId,
       name: memoria.name,
       limitBreak: usersToMemoria.limitBreak,
     })

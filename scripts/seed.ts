@@ -29,6 +29,7 @@ async function main() {
     // 変換ロジック
     return {
       id: source.uniqueId,
+      uniqueId: source.uniqueId,
       name: source.name,
     };
   });
@@ -51,6 +52,7 @@ async function main() {
         target: memoria.id,
         set: {
           name: sql`excluded.name`,
+          uniqueId: sql`excluded.unique_id`,
         },
       });
 

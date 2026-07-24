@@ -10,6 +10,7 @@ import { fromThrowable } from "neverthrow";
 
 const costumeSchema = z.object({
   id: z.ulid().readonly(),
+  uniqueId: z.ulid().readonly(),
   name: z.string().readonly(),
   cardType: z
     .union([

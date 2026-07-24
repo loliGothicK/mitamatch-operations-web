@@ -8,19 +8,13 @@ import { Alert, Button, Divider, Grid, Paper, Snackbar, Stack, Typography } from
 import { ImageWithFallback } from "@/components/image/ImageWithFallback";
 import { useMemo, useState, useEffect, type MouseEvent } from "react";
 import { formatCardType, UniqueMemoria, uniqueMemoriaList } from "@/domain/memoria/memoria";
-import { projector } from "@/functional/proj";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import { FilterAlt, Redo, Save, Undo } from "@mui/icons-material";
-import { pipe } from "fp-ts/function";
-import { filterWithIndex } from "fp-ts/lib/Map";
 import { ConcentrationIcon } from "@/deck-builder/_tabs/builder";
 
 type Props = {
   user: User;
 };
-
-const toShort = (name: string) =>
-  name.replace(/(?:クリエイターズコラボ|Ultimate Memoria|Emotional Memoria)\s*-(.*)-/g, "$1");
 
 function MemoriaCard({
   memoria,
@@ -30,6 +24,7 @@ function MemoriaCard({
 }: {
   memoria: {
     id: string;
+    uniqueId: string;
     name: string;
     limitBreak: number;
   };
@@ -48,7 +43,7 @@ function MemoriaCard({
       }}
     >
       <ConcentrationIcon
-        key={memoria.id}
+        key={memoria.uniqueId}
         concentration={concentration}
         handleConcentration={() => {
           const next = concentration === 4 ? 0 : concentration + 1;
@@ -57,7 +52,7 @@ function MemoriaCard({
         }}
       />
       <ImageWithFallback
-        src={`/memoria/${toShort(memoria.name)}.png`}
+        src={`/memoria/${memoria.uniqueId}.png`}
         alt={memoria.name}
         width={100}
         height={100}
@@ -77,21 +72,19 @@ export function Memoria(_props: Props) {
     queryFn: () => getListAction(),
   });
 
-  const [edit, setEdit] = useState<{ id: string; name: string; limitBreak: number }[]>(
-    registered || [],
-  );
+  const [edit, setEdit] = useState<
+    { id: string; uniqueId: string; name: string; limitBreak: number }[]
+  >(registered || []);
 
   useEffect(() => {
     if (registered) setEdit(registered);
   }, [registered]);
 
   const NotYetRegistered = useMemo(
-    () => [
-      ...pipe(
-        uniqueMemoriaList,
-        filterWithIndex((id, _) => !edit.map(projector("id")).includes(id)),
-      ).values(),
-    ],
+    () =>
+      [...uniqueMemoriaList.values()].filter(
+        ({ uniqueId }) => !edit.some((memoria) => memoria.uniqueId === uniqueId),
+      ),
     [edit],
   );
 
@@ -117,7 +110,9 @@ export function Memoria(_props: Props) {
               mutation.mutate({
                 update: edit,
                 remove:
-                  registered?.filter(({ id }) => !edit.map(projector("id")).includes(id)) || [],
+                  registered?.filter(
+                    ({ uniqueId }) => !edit.some((memoria) => memoria.uniqueId === uniqueId),
+                  ) || [],
               });
               setOpen(true);
             }}
@@ -151,8 +146,8 @@ export function Memoria(_props: Props) {
                   {info.name.full.replace(/-(.+)-/g, "\n-$1-")}
                 </Typography>
                 <ImageWithFallback
-                  key={info.id}
-                  src={`/memoria/${info.name.short}.png`}
+                  key={info.uniqueId}
+                  src={`/memoria/${info.uniqueId}.png`}
                   alt={info.name.full}
                   width={100}
                   height={100}
@@ -203,15 +198,19 @@ export function Memoria(_props: Props) {
           >
             {edit.map((memoria) => (
               <MemoriaCard
-                key={memoria.id}
+                key={memoria.uniqueId}
                 memoria={memoria}
                 onConcentrationChange={(value: number) => {
                   setEdit((prev) =>
-                    prev.map((m) => (m.id === memoria.id ? { ...m, limitBreak: value } : m)),
+                    prev.map((m) =>
+                      m.uniqueId === memoria.uniqueId ? { ...m, limitBreak: value } : m,
+                    ),
                   );
                 }}
-                onClick={() => setInfo(() => uniqueMemoriaList.get(memoria.id))}
-                onContextMenu={() => setEdit((prev) => prev.filter((m) => m.id !== memoria.id))}
+                onClick={() => setInfo(() => uniqueMemoriaList.get(memoria.uniqueId))}
+                onContextMenu={() =>
+                  setEdit((prev) => prev.filter((m) => m.uniqueId !== memoria.uniqueId))
+                }
               />
             ))}
           </Paper>
@@ -231,18 +230,19 @@ export function Memoria(_props: Props) {
             {NotYetRegistered.map((memoria) => {
               return (
                 <ImageWithFallback
-                  src={`/memoria/${memoria.name.short}.png`}
+                  src={`/memoria/${memoria.uniqueId}.png`}
                   alt={memoria.name.full}
                   fallback={"/memoria/CommingSoon.jpeg"}
                   width={100}
                   height={100}
-                  key={memoria.id}
-                  onClick={() => setInfo(() => uniqueMemoriaList.get(memoria.id))}
+                  key={memoria.uniqueId}
+                  onClick={() => setInfo(() => uniqueMemoriaList.get(memoria.uniqueId))}
                   onContextMenu={(e) => {
                     e.preventDefault();
                     setEdit((prev) => {
                       const add = {
-                        id: memoria.id,
+                        id: memoria.uniqueId,
+                        uniqueId: memoria.uniqueId,
                         name: memoria.name.full,
                         limitBreak: 0,
                       };

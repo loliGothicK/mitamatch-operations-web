@@ -138,6 +138,7 @@ export const memoria = pgTable("memoria", {
     .$defaultFn(() => genUlid())
     .primaryKey()
     .notNull(),
+  uniqueId: ulid("unique_id").notNull(),
   name: varchar("name", { length: 255 }).notNull(),
 });
 

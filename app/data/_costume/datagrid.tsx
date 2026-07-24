@@ -21,6 +21,7 @@ import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
 import { DataGrid } from "@/data/_common/DataGrid";
 import { ImageWithFallback } from "@/components/image/ImageWithFallback";
+import { CostumeIcon } from "@/components/image/CostumeIcon";
 
 const columns: GridColDef<Costume>[] = [
   {
@@ -33,13 +34,7 @@ const columns: GridColDef<Costume>[] = [
     }),
     renderCell: (params) => (
       <Link href={`/data/costume/${Lenz.costume.general.name.normalized.URI.get(params.row)}`}>
-        <ImageWithFallback
-          src={`/costume/icon/${Lenz.costume.general.name.normalized.full.get(params.row)}.jpg`}
-          fallback={"/memoria/CommingSoon.jpeg"}
-          alt={params.value.name}
-          width={80}
-          height={80}
-        />
+        <CostumeIcon costume={params.row} size={80} />
       </Link>
     ),
     sortComparator: (a, b) => a.id - b.id,

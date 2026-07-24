@@ -22,6 +22,20 @@
       "when": 1784774223962,
       "tag": "0002_shocking_ser_duncan",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1784905895370,
+      "tag": "0003_add_memoria_unique_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1784906340692,
+      "tag": "0004_famous_masked_marvel",
+      "breakpoints": true
     }
   ]
 }

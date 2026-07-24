@@ -1,10 +1,10 @@
 "use server";
 
-import {auth, clerkClient} from "@clerk/nextjs/server";
-import {db, getUserData} from "@/database";
-import {organization, organizationInvites, organizationMembers, users} from "@/database/schema";
-import {and, eq} from "drizzle-orm";
-import {revalidatePath} from "next/cache";
+import { auth, clerkClient } from "@clerk/nextjs/server";
+import { db, getUserData } from "@/database";
+import { organization, organizationInvites, organizationMembers, users } from "@/database/schema";
+import { and, eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 
 // ユーザーがAdminであるかチェック
 async function requireLegionAdmin(legionId: string) {
@@ -117,12 +117,15 @@ export async function inviteUsersByUsernameAction(legionId: string, usernames: s
       }
 
       // 5. Create invite
-      await db.insert(organizationInvites).values({
-        organizationId: legionId,
-        userId: targetInternalUserId,
-        status: "pending",
-        updatedAt: new Date().toISOString(),
-      }).returning();
+      await db
+        .insert(organizationInvites)
+        .values({
+          organizationId: legionId,
+          userId: targetInternalUserId,
+          status: "pending",
+          updatedAt: new Date().toISOString(),
+        })
+        .returning();
 
       results.push({ username, success: true });
     } catch (e: any) {
@@ -190,11 +193,14 @@ export async function acceptInviteAction(inviteId: string) {
     .where(eq(organizationInvites.id, inviteId))
     .returning();
 
-  await db.insert(organizationMembers).values({
-    organizationId: invite[0].organizationId,
-    userId: internalUser[0].id,
-    role: "org:member",
-  }).returning();
+  await db
+    .insert(organizationMembers)
+    .values({
+      organizationId: invite[0].organizationId,
+      userId: internalUser[0].id,
+      role: "org:member",
+    })
+    .returning();
 
   revalidatePath("/");
   return { success: true };
