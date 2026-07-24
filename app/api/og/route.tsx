@@ -37,11 +37,11 @@ export async function GET(reqest: NextRequest) {
 
           return new ImageResponse(
             <div style={style}>
-              {legendary.map((name) => {
+              {legendary.map((uniqueId) => {
                 return (
                   <Image
-                    src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
-                    key={name}
+                    src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${uniqueId}.png`}
+                    key={uniqueId}
                     alt={"memoria"}
                     width={100}
                     height={100}
@@ -57,11 +57,11 @@ export async function GET(reqest: NextRequest) {
                   margin: "10px 0",
                 }}
               />
-              {deck.map((name) => {
+              {deck.map((uniqueId) => {
                 return (
                   <Image
-                    src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${name}.png`}
-                    key={name}
+                    src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/memoria/${uniqueId}.png`}
+                    key={uniqueId}
                     alt={"memoria"}
                     width={100}
                     height={100}
