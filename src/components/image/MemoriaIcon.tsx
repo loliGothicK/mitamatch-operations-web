@@ -19,15 +19,12 @@ export function MemoriaIcon({
       <Box
         sx={{
           position: "absolute",
-          zIndex: 3,
+          top: -1,
+          right: -1,
+          zIndex: 4,
         }}
       >
-        <CardTypeIcon
-          cardType={cardType}
-          attribute={attribute}
-          size={size ? size * 0.34 : 34}
-          left={size ? size * 0.63 : 63}
-        />
+        <CardTypeIcon cardType={cardType} attribute={attribute} size={size ? size * 0.34 : 34} />
       </Box>
       {labels.includes("Legendary") && (
         <Box

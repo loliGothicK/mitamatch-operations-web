@@ -10,7 +10,6 @@ import {
   Breadcrumbs,
   Button,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Chip,
@@ -30,6 +29,7 @@ import * as O from "fp-ts/Ord";
 import Toolbar from "@mui/material/Toolbar";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { comparator } from "@/functional/proj";
+import { CostumeIcon } from "@/components/image/CostumeIcon";
 
 const byGarden = pipe(
   N.Ord,
@@ -191,25 +191,20 @@ export default function Detail({ name }: { name: string }) {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                  padding: 2,
+                  p: 2,
+                  height: "100%",
                 }}
               >
                 <Link
                   href={`/data/costume/${dir}/${Lenz.costume.general.name.normalized.job.get(costume)}`}
                 >
-                  <CardMedia
-                    component="img"
-                    sx={{ width: 150 }}
-                    image={`/costume/icon/${costume.uniqueId}.png`}
-                    alt={name}
-                  />
+                  <CostumeIcon costume={costume} />
                 </Link>
-                <CardContent>
+                <CardContent sx={{ p: 1, pb: "8px !important", textAlign: "center" }}>
                   <Typography variant="body2" component="div">
                     {Lenz.costume.general.name.job.get(costume)}
                   </Typography>
                 </CardContent>
-                <CardActions></CardActions>
               </Card>
             </Grid>
           ))}

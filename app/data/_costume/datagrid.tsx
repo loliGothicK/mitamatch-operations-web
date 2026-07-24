@@ -20,7 +20,6 @@ import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
 import { DataGrid } from "@/data/_common/DataGrid";
-import { ImageWithFallback } from "@/components/image/ImageWithFallback";
 import { CostumeIcon } from "@/components/image/CostumeIcon";
 
 const columns: GridColDef<Costume>[] = [

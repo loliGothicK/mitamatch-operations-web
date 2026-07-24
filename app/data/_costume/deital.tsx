@@ -33,6 +33,7 @@ import { match } from "ts-pattern";
 import { option } from "fp-ts";
 import Link from "@/components/link";
 import { isSome } from "fp-ts/lib/Option";
+import {CostumeIcon} from "@/components/image/CostumeIcon";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -169,12 +170,9 @@ function RareSkill({ costume: { rareSkill } }: { costume: Costume }) {
 function Basic({ costume }: { costume: Costume }) {
   return (
     <Card sx={{ display: "flex", width: "100%" }}>
-      <CardMedia
-        component="img"
-        sx={{ width: 150 }}
-        image={`/costume/icon/${costume.uniqueId}.png`}
-        alt="Live from space album cover"
-      />
+      <CardMedia>
+        <CostumeIcon costume={costume} size={120} />
+      </CardMedia>
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
           <Typography component="div" variant="h5">

@@ -2,7 +2,7 @@
 
 import { useAtom } from "jotai";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import {
   Dispatch,
   type MouseEvent,
@@ -527,9 +527,15 @@ function UnitComponent() {
   const [, setCompare] = useAtom(compareModeAtom);
   const [query, setQuery] = useAtom(deckBuilderQueryAtom);
 
+  const loadedDeck = useRef<string | null>(null);
+
   useAsync(async () => {
     const value = params.get("deck");
     const title = params.get("title");
+
+    if (value === loadedDeck.current) return;
+    loadedDeck.current = value;
+
     setTitle(title ? decodeURI(title) : "No Title");
     if (value) {
       const { sw, deck, legendaryDeck } = await restore({
@@ -1565,6 +1571,7 @@ function ShareButton() {
   const [toast, setToast] = useState<string | false>(false);
   const queryClient = useQueryClient();
   const shareCardRef = useRef<HTMLDivElement>(null);
+  const params = useSearchParams();
 
   // Mutations
   const mutation = useMutation({
@@ -1627,7 +1634,9 @@ function ShareButton() {
               onClick={async () => {
                 popupState.close();
                 handleClick("short");
-                const short = ulid();
+                const existingDeckId = params.get("deck");
+                const short =
+                  existingDeckId && existingDeckId.length === 26 ? existingDeckId : ulid();
                 setUrl(
                   `https://operations.mitama.io/deck-builder?deck=${short}&title=${encodeURI(title)}`,
                 );
@@ -1796,6 +1805,9 @@ export function DeckBuilder({
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setCompare] = useAtom(compareModeAtom);
+  const params = useSearchParams();
+  const router = useRouter();
+  const deckParam = params.get("deck");
 
   return (
     <Box
@@ -1806,6 +1818,26 @@ export function DeckBuilder({
         justifyContent: "center",
       }}
     >
+      {deckParam && (
+        <Alert
+          severity="info"
+          sx={{ width: "100%", mb: 2 }}
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => {
+                const titleParam = params.get("title");
+                router.replace(titleParam ? `/deck-builder?title=${titleParam}` : "/deck-builder");
+              }}
+            >
+              コピーして編集
+            </Button>
+          }
+        >
+          共有されたデッキを表示しています。変更は共有リンクに反映されます。「コピーして編集」をクリックすると新しいデッキとして独立して編集できます。
+        </Alert>
+      )}
       <Box data-tour="deck-toolbar" sx={{ width: "100%" }}>
         <Ribbon>
           <RibbonGroup>

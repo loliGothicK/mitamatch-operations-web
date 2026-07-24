@@ -8,12 +8,10 @@ export function CardTypeIcon({
   cardType,
   attribute,
   size,
-  left,
 }: {
   cardType: Memoria["cardType"];
   attribute?: Memoria["attribute"];
   size: number;
-  left: number;
 }) {
   const wh = {
     width: size * 0.82,
@@ -34,8 +32,6 @@ export function CardTypeIcon({
       sx={{
         width: size,
         height: size,
-        left,
-        top: -1,
         bgcolor: color,
       }}
     >
@@ -49,6 +45,6 @@ export function CardTypeIcon({
     .with("Wind", () => avatar(green[500]))
     .with("Light", () => avatar(yellow[500]))
     .with("Dark", () => avatar(purple[500]))
-    .with(undefined, () => avatar(grey[500]))
+    .with(undefined, () => avatar(grey[700]))
     .exhaustive();
 }

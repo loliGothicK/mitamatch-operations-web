@@ -37,8 +37,8 @@ describe("InviteMemberDialog", () => {
     fireEvent.change(input, { target: { value: "testuser" } });
     fireEvent.keyDown(input, { key: "Enter", code: "Enter" });
 
-    // Click the "Send Invites" button
-    const sendBtn = screen.getByRole("button", { name: "Send Invites" });
+    // Click the "Invite" button
+    const sendBtn = screen.getByRole("button", { name: "Invite" });
     fireEvent.click(sendBtn);
 
     // Verify the server action was called
@@ -48,7 +48,7 @@ describe("InviteMemberDialog", () => {
 
     // Verify success result is displayed
     await waitFor(() => {
-      expect(screen.getByText("testuser: Invited successfully")).toBeInTheDocument();
+      expect(screen.getByText("Successfully invited 1 user(s).")).toBeInTheDocument();
     });
   });
 });
