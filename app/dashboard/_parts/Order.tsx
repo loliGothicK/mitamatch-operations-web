@@ -59,7 +59,7 @@ export function OrderRegistration(_props: Props) {
     queryFn: () => getOrderListAction(),
   });
 
-  const [edit, setEdit] = useState<number[]>([]);
+  const [edit, setEdit] = useState<string[]>([]);
 
   useEffect(() => {
     if (registered) {

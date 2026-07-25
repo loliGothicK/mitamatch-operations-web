@@ -15,7 +15,7 @@
     "pretty": "pnpm dlx oxlint --config=./oxlint.config.ts --fix && pnpm dlx oxfmt --config=./oxfmt.config.ts && npx biome format --write .",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
-    "package:update": "npx ncu -u && pnpm install",
+    "renovate": "npx ncu -u && pnpm install",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",

@@ -2,37 +2,15 @@ import { z } from "zod";
 
 import orderData from "./order.json";
 
-export const orderKind = [
-  "Elemental/Fire",
-  "Elemental/Water",
-  "Elemental/Wind",
-  "Elemental/Dark",
-  "Elemental/Light",
-  "Elemental/Special",
-  "Buff",
-  "DeBuff",
-  "Mp",
-  "TriggerRateFluctuation",
-  "Shield",
-  "Formation",
-  "Stack",
-  "Other",
-] as const;
-
-export type OrderKind = (typeof orderKind)[number];
-
 const orderSchema = z.object({
-  id: z.number().readonly(),
+  id: z.string().readonly(),
   name: z.string().readonly(),
   status: z.array(z.number()).readonly(),
   effect: z.string().readonly(),
   description: z.string().readonly(),
-
   prepare_time: z.number().readonly(),
-
   active_time: z.number().readonly(),
   payed: z.boolean().readonly(),
-  kind: z.enum(orderKind).readonly(),
   usually: z.boolean().readonly(),
 });
 

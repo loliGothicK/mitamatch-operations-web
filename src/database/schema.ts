@@ -171,7 +171,7 @@ export const usersToMemoria = pgTable(
 );
 
 export const order = pgTable("order", {
-  id: integer("id").primaryKey().notNull(),
+  id: ulid("id").$defaultFn(() => genUlid()).primaryKey().notNull(),
   name: varchar("name", { length: 255 }).notNull(),
 });
 
@@ -184,7 +184,7 @@ export const usersToOrder = pgTable(
       .references(() => users.id, { onDelete: "cascade" }),
 
     // 外部キー 2: memoria.id を参照 (Memoria定義が削除されたら、所持情報も削除)
-    orderId: integer("order_id")
+    orderId: ulid("order_id")
       .notNull()
       .references(() => order.id, { onDelete: "cascade" }),
   },

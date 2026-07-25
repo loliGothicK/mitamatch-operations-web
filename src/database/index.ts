@@ -365,7 +365,7 @@ export async function getOrdersByUserId(userId: string) {
     .where(eq(usersToOrder.userId, userId));
 }
 
-export async function upsertOrder(userId: string, targetIds: number[]) {
+export async function upsertOrder(userId: string, targetIds: string[]) {
   if (targetIds.length === 0) return;
 
   return db
@@ -374,7 +374,7 @@ export async function upsertOrder(userId: string, targetIds: number[]) {
     .onConflictDoNothing();
 }
 
-export async function deleteOrder(userId: string, targetIds: number[]) {
+export async function deleteOrder(userId: string, targetIds: string[]) {
   if (targetIds.length === 0) return;
 
   return db

@@ -207,7 +207,7 @@ Drizzle 設定は `drizzle.config.ts` で管理しています。
 pnpm seed
 ```
 
-`scripts/seed.ts` は `src/domain/memoria/memoria.json` と `src/domain/order/order.json` を DB に投入します。
+`scripts/seed.ts` は `src/domain/memoria/memoria.json` と `src/domain/order/legacy_order.json` を DB に投入します。
 
 ## ドキュメント運用
 

@@ -19,12 +19,14 @@ export function CostumeIcon({
   const isAdx = isSome(specialSkill) && specialSkill.value.type === "adx";
   const containerSize = size ?? 100;
   const innerSize = containerSize - 2;
-  const isAwakable = isSome(specialSkill) && match(specialSkill.value)
+  const isAwakable =
+    isSome(specialSkill) &&
+    match(specialSkill.value)
       .with({ type: "ex" }, () => true)
       .with({ type: "adx" }, (adx) => adx.awakable)
       .exhaustive();
 
-    return (
+  return (
     <Box sx={{ position: "relative", width: containerSize, height: containerSize, flexShrink: 0 }}>
       <Box
         sx={{

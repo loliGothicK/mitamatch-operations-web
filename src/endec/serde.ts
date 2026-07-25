@@ -126,6 +126,8 @@ export function encodeTimeline(timeline: OrderWithPic[]) {
   return btoa(JSON.stringify({ timeline: timelineInfo }));
 }
 
+import { orderMigrationMap } from "@/jotai/orderMigrationMap";
+
 const timelineItemSchemaV1 = z.object({
   id: z.number(),
   delay: z.number().optional().nullable(),
@@ -149,18 +151,39 @@ const timelineItemSchemaV2 = z.object({
   sub: z.string().optional().nullable(),
 });
 
+const timelineItemSchemaV3 = z.object({
+  id: z.string(),
+  delay: z.union([
+    z.object({
+      source: z.literal("auto"),
+      value: z.number().optional(),
+    }),
+    z.object({
+      source: z.literal("manual"),
+      value: z.number(),
+    }),
+  ]),
+  pic: z.string().optional().nullable(),
+  sub: z.string().optional().nullable(),
+});
+
 const timelineSchema = z.object({
-  timeline: z.array(timelineItemSchemaV2),
+  timeline: z.array(timelineItemSchemaV3),
 });
 
 const backwardsCompatibleSchema = z
   .object({
-    timeline: z.union([z.array(timelineItemSchemaV1), z.array(timelineItemSchemaV2)]),
+    timeline: z.union([
+      z.array(timelineItemSchemaV1),
+      z.array(timelineItemSchemaV2),
+      z.array(timelineItemSchemaV3),
+    ]),
   })
   .transform((xs) => ({
     timeline: xs.timeline.map(
-      ({ delay, ...xs }): z.infer<typeof timelineItemSchemaV2> => ({
+      ({ delay, id, ...xs }): z.infer<typeof timelineItemSchemaV3> => ({
         ...xs,
+        id: typeof id === "number" ? orderMigrationMap[id] || String(id) : id,
         delay: match(delay)
           .with(P.nullish, () => ({ source: "auto" as const }))
           .with(5, () => ({
@@ -200,7 +223,7 @@ const restoreTimeline = (data: Timeline): Result<OrderWithPic[], string> => {
       (
         item,
       ): item is {
-        id: number;
+        id: string;
         order: Order;
         xs: Exclude<TimelineItem, "order">;
       } => item.order !== undefined,

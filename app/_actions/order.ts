@@ -25,8 +25,8 @@ export async function updateOrderAction({
   update,
   remove,
 }: {
-  update: number[];
-  remove: number[];
+  update: string[];
+  remove: string[];
 }) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");

@@ -33,7 +33,7 @@ import { match } from "ts-pattern";
 import { option } from "fp-ts";
 import Link from "@/components/link";
 import { isSome } from "fp-ts/lib/Option";
-import {CostumeIcon} from "@/components/image/CostumeIcon";
+import { CostumeIcon } from "@/components/image/CostumeIcon";
 
 interface TabPanelProps {
   children?: ReactNode;

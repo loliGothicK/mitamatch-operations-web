@@ -1,6 +1,6 @@
 import "dotenv/config";
 import memoriaData from "../src/domain/memoria/memoria.json";
-import orderData from "../src/domain/order/order.json";
+import orderData from "@/domain/order/order.json";
 import { drizzle } from "drizzle-orm/neon-http";
 import { z } from "zod";
 import { memoria, order } from "@/database/schema";
@@ -17,7 +17,7 @@ const memoriaColumnSchema = z.object({
 });
 
 const orderColumnSchema = z.object({
-  id: z.number().int().positive(),
+  id: z.string(),
   name: z.string(),
 });
 

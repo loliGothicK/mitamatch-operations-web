@@ -63,6 +63,7 @@ import Sortable from "@/components/sortable/Sortable";
 import {
   filterAtom,
   filteredOrderAtom,
+  orderKinds,
   type OrderWithPic,
   payedAtom,
   timelineAtom,
@@ -560,20 +561,7 @@ function FilterMenu() {
         <>
           <Button {...bindTrigger(popupState)}>{filter}</Button>
           <Menu {...bindMenu(popupState)}>
-            {(
-              [
-                "Usually",
-                "Elemental",
-                "Buff",
-                "DeBuff",
-                "Mp",
-                "TriggerRateFluctuation",
-                "Shield",
-                "Formation",
-                "Stack",
-                "Other",
-              ] as const
-            ).map((kind) => {
+            {orderKinds.map((kind) => {
               return (
                 <MenuItem
                   key={kind}

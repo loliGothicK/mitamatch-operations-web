@@ -6,7 +6,7 @@ import { orderList } from "@/domain/order/order";
 
 // 1. Server Actionsのモック
 vi.mock("@/_actions/order", () => ({
-  getOrderListAction: vi.fn(async () => [{ id: 1 }]),
+  getOrderListAction: vi.fn(async () => [{ id: "01KYBN9JXRDFJG4K82HCHE56E2" }]),
   updateOrderAction: vi.fn(async () => {}),
 }));
 
@@ -15,7 +15,7 @@ const queryClient = new QueryClient();
 const renderComponent = () =>
   render(
     <QueryClientProvider client={queryClient}>
-      <OrderRegistration user={{ id: "test", name: "test", image: "" }} />
+      <OrderRegistration user={{ id: "test", name: "test" }} />
     </QueryClientProvider>,
   );
 
