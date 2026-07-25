@@ -3,7 +3,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { getUserData, getLegionMemberMemoria, getLegionMemberOrders, db } from "@/database";
 import { organization, organizationMembers, users } from "@/database/schema";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 // Helper to check if the user is an admin of the specified legion
 async function requireLegionAdmin(legionId: string) {
@@ -55,4 +55,22 @@ export async function createLegionAction(name: string) {
   });
 
   return orgId;
+}
+
+export async function updateLegionMemberDisplayNameAction(
+  legionId: string,
+  targetUserId: string,
+  displayName: string | null
+) {
+  await requireLegionAdmin(legionId);
+
+  await db
+    .update(organizationMembers)
+    .set({ displayName })
+    .where(
+      and(
+        eq(organizationMembers.organizationId, legionId),
+        eq(organizationMembers.userId, targetUserId)
+      )
+    );
 }

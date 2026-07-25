@@ -5,7 +5,7 @@ import { match } from "ts-pattern";
 if (
   match(process.env.NODE_ENV)
     .with("test", () => false)
-    .with("development", () => false)
+    .with("development", () => !process.env.POSTGRES_URL)
     .with("production", () => !process.env.POSTGRES_URL)
     .exhaustive()
 ) {

@@ -71,7 +71,7 @@ export async function getUserData(clerkUserId: string) {
   const adminOrgIds = legions.filter((l) => l.role === "org:admin").map((l) => l.id);
 
   // 3. 管理者権限を持つ組織のメンバーを一括取得するためのマップを作成
-  const membersByOrgId = new Map<string, Array<{ userId: string; name: string; role: string }>>();
+  const membersByOrgId = new Map<string, Array<{ userId: string; name: string; displayName: string | null; role: string }>>();
 
   if (adminOrgIds.length > 0) {
     // 該当する組織のメンバーをまとめて取得（1回のクエリで済ませる）
@@ -80,6 +80,7 @@ export async function getUserData(clerkUserId: string) {
         orgId: organizationMembers.organizationId,
         userId: users.id,
         name: users.name,
+        displayName: organizationMembers.displayName,
         role: organizationMembers.role,
       })
       .from(organizationMembers)
@@ -89,7 +90,7 @@ export async function getUserData(clerkUserId: string) {
     // 取得したメンバーを組織IDごとにグループ化
     for (const m of members) {
       const list = membersByOrgId.get(m.orgId) || [];
-      list.push({ userId: m.userId, name: m.name, role: m.role });
+      list.push({ userId: m.userId, name: m.name, displayName: m.displayName, role: m.role });
       membersByOrgId.set(m.orgId, list);
     }
   }

@@ -1,0 +1,1 @@
+ALTER TABLE "organization_members" ADD COLUMN "display_name" varchar(255);

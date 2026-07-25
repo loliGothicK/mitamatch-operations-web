@@ -43,6 +43,13 @@
       "when": 1784961942093,
       "tag": "0005_flashy_ogun",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1784966190450,
+      "tag": "0006_big_zeigeist",
+      "breakpoints": true
     }
   ]
 }

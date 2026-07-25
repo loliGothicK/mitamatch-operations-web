@@ -261,32 +261,30 @@ export function ConcentrationIcon({
       disabled={handleConcentration === true}
       onClick={handleConcentration === true ? undefined : handleConcentration}
       sx={{
-        top: 25,
-        left: 60,
+        top: 32,
+        right: 0,
+        width: 30,
+        height: 30,
         position: "absolute",
+        zIndex: 10,
+        p: 0,
       }}
     >
-      {concentration === 4 ? (
-        <Typography
-          variant="body2"
-          color="white"
-          sx={{
-            position: "absolute",
-          }}
-        >
-          MAX
-        </Typography>
-      ) : (
-        <Typography
-          variant="body2"
-          color="white"
-          sx={{
-            position: "absolute",
-          }}
-        >
-          {concentration}
-        </Typography>
-      )}
+      <Box
+        sx={{
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "white",
+          fontSize: concentration === 4 ? 12 : 16,
+          fontWeight: 700,
+          lineHeight: 1,
+          zIndex: 1,
+        }}
+      >
+        {concentration === 4 ? "MAX" : concentration}
+      </Box>
       <Image src={"/Concentration.png"} alt={"concentration"} width={30} height={30} />
     </IconButton>
   );

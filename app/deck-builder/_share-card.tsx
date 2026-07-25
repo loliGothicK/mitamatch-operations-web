@@ -82,11 +82,12 @@ function ConcentrationBadge({ concentration }: { concentration: number }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "common.white",
+          color: "white",
           fontSize: 14,
-          fontWeight: 700,
+          fontWeight: 900,
           lineHeight: 1,
-          textShadow: "0 1px 2px rgba(0, 0, 0, 0.7)",
+          textShadow: "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000",
+          zIndex: 1,
         }}
       >
         {concentration === 4 ? "MAX" : concentration}

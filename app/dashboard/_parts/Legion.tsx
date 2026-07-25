@@ -10,12 +10,81 @@ import {
   Stack,
   Typography,
   Button,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import { UserData } from "@/types/user";
 import { useState } from "react";
 import { InviteMemberDialog } from "@/components/legion/InviteMemberDialog";
+import { updateLegionMemberDisplayNameAction } from "@/_actions/legion";
+import { useRouter } from "next/navigation";
+
+// Utility component to display and edit a single member
+function MemberRow({ member, legionId, onUpdate }: { member: any; legionId: string; onUpdate: () => void }) {
+  const [open, setOpen] = useState(false);
+  const [displayName, setDisplayName] = useState(member.displayName || "");
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const handleUpdate = async () => {
+    setIsUpdating(true);
+    try {
+      await updateLegionMemberDisplayNameAction(legionId, member.userId, displayName || null);
+      setOpen(false);
+      onUpdate();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  return (
+    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <Typography variant="body2">{member.displayName || member.name}</Typography>
+        {member.displayName && (
+          <Typography variant="caption" color="text.secondary">
+            (@{member.name})
+          </Typography>
+        )}
+        <IconButton size="small" onClick={() => setOpen(true)}>
+          <EditIcon fontSize="small" />
+        </IconButton>
+      </Box>
+      <Typography variant="caption" color="text.secondary">
+        {member.role === "org:admin" ? "Admin" : "Member"}
+      </Typography>
+
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>Edit Display Name</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Display Name"
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
+          <Button onClick={handleUpdate} disabled={isUpdating}>Save</Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
+  );
+}
 
 export function LegionManagement({ userData }: { userData: UserData }) {
+  const router = useRouter();
   const [selectedLegionId, setSelectedLegionId] = useState<string>(userData.legions[0]?.id || "");
   const [inviteDialogOpen, setInviteDialogOpen] = useState(false);
 
@@ -60,12 +129,12 @@ export function LegionManagement({ userData }: { userData: UserData }) {
                 </Typography>
                 <Stack spacing={1}>
                   {selectedLegion.members.map((m) => (
-                    <Box key={m.userId} sx={{ display: "flex", justifyContent: "space-between" }}>
-                      <Typography variant="body2">{m.name}</Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        {m.role === "org:admin" ? "Admin" : "Member"}
-                      </Typography>
-                    </Box>
+                    <MemberRow
+                      key={m.userId}
+                      member={m}
+                      legionId={selectedLegionId}
+                      onUpdate={() => router.refresh()}
+                    />
                   ))}
                 </Stack>
               </CardContent>

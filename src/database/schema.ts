@@ -80,6 +80,7 @@ export const organizationMembers = pgTable("organization_members", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   role: varchar("role", { length: 255 }).default("org:member").notNull(),
+  displayName: varchar("display_name", { length: 255 }),
 });
 
 export const decks = pgTable("deck", {
