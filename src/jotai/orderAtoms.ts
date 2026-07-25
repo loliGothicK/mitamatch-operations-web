@@ -20,7 +20,13 @@ export type OrderWithPic = Order & {
 };
 
 const customStorage = createJSONStorage<OrderWithPic[]>(() =>
-  typeof window !== "undefined" ? window.localStorage : ({} as Storage),
+  typeof window !== "undefined"
+    ? window.localStorage
+    : ({
+        getItem: () => null,
+        setItem: () => {},
+        removeItem: () => {},
+      } as unknown as Storage),
 );
 
 const originalGetItem = customStorage.getItem;
@@ -40,7 +46,7 @@ customStorage.getItem = (key, initialValue) => {
     }
     return val;
   };
-  
+
   if (value instanceof Promise) {
     return value.then(migrate);
   }
@@ -89,5 +95,6 @@ export const filteredOrderAtom = atom((get) => {
   return orderList
     .filter((order) => (filter === "Usually" ? order.usually : kind(order) === filter))
     .filter((order) => get(timelineAtom).every((o) => o.id !== order.id))
-    .filter((order) => (get(payedAtom) ? order.payed : !order.payed));
+    .filter((order) => (get(payedAtom) ? order.payed : !order.payed))
+    .toReversed();
 });

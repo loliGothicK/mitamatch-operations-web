@@ -328,7 +328,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": false,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNDKTRM5R9RTNEPJQ0NWJ5",
@@ -350,7 +350,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": false,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNCYB88YSV3AGXA0Z63WWJ",
@@ -372,7 +372,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": false,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBN8QJR2F6VY0QSXXAEBZKP",
@@ -383,7 +383,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": false,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNBW5GAVJWAMNMSDPZGDQJ",
@@ -394,7 +394,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": false,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNDRQ009TB319XE4PMT1PD",
@@ -405,7 +405,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": false,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNCTE8CMRDHXQFDSDWCAJR",
@@ -559,7 +559,7 @@
       "prepare_time": 15,
       "active_time": 60,
       "payed": false,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNDD00MN7AJDJZV3B5238D",
@@ -1076,7 +1076,7 @@
       "prepare_time": 20,
       "active_time": 130,
       "payed": false,
-      "usually": false
+      "usually": true
     },
     {
       "id": "01KYBNB0TGTFADWN5AER73EZVE",
@@ -1131,7 +1131,7 @@
       "prepare_time": 20,
       "active_time": 130,
       "payed": false,
-      "usually": false
+      "usually": true
     },
     {
       "id": "01KYBNB4QGEEKX6G1CTF0JHCD3",
@@ -1274,7 +1274,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": true,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNC5Y01ZCTZEEHV16JB7T2",
@@ -1296,7 +1296,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": true,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBN8JPGHR0XXRMPQ4GX0BD6",
@@ -1340,7 +1340,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": true,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNAS0G8FZ22PDTTWQ5E30K",
@@ -1351,7 +1351,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": true,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNBMBGHR7W4ZCRCXGKAR7J",
@@ -1362,7 +1362,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": true,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNA8D80P20C5ZWCRPKCPEX",
@@ -1373,7 +1373,7 @@
       "prepare_time": 30,
       "active_time": 120,
       "payed": true,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNCSF06YGDV68MZ99F2S38",
@@ -1560,7 +1560,7 @@
       "prepare_time": 15,
       "active_time": 60,
       "payed": true,
-      "usually": true
+      "usually": false
     },
     {
       "id": "01KYBNB7N8MH1JSARSGWWW1JXM",
@@ -2088,7 +2088,7 @@
       "prepare_time": 20,
       "active_time": 130,
       "payed": true,
-      "usually": false
+      "usually": true
     },
     {
       "id": "01KYBNA1JG23YZS6GA2CX03PZX",
@@ -2143,7 +2143,7 @@
       "prepare_time": 20,
       "active_time": 130,
       "payed": true,
-      "usually": false
+      "usually": true
     }
   ]
 }

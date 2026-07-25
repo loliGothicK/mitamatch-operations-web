@@ -171,7 +171,10 @@ export const usersToMemoria = pgTable(
 );
 
 export const order = pgTable("order", {
-  id: ulid("id").$defaultFn(() => genUlid()).primaryKey().notNull(),
+  id: ulid("id")
+    .$defaultFn(() => genUlid())
+    .primaryKey()
+    .notNull(),
   name: varchar("name", { length: 255 }).notNull(),
 });
 

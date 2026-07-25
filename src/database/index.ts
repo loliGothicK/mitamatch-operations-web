@@ -19,11 +19,7 @@ import { OrderWithPic } from "@/jotai/orderAtoms";
 import { sql } from "drizzle-orm";
 
 export const db = drizzle({
-  client: neon(
-    process.env.NODE_ENV === "development"
-      ? process.env.POSTGRES_DEVELOP_BRANCH_URL!
-      : process.env.POSTGRES_URL!,
-  ),
+  client: neon(process.env.POSTGRES_URL!),
 });
 
 export async function upsertUser(user: { id: string; username: string | null } | undefined) {

@@ -5,7 +5,7 @@ import { match } from "ts-pattern";
 if (
   match(process.env.NODE_ENV)
     .with("test", () => false)
-    .with("development", () => !process.env.POSTGRES_DEVELOP_BRANCH_URL)
+    .with("development", () => false)
     .with("production", () => !process.env.POSTGRES_URL)
     .exhaustive()
 ) {
@@ -19,8 +19,11 @@ export default defineConfig({
   dbCredentials:
     process.env.NODE_ENV === "development"
       ? {
-          url: process.env.POSTGRES_DEVELOP_BRANCH_URL!,
-          ssl: "allow",
+          url: process.env.POSTGRES_URL!,
+          ssl: {
+            rejectUnauthorized: true,
+            cert: "./cacert.pem",
+          },
         }
       : {
           url: process.env.POSTGRES_URL!,
