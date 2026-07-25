@@ -50,7 +50,6 @@ export const mainListItems = (
           <Link href={href}>
             <ListItemButton>
               <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={title} />
             </ListItemButton>
           </Link>
         </Tooltip>
@@ -67,7 +66,6 @@ export const userListItems = (
           <Link href={href}>
             <ListItemButton>
               <ListItemIcon>{icon}</ListItemIcon>
-              <ListItemText primary={title} />
             </ListItemButton>
           </Link>
         </Tooltip>
