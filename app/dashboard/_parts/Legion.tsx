@@ -25,7 +25,15 @@ import { updateLegionMemberDisplayNameAction } from "@/_actions/legion";
 import { useRouter } from "next/navigation";
 
 // Utility component to display and edit a single member
-function MemberRow({ member, legionId, onUpdate }: { member: any; legionId: string; onUpdate: () => void }) {
+function MemberRow({
+  member,
+  legionId,
+  onUpdate,
+}: {
+  member: any;
+  legionId: string;
+  onUpdate: () => void;
+}) {
   const [open, setOpen] = useState(false);
   const [displayName, setDisplayName] = useState(member.displayName || "");
   const [isUpdating, setIsUpdating] = useState(false);
@@ -76,7 +84,9 @@ function MemberRow({ member, legionId, onUpdate }: { member: any; legionId: stri
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
-          <Button onClick={handleUpdate} disabled={isUpdating}>Save</Button>
+          <Button onClick={handleUpdate} disabled={isUpdating}>
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
     </Box>

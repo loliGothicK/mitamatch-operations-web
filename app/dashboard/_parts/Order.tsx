@@ -5,9 +5,9 @@ import { User } from "@/types/user";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getOrderListAction, updateOrderAction } from "@/_actions/order";
 import { Alert, Button, Divider, Grid, Paper, Snackbar, Stack, Typography } from "@mui/material";
-import { ImageWithFallback } from "@/components/image/ImageWithFallback";
 import { useMemo, useState, useEffect, type MouseEvent } from "react";
 import { type Order, orderList } from "@/domain/order/order";
+import { OrderIcon } from "@/components/image/OrderIcon";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import { Save, Undo, Redo } from "@mui/icons-material";
 
@@ -38,13 +38,7 @@ function OrderCard({
         onContextMenu?.(event);
       }}
     >
-      <ImageWithFallback
-        src={`/order/${order.name}.png`}
-        alt={order.name}
-        width={100}
-        height={100}
-        fallback={"/memoria/CommingSoon.jpeg"}
-      />
+      <OrderIcon order={order} size={100} />
     </Box>
   );
 }
@@ -121,14 +115,7 @@ export function OrderRegistration(_props: Props) {
             {info && (
               <Stack direction={"column"} sx={{ p: 2 }}>
                 <Typography variant={"subtitle1"}>{info.name}</Typography>
-                <ImageWithFallback
-                  key={info.id}
-                  src={`/order/${info.name}.png`}
-                  alt={info.name}
-                  width={100}
-                  height={100}
-                  fallback={"/memoria/CommingSoon.jpeg"}
-                />
+                <OrderIcon order={info} size={100} />
                 <Box sx={{ mt: 2 }}>
                   <Divider flexItem={true} sx={{ my: 1, width: "100%" }}>
                     <Typography variant={"subtitle2"}>効果</Typography>

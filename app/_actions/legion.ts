@@ -60,7 +60,7 @@ export async function createLegionAction(name: string) {
 export async function updateLegionMemberDisplayNameAction(
   legionId: string,
   targetUserId: string,
-  displayName: string | null
+  displayName: string | null,
 ) {
   await requireLegionAdmin(legionId);
 
@@ -70,7 +70,7 @@ export async function updateLegionMemberDisplayNameAction(
     .where(
       and(
         eq(organizationMembers.organizationId, legionId),
-        eq(organizationMembers.userId, targetUserId)
-      )
+        eq(organizationMembers.userId, targetUserId),
+      ),
     );
 }

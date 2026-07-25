@@ -71,7 +71,10 @@ export async function getUserData(clerkUserId: string) {
   const adminOrgIds = legions.filter((l) => l.role === "org:admin").map((l) => l.id);
 
   // 3. 管理者権限を持つ組織のメンバーを一括取得するためのマップを作成
-  const membersByOrgId = new Map<string, Array<{ userId: string; name: string; displayName: string | null; role: string }>>();
+  const membersByOrgId = new Map<
+    string,
+    Array<{ userId: string; name: string; displayName: string | null; role: string }>
+  >();
 
   if (adminOrgIds.length > 0) {
     // 該当する組織のメンバーをまとめて取得（1回のクエリで済ませる）

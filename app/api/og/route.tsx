@@ -85,10 +85,10 @@ export async function GET(reqest: NextRequest) {
 
           return new ImageResponse(
             <div style={style}>
-              {timeline.map((name) => (
+              {timeline.map((id) => (
                 <Image
-                  src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/order/${name}.png`}
-                  key={name}
+                  src={`https://github.com/loliGothicK/mitamatch-operations-web/raw/main/public/order/${id}.png`}
+                  key={id}
                   alt={"memoria"}
                   width={100}
                   height={100}

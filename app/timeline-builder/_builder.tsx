@@ -1,7 +1,6 @@
 "use client";
 
 import { useAtom } from "jotai";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import {
   type SubmitEvent,
@@ -27,7 +26,6 @@ import HelpOutlined from "@mui/icons-material/HelpOutlined";
 import {
   alpha,
   Autocomplete,
-  Avatar,
   Box,
   Button,
   Card,
@@ -56,6 +54,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { OrderIcon } from "@/components/image/OrderIcon";
 import { useMediaQuery } from "@mui/system";
 
 import { encodeTimeline } from "@/endec/serde";
@@ -232,9 +231,7 @@ export const TimelineItem = ({
           <Tooltip title={order.description} placement="top">
             <ListItem key={order.id} sx={{ padding: 0 }}>
               <ListItemAvatar>
-                <Avatar>
-                  <Image src={`/order/${order.name}.png`} alt={order.name} width={50} height={50} />
-                </Avatar>
+                <OrderIcon order={order} size={50} />
               </ListItemAvatar>
               <ListItemText primary={<Info order={order} />} secondary={order.effect} />
             </ListItem>
@@ -516,13 +513,7 @@ function Source() {
               >
                 <Add color={"warning"} />
               </IconButton>
-              <Image
-                src={`/order/${orders[index].name}.png`}
-                alt={orders[index].name}
-                width={100}
-                height={100}
-                priority={index < 8}
-              />
+              <OrderIcon order={orders[index]} size={100} preload={index < 8} />
               <Stack sx={{ ml: 2 }}>
                 <Typography variant="body1">{orders[index].name}</Typography>
                 <Divider />

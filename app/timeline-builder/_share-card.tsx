@@ -172,7 +172,7 @@ export function TimelineShareCard({
                   />
                   <Box
                     component="img"
-                    src={`/order/${order.name}.png`}
+                    src={`/order/${order.id}.png`}
                     alt={order.name}
                     sx={{
                       width: 64,

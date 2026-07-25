@@ -46,7 +46,6 @@ export type ComputedOrder = OrderWithPic & {
 };
 
 export function useComputedTimeline(timeline: OrderWithPic[]) {
-  console.log(timeline);
   return useMemo((): ComputedOrder[] => {
     let currentRemainingTime = 900; // 15:00
     return timeline.map((order, index) => {

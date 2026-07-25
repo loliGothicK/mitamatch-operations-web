@@ -22,6 +22,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import { type Order, orderList } from "@/domain/order/order";
+import { OrderIcon } from "@/components/image/OrderIcon";
 import { type NodeData, edgeStorageAtom, idAtom, nodeStorageAtom } from "@/jotai/flowAtoms";
 
 import { Handle, type NodeProps, Position } from "reactflow";
@@ -93,11 +94,7 @@ function OrderNode({ id, data, isConnectable }: NodeProps<NodeData>) {
             }}
           >
             {order ? (
-              <CardMedia
-                component="img"
-                sx={{ width: 50, height: 50, padding: 0 }}
-                image={`/order/${order.name}.png`}
-              />
+              <OrderIcon order={order} size={50} />
             ) : (
               <CardMedia component="div">
                 <Skeleton width={50} height={50} />
