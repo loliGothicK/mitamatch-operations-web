@@ -12,6 +12,7 @@ vi.mock("@/_actions/order", () => ({
 
 vi.mock("@/components/image/OrderIcon", () => ({
   OrderIcon: ({ order }: { order: { name: string } }) => (
+    // oxlint-disable-next-line next/no-img-element
     <img src="/order/test.png" alt={order.name} />
   ),
 }));
