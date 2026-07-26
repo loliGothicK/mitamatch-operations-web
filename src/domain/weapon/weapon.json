@@ -1,262 +1,80 @@
 {
   "data": [
     {
-      "id": "01KYF9G2F9MKTCA8WKTCECHTD9",
-      "resourceId": 144,
-      "name": "美琴のコイン",
+      "id": "01KYF9G0GSRHQQ0N7R828G8FYB",
+      "resourceId": 187,
+      "name": "東郷の砲撃台",
       "maker": null,
       "effect": [
         {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
         }
       ],
       "kind": 1,
-      "status": [18000, 10000, 12500, 9500]
+      "status": [10400, 24050, 10400, 20150]
     },
     {
-      "id": "01KYF9DEFSDC2B64HMSMG4RBFN",
-      "resourceId": 60,
-      "name": "ミミング",
-      "maker": "ユグドラシル",
+      "id": "01KYF9DW59DBEE4TA6EGDWV6BH",
+      "resourceId": 146,
+      "name": "食蜂のリモコン",
+      "maker": null,
       "effect": [
         {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/DEFが大アップする。"
         }
       ],
       "kind": 1,
-      "status": [17600, 9900, 16500, 11000]
+      "status": [18500, 7000, 17500, 7000]
     },
     {
-      "id": "01KYF9DCH9T9JV1HK88ZXE44X6",
-      "resourceId": 80,
-      "name": "グングニルカービンSP.TT",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9DAJSQGT105M0K7S1NR8Z",
-      "resourceId": 107,
-      "name": "ブリューナクSP.SS",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [18500, 10000, 11500, 10000]
-    },
-    {
-      "id": "01KYF9D7N1MVND76CAXYAT9NDE",
-      "resourceId": 109,
-      "name": "クリューサーオールSP.IF",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10000, 18500, 10000, 11500]
-    },
-    {
-      "id": "01KYF9D4Q9TAQPNKFP958DWACD",
-      "resourceId": 113,
-      "name": "マルテSP.MF",
+      "id": "01KYF9H1Q97T455CS6162RWHNY",
+      "resourceId": 157,
+      "name": "シャルルマーニュSP.TS",
       "maker": "グランギニョル",
       "effect": [
         {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [18500, 10000, 11500, 10000]
-    },
-    {
-      "id": "01KYF9D1SH4W59HFRDK102H6K1",
-      "resourceId": 280,
-      "name": "ティルフィングSP.MR",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7800, 7800, 24700, 24700]
-    },
-    {
-      "id": "01KYF9CZV1J936XVQN2B8BY0Y3",
-      "resourceId": 12,
-      "name": "ブルンツヴィーク",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9CXWH7PTAP7QCBY27N0GA",
-      "resourceId": 79,
-      "name": "P40型重戦車",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [15000, 8100, 12900, 9000]
-    },
-    {
-      "id": "01KYF9CVY195D5QA7XG4Q14Y2H",
-      "resourceId": 103,
-      "name": "マミのマスケット銃",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [15100, 7550, 13350, 9000]
-    },
-    {
-      "id": "01KYF9CSZHRJ26XQTJ01V67PTD",
-      "resourceId": 197,
-      "name": "クラウ・ソラスSP.HW",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8450, 8450, 24050, 24050]
-    },
-    {
-      "id": "01KYF9CR11RADSW3P4E8H3G2HB",
-      "resourceId": 111,
-      "name": "グングニルカービンSP.KM",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
         }
       ],
       "kind": 2,
       "status": [10446, 10470, 10458, 10626]
     },
     {
-      "id": "01KYF9CP2HH1FCVC57H59Y0MYJ",
-      "resourceId": 77,
-      "name": "チャーチル",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8100, 15000, 9000, 12900]
-    },
-    {
-      "id": "01KYF9CM41JHA5SVK7HQYYBPM6",
-      "resourceId": 144,
-      "name": "美琴のコイン",
+      "id": "01KYF9FZHH5308XH8HJ65YXARX",
+      "resourceId": 152,
+      "name": "エミリアのペンダント",
       "maker": null,
       "effect": [
         {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
         }
       ],
       "kind": 1,
-      "status": [7000, 18500, 7000, 17500]
+      "status": [9100, 26000, 9100, 20800]
     },
     {
-      "id": "01KYF9CJ5HS3CAM24H0K9SH1TF",
-      "resourceId": 281,
-      "name": "ブリューナクFC-01",
-      "maker": "ケルティックデール",
+      "id": "01KYF9K16HNN3CGTXTSMEH6K5S",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24700, 12350, 15600, 12350]
+    },
+    {
+      "id": "01KYF9J8S9EVATQ0WZ0D5KVYNW",
+      "resourceId": 7,
+      "name": "媽祖聖札(マソレリック)",
+      "maker": "台北封神公司",
       "effect": [
         {
           "kind": "対ヒュージ",
@@ -271,58 +89,54 @@
       "status": [10403, 10382, 9943, 9964]
     },
     {
-      "id": "01KYF9EQG94ZWMNE0TG7VJW07R",
-      "resourceId": 44,
-      "name": "アステリオンSP.KR",
+      "id": "01KYF9E301AFZ0QQCBV7RE43S4",
+      "resourceId": 118,
+      "name": "夏凜の刀",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のSp.ATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [9500, 18900, 9500, 12100]
+    },
+    {
+      "id": "01KYF9JRD98XW98VBCEZGFCJG6",
+      "resourceId": 62,
+      "name": "レーヴァテイン",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+20%。メモリア使用時、20%の確率で敵1体のSp.ATK/Sp.DEFが大ダウンする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のSp.ATK/Sp.DEFが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [9900, 17600, 11000, 16500]
+    },
+    {
+      "id": "01KYF9DMB92RQF72F5XNDRDB6P",
+      "resourceId": 84,
+      "name": "クリューサーオールSP.TS",
       "maker": "ヒヒイロカネインターナショナル",
       "effect": [
         {
           "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
         },
         {
           "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
         }
       ],
       "kind": 1,
-      "status": [11882, 11840, 9910, 9868]
-    },
-    {
-      "id": "01KYF9FHW1PAXJJNF0HYEE2SJS",
-      "resourceId": 284,
-      "name": "七星宝剣",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8450, 24700, 8450, 23400]
-    },
-    {
-      "id": "01KYF9EEQ17WQ0CHJF6AYXWZ8A",
-      "resourceId": 133,
-      "name": "友奈の豪腕",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7000, 20000, 7000, 16000]
+      "status": [14580, 7920, 14400, 8100]
     },
     {
       "id": "01KYF9E8VHRKTMC6HGDHWP41RN",
@@ -343,28 +157,226 @@
       "status": [10403, 10382, 9943, 9964]
     },
     {
-      "id": "01KYF9E0290CW85CCTHQMX6X69",
-      "resourceId": 128,
-      "name": "ティルフィングSP.SH",
+      "id": "01KYF9FVMHEYKR2BPHKB2F50X8",
+      "resourceId": 119,
+      "name": "風の大剣",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [18700, 10000, 11300, 10000]
+    },
+    {
+      "id": "01KYF9E9TS0PRY1J3ETFJ0J6RM",
+      "resourceId": 144,
+      "name": "美琴のコイン",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [20000, 7000, 16000, 7000]
+    },
+    {
+      "id": "01KYF9EFP9039SCBDWV9SRQD59",
+      "resourceId": 147,
+      "name": "グングニルカービンSP.TT",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10445, 10471, 10458, 10626]
+    },
+    {
+      "id": "01KYF9DBJ12MMCXFSCPKJ1TZ14",
+      "resourceId": 74,
+      "name": "Ⅳ号戦車H型",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [15000, 8100, 12900, 9000]
+    },
+    {
+      "id": "01KYF9EGNHMY3E4S70QZ6VG701",
+      "resourceId": 53,
+      "name": "ガングニール",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のSp.ATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [9240, 12264, 8820, 11676]
+    },
+    {
+      "id": "01KYF9H7JSQNG8MQXEG24W1P05",
+      "resourceId": 48,
+      "name": "クリューサーオールSP.FA",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のSp.ATK/Sp.DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のSp.ATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [8700, 13050, 9570, 12180]
+    },
+    {
+      "id": "01KYF9CBASG2NWK2T10SR5VC5K",
+      "resourceId": 100,
+      "name": "ほむらの拳銃",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/Sp.ATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [15000, 15000, 7500, 7500]
+    },
+    {
+      "id": "01KYF9J9RHYH48DWKTCBCFBYNS",
+      "resourceId": 121,
+      "name": "園子の槍",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [18700, 10000, 11300, 10000]
+    },
+    {
+      "id": "01KYF9GWV1FP92J4EXY9SXADPD",
+      "resourceId": 69,
+      "name": "カマエル",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8450, 15000, 8550, 13000]
+    },
+    {
+      "id": "01KYF9FA216THV3Q38YJX6SCQF",
+      "resourceId": 131,
+      "name": "ティルフィングSP.TS",
       "maker": "ユグドラシル",
       "effect": [
         {
           "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
         },
         {
           "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
         }
       ],
       "kind": 1,
-      "status": [18500, 10000, 11500, 10000]
+      "status": [13000, 20800, 13000, 18200]
     },
     {
-      "id": "01KYF9DP9SZAP8MR8X767JE6Z0",
-      "resourceId": 282,
-      "name": "青龍偃月刀",
+      "id": "01KYF9K351V12DXVAWQTDXCKE1",
+      "resourceId": 40,
+      "name": "ブリューナク・スノウ",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8400, 12222, 9660, 11718]
+    },
+    {
+      "id": "01KYF9G4DS87M78K61KX23A3BM",
+      "resourceId": 188,
+      "name": "夏凜の豪刀",
       "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10400, 10400, 22100, 22100]
+    },
+    {
+      "id": "01KYF9CK4SW5XCGR0ZPJW2YPSJ",
+      "resourceId": 195,
+      "name": "デュランダルSP.HH",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24050, 10400, 20150, 10400]
+    },
+    {
+      "id": "01KYF9G5D10MJQ7ZWEDN748GXG",
+      "resourceId": 67,
+      "name": "プレシューズ",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+20%。メモリア使用時、20%の確率で敵1体のATK/Sp.ATKが大ダウンする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のATK/Sp.ATKが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [18000, 18000, 9500, 9500]
+    },
+    {
+      "id": "01KYF9JJHSERB5N8HVYME2474A",
+      "resourceId": 27,
+      "name": "シュベルト​クロイツ",
+      "maker": "",
       "effect": [
         {
           "kind": "対ヒュージ",
@@ -376,12 +388,176 @@
         }
       ],
       "kind": 1,
-      "status": [24700, 8450, 23400, 8450]
+      "status": [12501, 8814, 11619, 9066]
     },
     {
-      "id": "01KYF9CCA1PS7C9HQ4YF0MPFE3",
-      "resourceId": 11,
-      "name": "モンドラゴン",
+      "id": "01KYF9H6KH5SXR9DG5E2K027BW",
+      "resourceId": 275,
+      "name": "ゲイボルグFC-01",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9JBQ1F2CYE9GQGN66Q7JT",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10400, 24700, 10400, 19500]
+    },
+    {
+      "id": "01KYF9FYJ9HQA7ZJJNY87F0E2D",
+      "resourceId": 46,
+      "name": "シャルルマーニュ改.FS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方2体のSp.ATKが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛2体のSp.ATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [8566, 12764, 9994, 12176]
+    },
+    {
+      "id": "01KYF9JSCH8N8JW7B1RWQK99EP",
+      "resourceId": 94,
+      "name": "エクスカリバー",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [7875, 15000, 9000, 13125]
+    },
+    {
+      "id": "01KYF9JGK9Q2GPZQA03YJ9X0PD",
+      "resourceId": 126,
+      "name": "ブルトガングGLT",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [20000, 10000, 10000, 10000]
+    },
+    {
+      "id": "01KYF9D8M965BW0YH6YHP8S1E1",
+      "resourceId": 61,
+      "name": "グンフィエズル",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9FQQHKR9KPR241Z2419Y3",
+      "resourceId": 161,
+      "name": "クリューサーオールSP.MN",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [22100, 11700, 19500, 11700]
+    },
+    {
+      "id": "01KYF9FKTHQX2J6T4SACMRCE2X",
+      "resourceId": 283,
+      "name": "方天画戟",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、水属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [7800, 7800, 24700, 24700]
+    },
+    {
+      "id": "01KYF9JAQS9FXHHNGKPQB2P4V6",
+      "resourceId": 286,
+      "name": "マルテFC-01",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9JMG9M9VQXHR1TXJF78E8",
+      "resourceId": 199,
+      "name": "プレシューズFC-01",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+25%。メモリア使用時、30%の確率で敵1体のATK/Sp.ATKが大ダウンする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のATK/Sp.ATKが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [21273, 21273, 11227, 11227]
+    },
+    {
+      "id": "01KYF9FWKSRS8K8XEYQNBPE46Q",
+      "resourceId": 302,
+      "name": "シュガールFC-01",
       "maker": "アウニャメンディ・システマス",
       "effect": [
         {
@@ -397,172 +573,10 @@
       "status": [10403, 10382, 9943, 9964]
     },
     {
-      "id": "01KYF9DX4H2N39BEC5CV7JWN5Q",
-      "resourceId": 174,
-      "name": "コルブランドFC-01",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [1350, 1350, 1350, 1350]
-    },
-    {
-      "id": "01KYF9DV61ERWT364M5ZZHCC1J",
-      "resourceId": 26,
-      "name": "BD・ホーネット",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9150, 12564, 8310, 11976]
-    },
-    {
-      "id": "01KYF9DQ91RDH2G8ZQSP4HWWJ5",
-      "resourceId": 66,
-      "name": "シャルルマーニュSP.TT",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9DJCSXR6NB8KVJKQAJRMV",
-      "resourceId": 257,
-      "name": "グングニルSP.TM",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [6500, 6500, 26000, 26000]
-    },
-    {
-      "id": "01KYF9CG71RPMG0VGRVW85AQGN",
-      "resourceId": 85,
-      "name": "コルブランド",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [1350, 1350, 1350, 1350]
-    },
-    {
-      "id": "01KYF9CF7S2YAJBFD9A4YZTWSR",
-      "resourceId": 176,
-      "name": "キャリバーンFC-01",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [1350, 1350, 1350, 1350]
-    },
-    {
-      "id": "01KYF9CE8HEFAF4M33W7HFB4K6",
-      "resourceId": 101,
-      "name": "さやかの剣",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [15100, 7550, 13350, 9000]
-    },
-    {
-      "id": "01KYF9H9H9J7C1XTKAPZEMRRBJ",
-      "resourceId": 71,
-      "name": "ザフキエル",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9H7JSQNG8MQXEG24W1P05",
-      "resourceId": 48,
-      "name": "クリューサーオールSP.FA",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8700, 13050, 9570, 12180]
-    },
-    {
-      "id": "01KYF9H6KH5SXR9DG5E2K027BW",
-      "resourceId": 275,
-      "name": "ゲイボルグFC-01",
-      "maker": "ケルティックデール",
+      "id": "01KYF9E6X1RDHADYHWMHSW7659",
+      "resourceId": 262,
+      "name": "モンドラゴンFC-01",
+      "maker": "アウニャメンディ・システマス",
       "effect": [
         {
           "kind": "対ヒュージ",
@@ -584,1065 +598,21 @@
       "effect": [
         {
           "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+20%。メモリア使用時、20%の確率で味方1体のSp.ATK/Sp.DEFが大アップする。"
         },
         {
           "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のSp.ATK/Sp.DEFが大アップする。"
         }
       ],
       "kind": 1,
       "status": [9900, 17600, 11000, 16500]
     },
     {
-      "id": "01KYF9H2PHBCSBGAH5YTKPZESK",
-      "resourceId": 33,
-      "name": "マルテSP.KM",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10355, 10130, 12380, 12153]
-    },
-    {
-      "id": "01KYF9GZRSRSB6YA0W12CCE5MM",
-      "resourceId": 132,
-      "name": "Hi-タンキエム",
-      "maker": "月読技研ベトナム支社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [20800, 20800, 11700, 11700]
-    },
-    {
-      "id": "01KYF9GWV1FP92J4EXY9SXADPD",
-      "resourceId": 69,
-      "name": "カマエル",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8450, 15000, 8550, 13000]
-    },
-    {
-      "id": "01KYF9H4N1329ES353086NMPR6",
-      "resourceId": 25,
-      "name": "RH・エストレア",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8520, 11934, 8940, 12606]
-    },
-    {
-      "id": "01KYF9H1Q97T455CS6162RWHNY",
-      "resourceId": 157,
-      "name": "シャルルマーニュSP.TS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9GYSH97DKREWW1FAP0N3H",
-      "resourceId": 68,
-      "name": "サンダルフォン",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8550, 13950, 9450, 13050]
-    },
-    {
-      "id": "01KYF9GXT9975TZ5W8YSCSQ8BY",
-      "resourceId": 171,
-      "name": "フラガラッハFC-01",
-      "maker": "ケルティックデール社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [19500, 19500, 13000, 13000]
-    },
-    {
-      "id": "01KYF9HBFSQ3QQW1TRPKCPY4MR",
-      "resourceId": 83,
-      "name": "ブルンツヴィークSP.IS",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7920, 14580, 8100, 14400]
-    },
-    {
-      "id": "01KYF9FWKSRS8K8XEYQNBPE46Q",
-      "resourceId": 302,
-      "name": "シュガールFC-01",
+      "id": "01KYF9CCA1PS7C9HQ4YF0MPFE3",
+      "resourceId": 11,
+      "name": "モンドラゴン",
       "maker": "アウニャメンディ・システマス",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9FTN9Z3SW0SQKS7G83ZE1",
-      "resourceId": 147,
-      "name": "グングニルカービンSP.TT",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10445, 10471, 10458, 10626]
-    },
-    {
-      "id": "01KYF9J001X9MZZXSB780PYSWW",
-      "resourceId": 39,
-      "name": "ジャック・オー・マルテ",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [12600, 9030, 10920, 9450]
-    },
-    {
-      "id": "01KYF9HX29FAG75N5GNXDNW64D",
-      "resourceId": 189,
-      "name": "風の豪剣",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9750, 26000, 9750, 19500]
-    },
-    {
-      "id": "01KYF9HW31V7SWS8Z7GJNN07DN",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9500, 19000, 9500, 12000]
-    },
-    {
-      "id": "01KYF9HS59KAP1T58E0HKY2ZW9",
-      "resourceId": 82,
-      "name": "グングニルSP.HM",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13950, 13950, 8550, 8550]
-    },
-    {
-      "id": "01KYF9HP7HR3NPVBJGMWZBHZ8J",
-      "resourceId": 120,
-      "name": "樹の花輪",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [17000, 17000, 8000, 8000]
-    },
-    {
-      "id": "01KYF9HEDHRDHC64VRVMQG8RTT",
-      "resourceId": 146,
-      "name": "食蜂のリモコン",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7000, 18000, 7000, 18000]
-    },
-    {
-      "id": "01KYF9HAGHSMZQD863B9H9XQFT",
-      "resourceId": 22,
-      "name": "アステリオンマギカノン",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [12180, 9240, 11760, 8820]
-    },
-    {
-      "id": "01KYF9HV3S0N82FMZJV7KAHY67",
-      "resourceId": 65,
-      "name": "タスラム",
-      "maker": "ケルティックデール社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10175, 10175, 17325, 17325]
-    },
-    {
-      "id": "01KYF9HQ6SG6QP71Y3E3ZDDRMF",
-      "resourceId": 145,
-      "name": "黒子の金属矢",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [18000, 18000, 7000, 7000]
-    },
-    {
-      "id": "01KYF9HM91M783990HCG11T6JH",
-      "resourceId": 49,
-      "name": "エゼルリング",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9450, 9450, 13050, 13050]
-    },
-    {
-      "id": "01KYF9DFF1QFBEK42WMAAQ8NX3",
-      "resourceId": 36,
-      "name": "ブルンツヴィークSP.WA",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9450, 12825, 12600, 10125]
-    },
-    {
-      "id": "01KYF9D6NS9EK4SND1SP2KVVMV",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8450, 24050, 8450, 24050]
-    },
-    {
-      "id": "01KYF9CN39HVN0E2NX1SNYP5VH",
-      "resourceId": 58,
-      "name": "マルミアドワーズ",
-      "maker": "ウルカヌス・インダストリー社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [17600, 9900, 16500, 11000]
-    },
-    {
-      "id": "01KYF9CBASG2NWK2T10SR5VC5K",
-      "resourceId": 100,
-      "name": "ほむらの拳銃",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [15000, 15000, 7500, 7500]
-    },
-    {
-      "id": "01KYF9JSCH8N8JW7B1RWQK99EP",
-      "resourceId": 94,
-      "name": "エクスカリバー",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7875, 15000, 9000, 13125]
-    },
-    {
-      "id": "01KYF9HDE98XNY8SZD4XH17W87",
-      "resourceId": 88,
-      "name": "タンキエム・サマー",
-      "maker": "月読技研ベトナム支社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8100, 14400, 8460, 14040]
-    },
-    {
-      "id": "01KYF9HCF1GXXGX997TDJ8DVRD",
-      "resourceId": 51,
-      "name": "ブルトガングSP.MK",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8550, 13500, 9450, 13500]
-    },
-    {
-      "id": "01KYF9H8J1MCC9N95MKQ7V660H",
-      "resourceId": 31,
-      "name": "ブリューナクSP.TI",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [12205, 10467, 10254, 12074]
-    },
-    {
-      "id": "01KYF9HY1HN3QCEZBYXV9JWZMT",
-      "resourceId": 42,
-      "name": "グングニルSP.HY",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9955, 9730, 11980, 11753]
-    },
-    {
-      "id": "01KYF9HT4HMG58436PEKFER732",
-      "resourceId": 70,
-      "name": "ザフキエル",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13950, 8550, 13050, 9450]
-    },
-    {
-      "id": "01KYF9J1YHVK9PRY4V7A789B06",
-      "resourceId": 177,
-      "name": "キャリバーンFC-01",
-      "maker": "キャメロットキャッスル社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [20800, 20800, 11700, 11700]
-    },
-    {
-      "id": "01KYF9K07907C5T65H9AZ5N4Z6",
-      "resourceId": 201,
-      "name": "ミミングFC-01",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [20800, 11700, 19500, 13000]
-    },
-    {
-      "id": "01KYF9HN89Z0V45T62AFW2T4JE",
-      "resourceId": 129,
-      "name": "モンドラゴンSP.KH",
-      "maker": "アウニャメンディ・システマス",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10000, 20000, 10000, 10000]
-    },
-    {
-      "id": "01KYF9JQE1W09T6NBF8V8PHC18",
-      "resourceId": 97,
-      "name": "ガングニール",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [14625, 7875, 13950, 8550]
-    },
-    {
-      "id": "01KYF9HK9SYYSAS8X26WVKP9Y3",
-      "resourceId": 93,
-      "name": "干将",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [15000, 7875, 13125, 9000]
-    },
-    {
-      "id": "01KYF9JNFHT36GHEZ8TXEQ59DT",
-      "resourceId": 220,
-      "name": "グラムSP.TH",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8450, 8450, 24050, 24050]
-    },
-    {
-      "id": "01KYF9GVVSAPG235W49BMYKBT4",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9750, 9750, 22750, 22750]
-    },
-    {
-      "id": "01KYF9GTWH9MY9EY1ZTYYCTAB3",
-      "resourceId": 287,
-      "name": "アステリオンFC-01",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9K16HNN3CGTXTSMEH6K5S",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24700, 12350, 15600, 12350]
-    },
-    {
-      "id": "01KYF9GM1S2BV1C7JGAZTD49VH",
-      "resourceId": 34,
-      "name": "クリューサーオールSP.TT",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13500, 9900, 12600, 9000]
-    },
-    {
-      "id": "01KYF9GK2H21H2TTZN3M96573D",
-      "resourceId": 89,
-      "name": "ジャック・モンドラゴン",
-      "maker": "アウニャメンディ・システマス",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [14400, 14400, 8100, 8100]
-    },
-    {
-      "id": "01KYF9JMG9M9VQXHR1TXJF78E8",
-      "resourceId": 199,
-      "name": "プレシューズFC-01",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [21273, 21273, 11227, 11227]
-    },
-    {
-      "id": "01KYF9J7T1VQ914TA6KEJFE9TN",
-      "resourceId": 115,
-      "name": "アルケミートレースSP.SR",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10000, 20000, 10000, 10000]
-    },
-    {
-      "id": "01KYF9HR61TEB420WWRKPTGTMD",
-      "resourceId": 2,
-      "name": "ブリューナク",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9JZ81CC78RH6S5PH6MBGQ",
-      "resourceId": 104,
-      "name": "アステリオンSP.WL",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [14625, 7875, 13950, 8550]
-    },
-    {
-      "id": "01KYF9HHB984DXPHHWSG34AECS",
-      "resourceId": 64,
-      "name": "キャリバーン",
-      "maker": "キャメロットキャッスル社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [17600, 17600, 9900, 9900]
-    },
-    {
-      "id": "01KYF9GQYSM2WBNMRDX4CK4QX4",
-      "resourceId": 16,
-      "name": "リサナウト",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9GPZHMHWCR2RFYX0Q86EM",
-      "resourceId": 73,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10400, 24700, 8450, 21450]
-    },
-    {
-      "id": "01KYF9H3NS9T1W82G2EJQTPD8V",
-      "resourceId": 122,
-      "name": "グングニルカービンSP.CE",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10445, 10471, 10458, 10626]
-    },
-    {
-      "id": "01KYF9H0R1ZPNWGCK3WS3DMCJ3",
-      "resourceId": 72,
-      "name": "ティルフィングPrtSP",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9EPH124BJK0REEMMNQDJS",
-      "resourceId": 3,
-      "name": "ジョワユーズ",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9EJM1VY2SH3DWM777QST7",
-      "resourceId": 56,
-      "name": "ラピス・フィロソフィカス",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [12516, 9408, 11676, 8400]
-    },
-    {
-      "id": "01KYF9CH698MTDNGE12WCY9YEV",
-      "resourceId": 63,
-      "name": "アロンダイト",
-      "maker": "キャメロットキャッスル社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10450, 10450, 17050, 17050]
-    },
-    {
-      "id": "01KYF9GC7S9XE3H0V6CB169Q8Y",
-      "resourceId": 159,
-      "name": "グラムSP.MW",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [11700, 22100, 11700, 19500]
-    },
-    {
-      "id": "01KYF9G8AS6GS5VY977PT3B3Z8",
-      "resourceId": 87,
-      "name": "デュランダル・サマー",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13725, 8100, 13275, 9900]
-    },
-    {
-      "id": "01KYF9GD71RXMVYAZV8ER27FSA",
-      "resourceId": 47,
-      "name": "グングニルSP.KY",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13050, 8700, 12180, 9570]
-    },
-    {
-      "id": "01KYF9GA99MG5RXBZ0SNC7V1FD",
-      "resourceId": 146,
-      "name": "食蜂のリモコン",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7000, 8000, 17000, 18000]
-    },
-    {
-      "id": "01KYF9FNS1RHE9KDYHQ27NTKHW",
-      "resourceId": 134,
-      "name": "ムラマサ・ブレード",
-      "maker": "天津重工",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24050, 24050, 8450, 8450]
-    },
-    {
-      "id": "01KYF9E3Z9Y2M6XH17AKEMWGK7",
-      "resourceId": 306,
-      "name": "タンキエム・サマーFC-01",
-      "maker": "月読技研ベトナム支社",
       "effect": [
         {
           "kind": "対ヒュージ",
@@ -1664,1491 +634,15 @@
       "effect": [
         {
           "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+25%。メモリア使用時、30%の確率で敵1体のDEF/Sp.DEFが大ダウンする。"
         },
         {
           "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のDEF/Sp.DEFが大ダウンする。"
         }
       ],
       "kind": 1,
       "status": [12350, 12350, 20150, 20150]
-    },
-    {
-      "id": "01KYF9E4YHQQEK1ZKJXB1RJ108",
-      "resourceId": 145,
-      "name": "黒子の金属矢",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7000, 20000, 7000, 16000]
-    },
-    {
-      "id": "01KYF9E20S8JE7RQ9959RXK1TC",
-      "resourceId": 130,
-      "name": "デュランダルSP.HY",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [20800, 13000, 18200, 13000]
-    },
-    {
-      "id": "01KYF9DZ31NSDFH6PR7NCENWBG",
-      "resourceId": 169,
-      "name": "ティルフィングMCC-B",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24050, 24050, 8450, 8450]
-    },
-    {
-      "id": "01KYF9DS7HTV6N0VQPZPTBJRXP",
-      "resourceId": 136,
-      "name": "グラムMCCブースト",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13000, 20800, 13000, 18200]
-    },
-    {
-      "id": "01KYF9DNAH6TSKAFEBHJEXJ8Q1",
-      "resourceId": 145,
-      "name": "黒子の金属矢",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [19000, 7000, 17000, 7000]
-    },
-    {
-      "id": "01KYF9DKC189TCNM5K7TSV7QA1",
-      "resourceId": 50,
-      "name": "シュガールSP.AS",
-      "maker": "アウニャメンディ・システマス",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13500, 8550, 13500, 9450]
-    },
-    {
-      "id": "01KYF9DGE9Q00HEHCHR12Q06PQ",
-      "resourceId": 289,
-      "name": "バイデント",
-      "maker": "ウルカヌス・インダストリー社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [45600, 45600, 14400, 14400]
-    },
-    {
-      "id": "01KYF9HGC109EJBP2PNK1D752T",
-      "resourceId": 256,
-      "name": "ブルトガングSP.AH",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7800, 7800, 24700, 24700]
-    },
-    {
-      "id": "01KYF9JRD98XW98VBCEZGFCJG6",
-      "resourceId": 62,
-      "name": "レーヴァテイン",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9900, 17600, 11000, 16500]
-    },
-    {
-      "id": "01KYF9FC0HYR5YC22HAQ5MFD1G",
-      "resourceId": 186,
-      "name": "友奈の神装甲手",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [26000, 9750, 19500, 9750]
-    },
-    {
-      "id": "01KYF9EFP9039SCBDWV9SRQD59",
-      "resourceId": 80,
-      "name": "グングニルカービンSP.TT",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10445, 10471, 10458, 10626]
-    },
-    {
-      "id": "01KYF9ECRH0VVY7Q985J1YB7KP",
-      "resourceId": 28,
-      "name": "グングニルカービンSP.BE",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10445, 10471, 10458, 10626]
-    },
-    {
-      "id": "01KYF9EAT1MMZC277K1FBFK954",
-      "resourceId": 92,
-      "name": "マジカルサファイア",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7875, 15000, 9000, 13125]
-    },
-    {
-      "id": "01KYF9E7W924104VMWN7S0512Z",
-      "resourceId": 127,
-      "name": "アステリオンSP.KY",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10000, 18000, 9500, 12500]
-    },
-    {
-      "id": "01KYF9ENHSFA55TR8C66A67YG1",
-      "resourceId": 255,
-      "name": "ティルフィングSP.SC",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [26000, 26000, 6500, 6500]
-    },
-    {
-      "id": "01KYF9EMJHQB20DRT7VPCKHZ2Z",
-      "resourceId": 188,
-      "name": "夏凜の豪刀",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10400, 24700, 10400, 19500]
-    },
-    {
-      "id": "01KYF9EKK9P695J0PVDGFAE7C3",
-      "resourceId": 13,
-      "name": "クリューサーオール",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9EHMSHWCFTWXVJKJ8167Q",
-      "resourceId": 110,
-      "name": "ティルフィングSP.MM",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10000, 18500, 10000, 11500]
-    },
-    {
-      "id": "01KYF9GJ39NTDZX02P4W2SG4QN",
-      "resourceId": 200,
-      "name": "レーヴァテインFC-01",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [11700, 20800, 13000, 19500]
-    },
-    {
-      "id": "01KYF9EYB1KZ0PJT7VNMSKYK3V",
-      "resourceId": 153,
-      "name": "レムの鉄球",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [26000, 9100, 20800, 9100]
-    },
-    {
-      "id": "01KYF9CABHQQD26HE4YWYXZBNM",
-      "resourceId": 21,
-      "name": "グラム",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [11191, 11218, 11205, 11385]
-    },
-    {
-      "id": "01KYF9K62SYNJ6Y66MBM1NSS1P",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [23400, 10400, 20800, 10400]
-    },
-    {
-      "id": "01KYF9K351V12DXVAWQTDXCKE1",
-      "resourceId": 40,
-      "name": "ブリューナク・スノウ",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8400, 12222, 9660, 11718]
-    },
-    {
-      "id": "01KYF9K4497VXXCVYJJNRDGG2K",
-      "resourceId": 301,
-      "name": "ブルンツヴィークFC-01",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9JHJH6N0AP8536XZYBF20",
-      "resourceId": 192,
-      "name": "ブリューナクSP.KM",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24050, 24050, 8450, 8450]
-    },
-    {
-      "id": "01KYF9JFM1JQBPZRH43GZR118A",
-      "resourceId": 215,
-      "name": "シュガールSP.TN",
-      "maker": "アウニャメンディ・システマス",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10400, 24050, 10400, 20150]
-    },
-    {
-      "id": "01KYF9JCP97YYJZVBGEF1PBTGQ",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [22100, 11700, 19500, 11700]
-    },
-    {
-      "id": "01KYF9J9RHYH48DWKTCBCFBYNS",
-      "resourceId": 121,
-      "name": "園子の槍",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [18700, 10000, 11300, 10000]
-    },
-    {
-      "id": "01KYF9J3X19WP7WNQ3B0MYW5Y3",
-      "resourceId": 112,
-      "name": "アステリオンマギカノンSP.KM",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [18500, 10000, 11500, 10000]
-    },
-    {
-      "id": "01KYF9JEMSDZR9MHJHVYEEZRSV",
-      "resourceId": 108,
-      "name": "グングニルカービンSP.IF",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10445, 10471, 10458, 10626]
-    },
-    {
-      "id": "01KYF9JPES2ZZ44MY94VD82SRB",
-      "resourceId": 30,
-      "name": "アステリオンSP.EA",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [12218, 10480, 11925, 10377]
-    },
-    {
-      "id": "01KYF9J8S9EVATQ0WZ0D5KVYNW",
-      "resourceId": 7,
-      "name": "媽祖聖札(マソレリック)",
-      "maker": "台北封神公司",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9J2XS52TFGK3ZGJSD3T8P",
-      "resourceId": 54,
-      "name": "神獣鏡",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [11424, 11298, 9702, 9576]
-    },
-    {
-      "id": "01KYF9JAQS9FXHHNGKPQB2P4V6",
-      "resourceId": 286,
-      "name": "マルテFC-01",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9J4W90E0VE38401G1F38S",
-      "resourceId": 66,
-      "name": "シャルルマーニュSP.TT",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [9660, 9660, 11340, 11340]
-    },
-    {
-      "id": "01KYF9J5VHAG7YPNKTW38A68AY",
-      "resourceId": 152,
-      "name": "エミリアのペンダント",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [22100, 11700, 19500, 11700]
-    },
-    {
-      "id": "01KYF9HZ0SD30BP28TW8AHQMTY",
-      "resourceId": 141,
-      "name": "グングニルカービンSP.BE",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10445, 10471, 10458, 10626]
-    },
-    {
-      "id": "01KYF9K25S49CNNVQ53QT9P0B9",
-      "resourceId": 303,
-      "name": "ミュルグレス",
-      "maker": "グランギニョル社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [14400, 14400, 45600, 45600]
-    },
-    {
-      "id": "01KYF9HFCSZ659GHP7B1JS16QY",
-      "resourceId": 259,
-      "name": "シュガールSP.KI",
-      "maker": "アウニャメンディ・システマス",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [6500, 6500, 26000, 26000]
-    },
-    {
-      "id": "01KYF9G6C9RNF93JHTB2KFSCKW",
-      "resourceId": 196,
-      "name": "クリューサーオールSP.SK",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24050, 24050, 8450, 8450]
-    },
-    {
-      "id": "01KYF9G5D10MJQ7ZWEDN748GXG",
-      "resourceId": 67,
-      "name": "プレシューズ",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [18000, 18000, 9500, 9500]
-    },
-    {
-      "id": "01KYF9G3EHW6A4176GAE699BEF",
-      "resourceId": 230,
-      "name": "ブルトガングSP.SO",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [26000, 26000, 6500, 6500]
-    },
-    {
-      "id": "01KYF9G1G1G322WCD2HB756VRF",
-      "resourceId": 45,
-      "name": "フィエルボワ",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9G0GSRHQQ0N7R828G8FYB",
-      "resourceId": 187,
-      "name": "東郷の砲撃台",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10400, 24050, 10400, 20150]
-    },
-    {
-      "id": "01KYF9FXK1KR03AHGSPSYBC5S9",
-      "resourceId": 32,
-      "name": "グングニルSP.EK",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10418, 12014, 10395, 12173]
-    },
-    {
-      "id": "01KYF9FVMHEYKR2BPHKB2F50X8",
-      "resourceId": 119,
-      "name": "風の大剣",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [18700, 10000, 11300, 10000]
-    },
-    {
-      "id": "01KYF9FSP1A2FJ0D1ZKE9KK6CM",
-      "resourceId": 95,
-      "name": "ナインライブズ",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [15000, 7875, 13125, 9000]
-    },
-    {
-      "id": "01KYF9FQQHKR9KPR241Z2419Y3",
-      "resourceId": 161,
-      "name": "クリューサーオールSP.MN",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [22100, 11700, 19500, 11700]
-    },
-    {
-      "id": "01KYF9FPR98KNHT7JKDGH4JAD6",
-      "resourceId": 102,
-      "name": "杏子の槍",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7550, 15100, 9000, 13350]
-    },
-    {
-      "id": "01KYF9FMSS3PCF4VVXJ2T9PNVG",
-      "resourceId": 57,
-      "name": "フラガラッハ",
-      "maker": "ケルティックデール社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [16500, 16500, 11000, 11000]
-    },
-    {
-      "id": "01KYF9F09H6D4CBAHGVDP1G51Q",
-      "resourceId": 6,
-      "name": "タンキエム",
-      "maker": "月読技研ベトナム支社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9EZA95935GVDBRYF9A823",
-      "resourceId": 10,
-      "name": "ブルトガング",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9EXBSAWCSMD4HPE1G6X7X",
-      "resourceId": 105,
-      "name": "ゲイボルグSP.HA",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7425, 14850, 8550, 14175]
-    },
-    {
-      "id": "01KYF9EVD9984G6G2RAJ8XS569",
-      "resourceId": 173,
-      "name": "コルブランドFC-01",
-      "maker": "キャメロットキャッスル社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [11700, 20800, 13000, 19500]
-    },
-    {
-      "id": "01KYF9ETE1QSW4N2KEPJD9FC4D",
-      "resourceId": 73,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13950, 13950, 8550, 8550]
-    },
-    {
-      "id": "01KYF9ESES5KSBHT9E73MFRJ15",
-      "resourceId": 276,
-      "name": "リサナウトFC-01",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9ERFHHGNTV6DMHCZ82FK5",
-      "resourceId": 279,
-      "name": "デュランダルV01",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24700, 24700, 7800, 7800]
-    },
-    {
-      "id": "01KYF9GH41XRXK6RQ7VM80ZNAG",
-      "resourceId": 81,
-      "name": "アルケミートレース",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [14625, 7875, 14625, 7875]
-    },
-    {
-      "id": "01KYF9GG4S526PHJWDDZTK1WKH",
-      "resourceId": 263,
-      "name": "アステリオンSP.FS",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7800, 24700, 7800, 24700]
-    },
-    {
-      "id": "01KYF9GP096Q7W51VE9C3TFNNS",
-      "resourceId": 190,
-      "name": "樹の大花環",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [26000, 9750, 19500, 9750]
-    },
-    {
-      "id": "01KYF9FFXHC0XHHW5G6R16C7P8",
-      "resourceId": 228,
-      "name": "リサナウトSP.ES",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [26000, 6500, 26000, 6500]
-    },
-    {
-      "id": "01KYF9FCZSHKH1R9HJZWKCS3CA",
-      "resourceId": 260,
-      "name": "グラムSP.TC",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24700, 24700, 7800, 7800]
-    },
-    {
-      "id": "01KYF9FA216THV3Q38YJX6SCQF",
-      "resourceId": 131,
-      "name": "ティルフィングSP.TS",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13000, 20800, 13000, 18200]
-    },
-    {
-      "id": "01KYF9F7494RWQ8F9WZ8AWPQVJ",
-      "resourceId": 55,
-      "name": "イチイバル",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [12180, 8862, 11760, 9198]
-    },
-    {
-      "id": "01KYF9EGNHMY3E4S70QZ6VG701",
-      "resourceId": 53,
-      "name": "ガングニール",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9240, 12264, 8820, 11676]
-    },
-    {
-      "id": "01KYF9EDQSTB82V77BQQSDWR0F",
-      "resourceId": 23,
-      "name": "アステリオンSP.MM",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10703, 10082, 10243, 9664]
-    },
-    {
-      "id": "01KYF9EBS9TFXWRQRP4RAG2MGW",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24700, 10400, 19500, 10400]
-    },
-    {
-      "id": "01KYF9E9TS0PRY1J3ETFJ0J6RM",
-      "resourceId": 144,
-      "name": "美琴のコイン",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [20000, 7000, 16000, 7000]
-    },
-    {
-      "id": "01KYF9E6X1RDHADYHWMHSW7659",
-      "resourceId": 262,
-      "name": "モンドラゴンFC-01",
-      "maker": "アウニャメンディ・システマス",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9E5XS7JZNKRXHHTX3DRBV",
-      "resourceId": 315,
-      "name": "グングニルV01",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [45600, 45600, 14400, 14400]
-    },
-    {
-      "id": "01KYF9E301AFZ0QQCBV7RE43S4",
-      "resourceId": 118,
-      "name": "夏凜の刀",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9500, 18900, 9500, 12100]
-    },
-    {
-      "id": "01KYF9DY3SADQWR5YHAVX1ZB6Q",
-      "resourceId": 229,
-      "name": "アステリオンSP.TM",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [6500, 26000, 6500, 26000]
-    },
-    {
-      "id": "01KYF9DW59DBEE4TA6EGDWV6BH",
-      "resourceId": 146,
-      "name": "食蜂のリモコン",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [18500, 7000, 17500, 7000]
-    },
-    {
-      "id": "01KYF9DT6ST2TQ3DGXB9SDCC74",
-      "resourceId": 86,
-      "name": "キャリバーン",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [1350, 1350, 1350, 1350]
-    },
-    {
-      "id": "01KYF9DR899M1JST987JB4B2TW",
-      "resourceId": 35,
-      "name": "ティルフィングSP.MT",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [14400, 8550, 13500, 8550]
-    },
-    {
-      "id": "01KYF9DMB92RQF72F5XNDRDB6P",
-      "resourceId": 84,
-      "name": "クリューサーオールSP.TS",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [14580, 7920, 14400, 8100]
-    },
-    {
-      "id": "01KYF9DHDHVF1FR3J4HP5NEZX9",
-      "resourceId": 106,
-      "name": "ティルフィングSP.YH",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [14850, 7425, 14175, 8550]
-    },
-    {
-      "id": "01KYF9CD99PKTHFF38YW210CG3",
-      "resourceId": 191,
-      "name": "園子の方舟",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8450, 8450, 24050, 24050]
-    },
-    {
-      "id": "01KYF9FKTHQX2J6T4SACMRCE2X",
-      "resourceId": 283,
-      "name": "方天画戟",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7800, 7800, 24700, 24700]
-    },
-    {
-      "id": "01KYF9FJV97DGX0SMKS9M28QYJ",
-      "resourceId": 156,
-      "name": "ラムの花飾り",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [23400, 10400, 20800, 10400]
-    },
-    {
-      "id": "01KYF9FGWSN7QHDP3Y8GTY0V8H",
-      "resourceId": 108,
-      "name": "グングニルカービンSP.IF",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9FEY97NF45M0PVFFEGF0J",
-      "resourceId": 188,
-      "name": "夏凜の豪刀",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
     },
     {
       "id": "01KYF9FDZ1PQXNRQWGZ0DP2WPX",
@@ -3157,592 +651,26 @@
       "maker": "グランギニョル",
       "effect": [
         {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、水属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
         }
       ],
       "kind": 1,
       "status": [8450, 24700, 8450, 23400]
     },
     {
-      "id": "01KYF9FB19JG0SZBSJB4N81YNY",
-      "resourceId": 28,
-      "name": "グングニルカービンSP.BE",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9F92SA1XYDKAF5Z96QFAG",
-      "resourceId": 117,
-      "name": "シロガネ",
+      "id": "01KYF9EYB1KZ0PJT7VNMSKYK3V",
+      "resourceId": 153,
+      "name": "レムの鉄球",
       "maker": null,
       "effect": [
         {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
         }
       ],
       "kind": 1,
-      "status": [8500, 8500, 16500, 16500]
-    },
-    {
-      "id": "01KYF9F83HDGHPRSGN5E8JCZVV",
-      "resourceId": 9,
-      "name": "ニョルニール",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9F6515JTY5BYK5EX5VZNC",
-      "resourceId": 99,
-      "name": "まどかの弓",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [7550, 15100, 9000, 13350]
-    },
-    {
-      "id": "01KYF9F55SK48QAXW3K4P4GJE1",
-      "resourceId": 142,
-      "name": "夏凜の刀",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9F46HDEEHGZJJZQPXAX1Q",
-      "resourceId": 155,
-      "name": "ラムの杖",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [11700, 22100, 11700, 19500]
-    },
-    {
-      "id": "01KYF9F379ZHVKTW4ZWCZEPDZ7",
-      "resourceId": 181,
-      "name": "ブルンツヴィークSP.TY",
-      "maker": "ヒヒイロカネインターナショナル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8450, 8450, 24050, 24050]
-    },
-    {
-      "id": "01KYF9F281HA5DMAE7TFNGV4HF",
-      "resourceId": 4,
-      "name": "グングニルSP.FF",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9F18SKK9RYATCT58W0M2V",
-      "resourceId": 24,
-      "name": "グングニル・サマー",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9240, 12180, 8820, 11760]
-    },
-    {
-      "id": "01KYF9JX9H92FVQX1GSTNY6SC0",
-      "resourceId": 18,
-      "name": "マルテ",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9G4DS87M78K61KX23A3BM",
-      "resourceId": 188,
-      "name": "夏凜の豪刀",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10400, 10400, 22100, 22100]
-    },
-    {
-      "id": "01KYF9FZHH5308XH8HJ65YXARX",
-      "resourceId": 152,
-      "name": "エミリアのペンダント",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9100, 26000, 9100, 20800]
-    },
-    {
-      "id": "01KYF9FRPSTXMHB1Z3GBQY3WRH",
-      "resourceId": 1,
-      "name": "グングニル",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9JTBSGBW7ACKCTZ0BEAK7",
-      "resourceId": 143,
-      "name": "グングニルカービンSP.MK",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 2,
-      "status": [10446, 10470, 10458, 10626]
-    },
-    {
-      "id": "01KYF9GN11ZA9DFS6ECWHGTKMG",
-      "resourceId": 261,
-      "name": "クラウ・ソラスFC-01",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9GSX9P5KZ3XP4AVX4BJJA",
-      "resourceId": 43,
-      "name": "デュランダルSP.TM",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [9787, 9788, 11745, 12180]
-    },
-    {
-      "id": "01KYF9J0Z90TEPSR6ZMJJMAEBS",
-      "resourceId": 73,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [45600, 45600, 14400, 14400]
-    },
-    {
-      "id": "01KYF9JDNHT5QEMB0M4MAKZ57N",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [11700, 22100, 11700, 19500]
-    },
-    {
-      "id": "01KYF9GRY18FXBQ34YM4GTHFTR",
-      "resourceId": 5,
-      "name": "ティルフィング",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9JY8SNRPA0BVSYCY4VNHA",
-      "resourceId": 73,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24700, 10400, 21450, 8450]
-    },
-    {
-      "id": "01KYF9GE69H9M8NTNN97SYG39Q",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [11050, 23400, 11050, 19500]
-    },
-    {
-      "id": "01KYF9G9A1YH0RS1C3EH9Z034Y",
-      "resourceId": 160,
-      "name": "グラムSP.OK",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [11700, 22100, 11700, 19500]
-    },
-    {
-      "id": "01KYF9FYJ9HQA7ZJJNY87F0E2D",
-      "resourceId": 46,
-      "name": "シャルルマーニュ改.FS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [8566, 12764, 9994, 12176]
-    },
-    {
-      "id": "01KYF9JGK9Q2GPZQA03YJ9X0PD",
-      "resourceId": 126,
-      "name": "ブルトガングGLT",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [20000, 10000, 10000, 10000]
-    },
-    {
-      "id": "01KYF9K53HJ75JPXCXX1MR9102",
-      "resourceId": 38,
-      "name": "ネイリング",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [13100, 8650, 12260, 9490]
-    },
-    {
-      "id": "01KYF9JBQ1F2CYE9GQGN66Q7JT",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10400, 24700, 10400, 19500]
-    },
-    {
-      "id": "01KYF9J6TSASBSY8X4V2PEB9YS",
-      "resourceId": 19,
-      "name": "デュランダル",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9JJHSERB5N8HVYME2474A",
-      "resourceId": 27,
-      "name": "シュベルト​クロイツ",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [12501, 8814, 11619, 9066]
-    },
-    {
-      "id": "01KYF9JKH1Z6RFNRQWEVCJXEF0",
-      "resourceId": 172,
-      "name": "マルミアドワーズFC-01",
-      "maker": "ウルカヌス・インダストリー社",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [20800, 11700, 19500, 13000]
-    },
-    {
-      "id": "01KYF9JVB1EHJEC3CP660F6PMG",
-      "resourceId": 116,
-      "name": "友奈の甲手",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [20000, 7000, 16000, 7000]
-    },
-    {
-      "id": "01KYF9HJAHB5ABW5C8WF30EGHG",
-      "resourceId": 14,
-      "name": "ゲイボルグ",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9GF5H94SAC173DTSEJ7D8",
-      "resourceId": 288,
-      "name": "丙子椒林剣",
-      "maker": "天津重工",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24700, 24700, 7800, 7800]
+      "status": [26000, 9100, 20800, 9100]
     },
     {
       "id": "01KYF9GB8HATWT0JXH4NGEGQDR",
@@ -3752,231 +680,65 @@
       "effect": [
         {
           "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+25%。メモリア使用時、30%の確率で味方1体のDEF/Sp.DEFが大アップする。"
         },
         {
           "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のDEF/Sp.DEFが大アップする。"
         }
       ],
       "kind": 1,
       "status": [12025, 12025, 20475, 20475]
     },
     {
-      "id": "01KYF9G7BHRM05YRFDMYMD8KR0",
-      "resourceId": 158,
-      "name": "デュランダルSP.TS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [22100, 11700, 19500, 11700]
-    },
-    {
-      "id": "01KYF9JWA9SE2EX9HPV20RXA7F",
-      "resourceId": 91,
-      "name": "マジカルルビー",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [15000, 7875, 13125, 9000]
-    },
-    {
-      "id": "01KYF9EWCHDSTQME369TZSTRXG",
-      "resourceId": 188,
-      "name": "夏凜の豪刀",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24700, 10400, 19500, 10400]
-    },
-    {
-      "id": "01KYF9DDGH0JJJ4MSM80PDTX5D",
-      "resourceId": 139,
-      "name": "シャルルマーニュSP.RS",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [23400, 11050, 19500, 11050]
-    },
-    {
-      "id": "01KYF9DBJ12MMCXFSCPKJ1TZ14",
-      "resourceId": 74,
-      "name": "Ⅳ号戦車H型",
-      "maker": "",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [15000, 8100, 12900, 9000]
-    },
-    {
-      "id": "01KYF9D9KHWEJ5WRKR6ENQ5FZT",
-      "resourceId": 154,
-      "name": "レムの花飾り",
-      "maker": null,
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [23400, 9100, 23400, 9100]
-    },
-    {
-      "id": "01KYF9D8M965BW0YH6YHP8S1E1",
-      "resourceId": 61,
-      "name": "グンフィエズル",
+      "id": "01KYF9JTBSGBW7ACKCTZ0BEAK7",
+      "resourceId": 143,
+      "name": "グングニルカービンSP.MK",
       "maker": "ユグドラシル",
       "effect": [
         {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
         }
       ],
       "kind": 2,
       "status": [10446, 10470, 10458, 10626]
     },
     {
-      "id": "01KYF9D5PH0VXN46RN6JDKJHXS",
-      "resourceId": 37,
-      "name": "フルンティング",
+      "id": "01KYF9K07907C5T65H9AZ5N4Z6",
+      "resourceId": 201,
+      "name": "ミミングFC-01",
       "maker": "ユグドラシル",
       "effect": [
         {
           "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+25%。メモリア使用時、30%の確率で敵1体のATK/DEFが大ダウンする。"
         },
         {
           "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のATK/DEFが大ダウンする。"
         }
       ],
       "kind": 1,
-      "status": [8650, 13100, 9490, 12260]
+      "status": [20800, 11700, 19500, 13000]
     },
     {
-      "id": "01KYF9D3R1B7QXNHY4VCWZCVZB",
-      "resourceId": 29,
-      "name": "アステリオンSP.BE",
-      "maker": "ヒヒイロカネインターナショナル",
+      "id": "01KYF9JKH1Z6RFNRQWEVCJXEF0",
+      "resourceId": 172,
+      "name": "マルミアドワーズFC-01",
+      "maker": "ウルカヌス・インダストリー社",
       "effect": [
         {
           "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+25%。メモリア使用時、30%の確率で味方1体のATK/DEFが大アップする。"
         },
         {
           "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/DEFが大アップする。"
         }
       ],
       "kind": 1,
-      "status": [10440, 10395, 12375, 11790]
-    },
-    {
-      "id": "01KYF9D2RSG6G58GT18DY3A7RJ",
-      "resourceId": 258,
-      "name": "ティルフィングSP.IH",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [24700, 7800, 24700, 7800]
-    },
-    {
-      "id": "01KYF9D0T9TMZ40VXSSRTZRWTP",
-      "resourceId": 304,
-      "name": "デュランダルFC-01",
-      "maker": "グランギニョル",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
-    },
-    {
-      "id": "01KYF9CYVS2J8TC4V4ZBCZJ573",
-      "resourceId": 15,
-      "name": "クラウ・ソラス",
-      "maker": "ケルティックデール",
-      "effect": [
-        {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
-        }
-      ],
-      "kind": 1,
-      "status": [10403, 10382, 9943, 9964]
+      "status": [20800, 11700, 19500, 13000]
     },
     {
       "id": "01KYF9CWX9HC4MJ1CF1X0H5172",
@@ -3997,27 +759,23 @@
       "status": [10403, 10382, 9943, 9964]
     },
     {
-      "id": "01KYF9CTYSFSQ38C2MZB78H5D6",
-      "resourceId": 75,
-      "name": "ティーガーⅠ        ",
-      "maker": "",
+      "id": "01KYF9DDGH0JJJ4MSM80PDTX5D",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
       "effect": [
         {
-          "kind": "対ヒュージ",
-          "description": "メモリアスキル効果UP+10%"
-        },
-        {
-          "kind": "レギオンマッチ",
-          "description": "メモリアスキル効果UP+10%"
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
         }
       ],
       "kind": 1,
-      "status": [8100, 15000, 9000, 12900]
+      "status": [23400, 11050, 19500, 11050]
     },
     {
-      "id": "01KYF9CS098WG2BA12WV9XXJQS",
-      "resourceId": 114,
-      "name": "ブリューナクSP.MY",
+      "id": "01KYF9GN11ZA9DFS6ECWHGTKMG",
+      "resourceId": 261,
+      "name": "クラウ・ソラスFC-01",
       "maker": "ケルティックデール",
       "effect": [
         {
@@ -4030,7 +788,2129 @@
         }
       ],
       "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9D2RSG6G58GT18DY3A7RJ",
+      "resourceId": 258,
+      "name": "ティルフィングSP.IH",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24700, 7800, 24700, 7800]
+    },
+    {
+      "id": "01KYF9DZ31NSDFH6PR7NCENWBG",
+      "resourceId": 169,
+      "name": "ティルフィングMCC-B",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24050, 24050, 8450, 8450]
+    },
+    {
+      "id": "01KYF9DNAH6TSKAFEBHJEXJ8Q1",
+      "resourceId": 145,
+      "name": "黒子の金属矢",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [19000, 7000, 17000, 7000]
+    },
+    {
+      "id": "01KYF9EHMSHWCFTWXVJKJ8167Q",
+      "resourceId": 110,
+      "name": "ティルフィングSP.MM",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10000, 18500, 10000, 11500]
+    },
+    {
+      "id": "01KYF9JWA9SE2EX9HPV20RXA7F",
+      "resourceId": 91,
+      "name": "マジカルルビー",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [15000, 7875, 13125, 9000]
+    },
+    {
+      "id": "01KYF9GD71RXMVYAZV8ER27FSA",
+      "resourceId": 47,
+      "name": "グングニルSP.KY",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のATK/DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [13050, 8700, 12180, 9570]
+    },
+    {
+      "id": "01KYF9D5PH0VXN46RN6JDKJHXS",
+      "resourceId": 37,
+      "name": "フルンティング",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のSp.ATK/DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のSp.ATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [8650, 13100, 9490, 12260]
+    },
+    {
+      "id": "01KYF9GM1S2BV1C7JGAZTD49VH",
+      "resourceId": 34,
+      "name": "クリューサーオールSP.TT",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で敵1体のATK/Sp.ATKが大ダウンする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のATK/Sp.ATKが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [13500, 9900, 12600, 9000]
+    },
+    {
+      "id": "01KYF9F83HDGHPRSGN5E8JCZVV",
+      "resourceId": 9,
+      "name": "ニョルニール",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9CM41JHA5SVK7HQYYBPM6",
+      "resourceId": 144,
+      "name": "美琴のコイン",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のSp.ATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [7000, 18500, 7000, 17500]
+    },
+    {
+      "id": "01KYF9D4Q9TAQPNKFP958DWACD",
+      "resourceId": 113,
+      "name": "マルテSP.MF",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のATK/DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [18500, 10000, 11500, 10000]
+    },
+    {
+      "id": "01KYF9EKK9P695J0PVDGFAE7C3",
+      "resourceId": 13,
+      "name": "クリューサーオール",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9EFP9039SCBDWV9SRQD59",
+      "resourceId": 80,
+      "name": "グングニルカービンSP.TT",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10445, 10471, 10458, 10626]
+    },
+    {
+      "id": "01KYF9DKC189TCNM5K7TSV7QA1",
+      "resourceId": 50,
+      "name": "シュガールSP.AS",
+      "maker": "アウニャメンディ・システマス",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        }
+      ],
+      "kind": 1,
+      "status": [13500, 8550, 13500, 9450]
+    },
+    {
+      "id": "01KYF9DP9SZAP8MR8X767JE6Z0",
+      "resourceId": 282,
+      "name": "青龍偃月刀",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、水属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [24700, 8450, 23400, 8450]
+    },
+    {
+      "id": "01KYF9GVVSAPG235W49BMYKBT4",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        }
+      ],
+      "kind": 1,
+      "status": [9750, 9750, 22750, 22750]
+    },
+    {
+      "id": "01KYF9J4W90E0VE38401G1F38S",
+      "resourceId": 66,
+      "name": "シャルルマーニュSP.TT",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [9660, 9660, 11340, 11340]
+    },
+    {
+      "id": "01KYF9ERFHHGNTV6DMHCZ82FK5",
+      "resourceId": 279,
+      "name": "デュランダルV01",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+20%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+5%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+20%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24700, 24700, 7800, 7800]
+    },
+    {
+      "id": "01KYF9DQ91RDH2G8ZQSP4HWWJ5",
+      "resourceId": 66,
+      "name": "シャルルマーニュSP.TT",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9J5VHAG7YPNKTW38A68AY",
+      "resourceId": 152,
+      "name": "エミリアのペンダント",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [22100, 11700, 19500, 11700]
+    },
+    {
+      "id": "01KYF9E7W924104VMWN7S0512Z",
+      "resourceId": 127,
+      "name": "アステリオンSP.KY",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10000, 18000, 9500, 12500]
+    },
+    {
+      "id": "01KYF9GK2H21H2TTZN3M96573D",
+      "resourceId": 89,
+      "name": "ジャック・モンドラゴン",
+      "maker": "アウニャメンディ・システマス",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [14400, 14400, 8100, 8100]
+    },
+    {
+      "id": "01KYF9G8AS6GS5VY977PT3B3Z8",
+      "resourceId": 87,
+      "name": "デュランダル・サマー",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        }
+      ],
+      "kind": 1,
+      "status": [13725, 8100, 13275, 9900]
+    },
+    {
+      "id": "01KYF9CP2HH1FCVC57H59Y0MYJ",
+      "resourceId": 77,
+      "name": "チャーチル",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のSp.ATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [8100, 15000, 9000, 12900]
+    },
+    {
+      "id": "01KYF9J6TSASBSY8X4V2PEB9YS",
+      "resourceId": 19,
+      "name": "デュランダル",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9E4YHQQEK1ZKJXB1RJ108",
+      "resourceId": 145,
+      "name": "黒子の金属矢",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [7000, 20000, 7000, 16000]
+    },
+    {
+      "id": "01KYF9J7T1VQ914TA6KEJFE9TN",
+      "resourceId": 115,
+      "name": "アルケミートレースSP.SR",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10000, 20000, 10000, 10000]
+    },
+    {
+      "id": "01KYF9E0290CW85CCTHQMX6X69",
+      "resourceId": 128,
+      "name": "ティルフィングSP.SH",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [18500, 10000, 11500, 10000]
+    },
+    {
+      "id": "01KYF9HAGHSMZQD863B9H9XQFT",
+      "resourceId": 22,
+      "name": "アステリオンマギカノン",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [12180, 9240, 11760, 8820]
+    },
+    {
+      "id": "01KYF9JQE1W09T6NBF8V8PHC18",
+      "resourceId": 97,
+      "name": "ガングニール",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        }
+      ],
+      "kind": 1,
+      "status": [14625, 7875, 13950, 8550]
+    },
+    {
+      "id": "01KYF9EPH124BJK0REEMMNQDJS",
+      "resourceId": 3,
+      "name": "ジョワユーズ",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9J2XS52TFGK3ZGJSD3T8P",
+      "resourceId": 54,
+      "name": "神獣鏡",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/Sp.ATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [11424, 11298, 9702, 9576]
+    },
+    {
+      "id": "01KYF9FB19JG0SZBSJB4N81YNY",
+      "resourceId": 28,
+      "name": "グングニルカービンSP.BE",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9J0Z90TEPSR6ZMJJMAEBS",
+      "resourceId": 73,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、火属性が多いほどメモリアスキル効果UP(最大10.5%)。水属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [45600, 45600, 14400, 14400]
+    },
+    {
+      "id": "01KYF9E3Z9Y2M6XH17AKEMWGK7",
+      "resourceId": 306,
+      "name": "タンキエム・サマーFC-01",
+      "maker": "月読技研ベトナム支社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9K25S49CNNVQ53QT9P0B9",
+      "resourceId": 303,
+      "name": "ミュルグレス",
+      "maker": "グランギニョル社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、火属性が多いほどメモリアスキル効果UP(最大10.5%)。水属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、火属性が多いほどメモリアスキル効果UP(最大10.5%)。水属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [14400, 14400, 45600, 45600]
+    },
+    {
+      "id": "01KYF9FFXHC0XHHW5G6R16C7P8",
+      "resourceId": 228,
+      "name": "リサナウトSP.ES",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        }
+      ],
+      "kind": 1,
+      "status": [26000, 6500, 26000, 6500]
+    },
+    {
+      "id": "01KYF9HX29FAG75N5GNXDNW64D",
+      "resourceId": 189,
+      "name": "風の豪剣",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [9750, 26000, 9750, 19500]
+    },
+    {
+      "id": "01KYF9CTYSFSQ38C2MZB78H5D6",
+      "resourceId": 75,
+      "name": "ティーガーⅠ        ",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8100, 15000, 9000, 12900]
+    },
+    {
+      "id": "01KYF9FNS1RHE9KDYHQ27NTKHW",
+      "resourceId": 134,
+      "name": "ムラマサ・ブレード",
+      "maker": "天津重工",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24050, 24050, 8450, 8450]
+    },
+    {
+      "id": "01KYF9F55SK48QAXW3K4P4GJE1",
+      "resourceId": 142,
+      "name": "夏凜の刀",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9JEMSDZR9MHJHVYEEZRSV",
+      "resourceId": 108,
+      "name": "グングニルカービンSP.IF",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10445, 10471, 10458, 10626]
+    },
+    {
+      "id": "01KYF9F6515JTY5BYK5EX5VZNC",
+      "resourceId": 99,
+      "name": "まどかの弓",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のSp.ATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [7550, 15100, 9000, 13350]
+    },
+    {
+      "id": "01KYF9CN39HVN0E2NX1SNYP5VH",
+      "resourceId": 58,
+      "name": "マルミアドワーズ",
+      "maker": "ウルカヌス・インダストリー社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+20%。メモリア使用時、20%の確率で味方1体のATK/DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [17600, 9900, 16500, 11000]
+    },
+    {
+      "id": "01KYF9GH41XRXK6RQ7VM80ZNAG",
+      "resourceId": 81,
+      "name": "アルケミートレース",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが光/闇属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが光/闇属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [14625, 7875, 14625, 7875]
+    },
+    {
+      "id": "01KYF9HR61TEB420WWRKPTGTMD",
+      "resourceId": 2,
+      "name": "ブリューナク",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9J1YHVK9PRY4V7A789B06",
+      "resourceId": 177,
+      "name": "キャリバーンFC-01",
+      "maker": "キャメロットキャッスル社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+25%。メモリア使用時、30%の確率で味方1体のATK/Sp.ATKが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/Sp.ATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [20800, 20800, 11700, 11700]
+    },
+    {
+      "id": "01KYF9EEQ17WQ0CHJF6AYXWZ8A",
+      "resourceId": 133,
+      "name": "友奈の豪腕",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [7000, 20000, 7000, 16000]
+    },
+    {
+      "id": "01KYF9FC0HYR5YC22HAQ5MFD1G",
+      "resourceId": 186,
+      "name": "友奈の神装甲手",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [26000, 9750, 19500, 9750]
+    },
+    {
+      "id": "01KYF9DV61ERWT364M5ZZHCC1J",
+      "resourceId": 26,
+      "name": "BD・ホーネット",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [9150, 12564, 8310, 11976]
+    },
+    {
+      "id": "01KYF9HM91M783990HCG11T6JH",
+      "resourceId": 49,
+      "name": "エゼルリング",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        }
+      ],
+      "kind": 1,
+      "status": [9450, 9450, 13050, 13050]
+    },
+    {
+      "id": "01KYF9G7BHRM05YRFDMYMD8KR0",
+      "resourceId": 158,
+      "name": "デュランダルSP.TS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [22100, 11700, 19500, 11700]
+    },
+    {
+      "id": "01KYF9F46HDEEHGZJJZQPXAX1Q",
+      "resourceId": 155,
+      "name": "ラムの杖",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [11700, 22100, 11700, 19500]
+    },
+    {
+      "id": "01KYF9FPR98KNHT7JKDGH4JAD6",
+      "resourceId": 102,
+      "name": "杏子の槍",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [7550, 15100, 9000, 13350]
+    },
+    {
+      "id": "01KYF9GSX9P5KZ3XP4AVX4BJJA",
+      "resourceId": 43,
+      "name": "デュランダルSP.TM",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のDEF/Sp.DEFが大アップし、HP回復時はHPの回復量がアップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のDEF/Sp.DEFが大アップし、HP回復時はHPの回復量がアップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [9787, 9788, 11745, 12180]
+    },
+    {
+      "id": "01KYF9K4497VXXCVYJJNRDGG2K",
+      "resourceId": 301,
+      "name": "ブルンツヴィークFC-01",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9FGWSN7QHDP3Y8GTY0V8H",
+      "resourceId": 108,
+      "name": "グングニルカービンSP.IF",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9F7494RWQ8F9WZ8AWPQVJ",
+      "resourceId": 55,
+      "name": "イチイバル",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [12180, 8862, 11760, 9198]
+    },
+    {
+      "id": "01KYF9K62SYNJ6Y66MBM1NSS1P",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [23400, 10400, 20800, 10400]
+    },
+    {
+      "id": "01KYF9J001X9MZZXSB780PYSWW",
+      "resourceId": 39,
+      "name": "ジャック・オー・マルテ",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のATKが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [12600, 9030, 10920, 9450]
+    },
+    {
+      "id": "01KYF9HEDHRDHC64VRVMQG8RTT",
+      "resourceId": 146,
+      "name": "食蜂のリモコン",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のSp.ATK/Sp.DEFが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [7000, 18000, 7000, 18000]
+    },
+    {
+      "id": "01KYF9H0R1ZPNWGCK3WS3DMCJ3",
+      "resourceId": 72,
+      "name": "ティルフィングPrtSP",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9G1G1G322WCD2HB756VRF",
+      "resourceId": 45,
+      "name": "フィエルボワ",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9HV3S0N82FMZJV7KAHY67",
+      "resourceId": 65,
+      "name": "タスラム",
+      "maker": "ケルティックデール社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+20%。メモリア使用時、20%の確率で味方1体のDEF/Sp.DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のDEF/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [10175, 10175, 17325, 17325]
+    },
+    {
+      "id": "01KYF9CJ5HS3CAM24H0K9SH1TF",
+      "resourceId": 281,
+      "name": "ブリューナクFC-01",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9ENHSFA55TR8C66A67YG1",
+      "resourceId": 255,
+      "name": "ティルフィングSP.SC",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        }
+      ],
+      "kind": 1,
+      "status": [26000, 26000, 6500, 6500]
+    },
+    {
+      "id": "01KYF9JCP97YYJZVBGEF1PBTGQ",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [22100, 11700, 19500, 11700]
+    },
+    {
+      "id": "01KYF9CE8HEFAF4M33W7HFB4K6",
+      "resourceId": 101,
+      "name": "さやかの剣",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [15100, 7550, 13350, 9000]
+    },
+    {
+      "id": "01KYF9D3R1B7QXNHY4VCWZCVZB",
+      "resourceId": 29,
+      "name": "アステリオンSP.BE",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のDEF/Sp.DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のDEF/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [10440, 10395, 12375, 11790]
+    },
+    {
+      "id": "01KYF9HBFSQ3QQW1TRPKCPY4MR",
+      "resourceId": 83,
+      "name": "ブルンツヴィークSP.IS",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [7920, 14580, 8100, 14400]
+    },
+    {
+      "id": "01KYF9FSP1A2FJ0D1ZKE9KK6CM",
+      "resourceId": 95,
+      "name": "ナインライブズ",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [15000, 7875, 13125, 9000]
+    },
+    {
+      "id": "01KYF9FRPSTXMHB1Z3GBQY3WRH",
+      "resourceId": 1,
+      "name": "グングニル",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9GJ39NTDZX02P4W2SG4QN",
+      "resourceId": 200,
+      "name": "レーヴァテインFC-01",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+25%。メモリア使用時、30%の確率で敵1体のSp.ATK/Sp.DEFが大ダウンする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のSp.ATK/Sp.DEFが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [11700, 20800, 13000, 19500]
+    },
+    {
+      "id": "01KYF9DGE9Q00HEHCHR12Q06PQ",
+      "resourceId": 289,
+      "name": "バイデント",
+      "maker": "ウルカヌス・インダストリー社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、火属性が多いほどメモリアスキル効果UP(最大10.5%)。水属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、火属性が多いほどメモリアスキル効果UP(最大10.5%)。水属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [45600, 45600, 14400, 14400]
+    },
+    {
+      "id": "01KYF9HY1HN3QCEZBYXV9JWZMT",
+      "resourceId": 42,
+      "name": "グングニルSP.HY",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [9955, 9730, 11980, 11753]
+    },
+    {
+      "id": "01KYF9GZRSRSB6YA0W12CCE5MM",
+      "resourceId": 132,
+      "name": "Hi-タンキエム",
+      "maker": "月読技研ベトナム支社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [20800, 20800, 11700, 11700]
+    },
+    {
+      "id": "01KYF9GTWH9MY9EY1ZTYYCTAB3",
+      "resourceId": 287,
+      "name": "アステリオンFC-01",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9HDE98XNY8SZD4XH17W87",
+      "resourceId": 88,
+      "name": "タンキエム・サマー",
+      "maker": "月読技研ベトナム支社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが光/闇属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが光/闇属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8100, 14400, 8460, 14040]
+    },
+    {
+      "id": "01KYF9HT4HMG58436PEKFER732",
+      "resourceId": 70,
+      "name": "ザフキエル",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        }
+      ],
+      "kind": 1,
+      "status": [13950, 8550, 13050, 9450]
+    },
+    {
+      "id": "01KYF9C9C9NHZAKC8KSGXV7MDB",
+      "resourceId": 98,
+      "name": "莫耶",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10710, 10584, 10290, 10416]
+    },
+    {
+      "id": "01KYF9EDQSTB82V77BQQSDWR0F",
+      "resourceId": 23,
+      "name": "アステリオンSP.MM",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10703, 10082, 10243, 9664]
+    },
+    {
+      "id": "01KYF9GRY18FXBQ34YM4GTHFTR",
+      "resourceId": 5,
+      "name": "ティルフィング",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9HS59KAP1T58E0HKY2ZW9",
+      "resourceId": 82,
+      "name": "グングニルSP.HM",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが光/闇属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが光/闇属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [13950, 13950, 8550, 8550]
+    },
+    {
+      "id": "01KYF9FEY97NF45M0PVFFEGF0J",
+      "resourceId": 188,
+      "name": "夏凜の豪刀",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9DEFSDC2B64HMSMG4RBFN",
+      "resourceId": 60,
+      "name": "ミミング",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+20%。メモリア使用時、20%の確率で敵1体のATK/DEFが大ダウンする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のATK/DEFが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [17600, 9900, 16500, 11000]
+    },
+    {
+      "id": "01KYF9DR899M1JST987JB4B2TW",
+      "resourceId": 35,
+      "name": "ティルフィングSP.MT",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のATK/Sp.ATKが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/Sp.ATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [14400, 8550, 13500, 8550]
+    },
+    {
+      "id": "01KYF9GA99MG5RXBZ0SNC7V1FD",
+      "resourceId": 146,
+      "name": "食蜂のリモコン",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [7000, 8000, 17000, 18000]
+    },
+    {
+      "id": "01KYF9FMSS3PCF4VVXJ2T9PNVG",
+      "resourceId": 57,
+      "name": "フラガラッハ",
+      "maker": "ケルティックデール社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+20%。メモリア使用時、20%の確率で味方1体のATK/Sp.ATKが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/Sp.ATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [16500, 16500, 11000, 11000]
+    },
+    {
+      "id": "01KYF9H8J1MCC9N95MKQ7V660H",
+      "resourceId": 31,
+      "name": "ブリューナクSP.TI",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のATK/Sp.DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [12205, 10467, 10254, 12074]
+    },
+    {
+      "id": "01KYF9GG4S526PHJWDDZTK1WKH",
+      "resourceId": 263,
+      "name": "アステリオンSP.FS",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [7800, 24700, 7800, 24700]
+    },
+    {
+      "id": "01KYF9FCZSHKH1R9HJZWKCS3CA",
+      "resourceId": 260,
+      "name": "グラムSP.TC",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+5%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+20%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+5%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+20%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24700, 24700, 7800, 7800]
+    },
+    {
+      "id": "01KYF9EBS9TFXWRQRP4RAG2MGW",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24700, 10400, 19500, 10400]
+    },
+    {
+      "id": "01KYF9JNFHT36GHEZ8TXEQ59DT",
+      "resourceId": 220,
+      "name": "グラムSP.TH",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8450, 8450, 24050, 24050]
+    },
+    {
+      "id": "01KYF9E20S8JE7RQ9959RXK1TC",
+      "resourceId": 130,
+      "name": "デュランダルSP.HY",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [20800, 13000, 18200, 13000]
+    },
+    {
+      "id": "01KYF9CS098WG2BA12WV9XXJQS",
+      "resourceId": 114,
+      "name": "ブリューナクSP.MY",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方前衛1体のDEF/Sp.DEFが大アップし、HP回復時はHPの回復量がアップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のDEF/Sp.DEFが大アップし、HP回復時はHPの回復量がアップする。"
+        }
+      ],
+      "kind": 1,
       "status": [8500, 8500, 16500, 16500]
+    },
+    {
+      "id": "01KYF9DHDHVF1FR3J4HP5NEZX9",
+      "resourceId": 106,
+      "name": "ティルフィングSP.YH",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [14850, 7425, 14175, 8550]
+    },
+    {
+      "id": "01KYF9HJAHB5ABW5C8WF30EGHG",
+      "resourceId": 14,
+      "name": "ゲイボルグ",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9GYSH97DKREWW1FAP0N3H",
+      "resourceId": 68,
+      "name": "サンダルフォン",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8550, 13950, 9450, 13050]
+    },
+    {
+      "id": "01KYF9GPZHMHWCR2RFYX0Q86EM",
+      "resourceId": 73,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10400, 24700, 8450, 21450]
+    },
+    {
+      "id": "01KYF9DCH9T9JV1HK88ZXE44X6",
+      "resourceId": 80,
+      "name": "グングニルカービンSP.TT",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9J3X19WP7WNQ3B0MYW5Y3",
+      "resourceId": 112,
+      "name": "アステリオンマギカノンSP.KM",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [18500, 10000, 11500, 10000]
+    },
+    {
+      "id": "01KYF9JPES2ZZ44MY94VD82SRB",
+      "resourceId": 30,
+      "name": "アステリオンSP.EA",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のATK/DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [12218, 10480, 11925, 10377]
+    },
+    {
+      "id": "01KYF9F379ZHVKTW4ZWCZEPDZ7",
+      "resourceId": 181,
+      "name": "ブルンツヴィークSP.TY",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8450, 8450, 24050, 24050]
+    },
+    {
+      "id": "01KYF9HK9SYYSAS8X26WVKP9Y3",
+      "resourceId": 93,
+      "name": "干将",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方2体のATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [15000, 7875, 13125, 9000]
+    },
+    {
+      "id": "01KYF9EAT1MMZC277K1FBFK954",
+      "resourceId": 92,
+      "name": "マジカルサファイア",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のSp.ATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [7875, 15000, 9000, 13125]
+    },
+    {
+      "id": "01KYF9DFF1QFBEK42WMAAQ8NX3",
+      "resourceId": 36,
+      "name": "ブルンツヴィークSP.WA",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のSp.ATK/DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のSp.ATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [9450, 12825, 12600, 10125]
+    },
+    {
+      "id": "01KYF9EQG94ZWMNE0TG7VJW07R",
+      "resourceId": 44,
+      "name": "アステリオンSP.KR",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で敵1体のATK/Sp.DEFが大ダウンする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のATK/Sp.DEFが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [11882, 11840, 9910, 9868]
+    },
+    {
+      "id": "01KYF9F18SKK9RYATCT58W0M2V",
+      "resourceId": 24,
+      "name": "グングニル・サマー",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [9240, 12180, 8820, 11760]
+    },
+    {
+      "id": "01KYF9CYVS2J8TC4V4ZBCZJ573",
+      "resourceId": 15,
+      "name": "クラウ・ソラス",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9CXWH7PTAP7QCBY27N0GA",
+      "resourceId": 79,
+      "name": "P40型重戦車",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [15000, 8100, 12900, 9000]
+    },
+    {
+      "id": "01KYF9K53HJ75JPXCXX1MR9102",
+      "resourceId": 38,
+      "name": "ネイリング",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のATK/Sp.DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [13100, 8650, 12260, 9490]
+    },
+    {
+      "id": "01KYF9FJV97DGX0SMKS9M28QYJ",
+      "resourceId": 156,
+      "name": "ラムの花飾り",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [23400, 10400, 20800, 10400]
+    },
+    {
+      "id": "01KYF9EVD9984G6G2RAJ8XS569",
+      "resourceId": 173,
+      "name": "コルブランドFC-01",
+      "maker": "キャメロットキャッスル社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+25%。メモリア使用時、30%の確率で味方1体のSp.ATK/Sp.DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のSp.ATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [11700, 20800, 13000, 19500]
+    },
+    {
+      "id": "01KYF9JFM1JQBPZRH43GZR118A",
+      "resourceId": 215,
+      "name": "シュガールSP.TN",
+      "maker": "アウニャメンディ・システマス",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10400, 24050, 10400, 20150]
+    },
+    {
+      "id": "01KYF9FXK1KR03AHGSPSYBC5S9",
+      "resourceId": 32,
+      "name": "グングニルSP.EK",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で味方1体のSp.ATK/Sp.DEFが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のSp.ATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [10418, 12014, 10395, 12173]
+    },
+    {
+      "id": "01KYF9GQYSM2WBNMRDX4CK4QX4",
+      "resourceId": 16,
+      "name": "リサナウト",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9GC7S9XE3H0V6CB169Q8Y",
+      "resourceId": 159,
+      "name": "グラムSP.MW",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [11700, 22100, 11700, 19500]
+    },
+    {
+      "id": "01KYF9DS7HTV6N0VQPZPTBJRXP",
+      "resourceId": 136,
+      "name": "グラムMCCブースト",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [13000, 20800, 13000, 18200]
+    },
+    {
+      "id": "01KYF9F92SA1XYDKAF5Z96QFAG",
+      "resourceId": 117,
+      "name": "シロガネ",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のDEF/Sp.DEFが大アップし、HP回復時はHPの回復量がアップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [8500, 8500, 16500, 16500]
+    },
+    {
+      "id": "01KYF9CR11RADSW3P4E8H3G2HB",
+      "resourceId": 111,
+      "name": "グングニルカービンSP.KM",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9EXBSAWCSMD4HPE1G6X7X",
+      "resourceId": 105,
+      "name": "ゲイボルグSP.HA",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [7425, 14850, 8550, 14175]
+    },
+    {
+      "id": "01KYF9JVB1EHJEC3CP660F6PMG",
+      "resourceId": 116,
+      "name": "友奈の甲手",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [20000, 7000, 16000, 7000]
+    },
+    {
+      "id": "01KYF9G9A1YH0RS1C3EH9Z034Y",
+      "resourceId": 160,
+      "name": "グラムSP.OK",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [11700, 22100, 11700, 19500]
+    },
+    {
+      "id": "01KYF9G3EHW6A4176GAE699BEF",
+      "resourceId": 230,
+      "name": "ブルトガングSP.SO",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        }
+      ],
+      "kind": 1,
+      "status": [26000, 26000, 6500, 6500]
+    },
+    {
+      "id": "01KYF9ETE1QSW4N2KEPJD9FC4D",
+      "resourceId": 73,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        }
+      ],
+      "kind": 1,
+      "status": [13950, 13950, 8550, 8550]
+    },
+    {
+      "id": "01KYF9G2F9MKTCA8WKTCECHTD9",
+      "resourceId": 144,
+      "name": "美琴のコイン",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [18000, 10000, 12500, 9500]
+    },
+    {
+      "id": "01KYF9CH698MTDNGE12WCY9YEV",
+      "resourceId": 63,
+      "name": "アロンダイト",
+      "maker": "キャメロットキャッスル社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+20%。メモリア使用時、20%の確率で敵1体のDEF/Sp.DEFが大ダウンする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のDEF/Sp.DEFが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [10450, 10450, 17050, 17050]
+    },
+    {
+      "id": "01KYF9CSZHRJ26XQTJ01V67PTD",
+      "resourceId": 197,
+      "name": "クラウ・ソラスSP.HW",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8450, 8450, 24050, 24050]
+    },
+    {
+      "id": "01KYF9HN89Z0V45T62AFW2T4JE",
+      "resourceId": 129,
+      "name": "モンドラゴンSP.KH",
+      "maker": "アウニャメンディ・システマス",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10000, 20000, 10000, 10000]
     },
     {
       "id": "01KYF9CQ1SNVDY1748P6X0ETM0",
@@ -4051,9 +2931,91 @@
       "status": [10403, 10382, 9943, 9964]
     },
     {
-      "id": "01KYF9CK4SW5XCGR0ZPJW2YPSJ",
-      "resourceId": 195,
-      "name": "デュランダルSP.HH",
+      "id": "01KYF9JDNHT5QEMB0M4MAKZ57N",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+6%。"
+        }
+      ],
+      "kind": 1,
+      "status": [11700, 22100, 11700, 19500]
+    },
+    {
+      "id": "01KYF9JHJH6N0AP8536XZYBF20",
+      "resourceId": 192,
+      "name": "ブリューナクSP.KM",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24050, 24050, 8450, 8450]
+    },
+    {
+      "id": "01KYF9GXT9975TZ5W8YSCSQ8BY",
+      "resourceId": 171,
+      "name": "フラガラッハFC-01",
+      "maker": "ケルティックデール社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+25%。メモリア使用時、30%の確率で味方1体のATK/Sp.ATKが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/Sp.ATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [19500, 19500, 13000, 13000]
+    },
+    {
+      "id": "01KYF9GE69H9M8NTNN97SYG39Q",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+10%。"
+        }
+      ],
+      "kind": 1,
+      "status": [11050, 23400, 11050, 19500]
+    },
+    {
+      "id": "01KYF9D7N1MVND76CAXYAT9NDE",
+      "resourceId": 109,
+      "name": "クリューサーオールSP.IF",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10000, 18500, 10000, 11500]
+    },
+    {
+      "id": "01KYF9D0T9TMZ40VXSSRTZRWTP",
+      "resourceId": 304,
+      "name": "デュランダルFC-01",
       "maker": "グランギニョル",
       "effect": [
         {
@@ -4066,12 +3028,512 @@
         }
       ],
       "kind": 1,
-      "status": [24050, 10400, 20150, 10400]
+      "status": [10403, 10382, 9943, 9964]
     },
     {
-      "id": "01KYF9C9C9NHZAKC8KSGXV7MDB",
-      "resourceId": 98,
-      "name": "莫耶",
+      "id": "01KYF9DAJSQGT105M0K7S1NR8Z",
+      "resourceId": 107,
+      "name": "ブリューナクSP.SS",
+      "maker": "ケルティックデール",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [18500, 10000, 11500, 10000]
+    },
+    {
+      "id": "01KYF9HHB984DXPHHWSG34AECS",
+      "resourceId": 64,
+      "name": "キャリバーン",
+      "maker": "キャメロットキャッスル社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+20%。メモリア使用時、20%の確率で味方1体のATK/Sp.ATKが大アップする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のATK/Sp.ATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [17600, 17600, 9900, 9900]
+    },
+    {
+      "id": "01KYF9HCF1GXXGX997TDJ8DVRD",
+      "resourceId": 51,
+      "name": "ブルトガングSP.MK",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/光/闇属性メモリアの場合、さらにメモリアスキル効果UP+3%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8550, 13500, 9450, 13500]
+    },
+    {
+      "id": "01KYF9JY8SNRPA0BVSYCY4VNHA",
+      "resourceId": 73,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+5%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+20%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24700, 10400, 21450, 8450]
+    },
+    {
+      "id": "01KYF9HZ0SD30BP28TW8AHQMTY",
+      "resourceId": 141,
+      "name": "グングニルカービンSP.BE",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10445, 10471, 10458, 10626]
+    },
+    {
+      "id": "01KYF9DJCSXR6NB8KVJKQAJRMV",
+      "resourceId": 257,
+      "name": "グングニルSP.TM",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        }
+      ],
+      "kind": 1,
+      "status": [6500, 6500, 26000, 26000]
+    },
+    {
+      "id": "01KYF9EZA95935GVDBRYF9A823",
+      "resourceId": 10,
+      "name": "ブルトガング",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9H9H9J7C1XTKAPZEMRRBJ",
+      "resourceId": 71,
+      "name": "ザフキエル",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10446, 10470, 10458, 10626]
+    },
+    {
+      "id": "01KYF9HFCSZ659GHP7B1JS16QY",
+      "resourceId": 259,
+      "name": "シュガールSP.KI",
+      "maker": "アウニャメンディ・システマス",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが風属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        }
+      ],
+      "kind": 1,
+      "status": [6500, 6500, 26000, 26000]
+    },
+    {
+      "id": "01KYF9F09H6D4CBAHGVDP1G51Q",
+      "resourceId": 6,
+      "name": "タンキエム",
+      "maker": "月読技研ベトナム支社",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9D9KHWEJ5WRKR6ENQ5FZT",
+      "resourceId": 154,
+      "name": "レムの花飾り",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火属性メモリアの場合、さらにメモリアスキル効果UP+7%。"
+        }
+      ],
+      "kind": 1,
+      "status": [23400, 9100, 23400, 9100]
+    },
+    {
+      "id": "01KYF9F281HA5DMAE7TFNGV4HF",
+      "resourceId": 4,
+      "name": "グングニルSP.FF",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9CABHQQD26HE4YWYXZBNM",
+      "resourceId": 21,
+      "name": "グラム",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [11191, 11218, 11205, 11385]
+    },
+    {
+      "id": "01KYF9HGC109EJBP2PNK1D752T",
+      "resourceId": 256,
+      "name": "ブルトガングSP.AH",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [7800, 7800, 24700, 24700]
+    },
+    {
+      "id": "01KYF9JX9H92FVQX1GSTNY6SC0",
+      "resourceId": 18,
+      "name": "マルテ",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9D6NS9EK4SND1SP2KVVMV",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [8450, 24050, 8450, 24050]
+    },
+    {
+      "id": "01KYF9HW31V7SWS8Z7GJNN07DN",
+      "resourceId": 139,
+      "name": "シャルルマーニュSP.RS",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [9500, 19000, 9500, 12000]
+    },
+    {
+      "id": "01KYF9HP7HR3NPVBJGMWZBHZ8J",
+      "resourceId": 120,
+      "name": "樹の花輪",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+5%。"
+        }
+      ],
+      "kind": 1,
+      "status": [17000, 17000, 8000, 8000]
+    },
+    {
+      "id": "01KYF9EJM1VY2SH3DWM777QST7",
+      "resourceId": 56,
+      "name": "ラピス・フィロソフィカス",
+      "maker": "",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/Sp.DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [12516, 9408, 11676, 8400]
+    },
+    {
+      "id": "01KYF9CZV1J936XVQN2B8BY0Y3",
+      "resourceId": 12,
+      "name": "ブルンツヴィーク",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9D1SH4W59HFRDK102H6K1",
+      "resourceId": 280,
+      "name": "ティルフィングSP.MR",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、水属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、水属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [7800, 7800, 24700, 24700]
+    },
+    {
+      "id": "01KYF9H2PHBCSBGAH5YTKPZESK",
+      "resourceId": 33,
+      "name": "マルテSP.KM",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、20%の確率で敵1体のDEF/Sp.DEFが大ダウンする。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で敵1体のDEF/Sp.DEFが大ダウンする。"
+        }
+      ],
+      "kind": 1,
+      "status": [10355, 10130, 12380, 12153]
+    },
+    {
+      "id": "01KYF9FHW1PAXJJNF0HYEE2SJS",
+      "resourceId": 284,
+      "name": "七星宝剣",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、水属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [8450, 24700, 8450, 23400]
+    },
+    {
+      "id": "01KYF9E5XS7JZNKRXHHTX3DRBV",
+      "resourceId": 315,
+      "name": "グングニルV01",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+20%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+5%。メモリア使用時、それが火/水属性メモリアの場合、さらにメモリアスキル効果UP+20%。"
+        }
+      ],
+      "kind": 1,
+      "status": [45600, 45600, 14400, 14400]
+    },
+    {
+      "id": "01KYF9G6C9RNF93JHTB2KFSCKW",
+      "resourceId": 196,
+      "name": "クリューサーオールSP.SK",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+15%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24050, 24050, 8450, 8450]
+    },
+    {
+      "id": "01KYF9JZ81CC78RH6S5PH6MBGQ",
+      "resourceId": 104,
+      "name": "アステリオンSP.WL",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+4%。"
+        }
+      ],
+      "kind": 1,
+      "status": [14625, 7875, 13950, 8550]
+    },
+    {
+      "id": "01KYF9GF5H94SAC173DTSEJ7D8",
+      "resourceId": 288,
+      "name": "丙子椒林剣",
+      "maker": "天津重工",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、水属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。このCHARMが編成されたリリィの、水属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [24700, 24700, 7800, 7800]
+    },
+    {
+      "id": "01KYF9CVY195D5QA7XG4Q14Y2H",
+      "resourceId": 103,
+      "name": "マミのマスケット銃",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/DEFが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [15100, 7550, 13350, 9000]
+    },
+    {
+      "id": "01KYF9ESES5KSBHT9E73MFRJ15",
+      "resourceId": 276,
+      "name": "リサナウトFC-01",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [10403, 10382, 9943, 9964]
+    },
+    {
+      "id": "01KYF9DY3SADQWR5YHAVX1ZB6Q",
+      "resourceId": 229,
+      "name": "アステリオンSP.TM",
+      "maker": "ヒヒイロカネインターナショナル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+7%。メモリア使用時、それが水属性メモリアの場合、さらにメモリアスキル効果UP+18%。"
+        }
+      ],
+      "kind": 1,
+      "status": [6500, 26000, 6500, 26000]
+    },
+    {
+      "id": "01KYF9H4N1329ES353086NMPR6",
+      "resourceId": 25,
+      "name": "RH・エストレア",
       "maker": "",
       "effect": [
         {
@@ -4083,8 +3545,106 @@
           "description": "メモリアスキル効果UP+10%"
         }
       ],
+      "kind": 1,
+      "status": [8520, 11934, 8940, 12606]
+    },
+    {
+      "id": "01KYF9EMJHQB20DRT7VPCKHZ2Z",
+      "resourceId": 188,
+      "name": "夏凜の豪刀",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [10400, 24700, 10400, 19500]
+    },
+    {
+      "id": "01KYF9CD99PKTHFF38YW210CG3",
+      "resourceId": 191,
+      "name": "園子の方舟",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方前衛1体のDEF/Sp.DEFが大アップし、HP回復時はHPの回復量がアップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [8450, 8450, 24050, 24050]
+    },
+    {
+      "id": "01KYF9HQ6SG6QP71Y3E3ZDDRMF",
+      "resourceId": 145,
+      "name": "黒子の金属矢",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、10%の確率で味方1体のATK/Sp.ATKが大アップする。"
+        }
+      ],
+      "kind": 1,
+      "status": [18000, 18000, 7000, 7000]
+    },
+    {
+      "id": "01KYF9GP096Q7W51VE9C3TFNNS",
+      "resourceId": 190,
+      "name": "樹の大花環",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが水/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [26000, 9750, 19500, 9750]
+    },
+    {
+      "id": "01KYF9EWCHDSTQME369TZSTRXG",
+      "resourceId": 188,
+      "name": "夏凜の豪刀",
+      "maker": null,
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%。メモリア使用時、それが火/風属性メモリアの場合、さらにメモリアスキル効果UP+8%。"
+        }
+      ],
+      "kind": 1,
+      "status": [24700, 10400, 19500, 10400]
+    },
+    {
+      "id": "01KYF9HZ0SD30BP28TW8AHQMTY",
+      "resourceId": 28,
+      "name": "グングニルカービンSP.BE",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
       "kind": 2,
-      "status": [10710, 10584, 10290, 10416]
+      "status": [10445, 10471, 10458, 10626]
+    },
+    {
+      "id": "01KYF9H3NS9T1W82G2EJQTPD8V",
+      "resourceId": 122,
+      "name": "グングニルカービンSP.CE",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [10445, 10471, 10458, 10626]
     }
   ]
 }
