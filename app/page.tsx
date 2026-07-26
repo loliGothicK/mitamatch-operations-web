@@ -1,5 +1,5 @@
-import Home from "@/components/home";
+import { redirect } from "next/navigation";
 
 export default function Index() {
-  return <Home />;
+  redirect("/data");
 }

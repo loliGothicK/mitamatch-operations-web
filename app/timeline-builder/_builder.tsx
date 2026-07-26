@@ -178,7 +178,13 @@ export const TimelineItem = ({
   // Get a list of all unique member names from all legions the user belongs to
   const memberNames = Array.from(
     new Set(
-      userData?.legions.flatMap((l) => (l.members ? l.members.map((m) => m.name) : [])) || [],
+      userData?.legions.flatMap((l) =>
+        l.members
+          ? l.members
+              .filter((m) => m.orders.includes(order.name))
+              .map((m) => m.displayName ?? m.name)
+          : [],
+      ) || [],
     ),
   );
 
@@ -317,9 +323,10 @@ export const TimelineItem = ({
           />
           {memberNames.length > 0 ? (
             <Autocomplete
+              key={`autocomplete-pic-${order.pic ?? "empty"}`}
               freeSolo
               options={memberNames}
-              defaultValue={order.pic}
+              defaultValue={order.pic ?? null}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -334,6 +341,7 @@ export const TimelineItem = ({
             />
           ) : (
             <TextField
+              key={`textfield-pic-${order.pic ?? "empty"}`}
               defaultValue={order.pic}
               margin="dense"
               id={`pic-${uniqueId}`}
@@ -345,9 +353,10 @@ export const TimelineItem = ({
           )}
           {memberNames.length > 0 ? (
             <Autocomplete
+              key={`autocomplete-sub-${order.sub ?? "empty"}`}
               freeSolo
               options={memberNames}
-              defaultValue={order.sub}
+              defaultValue={order.sub ?? null}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -362,6 +371,7 @@ export const TimelineItem = ({
             />
           ) : (
             <TextField
+              key={`textfield-sub-${order.sub ?? "empty"}`}
               defaultValue={order.sub}
               margin="dense"
               id={`sub-${uniqueId}`}
@@ -508,6 +518,7 @@ function Source() {
                   position: "absolute",
                   left: 0,
                   bgcolor: "rgba(0, 0, 0, 0.2)",
+                  zIndex: 5,
                 }}
                 onClick={() => handleAddOrder(index)}
               >

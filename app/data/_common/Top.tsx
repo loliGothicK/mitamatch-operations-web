@@ -2,6 +2,8 @@
 
 import { Datagrid as MemoriaDataGrid } from "@/data/_memoria/datagrid";
 import { Datagrid as CostumeDataGrid } from "@/data/_costume/datagrid";
+import { Datagrid as OrderDataGrid } from "@/data/_order/datagrid";
+import { Datagrid as WeaponDataGrid } from "@/data/_weapon/datagrid";
 import { DataPageTour } from "@/data/_common/Tour";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -17,9 +19,9 @@ import TabPanel from "@mui/lab/TabPanel";
 import { match } from "ts-pattern";
 import HelpOutlined from "@mui/icons-material/HelpOutlined";
 
-const ROUTES = ["memoria", "costume", "character"] as const;
+const ROUTES = ["memoria", "costume", "character", "order", "weapon"] as const;
 
-export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[number] }) {
+export default function DataPage({ dataType }: { dataType: (typeof ROUTES)[number] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || undefined;
@@ -29,6 +31,8 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
       .with("memoria", () => 0)
       .with("costume", () => 1)
       .with("character", () => 2)
+      .with("order", () => 3)
+      .with("weapon", () => 4)
       .otherwise(() => 0),
   );
 
@@ -48,6 +52,8 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
           <Tab label="Memoria" value={0} />
           <Tab label="Costume" value={1} />
           <Tab label="Character" value={2} />
+          <Tab label="Order" value={3} />
+          <Tab label="Weapon" value={4} />
         </TabList>
         <AppBar position="static" sx={{ backgroundColor: "transparent" }}>
           <Toolbar>
@@ -73,6 +79,12 @@ export default function DataPage({ dataType }: { dataType?: (typeof ROUTES)[numb
           {value === 1 && <CostumeDataGrid initialQuery={query} />}
         </TabPanel>
         <TabPanel value={2}>{value === 2 && <View />}</TabPanel>
+        <TabPanel value={3} sx={{ padding: 0 }}>
+          {value === 3 && <OrderDataGrid />}
+        </TabPanel>
+        <TabPanel value={4} sx={{ padding: 0 }}>
+          {value === 4 && <WeaponDataGrid />}
+        </TabPanel>
       </TabContext>
     </Box>
   );

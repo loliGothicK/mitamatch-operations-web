@@ -10,6 +10,12 @@ vi.mock("@/_actions/order", () => ({
   updateOrderAction: vi.fn(async () => {}),
 }));
 
+vi.mock("@/components/image/OrderIcon", () => ({
+  OrderIcon: ({ order }: { order: { name: string } }) => (
+    <img src="/order/test.png" alt={order.name} />
+  ),
+}));
+
 const queryClient = new QueryClient();
 
 const renderComponent = () =>

@@ -14,6 +14,9 @@ import { either } from "fp-ts";
 import { default as CharacterDetail } from "@/data/_character/detail";
 import { normalizeJobName } from "@/domain/costume/function";
 import View from "@/data/_character/view";
+import Recent from "@/data/_common/Recent";
+import OrderDetail from "@/data/_order/detail";
+import WeaponDetail from "@/data/_weapon/detail";
 
 type Props = {
   params: Promise<{ slug?: string | string[] }>;
@@ -43,8 +46,8 @@ export default async function Page({ params, searchParams }: Props) {
   }
 
   return match(slug)
-    .with(undefined, () => <DataPage dataType={"memoria"} />)
-    .with([P.union("memoria", "costume", "character").select()], (slug) => (
+    .with(undefined, () => <Recent />)
+    .with([P.union("memoria", "costume", "character", "order", "weapon").select()], (slug) => (
       <DataPage dataType={slug} />
     ))
     .with(["memoria", P.string], ([, name]) => (
@@ -60,6 +63,8 @@ export default async function Page({ params, searchParams }: Props) {
     .with(["character", P.string.select()], (name) => (
       <CharacterDetail name={decodeURIComponent(name)} />
     ))
+    .with(["order", P.string.select()], (id) => <OrderDetail id={decodeURIComponent(id)} />)
+    .with(["weapon", P.string.select()], (id) => <WeaponDetail id={decodeURIComponent(id)} />)
     .otherwise(() => <NotFound />);
 }
 
@@ -75,7 +80,9 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
     .with(["memoria"], () => ["メモリア", "Memoria "])
     .with(["costume"], () => ["衣装", "Costume "])
     .with(["character"], () => ["キャラクター", "Character "])
-    .otherwise(() => ["メモリアも衣装もキャラクター", ""]);
+    .with(["order"], () => ["オーダー", "Order "])
+    .with(["weapon"], () => ["武器", "Weapon "])
+    .otherwise(() => ["データ", ""]);
 
   return pipe(
     defaultMetadata,

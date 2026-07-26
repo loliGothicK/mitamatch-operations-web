@@ -34,12 +34,26 @@ export function OrderIcon({
       </Box>
       <Box
         sx={{
+          zIndex: 0,
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+      >
+        <Image
+          src={"/assets/Blank.png"}
+          alt={"frame"}
+          width={containerSize}
+          height={containerSize}
+          {...option}
+        />
+      </Box>
+      <Box
+        sx={{
           zIndex: 1,
           position: "absolute",
           top: 0,
           left: 0,
-          backgroundImage: `url("/assets/Blank.png")`,
-          backgroundSize: "cover",
         }}
       >
         <ImageWithFallback

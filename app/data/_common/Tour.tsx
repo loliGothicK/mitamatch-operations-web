@@ -9,7 +9,7 @@ const STORAGE_KEY = "data-pages-tour-completed-v1";
 const gridSteps: Step[] = [
   {
     target: '[data-tour="data-tabs"]',
-    content: "タブを切り替えて、メモリア・衣装・キャラクターの各データページへ移動できます。",
+    content: "タブを切り替えて、各データページへ移動できます。",
     skipBeacon: true,
     placement: "bottom",
   },
@@ -64,7 +64,7 @@ export function DataPageTour({
   tab,
   replayKey,
 }: {
-  tab: "memoria" | "costume" | "character";
+  tab: "memoria" | "costume" | "character" | "order" | "weapon";
   replayKey: number;
 }) {
   const theme = useTheme();
@@ -74,7 +74,7 @@ export function DataPageTour({
   const steps = useMemo(() => gridSteps, []);
 
   useEffect(() => {
-    if (tab === "character") {
+    if (tab !== "memoria" && tab !== "costume") {
       setRun(false);
       setStepIndex(0);
       return;
@@ -88,7 +88,7 @@ export function DataPageTour({
   }, [tab]);
 
   useEffect(() => {
-    if (tab === "character") {
+    if (tab !== "memoria" && tab !== "costume") {
       setRun(false);
       setStepIndex(0);
       return;

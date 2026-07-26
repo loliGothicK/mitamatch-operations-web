@@ -5,6 +5,7 @@ import { drizzle } from "drizzle-orm/neon-http";
 import {
   decks,
   memoria,
+  order,
   organization,
   organizationMembers,
   queryPresets,
@@ -73,7 +74,13 @@ export async function getUserData(clerkUserId: string) {
   // 3. 管理者権限を持つ組織のメンバーを一括取得するためのマップを作成
   const membersByOrgId = new Map<
     string,
-    Array<{ userId: string; name: string; displayName: string | null; role: string }>
+    Array<{
+      userId: string;
+      name: string;
+      displayName: string | null;
+      role: string;
+      orders: string[];
+    }>
   >();
 
   if (adminOrgIds.length > 0) {
@@ -90,10 +97,38 @@ export async function getUserData(clerkUserId: string) {
       .innerJoin(users, eq(users.id, organizationMembers.userId))
       .where(inArray(organizationMembers.organizationId, adminOrgIds));
 
+    // メンバーの所持オーダーを一括取得
+    const memberIds = Array.from(new Set(members.map((m) => m.userId)));
+    const memberOrders =
+      memberIds.length > 0
+        ? await db
+            .select({
+              userId: usersToOrder.userId,
+              orderName: order.name,
+            })
+            .from(usersToOrder)
+            .innerJoin(order, eq(usersToOrder.orderId, order.id))
+            .where(inArray(usersToOrder.userId, memberIds))
+        : [];
+
+    const ordersByUserId = new Map<string, string[]>();
+    for (const mo of memberOrders) {
+      const list = ordersByUserId.get(mo.userId) || [];
+      list.push(mo.orderName);
+      ordersByUserId.set(mo.userId, list);
+    }
+
     // 取得したメンバーを組織IDごとにグループ化
     for (const m of members) {
       const list = membersByOrgId.get(m.orgId) || [];
-      list.push({ userId: m.userId, name: m.name, displayName: m.displayName, role: m.role });
+      const userOrders = ordersByUserId.get(m.userId) || [];
+      list.push({
+        userId: m.userId,
+        name: m.name,
+        displayName: m.displayName,
+        role: m.role,
+        orders: userOrders,
+      });
       membersByOrgId.set(m.orgId, list);
     }
   }
