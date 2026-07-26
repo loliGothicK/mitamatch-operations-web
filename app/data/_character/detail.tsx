@@ -24,12 +24,13 @@ import { BindRune } from "@/components/runes/bindrune";
 import { match, P } from "ts-pattern";
 import { sort } from "fp-ts/Array";
 import { pipe } from "fp-ts/function";
+import * as M from "fp-ts/Monoid";
 import * as N from "fp-ts/number";
 import * as O from "fp-ts/Ord";
 import Toolbar from "@mui/material/Toolbar";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
-import { comparator } from "@/functional/proj";
 import { CostumeIcon } from "@/components/image/CostumeIcon";
+import { comparator } from "@/functional/proj";
 
 const byGarden = pipe(
   N.Ord,
@@ -44,6 +45,31 @@ const byGarden = pipe(
       .run(),
   ),
 );
+const byLegion = pipe(
+  N.Ord,
+  O.contramap((character: Character) =>
+    match(character.legion)
+      .with("一柳隊", () => 1)
+      .with("アールヴヘイム", () => 2)
+      .with("ローエングリン", () => 3)
+      .with("レギンレイヴ", () => 4)
+      .with("エイル", () => 5)
+      .with("シュバルツグレイル", () => 6)
+      .with("サングリーズル", () => 7)
+      .with("シュヴェルトライテ", () => 8)
+      .with("ヘルヴォル", () => 9)
+      .with("クエレブレ", () => 10)
+      .with("バシャンドレ", () => 11)
+      .with("グラン・エプレ", () => 12)
+      .with("神庭生徒会防衛隊", () => 13)
+      .with("ロネスネス", () => 14)
+      .with("ヘオロットセインツ", () => 15)
+      .with("アイアンサイド", () => 16)
+      .with("テンプルレギオン", () => 16)
+      .otherwise(() => Number.POSITIVE_INFINITY),
+  ),
+);
+const characterOrd = M.concatAll(O.getMonoid<Character>())([byGarden, byLegion]);
 
 const gardenImage = (character: Character) =>
   match(character.garden)
@@ -55,7 +81,7 @@ export default function Detail({ name }: { name: string }) {
     .filter((costume) => name.includes(Lenz.costume.general.name.lily.get(costume)))
     .toSorted(comparator("released_at", "desc"));
   const character = characterList.find((character) => character.name === name);
-  const characters = sort(byGarden)(
+  const characters = sort(characterOrd)(
     characterList.filter(({ name, garden }) => !name.includes(garden) || garden.length === 0),
   ).map((character) => character.name);
 

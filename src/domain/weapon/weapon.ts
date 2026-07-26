@@ -6,6 +6,7 @@ const weaponSchema = z.object({
   id: z.ulid().readonly(),
   resourceId: z.number().readonly(),
   name: z.string().readonly(),
+  maker: z.string().optional().readonly(),
   effect: z
     .array(
       z.object({
