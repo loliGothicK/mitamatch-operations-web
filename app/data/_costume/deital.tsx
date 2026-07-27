@@ -410,6 +410,7 @@ export default function Deital({ lily, job }: { lily: string; job: string }) {
             width={750}
             height={1300}
             priority={true}
+            unoptimized
           />
         </Grid>
       </Grid>

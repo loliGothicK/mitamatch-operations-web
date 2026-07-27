@@ -150,6 +150,7 @@ export default function Detail({ name }: { name: string }) {
                   alt={character.garden}
                   width={100}
                   height={100}
+                  unoptimized
                 />
                 <Stack direction="column" sx={{ alignItems: "flex-start" }}>
                   <Typography component="div" variant="body1">

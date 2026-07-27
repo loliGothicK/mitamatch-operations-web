@@ -8,8 +8,8 @@
     "b": "next build",
     "build": "next build",
     "start": "next start",
-    "lint": "pnpm dlx oxlint",
-    "lint:fix": "pnpm dlx oxlint --fix",
+    "lint": "content-collections build && pnpm dlx oxlint",
+    "lint:fix": "content-collections build && pnpm dlx oxlint --fix",
     "fmt": "pnpm dlx oxfmt",
     "fmt:check": "pnpm dlx oxfmt --check && pnpm dlx biome format .",
     "pretty": "pnpm dlx oxlint --config=./oxlint.config.ts --fix && pnpm dlx oxfmt --config=./oxfmt.config.ts && npx biome format --write .",
@@ -104,6 +104,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.5",
+    "@content-collections/cli": "^0.1.9",
     "@content-collections/core": "0.15.2",
     "@content-collections/mdx": "0.2.2",
     "@content-collections/next": "0.2.11",

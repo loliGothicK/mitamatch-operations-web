@@ -23,6 +23,7 @@ import { projector } from "@/functional/proj";
 import TabList from "@mui/lab/TabList";
 import TabContext from "@mui/lab/TabContext";
 import TabPanel from "@mui/lab/TabPanel";
+import { MemoriaIcon } from "@/components/image/MemoriaIcon";
 
 function a11yProps(index: number) {
   return {
@@ -91,13 +92,7 @@ export default function Deital({ name, type }: { name: string; type?: 1 | 2 | 3 
           spacing={2}
           sx={{ justifyContent: "flex-start", alignItems: "center" }}
         >
-          <Image
-            src={`/memoria/${data[0].uniqueId}.png`}
-            alt={data[0].name.short}
-            width={120}
-            height={120}
-            priority={true}
-          />
+          <MemoriaIcon memoria={data[0]} size={120} />
           <Box>
             <Typography variant="h4" component="div">
               {data[0].name.full}

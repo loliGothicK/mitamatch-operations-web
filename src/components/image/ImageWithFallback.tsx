@@ -14,6 +14,7 @@ export const ImageWithFallback = (
       onError={() => {
         setImgSrc(fallback);
       }}
+      unoptimized
     />
   );
 };

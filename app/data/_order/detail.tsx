@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import Link from "@/components/link";
 import { orderList } from "@/domain/order/order";
+import { OrderIcon } from "@/components/image/OrderIcon";
 
 export default function OrderDetail({ id }: { id: string }) {
   const order = orderList.find((item) => item.id === id);
@@ -15,7 +16,7 @@ export default function OrderDetail({ id }: { id: string }) {
       <Link href="/data/order">← Order data</Link>
       <Card sx={{ mt: 2, maxWidth: 900 }}>
         <CardContent sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
-          <Image src={`/order/${order.id}.png`} alt={order.name} width={160} height={160} />
+          <OrderIcon order={order} size={160} />
           <Box sx={{ flex: 1, minWidth: 280 }}>
             <Typography variant="h4" gutterBottom>
               {order.name}
