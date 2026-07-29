@@ -5,7 +5,6 @@ import { formatCardType, type Memoria, memoriaList } from "@/domain/memoria/memo
 import { Box, Stack } from "@mui/system";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import Image from "next/image";
 import {
   Card,
   CardContent,

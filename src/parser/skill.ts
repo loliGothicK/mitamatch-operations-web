@@ -540,6 +540,9 @@ function parseElementEffect(
     if (name.includes("スプレシア")) {
       return right(["spread" as const, "minima" as const]);
     }
+    if (name.includes("トリニティ") || name.includes("Tr")) {
+      return right(["spread" as const, "enhance" as const, "minima" as const]);
+    }
     return bail(name, "given text doesn't match resonance type", {
       path: path.join("parseElementEffect.parseResonanceType"),
       memoriaName,

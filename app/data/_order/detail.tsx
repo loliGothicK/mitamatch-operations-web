@@ -1,7 +1,6 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import Link from "@/components/link";
 import { orderList } from "@/domain/order/order";
