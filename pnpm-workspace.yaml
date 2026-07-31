@@ -48,3 +48,5 @@ minimumReleaseAgeExclude:
   - happy-dom@20.10.4 || 20.11.1
   - oxfmt@0.55.0 || 0.60.0
   - "@vitejs/plugin-react@6.0.4"
+  - '@types/react-dom@19.2.4'
+  - '@types/react@19.2.18'
