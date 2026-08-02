@@ -87,6 +87,7 @@ import { ULID, ulid } from "ulid";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { saveTimelinesAction } from "@/_actions/timelines";
 import { TimelineBuilderTour } from "@/timeline-builder/_tour";
+import { AutoAssignButton } from "@/timeline-builder/_auto-assign";
 import { TimelineShareCard } from "@/timeline-builder/_share-card";
 import { copyNodeAsImage } from "@/components/share/copyImage";
 
@@ -199,7 +200,7 @@ export const TimelineItem = ({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    zIndex: isDragging ? Number.POSITIVE_INFINITY : "auto",
+    zIndex: isDragging ? 100 : "auto",
     touchAction: "none",
   };
 
@@ -768,6 +769,7 @@ export function TimelineBuilderPage({ userData }: { userData?: UserData }) {
             pr: 20,
           }}
         >
+          <AutoAssignButton userData={userData} />
           <ShareButton />
           <FilterMenu />
           <Divider orientation="vertical" flexItem sx={{ margin: 1 }} />
