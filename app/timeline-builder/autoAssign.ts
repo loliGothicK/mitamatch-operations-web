@@ -63,6 +63,8 @@ export function assignOrders(
           if (rearGuard.includes(name)) {
             if (resetIndex !== -1 && i > resetIndex) {
               score += 2; // リセット後は特に後衛を優先
+            } else {
+              score += 1; // リセット前も後衛を少し優先
             }
           }
           return { name, score };
