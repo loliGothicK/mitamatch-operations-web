@@ -8,6 +8,7 @@ import { LegionManagement } from "@/dashboard/_parts/Legion";
 import { OrderRegistration } from "@/dashboard/_parts/Order";
 import { createLegionAction } from "@/_actions/legion";
 import { useRouter } from "next/navigation";
+import * as Sentry from "@sentry/nextjs";
 import {
   Button,
   Dialog,
@@ -57,6 +58,9 @@ export function Dashboard({ userData }: { userData: UserData }) {
       setNewLegionName("");
       router.refresh();
     } catch (e) {
+      Sentry.captureException(e, {
+        extra: { action: "createLegionAction", legionName: newLegionName },
+      });
       console.error("Failed to create legion", e);
     } finally {
       setIsCreating(false);
