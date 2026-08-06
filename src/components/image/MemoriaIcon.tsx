@@ -14,8 +14,9 @@ export function MemoriaIcon({
   ImageProps,
   "src" | "alt" | "width" | "height"
 >) {
+  const containerSize = size ?? 100;
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box sx={{ position: "relative", width: containerSize, height: containerSize, flexShrink: 0 }}>
       <Box
         sx={{
           position: "absolute",
@@ -38,10 +39,16 @@ export function MemoriaIcon({
           <Image
             src={"/assets/LegendaryIcon.png"}
             alt={"LegendaryIcon"}
-            width={size ? size * 0.25 : 25}
-            height={size ? size * 0.25 : 25}
+            width={size ? size * 0.3 : 30}
+            height={size ? size * 0.3 : 30}
             unoptimized
-            style={{ width: size ? size * 0.25 : 25, height: size ? size * 0.25 : 25 }}
+            style={{
+              width: size ? size * 0.3 : 30,
+              height: size ? size * 0.3 : 30,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+            }}
           />
         </Box>
       )}

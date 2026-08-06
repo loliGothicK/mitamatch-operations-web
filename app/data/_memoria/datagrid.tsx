@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Tooltip, Typography } from "@mui/material";
+import { Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { type GridColDef, type GridColumnVisibilityModel } from "@mui/x-data-grid";
 import { decodeTime } from "ulid";
 import Link from "@/components/link";
@@ -16,6 +16,16 @@ import { MemoriaIcon } from "@/components/image/MemoriaIcon";
 import { match } from "ts-pattern";
 import type { Attribute } from "@/parser/skill";
 
+const MemoriaGridIcon = ({ row }: { row: Memoria }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  return (
+    <Link href={`/data/memoria/${encodeURI(row.name.full)}?type=${row.cardType}`}>
+      <MemoriaIcon memoria={row} size={isMobile ? 60 : 80} />
+    </Link>
+  );
+};
+
 const columns: GridColDef<Memoria>[] = [
   {
     field: "image",
@@ -26,9 +36,7 @@ const columns: GridColDef<Memoria>[] = [
       name: Lenz.memoria.general.shortName.get(memoria),
     }),
     renderCell: (params) => (
-      <Link href={`/data/memoria/${encodeURI(params.row.name.full)}?type=${params.row.cardType}`}>
-        <MemoriaIcon memoria={params.row} size={80} />
-      </Link>
+      <MemoriaGridIcon row={params.row as Memoria} />
     ),
     sortComparator: (a, b) => a.id - b.id,
   },

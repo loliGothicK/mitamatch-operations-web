@@ -14,6 +14,8 @@ import {
   ListSubheader,
   Tooltip,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { match, P } from "ts-pattern";
 import { option } from "fp-ts";
@@ -21,6 +23,16 @@ import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
 import { DataGrid } from "@/data/_common/DataGrid";
 import { CostumeIcon } from "@/components/image/CostumeIcon";
+
+const CostumeGridIcon = ({ row }: { row: Costume }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  return (
+    <Link href={`/data/costume/${Lenz.costume.general.name.normalized.URI.get(row)}`}>
+      <CostumeIcon costume={row} size={isMobile ? 60 : 80} />
+    </Link>
+  );
+};
 
 const columns: GridColDef<Costume>[] = [
   {
@@ -32,9 +44,7 @@ const columns: GridColDef<Costume>[] = [
       name: Lenz.costume.general.name.full.get(costume),
     }),
     renderCell: (params) => (
-      <Link href={`/data/costume/${Lenz.costume.general.name.normalized.URI.get(params.row)}`}>
-        <CostumeIcon costume={params.row} size={80} />
-      </Link>
+      <CostumeGridIcon row={params.row as Costume} />
     ),
     sortComparator: (a, b) => a.id - b.id,
   },

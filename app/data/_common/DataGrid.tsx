@@ -5,7 +5,7 @@ import {
   GridColumnVisibilityModel,
   GridSortModel,
 } from "@mui/x-data-grid";
-import { ComponentPropsWithoutRef, useCallback, useEffect, useState } from "react";
+import { ComponentPropsWithoutRef, useCallback, useEffect, useState, useMemo } from "react";
 import { Box } from "@mui/system";
 import {
   Alert,
@@ -136,26 +136,19 @@ export function DataGrid<
   const [sortModel, setSortModel] = useState<GridSortModel>([]);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const [visibility, setVisibility] = useState<GridColumnVisibilityModel>(() => {
-    if (!isMobile) return visibilityAll;
+  const mobileDefaultVisibility = useMemo(() => {
     const v = { ...visibilityAll };
-    ["atk", "def", "spatk", "spdef", "released_at", "attribute", "cost"].forEach((col) => {
-      if (col in v) v[col] = false;
+    Object.keys(v).forEach((col) => {
+      if (!["image", "name", "gvgSkill", "autoSkill", "rareSkill", "specialSkill"].includes(col)) {
+        v[col] = false;
+      }
     });
     return v;
-  });
+  }, [visibilityAll]);
 
-  useEffect(() => {
-    if (!isMobile) {
-      setVisibility(visibilityAll);
-    } else {
-      const v = { ...visibilityAll };
-      ["atk", "def", "spatk", "spdef", "released_at", "attribute", "cost"].forEach((col) => {
-        if (col in v) v[col] = false;
-      });
-      setVisibility(v);
-    }
-  }, [isMobile, visibilityAll]);
+  const [visibility, setVisibility] = useState<GridColumnVisibilityModel>(() => {
+    return isMobile ? mobileDefaultVisibility : visibilityAll;
+  });
 
   const handleVisibilityChange = useCallback(
     (newModel: GridColumnVisibilityModel) => {
@@ -187,7 +180,9 @@ export function DataGrid<
           if (visibility.type === "column_ref") {
             setVisibility(
               visibility.columns.has("*")
-                ? visibilityAll
+                ? isMobile
+                  ? mobileDefaultVisibility
+                  : visibilityAll
                 : pipe(
                     visibilityAll,
                     mapWithIndex((col) => visibility.columns.has(col)),
@@ -246,8 +241,12 @@ export function DataGrid<
         }),
       );
     },
-    [completion, query, resolver, origin, phantasmFilter, visibilityAll, setVisibility],
+    [completion, query, resolver, origin, phantasmFilter, visibilityAll, setVisibility, isMobile, mobileDefaultVisibility],
   );
+
+  useEffect(() => {
+    runQuery();
+  }, [isMobile]);
 
   const handleToggle = useCallback(() => {
     setVisible((prev) => !prev);
@@ -335,8 +334,15 @@ export function DataGrid<
           <MuiDataGrid
             key={table}
             rows={rows}
-            rowHeight={80}
-            columns={columns}
+            rowHeight={isMobile ? 60 : 80}
+            columns={
+              isMobile
+                ? columns.map((col) => ({
+                    ...col,
+                    width: col.field === "image" ? 70 : col.width ? Math.min(col.width, 200) : col.width,
+                  }))
+                : columns
+            }
             columnVisibilityModel={visibility}
             sortModel={sortModel}
             onSortModelChange={setSortModel}

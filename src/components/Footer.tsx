@@ -34,27 +34,35 @@ export default function Footer({ ...props }) {
         <Box
           sx={{
             display: "grid",
-            gap: 10,
-            margin: 4,
+            gap: { xs: 4, md: 10 },
+            margin: { xs: 2, md: 4 },
             justifyContent: "center",
             alignItems: "center",
-            GridTemplateColumns: "1fr 1fr",
-            GridTemplateRows: "1fr 1fr",
-            GridTemplateAreas: `
-            "logo tools"
-            "donate docs"
-          `,
+            gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+            gridTemplateAreas: {
+              xs: `
+                "logo"
+                "tools"
+                "docs"
+                "donate"
+              `,
+              sm: `
+                "logo tools"
+                "donate docs"
+              `
+            },
           }}
         >
-          <Box sx={{ GridArea: "logo" }}>
+          <Box sx={{ gridArea: "logo" }}>
             <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
               <Image
                 src={theme.palette.mode === "dark" ? "/MO_DARK.png" : "/MO_LIGHT.png"}
                 alt={"mode"}
                 width={300}
                 height={100}
+                style={{ maxWidth: "100%", height: "auto" }}
               />
-              <Typography>{"一瞬でレギオンマッチを改善。驚きの速さで。"}</Typography>
+              <Typography sx={{ textAlign: "center" }}>{"一瞬でレギオンマッチを改善。驚きの速さで。"}</Typography>
             </Stack>
           </Box>
           <Box sx={{ gridArea: "docs" }}>
@@ -72,7 +80,7 @@ export default function Footer({ ...props }) {
               ))}
             </Stack>
           </Box>
-          <Box sx={{ GridArea: "tools" }}>
+          <Box sx={{ gridArea: "tools" }}>
             <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
               <Typography>{"Tools"}</Typography>
               {content.tools.map((link) => {
@@ -89,7 +97,7 @@ export default function Footer({ ...props }) {
               })}
             </Stack>
           </Box>
-          <Box sx={{ GridArea: "donate" }}>
+          <Box sx={{ gridArea: "donate" }}>
             <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
               <Typography>{"Donate"}</Typography>
               <Link
@@ -146,8 +154,8 @@ export default function Footer({ ...props }) {
           </Box>
         </Box>
         <Divider sx={{ margin: 2, width: "100%" }} />
-        <Grid container direction={"row"} sx={{ paddingBottom: 10 }}>
-          <Grid sx={{ flexGrow: 0.9 }}>
+        <Grid container spacing={2} sx={{ alignItems: "center", flexDirection: { xs: "column", sm: "row" }, paddingBottom: { xs: 6, sm: 10 } }}>
+          <Grid sx={{ flexGrow: 0.9, textAlign: { xs: "center", sm: "left" } }}>
             <Typography
               color={theme.palette.text.secondary}
               component="p"
