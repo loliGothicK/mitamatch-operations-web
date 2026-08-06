@@ -44,7 +44,10 @@ export async function createLegionAction(name: string) {
   const internalUserId = user[0].id;
 
   return await db.transaction(async (tx) => {
-    const newOrg = await tx.insert(organization).values({ name }).returning({ id: organization.id });
+    const newOrg = await tx
+      .insert(organization)
+      .values({ name })
+      .returning({ id: organization.id });
 
     if (!newOrg.length) throw new Error("Failed to create organization");
     const orgId = newOrg[0].id;

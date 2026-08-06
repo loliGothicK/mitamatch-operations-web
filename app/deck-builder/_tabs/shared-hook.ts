@@ -3,7 +3,10 @@ import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import { useAsync } from "react-use";
 import { restore } from "@/actions/restore";
-import { shouldResetDeckBuilderQueryForSw, getDefaultDeckBuilderQuery } from "@/domain/memoria/query";
+import {
+  shouldResetDeckBuilderQueryForSw,
+  getDefaultDeckBuilderQuery,
+} from "@/domain/memoria/query";
 import {
   rwDeckAtom,
   rwLegendaryDeckAtom,

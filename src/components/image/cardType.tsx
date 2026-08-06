@@ -16,6 +16,8 @@ export function CardTypeIcon({
   const wh = {
     width: size * 0.82,
     height: size * 0.82,
+    unoptimized: true,
+    style: { width: "100%", height: "100%" },
   };
   const kindImage = match(cardType)
     .with(1, () => <Image src={"/NormalSingle.png"} alt={"kind"} {...wh} />)

@@ -117,6 +117,7 @@ import { Lenz } from "@/domain/lenz";
 import { isStackEffect } from "@/parser/skill";
 import { Calculator } from "@/deck-builder/_tabs/calculator";
 import { isLeft } from "fp-ts/Either";
+import { useMeasure } from "react-use";
 import { ULID, ulid } from "ulid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { saveDecksAction } from "@/_actions/decks";
@@ -211,22 +212,75 @@ export function Icon({
 
   const kindImage = match(cardType)
     .with(1, () => (
-      <Image src={"/NormalSingle.png"} alt={"kind"} width={iconSize} height={iconSize} />
+      <Image
+        src={"/NormalSingle.png"}
+        alt={"kind"}
+        width={iconSize}
+        height={iconSize}
+        unoptimized
+        style={{ width: "100%", height: "100%" }}
+      />
     ))
     .with(2, () => (
-      <Image src={"/NormalRange.png"} alt={"kind"} width={iconSize} height={iconSize} />
+      <Image
+        src={"/NormalRange.png"}
+        alt={"kind"}
+        width={iconSize}
+        height={iconSize}
+        unoptimized
+        style={{ width: "100%", height: "100%" }}
+      />
     ))
     .with(3, () => (
-      <Image src={"/SpecialSingle.png"} alt={"kind"} width={iconSize} height={iconSize} />
+      <Image
+        src={"/SpecialSingle.png"}
+        alt={"kind"}
+        width={iconSize}
+        height={iconSize}
+        unoptimized
+        style={{ width: "100%", height: "100%" }}
+      />
     ))
     .with(4, () => (
-      <Image src={"/SpecialRange.png"} alt={"kind"} width={iconSize} height={iconSize} />
+      <Image
+        src={"/SpecialRange.png"}
+        alt={"kind"}
+        width={iconSize}
+        height={iconSize}
+        unoptimized
+        style={{ width: "100%", height: "100%" }}
+      />
     ))
-    .with(5, () => <Image src={"/Assist.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(5, () => (
+      <Image
+        src={"/Assist.png"}
+        alt={"kind"}
+        width={iconSize}
+        height={iconSize}
+        unoptimized
+        style={{ width: "100%", height: "100%" }}
+      />
+    ))
     .with(6, () => (
-      <Image src={"/Interference.png"} alt={"kind"} width={iconSize} height={iconSize} />
+      <Image
+        src={"/Interference.png"}
+        alt={"kind"}
+        width={iconSize}
+        height={iconSize}
+        unoptimized
+        style={{ width: "100%", height: "100%" }}
+      />
     ))
-    .with(7, () => <Image src={"/Recovery.png"} alt={"kind"} width={iconSize} height={iconSize} />)
+    .with(7, () => (
+      <Image
+        src={"/Recovery.png"}
+        alt={"kind"}
+        width={iconSize}
+        height={iconSize}
+        unoptimized
+        style={{ width: "100%", height: "100%" }}
+      />
+    ))
     .exhaustive();
 
   const avatar = (color: string) => (
@@ -553,9 +607,14 @@ function MemoriaGrid({
   layout?: "desktop" | "mobile";
   onMobileClick?: (memoria: MemoriaWithConcentration) => void;
 }) {
+  const [ref, { width }] = useMeasure<HTMLDivElement>();
+  // MUI gap: 0.5 = 4px. 4 gaps = 16px.
+  const itemSize = layout === "mobile" && width > 0 ? (width - 16) / 5 : size;
+
   return (
     <Sortable items={memorias} onChangeOrder={onChangeOrder}>
       <Box
+        ref={ref}
         sx={
           layout === "desktop"
             ? {
@@ -581,7 +640,7 @@ function MemoriaGrid({
               memoria={memoria}
               key={memoria.id}
               preload={true}
-              size={size}
+              size={itemSize}
               onMobileClick={onMobileClick}
             />
           );

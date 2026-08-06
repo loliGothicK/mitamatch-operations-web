@@ -45,6 +45,8 @@ export function OrderIcon({
           alt={"frame"}
           width={containerSize}
           height={containerSize}
+          unoptimized
+          style={{ width: "100%", height: "100%" }}
           {...option}
         />
       </Box>

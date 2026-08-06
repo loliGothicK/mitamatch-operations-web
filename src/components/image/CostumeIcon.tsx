@@ -36,7 +36,14 @@ export function CostumeIcon({
           left: 1,
         }}
       >
-        <Image src={"/assets/Blank.png"} alt={"blank"} width={innerSize} height={innerSize} />
+        <Image
+          src={"/assets/Blank.png"}
+          alt={"blank"}
+          width={innerSize}
+          height={innerSize}
+          unoptimized
+          style={{ width: "100%", height: "100%" }}
+        />
       </Box>
       {/* アイコン！ */}
       {(isAdx || isAwakable) && (

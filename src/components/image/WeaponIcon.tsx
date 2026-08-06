@@ -27,6 +27,8 @@ export function WeaponIcon({
           alt={"blank"}
           width={containerSize}
           height={containerSize}
+          unoptimized
+          style={{ width: "100%", height: "100%" }}
         />
       </Box>
       <Box

@@ -40,6 +40,8 @@ export function MemoriaIcon({
             alt={"LegendaryIcon"}
             width={size ? size * 0.25 : 25}
             height={size ? size * 0.25 : 25}
+            unoptimized
+            style={{ width: size ? size * 0.25 : 25, height: size ? size * 0.25 : 25 }}
           />
         </Box>
       )}
@@ -55,6 +57,8 @@ export function MemoriaIcon({
             alt={"frame"}
             width={size ?? 100}
             height={size ?? 100}
+            unoptimized
+            style={{ width: "100%", height: "100%" }}
           />
         ) : (
           <Image
@@ -62,6 +66,8 @@ export function MemoriaIcon({
             alt={"frame"}
             width={size ?? 100}
             height={size ?? 100}
+            unoptimized
+            style={{ width: "100%", height: "100%" }}
           />
         )}
       </Box>

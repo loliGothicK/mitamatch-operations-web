@@ -127,8 +127,14 @@ export function Dashboard({ userData }: { userData: UserData }) {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setCreateDialogOpen(false)} disabled={isCreating}>キャンセル</Button>
-            <Button onClick={onLegionCreateSubmit} disabled={!newLegionName || isCreating} variant="contained">
+            <Button onClick={() => setCreateDialogOpen(false)} disabled={isCreating}>
+              キャンセル
+            </Button>
+            <Button
+              onClick={onLegionCreateSubmit}
+              disabled={!newLegionName || isCreating}
+              variant="contained"
+            >
               作成
             </Button>
           </DialogActions>

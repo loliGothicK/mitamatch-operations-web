@@ -131,7 +131,15 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
             </Box>
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <Link href="/" sx={{ pr: 2 }}>
-                <Image src="/MitamaLabLogo.png" alt="logo" width={40} height={40} priority={true} />
+                <Image
+                  src="/MitamaLabLogo.png"
+                  alt="logo"
+                  width={40}
+                  height={40}
+                  priority={true}
+                  unoptimized
+                  style={{ width: 40, height: 40 }}
+                />
               </Link>
               <Typography
                 variant="h6"

@@ -144,6 +144,8 @@ function RecentCard({ entry }: { entry: RecentItem }) {
                   alt="frame"
                   width={80}
                   height={80}
+                  unoptimized
+                  style={{ width: "100%", height: "100%" }}
                 />
               </Box>
               <ImageWithFallback
