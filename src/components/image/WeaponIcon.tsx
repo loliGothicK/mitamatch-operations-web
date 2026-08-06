@@ -9,10 +9,7 @@ export function WeaponIcon({
   weapon: { resourceId, name },
   size,
   ...option
-}: { weapon: Weapon; size?: number } & StrictOmit<
-  ImageProps,
-  "src" | "alt" | "width" | "height"
->) {
+}: { weapon: Weapon; size?: number } & StrictOmit<ImageProps, "src" | "alt" | "width" | "height">) {
   const containerSize = size ?? 100;
 
   return (
@@ -25,7 +22,12 @@ export function WeaponIcon({
           left: 0,
         }}
       >
-        <Image src={"/assets/Blank.png"} alt={"blank"} width={containerSize} height={containerSize} />
+        <Image
+          src={"/assets/Blank.png"}
+          alt={"blank"}
+          width={containerSize}
+          height={containerSize}
+        />
       </Box>
       <Box
         sx={{

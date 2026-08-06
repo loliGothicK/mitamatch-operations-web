@@ -13,11 +13,11 @@ import {
   useMemo,
   useRef,
   useState,
+  useEffect,
 } from "react";
 import DifferenceIcon from "@mui/icons-material/Difference";
 import type { Unit } from "@/domain/types";
 import { saveShortLink } from "@/actions/permlink";
-import { restore } from "@/actions/restore";
 
 import {
   Add,
@@ -117,7 +117,6 @@ import { Lenz } from "@/domain/lenz";
 import { isStackEffect } from "@/parser/skill";
 import { Calculator } from "@/deck-builder/_tabs/calculator";
 import { isLeft } from "fp-ts/Either";
-import { useAsync } from "react-use";
 import { ULID, ulid } from "ulid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { saveDecksAction } from "@/_actions/decks";
@@ -157,17 +156,18 @@ const isLegendaryMemoria = (memoria: MemoriaWithConcentration) =>
 const hasStackDescription = (memoria?: MemoriaWithConcentration) =>
   memoria?.skills.gvgSkill.raw.description.includes("スタック") ?? false;
 
-const getNextConcentration = (concentration: number): Concentration =>
+export const getNextConcentration = (concentration: number): Concentration =>
   (concentration > 0 ? concentration - 1 : 4) as Concentration;
 
-const updateMemoriaConcentration = (
-  memorias: MemoriaWithConcentration[],
+export const updateMemoriaConcentration = (
+  deck: MemoriaWithConcentration[],
   shortName: string,
   concentration: Concentration,
-) =>
-  memorias.map((memoria) =>
+) => {
+  return deck.map((memoria) =>
     memoria.name.short === shortName ? { ...memoria, concentration } : memoria,
   );
+};
 
 const replaceMemoriaById = (
   memorias: MemoriaWithConcentration[],
@@ -175,8 +175,9 @@ const replaceMemoriaById = (
   replacement: MemoriaWithConcentration,
 ) => memorias.map((memoria) => (memoria.id === targetId ? replacement : memoria));
 
-const removeMemoriaByShortName = (memorias: MemoriaWithConcentration[], shortName: string) =>
-  memorias.filter((memoria) => memoria.name.short !== shortName);
+export const removeMemoriaByShortName = (deck: MemoriaWithConcentration[], shortName: string) => {
+  return deck.filter((memoria) => memoria.name.short !== shortName);
+};
 
 const getStackSettings = (memoria: MemoriaWithConcentration, sw: "sword" | "shield") => {
   const effect = match(sw)
@@ -194,16 +195,19 @@ const getStackSettings = (memoria: MemoriaWithConcentration, sw: "sword" | "shie
   };
 };
 
-function Icon({
+export function Icon({
   cardType,
   attribute,
   position,
+  size = 100,
 }: {
   cardType: Memoria["cardType"];
   attribute: Memoria["attribute"];
   position?: number;
+  size?: number;
 }) {
-  const iconSize = 28;
+  const scale = size / 100;
+  const iconSize = 28 * scale;
 
   const kindImage = match(cardType)
     .with(1, () => (
@@ -228,9 +232,9 @@ function Icon({
   const avatar = (color: string) => (
     <Avatar
       sx={{
-        width: 34,
-        height: 34,
-        left: position === undefined ? undefined : position - 3,
+        width: 34 * scale,
+        height: 34 * scale,
+        left: position === undefined ? undefined : position * scale - 3 * scale,
         position: "absolute",
         bgcolor: color,
         zIndex: 1,
@@ -252,19 +256,22 @@ function Icon({
 export function ConcentrationIcon({
   concentration,
   handleConcentration,
+  size = 100,
 }: {
   concentration: number;
   handleConcentration: (() => void) | true;
+  size?: number;
 }) {
+  const scale = size / 100;
   return (
     <IconButton
       disabled={handleConcentration === true}
       onClick={handleConcentration === true ? undefined : handleConcentration}
       sx={{
-        top: 32,
+        top: 32 * scale,
         right: 0,
-        width: 30,
-        height: 30,
+        width: 30 * scale,
+        height: 30 * scale,
         position: "absolute",
         zIndex: 10,
         p: 0,
@@ -277,7 +284,7 @@ export function ConcentrationIcon({
           alignItems: "center",
           justifyContent: "center",
           color: "white",
-          fontSize: concentration === 4 ? 12 : 16,
+          fontSize: (concentration === 4 ? 12 : 16) * scale,
           fontWeight: 700,
           lineHeight: 1,
           zIndex: 1,
@@ -285,7 +292,12 @@ export function ConcentrationIcon({
       >
         {concentration === 4 ? "MAX" : concentration}
       </Box>
-      <Image src={"/Concentration.png"} alt={"concentration"} width={30} height={30} />
+      <Image
+        src={"/Concentration.png"}
+        alt={"concentration"}
+        width={30 * scale}
+        height={30 * scale}
+      />
     </IconButton>
   );
 }
@@ -297,13 +309,17 @@ function MemoriaItem({
   onContextMenu,
   disable,
   preload,
+  size = 100,
+  onMobileClick,
 }: {
-  readonly memoria: MemoriaWithConcentration;
-  readonly remove?: false;
-  readonly onConcentrationChange?: Dispatch<SetStateAction<Concentration | undefined>> | false;
-  readonly onContextMenu?: false;
-  readonly disable?: true;
-  readonly preload?: boolean;
+  memoria: MemoriaWithConcentration;
+  remove?: true;
+  onConcentrationChange?: Dispatch<SetStateAction<Concentration | undefined>> | false;
+  onContextMenu?: false;
+  disable?: boolean;
+  preload?: boolean;
+  size?: number;
+  onMobileClick?: (memoria: MemoriaWithConcentration) => void;
 }) {
   const { name, id, concentration } = memoria;
   const [, setDeck] = useAtom(rwDeckAtom);
@@ -374,8 +390,16 @@ function MemoriaItem({
     return window.btoa(str);
   };
 
+  const dragRef = useRef(false);
+  const handlePointerDown = () => {
+    dragRef.current = false;
+  };
+  const handlePointerMove = () => {
+    dragRef.current = true;
+  };
+
   return (
-    <Grid key={id} ref={setNodeRef} style={style}>
+    <Box key={id} ref={setNodeRef} style={style}>
       <Box
         sx={
           compare && compare.id === memoria.id
@@ -385,36 +409,70 @@ function MemoriaItem({
             : {}
         }
       >
-        <ImageListItem>
+        <ImageListItem sx={{ width: size, height: size }}>
           <Box>
-            <Icon cardType={memoria.cardType} attribute={memoria.attribute} position={70} />
+            <Icon
+              cardType={memoria.cardType}
+              attribute={memoria.attribute}
+              position={70}
+              size={size}
+            />
             <ConcentrationIcon
               concentration={concentrationValue}
               handleConcentration={disable || handleConcentration}
+              size={size}
             />
           </Box>
-          <div {...attributes} {...listeners} style={{ touchAction: "none" }}>
-            <Tooltip
-              title={
-                <Stack>
-                  <Typography variant="h6">{name.short}</Typography>
-                  <Typography variant="body2">{Lenz.memoria.gvgSkill.name.get(memoria)}</Typography>
-                  <Typography variant="body2">
-                    {Lenz.memoria.autoSkill.name.get(memoria)}
-                  </Typography>
-                </Stack>
+          <div
+            {...attributes}
+            {...listeners}
+            style={{ touchAction: "none", width: size, height: size }}
+            onPointerDown={(e) => {
+              listeners?.onPointerDown?.(e);
+              handlePointerDown();
+            }}
+            onPointerMove={handlePointerMove}
+            onClick={() => {
+              if (onMobileClick && !dragRef.current) {
+                onMobileClick(memoria);
               }
-              placement={"top"}
-              arrow
-            >
+            }}
+          >
+            {onMobileClick ? (
               <MemoriaIcon
                 memoria={memoria}
                 placeholder={"blur"}
-                blurDataURL={toBase64(skeleton(100, 100))}
-                onContextMenu={onContextMenu ? undefined : handleContextMenu}
+                blurDataURL={toBase64(skeleton(size, size))}
+                onContextMenu={onContextMenu === false ? undefined : handleContextMenu}
                 preload={preload}
+                size={size}
               />
-            </Tooltip>
+            ) : (
+              <Tooltip
+                title={
+                  <Stack>
+                    <Typography variant="h6">{name.short}</Typography>
+                    <Typography variant="body2">
+                      {Lenz.memoria.gvgSkill.name.get(memoria)}
+                    </Typography>
+                    <Typography variant="body2">
+                      {Lenz.memoria.autoSkill.name.get(memoria)}
+                    </Typography>
+                  </Stack>
+                }
+                placement={"top"}
+                arrow
+              >
+                <MemoriaIcon
+                  memoria={memoria}
+                  placeholder={"blur"}
+                  blurDataURL={toBase64(skeleton(size, size))}
+                  onContextMenu={onContextMenu === false ? undefined : handleContextMenu}
+                  preload={preload}
+                  size={size}
+                />
+              </Tooltip>
+            )}
           </div>
           <ImageListItemBar
             sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
@@ -422,18 +480,18 @@ function MemoriaItem({
             actionPosition={"right"}
           />
           <Box>
-            {!disable && (
+            {!disable && !onMobileClick && (
               <ImageListItemBar
                 sx={{ bgcolor: "rgba(0, 0, 0, 0)" }}
                 position={"top"}
                 actionPosition={"left"}
                 actionIcon={
-                  remove === undefined && (
+                  remove !== true && (
                     <IconButton
                       sx={{
                         color: "rgba(255, 50, 50, 0.9)",
                         bgcolor: "rgba(0, 0, 0, 0.2)",
-                        zIndex: Number.POSITIVE_INFINITY,
+                        zIndex: 500,
                       }}
                       aria-label={"remove"}
                       onClick={() => {
@@ -478,77 +536,107 @@ function MemoriaItem({
           </MenuItem>
         )}
       </Menu>
-    </Grid>
+    </Box>
   );
 }
 
 function MemoriaGrid({
   memorias,
   onChangeOrder,
+  size = 100,
+  layout = "desktop",
+  onMobileClick,
 }: {
   memorias: MemoriaWithConcentration[];
   onChangeOrder: Dispatch<SetStateAction<MemoriaWithConcentration[]>>;
+  size?: number;
+  layout?: "desktop" | "mobile";
+  onMobileClick?: (memoria: MemoriaWithConcentration) => void;
 }) {
   return (
     <Sortable items={memorias} onChangeOrder={onChangeOrder}>
-      <Grid
-        container
-        direction={"row"}
-        spacing={2}
-        sx={{ maxWidth: 600, minHeight: 100, alignItems: "flex-start" }}
+      <Box
+        sx={
+          layout === "desktop"
+            ? {
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 2,
+                maxWidth: 600,
+                minHeight: 100,
+                alignItems: "flex-start",
+              }
+            : {
+                display: "grid",
+                gridTemplateColumns: "repeat(5, 1fr)",
+                gap: 0.5,
+                width: "100%",
+                justifyItems: "center",
+              }
+        }
       >
         {memorias.map((memoria) => {
-          return <MemoriaItem memoria={memoria} key={memoria.id} preload={true} />;
+          return (
+            <MemoriaItem
+              memoria={memoria}
+              key={memoria.id}
+              preload={true}
+              size={size}
+              onMobileClick={onMobileClick}
+            />
+          );
         })}
-      </Grid>
+      </Box>
     </Sortable>
   );
 }
 
-function Deck() {
+export function Deck({
+  size = 100,
+  layout = "desktop",
+  onMobileClick,
+}: {
+  size?: number;
+  layout?: "desktop" | "mobile";
+  onMobileClick?: (memoria: MemoriaWithConcentration) => void;
+}) {
   const [deck, setDeck] = useAtom(rwDeckAtom);
-  return <MemoriaGrid memorias={deck} onChangeOrder={setDeck} />;
+  return (
+    <MemoriaGrid
+      memorias={deck}
+      onChangeOrder={setDeck}
+      size={size}
+      layout={layout}
+      onMobileClick={onMobileClick}
+    />
+  );
 }
 
-function LegendaryDeck() {
+export function LegendaryDeck({
+  size = 100,
+  layout = "desktop",
+  onMobileClick,
+}: {
+  size?: number;
+  layout?: "desktop" | "mobile";
+  onMobileClick?: (memoria: MemoriaWithConcentration) => void;
+}) {
   const [deck, setDeck] = useAtom(rwLegendaryDeckAtom);
-  return <MemoriaGrid memorias={deck} onChangeOrder={setDeck} />;
+  return (
+    <MemoriaGrid
+      memorias={deck}
+      onChangeOrder={setDeck}
+      size={size}
+      layout={layout}
+      onMobileClick={onMobileClick}
+    />
+  );
 }
+import { useDeckRestore } from "./shared-hook";
 
-function UnitComponent() {
-  const params = useSearchParams();
+export default function UnitComponent() {
   const theme = useTheme();
-  const [, setTitle] = useAtom(unitTitleAtom);
-  const [, setDeck] = useAtom(rwDeckAtom);
-  const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
-  const [, setSw] = useAtom(swAtom);
-  const [, setCompare] = useAtom(compareModeAtom);
-  const [query, setQuery] = useAtom(deckBuilderQueryAtom);
-
-  const loadedDeck = useRef<string | null>(null);
-
-  useAsync(async () => {
-    const value = params.get("deck");
-    const title = params.get("title");
-
-    if (value === loadedDeck.current) return;
-    loadedDeck.current = value;
-
-    setTitle(title ? decodeURI(title) : "No Title");
-    if (value) {
-      const { sw, deck, legendaryDeck } = await restore({
-        target: "deck",
-        param: value,
-      });
-      setSw(sw);
-      if (shouldResetDeckBuilderQueryForSw(query, sw)) {
-        setQuery(getDefaultDeckBuilderQuery(sw));
-      }
-      setDeck(deck);
-      setLegendaryDeck(legendaryDeck);
-      setCompare(undefined);
-    }
-  }, [params, query, setCompare, setDeck, setLegendaryDeck, setQuery, setSw, setTitle]);
+  useDeckRestore();
 
   return (
     <Box
@@ -1073,7 +1161,7 @@ function VirtualizedList() {
   );
 }
 
-function Source() {
+export function Source() {
   const theme = useTheme();
 
   return (
@@ -1089,7 +1177,7 @@ function Source() {
   );
 }
 
-function ToggleButtons() {
+export function ToggleButtons() {
   const theme = useTheme();
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
@@ -1156,7 +1244,7 @@ export function MemberSwitcher({ userData }: { userData: UserData }) {
   );
 }
 
-function QueryModal({ signedIn, canPersist }: { signedIn: boolean; canPersist: boolean }) {
+export function QueryModal({ signedIn, canPersist }: { signedIn: boolean; canPersist: boolean }) {
   const [query, setQuery] = useAtom(deckBuilderQueryAtom);
   const [ownedOnly, setOwnedOnly] = useAtom(ownedFilterAtom);
   const [sw] = useAtom(swAtom);
@@ -1361,7 +1449,13 @@ function QueryModal({ signedIn, canPersist }: { signedIn: boolean; canPersist: b
   );
 }
 
-function QueryPresetsMenu({ signedIn, canPersist }: { signedIn: boolean; canPersist: boolean }) {
+export function QueryPresetsMenu({
+  signedIn,
+  canPersist,
+}: {
+  signedIn: boolean;
+  canPersist: boolean;
+}) {
   const [, setQuery] = useAtom(deckBuilderQueryAtom);
   const [, setOwnedOnly] = useAtom(ownedFilterAtom);
   const [toast, setToast] = useState<string | false>(false);
@@ -1485,7 +1579,7 @@ function Diff(props: { origin: Unit; current: Unit }) {
   return <Typography>変更はありません</Typography>;
 }
 
-function DiffModal() {
+export function DiffModal() {
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState<Unit | undefined>(undefined);
   const [sw] = useAtom(swAtom);
@@ -1558,7 +1652,7 @@ function DiffModal() {
   );
 }
 
-function ShareButton() {
+export function ShareButton() {
   const [title] = useAtom(unitTitleAtom);
   const [sw] = useAtom(swAtom);
   const [deck] = useAtom(rwDeckAtom);
@@ -1704,7 +1798,7 @@ function ShareButton() {
   );
 }
 
-function CalcSettings() {
+export function CalcSettings() {
   const [open, setOpen] = useState(false);
   const uniqueId = useId();
   return (
@@ -1733,7 +1827,7 @@ function CalcSettings() {
   );
 }
 
-function SaveDeck() {
+export function SaveDeck() {
   const [title] = useAtom(unitTitleAtom);
   const [sw] = useAtom(swAtom);
   const [deck] = useAtom(rwDeckAtom);
@@ -1792,7 +1886,7 @@ function SaveDeck() {
   );
 }
 
-export function DeckBuilder({
+export function DesktopDeckBuilder({
   signedIn,
   userData,
 }: {
@@ -1905,4 +1999,32 @@ export function DeckBuilder({
       </Grid>
     </Box>
   );
+}
+
+import { MobileDeckBuilder } from "../_mobile-builder";
+import { useMediaQuery } from "@mui/system";
+
+export function DeckBuilder({
+  signedIn,
+  userData,
+}: {
+  signedIn: boolean;
+  userData: UserData | undefined;
+}) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"), { noSsr: true });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <Box sx={{ flexGrow: 1, minHeight: "100vh" }} />; // Neutral placeholder
+  }
+
+  if (isMobile) {
+    return <MobileDeckBuilder signedIn={signedIn} userData={userData} />;
+  }
+  return <DesktopDeckBuilder signedIn={signedIn} userData={userData} />;
 }

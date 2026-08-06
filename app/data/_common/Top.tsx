@@ -18,11 +18,14 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import { match } from "ts-pattern";
 import HelpOutlined from "@mui/icons-material/HelpOutlined";
+import { useTheme } from "@mui/material/styles";
+import { useMediaQuery } from "@mui/system";
 
 const ROUTES = ["memoria", "costume", "character", "order", "weapon"] as const;
 
 export default function DataPage({ dataType }: { dataType: (typeof ROUTES)[number] }) {
   const router = useRouter();
+  const theme = useTheme();
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || undefined;
   const [replayKey, setReplayKey] = useState(0);
@@ -44,11 +47,20 @@ export default function DataPage({ dataType }: { dataType: (typeof ROUTES)[numbe
     [router, setValue],
   );
 
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Box sx={{ width: "100%" }}>
       <DataPageTour tab={ROUTES[value]} replayKey={replayKey} />
       <TabContext value={value}>
-        <TabList onChange={handleChange} aria-label="lab API tabs example" data-tour="data-tabs">
+        <TabList
+          onChange={handleChange}
+          aria-label="lab API tabs example"
+          data-tour="data-tabs"
+          variant={isMobile ? "scrollable" : "standard"}
+          scrollButtons={isMobile ? "auto" : false}
+          allowScrollButtonsMobile={isMobile}
+        >
           <Tab label="Memoria" value={0} />
           <Tab label="Costume" value={1} />
           <Tab label="Character" value={2} />
@@ -57,12 +69,14 @@ export default function DataPage({ dataType }: { dataType: (typeof ROUTES)[numbe
         </TabList>
         <AppBar position="static" sx={{ backgroundColor: "transparent" }}>
           <Toolbar>
-            <Breadcrumbs separator="›" aria-label="breadcrumb" data-tour="data-breadcrumbs">
-              <Link underline="hover" color="inherit" href="/data">
-                data
-              </Link>
-              <Typography sx={{ color: "text.primary" }}>{dataType ?? "memoria"}</Typography>
-            </Breadcrumbs>
+            {!isMobile && (
+              <Breadcrumbs separator="›" aria-label="breadcrumb" data-tour="data-breadcrumbs">
+                <Link underline="hover" color="inherit" href="/data">
+                  data
+                </Link>
+                <Typography sx={{ color: "text.primary" }}>{dataType ?? "memoria"}</Typography>
+              </Breadcrumbs>
+            )}
             <Box sx={{ marginLeft: "auto" }}>
               <Tooltip title="Tour">
                 <IconButton onClick={() => setReplayKey((prev) => prev + 1)}>

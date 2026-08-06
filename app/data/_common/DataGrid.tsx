@@ -7,7 +7,17 @@ import {
 } from "@mui/x-data-grid";
 import { ComponentPropsWithoutRef, useCallback, useEffect, useState } from "react";
 import { Box } from "@mui/system";
-import { Alert, IconButton, Modal, NoSsr, Paper, Snackbar, Tooltip } from "@mui/material";
+import {
+  Alert,
+  IconButton,
+  Modal,
+  NoSsr,
+  Paper,
+  Snackbar,
+  Tooltip,
+  useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import {
   ClearAll,
   Info,
@@ -124,7 +134,28 @@ export function DataGrid<
 
   const [rows, setRows] = useState(phantasmFilter(origin));
   const [sortModel, setSortModel] = useState<GridSortModel>([]);
-  const [visibility, setVisibility] = useState(visibilityAll);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [visibility, setVisibility] = useState<GridColumnVisibilityModel>(() => {
+    if (!isMobile) return visibilityAll;
+    const v = { ...visibilityAll };
+    ["atk", "def", "spatk", "spdef", "released_at", "attribute", "cost"].forEach((col) => {
+      if (col in v) v[col] = false;
+    });
+    return v;
+  });
+
+  useEffect(() => {
+    if (!isMobile) {
+      setVisibility(visibilityAll);
+    } else {
+      const v = { ...visibilityAll };
+      ["atk", "def", "spatk", "spdef", "released_at", "attribute", "cost"].forEach((col) => {
+        if (col in v) v[col] = false;
+      });
+      setVisibility(v);
+    }
+  }, [isMobile, visibilityAll]);
 
   const handleVisibilityChange = useCallback(
     (newModel: GridColumnVisibilityModel) => {

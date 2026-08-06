@@ -174,52 +174,51 @@ function parseDamage(
           /(?:、自身の|、敵の|、)(.+?)[をの]((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))/g,
         ),
       ),
-      option.map(
-        (matches): ValidateResult<SkillEffect[]> =>
-          separator(
-            matches.flatMap((eff) =>
-              pipe(
-                fromNullable(eff.match(ATK_EFF)),
-                option.map(([, status, amount]) =>
-                  pipe(
-                    Do,
-                    bind("status", () =>
-                      separator(
-                        status
-                          .split("と")
-                          .map((s) => parseStatus(s, { path: joined(), memoriaName })),
-                      ),
+      option.map((matches): ValidateResult<SkillEffect[]> =>
+        separator(
+          matches.flatMap((eff) =>
+            pipe(
+              fromNullable(eff.match(ATK_EFF)),
+              option.map(([, status, amount]) =>
+                pipe(
+                  Do,
+                  bind("status", () =>
+                    separator(
+                      status
+                        .split("と")
+                        .map((s) => parseStatus(s, { path: joined(), memoriaName })),
                     ),
-                    either.flatMap(({ status }) =>
-                      separator(
-                        status.map((stat) =>
-                          sequenceS(ap)({
-                            type: toValidated(toType(amount)),
-                            amount: toValidated(
-                              parseAmount(amount, {
-                                path: joined(),
-                                memoriaName,
-                              }),
-                            ),
-                            status: right(stat),
-                            range: right(range),
-                          }),
-                        ),
+                  ),
+                  either.flatMap(({ status }) =>
+                    separator(
+                      status.map((stat) =>
+                        sequenceS(ap)({
+                          type: toValidated(toType(amount)),
+                          amount: toValidated(
+                            parseAmount(amount, {
+                              path: joined(),
+                              memoriaName,
+                            }),
+                          ),
+                          status: right(stat),
+                          range: right(range),
+                        }),
                       ),
                     ),
                   ),
                 ),
-                option.getOrElse(() =>
-                  toValidated(
-                    bail(eff, "given text doesn't match ATK_EFF", {
-                      path: joined(),
-                      memoriaName,
-                    }),
-                  ),
+              ),
+              option.getOrElse(() =>
+                toValidated(
+                  bail(eff, "given text doesn't match ATK_EFF", {
+                    path: joined(),
+                    memoriaName,
+                  }),
                 ),
               ),
             ),
           ),
+        ),
       ),
     );
 
@@ -356,19 +355,18 @@ const parseRecoveryBuff = (
       pipe(
         status.split("と").map((s) => parseStatus(s, { path: joined(), memoriaName })),
         separator,
-        either.flatMap(
-          (statuses): ValidateResult<SkillEffect[]> =>
-            pipe(
-              statuses.map((stat) =>
-                sequenceS(ap)({
-                  type: right("buff" as const),
-                  range: right(range),
-                  amount: toValidated(parseAmount(up, { path: joined(), memoriaName })),
-                  status: right(stat),
-                }),
-              ),
-              separator,
+        either.flatMap((statuses): ValidateResult<SkillEffect[]> =>
+          pipe(
+            statuses.map((stat) =>
+              sequenceS(ap)({
+                type: right("buff" as const),
+                range: right(range),
+                amount: toValidated(parseAmount(up, { path: joined(), memoriaName })),
+                status: right(stat),
+              }),
             ),
+            separator,
+          ),
         ),
       ),
     ),
@@ -385,14 +383,12 @@ const parseHeal = (description: string, memoriaName: string, path: CallPath = Ca
         Do,
         bind("range", () => parseRange(range, memoriaName, joined())),
         bind("buff", ({ range }) => parseRecoveryBuff(range, description, memoriaName, joined())),
-        bind(
-          "recovery",
-          ({ range }): ValidateResult<SkillEffect> =>
-            sequenceS(ap)({
-              type: right("heal" as const),
-              range: right(range),
-              amount: toValidated(parseAmount(heal, { path: joined(), memoriaName })),
-            }),
+        bind("recovery", ({ range }): ValidateResult<SkillEffect> =>
+          sequenceS(ap)({
+            type: right("heal" as const),
+            range: right(range),
+            amount: toValidated(parseAmount(heal, { path: joined(), memoriaName })),
+          }),
         ),
         either.map(({ recovery, buff }) => [recovery, ...buff]),
       ),
@@ -569,46 +565,42 @@ function parseElementEffect(
 
   return pipe(
     fromNullable(name.match(RESONANCE_PREFIX)),
-    option.map(
-      ([, element]): ValidateResult<SkillEffect[]> =>
-        pipe(
-          toValidated(parseResonanceType(name)),
-          either.flatMap((kinds) =>
-            separator(
-              kinds.map((kind) =>
-                match(kind)
-                  .with(
-                    "enhance",
-                    (enhance): ValidateResult<SkillEffect> =>
-                      sequenceS(ap)({
-                        type: right("element" as const),
-                        element: toValidated(
-                          parseMajorAttribute(element, {
-                            path: path.join("parseElementEffect"),
-                            memoriaName,
-                          }),
-                        ),
-                        kind: right(enhance),
-                        rate: parseRate(description),
+    option.map(([, element]): ValidateResult<SkillEffect[]> =>
+      pipe(
+        toValidated(parseResonanceType(name)),
+        either.flatMap((kinds) =>
+          separator(
+            kinds.map((kind) =>
+              match(kind)
+                .with("enhance", (enhance): ValidateResult<SkillEffect> =>
+                  sequenceS(ap)({
+                    type: right("element" as const),
+                    element: toValidated(
+                      parseMajorAttribute(element, {
+                        path: path.join("parseElementEffect"),
+                        memoriaName,
                       }),
-                  )
-                  .otherwise(
-                    (kind): ValidateResult<SkillEffect> =>
-                      sequenceS(ap)({
-                        type: right("element" as const),
-                        element: toValidated(
-                          parseMajorAttribute(element, {
-                            path: path.join("parseElementEffect"),
-                            memoriaName,
-                          }),
-                        ),
-                        kind: right(kind),
+                    ),
+                    kind: right(enhance),
+                    rate: parseRate(description),
+                  }),
+                )
+                .otherwise((kind): ValidateResult<SkillEffect> =>
+                  sequenceS(ap)({
+                    type: right("element" as const),
+                    element: toValidated(
+                      parseMajorAttribute(element, {
+                        path: path.join("parseElementEffect"),
+                        memoriaName,
                       }),
-                  ),
-              ),
+                    ),
+                    kind: right(kind),
+                  }),
+                ),
             ),
           ),
         ),
+      ),
     ),
     option.getOrElse((): ValidateResult<SkillEffect[]> => right([])),
   );

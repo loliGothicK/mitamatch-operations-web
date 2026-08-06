@@ -1,12 +1,11 @@
 "use client";
 
-
 import { Box, Card, CardActionArea, CardContent, Grid, Typography } from "@mui/material";
 import Link from "@/components/link";
 
 import { OrderIcon } from "@/components/image/OrderIcon";
 import { type Memoria, memoriaList } from "@/domain/memoria/memoria";
-import { type Order } from "@/domain/order/order";
+import { type Order, orderList } from "@/domain/order/order";
 import { type Weapon, weaponList } from "@/domain/weapon/weapon";
 import { type Costume, costumeList } from "@/domain/costume/costume";
 import recentData from "@/domain/recent.json";
@@ -41,6 +40,10 @@ const recentItems: RecentItem[] = recentData.data
       const item = weaponList.find((w) => w.id === entry.id);
       return item ? { kind: "weapon" as const, item } : null;
     }
+    if (entry.type === "order") {
+      const item = orderList.find((o) => o.id === entry.id);
+      return item ? { kind: "order" as const, item } : null;
+    }
     return null;
   })
   .filter((item) => item !== null) as RecentItem[];
@@ -55,20 +58,6 @@ export default function Recent() {
         Explore the latest Memoria, Costume, Character, Order, and Weapon data.
       </Typography>
       <Typography component="h2" variant="h4" gutterBottom>
-        Recently Added
-      </Typography>
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-          gap: 2,
-        }}
-      >
-        {recentItems.map((entry) => (
-          <RecentCard key={`${entry.kind}-${entry.item.id}`} entry={entry} />
-        ))}
-      </Box>
-      <Typography component="h2" variant="h4" sx={{ mt: 5 }} gutterBottom>
         Browse Data
       </Typography>
       <Grid container spacing={2}>
@@ -84,6 +73,34 @@ export default function Recent() {
           </Grid>
         ))}
       </Grid>
+      <Typography component="h2" variant="h4" sx={{ mt: 5 }} gutterBottom>
+        Recently Added
+      </Typography>
+      {["memoria", "costume", "weapon", "order"].map((kind) => {
+        const items = recentItems.filter((entry) => entry.kind === kind);
+        if (items.length === 0) return null;
+
+        const label = kind.charAt(0).toUpperCase() + kind.slice(1);
+
+        return (
+          <Box key={kind} sx={{ mb: 4 }}>
+            <Typography component="h3" variant="h6" sx={{ mb: 2 }} color="text.secondary">
+              {label}
+            </Typography>
+            <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
+                gap: 2,
+              }}
+            >
+              {items.map((entry) => (
+                <RecentCard key={`${entry.kind}-${entry.item.id}`} entry={entry} />
+              ))}
+            </Box>
+          </Box>
+        );
+      })}
     </Box>
   );
 }
@@ -99,7 +116,6 @@ function RecentCard({ entry }: { entry: RecentItem }) {
         : kind === "costume"
           ? `/data/costume/${encodeURI(item.name)}`
           : `/data/memoria/${encodeURI(item.name.full)}?type=${Math.min(...memoriaList.filter((m) => m.uniqueId === item.uniqueId).map((m) => m.cardType))}`;
-
 
   return (
     <Card sx={{ height: "100%" }}>

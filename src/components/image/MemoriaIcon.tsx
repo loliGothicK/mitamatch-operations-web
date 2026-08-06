@@ -35,7 +35,12 @@ export function MemoriaIcon({
             zIndex: 3,
           }}
         >
-          <Image src={"/assets/LegendaryIcon.png"} alt={"LegendaryIcon"} width={25} height={25} />
+          <Image
+            src={"/assets/LegendaryIcon.png"}
+            alt={"LegendaryIcon"}
+            width={size ? size * 0.25 : 25}
+            height={size ? size * 0.25 : 25}
+          />
         </Box>
       )}
       <Box

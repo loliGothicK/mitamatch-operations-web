@@ -1,22 +1,18 @@
 import type React from "react";
-import { useEffect } from "react";
+
 import type { PropsWithChildren, SetStateAction } from "react";
 
 import {
   type DndContextProps,
   type DragEndEvent,
-  type PointerSensorOptions,
-  type Sensor,
+  KeyboardSensor,
+  MouseSensor,
   TouchSensor,
   type UniqueIdentifier,
-} from "@dnd-kit/core";
-import {
-  DndContext,
-  KeyboardSensor,
-  PointerSensor,
   closestCenter,
   useSensor,
   useSensors,
+  DndContext,
 } from "@dnd-kit/core";
 import type { SortingStrategy } from "@dnd-kit/sortable";
 import { SortableContext, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
@@ -102,15 +98,9 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
       onChangeOrder(newItems);
     }
   };
-  let sensor: Sensor<PointerSensorOptions> = PointerSensor;
-  useEffect(() => {
-    const hai = sessionStorage.getItem("isWebEntry");
-    const isWebEntry = hai === null ? false : JSON.parse(hai);
-    sensor = isWebEntry ? PointerSensor : TouchSensor;
-  }, [sensor]);
-
   const sensors = useSensors(
-    useSensor(sensor),
+    useSensor(MouseSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 150, tolerance: 5 } }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
