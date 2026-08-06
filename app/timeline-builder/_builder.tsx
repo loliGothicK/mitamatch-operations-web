@@ -249,6 +249,7 @@ export const TimelineItem = ({
         <Box sx={{ display: "flex", gap: 0.5, flexShrink: 0, pr: 1 }}>
           <IconButton
             size={"small"}
+            aria-label="Edit"
             sx={{
               color: "text.secondary",
               bgcolor: "action.hover",
@@ -260,6 +261,7 @@ export const TimelineItem = ({
           </IconButton>
           <IconButton
             size={"small"}
+            aria-label="Remove"
             sx={{
               color: "error.main",
               bgcolor: "rgba(255, 0, 0, 0.05)",

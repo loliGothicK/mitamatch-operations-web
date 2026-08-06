@@ -145,6 +145,18 @@ export function DataGrid<
     return v;
   });
 
+  useEffect(() => {
+    if (!isMobile) {
+      setVisibility(visibilityAll);
+    } else {
+      const v = { ...visibilityAll };
+      ["atk", "def", "spatk", "spdef", "released_at", "attribute", "cost"].forEach((col) => {
+        if (col in v) v[col] = false;
+      });
+      setVisibility(v);
+    }
+  }, [isMobile, visibilityAll]);
+
   const handleVisibilityChange = useCallback(
     (newModel: GridColumnVisibilityModel) => {
       requestAnimationFrame(() => {

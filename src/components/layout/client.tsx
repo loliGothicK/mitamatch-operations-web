@@ -92,6 +92,10 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const theme = useTheme();
 
+  useEffect(() => {
+    setMobileDrawerOpen(false);
+  }, [pathname]);
+
   return (
     <Box
       sx={{
@@ -117,6 +121,7 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 color="inherit"
+                aria-label="Open navigation menu"
                 onClick={() => setMobileDrawerOpen((prev) => !prev)}
                 edge="start"
                 sx={{ mr: 1 }}

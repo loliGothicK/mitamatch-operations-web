@@ -5,7 +5,7 @@ import Link from "@/components/link";
 
 import { OrderIcon } from "@/components/image/OrderIcon";
 import { type Memoria, memoriaList } from "@/domain/memoria/memoria";
-import { type Order } from "@/domain/order/order";
+import { type Order, orderList } from "@/domain/order/order";
 import { type Weapon, weaponList } from "@/domain/weapon/weapon";
 import { type Costume, costumeList } from "@/domain/costume/costume";
 import recentData from "@/domain/recent.json";
@@ -39,6 +39,10 @@ const recentItems: RecentItem[] = recentData.data
     if (entry.type === "weapon") {
       const item = weaponList.find((w) => w.id === entry.id);
       return item ? { kind: "weapon" as const, item } : null;
+    }
+    if (entry.type === "order") {
+      const item = orderList.find((o) => o.id === entry.id);
+      return item ? { kind: "order" as const, item } : null;
     }
     return null;
   })

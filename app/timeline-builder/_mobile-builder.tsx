@@ -27,7 +27,14 @@ export function MobileTimelineBuilderPage({ userData }: { userData?: UserData })
 
   return (
     <Box sx={{ pb: 10 }}>
-      <TimelineBuilderTour replayKey={replayKey} />
+      <TimelineBuilderTour
+        replayKey={replayKey}
+        onStepChange={(stepIndex) => {
+          if (stepIndex === 2) {
+            setDrawerOpen(true);
+          }
+        }}
+      />
 
       {/* Tools Section at the top */}
       <Box

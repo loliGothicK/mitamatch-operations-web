@@ -11,10 +11,12 @@ import {
   Tooltip,
   Divider,
   Popover,
+  Alert,
 } from "@mui/material";
 import { Add, InfoOutlined, MoreVert } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { UserData } from "@/types/user";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import {
   CalcSettings,
@@ -31,6 +33,7 @@ import {
   updateMemoriaConcentration,
   removeMemoriaByShortName,
 } from "./_tabs/builder";
+import { useDeckRestore } from "./_tabs/shared-hook";
 import Details from "@/components/deck-builder/Details";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import { Typography, Button, Stack } from "@mui/material";
@@ -94,6 +97,7 @@ function DeckActionsMenu({ setDetailsDrawerOpen }: { setDetailsDrawerOpen: (v: b
 }
 
 function MobileUnitComponent() {
+  useDeckRestore();
   const [legendaryDeck, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setDeck] = useAtom(rwDeckAtom);
   const [selectedMemoria, setSelectedMemoria] = useState<MemoriaWithConcentration | null>(null);
@@ -141,13 +145,13 @@ function MobileUnitComponent() {
         <Typography variant="caption" color="text.secondary">
           レジェンダリーメモリア {legendaryDeck.length}/5
         </Typography>
-        <LegendaryDeck size={56} onMobileClick={handleMobileClick} />
+        <LegendaryDeck size={56} layout="mobile" onMobileClick={handleMobileClick} />
       </Box>
 
       {/* 通常メモリア (20枚) */}
       <Box sx={{ width: "100%", px: 1 }}>
         <Divider sx={{ my: 1.5, borderBottomWidth: 2, borderColor: "divider" }} />
-        <Deck size={56} onMobileClick={handleMobileClick} />
+        <Deck size={56} layout="mobile" onMobileClick={handleMobileClick} />
       </Box>
 
       {/* Bottom Drawer for Action */}
@@ -202,9 +206,32 @@ export function MobileDeckBuilder({
   const [sourceDrawerOpen, setSourceDrawerOpen] = useState(false);
   const [detailsDrawerOpen, setDetailsDrawerOpen] = useState(false);
   const canPersistQueryPresets = !!userData;
+  const params = useSearchParams();
+  const router = useRouter();
+  const deckParam = params.get("deck");
 
   return (
     <Box sx={{ pb: 10 }}>
+      {deckParam && (
+        <Alert
+          severity="info"
+          sx={{ width: "100%", mb: 2 }}
+          action={
+            <Button
+              color="inherit"
+              size="small"
+              onClick={() => {
+                const titleParam = params.get("title");
+                router.replace(titleParam ? `/deck-builder?title=${titleParam}` : "/deck-builder");
+              }}
+            >
+              コピーして編集
+            </Button>
+          }
+        >
+          共有されたデッキを表示しています。変更は共有リンクに反映されます。「コピーして編集」をクリックすると新しいデッキとして独立して編集できます。
+        </Alert>
+      )}
       {/* Ribbon Toolbar */}
       <Box data-tour="deck-toolbar" sx={{ width: "100%", overflowX: "auto" }}>
         <Ribbon>

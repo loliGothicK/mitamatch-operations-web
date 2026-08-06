@@ -25,7 +25,13 @@ const steps: Step[] = [
   },
 ];
 
-export function TimelineBuilderTour({ replayKey }: { replayKey: number }) {
+export function TimelineBuilderTour({
+  replayKey,
+  onStepChange,
+}: {
+  replayKey: number;
+  onStepChange?: (index: number) => void;
+}) {
   const theme = useTheme();
   const [run, setRun] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
@@ -34,18 +40,20 @@ export function TimelineBuilderTour({ replayKey }: { replayKey: number }) {
     const completed = window.localStorage.getItem(STORAGE_KEY);
     if (completed !== "true") {
       setStepIndex(0);
+      onStepChange?.(0);
       setRun(true);
       window.localStorage.setItem(STORAGE_KEY, "true");
     }
-  }, []);
+  }, [onStepChange]);
 
   useEffect(() => {
     if (replayKey === 0) {
       return;
     }
     setStepIndex(0);
+    onStepChange?.(0);
     setRun(true);
-  }, [replayKey]);
+  }, [replayKey, onStepChange]);
 
   const handleEvent = (data: EventData) => {
     const { action, index, status, type } = data;
@@ -62,7 +70,9 @@ export function TimelineBuilderTour({ replayKey }: { replayKey: number }) {
     }
 
     if (type === EVENTS.STEP_AFTER) {
-      setStepIndex(index + (action === ACTIONS.PREV ? -1 : 1));
+      const nextIndex = index + (action === ACTIONS.PREV ? -1 : 1);
+      setStepIndex(nextIndex);
+      onStepChange?.(nextIndex);
     }
   };
 

@@ -13,11 +13,11 @@ import {
   useMemo,
   useRef,
   useState,
+  useEffect,
 } from "react";
 import DifferenceIcon from "@mui/icons-material/Difference";
 import type { Unit } from "@/domain/types";
 import { saveShortLink } from "@/actions/permlink";
-import { restore } from "@/actions/restore";
 
 import {
   Add,
@@ -117,7 +117,6 @@ import { Lenz } from "@/domain/lenz";
 import { isStackEffect } from "@/parser/skill";
 import { Calculator } from "@/deck-builder/_tabs/calculator";
 import { isLeft } from "fp-ts/Either";
-import { useAsync } from "react-use";
 import { ULID, ulid } from "ulid";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { saveDecksAction } from "@/_actions/decks";
@@ -391,6 +390,14 @@ function MemoriaItem({
     return window.btoa(str);
   };
 
+  const dragRef = useRef(false);
+  const handlePointerDown = () => {
+    dragRef.current = false;
+  };
+  const handlePointerMove = () => {
+    dragRef.current = true;
+  };
+
   return (
     <Box key={id} ref={setNodeRef} style={style}>
       <Box
@@ -420,9 +427,13 @@ function MemoriaItem({
             {...attributes}
             {...listeners}
             style={{ touchAction: "none", width: size, height: size }}
+            onPointerDown={(e) => {
+              listeners?.onPointerDown?.(e);
+              handlePointerDown();
+            }}
+            onPointerMove={handlePointerMove}
             onClick={() => {
-              if (onMobileClick) {
-                // Prevent drag click interference if needed, though dnd-kit usually handles it
+              if (onMobileClick && !dragRef.current) {
                 onMobileClick(memoria);
               }
             }}
@@ -533,18 +544,20 @@ function MemoriaGrid({
   memorias,
   onChangeOrder,
   size = 100,
+  layout = "desktop",
   onMobileClick,
 }: {
   memorias: MemoriaWithConcentration[];
   onChangeOrder: Dispatch<SetStateAction<MemoriaWithConcentration[]>>;
   size?: number;
+  layout?: "desktop" | "mobile";
   onMobileClick?: (memoria: MemoriaWithConcentration) => void;
 }) {
   return (
     <Sortable items={memorias} onChangeOrder={onChangeOrder}>
       <Box
         sx={
-          size === 100
+          layout === "desktop"
             ? {
                 display: "flex",
                 flexWrap: "wrap",
@@ -580,9 +593,11 @@ function MemoriaGrid({
 
 export function Deck({
   size = 100,
+  layout = "desktop",
   onMobileClick,
 }: {
   size?: number;
+  layout?: "desktop" | "mobile";
   onMobileClick?: (memoria: MemoriaWithConcentration) => void;
 }) {
   const [deck, setDeck] = useAtom(rwDeckAtom);
@@ -591,6 +606,7 @@ export function Deck({
       memorias={deck}
       onChangeOrder={setDeck}
       size={size}
+      layout={layout}
       onMobileClick={onMobileClick}
     />
   );
@@ -598,9 +614,11 @@ export function Deck({
 
 export function LegendaryDeck({
   size = 100,
+  layout = "desktop",
   onMobileClick,
 }: {
   size?: number;
+  layout?: "desktop" | "mobile";
   onMobileClick?: (memoria: MemoriaWithConcentration) => void;
 }) {
   const [deck, setDeck] = useAtom(rwLegendaryDeckAtom);
@@ -609,45 +627,16 @@ export function LegendaryDeck({
       memorias={deck}
       onChangeOrder={setDeck}
       size={size}
+      layout={layout}
       onMobileClick={onMobileClick}
     />
   );
 }
+import { useDeckRestore } from "./shared-hook";
 
 export default function UnitComponent() {
-  const params = useSearchParams();
   const theme = useTheme();
-  const [, setTitle] = useAtom(unitTitleAtom);
-  const [, setDeck] = useAtom(rwDeckAtom);
-  const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
-  const [, setSw] = useAtom(swAtom);
-  const [, setCompare] = useAtom(compareModeAtom);
-  const [query, setQuery] = useAtom(deckBuilderQueryAtom);
-
-  const loadedDeck = useRef<string | null>(null);
-
-  useAsync(async () => {
-    const value = params.get("deck");
-    const title = params.get("title");
-
-    if (value === loadedDeck.current) return;
-    loadedDeck.current = value;
-
-    setTitle(title ? decodeURI(title) : "No Title");
-    if (value) {
-      const { sw, deck, legendaryDeck } = await restore({
-        target: "deck",
-        param: value,
-      });
-      setSw(sw);
-      if (shouldResetDeckBuilderQueryForSw(query, sw)) {
-        setQuery(getDefaultDeckBuilderQuery(sw));
-      }
-      setDeck(deck);
-      setLegendaryDeck(legendaryDeck);
-      setCompare(undefined);
-    }
-  }, [params, query, setCompare, setDeck, setLegendaryDeck, setQuery, setSw, setTitle]);
+  useDeckRestore();
 
   return (
     <Box
@@ -2023,7 +2012,16 @@ export function DeckBuilder({
   userData: UserData | undefined;
 }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"), { noSsr: true });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <Box sx={{ flexGrow: 1, minHeight: "100vh" }} />; // Neutral placeholder
+  }
 
   if (isMobile) {
     return <MobileDeckBuilder signedIn={signedIn} userData={userData} />;

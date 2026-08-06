@@ -46,9 +46,11 @@ export function Dashboard({ userData }: { userData: UserData }) {
   const router = useRouter();
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [newLegionName, setNewLegionName] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
 
   const onLegionCreateSubmit = async () => {
     if (!newLegionName) return;
+    setIsCreating(true);
     try {
       await createLegionAction(newLegionName);
       setCreateDialogOpen(false);
@@ -56,6 +58,8 @@ export function Dashboard({ userData }: { userData: UserData }) {
       router.refresh();
     } catch (e) {
       console.error("Failed to create legion", e);
+    } finally {
+      setIsCreating(false);
     }
   };
 
@@ -119,8 +123,8 @@ export function Dashboard({ userData }: { userData: UserData }) {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setCreateDialogOpen(false)}>キャンセル</Button>
-            <Button onClick={onLegionCreateSubmit} disabled={!newLegionName} variant="contained">
+            <Button onClick={() => setCreateDialogOpen(false)} disabled={isCreating}>キャンセル</Button>
+            <Button onClick={onLegionCreateSubmit} disabled={!newLegionName || isCreating} variant="contained">
               作成
             </Button>
           </DialogActions>

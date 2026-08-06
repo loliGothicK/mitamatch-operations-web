@@ -43,18 +43,20 @@ export async function createLegionAction(name: string) {
   if (!user.length) throw new Error("User not found in database");
   const internalUserId = user[0].id;
 
-  const newOrg = await db.insert(organization).values({ name }).returning({ id: organization.id });
+  return await db.transaction(async (tx) => {
+    const newOrg = await tx.insert(organization).values({ name }).returning({ id: organization.id });
 
-  if (!newOrg.length) throw new Error("Failed to create organization");
-  const orgId = newOrg[0].id;
+    if (!newOrg.length) throw new Error("Failed to create organization");
+    const orgId = newOrg[0].id;
 
-  await db.insert(organizationMembers).values({
-    organizationId: orgId,
-    userId: internalUserId,
-    role: "org:admin",
+    await tx.insert(organizationMembers).values({
+      organizationId: orgId,
+      userId: internalUserId,
+      role: "org:admin",
+    });
+
+    return orgId;
   });
-
-  return orgId;
 }
 
 export async function updateLegionMemberDisplayNameAction(

@@ -115,7 +115,7 @@ export function OrderRegistration(_props: Props) {
         <RibbonGroup label={"filter"}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography variant="body2">無課金</Typography>
-            <Switch checked={payed} onChange={() => setPayed((prev) => !prev)} />
+            <Switch checked={payed} onChange={() => setPayed((prev) => !prev)} aria-label="paid orders" />
             <Typography variant="body2">課金</Typography>
           </Box>
         </RibbonGroup>

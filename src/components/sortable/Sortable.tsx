@@ -5,16 +5,14 @@ import type { PropsWithChildren, SetStateAction } from "react";
 import {
   type DndContextProps,
   type DragEndEvent,
+  KeyboardSensor,
+  MouseSensor,
   TouchSensor,
   type UniqueIdentifier,
-} from "@dnd-kit/core";
-import {
-  DndContext,
-  KeyboardSensor,
-  PointerSensor,
   closestCenter,
   useSensor,
   useSensors,
+  DndContext,
 } from "@dnd-kit/core";
 import type { SortingStrategy } from "@dnd-kit/sortable";
 import { SortableContext, arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
@@ -101,7 +99,7 @@ export default function Sortable<T extends { id: UniqueIdentifier }>({
     }
   };
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 8 } }),
     useSensor(TouchSensor, { activationConstraint: { delay: 150, tolerance: 5 } }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
