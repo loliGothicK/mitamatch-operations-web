@@ -17,44 +17,48 @@ export default function Home() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          gap: 4,
-          padding: 4,
-          minHeight: "50vh",
+          gap: { xs: 2, md: 4 },
+          padding: { xs: 2, md: 4 },
+          minHeight: { xs: "30vh", md: "50vh" },
         }}
       >
-        <Box className="hero-image" sx={{ width: 1500, height: 500 }}>
-          <Box sx={{ zIndex: 2 }}>
+        <Box className="hero-image" sx={{ width: "100%", maxWidth: 1500, position: "relative" }}>
+          <Box sx={{ zIndex: 2, width: "100%" }}>
             <Image
               src={theme.palette.mode === "dark" ? "/MO_DARK.png" : "/MO_LIGHT.png"}
               alt={"Mitamatch Operations"}
               width={1500}
               height={500}
               loading="eager"
+              unoptimized
+              style={{ width: "100%", height: "auto" }}
             />
           </Box>
-          <Box className="animation-circle circle-1" />
-          <Box className="animation-circle circle-2" />
-          <Box className="animation-circle circle-3" />
-          <Box className="animation-circle circle-4" />
-          <Box className="animation-circle circle-5" />
+          <Box className="animation-circle circle-1" sx={{ display: { xs: "none", md: "block" } }} />
+          <Box className="animation-circle circle-2" sx={{ display: { xs: "none", md: "block" } }} />
+          <Box className="animation-circle circle-3" sx={{ display: { xs: "none", md: "block" } }} />
+          <Box className="animation-circle circle-4" sx={{ display: { xs: "none", md: "block" } }} />
+          <Box className="animation-circle circle-5" sx={{ display: { xs: "none", md: "block" } }} />
         </Box>
       </Grid>
       <Grid
         size={12}
         sx={{
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          gap: 4,
-          padding: 4,
-          minHeight: "50vh",
+          gap: { xs: 2, md: 4 },
+          padding: { xs: 3, md: 4 },
+          minHeight: { xs: "30vh", md: "50vh" },
           backgroundColor: theme.palette.primary.dark,
+          textAlign: "center",
         }}
       >
-        <Typography component="h1" variant="h2">
+        <Typography component="h1" variant="h2" sx={{ fontSize: { xs: "2rem", md: "3.75rem" } }}>
           レギオンマッチを"次"のレベルへ
         </Typography>
-        <Typography variant="h6">
+        <Typography variant="h6" sx={{ fontSize: { xs: "1rem", md: "1.25rem" }, maxWidth: "800px" }}>
           {
             "Mitamatch Operationsは、データ駆動型のアプローチで複雑なレギオンマッチを簡素化し、レギオンマッチの改善効率を最大300%向上させるプラットフォームです。"
           }
@@ -66,21 +70,26 @@ export default function Home() {
           display: "grid",
           alignItems: "center",
           justifyContent: "center",
-          gridTemplateColumns: "repeat(auto-fit, 1fr)",
-          gridTemplateRows: "repeat(auto-fit, 1fr)",
-          gridTemplateAreas: `
-            "title title"
-            "feature1 feature2"
-            "feature3 feature4"
-          `,
-          gap: 4,
-          padding: 4,
-          minHeight: "50vh",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(auto-fit, minmax(300px, 1fr))" },
+          gridTemplateAreas: {
+            xs: `
+              "title"
+              "feature1"
+              "feature2"
+            `,
+            md: `
+              "title title"
+              "feature1 feature2"
+            `,
+          },
+          gap: { xs: 3, md: 4 },
+          padding: { xs: 3, md: 4 },
+          minHeight: { xs: "30vh", md: "50vh" },
           backgroundColor: "rgba(255, 255, 255, 0.05)",
         }}
       >
-        <Box sx={{ fontSize: 16, gridArea: "title" }}>
-          <Typography component="h1" variant="h2">
+        <Box sx={{ gridArea: "title", textAlign: "center", mb: { xs: 0, md: 2 } }}>
+          <Typography component="h1" variant="h2" sx={{ fontSize: { xs: "2rem", md: "3.75rem" } }}>
             革新的な機能
           </Typography>
         </Box>
@@ -109,13 +118,14 @@ export default function Home() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          gap: 4,
-          padding: 4,
-          minHeight: "50vh",
+          gap: { xs: 2, md: 4 },
+          padding: { xs: 3, md: 4 },
+          minHeight: { xs: "30vh", md: "50vh" },
           backgroundColor: theme.palette.primary.dark,
+          textAlign: "center",
         }}
       >
-        <Typography component="h1" variant="h2">
+        <Typography component="h1" variant="h2" sx={{ fontSize: { xs: "2rem", md: "3.75rem" } }}>
           レギオンマッチの変革を始めましょう
         </Typography>
       </Grid>
