@@ -1,7 +1,7 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import { WeaponIcon } from "@/components/image/WeaponIcon";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import Link from "@/components/link";
 import { weaponList } from "@/domain/weapon/weapon";
@@ -15,7 +15,7 @@ export default function WeaponDetail({ id }: { id: string }) {
       <Link href="/data/weapon">← Weapon data</Link>
       <Card sx={{ mt: 2, maxWidth: 900 }}>
         <CardContent sx={{ display: "flex", gap: 3, flexWrap: "wrap" }}>
-          <Image src={`/weapon/${weapon.id}.png`} alt={weapon.name} width={160} height={160} />
+          <WeaponIcon weapon={weapon} size={160} />
           <Box sx={{ flex: 1, minWidth: 280 }}>
             <Typography variant="h4" gutterBottom>
               {weapon.name}

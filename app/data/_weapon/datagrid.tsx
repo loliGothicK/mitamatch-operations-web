@@ -3,7 +3,7 @@
 import { Box, Paper } from "@mui/material";
 import { DataGrid as MuiDataGrid, type GridColDef } from "@mui/x-data-grid";
 import Link from "@/components/link";
-import { ImageWithFallback } from "@/components/image/ImageWithFallback";
+import { WeaponIcon } from "@/components/image/WeaponIcon";
 import { type Weapon, weaponList } from "@/domain/weapon/weapon";
 
 const columns: GridColDef<Weapon>[] = [
@@ -14,13 +14,7 @@ const columns: GridColDef<Weapon>[] = [
     sortable: false,
     renderCell: ({ row }) => (
       <Link href={`/data/weapon/${row.id}`}>
-        <ImageWithFallback
-          src={`/weapon/${row.resourceId}.png`}
-          fallback="/assets/Blank.png"
-          alt={row.name}
-          width={80}
-          height={80}
-        />
+        <WeaponIcon weapon={row} size={80} />
       </Link>
     ),
   },
