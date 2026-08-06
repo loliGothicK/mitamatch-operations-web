@@ -32,7 +32,10 @@ export function AutoAssignButton({ userData }: { userData?: UserData }) {
   const [rearGuard, setRearGuard] = useState<string[]>([]);
   const [toastMessage, setToastMessage] = useState<string>("");
   const [resultMatrixOpen, setResultMatrixOpen] = useState(false);
-  const [pendingShift, setPendingShift] = useState<{ picShift: string[]; subPicShift: string[] } | null>(null);
+  const [pendingShift, setPendingShift] = useState<{
+    picShift: string[];
+    subPicShift: string[];
+  } | null>(null);
 
   const validLegions = useMemo(() => {
     return (userData?.legions || []).filter((l) => l.members && l.members.length === 9);
@@ -51,13 +54,13 @@ export function AutoAssignButton({ userData }: { userData?: UserData }) {
 
   const handleToggleWhitelist = (memberName: string) => {
     setWhitelist((prev) =>
-      prev.includes(memberName) ? prev.filter((m) => m !== memberName) : [...prev, memberName]
+      prev.includes(memberName) ? prev.filter((m) => m !== memberName) : [...prev, memberName],
     );
   };
 
   const handleToggleRearGuard = (memberName: string) => {
     setRearGuard((prev) =>
-      prev.includes(memberName) ? prev.filter((m) => m !== memberName) : [...prev, memberName]
+      prev.includes(memberName) ? prev.filter((m) => m !== memberName) : [...prev, memberName],
     );
   };
 
@@ -85,7 +88,7 @@ export function AutoAssignButton({ userData }: { userData?: UserData }) {
         ...order,
         pic: pendingShift.picShift[i],
         sub: pendingShift.subPicShift[i],
-      }))
+      })),
     );
     setToastMessage("割り当てを完了しました");
     setResultMatrixOpen(false);
@@ -181,9 +184,9 @@ export function AutoAssignButton({ userData }: { userData?: UserData }) {
         onClose={() => setToastMessage("")}
         message={toastMessage}
       />
-      <AbsenceMatrixDialog 
-        open={resultMatrixOpen} 
-        onClose={() => setResultMatrixOpen(false)} 
+      <AbsenceMatrixDialog
+        open={resultMatrixOpen}
+        onClose={() => setResultMatrixOpen(false)}
         pendingShift={pendingShift}
         onConfirm={handleConfirm}
       />

@@ -8,7 +8,8 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   define: {
     "process.env": {},
-    "process.env.DATABASE_URL": "'postgres://dummy'",
+    "process.env.DATABASE_URL": "'postgresql://user:password@host.tld/dbname'",
+    "process.env.POSTGRES_URL": "'postgresql://user:password@host.tld/dbname'",
   },
   resolve: {
     alias: {

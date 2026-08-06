@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 
-import { type Order, orderList } from "@/domain/order/order";
+import { type Order, orderList, isSameLineage } from "@/domain/order/order";
 import { atomWithStorage, createJSONStorage } from "jotai/utils";
 import { match, P } from "ts-pattern";
 import { orderMigrationMap } from "./orderMigrationMap";
@@ -92,9 +92,10 @@ export const filterAtom = atom<OrderKind>("Usually");
 
 export const filteredOrderAtom = atom((get) => {
   const filter = get(filterAtom);
+  const timeline = get(timelineAtom);
   return orderList
     .filter((order) => (filter === "Usually" ? order.usually : kind(order) === filter))
-    .filter((order) => get(timelineAtom).every((o) => o.id !== order.id))
+    .filter((order) => timeline.every((o) => !isSameLineage(o, order)))
     .filter((order) => (get(payedAtom) ? order.payed : !order.payed))
     .toReversed();
 });

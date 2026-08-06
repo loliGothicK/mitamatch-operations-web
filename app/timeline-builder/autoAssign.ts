@@ -12,7 +12,7 @@ export function assignOrders(
   timeline: OrderWithPic[],
   members: Member[],
   whitelist: string[],
-  rearGuard: string[]
+  rearGuard: string[],
 ): { picShift: string[] | null; subPicShift: string[] | null } {
   let resetIndex = -1;
   for (let i = 0; i < timeline.length; i++) {
@@ -45,7 +45,7 @@ export function assignOrders(
             else isFreeMatch = true;
           }
         });
-        
+
         if (isPayedMatch) {
           score = 20; // 課金オーダーは高スコア
           isMatch = true;
@@ -92,7 +92,7 @@ export function assignOrders(
     usedPhase2: Set<string>,
     resetCaster: string | null,
     currentShift: string[],
-    currentScore: number
+    currentScore: number,
   ) {
     if (index === timeline.length) {
       if (currentScore > bestScore) {
@@ -120,13 +120,27 @@ export function assignOrders(
         if (name === resetCaster || usedPhase2.has(name)) continue;
         currentShift[index] = name;
         usedPhase2.add(name);
-        dfs(index + 1, usedPhase1, usedPhase2, resetCaster, currentShift, currentScore + candidate.score);
+        dfs(
+          index + 1,
+          usedPhase1,
+          usedPhase2,
+          resetCaster,
+          currentShift,
+          currentScore + candidate.score,
+        );
         usedPhase2.delete(name);
       } else {
         if (name === resetCaster || usedPhase1.has(name)) continue;
         currentShift[index] = name;
         usedPhase1.add(name);
-        dfs(index + 1, usedPhase1, usedPhase2, resetCaster, currentShift, currentScore + candidate.score);
+        dfs(
+          index + 1,
+          usedPhase1,
+          usedPhase2,
+          resetCaster,
+          currentShift,
+          currentScore + candidate.score,
+        );
         usedPhase1.delete(name);
       }
     }
@@ -150,19 +164,19 @@ export function assignOrders(
       continue;
     }
 
-    const candidates = baseCandidates[i].filter(c => {
+    const candidates = baseCandidates[i].filter((c) => {
       const sub = c.name;
       if (sub === picShift[i]) return false;
-      
+
       if (i === resetIndex) {
         // If this order is the reset order, the sub must not be assigned to ANY other order in picShift
         return !picShift.some((p, idx) => idx !== i && p === sub);
       }
-      
+
       // If this order is NOT the reset order:
       // 1. The sub must not be the one who casts the reset order
       if (resetIndex !== -1 && picShift[resetIndex] === sub) return false;
-      
+
       // 2. The sub must not be assigned to another order in the SAME phase in picShift
       let samePhase = false;
       if (resetIndex === -1) {
@@ -176,7 +190,7 @@ export function assignOrders(
           if (j !== i && picShift[j] === sub) samePhase = true;
         }
       }
-      
+
       return !samePhase;
     });
 

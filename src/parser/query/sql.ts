@@ -93,22 +93,21 @@ function parseExpr(
           list.value.flatMap((expr) =>
             pipe(
               parseExpr(expr),
-              either.flatMap(
-                (expr): ValidateResult<AtomicExpr | AtomicExprList> =>
-                  match(expr)
-                    .with({ type: "field", value: P.string }, right)
-                    .when(
-                      (e) => Array.isArray(e),
-                      (e) => right(e),
-                    )
-                    .otherwise(() =>
-                      toValidated(
-                        bail(
-                          "expr_list",
-                          `${JSON.stringify(expr)} <- binary expression in exprssion list is not supported.`,
-                        ),
+              either.flatMap((expr): ValidateResult<AtomicExpr | AtomicExprList> =>
+                match(expr)
+                  .with({ type: "field", value: P.string }, right)
+                  .when(
+                    (e) => Array.isArray(e),
+                    (e) => right(e),
+                  )
+                  .otherwise(() =>
+                    toValidated(
+                      bail(
+                        "expr_list",
+                        `${JSON.stringify(expr)} <- binary expression in exprssion list is not supported.`,
                       ),
                     ),
+                  ),
               ),
             ),
           ),

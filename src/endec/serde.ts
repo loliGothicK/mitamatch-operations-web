@@ -180,23 +180,21 @@ const backwardsCompatibleSchema = z
     ]),
   })
   .transform((xs) => ({
-    timeline: xs.timeline.map(
-      ({ delay, id, ...xs }): z.infer<typeof timelineItemSchemaV3> => ({
-        ...xs,
-        id: typeof id === "number" ? orderMigrationMap[id] || String(id) : id,
-        delay: match(delay)
-          .with(P.nullish, () => ({ source: "auto" as const }))
-          .with(5, () => ({
-            source: "auto" as const,
-            value: 5,
-          }))
-          .with(P.number, (delay) => ({
-            source: "manual" as const,
-            value: delay,
-          }))
-          .otherwise(identity),
-      }),
-    ),
+    timeline: xs.timeline.map(({ delay, id, ...xs }): z.infer<typeof timelineItemSchemaV3> => ({
+      ...xs,
+      id: typeof id === "number" ? orderMigrationMap[id] || String(id) : id,
+      delay: match(delay)
+        .with(P.nullish, () => ({ source: "auto" as const }))
+        .with(5, () => ({
+          source: "auto" as const,
+          value: 5,
+        }))
+        .with(P.number, (delay) => ({
+          source: "manual" as const,
+          value: delay,
+        }))
+        .otherwise(identity),
+    })),
   }));
 
 type TimelineItem = z.infer<typeof timelineItemSchemaV2>;

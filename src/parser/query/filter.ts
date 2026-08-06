@@ -199,19 +199,17 @@ export default function build<T>(
 
   const cvt = (input: Input) =>
     match<Input, ValidateResult<IExpression<T>>>(input)
-      .with(
-        { type: "binary_expr" },
-        (binary): ValidateResult<IExpression<T>> =>
-          pipe(
-            sequenceS(ap)({
-              left: cvt(binary.lhs),
-              operator: toValidated(intoOperator(binary.operator, binary.lhs, binary.rhs)),
-              right: cvt(binary.rhs),
-            }),
-            either.map(({ left, operator, right }) => {
-              return new Binary(left, operator, right);
-            }),
-          ),
+      .with({ type: "binary_expr" }, (binary): ValidateResult<IExpression<T>> =>
+        pipe(
+          sequenceS(ap)({
+            left: cvt(binary.lhs),
+            operator: toValidated(intoOperator(binary.operator, binary.lhs, binary.rhs)),
+            right: cvt(binary.rhs),
+          }),
+          either.map(({ left, operator, right }) => {
+            return new Binary(left, operator, right);
+          }),
+        ),
       )
       .when(Array.isArray, () =>
         toValidated(bail("expr_list", "AtomicExprList is not supported yet")),

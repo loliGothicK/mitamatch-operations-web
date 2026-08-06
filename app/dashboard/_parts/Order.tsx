@@ -10,15 +10,11 @@ import { type Order, orderList } from "@/domain/order/order";
 import { OrderIcon } from "@/components/image/OrderIcon";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import { Save, Undo, Redo } from "@mui/icons-material";
+import { Switch } from "@mui/material";
 
 type Props = {
   user: User;
 };
-
-// 課金オーダーのみを抽出
-const paidOrderList = orderList.filter((order) => order.payed);
-// IDで検索しやすくするためのMap
-const paidOrderMap = new Map(paidOrderList.map((order) => [order.id, order]));
 
 function OrderCard({
   order,
@@ -48,6 +44,8 @@ export function OrderRegistration(_props: Props) {
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState<Order | undefined>(undefined);
 
+  const [payed, setPayed] = useState(true);
+
   const { data: registered } = useQuery({
     queryKey: ["orders"],
     queryFn: () => getOrderListAction(),
@@ -61,13 +59,19 @@ export function OrderRegistration(_props: Props) {
     }
   }, [registered]);
 
+  const currentOrderList = useMemo(() => {
+    return orderList.filter((order) => order.payed === payed);
+  }, [payed]);
+
   const NotYetRegistered = useMemo(() => {
-    return paidOrderList.filter((order) => !edit.includes(order.id));
-  }, [edit]);
+    return currentOrderList.filter((order) => !edit.includes(order.id));
+  }, [edit, currentOrderList]);
 
   const RegisteredOrders = useMemo(() => {
-    return edit.map((id) => paidOrderMap.get(id)).filter((o): o is Order => o !== undefined);
-  }, [edit]);
+    return edit
+      .map((id) => orderList.find((o) => o.id === id))
+      .filter((o): o is Order => o !== undefined && o.payed === payed);
+  }, [edit, payed]);
 
   const mutation = useMutation({
     mutationFn: updateOrderAction,
@@ -107,6 +111,13 @@ export function OrderRegistration(_props: Props) {
           <Button>
             <Redo />
           </Button>
+        </RibbonGroup>
+        <RibbonGroup label={"filter"}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography variant="body2">無課金</Typography>
+            <Switch checked={payed} onChange={() => setPayed((prev) => !prev)} />
+            <Typography variant="body2">課金</Typography>
+          </Box>
         </RibbonGroup>
       </Ribbon>
       <Grid container spacing={3} sx={{ mt: 2, width: "100%" }}>

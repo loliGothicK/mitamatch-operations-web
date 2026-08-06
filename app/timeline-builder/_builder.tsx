@@ -21,6 +21,7 @@ import {
   Image as ImageIcon,
   Remove,
   Share,
+  FilterList,
 } from "@mui/icons-material";
 import HelpOutlined from "@mui/icons-material/HelpOutlined";
 import {
@@ -58,6 +59,7 @@ import { OrderIcon } from "@/components/image/OrderIcon";
 import { useMediaQuery } from "@mui/system";
 
 import { encodeTimeline } from "@/endec/serde";
+import { isSameLineage } from "@/domain/order/order";
 import Sortable from "@/components/sortable/Sortable";
 import {
   filterAtom,
@@ -90,77 +92,6 @@ import { TimelineBuilderTour } from "@/timeline-builder/_tour";
 import { AutoAssignButton } from "@/timeline-builder/_auto-assign";
 import { TimelineShareCard } from "@/timeline-builder/_share-card";
 import { copyNodeAsImage } from "@/components/share/copyImage";
-
-function Info({ order }: { order: OrderWithPic }) {
-  if (order.pic && order.sub && order.delay) {
-    return (
-      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" sx={{ fontSize: 10 }}>
-          [ {order.pic} / {order.sub} ]
-        </Typography>
-      </Stack>
-    );
-  }
-  if (order.pic && order.sub) {
-    return (
-      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" sx={{ fontSize: 10 }}>
-          [ {order.pic} / {order.sub} ]
-        </Typography>
-      </Stack>
-    );
-  }
-  if (order.sub && order.delay) {
-    return (
-      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" sx={{ fontSize: 10 }}>
-          [ {order.sub} ]
-        </Typography>
-      </Stack>
-    );
-  }
-  if (order.pic && order.delay) {
-    return (
-      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" sx={{ fontSize: 10 }}>
-          [ {order.pic} ]
-        </Typography>
-      </Stack>
-    );
-  }
-  if (order.pic) {
-    return (
-      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" sx={{ fontSize: 10 }}>
-          [ {order.pic} ]
-        </Typography>
-      </Stack>
-    );
-  }
-  if (order.sub) {
-    return (
-      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
-        <Typography variant="body1">{order.name}</Typography>
-        <Typography variant="body2" sx={{ fontSize: 10 }}>
-          [ {order.sub} ]
-        </Typography>
-      </Stack>
-    );
-  }
-  if (order.delay) {
-    return (
-      <Stack direction={"row"} spacing={1} sx={{ alignItems: "center" }}>
-        <Typography variant="body1">{order.name}</Typography>
-      </Stack>
-    );
-  }
-  return <Typography variant="body1">{order.name}</Typography>;
-}
 
 export const TimelineItem = ({
   order,
@@ -230,49 +161,120 @@ export const TimelineItem = ({
           </span>
         </Typography>
       </Divider>
-      <Stack direction={"row"} spacing={0} sx={{ p: 0, alignItems: "center" }}>
+      <Stack
+        direction={"row"}
+        spacing={0}
+        sx={{ p: 0, alignItems: "center", width: "100%", overflow: "hidden" }}
+      >
         <div {...attributes} {...listeners}>
           <DragIndicator sx={{ color: "dimgrey", touchAction: "none" }} />
         </div>
-        <Stack direction={"row"} spacing={0} sx={{ p: 0, alignItems: "center" }}>
+        <Box sx={{ flexGrow: 1, overflow: "hidden" }}>
           <Tooltip title={order.description} placement="top">
             <ListItem key={order.id} sx={{ padding: 0 }}>
-              <ListItemAvatar>
-                <OrderIcon order={order} size={50} />
+              <ListItemAvatar sx={{ minWidth: 0, mr: 1.5, display: "flex", alignItems: "center" }}>
+                <OrderIcon order={order} size={40} />
               </ListItemAvatar>
-              <ListItemText primary={<Info order={order} />} secondary={order.effect} />
+              {/* Desktop Layout (sm and up) - Restored to exact original */}
+              <ListItemText
+                sx={{ display: { xs: "none", sm: "block" }, pr: 1, overflow: "hidden" }}
+                primary={
+                  <Stack
+                    direction={"row"}
+                    spacing={1}
+                    sx={{ alignItems: "baseline", overflow: "hidden", width: "100%" }}
+                  >
+                    <Typography variant="body1" noWrap sx={{ flexShrink: 0, fontWeight: "bold" }}>
+                      {order.name}
+                    </Typography>
+                    {(order.pic || order.sub) && (
+                      <Typography
+                        variant="body2"
+                        noWrap
+                        sx={{ fontSize: 10, color: "text.secondary", flexShrink: 1, minWidth: 0 }}
+                      >
+                        [{[order.pic, order.sub].filter(Boolean).join(" / ")}]
+                      </Typography>
+                    )}
+                  </Stack>
+                }
+                secondary={
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontSize: 11,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {order.effect}
+                  </Typography>
+                }
+              />
+
+              {/* Mobile Layout (xs only) - Effect on top, PIC on bottom, perfectly left-aligned */}
+              <Box
+                sx={{
+                  display: { xs: "flex", sm: "none" },
+                  flexGrow: 1,
+                  overflow: "hidden",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  textAlign: "left",
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: "text.secondary",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {order.effect}
+                </Typography>
+
+                {(order.pic || order.sub) && (
+                  <Typography variant="caption" noWrap sx={{ color: "text.secondary" }}>
+                    [{[order.pic, order.sub].filter(Boolean).join(" / ")}]
+                  </Typography>
+                )}
+              </Box>
             </ListItem>
           </Tooltip>
-        </Stack>
-        <IconButton
-          size={"small"}
-          sx={{
-            position: "absolute",
-            right: 0,
-            color: "rgba(255, 50, 50, 0.9)",
-            bgcolor: "rgba(0, 0, 0, 0.05)",
-          }}
-          onClick={() => {
-            // remove order from timeline
-            setTimeline((prev) => {
-              return prev.filter((o) => o.id !== order.id);
-            });
-          }}
-        >
-          <Remove />
-        </IconButton>
-        <IconButton
-          size={"small"}
-          sx={{
-            position: "absolute",
-            right: 50,
-            color: "secondary",
-            bgcolor: "rgba(0, 0, 0, 0.05)",
-          }}
-          onClick={handleClickOpen}
-        >
-          <Edit />
-        </IconButton>
+        </Box>
+        <Box sx={{ display: "flex", gap: 0.5, flexShrink: 0, pr: 1 }}>
+          <IconButton
+            size={"small"}
+            sx={{
+              color: "text.secondary",
+              bgcolor: "action.hover",
+              "&:hover": { bgcolor: "action.selected" },
+            }}
+            onClick={handleClickOpen}
+          >
+            <Edit fontSize="small" />
+          </IconButton>
+          <IconButton
+            size={"small"}
+            sx={{
+              color: "error.main",
+              bgcolor: "rgba(255, 0, 0, 0.05)",
+              "&:hover": { bgcolor: "rgba(255, 0, 0, 0.1)" },
+            }}
+            onClick={() => {
+              // remove order from timeline
+              setTimeline((prev) => {
+                return prev.filter((o) => o.id !== order.id);
+              });
+            }}
+          >
+            <Remove fontSize="small" />
+          </IconButton>
+        </Box>
       </Stack>
       <Dialog
         open={open}
@@ -392,7 +394,7 @@ export const TimelineItem = ({
   );
 };
 
-function Timeline({ userData }: { userData?: UserData }) {
+export function Timeline({ userData }: { userData?: UserData }) {
   const [, setTitle] = useAtom(timelineTitleAtom);
   const [timeline, setTimeline] = useAtom(timelineAtom);
   const params = useSearchParams();
@@ -456,7 +458,7 @@ function Timeline({ userData }: { userData?: UserData }) {
   );
 }
 
-function Source() {
+export function Source() {
   const [orders] = useAtom(filteredOrderAtom);
   const [timeline, setTimeline] = useAtom(timelineAtom);
   const [open, setOpen] = useState(false);
@@ -467,21 +469,7 @@ function Source() {
   };
 
   const handleAddOrder = (index: number) => {
-    if (
-      timeline.some(
-        (order) =>
-          orders[index].effect.replace(/^(.+)Lv.\d/g, "$1").replace(/(通常|特殊):/g, "") ===
-            order.effect.replace(/^(.+)Lv.\d/g, "$1").replace(/(通常|特殊):/g, "") ||
-          (orders[index].effect.includes("闇") &&
-            !orders[index].effect.includes("光闇") &&
-            order.effect.includes("闇") &&
-            !order.effect.includes("光闇")) ||
-          (orders[index].effect.includes("光") &&
-            !orders[index].effect.includes("光闇") &&
-            order.effect.includes("光") &&
-            !order.effect.includes("光闇")),
-      )
-    ) {
+    if (timeline.some((order) => isSameLineage(orders[index], order))) {
       setOpen(true);
       return;
     }
@@ -551,8 +539,9 @@ function Source() {
   );
 }
 
-function FilterMenu() {
+export function FilterMenu() {
   const [filter, setFilter] = useAtom(filterAtom);
+  const [payed, setPayed] = useAtom(payedAtom);
   return (
     <PopupState
       variant="popover"
@@ -562,8 +551,23 @@ function FilterMenu() {
     >
       {(popupState) => (
         <>
-          <Button {...bindTrigger(popupState)}>{filter}</Button>
+          <Button startIcon={<FilterList />} {...bindTrigger(popupState)}>
+            {filter}
+          </Button>
           <Menu {...bindMenu(popupState)}>
+            {/* Paid / Free Toggle Item */}
+            <MenuItem
+              onClick={(e) => {
+                // Prevent menu from closing when toggling switch
+                e.stopPropagation();
+                setPayed((prev) => !prev);
+              }}
+            >
+              <ListItemText primary={payed ? "課金" : "無課金"} sx={{ mr: 2 }} />
+              <Switch checked={payed} sx={{ pointerEvents: "none" }} size="small" />
+            </MenuItem>
+            <Divider />
+            {/* Order Kind Filters */}
             {orderKinds.map((kind) => {
               return (
                 <MenuItem
@@ -584,7 +588,7 @@ function FilterMenu() {
   );
 }
 
-function ShareButton() {
+export function ShareButton() {
   const [title] = useAtom(timelineTitleAtom);
   const [timeline] = useAtom(timelineAtom);
   const [modalOpen, setModalOpen] = useState<"short" | "full" | false>(false);
@@ -724,11 +728,11 @@ function ShareButton() {
 }
 
 import { UserData } from "@/types/user";
+import { MobileTimelineBuilderPage } from "./_mobile-builder";
 
-export function TimelineBuilderPage({ userData }: { userData?: UserData }) {
+export function DesktopTimelineBuilderPage({ userData }: { userData?: UserData }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
-  const [, setPayed] = useAtom(payedAtom);
   const [replayKey, setReplayKey] = useState(0);
 
   return (
@@ -773,9 +777,6 @@ export function TimelineBuilderPage({ userData }: { userData?: UserData }) {
           <ShareButton />
           <FilterMenu />
           <Divider orientation="vertical" flexItem sx={{ margin: 1 }} />
-          <Typography>無課金</Typography>
-          <Switch defaultChecked onChange={() => setPayed((prev) => !prev)} />
-          <Typography>課金</Typography>
           <Tooltip title="Tour">
             <IconButton onClick={() => setReplayKey((prev) => prev + 1)}>
               <HelpOutlined />
@@ -800,4 +801,13 @@ export function TimelineBuilderPage({ userData }: { userData?: UserData }) {
       </Grid>
     </Grid>
   );
+}
+
+export function TimelineBuilderPage({ userData }: { userData?: UserData }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  if (isMobile) {
+    return <MobileTimelineBuilderPage userData={userData} />;
+  }
+  return <DesktopTimelineBuilderPage userData={userData} />;
 }

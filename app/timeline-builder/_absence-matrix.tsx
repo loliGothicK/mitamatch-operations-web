@@ -21,7 +21,7 @@ export const AbsenceMatrixDialog = ({
   open,
   onClose,
   pendingShift,
-  onConfirm
+  onConfirm,
 }: {
   open: boolean;
   onClose: () => void;
@@ -35,10 +35,7 @@ export const AbsenceMatrixDialog = ({
 
   // Get unique assigned members from PIC and Sub PIC
   const assignedMembers = Array.from(
-    new Set([
-      ...picShift.filter(Boolean),
-      ...subPicShift.filter(Boolean),
-    ])
+    new Set([...picShift.filter(Boolean), ...subPicShift.filter(Boolean)]),
   ).sort();
 
   return (
@@ -74,7 +71,7 @@ export const AbsenceMatrixDialog = ({
                   </TableCell>
                 ))}
               </TableRow>
-              
+
               {/* Patterns 1..N: Each assigned member is absent */}
               {assignedMembers.map((absentMember) => (
                 <TableRow key={absentMember}>
@@ -85,14 +82,18 @@ export const AbsenceMatrixDialog = ({
                     const isPicAbsent = picShift[i] === absentMember;
                     const activeCaster = isPicAbsent ? subPicShift[i] : picShift[i];
                     const isFailed = !activeCaster || activeCaster === absentMember;
-                    
+
                     return (
-                      <TableCell 
+                      <TableCell
                         key={order.id}
-                        sx={{ 
-                          color: isFailed ? "error.main" : (isPicAbsent ? "warning.main" : "text.primary"),
+                        sx={{
+                          color: isFailed
+                            ? "error.main"
+                            : isPicAbsent
+                              ? "warning.main"
+                              : "text.primary",
                           fontWeight: isPicAbsent && !isFailed ? "bold" : "normal",
-                          whiteSpace: "nowrap"
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {isFailed ? "割当不可" : activeCaster}
@@ -108,7 +109,9 @@ export const AbsenceMatrixDialog = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>キャンセル</Button>
-        <Button onClick={onConfirm} variant="contained" color="primary">この割り当てを適用する</Button>
+        <Button onClick={onConfirm} variant="contained" color="primary">
+          この割り当てを適用する
+        </Button>
       </DialogActions>
     </Dialog>
   );
