@@ -1956,6 +1956,7 @@ export function DesktopDeckBuilder({
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setCompare] = useAtom(compareModeAtom);
+  const [title, setTitle] = useAtom(unitTitleAtom);
   const params = useSearchParams();
   const router = useRouter();
   const deckParam = params.get("deck");
@@ -1995,6 +1996,13 @@ export function DesktopDeckBuilder({
             <ToggleButtons />
           </RibbonGroup>
           <RibbonGroup label={"Deck"}>
+            <TextField
+              size="small"
+              label="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              sx={{ mx: 2, width: 200 }}
+            />
             <Tooltip title="clear all" placement={"top"}>
               <Button
                 onClick={() => {

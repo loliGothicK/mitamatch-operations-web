@@ -203,6 +203,7 @@ export async function getTimelinesByClerkUserId(clerkUserId: string) {
 
   return db
     .select({
+      short: timelines.short,
       title: timelines.title,
       timeline: timelines.timeline,
     })
@@ -210,6 +211,7 @@ export async function getTimelinesByClerkUserId(clerkUserId: string) {
     .where(eq(timelines.userId, user.id))
     .then((result) =>
       result.map((r) => ({
+        short: r.short,
         title: r.title,
         timeline: r.timeline.timeline,
       })),
@@ -258,6 +260,10 @@ export function uupdateTitle(short: string, title: string) {
     title: decks.title,
     short: decks.short,
   });
+}
+
+export function deleteDeck(short: string, userId: string) {
+  return db.delete(decks).where(and(eq(decks.short, short), eq(decks.userId, userId)));
 }
 
 export function upsertDeck(create: {
@@ -317,6 +323,17 @@ export function upsertTimeline(create: {
     .returning({
       id: timelines.id,
     });
+}
+
+export function updateTimelineTitle(short: string, title: string) {
+  return db.update(timelines).set({ title }).where(eq(timelines.short, short)).returning({
+    title: timelines.title,
+    short: timelines.short,
+  });
+}
+
+export function deleteTimeline(short: string, userId: string) {
+  return db.delete(timelines).where(and(eq(timelines.short, short), eq(timelines.userId, userId)));
 }
 
 export function upsertQueryPreset(create: {

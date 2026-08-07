@@ -736,6 +736,7 @@ export function DesktopTimelineBuilderPage({ userData }: { userData?: UserData }
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
   const [replayKey, setReplayKey] = useState(0);
+  const [title, setTitle] = useAtom(timelineTitleAtom);
 
   return (
     <Grid
@@ -775,6 +776,13 @@ export function DesktopTimelineBuilderPage({ userData }: { userData?: UserData }
             pr: 20,
           }}
         >
+          <TextField
+            size="small"
+            label="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            sx={{ mr: 2, width: 200 }}
+          />
           <AutoAssignButton userData={userData} />
           <ShareButton />
           <FilterMenu />

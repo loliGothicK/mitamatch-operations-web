@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
-import { getTimelinesByClerkUserId, getUser, upsertTimeline } from "@/database";
+import { getTimelinesByClerkUserId, getUser, upsertTimeline, updateTimelineTitle, deleteTimeline } from "@/database";
 import { ulid, ULID } from "ulid";
 import { OrderWithPic } from "@/jotai/orderAtoms";
 
@@ -25,4 +25,16 @@ export async function saveTimelinesAction({
   const { id } = await getUser(userId);
 
   return upsertTimeline({ short: short || ulid(), timeline, userId: id });
+}
+
+export async function updateTimelineTitleAction({ short, title }: { short: ULID; title: string }) {
+  return updateTimelineTitle(short, title);
+}
+
+export async function deleteTimelinesAction({ short }: { short: ULID }) {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+  const { id } = await getUser(userId);
+
+  return deleteTimeline(short, id);
 }

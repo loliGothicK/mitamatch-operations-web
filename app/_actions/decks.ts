@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
-import { getDecksByClerkUserId, getUser, upsertDeck, uupdateTitle } from "@/database";
+import { getDecksByClerkUserId, getUser, upsertDeck, uupdateTitle, deleteDeck } from "@/database";
 import { ULID, ulid } from "ulid";
 import { Unit } from "@/domain/types";
 
@@ -27,4 +27,12 @@ export async function saveDecksAction({
 
 export async function updateTitleAction({ short, title }: { short: ULID; title: string }) {
   return uupdateTitle(short, title);
+}
+
+export async function deleteDecksAction({ short }: { short: ULID }) {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+  const { id } = await getUser(userId);
+
+  return deleteDeck(short, id);
 }

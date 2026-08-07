@@ -2,36 +2,40 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { TreeItem } from "@mui/x-tree-view";
-import { getDecksAction, updateTitleAction } from "@/_actions/decks";
+import { getDecksAction, updateTitleAction, deleteDecksAction } from "@/_actions/decks";
 import { Folder } from "@mui/icons-material";
 import { Menu, MenuItem, Modal, Stack, TextField, Typography } from "@mui/material";
 import { useAtom } from "jotai";
 import { rwDeckAtom, rwLegendaryDeckAtom } from "@/jotai/memoriaAtoms";
 import { openAtom } from "@/jotai/editor";
 import { useState, MouseEvent } from "react";
-import { Box } from "@mui/system";
 import { ULID } from "ulid";
 
 export function Decks() {
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setOpen] = useAtom(openAtom);
-  const [contextMenu, setContextMenu] = useState<{ mouseX: number; mouseY: number } | null>(null);
-  const [openRenameMenu, setOpenRenameMenu] = useState(false);
-  const [newTitle, setNewTitle] = useState("new title");
+  const [contextMenu, setContextMenu] = useState<{ mouseX: number; mouseY: number; short: string; title: string } | null>(null);
+  const [openRenameMenu, setOpenRenameMenu] = useState<{ short: string; title: string } | null>(null);
+  const [newTitle, setNewTitle] = useState("");
 
-  const handleContextMenu = (e: MouseEvent) => {
+  const handleContextMenu = (e: MouseEvent, short: string, title: string) => {
     e.preventDefault();
     e.stopPropagation();
     setContextMenu({
       mouseX: e.clientX + 2,
       mouseY: e.clientY - 6,
+      short,
+      title,
     });
   };
 
   const handleRenameStart = (e: MouseEvent) => {
     e.stopPropagation();
-    setOpenRenameMenu(true);
+    if (contextMenu) {
+      setOpenRenameMenu({ short: contextMenu.short, title: contextMenu.title });
+      setNewTitle(contextMenu.title);
+    }
     handleCloseMenu();
   };
 
@@ -55,6 +59,21 @@ export function Decks() {
     },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async (short: ULID) => deleteDecksAction({ short }),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["decks"] });
+    },
+  });
+
+  const handleDelete = (e: MouseEvent) => {
+    e.stopPropagation();
+    if (contextMenu) {
+      deleteMutation.mutate(contextMenu.short);
+    }
+    handleCloseMenu();
+  };
+
   const label = (
     <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
       <Folder />
@@ -66,77 +85,86 @@ export function Decks() {
     <TreeItem itemId="decks" label={label} disabled={query.data === undefined}>
       {query.data?.map((deck) => {
         return (
-          <Box key={deck.short}>
-            <Modal open={openRenameMenu} onClose={() => setOpenRenameMenu(false)}>
-              <Stack
-                direction="column"
-                sx={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  bgcolor: "background.paper",
-                }}
-              >
-                <Typography variant="h6" component="h2">
-                  Rename Deck
-                </Typography>
-                <TextField
-                  id="outlined-basic"
-                  label="new title"
-                  variant="outlined"
-                  onChange={(e) => setNewTitle(e.target.value)}
-                />
-                <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
-                  <button
-                    onClick={() => {
-                      setOpenRenameMenu(false);
-                    }}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={() => {
-                      mutation.mutate({ short: deck.short, title: newTitle });
-                      setOpenRenameMenu(false);
-                    }}
-                  >
-                    Save
-                  </button>
-                </Stack>
-              </Stack>
-            </Modal>
-            <TreeItem
-              itemId={deck.short}
-              label={deck.title}
-              onContextMenu={handleContextMenu}
-              onDoubleClick={() => {
-                setOpen({
-                  type: "deck",
-                  hash: deck.short,
-                });
-                setLegendaryDeck(deck.unit.legendaryDeck);
-                setDeck(deck.unit.deck);
-              }}
-            />
-            <Menu
-              open={contextMenu !== null}
-              onClose={handleCloseMenu}
-              anchorReference="anchorPosition"
-              anchorPosition={
-                contextMenu !== null
-                  ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-                  : undefined
-              }
-            >
-              <MenuItem onClick={handleRenameStart}>Rename</MenuItem>
-              <MenuItem onClick={handleCloseMenu}>Delete</MenuItem>
-            </Menu>
-          </Box>
+          <TreeItem
+            key={deck.short}
+            itemId={deck.short}
+            label={deck.title}
+            onContextMenu={(e) => handleContextMenu(e, deck.short, deck.title)}
+            onDoubleClick={() => {
+              setOpen({
+                type: "deck",
+                hash: deck.short,
+              });
+              setLegendaryDeck(deck.unit.legendaryDeck);
+              setDeck(deck.unit.deck);
+            }}
+          />
         );
       })}
+
+      <Menu
+        open={contextMenu !== null}
+        onClose={handleCloseMenu}
+        anchorReference="anchorPosition"
+        anchorPosition={
+          contextMenu !== null
+            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+            : undefined
+        }
+      >
+        <MenuItem onClick={handleRenameStart}>Rename</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete</MenuItem>
+      </Menu>
+
+      <Modal open={openRenameMenu !== null} onClose={() => setOpenRenameMenu(null)}>
+        <Stack
+          onKeyDown={(e) => e.stopPropagation()}
+          direction="column"
+          spacing={2}
+          sx={{
+            alignItems: "center",
+            justifyContent: "center",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            bgcolor: "background.paper",
+            p: 4,
+            borderRadius: 2,
+            boxShadow: 24,
+          }}
+        >
+          <Typography variant="h6" component="h2">
+            Rename Deck
+          </Typography>
+          <TextField
+            id="outlined-basic"
+            label="New Title"
+            variant="outlined"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+          <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+            <button
+              onClick={() => {
+                setOpenRenameMenu(null);
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => {
+                if (openRenameMenu) {
+                  mutation.mutate({ short: openRenameMenu.short, title: newTitle });
+                }
+                setOpenRenameMenu(null);
+              }}
+            >
+              Save
+            </button>
+          </Stack>
+        </Stack>
+      </Modal>
     </TreeItem>
   );
 }
