@@ -7,11 +7,14 @@ import {
   acceptInviteAction,
   declineInviteAction,
 } from "@/_actions/invite";
+import { useAuth } from "@clerk/nextjs";
 
 export const NotificationsMenu = () => {
+  const { isSignedIn } = useAuth();
   const { data: invites } = useQuery({
     queryKey: ["pending-invites"],
     queryFn: () => getPendingInvitesAction(),
+    enabled: !!isSignedIn,
   });
 
   const queryClient = useQueryClient();
