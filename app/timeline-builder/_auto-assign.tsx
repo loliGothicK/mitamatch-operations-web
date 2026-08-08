@@ -17,6 +17,8 @@ import {
   FormGroup,
   FormControlLabel,
   Snackbar,
+  Tooltip,
+  IconButton,
 } from "@mui/material";
 import { AutoAwesome } from "@mui/icons-material";
 import { timelineAtom } from "@/jotai/orderAtoms";
@@ -101,9 +103,11 @@ export function AutoAssignButton({ userData }: { userData?: UserData }) {
 
   return (
     <>
-      <Button startIcon={<AutoAwesome />} onClick={handleOpen}>
-        Auto Assign
-      </Button>
+      <Tooltip title="Auto Assign">
+        <IconButton onClick={handleOpen}>
+          <AutoAwesome />
+        </IconButton>
+      </Tooltip>
 
       <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
         <DialogTitle>PIC / Sub PIC 自動割り当て</DialogTitle>

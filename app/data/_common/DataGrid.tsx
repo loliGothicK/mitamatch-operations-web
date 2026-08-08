@@ -246,6 +246,7 @@ export function DataGrid<
 
   useEffect(() => {
     runQuery();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile]);
 
   const handleToggle = useCallback(() => {

@@ -11,12 +11,15 @@ import {
   IconButton,
   Tooltip,
   Typography,
+  TextField,
 } from "@mui/material";
 import { Add, HelpOutlined } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import { AutoAssignButton } from "@/timeline-builder/_auto-assign";
 import { TimelineBuilderTour } from "@/timeline-builder/_tour";
 import { UserData } from "@/types/user";
+import { useAtom } from "jotai";
+import { timelineTitleAtom } from "@/jotai/orderAtoms";
 
 import { FilterMenu, ShareButton, Source, Timeline } from "./_builder";
 
@@ -24,6 +27,7 @@ export function MobileTimelineBuilderPage({ userData }: { userData?: UserData })
   const theme = useTheme();
   const [replayKey, setReplayKey] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [title, setTitle] = useAtom(timelineTitleAtom);
 
   return (
     <Box sx={{ pb: 10 }}>
@@ -72,8 +76,22 @@ export function MobileTimelineBuilderPage({ userData }: { userData?: UserData })
               : alpha(theme.palette.primary.main, 0.2),
           minHeight: "80vh",
           paddingTop: 2,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
+        <Box sx={{ width: "100%", maxWidth: "65vh", mb: 2 }}>
+          <TextField
+            size="small"
+            label="Title"
+            variant="standard"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            fullWidth
+            sx={{ input: { fontSize: "1.2rem", textAlign: "center" } }}
+          />
+        </Box>
         <Suspense>
           <Timeline userData={userData} />
         </Suspense>

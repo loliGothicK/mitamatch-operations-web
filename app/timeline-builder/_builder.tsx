@@ -553,8 +553,8 @@ export function FilterMenu() {
     >
       {(popupState) => (
         <>
-          <Button startIcon={<FilterList />} {...bindTrigger(popupState)}>
-            {filter}
+          <Button startIcon={<FilterList />} {...bindTrigger(popupState)} sx={{ textTransform: 'none' }} color="inherit">
+            Filter: {filter}
           </Button>
           <Menu {...bindMenu(popupState)}>
             {/* Paid / Free Toggle Item */}
@@ -643,9 +643,11 @@ export function ShareButton() {
               <TimelineShareCard title={title} timeline={timeline} />
             </div>
           </Box>
-          <Button {...bindTrigger(popupState)}>
-            <Share />
-          </Button>
+          <Tooltip title="Share">
+            <IconButton {...bindTrigger(popupState)}>
+              <Share />
+            </IconButton>
+          </Tooltip>
           <Menu {...bindMenu(popupState)}>
             <MenuItem
               onClick={async () => {
@@ -758,8 +760,23 @@ export function DesktopTimelineBuilderPage({ userData }: { userData?: UserData }
                 : alpha(theme.palette.primary.main, 0.2),
             minHeight: "80vh",
             maxWidth: matches ? "30vw" : "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            pt: 2,
           }}
         >
+          <Box sx={{ width: "100%", maxWidth: "65vh", mb: 2 }}>
+            <TextField
+              size="small"
+              label="Title"
+              variant="standard"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              fullWidth
+              sx={{ input: { fontSize: "1.2rem", textAlign: "center" } }}
+            />
+          </Box>
           <Suspense>
             <Timeline userData={userData} />
           </Suspense>
@@ -776,13 +793,7 @@ export function DesktopTimelineBuilderPage({ userData }: { userData?: UserData }
             pr: 20,
           }}
         >
-          <TextField
-            size="small"
-            label="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            sx={{ mr: 2, width: 200 }}
-          />
+
           <AutoAssignButton userData={userData} />
           <ShareButton />
           <FilterMenu />
