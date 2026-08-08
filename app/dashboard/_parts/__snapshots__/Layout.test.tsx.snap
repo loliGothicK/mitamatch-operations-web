@@ -1,0 +1,110 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Dashboard Layout - snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root css-ghoxks"
+  >
+    <div
+      class="MuiBox-root css-1gsv261"
+    >
+      <div
+        class="MuiTabs-root css-1xkjjjh-MuiTabs-root"
+      >
+        <div
+          class="MuiTabs-scrollableX MuiTabs-hideScrollbar css-i8yde5"
+          style="width: 99px; height: 99px; position: absolute; top: -9999px; overflow: scroll; pointer-events: none;"
+        />
+        <div
+          class="MuiTabs-scroller MuiTabs-hideScrollbar MuiTabs-scrollableX css-1fr578y-MuiTabs-scroller"
+          style="margin-bottom: 0px;"
+        >
+          <div
+            aria-label="dashboard tabs"
+            class="MuiTabs-list css-hzcega-MuiTabs-list"
+            role="tablist"
+          >
+            <button
+              aria-controls="simple-tabpanel-0"
+              aria-selected="false"
+              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1usuzwp-MuiButtonBase-root-MuiTab-root"
+              id="simple-tab-0"
+              role="tab"
+              tabindex="-1"
+              type="button"
+            >
+              overview
+            </button>
+            <button
+              aria-controls="simple-tabpanel-1"
+              aria-selected="true"
+              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-1usuzwp-MuiButtonBase-root-MuiTab-root"
+              id="simple-tab-1"
+              role="tab"
+              tabindex="0"
+              type="button"
+            >
+              memoria
+            </button>
+            <button
+              aria-controls="simple-tabpanel-2"
+              aria-selected="false"
+              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1usuzwp-MuiButtonBase-root-MuiTab-root"
+              id="simple-tab-2"
+              role="tab"
+              tabindex="-1"
+              type="button"
+            >
+              order
+            </button>
+            <button
+              aria-controls="simple-tabpanel-3"
+              aria-selected="false"
+              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1usuzwp-MuiButtonBase-root-MuiTab-root"
+              id="simple-tab-3"
+              role="tab"
+              tabindex="-1"
+              type="button"
+            >
+              legion
+            </button>
+          </div>
+          <span
+            class="MuiTabs-indicator css-1qltlow-MuiTabs-indicator"
+            style="left: 110.406px; width: 101.703px;"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      hidden=""
+      id="simple-tabpanel-0"
+      role="tabpanel"
+    />
+    <div
+      id="simple-tabpanel-1"
+      role="tabpanel"
+    >
+      <div
+        class="MuiBox-root css-19kzrtu"
+      >
+        <div
+          data-testid="memoria-mock"
+        >
+          Memoria
+        </div>
+      </div>
+    </div>
+    <div
+      hidden=""
+      id="simple-tabpanel-2"
+      role="tabpanel"
+    />
+    <div
+      hidden=""
+      id="simple-tabpanel-3"
+      role="tabpanel"
+    />
+  </div>
+</DocumentFragment>
+`;

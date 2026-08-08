@@ -27,10 +27,11 @@ const renderComponent = () =>
   );
 
 test("OrderRegistration - renders without crashing", async () => {
-  renderComponent();
+  const { asFragment } = renderComponent();
   await waitFor(() => {
     expect(screen.getByTestId("SaveIcon")).toBeInTheDocument();
   });
+  expect(asFragment()).toMatchSnapshot();
 });
 
 test("OrderRegistration - shows only paid orders and handles clicking", async () => {

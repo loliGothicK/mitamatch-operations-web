@@ -138,7 +138,7 @@ export function Memoria(_props: Props) {
         </RibbonGroup>
       </Ribbon>
       <Grid container spacing={3} sx={{ mt: 2, width: "100%" }}>
-        <Grid size={2.4} sx={{ display: "flex", flexWrap: "wrap" }}>
+        <Grid size={{ xs: 12, md: 2.4 }} sx={{ display: "flex", flexWrap: "wrap" }}>
           <Paper sx={{ minHeight: "80vh", width: "100%", display: "flex", flexWrap: "wrap" }}>
             {info && (
               <Stack direction={"column"} sx={{ p: 2 }}>
@@ -184,7 +184,7 @@ export function Memoria(_props: Props) {
             )}
           </Paper>
         </Grid>
-        <Grid size={4.8} sx={{ display: "flex", flexWrap: "wrap" }}>
+        <Grid size={{ xs: 12, md: 4.8 }} sx={{ display: "flex", flexWrap: "wrap" }}>
           <Paper
             sx={{
               height: "80vh",
@@ -215,7 +215,7 @@ export function Memoria(_props: Props) {
             ))}
           </Paper>
         </Grid>
-        <Grid size={4.8}>
+        <Grid size={{ xs: 12, md: 4.8 }}>
           <Paper
             sx={{
               height: "80vh",

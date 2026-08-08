@@ -79,7 +79,7 @@ export function Dashboard({ userData }: { userData: UserData }) {
       }}
     >
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs value={value} onChange={handleChange} aria-label="dashboard tabs" variant="scrollable" scrollButtons="auto" allowScrollButtonsMobile>
           <Tab key={"overview"} label={"overview"} {...a11yProps(0)} />
           <Tab key={"memoria"} label={"memoria"} {...a11yProps(1)} />
           <Tab key={"order"} label={"order"} {...a11yProps(2)} />
