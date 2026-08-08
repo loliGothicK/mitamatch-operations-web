@@ -8,7 +8,7 @@ import { Menu, MenuItem, Modal, Stack, TextField, Typography } from "@mui/materi
 import { useAtom } from "jotai";
 import { rwDeckAtom, rwLegendaryDeckAtom, unitTitleAtom } from "@/jotai/memoriaAtoms";
 import { openAtom } from "@/jotai/editor";
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useOptimistic, startTransition } from "react";
 import { ULID } from "ulid";
 
 export function Decks() {
@@ -50,6 +50,11 @@ export function Decks() {
     queryFn: getDecksAction,
   });
 
+  const [optimisticDecks, removeOptimisticDeck] = useOptimistic(
+    query.data || [],
+    (state, shortToRemove: string) => state.filter((d) => d.short !== shortToRemove)
+  );
+
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -62,15 +67,6 @@ export function Decks() {
 
   const deleteMutation = useMutation({
     mutationFn: async (short: ULID) => deleteDecksAction({ short }),
-    onMutate: async (short) => {
-      await queryClient.cancelQueries({ queryKey: ["decks"] });
-      const previousDecks = queryClient.getQueryData(["decks"]);
-      queryClient.setQueryData(["decks"], (old: any) => old?.filter((d: any) => d.short !== short));
-      return { previousDecks };
-    },
-    onError: (_err, _short, context) => {
-      queryClient.setQueryData(["decks"], context?.previousDecks);
-    },
     onSettled: async () => {
       await queryClient.invalidateQueries({ queryKey: ["decks"] });
     },
@@ -79,7 +75,11 @@ export function Decks() {
   const handleDelete = (e: MouseEvent) => {
     e.stopPropagation();
     if (contextMenu) {
-      deleteMutation.mutate(contextMenu.short);
+      const short = contextMenu.short;
+      startTransition(async () => {
+        removeOptimisticDeck(short);
+        await deleteMutation.mutateAsync(short);
+      });
     }
     handleCloseMenu();
   };
@@ -93,7 +93,7 @@ export function Decks() {
 
   return (
     <TreeItem itemId="decks" label={label} disabled={query.data === undefined}>
-      {query.data?.map((deck) => {
+      {optimisticDecks.map((deck) => {
         return (
           <TreeItem
             key={deck.short}

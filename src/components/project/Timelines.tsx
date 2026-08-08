@@ -7,7 +7,7 @@ import { Folder } from "@mui/icons-material";
 import { Menu, MenuItem, Modal, Stack, TextField, Typography } from "@mui/material";
 import { useAtom } from "jotai";
 import { timelineAtom, timelineTitleAtom } from "@/jotai/orderAtoms";
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useOptimistic, startTransition } from "react";
 import { ULID } from "ulid";
 
 export function Timelines() {
@@ -48,6 +48,11 @@ export function Timelines() {
     queryFn: getTimelinesAction,
   });
 
+  const [optimisticTimelines, removeOptimisticTimeline] = useOptimistic(
+    query.data || [],
+    (state, shortToRemove: string) => state.filter((t) => t.short !== shortToRemove)
+  );
+
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -60,15 +65,6 @@ export function Timelines() {
 
   const deleteMutation = useMutation({
     mutationFn: async (short: ULID) => deleteTimelinesAction({ short }),
-    onMutate: async (short) => {
-      await queryClient.cancelQueries({ queryKey: ["timelines"] });
-      const previousTimelines = queryClient.getQueryData(["timelines"]);
-      queryClient.setQueryData(["timelines"], (old: any) => old?.filter((t: any) => t.short !== short));
-      return { previousTimelines };
-    },
-    onError: (_err, _short, context) => {
-      queryClient.setQueryData(["timelines"], context?.previousTimelines);
-    },
     onSettled: async () => {
       await queryClient.invalidateQueries({ queryKey: ["timelines"] });
     },
@@ -77,7 +73,11 @@ export function Timelines() {
   const handleDelete = (e: MouseEvent) => {
     e.stopPropagation();
     if (contextMenu) {
-      deleteMutation.mutate(contextMenu.short);
+      const short = contextMenu.short;
+      startTransition(async () => {
+        removeOptimisticTimeline(short);
+        await deleteMutation.mutateAsync(short);
+      });
     }
     handleCloseMenu();
   };
@@ -91,7 +91,7 @@ export function Timelines() {
 
   return (
     <TreeItem itemId="timelines" label={label} disabled={query.data === undefined}>
-      {query.data?.map((timeline, index) => {
+      {optimisticTimelines.map((timeline, index) => {
         const itemId = timeline.short || `timeline-${index}`;
         return (
           <TreeItem
