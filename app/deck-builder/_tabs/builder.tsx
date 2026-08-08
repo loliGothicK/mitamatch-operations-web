@@ -1726,7 +1726,7 @@ export function ShareButton() {
 
   // Mutations
   const mutation = useMutation({
-    mutationFn: async (unit: Unit & { title: string }) => saveDecksAction(unit),
+    mutationFn: async (unit: Unit & { title: string; short?: ULID }) => saveDecksAction(unit),
     onSuccess: async () => {
       // Invalidate and refetch
       await queryClient.invalidateQueries({ queryKey: ["decks"] });
@@ -1791,8 +1791,8 @@ export function ShareButton() {
                 setUrl(
                   `https://operations.mitama.io/deck-builder?deck=${short}&title=${encodeURI(title)}`,
                 );
-                await saveShortLink({ target: "deck", unit: { sw, deck, legendaryDeck }, short });
-                mutation.mutate({ sw, deck, legendaryDeck, title });
+                await saveShortLink({ target: "deck", unit: { sw, deck, legendaryDeck }, short, title });
+                mutation.mutate({ sw, deck, legendaryDeck, title, short });
               }}
             >
               {"short link"}

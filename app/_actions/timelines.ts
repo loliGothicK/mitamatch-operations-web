@@ -16,15 +16,17 @@ export async function getTimelinesAction() {
 export async function saveTimelinesAction({
   timeline,
   short,
+  title,
 }: {
   timeline: OrderWithPic[];
   short?: ULID;
+  title?: string;
 }) {
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
   const { id } = await getUser(userId);
 
-  return upsertTimeline({ short: short || ulid(), timeline, userId: id });
+  return upsertTimeline({ short: short || ulid(), timeline, userId: id, title });
 }
 
 export async function updateTimelineTitleAction({ short, title }: { short: ULID; title: string }) {

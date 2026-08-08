@@ -300,6 +300,7 @@ export function upsertDeck(create: {
 export function upsertTimeline(create: {
   short: string;
   timeline: OrderWithPic[];
+  title?: string;
   userId?: string; // ログインしている場合のみ存在
 }) {
   const now = new Date();
@@ -309,6 +310,7 @@ export function upsertTimeline(create: {
     .values({
       short: create.short,
       timeline: { timeline: create.timeline },
+      title: create.title,
       userId: create.userId,
       updatedAt: now.toISOString(),
     })
@@ -317,6 +319,7 @@ export function upsertTimeline(create: {
       set: {
         userId: create.userId,
         timeline: { timeline: create.timeline },
+        title: create.title,
         updatedAt: now.toISOString(),
       },
     })

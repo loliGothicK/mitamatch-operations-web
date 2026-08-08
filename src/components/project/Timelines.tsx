@@ -6,12 +6,13 @@ import { getTimelinesAction, updateTimelineTitleAction, deleteTimelinesAction } 
 import { Folder } from "@mui/icons-material";
 import { Menu, MenuItem, Modal, Stack, TextField, Typography } from "@mui/material";
 import { useAtom } from "jotai";
-import { timelineAtom } from "@/jotai/orderAtoms";
+import { timelineAtom, timelineTitleAtom } from "@/jotai/orderAtoms";
 import { useState, MouseEvent } from "react";
 import { ULID } from "ulid";
 
 export function Timelines() {
   const [, setTimeline] = useAtom(timelineAtom);
+  const [, setTitle] = useAtom(timelineTitleAtom);
   const [contextMenu, setContextMenu] = useState<{ mouseX: number; mouseY: number; short: string; title: string } | null>(null);
   const [openRenameMenu, setOpenRenameMenu] = useState<{ short: string; title: string } | null>(null);
   const [newTitle, setNewTitle] = useState("");
@@ -59,7 +60,16 @@ export function Timelines() {
 
   const deleteMutation = useMutation({
     mutationFn: async (short: ULID) => deleteTimelinesAction({ short }),
-    onSuccess: async () => {
+    onMutate: async (short) => {
+      await queryClient.cancelQueries({ queryKey: ["timelines"] });
+      const previousTimelines = queryClient.getQueryData(["timelines"]);
+      queryClient.setQueryData(["timelines"], (old: any) => old?.filter((t: any) => t.short !== short));
+      return { previousTimelines };
+    },
+    onError: (_err, _short, context) => {
+      queryClient.setQueryData(["timelines"], context?.previousTimelines);
+    },
+    onSettled: async () => {
       await queryClient.invalidateQueries({ queryKey: ["timelines"] });
     },
   });
@@ -95,6 +105,7 @@ export function Timelines() {
             }}
             onDoubleClick={() => {
               setTimeline(timeline.timeline);
+              setTitle(timeline.title);
             }}
           />
         );

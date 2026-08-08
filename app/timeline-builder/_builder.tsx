@@ -92,6 +92,7 @@ import { TimelineBuilderTour } from "@/timeline-builder/_tour";
 import { AutoAssignButton } from "@/timeline-builder/_auto-assign";
 import { TimelineShareCard } from "@/timeline-builder/_share-card";
 import { copyNodeAsImage } from "@/components/share/copyImage";
+import { saveShortLink } from "@/actions/permlink";
 
 export const TimelineItem = ({
   order,
@@ -602,11 +603,11 @@ export function ShareButton() {
 
   // Mutations
   const mutation = useMutation({
-    mutationFn: async (timelines: { timeline: OrderWithPic[]; short?: ULID }) =>
+    mutationFn: async (timelines: { timeline: OrderWithPic[]; short?: ULID; title?: string }) =>
       saveTimelinesAction(timelines),
     onSuccess: async () => {
       // Invalidate and refetch
-      await queryClient.invalidateQueries({ queryKey: ["decks"] });
+      await queryClient.invalidateQueries({ queryKey: ["timelines"] });
     },
   });
 
@@ -666,7 +667,8 @@ export function ShareButton() {
                 setUrl(
                   `https://operations.mitama.io/timeline-builder?timeline=${short}&title=${encodeURI(title)}`,
                 );
-                mutation.mutate({ timeline, short });
+                await saveShortLink({ target: "timeline", timeline, short, title });
+                mutation.mutate({ timeline, short, title });
               }}
             >
               {"short link"}

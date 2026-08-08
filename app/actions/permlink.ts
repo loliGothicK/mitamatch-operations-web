@@ -9,11 +9,13 @@ export async function saveShortLink(
         target: "deck";
         short: string;
         unit: Unit;
+        title?: string;
       }
     | {
         target: "timeline";
         short: string;
         timeline: OrderWithPic[];
+        title?: string;
       },
 ) {
   "use server";
@@ -21,11 +23,13 @@ export async function saveShortLink(
     await upsertDeck({
       short: data.short,
       unit: data.unit,
+      title: data.title,
     });
   } else {
     await upsertTimeline({
       short: data.short,
       timeline: data.timeline,
+      title: data.title,
     });
   }
 }

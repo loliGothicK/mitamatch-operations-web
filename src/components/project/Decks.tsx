@@ -6,7 +6,7 @@ import { getDecksAction, updateTitleAction, deleteDecksAction } from "@/_actions
 import { Folder } from "@mui/icons-material";
 import { Menu, MenuItem, Modal, Stack, TextField, Typography } from "@mui/material";
 import { useAtom } from "jotai";
-import { rwDeckAtom, rwLegendaryDeckAtom } from "@/jotai/memoriaAtoms";
+import { rwDeckAtom, rwLegendaryDeckAtom, unitTitleAtom } from "@/jotai/memoriaAtoms";
 import { openAtom } from "@/jotai/editor";
 import { useState, MouseEvent } from "react";
 import { ULID } from "ulid";
@@ -14,6 +14,7 @@ import { ULID } from "ulid";
 export function Decks() {
   const [, setLegendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [, setDeck] = useAtom(rwDeckAtom);
+  const [, setTitle] = useAtom(unitTitleAtom);
   const [, setOpen] = useAtom(openAtom);
   const [contextMenu, setContextMenu] = useState<{ mouseX: number; mouseY: number; short: string; title: string } | null>(null);
   const [openRenameMenu, setOpenRenameMenu] = useState<{ short: string; title: string } | null>(null);
@@ -61,7 +62,16 @@ export function Decks() {
 
   const deleteMutation = useMutation({
     mutationFn: async (short: ULID) => deleteDecksAction({ short }),
-    onSuccess: async () => {
+    onMutate: async (short) => {
+      await queryClient.cancelQueries({ queryKey: ["decks"] });
+      const previousDecks = queryClient.getQueryData(["decks"]);
+      queryClient.setQueryData(["decks"], (old: any) => old?.filter((d: any) => d.short !== short));
+      return { previousDecks };
+    },
+    onError: (_err, _short, context) => {
+      queryClient.setQueryData(["decks"], context?.previousDecks);
+    },
+    onSettled: async () => {
       await queryClient.invalidateQueries({ queryKey: ["decks"] });
     },
   });
@@ -97,6 +107,7 @@ export function Decks() {
               });
               setLegendaryDeck(deck.unit.legendaryDeck);
               setDeck(deck.unit.deck);
+              setTitle(deck.title);
             }}
           />
         );
