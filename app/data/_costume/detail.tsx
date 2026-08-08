@@ -106,12 +106,24 @@ function StatusTable({
             <TableCell component="th" scope="row" sx={{ color: "primary.contrastText" }}>
               {"共通"}
             </TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{summary.common[0]}</TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{summary.common[1]}</TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{summary.common[2]}</TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{summary.common[3]}</TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{summary.common[4]}</TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{rate}</TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {summary.common[0]}
+            </TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {summary.common[1]}
+            </TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {summary.common[2]}
+            </TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {summary.common[3]}
+            </TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {summary.common[4]}
+            </TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {rate}
+            </TableCell>
           </TableRow>
           <TableRow
             sx={{
@@ -123,10 +135,18 @@ function StatusTable({
               {"固有"}
             </TableCell>
             <TableCell align="right" sx={{ color: "primary.contrastText" }}></TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{summary.particular[0]}</TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{summary.particular[1]}</TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{summary.particular[2]}</TableCell>
-            <TableCell align="right" sx={{ color: "primary.contrastText" }}>{summary.particular[3]}</TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {summary.particular[0]}
+            </TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {summary.particular[1]}
+            </TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {summary.particular[2]}
+            </TableCell>
+            <TableCell align="right" sx={{ color: "primary.contrastText" }}>
+              {summary.particular[3]}
+            </TableCell>
             <TableCell align="right" sx={{ color: "primary.contrastText" }}></TableCell>
           </TableRow>
         </TableBody>
@@ -140,7 +160,11 @@ function RareSkill({ costume: { rareSkill } }: { costume: Costume }) {
     <Box sx={{ width: "100%" }}>
       <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
         <CardContent sx={{ p: { xs: 2, sm: 3 }, "&:last-child": { pb: { xs: 2, sm: 3 } } }}>
-          <Stack direction={{ xs: "column", sm: "row" }} spacing={1} sx={{ alignItems: { xs: "flex-start", sm: "center" }, mb: 1.5 }}>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={1}
+            sx={{ alignItems: { xs: "flex-start", sm: "center" }, mb: 1.5 }}
+          >
             <Typography variant="h6" sx={{ fontWeight: "bold", color: "primary.main" }}>
               {rareSkill.name}
             </Typography>
@@ -189,7 +213,11 @@ function Basic({ costume }: { costume: Costume }) {
       >
         <CostumeIcon costume={costume} size={120} />
         <Box sx={{ textAlign: { xs: "center", sm: "left" }, flexGrow: 1 }}>
-          <Breadcrumbs separator="›" aria-label="breadcrumb" sx={{ justifyContent: { xs: "center", sm: "flex-start" }, display: "flex", mb: 1 }}>
+          <Breadcrumbs
+            separator="›"
+            aria-label="breadcrumb"
+            sx={{ justifyContent: { xs: "center", sm: "flex-start" }, display: "flex", mb: 1 }}
+          >
             <Link underline="hover" color="inherit" href="/data">
               data
             </Link>
@@ -201,13 +229,32 @@ function Basic({ costume }: { costume: Costume }) {
           <Typography variant="h4" sx={{ fontWeight: "bold" }} gutterBottom>
             {costume.name}
           </Typography>
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, justifyContent: { xs: "center", sm: "flex-start" }, mt: 2 }}>
-            <Chip label={`${costume.cardType} / ${costume.rate}%`} size="small" variant="outlined" color="primary" />
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 1,
+              justifyContent: { xs: "center", sm: "flex-start" },
+              mt: 2,
+            }}
+          >
+            <Chip
+              label={`${costume.cardType} / ${costume.rate}%`}
+              size="small"
+              variant="outlined"
+              color="primary"
+            />
             {isSome(costume.specialSkill) &&
               match(costume.specialSkill.value)
-                .with({ type: "ex" }, () => <Chip label="EX" size="small" variant="outlined" color="secondary" />)
-                .with({ type: "adx", awakable: false }, () => <Chip label="ADX" size="small" variant="outlined" color="secondary" />)
-                .with({ type: "adx", awakable: true }, () => <Chip label="ADX/覚醒" size="small" variant="outlined" color="secondary" />)
+                .with({ type: "ex" }, () => (
+                  <Chip label="EX" size="small" variant="outlined" color="secondary" />
+                ))
+                .with({ type: "adx", awakable: false }, () => (
+                  <Chip label="ADX" size="small" variant="outlined" color="secondary" />
+                ))
+                .with({ type: "adx", awakable: true }, () => (
+                  <Chip label="ADX/覚醒" size="small" variant="outlined" color="secondary" />
+                ))
                 .exhaustive()}
           </Box>
         </Box>
@@ -228,7 +275,13 @@ function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" variant="scrollable" scrollButtons="auto">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          variant="scrollable"
+          scrollButtons="auto"
+        >
           <Tab label="突破 0" {...a11yProps(0)} />
           <Tab label="突破 1" {...a11yProps(1)} />
           <Tab label="突破 2" {...a11yProps(2)} />
@@ -241,10 +294,12 @@ function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
             display: "flex",
             justifyContent: "flex-end",
             alignItems: "center",
-            mb: 2
+            mb: 2,
           }}
         >
-          <Typography variant="body2" sx={{ fontWeight: "bold" }}>覚醒</Typography>
+          <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+            覚醒
+          </Typography>
           <Checkbox onChange={() => setIsAwakened(!isAwakened)} defaultChecked size="small" />
         </Box>
       )}
@@ -255,8 +310,13 @@ function AdxSkill({ adx: { get, awakable } }: { adx: Adx }) {
               {get({ limitBreak, isAwakened }).map(({ name, description }) => {
                 return (
                   <Card key={name} variant="outlined" sx={{ borderRadius: 2 }}>
-                    <CardContent sx={{ p: { xs: 2, sm: 3 }, "&:last-child": { pb: { xs: 2, sm: 3 } } }}>
-                      <Typography variant="h6" sx={{ fontWeight: "bold", color: "primary.main", mb: 1 }}>
+                    <CardContent
+                      sx={{ p: { xs: 2, sm: 3 }, "&:last-child": { pb: { xs: 2, sm: 3 } } }}
+                    >
+                      <Typography
+                        variant="h6"
+                        sx={{ fontWeight: "bold", color: "primary.main", mb: 1 }}
+                      >
                         {name}
                       </Typography>
                       <Typography variant="body2" color="text.primary">
@@ -308,10 +368,18 @@ function SkillTabs({ specialSkill, costume }: { specialSkill: Adx | Ex; costume:
   return (
     <Box sx={{ width: "100%" }}>
       <Divider textAlign="left" sx={{ my: 3 }}>
-        <Typography variant="subtitle1" color="text.secondary" sx={{ fontWeight: "bold" }}>詳細</Typography>
+        <Typography variant="subtitle1" color="text.secondary" sx={{ fontWeight: "bold" }}>
+          詳細
+        </Typography>
       </Divider>
       <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" variant="scrollable" scrollButtons="auto">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          variant="scrollable"
+          scrollButtons="auto"
+        >
           <Tab label={label} {...a11yProps(0)} sx={{ fontWeight: "bold" }} />
           <Tab label="ステータス" {...a11yProps(1)} sx={{ fontWeight: "bold" }} />
         </Tabs>
@@ -336,7 +404,9 @@ function DetailData({ costume }: { costume: Costume }) {
         .with(option.none, () => (
           <>
             <Divider textAlign="left" sx={{ my: 3 }}>
-              <Typography variant="subtitle1" color="text.secondary" sx={{ fontWeight: "bold" }}>詳細</Typography>
+              <Typography variant="subtitle1" color="text.secondary" sx={{ fontWeight: "bold" }}>
+                詳細
+              </Typography>
             </Divider>
             <StatusTable costume={costume} />
           </>
@@ -356,7 +426,7 @@ export default function Detail({ lily, job }: { lily: string; job: string }) {
   const costume = costumeList.find(
     (costume) => Lenz.costume.general.name.normalized.full.get(costume) === `${lily}/${job}`,
   );
-  
+
   const [showStanding, setShowStanding] = useState(false);
 
   if (costume === undefined) return <NotFound />;
@@ -380,29 +450,41 @@ export default function Detail({ lily, job }: { lily: string; job: string }) {
       <Grid container={true} spacing={{ xs: 2, md: 4 }} sx={{ width: "100%" }}>
         <Grid size={{ xs: 12, md: 8 }} sx={{ order: { xs: 2, md: 1 } }}>
           <Divider textAlign="left" sx={{ mb: 2 }}>
-            <Typography variant="subtitle1" color="text.secondary" sx={{ fontWeight: "bold" }}>レアスキル</Typography>
+            <Typography variant="subtitle1" color="text.secondary" sx={{ fontWeight: "bold" }}>
+              レアスキル
+            </Typography>
           </Divider>
           <RareSkill costume={costume} />
           <DetailData costume={costume} />
         </Grid>
-        <Grid size={{ xs: 12, md: 4 }} sx={{ order: { xs: 1, md: 2 }, display: "flex", flexDirection: "column", alignItems: "center" }}>
-          <Button 
-            variant="outlined" 
+        <Grid
+          size={{ xs: 12, md: 4 }}
+          sx={{
+            order: { xs: 1, md: 2 },
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Button
+            variant="outlined"
             onClick={() => setShowStanding(!showStanding)}
             sx={{ mb: 2, borderRadius: 2 }}
           >
             {showStanding ? "立ち絵を非表示" : "立ち絵を表示"}
           </Button>
           <Collapse in={showStanding} timeout="auto" unmountOnExit sx={{ width: "100%" }}>
-            <Box sx={{ 
-              position: "relative", 
-              width: "100%", 
-              maxWidth: { xs: 300, md: 400 },
-              borderRadius: 2,
-              overflow: "hidden",
-              boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-              mx: "auto"
-            }}>
+            <Box
+              sx={{
+                position: "relative",
+                width: "100%",
+                maxWidth: { xs: 300, md: 400 },
+                borderRadius: 2,
+                overflow: "hidden",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+                mx: "auto",
+              }}
+            >
               <Image
                 src={`/costume/standing/${costume.uniqueId}.png`}
                 alt={costume.name}
@@ -419,4 +501,3 @@ export default function Detail({ lily, job }: { lily: string; job: string }) {
     </Box>
   );
 }
-

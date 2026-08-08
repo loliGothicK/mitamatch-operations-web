@@ -107,7 +107,14 @@ export default function Detail({ name, type }: { name: string; type?: 1 | 2 | 3 
             <Typography variant="h4" sx={{ fontWeight: "bold" }} gutterBottom>
               {data[0].name.full}
             </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, justifyContent: { xs: "center", sm: "flex-start" } }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 1,
+                justifyContent: { xs: "center", sm: "flex-start" },
+              }}
+            >
               {data[0].labels.map((label) => (
                 <Chip key={label} label={label} size="small" variant="outlined" color="primary" />
               ))}
@@ -145,10 +152,16 @@ export default function Detail({ name, type }: { name: string; type?: 1 | 2 | 3 
                 <SkillCard skill={memoria.skills.legendary.raw[4]} title={"レジェンダリースキル"} />
               )}
               <SkillCard skill={memoria.skills.questSkill.raw} title={"対ヒュージスキル"} />
-              
+
               <Box sx={{ mt: 2 }}>
                 <Divider textAlign="left" sx={{ mb: 3 }}>
-                  <Typography variant="subtitle1" color="text.secondary" sx={{ fontWeight: "bold" }}>ステータス</Typography>
+                  <Typography
+                    variant="subtitle1"
+                    color="text.secondary"
+                    sx={{ fontWeight: "bold" }}
+                  >
+                    ステータス
+                  </Typography>
                 </Divider>
                 <StatusTable status={memoria.status} />
               </Box>
@@ -170,11 +183,20 @@ function SkillCard({
   return (
     <Box>
       <Divider textAlign="left" sx={{ mb: 2 }}>
-        <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>{title}</Typography>
+        <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>
+          {title}
+        </Typography>
       </Divider>
-      <Card variant="outlined" sx={{ width: "100%", borderRadius: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+      <Card
+        variant="outlined"
+        sx={{ width: "100%", borderRadius: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+      >
         <CardContent sx={{ p: { xs: 2, sm: 3 }, "&:last-child": { pb: { xs: 2, sm: 3 } } }}>
-          <Stack direction={{ xs: "column", sm: "row" }} spacing={1} sx={{ alignItems: { xs: "flex-start", sm: "center" }, mb: 1.5 }}>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={1}
+            sx={{ alignItems: { xs: "flex-start", sm: "center" }, mb: 1.5 }}
+          >
             <Typography variant="h6" sx={{ fontWeight: "bold", color: "primary.main" }}>
               {skill.name}
             </Typography>

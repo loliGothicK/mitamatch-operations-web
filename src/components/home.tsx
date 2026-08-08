@@ -34,11 +34,26 @@ export default function Home() {
               style={{ width: "100%", height: "auto" }}
             />
           </Box>
-          <Box className="animation-circle circle-1" sx={{ display: { xs: "none", md: "block" } }} />
-          <Box className="animation-circle circle-2" sx={{ display: { xs: "none", md: "block" } }} />
-          <Box className="animation-circle circle-3" sx={{ display: { xs: "none", md: "block" } }} />
-          <Box className="animation-circle circle-4" sx={{ display: { xs: "none", md: "block" } }} />
-          <Box className="animation-circle circle-5" sx={{ display: { xs: "none", md: "block" } }} />
+          <Box
+            className="animation-circle circle-1"
+            sx={{ display: { xs: "none", md: "block" } }}
+          />
+          <Box
+            className="animation-circle circle-2"
+            sx={{ display: { xs: "none", md: "block" } }}
+          />
+          <Box
+            className="animation-circle circle-3"
+            sx={{ display: { xs: "none", md: "block" } }}
+          />
+          <Box
+            className="animation-circle circle-4"
+            sx={{ display: { xs: "none", md: "block" } }}
+          />
+          <Box
+            className="animation-circle circle-5"
+            sx={{ display: { xs: "none", md: "block" } }}
+          />
         </Box>
       </Grid>
       <Grid
@@ -58,7 +73,10 @@ export default function Home() {
         <Typography component="h1" variant="h2" sx={{ fontSize: { xs: "2rem", md: "3.75rem" } }}>
           レギオンマッチを"次"のレベルへ
         </Typography>
-        <Typography variant="h6" sx={{ fontSize: { xs: "1rem", md: "1.25rem" }, maxWidth: "800px" }}>
+        <Typography
+          variant="h6"
+          sx={{ fontSize: { xs: "1rem", md: "1.25rem" }, maxWidth: "800px" }}
+        >
           {
             "Mitamatch Operationsは、データ駆動型のアプローチで複雑なレギオンマッチを簡素化し、レギオンマッチの改善効率を最大300%向上させるプラットフォームです。"
           }

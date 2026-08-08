@@ -111,17 +111,41 @@ export default function Detail({ name }: { name: string }) {
           gap: { xs: 2, md: 3 },
         }}
       >
-        <AppBar position="static" color="transparent" elevation={0} sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}>
-          <Toolbar sx={{ flexWrap: "nowrap", justifyContent: "space-between", py: 1, px: { xs: 0, sm: 2 } }}>
+        <AppBar
+          position="static"
+          color="transparent"
+          elevation={0}
+          sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}
+        >
+          <Toolbar
+            sx={{
+              flexWrap: "nowrap",
+              justifyContent: "space-between",
+              py: 1,
+              px: { xs: 0, sm: 2 },
+            }}
+          >
             {characters[index - 1] ? (
               <Link href={`/data/character/${characters[index - 1]}`}>
-                <Button variant="outlined" size="small" sx={{ minWidth: { xs: 'auto', sm: 64 }, px: { xs: 1, sm: 2 } }}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  sx={{ minWidth: { xs: "auto", sm: 64 }, px: { xs: 1, sm: 2 } }}
+                >
                   <NavigateBefore sx={{ mx: { xs: -1, sm: 0 } }} />
-                  <Typography variant="body2" sx={{ display: { xs: 'none', sm: 'block' } }}>{characters[index - 1]}</Typography>
+                  <Typography variant="body2" sx={{ display: { xs: "none", sm: "block" } }}>
+                    {characters[index - 1]}
+                  </Typography>
                 </Button>
               </Link>
-            ) : <Box sx={{ width: { xs: 40, sm: 64 } }} />}
-            <Breadcrumbs separator="›" aria-label="breadcrumb" sx={{ mx: 1, display: 'flex', justifyContent: 'center' }}>
+            ) : (
+              <Box sx={{ width: { xs: 40, sm: 64 } }} />
+            )}
+            <Breadcrumbs
+              separator="›"
+              aria-label="breadcrumb"
+              sx={{ mx: 1, display: "flex", justifyContent: "center" }}
+            >
               <Link underline="hover" color="inherit" href="/data">
                 data
               </Link>
@@ -132,21 +156,48 @@ export default function Detail({ name }: { name: string }) {
             </Breadcrumbs>
             {characters[index + 1] ? (
               <Link href={`/data/character/${characters[index + 1]}`}>
-                <Button variant="outlined" size="small" sx={{ minWidth: { xs: 'auto', sm: 64 }, px: { xs: 1, sm: 2 } }}>
-                  <Typography variant="body2" sx={{ display: { xs: 'none', sm: 'block' } }}>{characters[index + 1]}</Typography>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  sx={{ minWidth: { xs: "auto", sm: 64 }, px: { xs: 1, sm: 2 } }}
+                >
+                  <Typography variant="body2" sx={{ display: { xs: "none", sm: "block" } }}>
+                    {characters[index + 1]}
+                  </Typography>
                   <NavigateNext sx={{ mx: { xs: -1, sm: 0 } }} />
                 </Button>
               </Link>
-            ) : <Box sx={{ width: { xs: 40, sm: 64 } }} />}
+            ) : (
+              <Box sx={{ width: { xs: 40, sm: 64 } }} />
+            )}
           </Toolbar>
         </AppBar>
-        <Card sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, width: "100%", borderRadius: 2, boxShadow: "0 4px 20px rgba(0,0,0,0.08)" }}>
-          <Box sx={{ display: "flex", justifyContent: "center", bgcolor: "background.default", p: 2 }}>
-            <CardMedia component="img" sx={{ width: { xs: 150, md: 250 }, height: "auto", borderRadius: 2 }} image={`/lily/${name}.jpg`} alt={name} />
+        <Card
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            width: "100%",
+            borderRadius: 2,
+            boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+          }}
+        >
+          <Box
+            sx={{ display: "flex", justifyContent: "center", bgcolor: "background.default", p: 2 }}
+          >
+            <CardMedia
+              component="img"
+              sx={{ width: { xs: 150, md: 250 }, height: "auto", borderRadius: 2 }}
+              image={`/lily/${name}.jpg`}
+              alt={name}
+            />
           </Box>
           <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
             <CardContent sx={{ flex: "1 0 auto", p: { xs: 2, sm: 3 } }}>
-              <Stack spacing={2} direction={{ xs: "column", sm: "row" }} sx={{ alignItems: { xs: "center", sm: "flex-start" } }}>
+              <Stack
+                spacing={2}
+                direction={{ xs: "column", sm: "row" }}
+                sx={{ alignItems: { xs: "center", sm: "flex-start" } }}
+              >
                 <Box sx={{ display: { xs: "none", sm: "block" } }}>
                   <Image
                     src={gardenImage(character)}
@@ -164,15 +215,27 @@ export default function Detail({ name }: { name: string }) {
                     {character.name}
                   </Typography>
                   <Divider flexItem={true} sx={{ my: 1.5, width: "100%" }} />
-                  <Stack spacing={{ xs: 1, sm: 2 }} direction={{ xs: "column", sm: "row" }} sx={{ alignItems: { xs: "flex-start", sm: "center" } }}>
+                  <Stack
+                    spacing={{ xs: 1, sm: 2 }}
+                    direction={{ xs: "column", sm: "row" }}
+                    sx={{ alignItems: { xs: "flex-start", sm: "center" } }}
+                  >
                     <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
                       {`誕生日: ${character.birthday}`}
                     </Typography>
-                    <Divider orientation="vertical" flexItem={true} sx={{ display: { xs: "none", sm: "block" } }} />
+                    <Divider
+                      orientation="vertical"
+                      flexItem={true}
+                      sx={{ display: { xs: "none", sm: "block" } }}
+                    />
                     <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
                       {`所属レギオン: ${character.legion}`}
                     </Typography>
-                    <Divider orientation="vertical" flexItem={true} sx={{ display: { xs: "none", sm: "block" } }} />
+                    <Divider
+                      orientation="vertical"
+                      flexItem={true}
+                      sx={{ display: { xs: "none", sm: "block" } }}
+                    />
                     <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
                       {`学年: ${character.grade}`}
                     </Typography>
@@ -180,20 +243,24 @@ export default function Detail({ name }: { name: string }) {
                 </Stack>
               </Stack>
               <Divider sx={{ my: 2 }} textAlign="left">
-                <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>Introduction</Typography>
+                <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>
+                  Introduction
+                </Typography>
               </Divider>
               <Typography variant="body1" sx={{ color: "text.primary", lineHeight: 1.6 }}>
                 {character.introduction.replace(String.raw`\n`, "")}
               </Typography>
               <Divider sx={{ my: 2 }} textAlign="left">
-                <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>Information</Typography>
+                <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>
+                  Information
+                </Typography>
               </Divider>
               <Box
                 sx={{
                   display: "flex",
                   gap: 1,
                   flexWrap: "wrap",
-                  justifyContent: { xs: "center", sm: "flex-start" }
+                  justifyContent: { xs: "center", sm: "flex-start" },
                 }}
               >
                 <Chip label={`好きなもの: ${character.favorites}`} variant="outlined" />
@@ -203,7 +270,15 @@ export default function Detail({ name }: { name: string }) {
             </CardContent>
           </Box>
           {character.bindRune && (
-            <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", p: 2, bgcolor: "background.default" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                p: 2,
+                bgcolor: "background.default",
+              }}
+            >
               <BindRune
                 first={character.bindRune[0]}
                 second={character.bindRune[1]}
@@ -214,7 +289,9 @@ export default function Detail({ name }: { name: string }) {
           )}
         </Card>
         <Divider sx={{ my: 3, width: "100%" }} textAlign="left">
-          <Typography variant="h6" color="text.secondary" sx={{ fontWeight: "bold" }}>衣装一覧</Typography>
+          <Typography variant="h6" color="text.secondary" sx={{ fontWeight: "bold" }}>
+            衣装一覧
+          </Typography>
         </Divider>
         <Grid container={true} spacing={2} sx={{ width: "100%" }}>
           {costumes.map((costume) => (
@@ -233,7 +310,7 @@ export default function Detail({ name }: { name: string }) {
                   transition: "box-shadow 0.2s",
                   "&:hover": {
                     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                  }
+                  },
                 }}
               >
                 <Link

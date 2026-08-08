@@ -1,7 +1,17 @@
 "use client";
 
 import { notFound } from "next/navigation";
-import { Box, Card, CardContent, Typography, Breadcrumbs, Paper, Stack, Chip, Divider } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Breadcrumbs,
+  Paper,
+  Stack,
+  Chip,
+  Divider,
+} from "@mui/material";
 import Link from "@/components/link";
 import { orderList } from "@/domain/order/order";
 import { OrderIcon } from "@/components/image/OrderIcon";
@@ -39,7 +49,11 @@ export default function OrderDetail({ id }: { id: string }) {
         >
           <OrderIcon order={order} size={120} />
           <Box sx={{ textAlign: { xs: "center", sm: "left" }, flexGrow: 1 }}>
-            <Breadcrumbs separator="›" aria-label="breadcrumb" sx={{ justifyContent: { xs: "center", sm: "flex-start" }, display: "flex", mb: 1 }}>
+            <Breadcrumbs
+              separator="›"
+              aria-label="breadcrumb"
+              sx={{ justifyContent: { xs: "center", sm: "flex-start" }, display: "flex", mb: 1 }}
+            >
               <Link underline="hover" color="inherit" href="/data">
                 data
               </Link>
@@ -51,9 +65,22 @@ export default function OrderDetail({ id }: { id: string }) {
             <Typography variant="h4" sx={{ fontWeight: "bold" }} gutterBottom>
               {order.name}
             </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, justifyContent: { xs: "center", sm: "flex-start" }, mt: 1 }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 1,
+                justifyContent: { xs: "center", sm: "flex-start" },
+                mt: 1,
+              }}
+            >
               <Chip label={`準備時間: ${order.prepare_time}`} size="small" variant="outlined" />
-              <Chip label={`効果時間: ${order.active_time}`} size="small" variant="outlined" color="primary" />
+              <Chip
+                label={`効果時間: ${order.active_time}`}
+                size="small"
+                variant="outlined"
+                color="primary"
+              />
             </Box>
           </Box>
         </Stack>
@@ -61,7 +88,9 @@ export default function OrderDetail({ id }: { id: string }) {
 
       <Box sx={{ width: "100%" }}>
         <Divider textAlign="left" sx={{ mb: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>オーダー効果</Typography>
+          <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>
+            オーダー効果
+          </Typography>
         </Divider>
         <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
           <CardContent sx={{ p: { xs: 2, sm: 3 }, "&:last-child": { pb: { xs: 2, sm: 3 } } }}>

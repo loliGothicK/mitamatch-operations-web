@@ -23,9 +23,7 @@ const columns: GridColDef<Order>[] = [
     headerName: "Image",
     width: 110,
     sortable: false,
-    renderCell: ({ row }) => (
-      <OrderGridIcon row={row} />
-    ),
+    renderCell: ({ row }) => <OrderGridIcon row={row} />,
   },
   { field: "name", headerName: "Name", width: 240 },
   { field: "effect", headerName: "Effect", width: 260 },

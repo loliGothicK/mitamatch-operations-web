@@ -1791,7 +1791,12 @@ export function ShareButton() {
                 setUrl(
                   `https://operations.mitama.io/deck-builder?deck=${short}&title=${encodeURI(title)}`,
                 );
-                await saveShortLink({ target: "deck", unit: { sw, deck, legendaryDeck }, short, title });
+                await saveShortLink({
+                  target: "deck",
+                  unit: { sw, deck, legendaryDeck },
+                  short,
+                  title,
+                });
                 mutation.mutate({ sw, deck, legendaryDeck, title, short });
               }}
             >

@@ -2,10 +2,20 @@
 
 import { notFound } from "next/navigation";
 import { WeaponIcon } from "@/components/image/WeaponIcon";
-import { Box, Card, CardContent, Typography, Breadcrumbs, Paper, Stack, Chip, Divider } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Breadcrumbs,
+  Paper,
+  Stack,
+  Chip,
+  Divider,
+} from "@mui/material";
 import Link from "@/components/link";
 import { weaponList } from "@/domain/weapon/weapon";
-import FlashOnIcon from '@mui/icons-material/FlashOn';
+import FlashOnIcon from "@mui/icons-material/FlashOn";
 
 export default function WeaponDetail({ id }: { id: string }) {
   const weapon = weaponList.find((item) => item.id === id);
@@ -40,7 +50,11 @@ export default function WeaponDetail({ id }: { id: string }) {
         >
           <WeaponIcon weapon={weapon} size={120} />
           <Box sx={{ textAlign: { xs: "center", sm: "left" }, flexGrow: 1 }}>
-            <Breadcrumbs separator="›" aria-label="breadcrumb" sx={{ justifyContent: { xs: "center", sm: "flex-start" }, display: "flex", mb: 1 }}>
+            <Breadcrumbs
+              separator="›"
+              aria-label="breadcrumb"
+              sx={{ justifyContent: { xs: "center", sm: "flex-start" }, display: "flex", mb: 1 }}
+            >
               <Link underline="hover" color="inherit" href="/data">
                 data
               </Link>
@@ -52,8 +66,22 @@ export default function WeaponDetail({ id }: { id: string }) {
             <Typography variant="h4" sx={{ fontWeight: "bold" }} gutterBottom>
               {weapon.name}
             </Typography>
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1, justifyContent: { xs: "center", sm: "flex-start" }, mt: 1 }}>
-              <Chip icon={<FlashOnIcon />} label={`ステータス合計: ${weapon.status.reduce((a, b) => a + b, 0)}`} size="small" variant="outlined" color="primary" />
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 1,
+                justifyContent: { xs: "center", sm: "flex-start" },
+                mt: 1,
+              }}
+            >
+              <Chip
+                icon={<FlashOnIcon />}
+                label={`ステータス合計: ${weapon.status.reduce((a, b) => a + b, 0)}`}
+                size="small"
+                variant="outlined"
+                color="primary"
+              />
             </Box>
           </Box>
         </Stack>
@@ -61,13 +89,22 @@ export default function WeaponDetail({ id }: { id: string }) {
 
       <Box sx={{ width: "100%" }}>
         <Divider textAlign="left" sx={{ mb: 2 }}>
-          <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>CHARM詳細</Typography>
+          <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>
+            CHARM詳細
+          </Typography>
         </Divider>
         <Stack spacing={2} sx={{ width: "100%" }}>
           {weapon.effect.map((effect) => (
-            <Card key={`${effect.kind}-${effect.description}`} variant="outlined" sx={{ borderRadius: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+            <Card
+              key={`${effect.kind}-${effect.description}`}
+              variant="outlined"
+              sx={{ borderRadius: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+            >
               <CardContent sx={{ p: { xs: 2, sm: 3 }, "&:last-child": { pb: { xs: 2, sm: 3 } } }}>
-                <Typography variant="h6" sx={{ fontWeight: "bold", color: "primary.main", mb: 1.5 }}>
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: "bold", color: "primary.main", mb: 1.5 }}
+                >
                   {effect.kind}
                 </Typography>
                 <Typography variant="body1" color="text.primary" sx={{ lineHeight: 1.6 }}>
@@ -76,8 +113,11 @@ export default function WeaponDetail({ id }: { id: string }) {
               </CardContent>
             </Card>
           ))}
-          
-          <Card variant="outlined" sx={{ borderRadius: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+
+          <Card
+            variant="outlined"
+            sx={{ borderRadius: 2, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+          >
             <CardContent sx={{ p: { xs: 2, sm: 3 }, "&:last-child": { pb: { xs: 2, sm: 3 } } }}>
               <Typography variant="h6" sx={{ fontWeight: "bold", color: "primary.main", mb: 1.5 }}>
                 ステータス

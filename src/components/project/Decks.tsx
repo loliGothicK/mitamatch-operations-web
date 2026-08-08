@@ -16,8 +16,15 @@ export function Decks() {
   const [, setDeck] = useAtom(rwDeckAtom);
   const [, setTitle] = useAtom(unitTitleAtom);
   const [, setOpen] = useAtom(openAtom);
-  const [contextMenu, setContextMenu] = useState<{ mouseX: number; mouseY: number; short: string; title: string } | null>(null);
-  const [openRenameMenu, setOpenRenameMenu] = useState<{ short: string; title: string } | null>(null);
+  const [contextMenu, setContextMenu] = useState<{
+    mouseX: number;
+    mouseY: number;
+    short: string;
+    title: string;
+  } | null>(null);
+  const [openRenameMenu, setOpenRenameMenu] = useState<{ short: string; title: string } | null>(
+    null,
+  );
   const [newTitle, setNewTitle] = useState("");
 
   const handleContextMenu = (e: MouseEvent, short: string, title: string) => {
@@ -52,7 +59,7 @@ export function Decks() {
 
   const [optimisticDecks, removeOptimisticDeck] = useOptimistic(
     query.data || [],
-    (state, shortToRemove: string) => state.filter((d) => d.short !== shortToRemove)
+    (state, shortToRemove: string) => state.filter((d) => d.short !== shortToRemove),
   );
 
   const queryClient = useQueryClient();
@@ -118,9 +125,7 @@ export function Decks() {
         onClose={handleCloseMenu}
         anchorReference="anchorPosition"
         anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : undefined
+          contextMenu !== null ? { top: contextMenu.mouseY, left: contextMenu.mouseX } : undefined
         }
       >
         <MenuItem onClick={handleRenameStart}>Rename</MenuItem>

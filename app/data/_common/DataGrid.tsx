@@ -241,7 +241,17 @@ export function DataGrid<
         }),
       );
     },
-    [completion, query, resolver, origin, phantasmFilter, visibilityAll, setVisibility, isMobile, mobileDefaultVisibility],
+    [
+      completion,
+      query,
+      resolver,
+      origin,
+      phantasmFilter,
+      visibilityAll,
+      setVisibility,
+      isMobile,
+      mobileDefaultVisibility,
+    ],
   );
 
   useEffect(() => {
@@ -340,7 +350,8 @@ export function DataGrid<
               isMobile
                 ? columns.map((col) => ({
                     ...col,
-                    width: col.field === "image" ? 70 : col.width ? Math.min(col.width, 200) : col.width,
+                    width:
+                      col.field === "image" ? 70 : col.width ? Math.min(col.width, 200) : col.width,
                   }))
                 : columns
             }

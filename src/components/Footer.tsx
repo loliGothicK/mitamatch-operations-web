@@ -49,7 +49,7 @@ export default function Footer({ ...props }) {
               sm: `
                 "logo tools"
                 "donate docs"
-              `
+              `,
             },
           }}
         >
@@ -62,7 +62,9 @@ export default function Footer({ ...props }) {
                 height={100}
                 style={{ maxWidth: "100%", height: "auto" }}
               />
-              <Typography sx={{ textAlign: "center" }}>{"一瞬でレギオンマッチを改善。驚きの速さで。"}</Typography>
+              <Typography sx={{ textAlign: "center" }}>
+                {"一瞬でレギオンマッチを改善。驚きの速さで。"}
+              </Typography>
             </Stack>
           </Box>
           <Box sx={{ gridArea: "docs" }}>
@@ -154,7 +156,15 @@ export default function Footer({ ...props }) {
           </Box>
         </Box>
         <Divider sx={{ margin: 2, width: "100%" }} />
-        <Grid container spacing={2} sx={{ alignItems: "center", flexDirection: { xs: "column", sm: "row" }, paddingBottom: { xs: 6, sm: 10 } }}>
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            alignItems: "center",
+            flexDirection: { xs: "column", sm: "row" },
+            paddingBottom: { xs: 6, sm: 10 },
+          }}
+        >
           <Grid sx={{ flexGrow: 0.9, textAlign: { xs: "center", sm: "left" } }}>
             <Typography
               color={theme.palette.text.secondary}

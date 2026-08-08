@@ -104,7 +104,12 @@ export default function View() {
       <Grid container={true} spacing={{ xs: 2, md: 3 }} sx={{ alignItems: "stretch" }}>
         {characters.map((character) => (
           <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4 }} key={character.name}>
-            <Link href={`/data/character/${character.name}`} scroll={true} underline={"none"} sx={{ display: 'block', width: '100%' }}>
+            <Link
+              href={`/data/character/${character.name}`}
+              scroll={true}
+              underline={"none"}
+              sx={{ display: "block", width: "100%" }}
+            >
               <ImageCardButton
                 focusRipple={true}
                 sx={{
@@ -162,13 +167,28 @@ export default function View() {
                         },
                       }}
                     >
-                      <Typography component="div" variant="h5" sx={{ fontWeight: "bold", fontSize: { xs: "1.25rem", sm: "1.5rem" } }}>
+                      <Typography
+                        component="div"
+                        variant="h5"
+                        sx={{ fontWeight: "bold", fontSize: { xs: "1.25rem", sm: "1.5rem" } }}
+                      >
                         {character.firstName}
                       </Typography>
                       <Divider sx={{ my: 1 }} flexItem={true} textAlign="left">
-                        <Typography variant="caption" color="text.secondary" sx={{ fontWeight: "bold" }}>Information</Typography>
+                        <Typography
+                          variant="caption"
+                          color="text.secondary"
+                          sx={{ fontWeight: "bold" }}
+                        >
+                          Information
+                        </Typography>
                       </Divider>
-                      <Typography component="div" variant="body2" color="text.secondary" sx={{ wordBreak: "break-all" }}>
+                      <Typography
+                        component="div"
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ wordBreak: "break-all" }}
+                      >
                         {`CV: ${character.voiceActor}`}
                       </Typography>
                       <Typography component="div" variant="body2" color="text.secondary">

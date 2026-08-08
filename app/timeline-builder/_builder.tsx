@@ -554,7 +554,12 @@ export function FilterMenu() {
     >
       {(popupState) => (
         <>
-          <Button startIcon={<FilterList />} {...bindTrigger(popupState)} sx={{ textTransform: 'none' }} color="inherit">
+          <Button
+            startIcon={<FilterList />}
+            {...bindTrigger(popupState)}
+            sx={{ textTransform: "none" }}
+            color="inherit"
+          >
             Filter: {filter}
           </Button>
           <Menu {...bindMenu(popupState)}>
@@ -795,7 +800,6 @@ export function DesktopTimelineBuilderPage({ userData }: { userData?: UserData }
             pr: 20,
           }}
         >
-
           <AutoAssignButton userData={userData} />
           <ShareButton />
           <FilterMenu />

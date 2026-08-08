@@ -35,9 +35,7 @@ const columns: GridColDef<Memoria>[] = [
       id: Lenz.memoria.general.id.get(memoria),
       name: Lenz.memoria.general.shortName.get(memoria),
     }),
-    renderCell: (params) => (
-      <MemoriaGridIcon row={params.row as Memoria} />
-    ),
+    renderCell: (params) => <MemoriaGridIcon row={params.row as Memoria} />,
     sortComparator: (a, b) => a.id - b.id,
   },
   {

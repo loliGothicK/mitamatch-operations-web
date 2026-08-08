@@ -23,9 +23,7 @@ const columns: GridColDef<Weapon>[] = [
     headerName: "Image",
     width: 110,
     sortable: false,
-    renderCell: ({ row }) => (
-      <WeaponGridIcon row={row} />
-    ),
+    renderCell: ({ row }) => <WeaponGridIcon row={row} />,
   },
   { field: "name", headerName: "Name", width: 280 },
   {

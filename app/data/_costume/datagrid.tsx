@@ -43,9 +43,7 @@ const columns: GridColDef<Costume>[] = [
       id: Lenz.costume.general.id.get(costume),
       name: Lenz.costume.general.name.full.get(costume),
     }),
-    renderCell: (params) => (
-      <CostumeGridIcon row={params.row as Costume} />
-    ),
+    renderCell: (params) => <CostumeGridIcon row={params.row as Costume} />,
     sortComparator: (a, b) => a.id - b.id,
   },
   {

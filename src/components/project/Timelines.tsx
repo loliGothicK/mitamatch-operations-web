@@ -2,7 +2,11 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { TreeItem } from "@mui/x-tree-view";
-import { getTimelinesAction, updateTimelineTitleAction, deleteTimelinesAction } from "@/_actions/timelines";
+import {
+  getTimelinesAction,
+  updateTimelineTitleAction,
+  deleteTimelinesAction,
+} from "@/_actions/timelines";
 import { Folder } from "@mui/icons-material";
 import { Menu, MenuItem, Modal, Stack, TextField, Typography } from "@mui/material";
 import { useAtom } from "jotai";
@@ -13,8 +17,15 @@ import { ULID } from "ulid";
 export function Timelines() {
   const [, setTimeline] = useAtom(timelineAtom);
   const [, setTitle] = useAtom(timelineTitleAtom);
-  const [contextMenu, setContextMenu] = useState<{ mouseX: number; mouseY: number; short: string; title: string } | null>(null);
-  const [openRenameMenu, setOpenRenameMenu] = useState<{ short: string; title: string } | null>(null);
+  const [contextMenu, setContextMenu] = useState<{
+    mouseX: number;
+    mouseY: number;
+    short: string;
+    title: string;
+  } | null>(null);
+  const [openRenameMenu, setOpenRenameMenu] = useState<{ short: string; title: string } | null>(
+    null,
+  );
   const [newTitle, setNewTitle] = useState("");
 
   const handleContextMenu = (e: MouseEvent, short: string, title: string) => {
@@ -50,7 +61,7 @@ export function Timelines() {
 
   const [optimisticTimelines, removeOptimisticTimeline] = useOptimistic(
     query.data || [],
-    (state, shortToRemove: string) => state.filter((t) => t.short !== shortToRemove)
+    (state, shortToRemove: string) => state.filter((t) => t.short !== shortToRemove),
   );
 
   const queryClient = useQueryClient();
@@ -116,9 +127,7 @@ export function Timelines() {
         onClose={handleCloseMenu}
         anchorReference="anchorPosition"
         anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : undefined
+          contextMenu !== null ? { top: contextMenu.mouseY, left: contextMenu.mouseX } : undefined
         }
       >
         <MenuItem onClick={handleRenameStart}>Rename</MenuItem>
