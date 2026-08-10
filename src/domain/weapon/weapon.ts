@@ -16,6 +16,7 @@ const weaponSchema = z.object({
     )
     .readonly(),
   status: z.tuple([z.number(), z.number(), z.number(), z.number()]).readonly(),
+  phantasm: z.boolean().readonly().optional(),
 });
 
 export type Weapon = z.infer<typeof weaponSchema>;

@@ -8,6 +8,7 @@ const charmSchema = z.object({
   ability: z.string().readonly(),
   status: z.tuple([z.number(), z.number(), z.number(), z.number()]).readonly(),
   date: z.coerce.date().readonly(),
+  phantasm: z.boolean().readonly().optional(),
 });
 
 /**

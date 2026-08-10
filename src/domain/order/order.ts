@@ -12,6 +12,7 @@ const orderSchema = z.object({
   active_time: z.number().readonly(),
   payed: z.boolean().readonly(),
   usually: z.boolean().readonly(),
+  phantasm: z.boolean().readonly().optional(),
 });
 
 /**
@@ -46,15 +47,11 @@ export function isSameLineage(o1: Pick<Order, "effect">, o2: Pick<Order, "effect
     !eff1.includes("光闇") &&
     eff2.includes("闇") &&
     !eff2.includes("光闇")
-  )
+  ) {
     return true;
-  if (
-    eff1.includes("光") &&
+  }
+  return eff1.includes("光") &&
     !eff1.includes("光闇") &&
     eff2.includes("光") &&
-    !eff2.includes("光闇")
-  )
-    return true;
-
-  return false;
+    !eff2.includes("光闇");
 }

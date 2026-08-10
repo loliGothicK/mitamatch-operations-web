@@ -31,9 +31,7 @@ vi.mock("@/dashboard/_parts/Order", () => ({
 
 const mockUserData = {
   user: { id: "test", name: "test" },
-  legions: [
-    { id: "legion1", name: "Test Legion", role: "org:admin" }
-  ],
+  legions: [{ id: "legion1", name: "Test Legion", role: "org:admin" }],
 };
 
 const renderComponent = () => render(<Dashboard userData={mockUserData as any} />);

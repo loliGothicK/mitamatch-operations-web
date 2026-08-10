@@ -931,7 +931,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -1591,7 +1591,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -2251,7 +2251,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -14914,7 +14914,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -15574,7 +15574,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -16234,7 +16234,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -18259,7 +18259,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -19628,7 +19628,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -20263,7 +20263,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -20678,7 +20678,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -21231,7 +21231,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -21917,7 +21917,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -23622,7 +23622,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -24590,7 +24590,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -25530,7 +25530,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -27202,7 +27202,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -27746,7 +27746,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -28290,7 +28290,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -31433,7 +31433,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -31936,7 +31936,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -32480,7 +32480,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -32888,7 +32888,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -33272,7 +33272,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -33544,7 +33544,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -34771,7 +34771,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -36169,7 +36169,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -36594,7 +36594,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -38793,7 +38793,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -39017,7 +39017,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -39465,7 +39465,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -42249,7 +42249,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -42605,7 +42605,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -43080,7 +43080,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -46190,7 +46190,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -46421,7 +46421,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -47373,7 +47373,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -49024,7 +49024,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -50454,7 +50454,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -51405,7 +51405,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -54505,7 +54505,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -56354,7 +56354,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -58468,7 +58468,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -66995,7 +66995,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -68983,7 +68983,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -70535,7 +70535,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -71254,7 +71254,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -71822,7 +71822,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -72535,7 +72535,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -74880,7 +74880,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -75019,7 +75019,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -79315,7 +79315,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -81605,7 +81605,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -82861,7 +82861,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -83829,7 +83829,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -84831,7 +84831,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -101012,7 +101012,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -104502,7 +104502,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -105332,7 +105332,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -108083,7 +108083,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -119376,7 +119376,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -131674,7 +131674,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -142873,7 +142873,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -143819,7 +143819,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -149838,7 +149838,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -150575,7 +150575,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "ブレイブ",
-        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。",
+        "description": "一定時間、味方前衛1体の攻撃力/防御力をアップする。※同スキルが同対象に発動中は発動不可",
         "note": "味方の攻撃力が20%上昇, 味方の防御力が20%上昇",
         "effectTime": 60
       },
@@ -154088,7 +154088,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -157813,7 +157813,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -162376,7 +162376,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -172163,7 +172163,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -176754,7 +176754,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -176889,6 +176889,152 @@
         }
       ],
       "released_at": "2026-07-31"
+    },
+    {
+      "id": "01KZNH6MQY4TNHS4VKH6EC0F71",
+      "uniqueId": "01KZNH6NQ6NNME4E9WYW2GR984",
+      "name": "ミリアム/ウェーブスタースタイル",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "フェイズトランセンデンス",
+        "description": "一定時間、自身の攻撃力/防御力が上昇し、メモリア使用時MPを消費しない。効果時間終了後にMPが0になる。",
+        "note": "自身の攻撃力が20%上昇, 自身の防御力が20%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 10
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 10
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 10
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 20
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 25
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 50
+          },
+          {
+            "jobSkillType": 1,
+            "value": 100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 50
+          },
+          {
+            "jobSkillType": 1,
+            "value": 100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 25
+          },
+          {
+            "jobSkillType": 9,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 3,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
     },
     {
       "id": "01KY01K5GQNC7HTW4HY38DY8GN",
@@ -177162,6 +177308,156 @@
         }
       ],
       "released_at": "2026-07-20"
+    },
+    {
+      "id": "01KZNH6PPEV2BVWPF3HK5XJ2S2",
+      "uniqueId": "01KZNH6QNPWHSSCF4MTQJQ7M5C",
+      "name": "佐々木藍/ウェーブスタースタイル",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "ルナティックトランサー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。",
+        "note": "自身の攻撃力が30%上昇, 自身の防御力が30%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 350
+          },
+          {
+            "jobSkillType": 2,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 2,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 4,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅡ",
+          "description": "自身が使用する水属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "火属性メモリア効果耐性AⅠ",
+          "description": "自身に対する火属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
     },
     {
       "id": "01KY01K6FZN221S6VQHD778XF3",
@@ -177601,6 +177897,1102 @@
         }
       ],
       "released_at": "2026-07-20"
+    },
+    {
+      "id": "01KZNH6RMYX402X7YQ57XNHSPJ",
+      "uniqueId": "01KZNH6SM6MJ4P5F322DH5KXBG",
+      "name": "丹羽灯莉/ウェーブスタースタイル",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "アクォルスケール",
+        "description": "一定時間、自身のメモリアスキル使用後の待機時間が短縮され、敵1体の攻撃力/防御力を特大ダウンする。自身を除く味方がレアスキルを発動中、この効果を受けている敵の被ダメージを10%アップさせる。※同スキルが同対象に発動中は発動不可",
+        "note": "敵の攻撃力が50%低下, 敵の防御が50%低下",
+        "effectTime": 80
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
+    },
+    {
+      "id": "01KZNH6WHYN596SFMN8AY08JCX",
+      "uniqueId": "01KZNH6XH6F67C8Y2DS5Z5QM4G",
+      "name": "定盛姫歌/ウェーブスタースタイル",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "アクォルマギプロヴィデンス",
+        "description": "一定時間、自身の攻撃力/防御力を特大アップする。さらに、自身が使用したメモリアスキルの50％の効果が、他のリリィ・ヒュージ1体にも適用される。自身を除く味方がレアスキルを発動中、自身の攻撃力/防御力をさらに大アップする。",
+        "note": "自身の攻撃力が50%上昇, 自身の防御力が50%上昇, 効果の0.5%適用",
+        "effectTime": 80
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
+    },
+    {
+      "id": "01KZNH6YGE6SPDV5S51J03QA2M",
+      "uniqueId": "01KZNH6ZFPSY2Y1296MB80B50F",
+      "name": "船田純/ウェーブスタースタイル",
+      "cardType": 3,
+      "rareSkill": {
+        "name": "スアビスルナー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、メモリアスキル効果を85%アップする。自身を除く味方がレアスキルを発動中、自身のメモリアスキル効果をさらに45％アップする。",
+        "note": "自身の攻撃力が50%上昇, 自身の防御力が50%上昇, メモリアスキル効果が85%上昇",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
+    },
+    {
+      "id": "01KZNH70EYVPYV4G8WR0PZ011P",
+      "uniqueId": "01KZNH71E6003MR3PMBVTZJDCR",
+      "name": "船田初/ウェーブスタースタイル",
+      "cardType": 1,
+      "rareSkill": {
+        "name": "スアビスルナー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、メモリアスキル効果を85%アップする。自身を除く味方がレアスキルを発動中、自身のメモリアスキル効果をさらに45％アップする。",
+        "note": "自身の攻撃力が50%上昇, 自身の防御力が50%上昇, メモリアスキル効果が85%上昇",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
     },
     {
       "id": "01KY01K9DQBH3WEB9NF179V90F",
@@ -178419,6 +179811,280 @@
         }
       ],
       "released_at": "2026-07-31"
+    },
+    {
+      "id": "01KZNH6JSE5RX6JGDRN0GZHPPA",
+      "uniqueId": "01KZNH6KRP7A1BQFM83EW9A86B",
+      "name": "松村優珂/ウェーブスタースタイル",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "ヘリオスフィア",
+        "description": "一定時間、敵全体の攻撃力/防御力をダウンする。",
+        "note": "敵全体の攻撃力が10%低下, 敵全体の防御力が10%低下",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
     },
     {
       "id": "01KYPPTZ75T45RC28AMTPMVBSH",
@@ -179509,6 +181175,150 @@
         }
       ],
       "released_at": "2026-07-31"
+    },
+    {
+      "id": "01KZNH6TKECSR819AKFDN5D8QR",
+      "uniqueId": "01KZNH6VJPTY19A699F28BW7SP",
+      "name": "外崎杏花/ウェーブスタースタイル",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "ルナティックトランサー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。",
+        "note": "自身の攻撃力が30%上昇, 自身の防御力が30%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 350
+          },
+          {
+            "jobSkillType": 2,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 2,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 600
+          },
+          {
+            "jobSkillType": 4,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "水属性メモリア効果増加AⅢ",
+          "description": "自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
     },
     {
       "id": "01KYPPTQD59S1DSC0AKEG8B4VF",
@@ -181898,6 +183708,554 @@
       "released_at": "2026-07-31"
     },
     {
+      "id": "01KZNH6EWE3DYZ37DJEMEPEWDF",
+      "uniqueId": "01KZNH6FVPT2BDFWBNKCH3BE4N",
+      "name": "高島八雲/ラグーンスプラッシュ",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "鷹の目S",
+        "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目」より延長時間が長い。",
+        "note": "オーダー時間を25秒延長する",
+        "effectTime": 0
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
+    },
+    {
+      "id": "01KZNH6GTYV8CF75X7FDDYJ6S8",
+      "uniqueId": "01KZNH6HT6S0T6DA8H0XCB2H78",
+      "name": "妹島広夢/ラグーンスプラッシュ",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "この世の理",
+        "description": "一定時間、自身の防御力が大アップし、攻撃力がアップする。",
+        "note": "自身の攻撃力が10%上昇, 自身の防御力が40%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-08-31",
+      "phantasm": true
+    },
+    {
       "id": "01KYPPTGJDEB1CV1SS5QB17VSZ",
       "uniqueId": "01KYPPTHHNWB7KRN83QW5ACYH5",
       "name": "早川弥宏/ラグーンスプラッシュ",
@@ -182744,7 +185102,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -184520,7 +186878,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -186194,7 +188552,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -187868,7 +190226,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -189560,7 +191918,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },
@@ -191627,7 +193985,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "天の秤目",
-        "description": "一定時間、敵1体の防御力をダウンする。",
+        "description": "一定時間、敵1体の防御力をダウンする。※同スキルが同対象に発動中は発動不可",
         "note": "敵の防御が40%低下",
         "effectTime": 80
       },

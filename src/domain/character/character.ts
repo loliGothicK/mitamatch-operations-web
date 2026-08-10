@@ -67,6 +67,7 @@ const characterSchema = z.object({
   keyColor: z.string().regex(/^[0-9a-f]{6}$/i),
   subColor: z.string().regex(/^[0-9a-f]{6}$/i),
   bindRune: z.tuple([runeSpecSchema, runeSpecSchema]).optional().readonly(),
+  phantasm: z.boolean().readonly().optional(),
 });
 
 export type Character = z.infer<typeof characterSchema>;
