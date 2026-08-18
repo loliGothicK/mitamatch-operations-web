@@ -129,7 +129,7 @@
     "drizzle-kit": "0.31.10",
     "happy-dom": "20.11.2",
     "import-in-the-middle": "3.3.3",
-    "oxfmt": "0.63.0",
+    "oxfmt": "0.64.0",
     "oxlint": "1.78.0",
     "oxlint-tsgolint": "7.0.2001",
     "require-in-the-middle": "8.0.1",
