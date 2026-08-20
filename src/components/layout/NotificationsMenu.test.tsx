@@ -3,6 +3,11 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+// Mock Clerk
+vi.mock("@clerk/nextjs", () => ({
+  useAuth: () => ({ isSignedIn: true }),
+}));
+
 // Mock the server actions
 vi.mock("@/_actions/invite", () => ({
   getPendingInvitesAction: vi.fn(),
