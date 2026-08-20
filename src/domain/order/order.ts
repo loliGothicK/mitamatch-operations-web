@@ -50,8 +50,7 @@ export function isSameLineage(o1: Pick<Order, "effect">, o2: Pick<Order, "effect
   ) {
     return true;
   }
-  return eff1.includes("光") &&
-    !eff1.includes("光闇") &&
-    eff2.includes("光") &&
-    !eff2.includes("光闇");
+  return (
+    eff1.includes("光") && !eff1.includes("光闇") && eff2.includes("光") && !eff2.includes("光闇")
+  );
 }

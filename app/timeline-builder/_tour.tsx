@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useMount } from "react-use";
 import { Joyride, ACTIONS, EVENTS, STATUS, type EventData, type Step } from "react-joyride";
 import { useTheme } from "@mui/material/styles";
 
@@ -36,7 +37,17 @@ export function TimelineBuilderTour({
   const [run, setRun] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
 
-  useEffect(() => {
+  const [prevReplayKey, setPrevReplayKey] = useState(replayKey);
+  if (replayKey !== prevReplayKey) {
+    setPrevReplayKey(replayKey);
+    if (replayKey !== 0) {
+      setStepIndex(0);
+      onStepChange?.(0);
+      setRun(true);
+    }
+  }
+
+  useMount(() => {
     const completed = window.localStorage.getItem(STORAGE_KEY);
     if (completed !== "true") {
       setStepIndex(0);
@@ -44,16 +55,7 @@ export function TimelineBuilderTour({
       setRun(true);
       window.localStorage.setItem(STORAGE_KEY, "true");
     }
-  }, [onStepChange]);
-
-  useEffect(() => {
-    if (replayKey === 0) {
-      return;
-    }
-    setStepIndex(0);
-    onStepChange?.(0);
-    setRun(true);
-  }, [replayKey, onStepChange]);
+  });
 
   const handleEvent = (data: EventData) => {
     const { action, index, status, type } = data;

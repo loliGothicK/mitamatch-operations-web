@@ -301,7 +301,7 @@ function parseBuffAndDebuff(
     option.map((matches) =>
       match(matches)
         .when(
-          (_) => /(?:アップ|ダウン)、/g.test(description),
+          (_m) => !!_m && /(?:アップ|ダウン)、/g.test(description),
           ([, range, s1, e1, s2, e2]) =>
             separator([
               parseStatChanges(type, range, s1, e1, memoriaName, joined()),

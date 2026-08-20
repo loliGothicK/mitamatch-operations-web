@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { useMount } from "react-use";
 import { Joyride, ACTIONS, EVENTS, STATUS, type EventData, type Step } from "react-joyride";
 import { useTheme } from "@mui/material/styles";
 
@@ -73,7 +74,27 @@ export function DataPageTour({
 
   const steps = useMemo(() => gridSteps, []);
 
-  useEffect(() => {
+  const [prevTab, setPrevTab] = useState(tab);
+  if (tab !== prevTab) {
+    setPrevTab(tab);
+    if (tab !== "memoria" && tab !== "costume") {
+      setRun(false);
+      setStepIndex(0);
+    }
+  }
+
+  const [prevReplayKey, setPrevReplayKey] = useState(replayKey);
+  if (replayKey !== prevReplayKey) {
+    setPrevReplayKey(replayKey);
+    if (tab === "memoria" || tab === "costume") {
+      if (replayKey !== 0) {
+        setStepIndex(0);
+        setRun(true);
+      }
+    }
+  }
+
+  useMount(() => {
     if (tab !== "memoria" && tab !== "costume") {
       setRun(false);
       setStepIndex(0);
@@ -85,20 +106,7 @@ export function DataPageTour({
       setRun(true);
       window.localStorage.setItem(STORAGE_KEY, "true");
     }
-  }, [tab]);
-
-  useEffect(() => {
-    if (tab !== "memoria" && tab !== "costume") {
-      setRun(false);
-      setStepIndex(0);
-      return;
-    }
-    if (replayKey === 0) {
-      return;
-    }
-    setStepIndex(0);
-    setRun(true);
-  }, [replayKey, tab]);
+  });
 
   const handleEvent = (data: EventData) => {
     const { action, index, status, type } = data;

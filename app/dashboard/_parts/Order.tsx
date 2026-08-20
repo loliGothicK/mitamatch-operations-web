@@ -5,7 +5,7 @@ import { User } from "@/types/user";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getOrderListAction, updateOrderAction } from "@/_actions/order";
 import { Alert, Button, Divider, Grid, Paper, Snackbar, Stack, Typography } from "@mui/material";
-import { useMemo, useState, useEffect, type MouseEvent } from "react";
+import { useMemo, useState, type MouseEvent } from "react";
 import { type Order, orderList } from "@/domain/order/order";
 import { OrderIcon } from "@/components/image/OrderIcon";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
@@ -53,11 +53,13 @@ export function OrderRegistration(_props: Props) {
 
   const [edit, setEdit] = useState<string[]>([]);
 
-  useEffect(() => {
+  const [prevRegistered, setPrevRegistered] = useState(registered);
+  if (registered !== prevRegistered) {
+    setPrevRegistered(registered);
     if (registered) {
       setEdit(registered.map((r) => r.id));
     }
-  }, [registered]);
+  }
 
   const currentOrderList = useMemo(() => {
     return orderList.filter((order) => order.payed === payed);

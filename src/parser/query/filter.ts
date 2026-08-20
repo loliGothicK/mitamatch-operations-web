@@ -298,7 +298,7 @@ export interface IExpression<T> {
 class Literal<T> implements IExpression<T> {
   constructor(private value: Lit) {}
 
-  apply(_: T): Lit {
+  apply(): Lit {
     return this.value;
   }
 }

@@ -410,7 +410,7 @@ export function Calculator() {
                   defaultValue={adLevel}
                   min={0}
                   max={3}
-                  onChange={(value, _) => setAdLevel(value || 0)}
+                  onChange={(value) => setAdLevel(value || 0)}
                 />
               </Grid>
             )}

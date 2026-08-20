@@ -6,7 +6,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getListAction, updateMemoriaAction } from "@/_actions/memoria";
 import { Alert, Button, Divider, Grid, Paper, Snackbar, Stack, Typography } from "@mui/material";
 import { ImageWithFallback } from "@/components/image/ImageWithFallback";
-import { useMemo, useState, useEffect, type MouseEvent } from "react";
+import { useMemo, useState, type MouseEvent } from "react";
 import { formatCardType, UniqueMemoria, uniqueMemoriaList } from "@/domain/memoria/memoria";
 import Ribbon, { RibbonGroup } from "@/components/toolbar/Toolbar";
 import { FilterAlt, Redo, Save, Undo } from "@mui/icons-material";
@@ -76,9 +76,11 @@ export function Memoria(_props: Props) {
     { id: string; uniqueId: string; name: string; limitBreak: number }[]
   >(registered || []);
 
-  useEffect(() => {
+  const [prevRegistered, setPrevRegistered] = useState(registered);
+  if (registered !== prevRegistered) {
+    setPrevRegistered(registered);
     if (registered) setEdit(registered);
-  }, [registered]);
+  }
 
   const NotYetRegistered = useMemo(
     () =>

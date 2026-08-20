@@ -47,40 +47,42 @@ export type ComputedOrder = OrderWithPic & {
 
 export function useComputedTimeline(timeline: OrderWithPic[]) {
   return useMemo((): ComputedOrder[] => {
-    let currentRemainingTime = 900; // 15:00
-    return timeline.map((order, index) => {
-      const prevOrder = index > 0 ? timeline[index - 1] : null;
+    return timeline.reduce<{ computed: ComputedOrder[]; currentRemainingTime: number }>(
+      (acc, order, index) => {
+        const prevOrder = index > 0 ? timeline[index - 1] : null;
 
-      // ■ 戦術加速チェック
-      // 直前のオーダー名に"戦術加速"が含まれていれば、準備時間を5秒にする
-      const isPrevAccel = prevOrder?.name.includes("戦術加速");
-      const actualPrepareTime = isPrevAccel ? 5 : order.prepare_time;
+        // ■ 戦術加速チェック
+        // 直前のオーダー名に"戦術加速"が含まれていれば、準備時間を5秒にする
+        const isPrevAccel = prevOrder?.name.includes("戦術加速");
+        const actualPrepareTime = isPrevAccel ? 5 : order.prepare_time;
 
-      // ■ 時間計算
-      // 1. Delay消費: 前の終了時間からDelay分引く
-      const delay =
-        order.delay.source === "manual"
-          ? order.delay.value
-          : (order.delay.value ?? DEFAULT_DELAY_SEC);
-      const prepareStartTime = currentRemainingTime - delay;
+        // ■ 時間計算
+        // 1. Delay消費: 前の終了時間からDelay分引く
+        const delay =
+          order.delay.source === "manual"
+            ? order.delay.value
+            : (order.delay.value ?? DEFAULT_DELAY_SEC);
+        const prepareStartTime = acc.currentRemainingTime - delay;
 
-      // 2. 準備時間消費: Prepare分引く -> 発動
-      const activationTime = prepareStartTime - actualPrepareTime;
+        // 2. 準備時間消費: Prepare分引く -> 発動
+        const activationTime = prepareStartTime - actualPrepareTime;
 
-      // 3. 効果時間消費: Active分引く -> 終了
-      const endTime = activationTime - order.active_time;
+        // 3. 効果時間消費: Active分引く -> 終了
+        const endTime = activationTime - order.active_time;
 
-      // 次のループのために残り時間を更新
-      currentRemainingTime = endTime;
+        acc.computed.push({
+          ...order,
+          startTime: acc.currentRemainingTime,
+          prepareStartTime,
+          activationTime,
+          endTime,
+          actualPrepareTime,
+        } as ComputedOrder);
 
-      return {
-        ...order,
-        startTime: currentRemainingTime + delay + actualPrepareTime + order.active_time,
-        prepareStartTime,
-        activationTime,
-        endTime,
-        actualPrepareTime,
-      } as ComputedOrder;
-    });
+        acc.currentRemainingTime = endTime;
+        return acc;
+      },
+      { computed: [], currentRemainingTime: 900 },
+    ).computed;
   }, [timeline]);
 }

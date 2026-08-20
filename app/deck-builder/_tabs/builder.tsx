@@ -13,8 +13,8 @@ import {
   useMemo,
   useRef,
   useState,
-  useEffect,
 } from "react";
+import { useMount } from "react-use";
 import DifferenceIcon from "@mui/icons-material/Difference";
 import type { Unit } from "@/domain/types";
 import { saveShortLink } from "@/actions/permlink";
@@ -987,7 +987,7 @@ function Compare({
       </Divider>
       <Grid container={true} sx={{ width: "100%" }}>
         {[...diff.right.expectedTotalBuff.entries()]
-          .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+          .filter(([, value]) => value[0] > 0 && value[0] !== value[1])
           .map(([type, value]) => intoRow([type, value]))}
       </Grid>
       <Divider textAlign={"left"} sx={{ margin: 2, width: "100%" }}>
@@ -995,7 +995,7 @@ function Compare({
       </Divider>
       <Grid container={true} sx={{ width: "100%" }}>
         {[...diff.right.expectedTotalDebuff.entries()]
-          .filter(([_, value]) => value[0] > 0 && value[0] !== value[1])
+          .filter(([, value]) => value[0] > 0 && value[0] !== value[1])
           .map(([type, value]) => intoRow([type, value]))}
       </Grid>
     </Grid>
@@ -2087,9 +2087,9 @@ export function DeckBuilder({
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"), { noSsr: true });
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+  useMount(() => {
     setMounted(true);
-  }, []);
+  });
 
   if (!mounted) {
     return <Box sx={{ flexGrow: 1, minHeight: "100vh" }} />; // Neutral placeholder

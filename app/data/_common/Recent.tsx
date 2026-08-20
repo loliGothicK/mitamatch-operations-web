@@ -139,8 +139,10 @@ function RecentCard({ entry }: { entry: RecentItem }) {
     .with({ kind: "order" }, ({ item }) => `/data/order/${item.id}`)
     .with({ kind: "weapon" }, ({ item }) => `/data/weapon/${item.id}`)
     .with({ kind: "costume" }, ({ item }) => `/data/costume/${encodeURI(item.name)}`)
-    .with({ kind: "memoria" }, ({ item }) =>
-      `/data/memoria/${encodeURI(item.name.full)}?type=${Math.min(...memoriaList.filter((m) => m.uniqueId === item.uniqueId).map((m) => m.cardType))}`,
+    .with(
+      { kind: "memoria" },
+      ({ item }) =>
+        `/data/memoria/${encodeURI(item.name.full)}?type=${Math.min(...memoriaList.filter((m) => m.uniqueId === item.uniqueId).map((m) => m.cardType))}`,
     )
     .exhaustive();
 
@@ -183,9 +185,7 @@ function RecentCard({ entry }: { entry: RecentItem }) {
   return (
     <Card sx={{ height: "100%" }}>
       <CardActionArea component={Link} href={href} sx={{ height: "100%" }}>
-        <Box sx={{ display: "flex", justifyContent: "center", p: 1 }}>
-          {icon}
-        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center", p: 1 }}>{icon}</Box>
         <CardContent sx={{ p: 1, "&:last-child": { pb: 1 } }}>
           <Typography variant="body2" noWrap sx={{ fontSize: "0.75rem", textAlign: "center" }}>
             {name}

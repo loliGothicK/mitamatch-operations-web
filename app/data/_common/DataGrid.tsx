@@ -111,7 +111,7 @@ export function DataGrid<
     severity: "error",
   });
   const onChange = useCallback(
-    (val: string, _: unknown) => {
+    (val: string) => {
       setQuery(val);
     },
     [setQuery],

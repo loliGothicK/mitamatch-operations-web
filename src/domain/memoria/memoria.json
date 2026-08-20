@@ -107770,8 +107770,7 @@
           "name": "[レギオンマッチ]火水特:ダメージUP/クリ率UP Ⅴ",
           "description": "火/水属性の特殊攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KZNH7PNE6195G3HK759CVYVV",
@@ -107824,8 +107823,7 @@
           "name": "[レギオンマッチ]火水援:支援UP/クリ率UP Ⅴ",
           "description": "火/水属性の支援/妨害メモリア使用時に支援/妨害効果を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KZNH7MPY7MH0Y5777N6SEBNH",
@@ -107878,8 +107876,7 @@
           "name": "[レギオンマッチ]火水援:支援UP/クリ率UP Ⅴ",
           "description": "火/水属性の支援/妨害メモリア使用時に支援/妨害効果を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KZNH7KQPY2FMTM8ZA1M8263H",
@@ -107910,8 +107907,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH7JREQ37WM7W2FNQSJG3R",
@@ -107942,8 +107938,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH7GSY103QMN6Q56YMDSZJ",
@@ -107974,8 +107969,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH7FTP41HHP5BYYRGY0F5S",
@@ -108006,8 +108000,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH7EVEJ6864NQ44VZ73FM0",
@@ -108038,8 +108031,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH7CWYBF8R5QP02B15MR04",
@@ -108070,8 +108062,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH7BXPFTP1WRDBV2NGPVQM",
@@ -108102,8 +108093,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH7AYESN0RM00SV8PQNN9X",
@@ -108134,8 +108124,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH79Z6A5WJ3KJ4HV1BSPRV",
@@ -108166,8 +108155,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH78ZY3YHNTB1HJMWKNXB3",
@@ -108198,8 +108186,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・水属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH771ECBYHC0PF1BXXP7Q4",
@@ -108230,8 +108217,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH7626BC7F4EWMXGRHZ8H8",
@@ -108284,8 +108270,7 @@
           "name": "[レギオンマッチ]火水通:ダメージUP Ⅴ",
           "description": "火/水属性の通常攻撃時に攻撃ダメージを6%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KZNH752Y4QMZD0VTVYR7CVZW",
@@ -108338,8 +108323,7 @@
           "name": "[レギオンマッチ]火水援:支援UP Ⅴ",
           "description": "火/水属性の支援/妨害メモリア使用時に支援/妨害効果を6%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KZNH734E5FEXR5TN9MRZMDBS",
@@ -108392,8 +108376,7 @@
           "name": "[レギオンマッチ]火水回:回復UP Ⅴ",
           "description": "火/水属性の回復メモリア使用時にHPの回復量を6%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01KZNH72568QJNNHMYVR39TCRV",
@@ -108424,8 +108407,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH715Y1KB37E1S22F4PHVS",
@@ -108456,8 +108438,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH706PHT0PJ56WE9QVCH69",
@@ -108488,8 +108469,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6Z7E7J704ABMMRYXX32A",
@@ -108520,8 +108500,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6X8YXCM7FFJRN2XXA33F",
@@ -108552,8 +108531,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6W9PBW3GDVRGHKAHJ8YF",
@@ -108584,8 +108562,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6VAE2DZJX1C6WY6C46HG",
@@ -108616,8 +108593,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・水属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6SBY7S4PAM066YWWKJCC",
@@ -108648,8 +108624,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6RCPK38H6CD5VCERYFNE",
@@ -108680,8 +108655,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6QDE0HV9Y2R3K451B0XA",
@@ -108712,8 +108686,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6NEYZD1BR5NRH8P6B7Z1",
@@ -108744,8 +108717,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6MFPTVBWGPS439SQM6CJ",
@@ -108776,8 +108748,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6KGEGBTF8WJ9KKNJMV8B",
@@ -108808,8 +108779,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・水属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01KZNH6HHYSTKFPN3X4FNKG8R2",
@@ -108840,8 +108810,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     }
   ]
 }

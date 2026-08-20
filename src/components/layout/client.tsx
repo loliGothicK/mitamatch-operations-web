@@ -1,6 +1,7 @@
 "use client";
 
 import { Provider, getDefaultStore } from "jotai";
+import { useMount } from "react-use";
 import Footer from "@/components/Footer";
 import { DarkMode, KeyboardArrowDown, LightMode, Menu as MenuIcon } from "@mui/icons-material";
 import {
@@ -27,7 +28,6 @@ import {
   PropsWithChildren,
   ElementType,
   useMemo,
-  useEffect,
 } from "react";
 import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
@@ -92,9 +92,11 @@ function LayoutMain({ children, userData }: PropsWithChildren<{ userData: UserDa
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const theme = useTheme();
 
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setMobileDrawerOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <Box
@@ -382,7 +384,15 @@ export function Layout({ children, userData }: PropsWithChildren<{ userData?: Us
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
-  useEffect(() => {
+  const [prevPrefersDarkMode, setPrevPrefersDarkMode] = useState(prefersDarkMode);
+  if (prefersDarkMode !== prevPrefersDarkMode) {
+    setPrevPrefersDarkMode(prefersDarkMode);
+    if (!localStorage.getItem("paletteMode")) {
+      setMode(prefersDarkMode ? "dark" : "light");
+    }
+  }
+
+  useMount(() => {
     if (localStorage.getItem("paletteMode") === "dark") {
       setMode("dark");
     } else if (localStorage.getItem("paletteMode") === "light") {
@@ -392,7 +402,7 @@ export function Layout({ children, userData }: PropsWithChildren<{ userData?: Us
     } else {
       setMode("light");
     }
-  }, [prefersDarkMode]);
+  });
 
   const theme = useMemo(
     () =>
