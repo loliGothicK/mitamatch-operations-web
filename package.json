@@ -141,12 +141,12 @@
     "zod": "4.4.3"
   },
   "engines": {
-    "pnpm": "11.23.0"
+    "pnpm": "11.24.0"
   },
   "volta": {
     "node": "24.20.0"
   },
-  "packageManager": "pnpm@11.23.0",
+  "packageManager": "pnpm@11.24.0",
   "pnpm": {
     "ignoredBuiltDependencies": [
       "@biomejs/biome",
