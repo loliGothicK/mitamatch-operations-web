@@ -27,8 +27,8 @@ importers:
         specifier: 3.16.12
         version: 3.16.12(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@clerk/nextjs':
-        specifier: 7.7.9
-        version: 7.7.9(next@16.3.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: 7.8.2
+        version: 7.8.2(next@16.3.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@codemirror/autocomplete':
         specifier: 6.20.3
         version: 6.20.3
@@ -592,44 +592,20 @@ packages:
     resolution: {integrity: sha512-R7g8L9/jOXdmU5FtIUTPxaWbSlcitKAlXRHsZj7YMzL6/kobRO69upchrqwU/5QHHb8BYCXOYE+gYEQMtUSmDg==}
     engines: {node: '>=20.9.0'}
 
-  '@clerk/nextjs@7.7.9':
-    resolution: {integrity: sha512-6niXLthsXYDwmH2pD0qL7Ut499p6/ucect1Ks9WQp+rVC5va+rTYGEy9pkKKWWePnO4oYf7ncmzJmjFYZXM0Hg==}
+  '@clerk/nextjs@7.8.2':
+    resolution: {integrity: sha512-EmUq8lkJLpaqI/D5XEK0pNYKxSoNdD7TZWvXfKxyeM86fQrJFr6I9cVEFTPksbx6Y+cRiHW/6Q4KrhgpqBGnjg==}
     engines: {node: '>=20.9.0'}
     peerDependencies:
       next: ^15.2.8 || ^15.3.8 || ^15.4.10 || ^15.5.9 || ^15.6.0-0 || ^16.0.10 || ^16.1.0-0
       react: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
       react-dom: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
 
-  '@clerk/react@6.14.4':
-    resolution: {integrity: sha512-vMv3SU8dvo/b09/FAY7A0xaAe+YhZ2u4nvkRUUdqmOi8u3HNSJ3s2k2PIb0cNHsLurMvDzw/dD2Hbk97MPnN/A==}
+  '@clerk/react@6.14.7':
+    resolution: {integrity: sha512-+d+VqD4nZR3vBn5UU++H96zloHFDe+Ll0sGwMmLXnHtoIs9oMx91GaGXzXo9rU83kl660EfAmgeWcsLMfWnOYg==}
     engines: {node: '>=20.9.0'}
     peerDependencies:
       react: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
       react-dom: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
-
-  '@clerk/shared@4.29.2':
-    resolution: {integrity: sha512-9c9Mc1oqumsqo+JY5R37O1ipwcG3RmwPK9oadBLL9E4VxZXthXVaFI9u+1/I4BSFGA/B9BO+17tkVDL4G0Wpbg==}
-    engines: {node: '>=20.9.0'}
-    peerDependencies:
-      react: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
-      react-dom: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-dom:
-        optional: true
-
-  '@clerk/shared@4.29.3':
-    resolution: {integrity: sha512-sc9CNFDR3q+tJ8N5MkGcHGiXlgupQ6DMcZlXdk88kfo1Pl7G9EFK8e4mzp5D9OiYGRJ7rPnZCKiWoyInD59QXw==}
-    engines: {node: '>=20.9.0'}
-    peerDependencies:
-      react: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
-      react-dom: ^18.0.0 || ~19.0.3 || ~19.1.4 || ~19.2.3 || ~19.3.0-0
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-dom:
-        optional: true
 
   '@clerk/shared@4.30.1':
     resolution: {integrity: sha512-Mawatm7CTKZXBqIW8t/z9LfoAKgOHtRRxROpnJ4VIkTdgzj/mmAZhPOPjzUttPXXtulR1uLWisvQXEMNeF/jTQ==}
@@ -2999,9 +2975,6 @@ packages:
 
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
-
-  '@types/node@26.3.0':
-    resolution: {integrity: sha512-L3fgrnchriRC2ExBflb8j4uZZURHZfQsmQeyVzhjcHW4kkwVyo8/0h1B2MVzMTrYUJYu6G7EWs14hW/L9putqw==}
 
   '@types/node@26.4.0':
     resolution: {integrity: sha512-faiGnoIrLH/V8cibOMEAZ8pMw6oXqSukl29ra4mN8GdaB2ZewzeaLj+INpV5N+Z1eKWzY+IzaIZH2EIR6YZRNQ==}
@@ -5970,43 +5943,23 @@ snapshots:
       - react
       - react-dom
 
-  '@clerk/nextjs@7.7.9(next@16.3.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@clerk/nextjs@7.8.2(next@16.3.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@clerk/backend': 3.16.12(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@clerk/react': 6.14.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@clerk/shared': 4.29.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@clerk/react': 6.14.7(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@clerk/shared': 4.30.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       next: 16.3.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.0)(babel-plugin-macros@3.1.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
       server-only: 0.0.1
       tslib: 2.8.1
 
-  '@clerk/react@6.14.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@clerk/react@6.14.7(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@clerk/shared': 4.29.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@clerk/shared': 4.30.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
       tslib: 2.8.1
-
-  '@clerk/shared@4.29.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
-    dependencies:
-      '@tanstack/query-core': 5.101.4
-      dequal: 2.0.3
-      glob-to-regexp: 0.4.1
-      js-cookie: 3.0.7
-    optionalDependencies:
-      react: 19.2.8
-      react-dom: 19.2.8(react@19.2.8)
-
-  '@clerk/shared@4.29.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
-    dependencies:
-      '@tanstack/query-core': 5.101.4
-      dequal: 2.0.3
-      glob-to-regexp: 0.4.1
-      js-cookie: 3.0.7
-    optionalDependencies:
-      react: 19.2.8
-      react-dom: 19.2.8(react@19.2.8)
 
   '@clerk/shared@4.30.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
@@ -8095,10 +8048,6 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@26.3.0':
-    dependencies:
-      undici-types: 8.3.0
-
   '@types/node@26.4.0':
     dependencies:
       undici-types: 8.3.0
@@ -9252,7 +9201,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 26.3.0
+      '@types/node': 26.4.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
