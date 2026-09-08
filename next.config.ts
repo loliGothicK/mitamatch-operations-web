@@ -1,5 +1,5 @@
 import createMdx from "@next/mdx";
-import { withSentryConfig } from "@sentry/nextjs";
+import { withSentryConfig } from "@sentry/nextjs/config";
 import { withContentCollections } from "@content-collections/next";
 
 if (process.env.NODE_ENV === "development") {
