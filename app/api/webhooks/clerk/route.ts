@@ -1,7 +1,7 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
-import { upsertUser } from "@/database"; // あなたのDBロジック
+import { upsertUser } from "@/database";
 import { NextResponse } from "next/server";
 
 const WEBHOOK_SECRET =
@@ -30,21 +30,21 @@ export async function POST(req: Request) {
   // Webhookインスタンスの作成
   const wh = new Webhook(WEBHOOK_SECRET);
 
-  let event: WebhookEvent;
-
   // 署名の検証 (ここが失敗するとエラーが投げられる)
   try {
-    event = wh.verify(body, {
+    wh.verify(body, {
       "svix-id": svix_id,
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
-    }) as WebhookEvent;
+    });
   } catch (err) {
     console.error("Error verifying webhook:", err);
     return new NextResponse("Error occured", {
       status: 400,
     });
   }
+
+  const event = payload as WebhookEvent;
 
   // イベントタイプごとの処理
   const eventType = event.type;

@@ -27,7 +27,7 @@ exports[`Dashboard Layout - snapshot 1`] = `
             <button
               aria-controls="simple-tabpanel-0"
               aria-selected="false"
-              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1usuzwp-MuiButtonBase-root-MuiTab-root"
+              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1a6igjw-MuiButtonBase-root-MuiTab-root"
               id="simple-tab-0"
               role="tab"
               tabindex="-1"
@@ -38,7 +38,7 @@ exports[`Dashboard Layout - snapshot 1`] = `
             <button
               aria-controls="simple-tabpanel-1"
               aria-selected="true"
-              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-1usuzwp-MuiButtonBase-root-MuiTab-root"
+              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary Mui-selected css-1a6igjw-MuiButtonBase-root-MuiTab-root"
               id="simple-tab-1"
               role="tab"
               tabindex="0"
@@ -49,7 +49,7 @@ exports[`Dashboard Layout - snapshot 1`] = `
             <button
               aria-controls="simple-tabpanel-2"
               aria-selected="false"
-              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1usuzwp-MuiButtonBase-root-MuiTab-root"
+              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1a6igjw-MuiButtonBase-root-MuiTab-root"
               id="simple-tab-2"
               role="tab"
               tabindex="-1"
@@ -60,7 +60,7 @@ exports[`Dashboard Layout - snapshot 1`] = `
             <button
               aria-controls="simple-tabpanel-3"
               aria-selected="false"
-              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1usuzwp-MuiButtonBase-root-MuiTab-root"
+              class="MuiButtonBase-root MuiTab-root MuiTab-textColorPrimary css-1a6igjw-MuiButtonBase-root-MuiTab-root"
               id="simple-tab-3"
               role="tab"
               tabindex="-1"
