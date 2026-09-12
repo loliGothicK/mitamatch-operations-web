@@ -128,7 +128,7 @@
     "@vitest/browser-playwright": "5.0.0",
     "@vitest/coverage-v8": "5.0.0",
     "drizzle-kit": "0.31.10",
-    "happy-dom": "20.14.3",
+    "happy-dom": "20.14.5",
     "import-in-the-middle": "3.5.0",
     "oxfmt": "0.67.0",
     "oxlint": "1.82.0",
