@@ -1,5 +1,4 @@
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -62,7 +61,6 @@ export default async function RootLayout({
             <Layout>{children}</Layout>
           </AppRouterCacheProvider>
           <Analytics />
-          <SpeedInsights />
         </body>
       </html>
     </ClerkProvider>
