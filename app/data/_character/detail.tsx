@@ -15,6 +15,7 @@ import {
   Chip,
   Divider,
   Grid,
+  Paper,
   Stack,
   Typography,
 } from "@mui/material";
@@ -172,122 +173,217 @@ export default function Detail({ name }: { name: string }) {
             )}
           </Toolbar>
         </AppBar>
-        <Card
+        <Paper
+          elevation={2}
           sx={{
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             width: "100%",
-            borderRadius: 2,
-            boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+            borderRadius: 3,
+            overflow: "hidden",
+            bgcolor: "background.paper",
+            border: "1px solid",
+            borderColor: "divider",
+            alignItems: { xs: "center", md: "stretch" },
+            boxShadow: (theme) =>
+              theme.palette.mode === "dark"
+                ? "0 4px 24px rgba(0,0,0,0.4)"
+                : "0 4px 24px rgba(0,0,0,0.06)",
           }}
         >
+          {/* 画像 */}
           <Box
-            sx={{ display: "flex", justifyContent: "center", bgcolor: "background.default", p: 2 }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              p: { xs: 2, sm: 2.5 },
+              flexShrink: 0,
+            }}
           >
             <CardMedia
               component="img"
-              sx={{ width: { xs: 150, md: 250 }, height: "auto", borderRadius: 2 }}
-              image={`/lily/${name}.jpg`}
+              sx={{
+                width: { xs: 140, sm: 160 },
+                height: "auto",
+                maxHeight: { xs: 300, md: 340 },
+                objectFit: "contain",
+                borderRadius: 2,
+                filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.2))",
+              }}
+              image={`/character/${character.id.toString().padStart(3, "0")}.png`}
               alt={name}
             />
           </Box>
-          <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-            <CardContent sx={{ flex: "1 0 auto", p: { xs: 2, sm: 3 } }}>
+
+          <Divider
+            orientation="vertical"
+            flexItem={true}
+            sx={{ display: { xs: "none", md: "block" } }}
+          />
+          <Divider
+            flexItem={true}
+            sx={{ display: { xs: "block", md: "none" }, width: "100%" }}
+          />
+
+          {/* info */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              flexGrow: 1,
+              minWidth: 0,
+              justifyContent: "center",
+              p: { xs: 2, sm: 2.5, md: 3 },
+            }}
+          >
+            <Stack
+              spacing={2}
+              direction={{ xs: "column", sm: "row" }}
+              sx={{ alignItems: { xs: "center", sm: "center" } }}
+            >
+              <Box sx={{ display: { xs: "none", sm: "block" }, flexShrink: 0 }}>
+                <Image
+                  src={gardenImage(character)}
+                  alt={character.garden}
+                  width={72}
+                  height={72}
+                  unoptimized
+                />
+              </Box>
               <Stack
-                spacing={2}
-                direction={{ xs: "column", sm: "row" }}
-                sx={{ alignItems: { xs: "center", sm: "flex-start" } }}
+                direction="column"
+                sx={{ alignItems: { xs: "center", sm: "flex-start" }, flexGrow: 1 }}
               >
-                <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                  <Image
-                    src={gardenImage(character)}
-                    alt={character.garden}
-                    width={80}
-                    height={80}
-                    unoptimized
+                <Typography variant="body2" color="text.secondary">
+                  {character.kanaName}
+                </Typography>
+                <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                  {character.name}
+                </Typography>
+                <Divider flexItem={true} sx={{ my: 1, width: "100%" }} />
+                <Stack
+                  spacing={{ xs: 1, sm: 2 }}
+                  direction={{ xs: "column", sm: "row" }}
+                  sx={{ alignItems: { xs: "flex-start", sm: "center" } }}
+                >
+                  <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+                    {`誕生日: ${character.birthday}`}
+                  </Typography>
+                  <Divider
+                    orientation="vertical"
+                    flexItem={true}
+                    sx={{ display: { xs: "none", sm: "block" } }}
                   />
-                </Box>
-                <Stack direction="column" sx={{ alignItems: { xs: "center", sm: "flex-start" } }}>
-                  <Typography variant="body2" color="text.secondary">
-                    {character.kanaName}
+                  <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+                    {`所属レギオン: ${character.legion}`}
                   </Typography>
-                  <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-                    {character.name}
+                  <Divider
+                    orientation="vertical"
+                    flexItem={true}
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                  />
+                  <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
+                    {`学年: ${character.grade}`}
                   </Typography>
-                  <Divider flexItem={true} sx={{ my: 1.5, width: "100%" }} />
-                  <Stack
-                    spacing={{ xs: 1, sm: 2 }}
-                    direction={{ xs: "column", sm: "row" }}
-                    sx={{ alignItems: { xs: "flex-start", sm: "center" } }}
-                  >
-                    <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                      {`誕生日: ${character.birthday}`}
-                    </Typography>
-                    <Divider
-                      orientation="vertical"
-                      flexItem={true}
-                      sx={{ display: { xs: "none", sm: "block" } }}
-                    />
-                    <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                      {`所属レギオン: ${character.legion}`}
-                    </Typography>
-                    <Divider
-                      orientation="vertical"
-                      flexItem={true}
-                      sx={{ display: { xs: "none", sm: "block" } }}
-                    />
-                    <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
-                      {`学年: ${character.grade}`}
-                    </Typography>
-                  </Stack>
                 </Stack>
               </Stack>
-              <Divider sx={{ my: 2 }} textAlign="left">
-                <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>
-                  Introduction
-                </Typography>
-              </Divider>
-              <Typography variant="body1" sx={{ color: "text.primary", lineHeight: 1.6 }}>
-                {character.introduction.replace(String.raw`\n`, "")}
-              </Typography>
-              <Divider sx={{ my: 2 }} textAlign="left">
-                <Typography variant="subtitle2" color="text.secondary" sx={{ fontWeight: "bold" }}>
-                  Information
-                </Typography>
-              </Divider>
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: 1,
-                  flexWrap: "wrap",
-                  justifyContent: { xs: "center", sm: "flex-start" },
-                }}
+            </Stack>
+            <Divider sx={{ my: 1.5 }} textAlign="left">
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ fontWeight: "bold", textTransform: "uppercase", letterSpacing: 0.5 }}
               >
-                <Chip label={`好きなもの: ${character.favorites}`} variant="outlined" />
-                <Chip label={`苦手なもの: ${character.hates}`} variant="outlined" />
-                <Chip label={`趣味: ${character.hobby}`} variant="outlined" />
-              </Box>
-            </CardContent>
-          </Box>
-          {character.bindRune && (
+                Introduction
+              </Typography>
+            </Divider>
+            <Typography variant="body2" sx={{ color: "text.primary", lineHeight: 1.7 }}>
+              {character.introduction.replace(String.raw`\n`, "")}
+            </Typography>
+            <Divider sx={{ my: 1.5 }} textAlign="left">
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ fontWeight: "bold", textTransform: "uppercase", letterSpacing: 0.5 }}
+              >
+                Information
+              </Typography>
+            </Divider>
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                p: 2,
-                bgcolor: "background.default",
+                gap: 1,
+                flexWrap: "wrap",
+                justifyContent: { xs: "center", sm: "flex-start" },
               }}
             >
-              <BindRune
-                first={character.bindRune[0]}
-                second={character.bindRune[1]}
-                width={150}
-                height={225}
-              />
+              <Chip size="small" label={`好きなもの: ${character.favorites}`} variant="outlined" />
+              <Chip size="small" label={`苦手なもの: ${character.hates}`} variant="outlined" />
+              <Chip size="small" label={`趣味: ${character.hobby}`} variant="outlined" />
             </Box>
+          </Box>
+
+          {/* bind rune */}
+          {character.bindRune && (
+            <>
+              <Divider
+                orientation="vertical"
+                flexItem={true}
+                sx={{ display: { xs: "none", md: "block" } }}
+              />
+              <Divider
+                flexItem={true}
+                sx={{ display: { xs: "block", md: "none" }, width: "100%" }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  p: { xs: 2, sm: 2.5 },
+                  flexShrink: 0,
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  color="text.secondary"
+                  sx={{
+                    fontWeight: "bold",
+                    mb: 1.5,
+                  }}
+                >
+                  BIND RUNE
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    bgcolor: (theme) =>
+                      theme.palette.mode === "dark" ? "rgba(0, 0, 0, 0.4)" : "grey.900",
+                    borderRadius: 2,
+                    p: 1.5,
+                    border: "1px solid",
+                    borderColor: "divider",
+                    boxShadow: "inset 0 2px 8px rgba(0,0,0,0.3)",
+                  }}
+                >
+                  <BindRune
+                    first={character.bindRune[0]}
+                    second={character.bindRune[1]}
+                    width={150}
+                    height={180}
+                    backgroundColor="transparent"
+                    padding="0px"
+                  />
+                </Box>
+              </Box>
+            </>
           )}
-        </Card>
+        </Paper>
         <Divider sx={{ my: 3, width: "100%" }} textAlign="left">
           <Typography variant="h6" color="text.secondary" sx={{ fontWeight: "bold" }}>
             衣装一覧

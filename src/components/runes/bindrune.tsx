@@ -374,6 +374,8 @@ interface BindRuneProps {
   strokeWidth?: number;
   width?: number;
   height?: number;
+  backgroundColor?: string;
+  padding?: string | number;
 }
 
 /**
@@ -382,14 +384,18 @@ interface BindRuneProps {
  * @param second - The second rune name to bind (colorized as pink)
  * @param strokeWidth - The width of the stroke (default: 6)
  * @param width - The width of the canvas (default: 100)
- * @param height - The height of the canvas (default: 50)
+ * @param height - The height of the canvas (default: 120)
+ * @param backgroundColor - The background color of the canvas (default: "#000")
+ * @param padding - Padding around the svg (default: "10px")
  */
 export const BindRune = ({
   first,
   second,
   strokeWidth = 10,
   width = 100,
-  height = 50,
+  height = 120,
+  backgroundColor = "#000",
+  padding = "10px",
 }: BindRuneProps) => {
   const rune1 = RUNE_DEFINITION[first.rune];
   const rune2 = RUNE_DEFINITION[second.rune];
@@ -426,12 +432,12 @@ export const BindRune = ({
   ] as const;
 
   return (
-    <div style={{ background: "#000", padding: "10px", textAlign: "center" }}>
+    <div style={{ background: backgroundColor, padding, textAlign: "center" }}>
       <svg
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
-        style={{ background: "#000" }}
+        style={{ background: backgroundColor }}
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>

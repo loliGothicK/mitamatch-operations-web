@@ -125,7 +125,7 @@ export default function View() {
                   <CardMedia
                     component="img"
                     sx={{ width: { xs: 120, sm: 150 }, flexShrink: 0 }}
-                    image={`/lily/${character.name}.jpg`}
+                    image={`/character/${character.id.toString().padStart(3, "0")}.png`}
                     alt={character.name}
                   />
                   <CardContent
