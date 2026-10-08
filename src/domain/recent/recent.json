@@ -1,84 +1,6 @@
 {
   "prev": [
     {
-      "id": "01M2QB07FZFNPFKDGDYE6R96YE",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QB06GQ5DCRK29XMWFWPEXP",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QB04J7GE2RZZWEMZ1HHC6A",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QB03JZ54EBRMEFV8CA5X23",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QB02KQ5K3B964NPDMZ53W6",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QB00N7G7Y2B3W1P4S4GKAW",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZZNZKBDQEJ8D1M92N02J",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZYPQ9XNX6CHYB511MR3R",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZWR7VA7FBB1D3RDNV0B6",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZVRZ9K22BNHREXHH8NTJ",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZTSQT6QR8Q636AWAMN5E",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZRV785NQECXP9P2TBYN2",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZQVZS907PWPC65SAXH4G",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZPWQ4SC3ZHFY9RVVEFT2",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZMY7YYJGKNNP0CTHTSS3",
-      "type": "memoria"
-    },
-    {
-      "id": "01M2QAZJBF0MGEW9KHMVC16X8N",
-      "type": "costume"
-    },
-    {
-      "id": "01M2QAZM9ZSMP9NGWNXTP2DTW8",
-      "type": "costume"
-    },
-    {
-      "id": "01M2QAZP8FBW7T8AGEX08RR157",
-      "type": "costume"
-    },
-    {
-      "id": "01M2QAZR6ZJ42SYVAWSR33C7W6",
-      "type": "costume"
-    }
-  ],
-  "data": [
-    {
       "id": "01M3PJ62DA4M538X5H9NA28GQT",
       "type": "memoria"
     },
@@ -224,6 +146,160 @@
     },
     {
       "id": "01M3PJ4SQVN2MZ0M5PWAVJ0MSC",
+      "type": "weapon"
+    }
+  ],
+  "data": [
+    {
+      "id": "01M4DXYJ6Y16184NNHXR29QP71",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXYH7PF177D5803CR41FYK",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXYF96G83SWX22M6D75KQE",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXYE9Y8578ZHF66EQDJPPJ",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXYDAPXJRVFDWD4BVDJC1A",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXYCBE6K4HSDCBR2A72JAE",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXYBC6MWAF3YMCQF5VV5CE",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXY9DPPBQ265YSEX1J73BX",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXY8EEEH37FW2AS6KZX8P2",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXY7F6GJHHDCPJ28BZ0GBP",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXY5GPJH0DYX92G3WJTQ1D",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXY4HE20NJ4BPSCJC4C1YA",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXY3J6TJ0CEGJ2VQ8S6873",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXY2JYPA4K5TZ7R2GAAA42",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXY1KP015ZNTH28YK6QKZX",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXZN6AWX340PAJ1EZ8EQ3",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXYNY6RWAWCHZXSJSDRDW",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXXPPTAPVPQ6DF5Z7P6QG",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXVR6K8FJT2QA6B7NS0N8",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXTRYXZG3RF3K0KYXJ86T",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXSSPNDS6DS83GNPXA0PQ",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXQV6QB0BMK4EXAF399GY",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXPVY1KZ06MEZWQ600P9M",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXNWPP0NGK37CG78B9EJB",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXKY6FSXQ9ABHE6GCKEPT",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXJYYY31E82J76NKGXGF0",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXHZPVCN4RVZMJ9V5866X",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXG16D466AMFT501MF4BD",
+      "type": "memoria"
+    },
+    {
+      "id": "01M4DXXFN9DEGZ5YF0PA47AZMX",
+      "type": "costume"
+    },
+    {
+      "id": "01M4DXXKJ92G9Z7BEJ5CDD125N",
+      "type": "costume"
+    },
+    {
+      "id": "01M4DXXNGSH79NJWCXXKX9NEXY",
+      "type": "costume"
+    },
+    {
+      "id": "01M4DXXDPSZAQ4T3VJ3JN2GG4P",
+      "type": "costume"
+    },
+    {
+      "id": "01M4DXXHKSY7FFTDPSHKK8QS5A",
+      "type": "costume"
+    },
+    {
+      "id": "01M4DXXBR92TS2NCJB34NW92J7",
+      "type": "costume"
+    },
+    {
+      "id": "01M4DXXQF9Y1VESDX0H0GZE01E",
+      "type": "costume"
+    },
+    {
+      "id": "01M4DXWQ2GJP6QW530GT56C2S5",
+      "type": "weapon"
+    },
+    {
+      "id": "01M4DXWR1RNEY5D5891PAZZGGS",
+      "type": "weapon"
+    },
+    {
+      "id": "01M4DXWS10ZM92AZJKK31RFDRH",
       "type": "weapon"
     }
   ]
