@@ -2,7 +2,7 @@ import { pipe } from "fp-ts/function";
 import { fromNullable } from "fp-ts/Option";
 import { option } from "fp-ts";
 import { isLeft, left, right } from "fp-ts/Either";
-import type { Charm } from "@/domain/charm/charm";
+import type { Weapon } from "@/domain/weapon/weapon";
 import type { Costume } from "@/domain/costume/costume";
 import type { MemoriaWithConcentration } from "@/jotai/memoriaAtoms";
 import { ValidateResult } from "@/error/error";
@@ -32,14 +32,14 @@ export type CalcDiffResult = {
 export function calcFinalStatus(
   deck: MemoriaWithConcentration[],
   selfStatus: [number, number, number, number],
-  charm: Charm,
+  weapon: Weapon,
   costume: Costume,
 ): [number, number, number, number] {
   const baseStatus: [number, number, number, number] = [
-    selfStatus[0] + charm.status[0] + costume.status.summary.particular[0],
-    selfStatus[1] + charm.status[1] + costume.status.summary.particular[1],
-    selfStatus[2] + charm.status[2] + costume.status.summary.particular[2],
-    selfStatus[3] + charm.status[3] + costume.status.summary.particular[3],
+    selfStatus[0] + weapon.status[0] + costume.status.summary.particular[0],
+    selfStatus[1] + weapon.status[1] + costume.status.summary.particular[1],
+    selfStatus[2] + weapon.status[2] + costume.status.summary.particular[2],
+    selfStatus[3] + weapon.status[3] + costume.status.summary.particular[3],
   ];
 
   return deck.reduce(
@@ -83,7 +83,7 @@ export function calcDiff(
   compareMode: MemoriaWithConcentration,
   selfStatus: [number, number, number, number],
   [def, spDef]: [number, number],
-  charm: Charm,
+  weapon: Weapon,
   costume: Costume,
   adxOptions: { limitBraek: number; isAwakened: boolean },
   options: CalcDiffOptions,
@@ -93,8 +93,8 @@ export function calcDiff(
   const deckAfter = deckBefore.map((m) => (m.id === compareMode?.id ? candidate : m));
 
   // ステータスの計算
-  const statusBefore = calcFinalStatus(deckBefore, selfStatus, charm, costume);
-  const statusAfter = calcFinalStatus(deckAfter, selfStatus, charm, costume);
+  const statusBefore = calcFinalStatus(deckBefore, selfStatus, weapon, costume);
+  const statusAfter = calcFinalStatus(deckAfter, selfStatus, weapon, costume);
 
   // 評価オプションの構築
   const evaluateOptionsBefore: EvaluateOptions = {
@@ -112,7 +112,7 @@ export function calcDiff(
     deckBefore,
     statusBefore,
     [def, spDef],
-    charm,
+    weapon,
     costume,
     adxOptions,
     evaluateOptionsBefore,
@@ -122,7 +122,7 @@ export function calcDiff(
     deckAfter,
     statusAfter,
     [def, spDef],
-    charm,
+    weapon,
     costume,
     adxOptions,
     evaluateOptionsAfter,

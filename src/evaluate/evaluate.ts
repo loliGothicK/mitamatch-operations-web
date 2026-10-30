@@ -3,7 +3,7 @@ import { option } from "fp-ts";
 import { Option, none, some, fromNullable } from "fp-ts/Option";
 import { isLeft, left, right } from "fp-ts/Either";
 import { P, match } from "ts-pattern";
-import type { Charm } from "@/domain/charm/charm";
+import type { Weapon } from "@/domain/weapon/weapon";
 import type { Costume } from "@/domain/costume/costume";
 import type { MemoriaId } from "@/domain/memoria/memoria";
 import type { MemoriaWithConcentration } from "@/jotai/memoriaAtoms";
@@ -70,14 +70,15 @@ export function evaluate(
   deck: MemoriaWithConcentration[],
   [atk, spAtk, def, spDef]: [number, number, number, number],
   [opDef, opSpDef]: [number, number],
-  charm: Charm,
+  weapon: Weapon,
   costume: Costume,
   { limitBraek, isAwakened }: { limitBraek: number; isAwakened: boolean },
   options: EvaluateOptions,
 ): ValidateResult<EvaluateResult> {
   // 基本補正値の計算
   const themeRate = createThemeRates();
-  const charmAbilityRates = parseAbility(fromNullable(charm?.ability));
+  const ability = weapon?.effect.find((e) => e.kind.includes("レギオンマッチ"))?.description;
+  const charmAbilityRates = parseAbility(fromNullable(ability));
 
   // 衣装特殊スキルの解析
   const costumeSpecialResult = parseSpecialSkillEffect(

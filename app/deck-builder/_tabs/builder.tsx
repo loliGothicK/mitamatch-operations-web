@@ -86,7 +86,7 @@ import {
   type MemoriaWithConcentration,
   adLevelAtom,
   candidateAtom,
-  charmAtom,
+  weaponAtom,
   compareModeAtom,
   costumeAtom,
   deckBuilderQueryAtom,
@@ -815,7 +815,7 @@ function Compare({
   const [selfStatus] = useAtom(statusAtom);
   const [def] = useAtom(defAtom);
   const [spDef] = useAtom(spDefAtom);
-  const [charm] = useAtom(charmAtom);
+  const [weapon] = useAtom(weaponAtom);
   const [costume] = useAtom(costumeAtom);
   const [adLevel] = useAtom(adLevelAtom);
   const [targetBefore] = useAtom(targetBeforeAtom);
@@ -836,7 +836,7 @@ function Compare({
     compare,
     selfStatus,
     [def, spDef],
-    charm,
+    weapon,
     costume,
     { limitBraek: adLevel, isAwakened: true },
     {

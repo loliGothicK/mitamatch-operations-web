@@ -142,7 +142,8 @@ function parseRange(
 }
 
 const ATK_DAMAGE = /敵(.+)体に(通常|特殊)(.*ダメージ)を与え/;
-const ATK_EFF = /(?:、自身の|、敵の|、)(.+?)[をの]((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))/;
+const ATK_EFF =
+  /(?:、自身の|、敵の|、)(.+?)[をの]((?:絶大|超極大|超特大|極大|特大|大|小)?(?:アップ|ダウン))/;
 
 function parseDamage(
   description: string,
@@ -171,7 +172,7 @@ function parseDamage(
     pipe(
       fromNullable(
         description.match(
-          /(?:、自身の|、敵の|、)(.+?)[をの]((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))/g,
+          /(?:、自身の|、敵の|、)(.+?)[をの]((?:絶大|超極大|超特大|極大|特大|大|小)?(?:アップ|ダウン))/g,
         ),
       ),
       option.map((matches): ValidateResult<SkillEffect[]> =>
@@ -257,7 +258,7 @@ function parseDamage(
 }
 
 const STAT_UP_OR_DOWN =
-  /(?:味方|敵)(.+?)体の(.+?)を((?:超特大|極大|特大|大|小)?(?:アップ|ダウン))(?:、(.+?)を((?:超特大|極大|特大|大|小)?(?:アップ|ダウン)))?させる/;
+  /(?:味方|敵)(.+?)体の(.+?)を((?:絶大|超極大|超特大|極大|特大|大|小)?(?:アップ|ダウン))(?:、(.+?)を((?:絶大|超極大|超特大|極大|特大|大|小)?(?:アップ|ダウン)))?させる/;
 
 const parseStatChanges = (
   type: "buff" | "debuff",

@@ -4322,25 +4322,6 @@
       ]
     },
     {
-      "id": "01KYPMVKSN9M51REF8XTDMJ1YN",
-      "resourceId": 80,
-      "name": "グングニルカービンSP.TT",
-      "maker": "ユグドラシル",
-      "effect": [
-        {
-          "kind": "対ヒュージ・レギオンマッチ",
-          "description": "メモリアスキル効果UP+50%"
-        }
-      ],
-      "kind": 2,
-      "status": [
-        10446,
-        10470,
-        10458,
-        10626
-      ]
-    },
-    {
       "id": "01KYPMT3YDJ2CS9WTYYYABTG3K",
       "resourceId": 301,
       "name": "ブルンツヴィークFC-01",
@@ -4390,7 +4371,7 @@
       "id": "01KYPMQGY508CFAHR2BFH26KA9",
       "resourceId": 303,
       "name": "ミュルグレス",
-      "maker": "グランギニョル社",
+      "maker": "グランギニョル",
       "effect": [
         {
           "kind": "対ヒュージ",
@@ -4521,6 +4502,29 @@
       ]
     },
     {
+      "id": "01M6719YA64BNRV2EX2AMYJDBX",
+      "resourceId": 314,
+      "name": "オートクレール",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+9%。このCHARMが編成されたリリィの、火属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+9%。このCHARMが編成されたリリィの、火属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [
+        45600,
+        45600,
+        14400,
+        14400
+      ]
+    },
+    {
       "id": "01KYPMSR7DCEB3WDDZM638B8XJ",
       "resourceId": 315,
       "name": "グングニルV01",
@@ -4624,6 +4628,29 @@
       ]
     },
     {
+      "id": "01M6719XAY6ZQABF2CH8Y7NG79",
+      "resourceId": 320,
+      "name": "ティルフィングFC-01",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+10%"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+10%"
+        }
+      ],
+      "kind": 1,
+      "status": [
+        10403,
+        10382,
+        9943,
+        9964
+      ]
+    },
+    {
       "id": "01KYPMP7XNS7CJ6JAZT0TY7QN2",
       "resourceId": 73,
       "name": "シャルルマーニュSP.RS",
@@ -4643,7 +4670,49 @@
       ]
     },
     {
-      "id": "01KYPQ6TMKGA63RREREH5FB6PD",
+      "id": "01M0FR9FC2D2Y1CZ6HADW07506",
+      "resourceId": 28,
+      "name": "グングニルカービンSP.BE",
+      "maker": "ユグドラシル",
+      "effect": [
+        {
+          "kind": "対ヒュージ・レギオンマッチ",
+          "description": "メモリアスキル効果UP+50%"
+        }
+      ],
+      "kind": 2,
+      "status": [
+        10446,
+        10470,
+        10458,
+        10626
+      ]
+    },
+    {
+      "id": "01M671A08PJV4RKQKD1SR1K9R8",
+      "resourceId": 332,
+      "name": "マルテV01",
+      "maker": "グランギニョル",
+      "effect": [
+        {
+          "kind": "対ヒュージ",
+          "description": "メモリアスキル効果UP+9%。このCHARMが編成されたリリィの、火属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        },
+        {
+          "kind": "レギオンマッチ",
+          "description": "メモリアスキル効果UP+9%。このCHARMが編成されたリリィの、火属性が多いほどメモリアスキル効果UP(最大10.5%)。風属性が多いほどメモリアスキル効果UP(最大10.5%)。※編成メモリアのカウントはそれぞれ最大7。サブメモリアは含まない。"
+        }
+      ],
+      "kind": 1,
+      "status": [
+        14400,
+        14400,
+        45600,
+        45600
+      ]
+    },
+    {
+      "id": "01M669GEAVMPXPRZ4BFP1HNM6X",
       "resourceId": 108,
       "name": "グングニルカービンSP.IF",
       "maker": "ユグドラシル",
@@ -4662,9 +4731,9 @@
       ]
     },
     {
-      "id": "01M0FR9FC2D2Y1CZ6HADW07506",
-      "resourceId": 28,
-      "name": "グングニルカービンSP.BE",
+      "id": "01M6719Z9EGQVEZEKKYEXFQTYR",
+      "resourceId": 80,
+      "name": "グングニルカービンSP.TT",
       "maker": "ユグドラシル",
       "effect": [
         {

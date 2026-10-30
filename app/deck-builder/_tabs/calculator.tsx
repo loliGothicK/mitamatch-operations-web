@@ -1,12 +1,12 @@
 "use client";
 
 import NumberInput from "@/components/common/NumberInput";
-import { charmList } from "@/domain/charm/charm";
+import { weaponList } from "@/domain/weapon/weapon";
 import { costumeList } from "@/domain/costume/costume";
 import { evaluate, type StackOption } from "@/evaluate/evaluate";
 import {
   adLevelAtom,
-  charmAtom,
+  weaponAtom,
   costumeAtom,
   defAtom,
   rwDeckAtom,
@@ -130,7 +130,7 @@ export function Calculator() {
   const [deck] = useAtom(rwDeckAtom);
   const [legendaryDeck] = useAtom(rwLegendaryDeckAtom);
   const [sw] = useAtom(swAtom);
-  const [charm, setCharm] = useAtom(charmAtom);
+  const [weapon, setWeapon] = useAtom(weaponAtom);
   const [costume, setCostume] = useAtom(costumeAtom);
   const [def, setDef] = useAtom(defAtom);
   const [spDef, setSpDef] = useAtom(spDefAtom);
@@ -140,13 +140,13 @@ export function Calculator() {
   const [adLevel, setAdLevel] = useAtom(adLevelAtom);
   const [settings] = useAtom(advancedSettings);
 
-  const finalStatus = calcFinalStatus([...deck, ...legendaryDeck], selfStatus, charm, costume);
+  const finalStatus = calcFinalStatus([...deck, ...legendaryDeck], selfStatus, weapon, costume);
 
   const evaluateResult = evaluate(
     [...deck, ...legendaryDeck],
     finalStatus,
     [def, spDef],
-    charm,
+    weapon,
     costume,
     { limitBraek: adLevel, isAwakened: true },
     {
@@ -239,17 +239,18 @@ export function Calculator() {
   }) => {
     return `${type}/${upDown}: ${amount}`;
   };
-  const charmOptions = charmList
-    .filter((charm) => {
+  const weaponOptions = weaponList
+    .map((weapon) => ({
+      id: weapon.id,
+      title: weapon.name,
+      ability: weapon.effect.find((e) => e.kind.includes("レギオンマッチ"))?.description ?? "",
+    }))
+    .filter((weapon) => {
       if (charmFilter.length === 0) {
         return true;
       }
-      return charmFilter.every((elem) => charm.ability.includes(elem));
-    })
-    .map((charm) => ({
-      title: charm.name,
-      ability: charm.ability,
-    }));
+      return charmFilter.every((elem) => weapon.ability.includes(elem));
+    });
   const costumeOptions = costumeList
     .filter((costume) => {
       if (isNone(costume.specialSkill)) {
@@ -346,8 +347,9 @@ export function Calculator() {
           </FormGroup>
           <Autocomplete
             disablePortal
-            options={charmOptions.sort((a, b) => a.ability.localeCompare(b.ability))}
+            options={weaponOptions.sort((a, b) => a.ability.localeCompare(b.ability))}
             groupBy={(option) => option.ability}
+            getOptionKey={(option) => option.id}
             getOptionLabel={(option) => option.title}
             renderInput={(params) => <TextField {...params} label="charm" />}
             renderGroup={(params) => (
@@ -358,7 +360,7 @@ export function Calculator() {
             )}
             onChange={(_, value) => {
               if (value) {
-                setCharm(charmList.find((charm) => charm.name === value.title)!);
+                setWeapon(weaponList.find((weapon) => weapon.id === value.id)!);
               }
             }}
             sx={{ marginTop: 2 }}

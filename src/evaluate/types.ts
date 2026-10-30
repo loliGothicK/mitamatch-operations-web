@@ -8,7 +8,8 @@ export type Amount =
   | "extraLarge" // 特大アップ
   | "superLarge" // 超特大アップ
   | "ultraLarge" // 極大アップ
-  | "superUltraLarge"; // 超極大アップ
+  | "superUltraLarge" // 超極大アップ
+  | "extremeLarge"; // 絶大アップ
 
 export type StatusKind = (typeof statusKind)[number];
 

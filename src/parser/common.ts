@@ -92,6 +92,9 @@ export const parseAmount = (
     .with(P.union("超極大アップ", "超極大ダウン", "超極大ダメージ", "超極大回復"), () =>
       right("superUltraLarge"),
     )
+    .with(P.union("絶大アップ", "絶大ダウン", "絶大ダメージ", "絶大回復"), () =>
+      right("extremeLarge"),
+    )
     .otherwise((src) =>
       bail(src, "given text doesn't match any amount", {
         ...meta,

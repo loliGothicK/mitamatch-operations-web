@@ -82,7 +82,7 @@ const parseSingleStatus = (
   path: CallPath = CallPath.empty,
 ): ValidateResult<PossibleStatus[]> =>
   separator(
-    status.split("と").map((stat) =>
+    status.split(/と|・/).map((stat) =>
       match<string, Either<MitamaError, PossibleStatus[]>>(stat)
         .with("ATK", () => right(["ATK"]))
         .with("DEF", () => right(["DEF"]))
@@ -91,19 +91,9 @@ const parseSingleStatus = (
         .with("火属性攻撃力", () => right(["Fire ATK"]))
         .with("水属性攻撃力", () => right(["Water ATK"]))
         .with("風属性攻撃力", () => right(["Wind ATK"]))
-        .with("水属性攻撃力・風属性攻撃力", () => right(["Water ATK", "Wind ATK"]))
-        .with("火属性攻撃力・水属性攻撃力", () => right(["Fire ATK", "Water ATK"]))
         .with("火属性防御力", () => right(["Fire DEF"]))
         .with("水属性防御力", () => right(["Water DEF"]))
         .with("風属性防御力", () => right(["Wind DEF"]))
-        .with("水属性防御力・風属性防御力", () => right(["Water DEF", "Wind DEF"]))
-        .with("火属性防御力・水属性防御力", () => right(["Fire DEF", "Water DEF"]))
-        .with("火属性攻撃力・水属性攻撃力・風属性攻撃力", () =>
-          right(["Fire ATK", "Water ATK", "Wind ATK"]),
-        )
-        .with("火属性防御力・水属性防御力・風属性防御力", () =>
-          right(["Fire DEF", "Water DEF", "Wind DEF"]),
-        )
         .otherwise((target) =>
           bail(target, `given text doesn't match any status`, {
             path: path.join("parseSingleStatus"),

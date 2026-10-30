@@ -4190,7 +4190,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -4512,7 +4512,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "テスタメントS",
-        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを20％減少する。",
         "note": "効果の0.2%適用",
         "effectTime": 40
       },
@@ -4620,7 +4620,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -4836,7 +4836,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -9557,7 +9557,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -9986,7 +9986,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -11075,7 +11075,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -11276,7 +11276,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -11678,7 +11678,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -12626,7 +12626,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "フルールファンタズム",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を大アップする。※「ファンタズムS」より効果時間が長く、メモリアスキル効果の増加量が大きい。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を20％アップする。※「ファンタズムS」より効果時間が長く、メモリアスキル効果の増加量が大きい。",
         "note": "最大確率30%, メモリアスキル効果が20%上昇",
         "effectTime": 50
       },
@@ -13315,7 +13315,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "テンプルレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」よりCHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」よりCHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 35
       },
@@ -13990,7 +13990,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -17462,6 +17462,30 @@
             "jobSkillType": 11,
             "value": 500
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -18243,6 +18267,30 @@
           {
             "jobSkillType": 3,
             "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
           }
         ],
         [
@@ -20282,6 +20330,30 @@
             "jobSkillType": 11,
             "value": 500
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -20393,6 +20465,30 @@
           {
             "jobSkillType": 10,
             "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
           }
         ]
       ],
@@ -22985,6 +23081,30 @@
             "jobSkillType": 9,
             "value": 50
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -23097,6 +23217,30 @@
             "jobSkillType": 9,
             "value": 50
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -23208,6 +23352,30 @@
           {
             "jobSkillType": 8,
             "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
           }
         ]
       ],
@@ -25997,6 +26165,50 @@
             "jobSkillType": 6,
             "value": 25
           }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 2,
+            "value": 100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -26652,6 +26864,30 @@
           {
             "jobSkillType": 8,
             "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
           }
         ]
       ],
@@ -33131,6 +33367,30 @@
             "jobSkillType": 11,
             "value": 500
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -33922,6 +34182,30 @@
           {
             "jobSkillType": 11,
             "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
           }
         ]
       ],
@@ -34902,6 +35186,30 @@
             "jobSkillType": 10,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -35150,6 +35458,30 @@
             "jobSkillType": 11,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -35162,7 +35494,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -36164,6 +36496,30 @@
             "jobSkillType": 11,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -36401,6 +36757,30 @@
           {
             "jobSkillType": 2,
             "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
           }
         ],
         [
@@ -36725,6 +37105,30 @@
             "jobSkillType": 10,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -36826,6 +37230,30 @@
           {
             "jobSkillType": 3,
             "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
           }
         ],
         [
@@ -37248,7 +37676,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -37510,7 +37938,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "テスタメントS",
-        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを20％減少する。",
         "note": "効果の0.2%適用",
         "effectTime": 40
       },
@@ -37586,7 +38014,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -38082,6 +38510,30 @@
           {
             "jobSkillType": 2,
             "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
           }
         ],
         [
@@ -38676,6 +39128,30 @@
             "jobSkillType": 11,
             "value": 500
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -39148,6 +39624,30 @@
             "jobSkillType": 11,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -39372,6 +39872,30 @@
             "jobSkillType": 10,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -39473,6 +39997,30 @@
           {
             "jobSkillType": 2,
             "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
           }
         ],
         [
@@ -39596,6 +40144,30 @@
             "jobSkillType": 10,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -39697,6 +40269,30 @@
           {
             "jobSkillType": 3,
             "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
           }
         ],
         [
@@ -39956,6 +40552,30 @@
             "jobSkillType": 11,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -40056,6 +40676,30 @@
           {
             "jobSkillType": 2,
             "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
           }
         ],
         [
@@ -40767,6 +41411,30 @@
             "jobSkillType": 10,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -40879,6 +41547,30 @@
             "jobSkillType": 11,
             "value": 1500
           }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
         ]
       ],
       "specialSkills": [],
@@ -40980,6 +41672,30 @@
           {
             "jobSkillType": 2,
             "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 500
+          },
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
           }
         ],
         [
@@ -42280,7 +42996,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "アルケミートレース",
-        "description": "[ブーステッドスキル]自身の攻撃力/防御力をアップする。さらにCHARM「アルケミートレース」を編成している場合、CHARM特性のメモリアスキル効果UPとCHARMの戦闘力を増加させる。",
+        "description": "[ブーステッドスキル]自身の攻撃力/防御力をアップする。さらにCHARM「アルケミートレース」を編成している場合、CHARM特性のメモリアスキル効果UPを50％増加させ、CHARMの戦闘力を増加させる。",
         "note": "自身の攻撃力が10%上昇, 自身の防御力が10%上昇, CHARM特性のメモリアスキル効果50%上昇",
         "effectTime": 60
       },
@@ -42727,6 +43443,30 @@
           },
           {
             "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
             "value": 1500
           }
         ]
@@ -43202,6 +43942,30 @@
           },
           {
             "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
             "value": 1500
           }
         ]
@@ -46534,6 +47298,30 @@
           {
             "jobSkillType": 4,
             "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 500
+          },
+          {
+            "jobSkillType": 5,
+            "value": 500
+          },
+          {
+            "jobSkillType": 1,
+            "value": 500
           }
         ],
         [
@@ -54358,7 +55146,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "アルケミートレース",
-        "description": "[ブーステッドスキル]自身の攻撃力/防御力をアップする。さらにCHARM「アルケミートレース」を編成している場合、CHARM特性のメモリアスキル効果UPとCHARMの戦闘力を増加させる。",
+        "description": "[ブーステッドスキル]自身の攻撃力/防御力をアップする。さらにCHARM「アルケミートレース」を編成している場合、CHARM特性のメモリアスキル効果UPを50％増加させ、CHARMの戦闘力を増加させる。",
         "note": "自身の攻撃力が10%上昇, 自身の防御力が10%上昇, CHARM特性のメモリアスキル効果50%上昇",
         "effectTime": 60
       },
@@ -61182,7 +61970,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -61615,7 +62403,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "テスタメントS",
-        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを20％減少する。",
         "note": "効果の0.2%適用",
         "effectTime": 40
       },
@@ -61754,7 +62542,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -64611,7 +65399,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -74165,7 +74953,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -77160,7 +77948,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "エルヴンファンタズム",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。※「ファンタズムS」より効果時間が長い。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。※「ファンタズムS」より効果時間が長い。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 50
       },
@@ -77587,7 +78375,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "エルヴンテスタメント",
-        "description": "一定時間、味方全員が使用したメモリアスキルの30％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。※「テスタメントS」より適用割合が大きい。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの30％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを20％減少する。※「テスタメントS」より適用割合が大きい。",
         "note": "効果の0.3%適用",
         "effectTime": 40
       },
@@ -77726,7 +78514,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "エルヴンレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果をアップする。※「レジスタS」より効果時間が長い。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。※「レジスタS」より効果時間が長い。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 45
       },
@@ -78004,7 +78792,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "エルヴンレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果をアップする。※「レジスタS」より効果時間が長い。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。※「レジスタS」より効果時間が長い。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 45
       },
@@ -83205,7 +83993,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -85660,7 +86448,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -87040,7 +87828,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -89317,7 +90105,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -90434,7 +91222,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -91545,7 +92333,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -92656,7 +93444,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -93809,7 +94597,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -94968,7 +95756,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -96148,7 +96936,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "エプレ・レジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果をアップする。※「レジスタS」より攻撃力/防御力の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。※「レジスタS」より攻撃力/防御力の増加量が大きい。",
         "note": "味方全体の攻撃力が30%上昇, 味方全体の防御力が30%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -97445,7 +98233,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "イルミンファンタズム",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を大アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を20％アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
         "note": "最大確率30%, メモリアスキル効果が20%上昇",
         "effectTime": 40
       },
@@ -98941,7 +99729,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -104244,7 +105032,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -106221,7 +107009,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -106362,7 +107150,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -106497,7 +107285,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -106632,7 +107420,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -106767,7 +107555,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -106908,7 +107696,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -109322,7 +110110,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -110170,7 +110958,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -110371,7 +111159,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -110914,7 +111702,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "テスタメントS",
-        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを20％減少する。",
         "note": "効果の0.2%適用",
         "effectTime": 40
       },
@@ -111316,7 +112104,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -112008,7 +112796,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -114543,7 +115331,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "プレスレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」よりCHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」よりCHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 35
       },
@@ -115520,7 +116308,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -115796,7 +116584,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -116066,7 +116854,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -116336,7 +117124,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -116612,7 +117400,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -116894,7 +117682,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -118125,7 +118913,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -118326,7 +119114,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -121991,7 +122779,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -123457,7 +124245,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "イルミンファンタズム",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を大アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を20％アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
         "note": "最大確率30%, メモリアスキル効果が20%上昇",
         "effectTime": 40
       },
@@ -123598,7 +124386,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "イルミンファンタズム",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を大アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を20％アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
         "note": "最大確率30%, メモリアスキル効果が20%上昇",
         "effectTime": 40
       },
@@ -123733,7 +124521,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "イルミンファンタズム",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を大アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を20％アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
         "note": "最大確率30%, メモリアスキル効果が20%上昇",
         "effectTime": 40
       },
@@ -123868,7 +124656,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "イルミンファンタズム",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を大アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を20％アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
         "note": "最大確率30%, メモリアスキル効果が20%上昇",
         "effectTime": 40
       },
@@ -124003,7 +124791,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "イルミンファンタズム",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を大アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を20％アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
         "note": "最大確率30%, メモリアスキル効果が20%上昇",
         "effectTime": 40
       },
@@ -124144,7 +124932,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "イルミンファンタズム",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を大アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を20％アップする。※「ファンタズムS」よりメモリアスキル効果の増加量が大きい",
         "note": "最大確率30%, メモリアスキル効果が20%上昇",
         "effectTime": 40
       },
@@ -126725,7 +127513,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "ミスティックレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が30%上昇, 味方全体の防御力が30%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 35
       },
@@ -129469,7 +130257,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -129974,7 +130762,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -132762,7 +133550,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -132903,7 +133691,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -133038,7 +133826,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -133173,7 +133961,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -133308,7 +134096,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -133449,7 +134237,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -138016,7 +138804,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "フルールレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が30%上昇, 味方全体の防御力が30%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 35
       },
@@ -138432,7 +139220,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "フルールテスタメント",
-        "description": "一定時間、味方全員が使用したメモリアスキルの30％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。※「テスタメントS」より効果時間が長く、適用割合が大きい。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの30％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを20％減少する。※「テスタメントS」より効果時間が長く、適用割合が大きい。",
         "note": "効果の0.3%適用",
         "effectTime": 50
       },
@@ -140193,7 +140981,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -140394,7 +141182,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -140543,7 +141331,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "リンケージレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が30%上昇, 味方全体の防御力が30%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 35
       },
@@ -142542,7 +143330,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "マルスレジスタ",
-        "description": "一定時間、味方全体のCHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップし、複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。",
+        "description": "一定時間、味方全体のCHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップし、複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。",
         "note": "最大確率30%, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 30
       },
@@ -144111,7 +144899,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -144312,7 +145100,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "テスタメントS",
-        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを20％減少する。",
         "note": "効果の0.2%適用",
         "effectTime": 40
       },
@@ -145770,7 +146558,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -146860,7 +147648,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -147483,7 +148271,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -155658,7 +156446,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -159761,7 +160549,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "ジャストガード",
-        "description": "一定時間、味方全体が使用したメモリアスキルの30%の効果が、他の1体にも適用される。さらに、敵から受けるダメージを大幅に減少する。※「テスタメントS」より効果時間が短く、適用割合が大きい。",
+        "description": "一定時間、味方全体が使用したメモリアスキルの30%の効果が、他の1体にも適用される。さらに、敵から受けるダメージを70％減少する。※「テスタメントS」より効果時間が短く、適用割合が大きい。",
         "note": "効果の0.3%適用",
         "effectTime": 20
       },
@@ -160377,7 +161165,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "エルシアレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」より効果時間が長く、CHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」より効果時間が長く、CHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 45
       },
@@ -161702,7 +162490,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -162246,7 +163034,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -162920,7 +163708,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "テスタメントS",
-        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを20％減少する。",
         "note": "効果の0.2%適用",
         "effectTime": 40
       },
@@ -164761,7 +165549,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -166475,7 +167263,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "テスタメントS",
-        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを減少する。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの20％の効果が、他の1体にも適用される。さらに、敵から受けるダメージを20％減少する。",
         "note": "効果の0.2%適用",
         "effectTime": 40
       },
@@ -166896,7 +167684,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -168208,7 +168996,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -171487,7 +172275,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -174255,7 +175043,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "グリントテスタメント",
-        "description": "一定時間、味方全員が使用したメモリアスキルの30％の効果が、他の1体にも適用され、敵から受けるダメージを減少する。さらに、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。",
+        "description": "一定時間、味方全員が使用したメモリアスキルの30％の効果が、他の1体にも適用され、敵から受けるダメージを20％減少する。さらに、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。",
         "note": "最大確率30%, 効果の0.3%適用",
         "effectTime": 50
       },
@@ -174528,7 +175316,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "グリントレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」より効果時間が長く、CHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」より効果時間が長く、CHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 45
       },
@@ -185083,7 +185871,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -185356,7 +186144,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "フィデスレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」より効果時間が長く、CHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」より効果時間が長く、CHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 45
       },
@@ -186887,7 +187675,7 @@
       "cardType": 2,
       "rareSkill": {
         "name": "レグラレジスタ",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」より効果時間が長く、CHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」より効果時間が長く、CHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 45
       },
@@ -189217,8 +190005,7 @@
           "requiresAwakening": true
         }
       ],
-      "released_at": "2026-10-10",
-      "phantasm": true
+      "released_at": "2026-10-10"
     },
     {
       "id": "01M4DXXKJ92G9Z7BEJ5CDD125N",
@@ -189491,8 +190278,7 @@
           "requiresAwakening": true
         }
       ],
-      "released_at": "2026-10-10",
-      "phantasm": true
+      "released_at": "2026-10-10"
     },
     {
       "id": "01M4DXXNGSH79NJWCXXKX9NEXY",
@@ -189765,8 +190551,7 @@
           "requiresAwakening": true
         }
       ],
-      "released_at": "2026-10-10",
-      "phantasm": true
+      "released_at": "2026-10-10"
     },
     {
       "id": "01M4DXXDPSZAQ4T3VJ3JN2GG4P",
@@ -189775,7 +190560,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "天の護り",
-        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が30%上昇, 味方全体の防御力が30%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 45
       },
@@ -189909,8 +190694,7 @@
           "requiresAwakening": false
         }
       ],
-      "released_at": "2026-10-10",
-      "phantasm": true
+      "released_at": "2026-10-10"
     },
     {
       "id": "01M4DXXHKSY7FFTDPSHKK8QS5A",
@@ -189919,7 +190703,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "魔獣たちとの休息",
-        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を大アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
+        "description": "一定時間、味方全体の攻撃力/防御力を大アップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を30％アップする。※「レジスタS」より攻撃力/防御力/CHARM特性効果の増加量が大きい。",
         "note": "味方全体の攻撃力が30%上昇, 味方全体の防御力が30%上昇, CHARM特性のメモリアスキル効果30%上昇, CHARM特性の支援/妨害効果が30%上昇",
         "effectTime": 45
       },
@@ -190053,8 +190837,7 @@
           "requiresAwakening": false
         }
       ],
-      "released_at": "2026-10-10",
-      "phantasm": true
+      "released_at": "2026-10-10"
     },
     {
       "id": "01M2QAZM9ZSMP9NGWNXTP2DTW8",
@@ -190485,7 +191268,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "ファンタズムS",
-        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果をアップする。",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。さらに、メモリアスキル効果を10％アップする。",
         "note": "最大確率30%, メモリアスキル効果が10%上昇",
         "effectTime": 40
       },
@@ -191571,6 +192354,280 @@
       "released_at": "2026-09-20"
     },
     {
+      "id": "01M671ASAKJMHGV7FMN935FJQ9",
+      "uniqueId": "01M671AT9V8QD3GKJJNJFH1GY6",
+      "name": "安藤鶴紗/ハッピーハロウィン",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "ファンタズム",
+        "description": "一定時間、味方全体の複数体が対象となるスキルの対象人数が、最大数になる確率がアップする。",
+        "note": "最大確率20%",
+        "effectTime": 40
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
       "id": "01M3PJ5ANJQA6VX2TTAK63B5QT",
       "uniqueId": "01M3PJ5BMT4BBA182N23AGWNGR",
       "name": "初鹿野瑤/モンスターハロウィン",
@@ -191844,6 +192901,423 @@
       "released_at": "2026-10-01"
     },
     {
+      "id": "01M671B23VMS9G2H22KCCYRFPA",
+      "uniqueId": "01M671B333F527RSSAPSAY67A2",
+      "name": "本間秋日/スプーキーハーベスター",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "ヘリオスフィア",
+        "description": "一定時間、敵全体の攻撃力/防御力をダウンする。",
+        "note": "敵全体の攻撃力が10%低下, 敵全体の防御力が10%低下",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671B51KD1Z29BSYEXB6QWN0",
+      "uniqueId": "01M671B60VJZRNF9GX0383YD9Q",
+      "name": "石塚藤乃/スプーキーハーベスター",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 350
+          },
+          {
+            "jobSkillType": 5,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "火属性メモリア効果増加AⅢ",
+          "description": "自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
       "id": "01M4DXXBR92TS2NCJB34NW92J7",
       "uniqueId": "01M4DXXCQHADVK0KM9HWNKZMCG",
       "name": "毛綱乃彩/モンスターハロウィン",
@@ -192114,7 +193588,2490 @@
           "requiresAwakening": true
         }
       ],
-      "released_at": "2026-10-10",
+      "released_at": "2026-10-10"
+    },
+    {
+      "id": "01M671AX7K0KNWK4W4G2MMMXAE",
+      "uniqueId": "01M671AY6V7D29XJK23MBMF7Q6",
+      "name": "外崎杏花/スプーキーハーベスター",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "ルナティックトランサー",
+        "description": "一定時間、自身の攻撃力/防御力が大幅にアップし、その間は敵からの妨害も受けない。ただし、味方からの支援/回復も受けられなくなる。",
+        "note": "自身の攻撃力が30%上昇, 自身の防御力が30%上昇",
+        "effectTime": 50
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD水属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する水属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD水属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する水属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671B703FZ8JM2FC33RT3X0B",
+      "uniqueId": "01M671B7ZBY6KSVE7HASKG8MR7",
+      "name": "楓・J・ヌーベル/ソレムプレッジ",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "リライズレジスタ",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を35％アップする。",
+        "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果35%上昇, CHARM特性の支援/妨害効果が35%上昇",
+        "effectTime": 40
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671AV93BTGS6B6M5K4DSHVZ",
+      "uniqueId": "01M671AW8BBW6CQ4VGKDFVMZ5H",
+      "name": "二川二水/ソレムプレッジ",
+      "cardType": 6,
+      "rareSkill": {
+        "name": "リライズホークアイ",
+        "description": "使用時、発動中のオーダーの発動効果時間を延長する。※「鷹の目S」より延長時間が長い。",
+        "note": "オーダー時間を30秒延長する",
+        "effectTime": 0
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671AZ637K2S6NJFYZPRDMQ0",
+      "uniqueId": "01M671B05BZFR0DMBQ8W6S2WNJ",
+      "name": "郭神琳/ソレムプレッジ",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "リライズテスタメント",
+        "description": "一定時間、味方全員が使用したメモリアスキルの30％の効果が、他の1体にも適用される。自身を除く味方がレアスキルを発動中、自身のメモリアスキル効果を50%アップする。",
+        "note": "効果の0.3%適用",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671B14KAFF2K16MFFKW30E5",
+      "uniqueId": "01M671B42BC2STKWZZPEXXN10H",
+      "name": "王雨嘉/ソレムプレッジ",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "リライズスケール",
+        "description": "一定時間、敵全体の防御力を特大ダウンする。さらに、被ダメージを10%アップさせる。自身を除く味方がレアスキルを発動中、自身のメモリアスキル効果を50%アップする。",
+        "note": "敵全体の防御力が40%低下",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671AFJ3CHAKYFZDF2NX1TCH",
+      "uniqueId": "01M671AGHBG42NCC57N33VMCS9",
+      "name": "ミリアム/ソレムプレッジ",
+      "cardType": 2,
+      "rareSkill": {
+        "name": "リライズPh.トランセンデンス",
+        "description": "一定時間、自身の攻撃力/防御力が大アップし、メモリア使用時MPを消費しない。さらに、自身のメモリアスキル効果を65%アップする。",
+        "effectTime": 150
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 8,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671AHGKE8ZHNY9Z7MEN94H9",
+      "uniqueId": "01M671AJFVCZ04Z9CVA8ZVS5PZ",
+      "name": "早川弥宏/ソレムプレッジ",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "リライズレジスタ",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を35％アップする。",
+        "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果35%上昇, CHARM特性の支援/妨害効果が35%上昇",
+        "effectTime": 40
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 350
+          },
+          {
+            "jobSkillType": 5,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 4,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "火属性メモリア効果増加AⅢ",
+          "description": "自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671AKF3F9SMGV75VQC8MWES",
+      "uniqueId": "01M671AMEB9DN13MZ7HR1WNQE5",
+      "name": "富永真/ソレムプレッジ",
+      "cardType": 4,
+      "rareSkill": {
+        "name": "リライズヘリオスフィア",
+        "description": "一定時間、敵全体の攻撃力/防御力を大ダウンし、味方全体のメモリアスキル効果を25％アップする。",
+        "note": "敵全体の攻撃力が30%低下, 敵全体の防御力が30%低下, メモリアスキル効果が25%上昇",
+        "effectTime": 40
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 150
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 400
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 350
+          },
+          {
+            "jobSkillType": 3,
+            "value": 350
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 600
+          },
+          {
+            "jobSkillType": 3,
+            "value": 850
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 600
+          },
+          {
+            "jobSkillType": 5,
+            "value": 600
+          },
+          {
+            "jobSkillType": 1,
+            "value": 600
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "風属性メモリア効果増加AⅡ",
+          "description": "自身が使用する風属性メモリアのスキル効果3％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "水属性メモリア効果耐性AⅠ",
+          "description": "自身に対する水属性メモリアのダメージ/妨害スキル効果2%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671ANDKSFB8RRBY3YACP6ME",
+      "uniqueId": "01M671APCVG761NE0ZJ2C6PZMY",
+      "name": "高須賀月詩/ノクターンミラージュ",
+      "cardType": 7,
+      "rareSkill": {
+        "name": "円環の御手",
+        "description": "レアスキル発動時には、サブCHARMに設定しているCHARMの戦闘力が加算される。かつ特性も適用される。",
+        "effectTime": 60
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 10,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
+      "phantasm": true
+    },
+    {
+      "id": "01M671AQC3W9SP5QC1NM0831EH",
+      "uniqueId": "01M671ARBBR6JD7KG9XXZDBE8Z",
+      "name": "牧野美岳/おやすみスタイル",
+      "cardType": 5,
+      "rareSkill": {
+        "name": "レジスタ",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。",
+        "note": "味方全体の攻撃力が10%上昇, 味方全体の防御力が10%上昇",
+        "effectTime": 35
+      },
+      "jobSkills": [
+        [
+          {
+            "jobSkillType": 5,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 30
+          }
+        ],
+        [
+          {
+            "jobSkillType": 4,
+            "value": 900
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 40
+          }
+        ],
+        [
+          {
+            "jobSkillType": 3,
+            "value": 1100
+          }
+        ],
+        [
+          {
+            "jobSkillType": 6,
+            "value": 50
+          }
+        ],
+        [
+          {
+            "jobSkillType": 2,
+            "value": 1000
+          }
+        ],
+        [
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 300
+          },
+          {
+            "jobSkillType": 5,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ],
+        [
+          {
+            "jobSkillType": 1,
+            "value": 200
+          },
+          {
+            "jobSkillType": 3,
+            "value": 200
+          }
+        ],
+        [
+          {
+            "jobSkillType": 9,
+            "value": 1500
+          },
+          {
+            "jobSkillType": 11,
+            "value": 1500
+          }
+        ]
+      ],
+      "specialSkills": [
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅰ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4%DOWN",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1％UP",
+          "requiredLimitBreak": 0,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅱ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.5%DOWN",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅱ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.5％UP",
+          "requiredLimitBreak": 1,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅲ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果4.8%DOWN",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅲ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が1.8％UP",
+          "requiredLimitBreak": 2,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性効果増加Ⅰ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアのスキル効果5％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD火属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する火属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD風属性効果耐性Ⅳ",
+          "description": "[レギオンマッチ]自身に対する風属性メモリアのダメージ/妨害スキル効果5%DOWN",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        },
+        {
+          "name": "AD風属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する風属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": false
+        },
+        {
+          "name": "AD火属性補助発動率増加Ⅳ",
+          "description": "[レギオンマッチ]自身が使用する火属性メモリアの補助スキル発動確率が2％UP",
+          "requiredLimitBreak": 3,
+          "requiresAwakening": true
+        }
+      ],
+      "released_at": "2026-11-03",
       "phantasm": true
     },
     {
@@ -193302,7 +197259,7 @@
       "cardType": 4,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -195303,7 +199260,7 @@
       "cardType": 5,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -196977,7 +200934,7 @@
       "cardType": 6,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -198651,7 +202608,7 @@
       "cardType": 7,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -200503,8 +204460,7 @@
           "requiresAwakening": true
         }
       ],
-      "released_at": "2026-10-10",
-      "phantasm": true
+      "released_at": "2026-10-10"
     },
     {
       "id": "01KCKJYNZ0ZJSNS1JJS54PYJ9V",
@@ -200665,7 +204621,7 @@
       "cardType": 1,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },
@@ -202732,7 +206688,7 @@
       "cardType": 3,
       "rareSkill": {
         "name": "レジスタS",
-        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を増加させる。",
+        "description": "一定時間、味方全体の攻撃力/防御力をアップする。さらに、CHARM特性のメモリアスキル効果UP、支援、妨害効果を20％アップする。",
         "note": "味方全体の攻撃力が20%上昇, 味方全体の防御力が20%上昇, CHARM特性のメモリアスキル効果20%上昇, CHARM特性の支援/妨害効果が20%上昇",
         "effectTime": 35
       },

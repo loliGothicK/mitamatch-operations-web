@@ -17,7 +17,7 @@ import type {
   RecoverySupportSearch,
   VanguardSupportSearch,
 } from "@/types/searchType";
-import { charmList } from "@/domain/charm/charm";
+import { weaponList } from "@/domain/weapon/weapon";
 import { costumeList } from "@/domain/costume/costume";
 import { match } from "ts-pattern";
 import { ATTRIBUTES } from "@/parser/skill";
@@ -35,7 +35,7 @@ export const targetAfterAtom = atom<MemoriaId[]>([]);
 export const compareModeAtom = atom<MemoriaWithConcentration | undefined>(undefined);
 export const candidateAtom = atom<MemoriaWithConcentration | undefined>(undefined);
 export const adLevelAtom = atom(3);
-export const charmAtom = atom(charmList.reverse()[0]);
+export const weaponAtom = atom(weaponList.toReversed()[0]);
 export const costumeAtom = atom(costumeList.reverse()[0]);
 export const defAtom = atom(400_000);
 export const spDefAtom = atom(400_000);

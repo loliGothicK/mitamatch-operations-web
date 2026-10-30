@@ -40,7 +40,13 @@ test.each(data)(".parseSkill($name)", (memoria: any) => {
 });
 
 // test for 極大ダメージ
-test.each(data.filter(({ gvgSkill }: any) => gvgSkill.description.includes("極大ダメージ")))(
+test.each(
+  data.filter(
+    ({ gvgSkill }: any) =>
+      gvgSkill.description.includes("極大ダメージ") &&
+      !gvgSkill.description.includes("超極大ダメージ"),
+  ),
+)(
   ".parseSkill($name)/極大ダメージ",
   (memoria: any) => {
     expect(

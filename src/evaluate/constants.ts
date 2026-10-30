@@ -54,6 +54,7 @@ export const LEVEL_RATES: Record<Exclude<Amount, "small">, number> = {
   superLarge: 0.21,
   ultraLarge: 0.24,
   superUltraLarge: 0.27,
+  extremeLarge: 0.3,
 } as const;
 
 // ダメージスキル倍率（単体）
@@ -152,6 +153,7 @@ export const SUPPORT_RATES: Record<Exclude<Amount, "small">, number> = {
   superLarge: 0.021,
   ultraLarge: 0.024,
   superUltraLarge: 0.027,
+  extremeLarge: 0.03,
 } as const;
 
 // 基本補正値
