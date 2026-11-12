@@ -171385,9 +171385,9 @@
       ]
     },
     {
-      "id": "01M4DXYJ6Y16184NNHXR29QP71",
-      "uniqueId": "01M4DXYG8EB7H9BXGB73VSB0C3",
-      "name": "Did you fall over",
+      "id": "01M77MRG7Z9B6Z78PH15A8YWFG",
+      "uniqueId": "01M77MRE9FR57C4V19WGMEZYEV",
+      "name": "Did you fall over?",
       "cardType": 4,
       "attribute": 3,
       "status": [
@@ -171441,9 +171441,9 @@
       "awk": "SuperAwakening"
     },
     {
-      "id": "01M4DXYH7PF177D5803CR41FYK",
-      "uniqueId": "01M4DXYG8EB7H9BXGB73VSB0C3",
-      "name": "Did you fall over",
+      "id": "01M77MRF8Q0TA7E992XSMD9WV2",
+      "uniqueId": "01M77MRE9FR57C4V19WGMEZYEV",
+      "name": "Did you fall over?",
       "cardType": 5,
       "attribute": 3,
       "status": [
@@ -171497,9 +171497,9 @@
       "awk": "SuperAwakening"
     },
     {
-      "id": "01M4DXYF96G83SWX22M6D75KQE",
-      "uniqueId": "01M4DXYG8EB7H9BXGB73VSB0C3",
-      "name": "Did you fall over",
+      "id": "01M77MRDA7SAYTVVFY1EC6117J",
+      "uniqueId": "01M77MRE9FR57C4V19WGMEZYEV",
+      "name": "Did you fall over?",
       "cardType": 6,
       "attribute": 3,
       "status": [
@@ -199434,8 +199434,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BMA9PZ2DTX52T9EKH4XE",
@@ -199491,8 +199490,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BJBSTSRE9KTY46HAXZZW",
@@ -199548,8 +199546,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・水属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BHCHMS4T86T2VPTMB4W6",
@@ -199605,8 +199602,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BGD9KXBCWV78WVHGT3BM",
@@ -199662,8 +199658,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BEES9FD3TCQXX9K30PAS",
@@ -199719,8 +199714,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・水属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BDFHBPX4J9H9P2SN46RS",
@@ -199776,8 +199770,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・水属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BCG9YSQB4RDFPEE3CXDT",
@@ -199833,8 +199826,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BAHSMCCTK4374F0S32BE",
@@ -199890,8 +199882,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671B9JHD3PRY6HTC2X0T4CR",
@@ -199947,8 +199938,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671B8K9X998KW3GAV8Q0VXA",
@@ -200004,8 +199994,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・水属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671B6MSBC7FCZTEHH5DW4A1",
@@ -200061,8 +200050,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671B5NHE1FHT1JWDE5Q42V8",
@@ -200118,8 +200106,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671B4P9G3VXRC5PEWNWGKNT",
@@ -200175,8 +200162,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・水属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671B2QSSFWE2SZB7W9QY5AP",
@@ -200232,8 +200218,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671B1RHAJV0CRBWZXWWMHW4",
@@ -200289,8 +200274,7 @@
         "description": "前衛から攻撃時、一定確率で自身のATKを特大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671B0S9SBSRAXHS2FMEPHQF",
@@ -200346,8 +200330,7 @@
         "description": "前衛から攻撃時、一定確率で自身のSp.ATKを特大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671AZT1FTAC9CFYNBQF6TG1",
@@ -200403,8 +200386,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体のATKとSp.ATKを特大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671AYTS6WEJ0SQVPR3RVNPV",
@@ -200460,8 +200442,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体のATKとSp.ATKを特大ダウンさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671AWW923A8ME9DSTAH2VQC",
@@ -200517,8 +200498,7 @@
         "description": "HP回復時、一定確率で味方前衛1体のDEFとSp.DEFを特大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671AVX1ZTE03FN0D11H1VKY",
@@ -200574,8 +200554,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671ATXSM0E7XYRPB9T04ZYK",
@@ -200631,8 +200610,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・風属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671ARZ9VZSZ3HZZ63SBKJ0M",
@@ -200688,8 +200666,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・風属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671AR019FW689SDDQE775QP",
@@ -200769,8 +200746,7 @@
           "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅴ",
           "description": "火/風属性の特殊攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01M671AP1HBB998XVRRVS6JE2K",
@@ -200850,8 +200826,7 @@
           "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅴ",
           "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01M671CNGSRFKSEEJWEDAGE808",
@@ -200931,8 +200906,7 @@
           "name": "[レギオンマッチ]火風回:回復UP/クリ率UP Ⅴ",
           "description": "火/風属性の回復メモリア使用時にHPの回復量を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01M671CMHH7VVXZP6A5FNH2H40",
@@ -200988,8 +200962,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671CKJ98MTM9WZ5YG4N5SYT",
@@ -201045,8 +201018,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・風属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671CHKS6G8FF62GXVWRG7BE",
@@ -201102,8 +201074,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671CGMH0Y601NDDA14NEPHC",
@@ -201183,8 +201154,7 @@
           "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅴ",
           "description": "火/風属性の通常攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01M671CFN9924HVCSTE1V03YYC",
@@ -201264,8 +201234,7 @@
           "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅴ",
           "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01M671CDPS5J8WDEQNFG918YGS",
@@ -201345,8 +201314,7 @@
           "name": "[レギオンマッチ]火風回:回復UP/クリ率UP Ⅴ",
           "description": "火/風属性の回復メモリア使用時にHPの回復量を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
         }
-      ],
-      "phantasm": true
+      ]
     },
     {
       "id": "01M671CCQHZR7NE5GZSPSGREDT",
@@ -201402,8 +201370,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・風属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671CBR9XVJQVW8VZ05Y5DS2",
@@ -201459,8 +201426,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671C9SS0JBS4H2F1KEKP5QN",
@@ -201516,8 +201482,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・風属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671C8THX77XDRARTWNX7QJ0",
@@ -201573,8 +201538,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671C7V9GN55D5JFH2KQDQCP",
@@ -201630,8 +201594,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・風属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671C5WSHB13C7FG1AZQQ2EY",
@@ -201687,8 +201650,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671C4XHT91NF16912NA809H",
@@ -201744,8 +201706,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・風属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671C3Y9AK0CJBKX5ZR5PZCW",
@@ -201801,8 +201762,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・風属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671C1ZS1J3Z9BD6V43QXSTE",
@@ -201858,8 +201818,7 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・風属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671C10H7B7ZG954WEDKP196",
@@ -201915,8 +201874,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・風属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671C019QRMR61SZ56RZQGA8",
@@ -201972,8 +201930,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BZ21G4G695NFS16G4445",
@@ -202029,8 +201986,7 @@
         "description": "攻撃時、一定確率で敵の火属性防御力・風属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BY2S2TA662WM7TZWE0BP",
@@ -202086,8 +202042,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・風属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BW494T4F451MMKVBAX38",
@@ -202143,8 +202098,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BV5117SXK978SBQFV0T0",
@@ -202200,8 +202154,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BT5SP40EAP3P2K3TAEB4",
@@ -202257,8 +202210,7 @@
         "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・風属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BR79525JJ0116B72NGZ6",
@@ -202314,8 +202266,7 @@
         "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BQ815CBVXTDHC9SH46XF",
@@ -202371,8 +202322,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671BP8S9G597JNWTBGW2DAX",
@@ -202428,8 +202378,7 @@
         "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
       },
       "labels": [],
-      "awk": "SuperAwakening",
-      "phantasm": true
+      "awk": "SuperAwakening"
     },
     {
       "id": "01M671AM31DPQH5V85YATZDA31",
@@ -202485,7 +202434,1167 @@
         "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・風属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
       },
       "labels": [],
+      "awk": "SuperAwakening"
+    },
+    {
+      "id": "01M77MRCAZDCP356MEM73YV1E2",
+      "uniqueId": "01M77MRACF76RAJ892JF94QSD4",
+      "name": "バチバチ！",
+      "cardType": 4,
+      "attribute": 1,
+      "status": [
+        [
+          6720,
+          7868,
+          6711,
+          7866
+        ],
+        [
+          7390,
+          8656,
+          7381,
+          9674
+        ],
+        [
+          8061,
+          11483,
+          8052,
+          10461
+        ],
+        [
+          8732,
+          12270,
+          8723,
+          14308
+        ],
+        [
+          9403,
+          17138,
+          9394,
+          15096
+        ]
+      ],
+      "cost": 27,
+      "questSkill": {
+        "name": "Sp.マイトバーストC Ⅵ+",
+        "description": "敵1～3体に特殊超特大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[火響火風]Sp.SdアニマデュオガードバーストC Ⅵ+",
+        "description": "敵1～3体に特殊超特大ダメージを与え、敵のSp.DEFと火属性防御力・風属性防御力を大ダウンさせる。さらに自身に「次の支援/妨害時に支援/妨害効果が30%アップするスタック」を3回蓄積する。自身が直前に使用したメモリア属性が火属性と異なる場合、効果対象範囲が最大になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "攻:ダメージUP/副援:支援UP Ⅵ",
+        "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
+      },
+      "labels": [],
       "awk": "SuperAwakening",
+      "phantasm": true
+    },
+    {
+      "id": "01M77MRBBQW0EJ7GGKT8YV54C2",
+      "uniqueId": "01M77MRACF76RAJ892JF94QSD4",
+      "name": "バチバチ！",
+      "cardType": 5,
+      "attribute": 1,
+      "status": [
+        [
+          6720,
+          7868,
+          6711,
+          7866
+        ],
+        [
+          7390,
+          8656,
+          7381,
+          9674
+        ],
+        [
+          8061,
+          11483,
+          8052,
+          10461
+        ],
+        [
+          8732,
+          12270,
+          8723,
+          14308
+        ],
+        [
+          9403,
+          17138,
+          9394,
+          15096
+        ]
+      ],
+      "cost": 27,
+      "questSkill": {
+        "name": "Sp.パワーアシストF Ⅶ",
+        "description": "味方1～4体のSp.ATKを超特大アップさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[火響火風攻]Sp.SdエーテルヴァースアシストF Ⅶ",
+        "description": "味方1～4体のSp.ATKと火属性攻撃力・風属性攻撃力を超特大アップ、DEFを極大アップさせる。さらに自身に「次の支援/妨害時に支援/妨害効果が30%アップするスタック」を2回蓄積し、味方に「次の攻撃時にダメージが20%アップするスタック」を2回蓄積する。自身が直前に使用したメモリア属性が火属性と異なる場合、効果対象範囲が最大になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "援:支援UP/副援:火風パワーUP Ⅵ",
+        "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・風属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
+      },
+      "labels": [],
+      "awk": "SuperAwakening",
+      "phantasm": true
+    },
+    {
+      "id": "01M77MR9D7BC4PXNN3VQ0VRMQT",
+      "uniqueId": "01M77MRACF76RAJ892JF94QSD4",
+      "name": "バチバチ！",
+      "cardType": 7,
+      "attribute": 1,
+      "status": [
+        [
+          6720,
+          6703,
+          7876,
+          7866
+        ],
+        [
+          7390,
+          7373,
+          9684,
+          8654
+        ],
+        [
+          8061,
+          8044,
+          10471,
+          11481
+        ],
+        [
+          8732,
+          8715,
+          14318,
+          12268
+        ],
+        [
+          9403,
+          9386,
+          15106,
+          17136
+        ]
+      ],
+      "cost": 27,
+      "questSkill": {
+        "name": "Sp.ガードヒールF Ⅶ+",
+        "description": "味方1～4体のHPを超特大回復する。さらに味方のSp.DEFをアップする。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[火響火風]Sp.SdチャージデュオガードヒールF Ⅶ+",
+        "description": "味方1～4体のHPを超特大回復し、Sp.DEFと火属性防御力・風属性防御力を大アップする。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。さらに自身が直前に使用したメモリア属性が火属性と異なる場合、効果対象範囲が最大になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "回:回復UP/副援:支援UP Ⅵ",
+        "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
+      },
+      "labels": [],
+      "awk": "SuperAwakening",
+      "phantasm": true
+    },
+    {
+      "id": "01M77MR8DZM6HXV5QCQAN6KWZA",
+      "uniqueId": "01M77MR6FFG5DCKZC00W24K99K",
+      "name": "ツインエンジン",
+      "cardType": 4,
+      "attribute": 3,
+      "status": [
+        [
+          6694,
+          7866,
+          6698,
+          7867
+        ],
+        [
+          7364,
+          8654,
+          7368,
+          9675
+        ],
+        [
+          8035,
+          11481,
+          8039,
+          10462
+        ],
+        [
+          8706,
+          12268,
+          8710,
+          14309
+        ],
+        [
+          9377,
+          17136,
+          9381,
+          15097
+        ]
+      ],
+      "cost": 27,
+      "questSkill": {
+        "name": "Sp.マイトバーストD Ⅴ+",
+        "description": "敵2体に特殊超特大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[風響火風]Sp.エンハンスデュオガードバーストD Ⅴ+",
+        "description": "敵2体に特殊超特大ダメージを与え、敵のSp.DEFと火属性防御力・風属性防御力を大ダウンさせる。さらに自身が直前に使用したメモリア属性が風属性と異なる場合、スキル効果が1.8倍になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "攻:ダメージUP/副攻:火風ガードDOWN Ⅵ",
+        "description": "攻撃時、一定確率で敵の火属性防御力・風属性防御力を極大ダウンさせる。さらに、攻撃ダメージを超極大アップさせる。"
+      },
+      "labels": [],
+      "awk": "SuperAwakening",
+      "phantasm": true
+    },
+    {
+      "id": "01M77MR7EQNK4VF2KB1N2YQKJF",
+      "uniqueId": "01M77MR6FFG5DCKZC00W24K99K",
+      "name": "ツインエンジン",
+      "cardType": 5,
+      "attribute": 3,
+      "status": [
+        [
+          7859,
+          6701,
+          7863,
+          6702
+        ],
+        [
+          8647,
+          7371,
+          9671,
+          7372
+        ],
+        [
+          11474,
+          8042,
+          10458,
+          8043
+        ],
+        [
+          12261,
+          8713,
+          14305,
+          8714
+        ],
+        [
+          17129,
+          9384,
+          15093,
+          9385
+        ]
+      ],
+      "cost": 27,
+      "questSkill": {
+        "name": "パワーアシストF Ⅶ",
+        "description": "味方1～4体のATKを超特大アップさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[風響火風攻]SdエーテルワイドアシストF Ⅶ",
+        "description": "味方1～4体のATKとDEFと火属性攻撃力・風属性攻撃力を超特大アップさせる。さらに自身に「次の支援/妨害時に支援/妨害効果が30%アップするスタック」を2回蓄積し、味方に「次の攻撃時にダメージが20%アップするスタック」を2回蓄積する。自身が直前に使用したメモリア属性が風属性と異なる場合、効果対象範囲が最大になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "援:支援UP/副援:火風パワーUP Ⅵ",
+        "description": "支援/妨害時、一定確率で味方前衛1体の火属性攻撃力・風属性攻撃力を極大アップさせる。さらに、支援/妨害効果を超極大アップさせる。"
+      },
+      "labels": [],
+      "awk": "SuperAwakening",
+      "phantasm": true
+    },
+    {
+      "id": "01M77MR5G7XN33FT66QZCKR970",
+      "uniqueId": "01M77MR6FFG5DCKZC00W24K99K",
+      "name": "ツインエンジン",
+      "cardType": 6,
+      "attribute": 3,
+      "status": [
+        [
+          6694,
+          7866,
+          6698,
+          7867
+        ],
+        [
+          7364,
+          8654,
+          7368,
+          9675
+        ],
+        [
+          8035,
+          11481,
+          8039,
+          10462
+        ],
+        [
+          8706,
+          12268,
+          8710,
+          14309
+        ],
+        [
+          9377,
+          17136,
+          9381,
+          15097
+        ]
+      ],
+      "cost": 27,
+      "questSkill": {
+        "name": "Sp.パワーフォールF Ⅶ",
+        "description": "敵1～4体のSp.ATKを超特大ダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[風響火風]Sp.SdルミナスデュオパワーフォールF Ⅶ",
+        "description": "敵1～4体のSp.ATKと火属性攻撃力・風属性攻撃力を超特大ダウンさせる。さらに自身に「次の支援/妨害時に支援/妨害効果が30%アップするスタック」を2回蓄積し、味方1～4体に「次の被ダメージ時に被ダメージを30%ダウンさせるスタック」を2回蓄積する。自身が直前に使用したメモリア属性が風属性と異なる場合、効果対象範囲が最大になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "援:支援UP/副援:火風パワーDOWN Ⅵ",
+        "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・風属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
+      },
+      "labels": [],
+      "awk": "SuperAwakening",
+      "phantasm": true
+    },
+    {
+      "id": "01M77MR4GZNREWMFZ2QDV7034V",
+      "uniqueId": "01M77MR2JFZHB56MRFEAMDKK80",
+      "name": "信頼を胸に",
+      "cardType": 2,
+      "attribute": 1,
+      "status": [
+        [
+          10490,
+          5877,
+          10476,
+          5917
+        ],
+        [
+          14252,
+          6419,
+          11438,
+          6459
+        ],
+        [
+          15215,
+          6960,
+          15201,
+          7000
+        ],
+        [
+          18978,
+          7502,
+          16164,
+          7542
+        ],
+        [
+          19941,
+          8044,
+          19927,
+          8084
+        ]
+      ],
+      "cost": 29,
+      "questSkill": {
+        "name": "マイトブレイクE Ⅶ+",
+        "description": "敵2～3体に通常極大ダメージを与え、敵のATKとDEFをダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[火響火風]スプレシアデュオガードブレイクF Ⅶ+",
+        "description": "敵1～4体に通常超特大ダメージを与え、敵のDEFと火属性防御力・風属性防御力を大ダウンさせる。さらに自身が直前に使用したメモリア属性が火属性と異なる場合、効果対象範囲が最大になり、MP消費を抑える。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "攻:ダメージUP Ⅵ+",
+        "description": "攻撃時、中確率で攻撃ダメージを超極大アップさせる。"
+      },
+      "labels": [
+        "Legendary"
+      ],
+      "awk": "SuperAwakening",
+      "legendarySkill": [
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅰ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4%アップさせる。さらにクリティカル発動確率を2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅱ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4.2%アップさせる。さらにクリティカル発動確率を2.2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅲ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4.5%アップさせる。さらにクリティカル発動確率を2.5%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅳ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4.7%アップさせる。さらにクリティカル発動確率を2.7%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅴ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
+        }
+      ],
+      "phantasm": true
+    },
+    {
+      "id": "01M77MR3HQA56Z1HYGKJFSDE4D",
+      "uniqueId": "01M77MR2JFZHB56MRFEAMDKK80",
+      "name": "信頼を胸に",
+      "cardType": 6,
+      "attribute": 1,
+      "status": [
+        [
+          10490,
+          5877,
+          10476,
+          5917
+        ],
+        [
+          14252,
+          6419,
+          11438,
+          6459
+        ],
+        [
+          15215,
+          6960,
+          15201,
+          7000
+        ],
+        [
+          18978,
+          7502,
+          16164,
+          7542
+        ],
+        [
+          19941,
+          8044,
+          19927,
+          8084
+        ]
+      ],
+      "cost": 29,
+      "questSkill": {
+        "name": "パワーフォールE Ⅶ",
+        "description": "敵2～3体のATKを極大ダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[火響火風]SdカウンターデュオパワーフォールF Ⅶ",
+        "description": "敵1～4体のATKと火属性攻撃力・風属性攻撃力を超特大ダウンさせる。さらに劣勢時は効果が1.5倍になる。自身が直前に使用したメモリア属性が火属性と異なる場合、効果対象範囲が最大になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "援:支援UP Ⅵ+",
+        "description": "支援/妨害時、中確率で支援/妨害効果を超極大アップさせる。"
+      },
+      "labels": [
+        "Legendary"
+      ],
+      "awk": "SuperAwakening",
+      "legendarySkill": [
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅰ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を4%アップさせる。さらにクリティカル発動確率を2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅱ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を4.2%アップさせる。さらにクリティカル発動確率を2.2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅲ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を4.5%アップさせる。さらにクリティカル発動確率を2.5%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅳ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を4.7%アップさせる。さらにクリティカル発動確率を2.7%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅴ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
+        }
+      ],
+      "phantasm": true
+    },
+    {
+      "id": "01M77MR1K7RS88F7AQCZTW29HN",
+      "uniqueId": "01M77MR2JFZHB56MRFEAMDKK80",
+      "name": "信頼を胸に",
+      "cardType": 7,
+      "attribute": 1,
+      "status": [
+        [
+          5902,
+          5877,
+          10476,
+          10505
+        ],
+        [
+          6444,
+          6419,
+          14238,
+          11467
+        ],
+        [
+          6985,
+          6960,
+          15201,
+          15230
+        ],
+        [
+          7527,
+          7502,
+          18964,
+          16193
+        ],
+        [
+          8069,
+          8044,
+          19927,
+          19956
+        ]
+      ],
+      "cost": 29,
+      "questSkill": {
+        "name": "ガードヒールG Ⅶ+",
+        "description": "味方3体のHPを極大回復する。さらに味方のDEFをアップする。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[火響火風]エンハンシアデュオガードヒールG Ⅵ+",
+        "description": "味方3体のHPを超特大回復し、DEFと火属性防御力・風属性防御力を大アップする。さらに自身が直前に使用したメモリア属性が火属性と異なる場合、スキル効果が1.8倍になり、MP消費を抑える。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "回:回復UP/副援:支援UP Ⅵ+",
+        "description": "HP回復時、中確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、中確率で支援/妨害効果を極大アップさせる。"
+      },
+      "labels": [
+        "Legendary"
+      ],
+      "awk": "SuperAwakening",
+      "legendarySkill": [
+        {
+          "name": "[レギオンマッチ]火風回:回復UP/クリ率UP Ⅰ",
+          "description": "火/風属性の回復メモリア使用時にHPの回復量を4%アップさせる。さらにクリティカル発動確率を2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風回:回復UP/クリ率UP Ⅱ",
+          "description": "火/風属性の回復メモリア使用時にHPの回復量を4.2%アップさせる。さらにクリティカル発動確率を2.2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風回:回復UP/クリ率UP Ⅲ",
+          "description": "火/風属性の回復メモリア使用時にHPの回復量を4.5%アップさせる。さらにクリティカル発動確率を2.5%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風回:回復UP/クリ率UP Ⅳ",
+          "description": "火/風属性の回復メモリア使用時にHPの回復量を4.7%アップさせる。さらにクリティカル発動確率を2.7%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風回:回復UP/クリ率UP Ⅴ",
+          "description": "火/風属性の回復メモリア使用時にHPの回復量を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
+        }
+      ],
+      "phantasm": true
+    },
+    {
+      "id": "01M77MR0KZSDTKDYHS3JBF1AEH",
+      "uniqueId": "01M77MQYNFY4G4MKF9BXE7KGKB",
+      "name": "より良い未来のために",
+      "cardType": 2,
+      "attribute": 1,
+      "status": [
+        [
+          7881,
+          6702,
+          7859,
+          6707
+        ],
+        [
+          8669,
+          7372,
+          9667,
+          7377
+        ],
+        [
+          11496,
+          8043,
+          10454,
+          8048
+        ],
+        [
+          12283,
+          8714,
+          14301,
+          8719
+        ],
+        [
+          17151,
+          9385,
+          15089,
+          9390
+        ]
+      ],
+      "cost": 27,
+      "questSkill": {
+        "name": "マイトブレイクC Ⅵ+",
+        "description": "敵1～3体に通常超特大ダメージを与え、敵のATKとDEFをダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[火響火風]SdアルカナデュオガードブレイクC Ⅵ+",
+        "description": "敵1～3体に通常超特大ダメージを与え、敵のDEFと火属性防御力・風属性防御力を大ダウンさせる。さらに自身に「次の攻撃時にダメージが20%アップするスタック」と「次の支援/妨害時に支援/妨害効果が30%アップするスタック」を2回蓄積する。自身が直前に使用したメモリア属性が火属性と異なる場合、効果対象範囲が最大になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "攻:ダメージUP/副援:支援UP Ⅵ",
+        "description": "攻撃時、一定確率で攻撃ダメージを超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
+      },
+      "labels": [],
+      "awk": "SuperAwakening",
+      "phantasm": true
+    },
+    {
+      "id": "01M77MQZMQBDEKX5MYZF3DX2AH",
+      "uniqueId": "01M77MQYNFY4G4MKF9BXE7KGKB",
+      "name": "より良い未来のために",
+      "cardType": 6,
+      "attribute": 1,
+      "status": [
+        [
+          7881,
+          6702,
+          7859,
+          6707
+        ],
+        [
+          8669,
+          7372,
+          9667,
+          7377
+        ],
+        [
+          11496,
+          8043,
+          10454,
+          8048
+        ],
+        [
+          12283,
+          8714,
+          14301,
+          8719
+        ],
+        [
+          17151,
+          9385,
+          15089,
+          9390
+        ]
+      ],
+      "cost": 27,
+      "questSkill": {
+        "name": "パワーフォールE Ⅵ",
+        "description": "敵2～3体のATKを超特大ダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[火響火風]エンハンシアデュオパワーフォールE Ⅵ",
+        "description": "敵2～3体のATKと火属性攻撃力・風属性攻撃力を超特大ダウンさせる。さらに自身が直前に使用したメモリア属性が火属性と異なる場合、スキル効果が1.8倍になり、MP消費を抑える。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "援:支援UP/副援:火風パワーDOWN Ⅵ",
+        "description": "支援/妨害時、一定確率で敵前衛1体の火属性攻撃力・風属性攻撃力を極大ダウンさせる。さらに、支援/妨害効果を超極大アップさせる。"
+      },
+      "labels": [],
+      "awk": "SuperAwakening",
+      "phantasm": true
+    },
+    {
+      "id": "01M77MQXP7787STDJFY3FEJ46X",
+      "uniqueId": "01M77MQYNFY4G4MKF9BXE7KGKB",
+      "name": "より良い未来のために",
+      "cardType": 7,
+      "attribute": 1,
+      "status": [
+        [
+          6716,
+          6702,
+          7859,
+          7872
+        ],
+        [
+          7386,
+          7372,
+          8647,
+          9680
+        ],
+        [
+          8057,
+          8043,
+          11474,
+          10467
+        ],
+        [
+          8728,
+          8714,
+          12261,
+          14314
+        ],
+        [
+          9399,
+          9385,
+          17129,
+          15102
+        ]
+      ],
+      "cost": 27,
+      "questSkill": {
+        "name": "ガードヒールF Ⅶ+",
+        "description": "味方1～4体のHPを超特大回復する。さらに味方のDEFをアップする。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[火響火風]SdチャージデュオガードヒールF Ⅶ+",
+        "description": "味方1～4体のHPを超特大回復し、DEFと火属性防御力・風属性防御力を大アップする。バトル時間60秒経過ごとにスキル効果がアップし、600秒経過で最大になる。さらに自身が直前に使用したメモリア属性が火属性と異なる場合、効果対象範囲が最大になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "回:回復UP/副援:支援UP Ⅵ",
+        "description": "HP回復時、一定確率でHPの回復量を超極大アップさせる。さらに、支援/妨害時、一定確率で支援/妨害効果を極大アップさせる。"
+      },
+      "labels": [],
+      "awk": "SuperAwakening",
+      "phantasm": true
+    },
+    {
+      "id": "01M77MQWPZHR2TQ9H9K2C2NB7M",
+      "uniqueId": "01M77MQRSZ0CA6WHSR88NXBKQN",
+      "name": "補給はだいじ",
+      "cardType": 1,
+      "attribute": 3,
+      "status": [
+        [
+          10481,
+          5917,
+          10470,
+          5907
+        ],
+        [
+          14243,
+          6459,
+          11432,
+          6449
+        ],
+        [
+          15206,
+          7000,
+          15195,
+          6990
+        ],
+        [
+          18969,
+          7542,
+          16158,
+          7532
+        ],
+        [
+          19932,
+          8084,
+          19921,
+          8074
+        ]
+      ],
+      "cost": 29,
+      "questSkill": {
+        "name": "マイトブレイクA Ⅷ+",
+        "description": "敵1体に通常絶大ダメージを与え、敵のATKとDEFをダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[風響火風]エンハンシアデュオガードブレイクA Ⅶ+",
+        "description": "敵1体に通常超極大ダメージを与え、敵のDEFと火属性防御力・風属性防御力を大ダウンさせる。さらに自身が直前に使用したメモリア属性が風属性と異なる場合、スキル効果が1.8倍になり、MP消費を抑える。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "攻:ダメージUP Ⅵ+",
+        "description": "攻撃時、中確率で攻撃ダメージを超極大アップさせる。"
+      },
+      "labels": [
+        "Legendary"
+      ],
+      "awk": "SuperAwakening",
+      "legendarySkill": [
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅰ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4%アップさせる。さらにクリティカル発動確率を2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅱ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4.2%アップさせる。さらにクリティカル発動確率を2.2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅲ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4.5%アップさせる。さらにクリティカル発動確率を2.5%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅳ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4.7%アップさせる。さらにクリティカル発動確率を2.7%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅴ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
+        }
+      ],
+      "phantasm": true
+    },
+    {
+      "id": "01M77MQVQQZA43HCMG13SYGP98",
+      "uniqueId": "01M77MQRSZ0CA6WHSR88NXBKQN",
+      "name": "補給はだいじ",
+      "cardType": 2,
+      "attribute": 3,
+      "status": [
+        [
+          10481,
+          5917,
+          10470,
+          5907
+        ],
+        [
+          14243,
+          6459,
+          11432,
+          6449
+        ],
+        [
+          15206,
+          7000,
+          15195,
+          6990
+        ],
+        [
+          18969,
+          7542,
+          16158,
+          7532
+        ],
+        [
+          19932,
+          8084,
+          19921,
+          8074
+        ]
+      ],
+      "cost": 29,
+      "questSkill": {
+        "name": "マイトブレイクD Ⅶ+",
+        "description": "敵2体に通常超極大ダメージを与え、敵のATKとDEFをダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[風響火風]エンハンスデュオガードブレイクD Ⅴ+",
+        "description": "敵2体に通常超特大ダメージを与え、敵のDEFと火属性防御力・風属性防御力を大ダウンさせる。さらに自身が直前に使用したメモリア属性が風属性と異なる場合、スキル効果が1.8倍になる。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "攻:ダメージUP Ⅵ+",
+        "description": "攻撃時、中確率で攻撃ダメージを超極大アップさせる。"
+      },
+      "labels": [
+        "Legendary"
+      ],
+      "awk": "SuperAwakening",
+      "legendarySkill": [
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅰ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4%アップさせる。さらにクリティカル発動確率を2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅱ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4.2%アップさせる。さらにクリティカル発動確率を2.2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅲ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4.5%アップさせる。さらにクリティカル発動確率を2.5%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅳ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを4.7%アップさせる。さらにクリティカル発動確率を2.7%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風通:ダメージUP/クリ率UP Ⅴ",
+          "description": "火/風属性の通常攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
+        }
+      ],
+      "phantasm": true
+    },
+    {
+      "id": "01M77MQTRFT7HT9051TZJDFZAV",
+      "uniqueId": "01M77MQRSZ0CA6WHSR88NXBKQN",
+      "name": "補給はだいじ",
+      "cardType": 3,
+      "attribute": 3,
+      "status": [
+        [
+          5893,
+          10505,
+          5882,
+          10495
+        ],
+        [
+          6435,
+          14267,
+          6424,
+          11457
+        ],
+        [
+          6976,
+          15230,
+          6965,
+          15220
+        ],
+        [
+          7518,
+          18993,
+          7507,
+          16183
+        ],
+        [
+          8060,
+          19956,
+          8049,
+          19946
+        ]
+      ],
+      "cost": 29,
+      "questSkill": {
+        "name": "Sp.マイトバーストA Ⅷ+",
+        "description": "敵1体に特殊絶大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[風響火風]Sp.エンハンシアデュオガードバーストA Ⅶ+",
+        "description": "敵1体に特殊超極大ダメージを与え、敵のSp.DEFと火属性防御力・風属性防御力を大ダウンさせる。さらに自身が直前に使用したメモリア属性が風属性と異なる場合、スキル効果が1.8倍になり、MP消費を抑える。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "攻:ダメージUP Ⅵ+",
+        "description": "攻撃時、中確率で攻撃ダメージを超極大アップさせる。"
+      },
+      "labels": [
+        "Legendary"
+      ],
+      "awk": "SuperAwakening",
+      "legendarySkill": [
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅰ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを4%アップさせる。さらにクリティカル発動確率を2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅱ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを4.2%アップさせる。さらにクリティカル発動確率を2.2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅲ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを4.5%アップさせる。さらにクリティカル発動確率を2.5%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅳ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを4.7%アップさせる。さらにクリティカル発動確率を2.7%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅴ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
+        }
+      ],
+      "phantasm": true
+    },
+    {
+      "id": "01M77MQSS7GVXV3YA1TT39J21D",
+      "uniqueId": "01M77MQRSZ0CA6WHSR88NXBKQN",
+      "name": "補給はだいじ",
+      "cardType": 4,
+      "attribute": 3,
+      "status": [
+        [
+          5893,
+          10505,
+          5882,
+          10495
+        ],
+        [
+          6435,
+          14267,
+          6424,
+          11457
+        ],
+        [
+          6976,
+          15230,
+          6965,
+          15220
+        ],
+        [
+          7518,
+          18993,
+          7507,
+          16183
+        ],
+        [
+          8060,
+          19956,
+          8049,
+          19946
+        ]
+      ],
+      "cost": 29,
+      "questSkill": {
+        "name": "Sp.マイトバーストE Ⅶ+",
+        "description": "敵2～3体に特殊極大ダメージを与え、敵のSp.ATKとSp.DEFをダウンさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[風響火風]Sp.スプレシアデュオガードバーストF Ⅶ+",
+        "description": "敵1～4体に特殊超特大ダメージを与え、敵のSp.DEFと火属性防御力・風属性防御力を大ダウンさせる。さらに自身が直前に使用したメモリア属性が風属性と異なる場合、効果対象範囲が最大になり、MP消費を抑える。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "攻:ダメージUP Ⅵ+",
+        "description": "攻撃時、中確率で攻撃ダメージを超極大アップさせる。"
+      },
+      "labels": [
+        "Legendary"
+      ],
+      "awk": "SuperAwakening",
+      "legendarySkill": [
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅰ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを4%アップさせる。さらにクリティカル発動確率を2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅱ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを4.2%アップさせる。さらにクリティカル発動確率を2.2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅲ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを4.5%アップさせる。さらにクリティカル発動確率を2.5%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅳ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを4.7%アップさせる。さらにクリティカル発動確率を2.7%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風特:ダメージUP/クリ率UP Ⅴ",
+          "description": "火/風属性の特殊攻撃時に攻撃ダメージを5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
+        }
+      ],
+      "phantasm": true
+    },
+    {
+      "id": "01M77MQQTQKMV4MG6WBQJQATKH",
+      "uniqueId": "01M77MQRSZ0CA6WHSR88NXBKQN",
+      "name": "補給はだいじ",
+      "cardType": 5,
+      "attribute": 3,
+      "status": [
+        [
+          10481,
+          10505,
+          5882,
+          5907
+        ],
+        [
+          12843,
+          12867,
+          6424,
+          6449
+        ],
+        [
+          15206,
+          15230,
+          6965,
+          6990
+        ],
+        [
+          17569,
+          17593,
+          7507,
+          7532
+        ],
+        [
+          19932,
+          19956,
+          8049,
+          8074
+        ]
+      ],
+      "cost": 29,
+      "questSkill": {
+        "name": "WパワーアシストE Ⅶ",
+        "description": "味方2～3体のATKとSp.ATKを極大アップさせる。",
+        "sp": 32
+      },
+      "gvgSkill": {
+        "name": "[風響火風]WエンハンシアデュオパワーアシストE Ⅵ",
+        "description": "味方2～3体のATKとSp.ATKと火属性攻撃力・風属性攻撃力を超特大アップさせる。さらに自身が直前に使用したメモリア属性が風属性と異なる場合、スキル効果が1.8倍になり、MP消費を抑える。",
+        "sp": 32
+      },
+      "autoSkill": {
+        "name": "援:支援UP Ⅵ+",
+        "description": "支援/妨害時、中確率で支援/妨害効果を超極大アップさせる。"
+      },
+      "labels": [
+        "Legendary"
+      ],
+      "awk": "SuperAwakening",
+      "legendarySkill": [
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅰ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を4%アップさせる。さらにクリティカル発動確率を2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅱ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を4.2%アップさせる。さらにクリティカル発動確率を2.2%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅲ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を4.5%アップさせる。さらにクリティカル発動確率を2.5%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅳ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を4.7%アップさせる。さらにクリティカル発動確率を2.7%アップさせる。"
+        },
+        {
+          "name": "[レギオンマッチ]火風援:支援UP/クリ率UP Ⅴ",
+          "description": "火/風属性の支援/妨害メモリア使用時に支援/妨害効果を5%アップさせる。さらにクリティカル発動確率を3%アップさせる。"
+        }
+      ],
       "phantasm": true
     }
   ]
