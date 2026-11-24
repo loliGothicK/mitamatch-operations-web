@@ -141,7 +141,7 @@
     "zod": "4.6.7"
   },
   "volta": {
-    "node": "24.20.0"
+    "node": "26.13.1"
   },
   "packageManager": "pnpm@12.23.0",
   "pnpm": {
