@@ -18,7 +18,6 @@ import {
   useTheme,
 } from "@mui/material";
 import { match, P } from "ts-pattern";
-import { option } from "fp-ts";
 import { ComleteCandidate } from "@/data/_common/autocomplete";
 import { isSome } from "fp-ts/lib/Option";
 import { DataGrid } from "@/data/_common/DataGrid";
@@ -121,7 +120,7 @@ const columns: GridColDef<Costume>[] = [
         }}
       >
         {match(params.row.specialSkill)
-          .with(option.none, () => <></>)
+          .with({ _tag: "None" }, () => <></>)
           .with({ value: { type: "ex" } }, ({ value: { skills } }) => {
             return skills.map(({ name, description }) => (
               <Tooltip

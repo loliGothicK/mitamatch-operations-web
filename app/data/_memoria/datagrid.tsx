@@ -20,7 +20,7 @@ const MemoriaGridIcon = ({ row }: { row: Memoria }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    <Link href={`/data/memoria/${encodeURI(row.name.full)}?type=${row.cardType}`}>
+    <Link href={`/data/memoria/${row.uniqueId}?type=${row.cardType}`}>
       <MemoriaIcon memoria={row} size={isMobile ? 60 : 80} />
     </Link>
   );

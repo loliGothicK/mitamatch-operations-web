@@ -1141,7 +1141,7 @@ function VirtualizedList() {
               </CardContent>
               <IconButton sx={{ position: "absolute", right: 0 }}>
                 <Link
-                  href={`https://operations.mitama.io/data/memoria/${data[index].name.full}?type=${data[index].cardType}`}
+                  href={`https://operations.mitama.io/data/memoria/${data[index].uniqueId}?type=${data[index].cardType}`}
                   target={"_blank"}
                 >
                   <Launch />

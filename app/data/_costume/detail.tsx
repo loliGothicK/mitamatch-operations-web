@@ -29,7 +29,6 @@ import NotFound from "next/dist/client/components/builtin/not-found";
 import { Lenz } from "@/domain/lenz";
 import Info from "@/components/data/Info";
 import { match } from "ts-pattern";
-import { option } from "fp-ts";
 import Link from "@/components/link";
 import { isSome } from "fp-ts/lib/Option";
 import { CostumeIcon } from "@/components/image/CostumeIcon";
@@ -401,7 +400,7 @@ function DetailData({ costume }: { costume: Costume }) {
   return (
     <Box sx={{ width: "100%" }}>
       {match(costume.specialSkill)
-        .with(option.none, () => (
+        .with({ _tag: "None" }, () => (
           <>
             <Divider textAlign="left" sx={{ my: 3 }}>
               <Typography variant="subtitle1" color="text.secondary" sx={{ fontWeight: "bold" }}>

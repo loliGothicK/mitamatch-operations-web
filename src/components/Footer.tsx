@@ -7,10 +7,12 @@ import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
 import Image from "next/image";
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function Footer({ ...props }) {
   const theme = useTheme();
   const content = {
-    copy: `Copyright © Mitama Lab. ${new Date().getFullYear()}`,
+    copy: `Copyright © Mitama Lab. ${CURRENT_YEAR}`,
     tools: [
       {
         content: "deck builder",

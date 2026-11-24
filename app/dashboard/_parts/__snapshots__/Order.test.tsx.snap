@@ -19,7 +19,7 @@ exports[`OrderRegistration - renders without crashing 1`] = `
             class="MuiStack-root css-95rbei-MuiStack-root"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-dizc30-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-1259lrg-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -54,7 +54,7 @@ exports[`OrderRegistration - renders without crashing 1`] = `
             class="MuiStack-root css-95rbei-MuiStack-root"
           >
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-dizc30-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-1259lrg-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -71,7 +71,7 @@ exports[`OrderRegistration - renders without crashing 1`] = `
               </svg>
             </button>
             <button
-              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-dizc30-MuiButtonBase-root-MuiButton-root"
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-sizeMedium MuiButton-colorPrimary css-1259lrg-MuiButtonBase-root-MuiButton-root"
               tabindex="0"
               type="button"
             >
@@ -908,6 +908,14 @@ exports[`OrderRegistration - renders without crashing 1`] = `
           >
             <img
               alt="灼洸碧焔"
+              src="/order/test.png"
+            />
+          </div>
+          <div
+            class="MuiBox-root css-1cc5hxu"
+          >
+            <img
+              alt="鳳炎煌翼"
               src="/order/test.png"
             />
           </div>

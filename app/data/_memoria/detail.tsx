@@ -1,6 +1,7 @@
 "use client";
 
 import { type SyntheticEvent, useState } from "react";
+import { notFound } from "next/navigation";
 import { formatCardType, type Memoria, memoriaList } from "@/domain/memoria/memoria";
 import { Box, Stack } from "@mui/system";
 import Tab from "@mui/material/Tab";
@@ -66,12 +67,17 @@ function StatusTable({ status }: { status: Memoria["status"] }) {
   );
 }
 
-export default function Detail({ name, type }: { name: string; type?: 1 | 2 | 3 | 4 | 5 | 6 | 7 }) {
-  const data = memoriaList.filter((memoria) => memoria.name.full === decodeURI(name));
+export default function Detail({ id, type }: { id: string; type?: 1 | 2 | 3 | 4 | 5 | 6 | 7 }) {
+  const data = memoriaList.filter((memoria) => memoria.uniqueId === id);
   const indices = data.map(projector("cardType"));
-  const [value, setValue] = useState(type ? indices.findIndex((_) => _ === type) : 0);
+  const initialIndex = type ? indices.findIndex((_) => _ === type) : 0;
+  const [value, setValue] = useState(initialIndex >= 0 ? initialIndex : 0);
 
-  const handleChange = (_: SyntheticEvent, newValue: 1 | 2 | 3 | 4 | 5 | 6 | 7) => {
+  if (data.length === 0) {
+    notFound();
+  }
+
+  const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 

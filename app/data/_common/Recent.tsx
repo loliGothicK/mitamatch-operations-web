@@ -142,7 +142,7 @@ function RecentCard({ entry }: { entry: RecentItem }) {
     .with(
       { kind: "memoria" },
       ({ item }) =>
-        `/data/memoria/${encodeURI(item.name.full)}?type=${Math.min(...memoriaList.filter((m) => m.uniqueId === item.uniqueId).map((m) => m.cardType))}`,
+        `/data/memoria/${item.uniqueId}?type=${Math.min(...memoriaList.filter((m) => m.uniqueId === item.uniqueId).map((m) => m.cardType))}`,
     )
     .exhaustive();
 

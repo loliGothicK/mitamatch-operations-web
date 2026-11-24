@@ -290,7 +290,7 @@ export function Calculator() {
     .map((costume) => ({
       title: costume.name,
       desc: match(costume.specialSkill)
-        .with(option.none, () => "")
+        .with({ _tag: "None" }, () => "")
         .with({ value: { type: "ex" } }, ({ value: { skills } }) =>
           skills.map(({ name }) => name).join("/"),
         )

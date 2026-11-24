@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { permanentRedirect } from "next/navigation";
 import { metadata as defaultMetadata } from "@/layout";
 import { pipe } from "fp-ts/function";
 import { Meta } from "@/metadata/lens";
@@ -17,6 +18,7 @@ import View from "@/data/_character/view";
 import Recent from "@/data/_common/Recent";
 import OrderDetail from "@/data/_order/detail";
 import WeaponDetail from "@/data/_weapon/detail";
+import { memoriaList } from "@/domain/memoria/memoria";
 
 type Props = {
   params: Promise<{ slug?: string | string[] }>;
@@ -28,7 +30,7 @@ export default async function Page({ params, searchParams }: Props) {
   const { type } = await searchParams;
 
   const cardType = match(type)
-    .with(undefined, () => right(1 as const))
+    .with(undefined, () => right(undefined))
     .with(P.string, (type) =>
       pipe(
         parseIntSafe(type),
@@ -50,9 +52,18 @@ export default async function Page({ params, searchParams }: Props) {
     .with([P.union("memoria", "costume", "character", "order", "weapon").select()], (slug) => (
       <DataPage dataType={slug} />
     ))
-    .with(["memoria", P.string], ([, name]) => (
-      <MemoriaDetail name={decodeURIComponent(name)} type={cardType.right} />
-    ))
+    .with(["memoria", P.string], ([, rawParam]) => {
+      const param = decodeURIComponent(rawParam);
+      if (memoriaList.some((m) => m.uniqueId === param)) {
+        return <MemoriaDetail id={param} type={cardType.right} />;
+      }
+      const byName = memoriaList.find((m) => m.name.full === param);
+      if (byName) {
+        const query = cardType.right !== undefined ? `?type=${cardType.right}` : "";
+        permanentRedirect(`/data/memoria/${byName.uniqueId}${query}`);
+      }
+      return <NotFound />;
+    })
     .with(["costume", P.string, P.string], ([, lily, job]) => (
       <CostumeDetail
         lily={decodeURIComponent(lily)}
