@@ -5,7 +5,7 @@ overrides:
   "@codemirror/commands": "6.11.0"
   "@codemirror/autocomplete": "6.20.3"
   "@codemirror/lint": "6.9.7"
-  "@lezer/common": "1.5.2"
+  "@lezer/common": "1.5.7"
 allowBuilds:
   "@clerk/shared": true
   "@sentry-internal/node-cpu-profiler": true
